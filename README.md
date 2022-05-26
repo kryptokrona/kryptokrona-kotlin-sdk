@@ -36,6 +36,28 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 - JUnit5
 - Lombok
 
+## Installation
+
+### Gradle
+
+To add the dependency in Gradle, just add the following line inside `dependencies` tag:
+
+```
+compile 'org.kryptokrona.sdk:kryptokrona-sdk:1.0.0'
+```
+
+### Maven
+
+To add our dependency to your Maven build tool, add this inside the `<dependencies>` tag:
+
+```xml
+<dependency>
+	<groupId>org.kryptokrona.sdk</groupId>
+	<artifactId>kryptokrona-sdk</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
 ## Usage
 
 ```java
