@@ -1,6 +1,6 @@
 # Kryptokrona SDK
 
-![](kryptokrona-logo.png)
+![Kryptokrona SDK](kryptokrona-logo.png)
 
 Kryptokrona SDK in Java for building decentralized private communication and payment systems.
 
@@ -30,18 +30,49 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 
 ## Technologies
 
+- OpenJDK 17 (LTS)
+- Gradle
+- RxJava
+- JUnit5
+- Lombok
+
 ## Usage
+
+```java
+import org.kryptokrona.sdk.wallet.Wallet;
+
+public class Main {
+    public static void main(String[] args) {
+        Wallet wallet = new Wallet();
+    }
+}
+```
 
 ## Unit Testing
 
+We are using JUnit 5 to conduct our tests. All tests are located under `src/test`.
+
 ## Build, Test and Deployment
+
+We are using Gradle as the build tool for this project. The easiest way to build if you are not running IntelliJ is to run
+the command:
+
+- `./gradlew build`
+
+This command will also run all the unit tests at the same time so if you want to avoid that, just run the command:
+
+- `./gradlew assemble`
+
+There might be some trouble doing this multiple times, then we need to do a cleanup:
+
+- `./gradlew clean`
 
 ## Contribute
 
 If you would like to contribute to this project there is two ways:
 
 - Send a pull request
-- Donate to my BTC/ETH address
+- Donate to XKR address
 
 ### Pull request
 
@@ -59,11 +90,13 @@ Extra details?
 
 ### Donate
 
-BTC: bc1ql97dlhhexma7agkk7gmg76t7ljycuqc9xgr4vl
+XKR: SEKReXXU9aJPiwjX2XkpbK8ACMWbUNXcYPxUVSiUYpNdhj8Z2snEy8CjjorZUNyswQNfzAmVWuGksU72Sf3Kq79Zd3fJWHq4Nyx
 
-ETH: 0x03A049028B673Cc5EF676695f442eC5614877335
+![Kryptokrona QR Code](qr-code.png)
 
 ## Help and Support
+
+The best place to get help and support is to join our Discord server. Please join us here: https://discord.gg/mkRpVgDubC
 
 ## FAQ
 
