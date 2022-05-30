@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.wallet;
+package org.kryptokrona.sdk.transaction;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +17,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction {
+public class TransactionBasic implements Transaction {
     private String              destination;
     private volatile double     amount;
     private String              paymentID;
 
-    public Transaction(String destination, double amount, String paymentID) {
+    public TransactionBasic(String destination, double amount, String paymentID) {
         this.destination = destination;
         this.amount = amount;
         this.paymentID = paymentID;

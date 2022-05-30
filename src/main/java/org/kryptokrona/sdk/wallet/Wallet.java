@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.wallet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.transaction.TransactionBasic;
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Wallet {
-    private List<Transaction> transactionList;
+    private List<TransactionBasic> transactionList;
+    private double balance;
 }
