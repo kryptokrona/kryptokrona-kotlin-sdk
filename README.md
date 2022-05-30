@@ -58,6 +58,36 @@ To add our dependency to your Maven build tool, add this inside the `<dependenci
 </dependency>
 ```
 
+### Manually
+
+If there is a need for not using a repository such as Maven Central we can import
+it manually, although in most cases it's recommended to use a repository. Use this only
+if you are sure that is needed.
+
+Open up the file **build.gradle** and add the following:
+
+```groovy
+buildscript {
+   repositories {
+      mavenCentral()
+      flatDir {
+         dirs 'libs'
+      }
+   }
+   dependencies {
+      classpath("org.kryptokrona.sdk:kryptokrona-sdk:1.0.0")
+   }
+}
+```
+
+Then add the .jar file you downloaded from our GitHub Packages to the dependency block:
+
+```groovy
+dependencies {
+    implementation files('libs/kryptokrona-sdk-<version.jar')
+}
+```
+
 ## Usage
 
 ```java
@@ -88,6 +118,28 @@ This command will also run all the unit tests at the same time so if you want to
 There might be some trouble doing this multiple times, then we need to do a cleanup:
 
 - `./gradlew clean`
+
+To run unit tests run:
+
+- `./gradlew test`
+
+### CI/CD
+
+We also have a CI/CD flow for this project that will assemble the code, run static code analysis,
+run unit tests, run code coverage, and save the artifact of the build to GitHub Packages.
+
+This artifact can then be downloaded and imported manually if that need exists for the project. Instructions
+on how to do this can be read in the installation instructions above.
+
+Whenever you submit a pull request a pipeline will run with the following steps:
+
+- Assemble
+- Static Code Analysis
+- Unit Test
+- Code Coverage
+
+The only thing different here from the main pipeline that runs is that we do not publish an artifact to
+GitHub Packages. 
 
 ## Contribute
 
