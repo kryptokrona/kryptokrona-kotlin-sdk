@@ -104,6 +104,14 @@ public class Main {
 
 We are using JUnit 5 to conduct our tests. All tests are located under `src/test`.
 
+To run unit tests run:
+
+- `./gradlew test`
+
+## Static Code Analysis
+
+## Code Coverage
+
 ## Build, Test and Deployment
 
 We are using Gradle as the build tool for this project. The easiest way to build if you are not running IntelliJ is to run
@@ -118,10 +126,6 @@ This command will also run all the unit tests at the same time so if you want to
 There might be some trouble doing this multiple times, then we need to do a cleanup:
 
 - `./gradlew clean`
-
-To run unit tests run:
-
-- `./gradlew test`
 
 ### CI/CD
 
