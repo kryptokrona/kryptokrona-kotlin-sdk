@@ -178,6 +178,10 @@ The best place to get help and support is to join our Discord server. Please joi
 
 ## FAQ
 
+- Q: Why use Java and not for example, JavaScript?
+  - A: The biggest reason why we decided to go with Java is that the language is very stable, scalable, good performance, active evolution, good for integrating in mobile applications as well as enterprice software that usually runs on Java.
+
+
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
