@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'org.kryptokrona.sdk'
-version '1.0.0-SNAPSHOT'
+version project.properties['kryptokrona.sdk.version']
 
 repositories {
     mavenCentral()
