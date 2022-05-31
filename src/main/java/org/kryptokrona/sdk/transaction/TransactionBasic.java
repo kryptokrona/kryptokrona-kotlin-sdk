@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Transaction.java
+ * TransactionBasic.java
  *
  * Represent a basic transaction of amount to the address destination,
  * using the given payment ID, if specified.
@@ -18,13 +18,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TransactionBasic implements Transaction {
+
     private String              destination;
     private volatile double     amount;
     private String              paymentID;
 
     public TransactionBasic(String destination, double amount, String paymentID) {
-        this.destination = destination;
-        this.amount = amount;
-        this.paymentID = paymentID;
+        this.destination    =      destination;
+        this.amount         =      amount;
+        this.paymentID      =      paymentID;
     }
 }

@@ -1,5 +1,14 @@
+//---------------------------------------------------------------------------------
+// PLUGINS
+//---------------------------------------------------------------------------------
+
 plugins {
     id 'java'
+    id "com.dorongold.task-tree" version "2.1.0"
+    id 'checkstyle'
+    id 'pmd'
+    id 'de.aaschmid.cpd' version '3.3'
+    id "com.github.spotbugs" version "5.0.4"
 }
 
 group 'org.kryptokrona.sdk'
@@ -8,6 +17,10 @@ version project.properties['kryptokrona.sdk.version']
 repositories {
     mavenCentral()
 }
+
+//---------------------------------------------------------------------------------
+// DEPENDENCIES
+//---------------------------------------------------------------------------------
 
 dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.1.4"
@@ -26,4 +39,73 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+//---------------------------------------------------------------------------------
+// STATIC CODE ANALYSIS CONFIGURATION
+//---------------------------------------------------------------------------------
+
+checkstyle {
+    toolVersion = '8.12'
+    ignoreFailures = false
+    configFile = file("${projectDir}/gradle/static-code-analysis/checkstyle/checkstyle.xml")
+}
+
+pmd {
+    toolVersion = '6.7.0'
+    ignoreFailures = false
+    ruleSetFiles = files("${projectDir}/gradle/static-code-analysis/pmd/ruleset.xml")
+    ruleSets = []
+    rulesMinimumPriority = 3
+}
+
+cpd {
+    language = 'java'
+    toolVersion = '6.1.0'
+    minimumTokenCount = 200 // approximately 5-10 lines
+}
+
+cpdCheck {
+    reports {
+        text.enabled = true
+        xml.enabled = false
+    }
+    ignoreAnnotations = true
+    source = sourceSets.main.allJava // only java, groovy and scala classes in 'main' sourceSets
+}
+
+spotbugsMain {
+    reports {
+        html {
+            required = true
+            outputLocation = file("$projectDir/build/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+    excludeFilter = file("${projectDir}/gradle/static-code-analysis/spotbugs/spotbugs-exclude.xml")
+}
+
+
+//---------------------------------------------------------------------------------
+// TASKS
+//---------------------------------------------------------------------------------
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+task printVersion {
+    doLast {
+        println project.version
+    }
 }

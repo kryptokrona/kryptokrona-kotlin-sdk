@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<ruleset name="DevFactory"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+
+    <description>
+        PMD Rules Configuration
+    </description>
+
+    <exclude-pattern>.*Mock\.java</exclude-pattern>
+
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="GuardLogStatement"/>
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="AvoidPrintStackTrace"/>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="DefaultPackage"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="ConfusingTernary"/>
+        <exclude name="AbstractNaming"/>
+        <exclude name="FieldNamingConventions"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="AvoidFinalLocalVariable"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="CommentDefaultAccessModifier"/>
+        <exclude name="TooManyStaticImports"/>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
+        <properties>
+            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]*"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="30"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="NullAssignment"/>
+        <exclude name="AssignmentInOperand"/>
+        <exclude name="BeanMembersShouldSerialize"/>
+        <exclude name="UseLocaleWithCaseConversions"/>
+    </rule>
+
+    <rule ref="category/java/multithreading.xml">
+        <exclude name="AvoidUsingVolatile"/>
+        <exclude name="UseConcurrentHashMap"/>
+    </rule>
+
+    <rule ref="category/java/performance.xml">
+        <exclude name="UseStringBufferForStringAppends"/>
+    </rule>
+
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>
+        <exclude name="ExcessiveImports"/>
+        <exclude name="LoosePackageCoupling"/>
+    </rule>
+    <rule ref="category/java/design.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="15"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/design.xml/SignatureDeclareThrowsException">
+        <properties>
+            <property name="IgnoreJUnitCompletely" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/security.xml"/>
+
+    <rule ref="category/java/documentation.xml">
+        <exclude name="CommentRequired"/>
+    </rule>
+    <rule ref="category/java/documentation.xml/CommentSize">
+        <properties>
+            <property name="maxLines" value="20"/>
+            <property name="maxLineLength" value="120"/>
+        </properties>
+    </rule>
+
+</ruleset>

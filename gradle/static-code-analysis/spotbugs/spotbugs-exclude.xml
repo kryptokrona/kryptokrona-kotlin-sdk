@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Class name="com.qryptic.api.security.SecurityConfig"/>
+    </Match>
+    <Match>
+        <Package name="com.qryptic.api.model"/>
+    </Match>
+</FindBugsFilter>
