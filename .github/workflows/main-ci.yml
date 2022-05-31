@@ -100,7 +100,7 @@ jobs:
         run: ./gradlew jacocoTestCoverageVerification
 
   javadoc:
-    name: JavaDoc
+    name: Javadocs
     runs-on: ubuntu-latest
     needs: [ code-coverage ]
 
@@ -119,7 +119,7 @@ jobs:
   publish:
     name: Publish Jar Package
     runs-on: ubuntu-latest
-    needs: [ code-coverage ]
+    needs: [ javadoc ]
 
     steps:
       - uses: actions/checkout@v3
