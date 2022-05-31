@@ -9,6 +9,7 @@ plugins {
     id 'pmd'
     id 'de.aaschmid.cpd' version '3.3'
     id "com.github.spotbugs" version "5.0.4"
+    id 'jacoco'
 }
 
 group 'org.kryptokrona.sdk'
@@ -37,8 +38,21 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
+//---------------------------------------------------------------------------------
+// TEST CONFIGURATION
+//---------------------------------------------------------------------------------
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('kryptokrona-sdk-report')
+    }
 }
 
 //---------------------------------------------------------------------------------
