@@ -33,12 +33,14 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 - OpenJDK 17 (LTS)
 - Gradle
 - RxJava
+- Google HTTP Client
 - JUnit5
 - Lombok
 - JaCoCo
 - Checkstyle
 - PMD
 - Spotbugs
+- gson
 
 ## Installation
 

@@ -19,6 +19,7 @@ public class Daemon {
 
     void init() {
         //TODO: should use the given hostname and port and make connection to node.
+
     }
 
 }
