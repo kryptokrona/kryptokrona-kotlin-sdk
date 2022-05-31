@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
     <Match>
-        <Class name="com.qryptic.api.security.SecurityConfig"/>
+        <Class name="org.kryptokrona.sdk.wallet.Wallet"/>
     </Match>
-    <Match>
+<!--    <Match>
         <Package name="com.qryptic.api.model"/>
-    </Match>
+    </Match>-->
 </FindBugsFilter>
