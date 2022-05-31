@@ -3,7 +3,7 @@
     <Match>
         <Class name="org.kryptokrona.sdk.wallet.Wallet"/>
     </Match>
-<!--    <Match>
-        <Package name="com.qryptic.api.model"/>
-    </Match>-->
+    <Match>
+        <Package name="org.kryptokrona.sdk.http"/>
+    </Match>
 </FindBugsFilter>
