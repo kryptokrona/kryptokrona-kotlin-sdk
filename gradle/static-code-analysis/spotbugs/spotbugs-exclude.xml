@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
     <Match>
-        <Class name="org.kryptokrona.sdk.wallet.Wallet"/>
+        <Class name="org.kryptokrona.sdk.wallet.WalletImpl"/>
     </Match>
     <Match>
         <Package name="org.kryptokrona.sdk.http"/>

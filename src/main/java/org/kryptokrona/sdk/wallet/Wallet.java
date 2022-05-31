@@ -1,24 +1,22 @@
 package org.kryptokrona.sdk.wallet;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.kryptokrona.sdk.transaction.TransactionBasic;
+public interface Wallet {
 
-import java.util.List;
+    /**
+     *
+     */
+    void start();
 
-/**
- * Wallet.java
- *
- * Represents a Wallet.
- *
- * @author Marcus Cvjeticanin (@mjovanc)
- */
-@Getter
-@Setter
-@NoArgsConstructor
-public class Wallet {
+    /**
+     * Saves a wallet to a file.
+     *
+     * @param fileName : String
+     * @param password : String
+     */
+    void saveToFile(String fileName, String password);
 
-    private List<TransactionBasic> transactionList;
-    private double balance;
+    /**
+     *
+     */
+    void stop();
 }

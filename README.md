@@ -97,7 +97,7 @@ dependencies {
 ## Usage
 
 ```java
-import org.kryptokrona.sdk.wallet.Wallet;
+import org.kryptokrona.sdk.wallet.WalletImpl;
 
 public class Main {
     public static void main(String[] args) {
