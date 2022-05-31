@@ -23,17 +23,16 @@ import java.io.IOException;
 @NoArgsConstructor
 public class Daemon {
 
-    private String hostname;
-    private int port;
+    private String  hostname;
+    private int     port;
 
     public Daemon(String hostname, int port) {
-        this.hostname = hostname;
-        this.port = port;
+        this.hostname   = hostname;
+        this.port       = port;
     }
 
     Observable<String> init() throws IOException {
-        HttpRequestFactory requestFactory
-                = new NetHttpTransport().createRequestFactory();
+        HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
                 new GenericUrl(String.format("http://%s:%s/getinfo", this.hostname, this.port)));
         return Observable.just(request.execute().parseAsString());

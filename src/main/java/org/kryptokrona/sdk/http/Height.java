@@ -16,13 +16,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Height {
-    private int height;
-    private int networkHeight;
-    private String status;
+
+    private int     height;
+    private int     networkHeight;
+    private String  status;
 
     public Height(int height, int networkHeight, String status) {
-        this.height = height;
-        this.networkHeight = networkHeight;
-        this.status = status;
+        this.height         = height;
+        this.networkHeight  = networkHeight;
+        this.status         = status;
     }
 }

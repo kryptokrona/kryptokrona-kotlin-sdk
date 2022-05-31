@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Wallet {
+
     private List<TransactionBasic> transactionList;
     private double balance;
 }
