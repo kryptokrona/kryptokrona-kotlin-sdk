@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
     implementation 'com.google.http-client:google-http-client:1.41.8'
     implementation "io.reactivex.rxjava3:rxjava:3.1.4"
 
@@ -32,6 +33,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // Test
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2'
 
