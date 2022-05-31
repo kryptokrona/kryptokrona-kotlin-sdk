@@ -44,6 +44,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    failFast = true // stop early to avoid running whole test suit if one fails
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
 
@@ -52,6 +53,18 @@ jacocoTestReport {
         xml.required = false
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir('kryptokrona-sdk-report')
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                //TODO: this is set to 0.0 since we do not have implemented proper
+                // unit tests yet to cover all code. Set to 0.7 when done.
+                minimum = 0.0
+            }
+        }
     }
 }
 
