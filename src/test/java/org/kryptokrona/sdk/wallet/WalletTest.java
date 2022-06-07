@@ -1,8 +1,6 @@
 package org.kryptokrona.sdk.wallet;
 
-import com.google.gson.Gson;
 import inet.ipaddr.HostName;
-import inet.ipaddr.HostNameException;
 import org.junit.jupiter.api.*;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;

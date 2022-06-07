@@ -6,7 +6,6 @@ import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import inet.ipaddr.HostName;
-import inet.ipaddr.HostNameException;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,7 +43,6 @@ public class DaemonImpl implements Daemon {
         request.setHeaders(headers);
 
         return Observable.just(request.execute().parseAsString());
-        //TODO: Should perhaps return a custom exception to describe more what the error could be about.
     }
 
 }

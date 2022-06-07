@@ -7,6 +7,11 @@ import org.kryptokrona.sdk.wallet.WalletImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * WalletServiceImpl.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public class WalletServiceImpl implements WalletService {
 
     private static final Logger logger = LoggerFactory.getLogger(WalletServiceImpl.class);

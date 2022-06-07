@@ -3,6 +3,11 @@ package org.kryptokrona.sdk.service;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.wallet.Wallet;
 
+/**
+ * WalletService.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public interface WalletService {
 
     /**
