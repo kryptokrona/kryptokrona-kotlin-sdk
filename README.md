@@ -101,7 +101,7 @@ import org.kryptokrona.sdk.wallet.WalletImpl;
 
 public class Main {
     public static void main(String[] args) {
-        Wallet wallet = new Wallet();
+        Daemon daemon = new Daemon();
     }
 }
 ```

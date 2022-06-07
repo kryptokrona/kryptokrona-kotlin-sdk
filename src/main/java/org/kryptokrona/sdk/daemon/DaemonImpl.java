@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.daemon;
 
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -33,9 +34,16 @@ public class DaemonImpl implements Daemon {
 
     @Override
     public Observable<String> init() throws IOException {
+
         HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
                 new GenericUrl(String.format("http://%s:%s/getinfo", this.hostname, this.port)));
+
+        // keep persistent HTTP connection.
+        HttpHeaders headers = request.getHeaders();
+        headers.set("Connection", "keep-alive");
+        request.setHeaders(headers);
+
         return Observable.just(request.execute().parseAsString());
         //TODO: Should perhaps return a custom exception to describe more what the error could be about.
     }
