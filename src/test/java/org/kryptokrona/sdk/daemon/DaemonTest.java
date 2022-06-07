@@ -1,6 +1,6 @@
 package org.kryptokrona.sdk.daemon;
 
-import com.google.gson.Gson;
+import inet.ipaddr.HostName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class DaemonTest {
     @Test
     @DisplayName("Initializing Daemon")
     void initializeDaemonTest() throws IOException {
-        Daemon daemon = new DaemonImpl("gota.kryptokrona.se", 11898);
+        Daemon daemon = new DaemonImpl(new HostName("gota.kryptokrona.se:11898"));
         daemon.init().subscribe(System.out::println);
     }
 

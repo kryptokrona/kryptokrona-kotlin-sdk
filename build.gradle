@@ -24,6 +24,7 @@ repositories {
 //---------------------------------------------------------------------------------
 
 dependencies {
+    implementation 'com.github.seancfoley:ipaddress:5.3.4'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
     implementation 'com.google.http-client:google-http-client:1.41.8'

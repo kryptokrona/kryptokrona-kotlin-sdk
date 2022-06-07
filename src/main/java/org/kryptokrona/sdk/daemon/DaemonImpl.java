@@ -5,6 +5,8 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import inet.ipaddr.HostName;
+import inet.ipaddr.HostNameException;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,20 +26,17 @@ import java.io.IOException;
 @NoArgsConstructor
 public class DaemonImpl implements Daemon {
 
-    private String  hostname;
-    private int     port;
+    private HostName hostname;
 
-    public DaemonImpl(String hostname, int port) {
-        this.hostname   = hostname;
-        this.port       = port;
+    public DaemonImpl(HostName hostname) {
+        this.hostname = hostname;
     }
 
     @Override
     public Observable<String> init() throws IOException {
-
         HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
-                new GenericUrl(String.format("http://%s:%s/getinfo", this.hostname, this.port)));
+                new GenericUrl(String.format("http://%s/getinfo", this.hostname.toString())));
 
         // keep persistent HTTP connection.
         HttpHeaders headers = request.getHeaders();

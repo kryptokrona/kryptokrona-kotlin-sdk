@@ -1,6 +1,8 @@
 package org.kryptokrona.sdk.wallet;
 
 import com.google.gson.Gson;
+import inet.ipaddr.HostName;
+import inet.ipaddr.HostNameException;
 import org.junit.jupiter.api.*;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
@@ -16,7 +18,7 @@ class WalletTest {
 
     @BeforeEach
     void beforeEach() {
-        daemon = new DaemonImpl("gota.kryptokrona.se", 11898);
+        daemon = new DaemonImpl(new HostName("gota.kryptokrona.se:11898"));
         walletService = new WalletServiceImpl();
     }
 
