@@ -1,5 +1,3 @@
-# Kryptokrona SDK
-
 ![Kryptokrona SDK](kryptokrona-logo.png)
 
 Kryptokrona SDK in Java for building decentralized private communication and payment systems.
