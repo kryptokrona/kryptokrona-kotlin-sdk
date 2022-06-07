@@ -195,6 +195,14 @@ Whenever you submit a pull request a pipeline will run with the following steps:
 The only thing different here from the main pipeline that runs is that we do not publish an artifact to
 GitHub Packages. 
 
+## Release notes
+
+Currently no releases exists. This will be updated later.
+
+| Release | Notes                                                | Summary                                                                                                                           |
+|---------|:-----------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| 1.0.0   | [1.0.0 release notes](./docs/release_1.0.0_notes.md) | <ul><li>Initial release</li></ul> |
+
 ## Contribute
 
 If you would like to contribute to this project there is two ways:
