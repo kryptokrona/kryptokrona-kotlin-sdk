@@ -199,6 +199,23 @@ Whenever you submit a pull request a pipeline will run with the following steps:
 The only thing different here from the main pipeline that runs is that we do not publish an artifact to
 GitHub Packages. 
 
+## Setup Testnet
+
+If you don't want to use a remote node in order to test the implementation you could setup your own testnet. To setup 
+run the command:
+
+- `./sdk-scripts/start-testnet.sh`
+
+This will fetch the Docker Image from Docker Hub and orchestrate up a testnet. 
+
+If you want to stop the containers:
+
+- `./sdk-scripts/teardown-testnet.sh`
+
+If you want to remove everything locally with Docker (use with caution):
+
+- `./sdk-scripts/remove-testnet.sh`
+
 ## Release notes
 
 Currently no releases exists. This will be updated later.
