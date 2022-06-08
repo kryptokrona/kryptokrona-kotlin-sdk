@@ -1,0 +1,3 @@
+[submodule "sdk-examples"]
+	path = sdk-examples
+	url = https://github.com/kryptokrona/sdk-examples
