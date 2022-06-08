@@ -43,6 +43,18 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 
 ## Installation
 
+To get it up and running locally you need to clone the repository with the following command:
+
+Using SSH:
+
+- `git clone --recursive git@github.com:kryptokrona/kryptokrona-sdk.git`
+
+Using HTTPS:
+
+- `git clone --recursive https://github.com/kryptokrona/kryptokrona-sdk.git`
+
+This is important if we want to have the sdk-examples submodule. If not, you should not need to do this recursive cloning.
+
 ### Gradle
 
 To add the dependency in Gradle, just add the following line inside `dependencies` tag:
@@ -95,15 +107,7 @@ dependencies {
 
 ## Usage
 
-```java
-import org.kryptokrona.sdk.wallet.WalletImpl;
-
-public class Main {
-    public static void main(String[] args) {
-        Daemon daemon = new Daemon();
-    }
-}
-```
+For usages please see the **sdk-examples** submodule with the `README.md` file.
 
 ## Tests
 
@@ -212,7 +216,9 @@ If you would like to contribute to this project there is two ways:
 
 ### Pull request
 
-We appreciate all contributions whether it be small changes such as documentation of source code to major improvement of code. The easiest way is to make a fork and then make a pull request into our develop branch. To make the PR go through make sure to include this information:
+We appreciate all contributions whether it be small changes such as documentation of source code to major improvement of code.
+
+The easiest way is to make a fork and then make a pull request into our develop branch. To make the PR go through make sure to include this information:
 
 ```
 What does this PR do?
