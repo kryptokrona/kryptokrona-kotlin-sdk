@@ -142,3 +142,14 @@ task printVersion {
         println project.version
     }
 }
+
+tasks.register('copyJavaDoc', Copy) {
+    println "${projectDir}/docs/${project.properties['kryptokrona.sdk.version']}"
+    mkdir "${projectDir}/docs/${project.properties['kryptokrona.sdk.version']}"
+
+    from "${buildDir}/docs/javadoc"
+    into layout.buildDirectory.dir("${projectDir}/docs/${project.properties['kryptokrona.sdk.version']}")
+    include '**/*.*'
+}
+
+copyJavaDoc.dependsOn(javadoc)
