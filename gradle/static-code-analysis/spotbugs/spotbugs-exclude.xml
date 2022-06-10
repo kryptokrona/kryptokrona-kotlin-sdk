@@ -6,4 +6,7 @@
     <Match>
         <Package name="org.kryptokrona.sdk.http"/>
     </Match>
+    <Match>
+        <Package name="org.kryptokrona.sdk.config"/>
+    </Match>
 </FindBugsFilter>
