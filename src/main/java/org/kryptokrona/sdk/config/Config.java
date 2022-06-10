@@ -18,7 +18,7 @@ public class Config {
     public boolean                  scanCoinbaseTransactions;
     public long                     minimumFee;
 
-    // public MixinLimits              mixinLimits;
+    // public List<MixinLimit>              mixinLimits;
 
     public long                     standardAddressLength;
     public long                     integratedAddressLength;
