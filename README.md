@@ -163,7 +163,7 @@ version control so it can get deployed we need to run:
 
 This has a dependency to javadoc gradle task so we don't need to run two commands.
 
-NOTE: The files will be located under `docs/<version>` and the version is picked up by what it says inside the file 
+**NOTE:** The files will be located under `docs/<version>` and the version is picked up by what it says inside the file 
 `gradle.properties`.
 
 ## Contribute
@@ -188,6 +188,8 @@ This PR has been tested using (e.g. Unit Tests, Manual Testing):
 
 Extra details?
 ```
+
+**NOTE:** Remember to update existing diagrams if there is some bigger improvements of code so it's up to date with the implementation.
 
 ### Donate
 

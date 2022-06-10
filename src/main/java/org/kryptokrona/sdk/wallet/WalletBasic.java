@@ -19,14 +19,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WalletImpl implements Wallet {
+public class WalletBasic implements Wallet {
 
     private List<TransactionBasic>  transactionList;
     private double                  balance;
 
-    private static final Logger     logger = LoggerFactory.getLogger(WalletImpl.class);
+    private static final Logger     logger = LoggerFactory.getLogger(WalletBasic.class);
 
-    public WalletImpl(List<TransactionBasic> transactionList, double balance) {
+    public WalletBasic(List<TransactionBasic> transactionList, double balance) {
         this.transactionList    = transactionList;
         this.balance            = balance;
     }

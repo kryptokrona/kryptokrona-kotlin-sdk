@@ -23,11 +23,11 @@ import java.io.IOException;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DaemonImpl implements Daemon {
+public class DaemonBasic implements Daemon {
 
     private HostName hostname;
 
-    public DaemonImpl(HostName hostname) {
+    public DaemonBasic(HostName hostname) {
         this.hostname = hostname;
     }
 

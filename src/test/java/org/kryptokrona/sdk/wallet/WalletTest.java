@@ -3,9 +3,8 @@ package org.kryptokrona.sdk.wallet;
 import inet.ipaddr.HostName;
 import org.junit.jupiter.api.*;
 import org.kryptokrona.sdk.daemon.Daemon;
-import org.kryptokrona.sdk.daemon.DaemonImpl;
+import org.kryptokrona.sdk.daemon.DaemonBasic;
 import org.kryptokrona.sdk.service.WalletService;
-import org.kryptokrona.sdk.service.WalletServiceImpl;
 
 import java.io.IOException;
 
@@ -16,8 +15,8 @@ class WalletTest {
 
     @BeforeEach
     void beforeEach() {
-        daemon = new DaemonImpl(new HostName("gota.kryptokrona.se:11898"));
-        walletService = new WalletServiceImpl();
+        daemon = new DaemonBasic(new HostName("gota.kryptokrona.se:11898"));
+        walletService = new WalletService();
     }
 
     @Test
