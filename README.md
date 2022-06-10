@@ -55,6 +55,10 @@ Using HTTPS:
 
 This is important if we want to have the sdk-examples submodule. If not, you should not need to do this recursive cloning.
 
+If we already cloned without the recursive flag and we want the content run:
+
+- `git submodule update --init --recursive`
+
 ## Tests
 
 We use unit tests, static code analysis and code coverage to ensure that we always write
