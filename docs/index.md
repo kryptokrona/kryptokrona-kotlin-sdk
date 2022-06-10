@@ -72,7 +72,7 @@ For usages please see the **sdk-examples** submodule with the `README.md` file.
 
 If you don't want to use a remote node in order to test the implementation you could setup your own testnet. To setup
 run the command:
-
+g
 - `./sdk-scripts/start-testnet.sh`
 
 This will fetch the Docker Image from Docker Hub and orchestrate up a testnet.
