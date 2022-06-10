@@ -55,60 +55,6 @@ Using HTTPS:
 
 This is important if we want to have the sdk-examples submodule. If not, you should not need to do this recursive cloning.
 
-### Gradle
-
-To add the dependency in Gradle, just add the following line inside `dependencies` tag:
-
-```
-compile 'org.kryptokrona.sdk:kryptokrona-sdk:1.0.0'
-```
-
-### Maven
-
-To add our dependency to your Maven build tool, add this inside the `<dependencies>` tag:
-
-```xml
-<dependency>
-	<groupId>org.kryptokrona.sdk</groupId>
-	<artifactId>kryptokrona-sdk</artifactId>
-	<version>1.0.0</version>
-</dependency>
-```
-
-### Manually
-
-If there is a need for not using a repository such as Maven Central we can import
-it manually, although in most cases it's recommended to use a repository. Use this only
-if you are sure that is needed.
-
-Open up the file **build.gradle** and add the following:
-
-```groovy
-buildscript {
-   repositories {
-      mavenCentral()
-      flatDir {
-         dirs 'libs'
-      }
-   }
-   dependencies {
-      classpath("org.kryptokrona.sdk:kryptokrona-sdk:1.0.0")
-   }
-}
-```
-
-Then add the .jar file you downloaded from our GitHub Packages to the dependency block:
-
-```groovy
-dependencies {
-    implementation files('libs/kryptokrona-sdk-<version.jar')
-}
-```
-
-## Usage
-
-For usages please see the **sdk-examples** submodule with the `README.md` file.
-
 ## Tests
 
 We use unit tests, static code analysis and code coverage to ensure that we always write
@@ -197,24 +143,7 @@ Whenever you submit a pull request a pipeline will run with the following steps:
 - Code Coverage
 
 The only thing different here from the main pipeline that runs is that we do not publish an artifact to
-GitHub Packages. 
-
-## Setup Testnet
-
-If you don't want to use a remote node in order to test the implementation you could setup your own testnet. To setup 
-run the command:
-
-- `./sdk-scripts/start-testnet.sh`
-
-This will fetch the Docker Image from Docker Hub and orchestrate up a testnet. 
-
-If you want to stop the containers:
-
-- `./sdk-scripts/teardown-testnet.sh`
-
-If you want to remove everything locally with Docker (use with caution):
-
-- `./sdk-scripts/remove-testnet.sh`
+GitHub Packages.
 
 ## GitHub Pages
 
@@ -231,15 +160,7 @@ version control so it can get deployed we need to run:
 This has a dependency to javadoc gradle task so we don't need to run two commands.
 
 NOTE: The files will be located under `docs/<version>` and the version is picked up by what it says inside the file 
-`gradle.properties`. 
-
-## Release notes
-
-Currently no releases exists. This will be updated later.
-
-| Release | Notes                                                | Summary                                                                                                                           |
-|---------|:-----------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
-| 1.0.0   | [1.0.0 release notes](docs/notes/release_1.0.0_notes.md) | <ul><li>Initial release</li></ul> |
+`gradle.properties`.
 
 ## Contribute
 
@@ -269,16 +190,6 @@ Extra details?
 XKR: SEKReXXU9aJPiwjX2XkpbK8ACMWbUNXcYPxUVSiUYpNdhj8Z2snEy8CjjorZUNyswQNfzAmVWuGksU72Sf3Kq79Zd3fJWHq4Nyx
 
 ![Kryptokrona QR Code](qr-code.png)
-
-## Help and Support
-
-The best place to get help and support is to join our Discord server. Please join us here: https://discord.gg/mkRpVgDubC
-
-## FAQ
-
-- Q: Why use Java and not for example, JavaScript?
-  - A: The biggest reason why we decided to go with Java is that the language is very stable, scalable, good performance, active evolution, good for integrating in mobile applications as well as enterprice software that usually runs on Java.
-
 
 ## Contributors
 
