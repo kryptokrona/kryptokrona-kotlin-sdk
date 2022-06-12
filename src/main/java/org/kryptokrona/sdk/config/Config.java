@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class Config {
 
     /**
@@ -90,7 +89,7 @@ public class Config {
     /**
      * Mapping of height to mixin maximum and mixin minimum.
      */
-    public List<MixinLimit>          mixinLimits;
+    public MixinLimits               mixinLimits;
 
     /**
      * The length of a standard address for Kryptokrona.
@@ -148,18 +147,11 @@ public class Config {
     private long                     maxLastUpdatedLocalHeightInterval;
 
     /**
-     * Allows setting a customer user agent string
+     * Allows setting a custom user agent string
      */
     private String                   customUserAgentString;
 
-    public Config(
-            float decimalPlaces, long addressPrefix, long requestTimeout, long blockTargetTime, long syncThreadInterval,
-            long daemonUpdateInterval, long lockedTransactionsCheckInterval, long blocksPerTick, String ticker,
-            boolean scanCoinbaseTransactions, long minimumFee, int feePerByteChunkSize, double minimumFeePerByte,
-            List<MixinLimit> mixinLimits, long standardAddressLength, long integratedAddressLength,
-            long blockStoreMemoryLimit, long blocksPerDaemonRequest, long maxLastFetchedBlockInterval,
-            long maxLastUpdatedNetworkHeightInterval, long maxLastUpdatedLocalHeightInterval, String customUserAgentString
-    ) {
+    public Config() {
         this.decimalPlaces                          = 5;
         this.addressPrefix                          = 2239254;
         this.requestTimeout                         = 10 * 1000;
@@ -173,7 +165,7 @@ public class Config {
         this.minimumFee                             = 10;
         this.feePerByteChunkSize                    = 256;
         this.minimumFeePerByte                      = 500.00 / this.feePerByteChunkSize;
-        /*this.mixinLimits                            = new MixinLimits(Arrays.asList(
+        this.mixinLimits                            = new MixinLimits(Arrays.asList(
                 // Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
                 new MixinLimit(440000, 0, 100, 3),
 
@@ -182,14 +174,14 @@ public class Config {
 
                 // At height of 800000, static mixin of 3
                 new MixinLimit(800000, 3)
-        ), 3);*/
-        this.standardAddressLength                  = standardAddressLength;
-        this.integratedAddressLength                = integratedAddressLength;
-        this.blockStoreMemoryLimit                  = blockStoreMemoryLimit;
-        this.blocksPerDaemonRequest                 = blocksPerDaemonRequest;
-        this.maxLastFetchedBlockInterval            = maxLastFetchedBlockInterval;
-        this.maxLastUpdatedNetworkHeightInterval    = maxLastUpdatedNetworkHeightInterval;
-        this.maxLastUpdatedLocalHeightInterval      = maxLastUpdatedLocalHeightInterval;
-        this.customUserAgentString                  = customUserAgentString;
+        ), 3);
+        this.standardAddressLength                  = 99;
+        this.integratedAddressLength                = 99 + ((64 * 11) / 8);
+        this.blockStoreMemoryLimit                  = 1024 * 1024 * 50;
+        this.blocksPerDaemonRequest                 = 100;
+        this.maxLastFetchedBlockInterval            = 60 * 3;
+        this.maxLastUpdatedNetworkHeightInterval    = 60 * 3;
+        this.maxLastUpdatedLocalHeightInterval      = 60 * 3;
+        this.customUserAgentString                  = String.format("%s-sdk-%s", this.ticker.toLowerCase(), System.getProperty("sdk-version"));
     }
 }
