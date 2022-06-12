@@ -25,4 +25,11 @@ public class MixinLimit {
         this.maxMixin = maxMixin;
         this.defaultMixin = defaultMixin;
     }
+
+    public MixinLimit(int height, int minMixin) {
+        this.height = height;
+        this.minMixin = minMixin;
+        this.maxMixin = minMixin;
+        this.defaultMixin = minMixin;
+    }
 }
