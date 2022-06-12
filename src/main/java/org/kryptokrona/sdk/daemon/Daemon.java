@@ -10,6 +10,8 @@ public interface Daemon {
     /**
      * Open a Daemon connection.
      *
+     * @throws IOException : If no connection
+     * @throws NetworkBlockCountException : If invalid network block count
      * @return Observable
      */
     Observable<String> open() throws IOException, NetworkBlockCountException;

@@ -10,11 +10,13 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.Instant;
 
 /**
  * DaemonBasic.java
@@ -41,32 +43,28 @@ public class DaemonBasic implements Daemon {
     private long                lastKnownHashrate;
     private long                blockCount;
     private boolean             useRawBlocks;
-
-    // private Config config;
-
-    // date here
-    // private lastUpdatedNetworkHeight: Date = new Date();
-    // private lastUpdatedLocalHeight: Date = new Date();
-
+    private Config              config;
+    private Instant             lastUpdatedNetworkHeight;
+    private Instant             lastUpdatedLocalHeight;
     private boolean             connected;
 
     private static final Logger logger = LoggerFactory.getLogger(DaemonBasic.class);
 
     public DaemonBasic(HostName hostname) {
-        this.hostname               = hostname;
-        this.ssl                    = !this.hostname.isAddress();
-        this.sslDetermined          = true;
-        this.isCacheApi             = false;
-        this.isCacheApiDetermined   = false;
-        this.feeAddress             = "";
-        this.feeAmount              = 0.0;
-        this.localDaemonBlockCount  = 0;
-        this.networkBlockCount      = 0;
-        this.peerCount              = 0;
-        this.lastKnownHashrate      = 0;
-        this.blockCount             = 100;
-        this.useRawBlocks           = true;
-        this.connected              = true;
+        this.hostname                   = hostname;
+        this.ssl                        = !this.hostname.isAddress();
+        this.sslDetermined              = true;
+        this.isCacheApi                 = false;
+        this.isCacheApiDetermined       = false;
+        this.feeAddress                 = "";
+        this.feeAmount                  = 0.0;
+        this.localDaemonBlockCount      = 0;
+        this.networkBlockCount          = 0;
+        this.peerCount                  = 0;
+        this.lastKnownHashrate          = 0;
+        this.blockCount                 = 100;
+        this.useRawBlocks               = true;
+        this.connected                  = true;
     }
 
     @Override
@@ -86,6 +84,7 @@ public class DaemonBasic implements Daemon {
         }
 
         //TODO: should we use a while loop here?
+        //TODO: set lastUpdated times here?
 
         return Observable.just(request.execute().parseAsString());
     }

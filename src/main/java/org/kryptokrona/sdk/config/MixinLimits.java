@@ -55,7 +55,7 @@ public class MixinLimits {
      * Returns the minimum and maximum mixin for the given height.
      *
      * @param height : long
-     * @return Map<Long, Double>
+     * @return HashMap
      */
     public Map<Long, Double> getMixinLimitsByHeight(long height) {
         long minimumMixin = 0;

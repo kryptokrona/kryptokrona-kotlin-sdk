@@ -1,11 +1,9 @@
 package org.kryptokrona.sdk.config;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Config.java
@@ -104,16 +102,6 @@ public class Config {
      * this automatically.
      */
     private long                     integratedAddressLength;
-
-    /*private UnderivePublicKey        underivePublicKey;
-    private DerivePublicKey          derivePublicKey;
-    private DeriveSecretKey          deriveSecretKey;
-    private GenerateKeyImage         generateKeyImage;
-    private SecretKeyToPublicKey     secretKeyToPublicKey;
-    private CnFastHash               cnFastHash;
-    private GenerateRingSignatures   generateRingSignatures;
-    private CheckRingSignatures      checkRingSignatures;
-    private GenerateKeyDerivation    generateKeyDerivation;*/
 
     /**
      * The amount of memory to use storing downloaded blocks - 50MB
