@@ -172,3 +172,6 @@ gradle-app.setting
 
 # drawio
 *.bkp
+
+# test file
+src/main/java/org/kryptokrona/sdk/Main.java

@@ -10,11 +10,14 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 /**
- * Daemon.java
+ * DaemonBasic.java
  *
  * Represents a Daemon for communicating to a node.
  *
@@ -25,14 +28,49 @@ import java.io.IOException;
 @NoArgsConstructor
 public class DaemonBasic implements Daemon {
 
-    private HostName hostname;
+    private HostName            hostname;
+    private boolean             ssl;
+    private boolean             sslDetermined;
+    private boolean             isCacheApi;
+    private boolean             isCacheApiDetermined;
+    private String              feeAddress;
+    private double              feeAmount;
+    private long                localDaemonBlockCount;
+    private long                networkBlockCount;
+    private long                peerCount;
+    private long                lastKnownHashrate;
+    private long                blockCount;
+    private boolean             useRawBlocks;
+
+    // private Config config;
+
+    // date here
+    // private lastUpdatedNetworkHeight: Date = new Date();
+    // private lastUpdatedLocalHeight: Date = new Date();
+
+    private boolean             connected;
+
+    private static final Logger logger = LoggerFactory.getLogger(DaemonBasic.class);
 
     public DaemonBasic(HostName hostname) {
-        this.hostname = hostname;
+        this.hostname               = hostname;
+        this.ssl                    = !this.hostname.isAddress();
+        this.sslDetermined          = true;
+        this.isCacheApi             = false;
+        this.isCacheApiDetermined   = false;
+        this.feeAddress             = "";
+        this.feeAmount              = 0.0;
+        this.localDaemonBlockCount  = 0;
+        this.networkBlockCount      = 0;
+        this.peerCount              = 0;
+        this.lastKnownHashrate      = 0;
+        this.blockCount             = 100;
+        this.useRawBlocks           = true;
+        this.connected              = true;
     }
 
     @Override
-    public Observable<String> init() throws IOException {
+    public Observable<String> open() throws IOException, NetworkBlockCountException {
         HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
                 new GenericUrl(String.format("http://%s/getinfo", this.hostname.toString())));
@@ -42,7 +80,24 @@ public class DaemonBasic implements Daemon {
         headers.set("Connection", "keep-alive");
         request.setHeaders(headers);
 
+        if (networkBlockCount == 0) {
+            logger.error("Network block count cannot be 0.");
+            throw new NetworkBlockCountException("Network block count cannot be 0.");
+        }
+
+        //TODO: should we use a while loop here?
+
         return Observable.just(request.execute().parseAsString());
+    }
+
+    @Override
+    public Observable<Void> updateDaemonInfo() {
+        return null;
+    }
+
+    @Override
+    public Observable<Void> updateFeeInfo() {
+        return null;
     }
 
 }
