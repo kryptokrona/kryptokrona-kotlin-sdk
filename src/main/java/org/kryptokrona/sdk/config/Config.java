@@ -72,16 +72,19 @@ public class Config {
      */
     private long                     minimumFee;
 
-    /* Fee per byte is rounded up in chunks. This helps makes estimates
+    /**
+     * Fee per byte is rounded up in chunks. This helps makes estimates
      * more accurate. It's suggested to make this a power of two, to relate
-     * to the underlying storage cost / page sizes for storing a transaction. */
+     * to the underlying storage cost / page sizes for storing a transaction.
+     */
     private int                      feePerByteChunkSize;
 
-    /* Fee to charge per byte of transaction. Will be applied in chunks, see
+    /** Fee to charge per byte of transaction. Will be applied in chunks, see
      * above. This value comes out to 1.953125. We use this value instead of
      * something like 2 because it makes for pretty resulting fees
      * - 5 XKR vs 5.12 XKR. You can read this as the fee per chunk
-     * is 500 atomic units. The fee per byte is 500 / chunk size. */
+     * is 500 atomic units. The fee per byte is 500 / chunk size.
+     */
     private double                   minimumFeePerByte;
 
     /**

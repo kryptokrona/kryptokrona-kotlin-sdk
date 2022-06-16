@@ -1,6 +1,0 @@
-[submodule "sdk-examples"]
-	path = sdk-examples
-	url = https://github.com/kryptokrona/sdk-examples
-[submodule "sdk-scripts"]
-	path = sdk-scripts
-	url = git@github.com:kryptokrona/sdk-scripts.git
