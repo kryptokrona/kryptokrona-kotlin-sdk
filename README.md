@@ -51,7 +51,7 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 - Web: kryptokrona.org
 - Mail: mjovanc@protonmail.com
 - GitHub: https://github.com/kryptokrona
-- Hugin: kryptokrona-development board on Hugin Messenger
+- Hugin: sdkdevs board on Hugin Messenger
 - It is HIGHLY recommended to join our board on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
 
 ## Technologies
