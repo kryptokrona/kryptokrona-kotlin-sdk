@@ -26,6 +26,31 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 </a>
 </p>
 
+## Table of Contents
+
+- [Development resources](#development-resources)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Tests](#tests)
+    - [Unit Testing](#unit-testing)
+    - [Static Code Analysis](#static-code-analysis)
+    - [Code Coverage](#code-coverage)
+- [Build](#build)
+  - [CI/CD](#cicd)
+- [GitHub Pages](#github-pages)
+- [Contribute](#contribute)
+- [Contributors](#contributors)
+- [License](#license)
+
+
+## Development Resources
+
+- Web: kryptokrona.org
+- Mail: mjovanc@protonmail.com
+- GitHub: https://github.com/kryptokrona
+- Hugin: kryptokrona-development board on Hugin Messenger
+- It is HIGHLY recommended to join our board on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
+
 ## Technologies
 
 - OpenJDK 17 (LTS)
@@ -43,21 +68,15 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 
 ## Installation
 
-To get it up and running locally you need to clone the repository with the following command:
+To get it up and running locally you need to clone the repository:
 
 Using SSH:
 
-- `git clone --recursive git@github.com:kryptokrona/kryptokrona-sdk.git`
+- `git clone git@github.com:kryptokrona/kryptokrona-sdk.git`
 
 Using HTTPS:
 
-- `git clone --recursive https://github.com/kryptokrona/kryptokrona-sdk.git`
-
-This is important if we want to have the sdk-examples submodule. If not, you should not need to do this recursive cloning.
-
-If we already cloned without the recursive flag and we want the content run:
-
-- `git submodule update --init --recursive`
+- `git clone https://github.com/kryptokrona/kryptokrona-sdk.git`
 
 ## Tests
 
