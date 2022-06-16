@@ -1,5 +1,5 @@
 # Kryptokrona Java SDK Scripts
-Useful scripts for the Kryptokrona Java SDK. This is a submodule to the Kryptokrona SDK repo.
+Useful scripts for the Kryptokrona Java SDK. 
 
 ## Setup Testnet
 

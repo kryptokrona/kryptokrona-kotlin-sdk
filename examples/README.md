@@ -1,5 +1,5 @@
 # Kryptokrona Java SDK Examples
-Example code for usage of Kryptokrona Java SDK. This is a submodule to the Kryptokrona SDK repo.
+Example code for usage of Kryptokrona Java SDK. 
 
 ## Usage
 
