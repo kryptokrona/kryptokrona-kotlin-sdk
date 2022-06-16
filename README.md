@@ -38,7 +38,10 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 - [Build](#build)
   - [CI/CD](#cicd)
 - [GitHub Pages](#github-pages)
+  - [Javadoc](#javadoc)
 - [Contribute](#contribute)
+  - [Pull Request](#pull-request)
+  - [Donate](#donate)
 - [Contributors](#contributors)
 - [License](#license)
 
