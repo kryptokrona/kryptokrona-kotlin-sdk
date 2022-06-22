@@ -40,16 +40,11 @@ public class DaemonBasic implements Daemon {
     private FeeInfo             feeInfo;
     private Info                info;
     private HostName            hostname;
-    private boolean             ssl;
-    private boolean             sslDetermined;
-    private boolean             isCacheApi;
-    private boolean             isCacheApiDetermined;
     private long                localDaemonBlockCount;
     private long                networkBlockCount;
     private long                peerCount;
     private long                lastKnownHashrate;
     private long                blockCount;
-    private boolean             useRawBlocks;
     private Config              config;
     private Instant             lastUpdatedNetworkHeight;
     private Instant             lastUpdatedLocalHeight;
@@ -62,16 +57,11 @@ public class DaemonBasic implements Daemon {
         this.feeInfoCollectionType      = new TypeToken<FeeInfo>(){}.getType();
         this.infoCollectionType         = new TypeToken<Info>(){}.getType();
         this.hostname                   = hostname;
-        this.ssl                        = !this.hostname.isAddress();
-        this.sslDetermined              = true;
-        this.isCacheApi                 = false;
-        this.isCacheApiDetermined       = false;
         this.localDaemonBlockCount      = 0;
         this.networkBlockCount          = 0;
         this.peerCount                  = 0;
         this.lastKnownHashrate          = 0;
         this.blockCount                 = 100;
-        this.useRawBlocks               = true;
         this.connected                  = true;
         this.config                     = new Config();
     }
