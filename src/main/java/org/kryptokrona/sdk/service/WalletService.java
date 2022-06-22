@@ -28,16 +28,29 @@ public class WalletService {
         this.started = false;
     }
 
-    public void start() throws NetworkBlockCountException, IOException, InterruptedException {
-        logger.info("Starting the wallet sync process.");
-        started = true;
-        daemon.init();
+    public void start() throws IOException {
+        if (!started) {
+            logger.info("Starting the wallet sync process.");
+            started = true;
+
+            daemon.init();
+
+            /*await Promise.all([
+                    this.syncThread.start(),
+                    this.daemonUpdateThread.start(),
+                    this.lockedTransactionsCheckThread.start()
+            ]);*/
+        }
     }
 
     public void stop() {
         logger.info("Stopping the wallet sync process.");
         started = false;
         // daemon.stop();
+
+        /*await this.syncThread.stop();
+        await this.daemonUpdateThread.stop();
+        await this.lockedTransactionsCheckThread.stop();*/
     }
 
     /**
