@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.kryptokrona.sdk.http.FeeInfo;
 
 import java.io.IOException;
 
@@ -11,8 +11,6 @@ public interface Daemon {
      * Open a Daemon connection.
      *
      * @throws IOException : If no connection
-     * @throws NetworkBlockCountException : If invalid network block count
-     * @return Observable
      */
     void init() throws IOException;
 
@@ -30,7 +28,25 @@ public interface Daemon {
      */
     Observable<Void> updateFeeInfo() throws IOException;
 
+    /**
+     * Get the node fee.
+     *
+     * @return Observable
+     */
+    Observable<FeeInfo> getNodeFee();
+
+    /**
+     * Make a GET request.
+     *
+     * @param param : String
+     * @return Observable
+     */
     Observable<String> getRequest(String param) throws IOException;
 
+    /**
+     * Make a POST request.
+     *
+     * @return Observable
+     */
     Observable<String> postRequest();
 }

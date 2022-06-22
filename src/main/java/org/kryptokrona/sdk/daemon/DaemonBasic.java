@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -45,8 +44,6 @@ public class DaemonBasic implements Daemon {
     private boolean             sslDetermined;
     private boolean             isCacheApi;
     private boolean             isCacheApiDetermined;
-    private String              feeAddress;
-    private double              feeAmount;
     private long                localDaemonBlockCount;
     private long                networkBlockCount;
     private long                peerCount;
@@ -69,8 +66,6 @@ public class DaemonBasic implements Daemon {
         this.sslDetermined              = true;
         this.isCacheApi                 = false;
         this.isCacheApiDetermined       = false;
-        this.feeAddress                 = "";
-        this.feeAmount                  = 0.0;
         this.localDaemonBlockCount      = 0;
         this.networkBlockCount          = 0;
         this.peerCount                  = 0;
@@ -92,6 +87,8 @@ public class DaemonBasic implements Daemon {
         getRequest("info").subscribe(json -> {
             // parse json to Info object
             Info infoObj = gson.fromJson(json, infoCollectionType);
+
+            //TODO: add more logic in here (check wallet-backend-js)
 
             /*Instant diff1 = Instant.now(lastUpdatedNetworkHeight / 1000);
             Instant diff2 = Instant.now(lastUpdatedLocalHeight / 1000);
@@ -121,6 +118,8 @@ public class DaemonBasic implements Daemon {
             // parse json to FeeInfo object
             FeeInfo feeInfoObj = gson.fromJson(json, feeInfoCollectionType);
 
+            //TODO: add more logic in here (check wallet-backend-js)
+
             // check if both amount is more than 0 and address is set
             if (feeInfoObj.getAmount() > 0 && !Objects.equals(feeInfoObj.getAddress(), "")) {
                 this.feeInfo = feeInfoObj;
@@ -128,6 +127,11 @@ public class DaemonBasic implements Daemon {
         });
 
         return Observable.empty();
+    }
+
+    @Override
+    public Observable<FeeInfo> getNodeFee() {
+        return Observable.just(feeInfo);
     }
 
     @Override
