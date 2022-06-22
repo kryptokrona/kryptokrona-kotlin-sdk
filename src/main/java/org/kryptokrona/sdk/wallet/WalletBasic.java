@@ -30,19 +30,4 @@ public class WalletBasic implements Wallet {
         this.transactionList    = transactionList;
         this.balance            = balance;
     }
-
-    @Override
-    public void start() {
-        logger.debug("Starting the wallet sync process.");
-    }
-
-    @Override
-    public void saveToFile(String fileName, String password) {
-        logger.debug("Wallet saved to file.");
-    }
-
-    @Override
-    public void stop() {
-        logger.debug("Stopping the wallet sync process.");
-    }
 }

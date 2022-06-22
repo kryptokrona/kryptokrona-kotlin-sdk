@@ -7,6 +7,6 @@ package org.kryptokrona.sdk.wallet;
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
-public class SubWallet {
+public class WalletSub {
     //TODO: should this use the Wallet interface?
 }
