@@ -23,14 +23,14 @@ class WalletTest {
     @Test
     @DisplayName("Create Wallet")
     void createWalletTest() throws IOException, NetworkBlockCountException {
-        daemon.open().subscribe(System.out::println);
+        daemon.init().subscribe(System.out::println);
         walletService.createWallet(daemon);
     }
 
     @Test
     @DisplayName("Start/Stop Wallet")
     void startStopWalletTest() throws IOException, NetworkBlockCountException {
-        daemon.open().subscribe(System.out::println);
+        daemon.init().subscribe(System.out::println);
         Wallet wallet = walletService.createWallet(daemon);
         wallet.start();
         wallet.stop();
@@ -39,7 +39,7 @@ class WalletTest {
     @Test
     @DisplayName("Save Wallet To File")
     void saveWalletToFileTest() throws IOException, NetworkBlockCountException {
-        daemon.open().subscribe(System.out::println);
+        daemon.init().subscribe(System.out::println);
         Wallet wallet = walletService.createWallet(daemon);
         wallet.saveToFile("test.wallet", "test1234");
     }

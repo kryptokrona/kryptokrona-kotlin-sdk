@@ -14,7 +14,7 @@ public interface Daemon {
      * @throws NetworkBlockCountException : If invalid network block count
      * @return Observable
      */
-    Observable<String> open() throws IOException, NetworkBlockCountException;
+    void init() throws IOException, NetworkBlockCountException, InterruptedException;
 
     /**
      * Update the daemon info.

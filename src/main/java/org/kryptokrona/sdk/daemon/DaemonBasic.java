@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * DaemonBasic.java
@@ -68,7 +70,7 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<String> open() throws IOException, NetworkBlockCountException {
+    public void init() throws IOException, NetworkBlockCountException, InterruptedException {
         HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
                 new GenericUrl(String.format("http://%s/getinfo", this.hostname.toString())));
@@ -78,15 +80,23 @@ public class DaemonBasic implements Daemon {
         headers.set("Connection", "keep-alive");
         request.setHeaders(headers);
 
-        if (networkBlockCount == 0) {
+        /*if (networkBlockCount == 0) {
             logger.error("Network block count cannot be 0.");
             throw new NetworkBlockCountException("Network block count cannot be 0.");
+        }*/
+
+        while (connected) {
+            test().subscribe(tick-> System.out.println(new Date()));
+            Thread.sleep(60_000);
         }
 
-        //TODO: should we use a while loop here?
-        //TODO: set lastUpdated times here?
+        // return
 
-        return Observable.just(request.execute().parseAsString());
+        // return Observable.just(request.execute().parseAsString());
+    }
+
+    public Observable<Long> test() {
+        return Observable.interval(5, TimeUnit.SECONDS);
     }
 
     @Override
