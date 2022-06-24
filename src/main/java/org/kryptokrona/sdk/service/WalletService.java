@@ -1,7 +1,6 @@
 package org.kryptokrona.sdk.service;
 
 import org.kryptokrona.sdk.daemon.Daemon;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.wallet.Wallet;
 import org.kryptokrona.sdk.wallet.WalletBasic;
 
@@ -64,7 +63,7 @@ public class WalletService {
         return new WalletBasic();
     }
 
-    public boolean saveWalletToFile(String password) {
+    public boolean saveWalletToFile(Wallet wallet, String password) {
         // save wallet to wallet.sqlite3
         return true;
     }

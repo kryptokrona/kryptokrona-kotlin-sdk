@@ -15,13 +15,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Height {
+public class NodeHeight {
 
     private int     height;
     private int     networkHeight;
     private String  status;
 
-    public Height(int height, int networkHeight, String status) {
+    public NodeHeight(int height, int networkHeight, String status) {
         this.height         = height;
         this.networkHeight  = networkHeight;
         this.status         = status;

@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Info {
+public class NodeInfo {
 
     private int                 altBlocksCount;
     private int                 difficulty;
@@ -41,7 +41,7 @@ public class Info {
     private String              version;
     private int                 whitePeerlistSize;
 
-    public Info(
+    public NodeInfo(
             int altBlocksCount, int difficulty, int greyPeerlistSize, int hashrate, int height,
             int incomingConnectionsCount, int lastKnownBlockIndex, int majorVersion, int minorVersion,
             int networkHeight, int outgoingConnectionsCount, int startTime, String status,

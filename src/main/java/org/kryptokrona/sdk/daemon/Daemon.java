@@ -19,7 +19,7 @@ public interface Daemon {
      *
      * @return Observable
      */
-    Observable<Void> updateDaemonInfo() throws IOException;
+    Observable<Void> updateNodeInfo() throws IOException;
 
     /**
      * Update the fee address and amount.

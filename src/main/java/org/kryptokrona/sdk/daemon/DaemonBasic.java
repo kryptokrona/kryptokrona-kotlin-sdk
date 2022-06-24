@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.http.NodeFee;
-import org.kryptokrona.sdk.http.Info;
+import org.kryptokrona.sdk.http.NodeInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class DaemonBasic implements Daemon {
     private Type                feeInfoCollectionType;
     private Type                infoCollectionType;
     private NodeFee nodeFee;
-    private Info                info;
+    private NodeInfo nodeInfo;
     private HostName            hostname;
     private long                localDaemonBlockCount;
     private long                networkBlockCount;
@@ -55,7 +55,7 @@ public class DaemonBasic implements Daemon {
     public DaemonBasic(HostName hostname) {
         this.gson                       = new Gson();
         this.feeInfoCollectionType      = new TypeToken<NodeFee>(){}.getType();
-        this.infoCollectionType         = new TypeToken<Info>(){}.getType();
+        this.infoCollectionType         = new TypeToken<NodeInfo>(){}.getType();
         this.hostname                   = hostname;
         this.localDaemonBlockCount      = 0;
         this.networkBlockCount          = 0;
@@ -68,15 +68,16 @@ public class DaemonBasic implements Daemon {
 
     @Override
     public void init() throws IOException {
-        updateDaemonInfo().subscribe();
+        logger.info("Initializing Daemon.");
+        updateNodeInfo().subscribe();
         updateFeeInfo().subscribe();
     }
 
     @Override
-    public Observable<Void> updateDaemonInfo() throws IOException {
+    public Observable<Void> updateNodeInfo() throws IOException {
         getRequest("info").subscribe(json -> {
             // parse json to Info object
-            info = gson.fromJson(json, infoCollectionType);
+            nodeInfo = gson.fromJson(json, infoCollectionType);
 
             //TODO: add more logic in here (check wallet-backend-js)
 
@@ -87,14 +88,15 @@ public class DaemonBasic implements Daemon {
                 // this.emit('deadnode');
             }*/
 
-            localDaemonBlockCount = info.getHeight();
-            networkBlockCount = info.getNetworkHeight();
+            localDaemonBlockCount = nodeInfo.getHeight();
+            networkBlockCount = nodeInfo.getNetworkHeight();
 
-            if (info.getNetworkHeight() > 0) {
-                info.setNetworkHeight(info.getNetworkHeight() - 1);
+            if (nodeInfo.getNetworkHeight() > 0) {
+                nodeInfo.setNetworkHeight(nodeInfo.getNetworkHeight() - 1);
             }
 
-            peerCount = info.getIncomingConnectionsCount() + info.getOutgoingConnectionsCount();
+            peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
+            logger.info("Node information, updated.");
         });
 
         return Observable.empty();
@@ -111,6 +113,7 @@ public class DaemonBasic implements Daemon {
             // check if both amount is more than 0 and address is set
             if (nodeFeeObj.getAmount() > 0 && !Objects.equals(nodeFeeObj.getAddress(), "")) {
                 nodeFee = nodeFeeObj;
+                logger.info("Node fee information, updated.");
             }
         });
 
