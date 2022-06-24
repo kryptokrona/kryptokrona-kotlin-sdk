@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.http.FeeInfo;
+import org.kryptokrona.sdk.http.NodeFee;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ public interface Daemon {
      *
      * @return Observable
      */
-    Observable<FeeInfo> getNodeFee();
+    Observable<NodeFee> getNodeFee();
 
     /**
      * Make a GET request.

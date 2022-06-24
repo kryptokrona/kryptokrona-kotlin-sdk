@@ -12,13 +12,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FeeInfo {
+public class NodeFee {
 
     private String address;
     private int amount;
     private String status;
 
-    public FeeInfo(String address, int amount, String status) {
+    public NodeFee(String address, int amount, String status) {
         this.address    = address;
         this.amount     = amount;
         this.status     = status;

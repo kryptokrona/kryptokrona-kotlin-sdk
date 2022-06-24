@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.http.FeeInfo;
+import org.kryptokrona.sdk.http.NodeFee;
 import org.kryptokrona.sdk.http.Info;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class DaemonBasic implements Daemon {
     private Gson                gson;
     private Type                feeInfoCollectionType;
     private Type                infoCollectionType;
-    private FeeInfo             feeInfo;
+    private NodeFee nodeFee;
     private Info                info;
     private HostName            hostname;
     private long                localDaemonBlockCount;
@@ -54,7 +54,7 @@ public class DaemonBasic implements Daemon {
 
     public DaemonBasic(HostName hostname) {
         this.gson                       = new Gson();
-        this.feeInfoCollectionType      = new TypeToken<FeeInfo>(){}.getType();
+        this.feeInfoCollectionType      = new TypeToken<NodeFee>(){}.getType();
         this.infoCollectionType         = new TypeToken<Info>(){}.getType();
         this.hostname                   = hostname;
         this.localDaemonBlockCount      = 0;
@@ -76,7 +76,7 @@ public class DaemonBasic implements Daemon {
     public Observable<Void> updateDaemonInfo() throws IOException {
         getRequest("info").subscribe(json -> {
             // parse json to Info object
-            Info infoObj = gson.fromJson(json, infoCollectionType);
+            info = gson.fromJson(json, infoCollectionType);
 
             //TODO: add more logic in here (check wallet-backend-js)
 
@@ -87,16 +87,14 @@ public class DaemonBasic implements Daemon {
                 // this.emit('deadnode');
             }*/
 
-            localDaemonBlockCount = infoObj.getHeight();
-            networkBlockCount = infoObj.getNetworkHeight();
+            localDaemonBlockCount = info.getHeight();
+            networkBlockCount = info.getNetworkHeight();
 
-            if (networkBlockCount > 0) {
-                networkBlockCount--;
+            if (info.getNetworkHeight() > 0) {
+                info.setNetworkHeight(info.getNetworkHeight() - 1);
             }
 
-            peerCount = infoObj.getIncomingConnectionsCount() + infoObj.getOutgoingConnectionsCount();
-
-            lastKnownHashrate = infoObj.getHashrate();
+            peerCount = info.getIncomingConnectionsCount() + info.getOutgoingConnectionsCount();
         });
 
         return Observable.empty();
@@ -106,13 +104,13 @@ public class DaemonBasic implements Daemon {
     public Observable<Void> updateFeeInfo() throws IOException {
         getRequest("fee").subscribe(json -> {
             // parse json to FeeInfo object
-            FeeInfo feeInfoObj = gson.fromJson(json, feeInfoCollectionType);
+            NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
             //TODO: add more logic in here (check wallet-backend-js)
 
             // check if both amount is more than 0 and address is set
-            if (feeInfoObj.getAmount() > 0 && !Objects.equals(feeInfoObj.getAddress(), "")) {
-                this.feeInfo = feeInfoObj;
+            if (nodeFeeObj.getAmount() > 0 && !Objects.equals(nodeFeeObj.getAddress(), "")) {
+                nodeFee = nodeFeeObj;
             }
         });
 
@@ -120,8 +118,8 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<FeeInfo> getNodeFee() {
-        return Observable.just(feeInfo);
+    public Observable<NodeFee> getNodeFee() {
+        return Observable.just(nodeFee);
     }
 
     @Override
