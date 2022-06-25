@@ -1,9 +1,15 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.block.RawBlock;
+import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.http.NodeFee;
+import org.kryptokrona.sdk.wallet.WalletError;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public interface Daemon {
 
@@ -12,7 +18,7 @@ public interface Daemon {
      *
      * @throws IOException : If no connection
      */
-    void init() throws IOException;
+    void init() throws IOException, NetworkBlockCountException;
 
     /**
      * Update the daemon info.
@@ -34,6 +40,66 @@ public interface Daemon {
      * @return Observable
      */
     Observable<NodeFee> getNodeFee();
+
+    /**
+     * Gets blocks from the daemon. Blocks are returned starting from the last
+     * known block hash (if higher than the startHeight/startTimestamp).
+     *
+     * @param blockHashCheckPoints : List
+     * @param startHeight : int
+     * @param startTimestamp : int
+     * @return Observable
+     */
+    Observable<Map<Integer, Boolean>> getWalletSyncData(List<String> blockHashCheckPoints, int startHeight, int startTimestamp);
+
+    /**
+     * Returns a mapping of transaction hashes to global indexes.
+     *
+     * Get global indexes for the transactions in the range
+     * [startHeight, endHeight]
+     *
+     * @param startHeight : List
+     * @param endHeight : int
+     * @return Observable
+     */
+    Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight);
+
+    /**
+     * Returns all cancelled transactions.
+     *
+     * @param transactionHashes : List
+     * @return Observable
+     */
+    Observable<String> getCancelledTransactions(List<String> transactionHashes);
+
+    /**
+     * Gets random outputs for the given amounts. requestedOuts per. Usually mixin+1.
+     *
+     * Returns an array of amounts to global indexes and keys. There
+     * should be requestedOuts indexes if the daemon fully fulfilled
+     * our request.
+     *
+     * @param amounts : List
+     * @param requestedOuts : int
+     * @return Observable
+     */
+    Observable<List<Integer>> getRandomOutputsByAmount(List<Integer> amounts, int requestedOuts);
+
+    /**
+     * Sending a transaction.
+     *
+     * @param rawTransaction : String
+     * @return Observable
+     */
+    Observable<WalletError> sendTransaction(String rawTransaction);
+
+    /**
+     * Convert raw blocks to blocks.
+     *
+     * @param rawBlocks : List
+     * @return Observable
+     */
+    Observable<List<Block>> rawBlocksToBlocks(List<RawBlock> rawBlocks);
 
     /**
      * Make a GET request.

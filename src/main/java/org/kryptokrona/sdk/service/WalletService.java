@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.service;
 
 import org.kryptokrona.sdk.daemon.Daemon;
+import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.wallet.Wallet;
 import org.kryptokrona.sdk.wallet.WalletBasic;
 
@@ -32,8 +33,13 @@ public class WalletService {
             logger.info("Starting the wallet sync process.");
             started = true;
 
-            daemon.init();
+            try {
+                daemon.init();
+            } catch (NetworkBlockCountException e) {
+                logger.error("Network block count cannot be 0.");
+            }
 
+            // merge obserables
             /*await Promise.all([
                     this.syncThread.start(),
                     this.daemonUpdateThread.start(),
@@ -58,7 +64,7 @@ public class WalletService {
      * @param daemon : Daemon
      * @return Wallet
      */
-    public Wallet createWallet(Daemon daemon) {
+    public WalletBasic createWallet(Daemon daemon) {
         logger.info("New Wallet was created.");
         return new WalletBasic();
     }

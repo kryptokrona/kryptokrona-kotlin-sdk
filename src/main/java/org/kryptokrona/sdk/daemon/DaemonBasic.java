@@ -11,15 +11,21 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
+import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.http.NodeFee;
 import org.kryptokrona.sdk.http.NodeInfo;
+import org.kryptokrona.sdk.wallet.WalletError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -67,10 +73,14 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public void init() throws IOException {
+    public void init() throws IOException, NetworkBlockCountException {
         logger.info("Initializing Daemon.");
-        updateNodeInfo().subscribe();
-        updateFeeInfo().subscribe();
+
+        Observable.merge(updateNodeInfo(), updateFeeInfo()).subscribe(result -> {
+            if (networkBlockCount == 0) {
+                throw new NetworkBlockCountException("Network block count cannot be 0.");
+            }
+        });
     }
 
     @Override
@@ -123,6 +133,37 @@ public class DaemonBasic implements Daemon {
     @Override
     public Observable<NodeFee> getNodeFee() {
         return Observable.just(nodeFee);
+    }
+
+    @Override
+    public Observable<Map<Integer, Boolean>> getWalletSyncData(
+            List<String> blockHashCheckPoints, int startHeight, int startTimestamp) {
+        return null;
+    }
+
+    @Override
+    public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) {
+        return null;
+    }
+
+    @Override
+    public Observable<String> getCancelledTransactions(List<String> transactionHashes) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<Integer>> getRandomOutputsByAmount(List<Integer> amounts, int requestedOuts) {
+        return null;
+    }
+
+    @Override
+    public Observable<WalletError> sendTransaction(String rawTransaction) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<Block>> rawBlocksToBlocks(List<RawBlock> rawBlocks) {
+        return null;
     }
 
     @Override
