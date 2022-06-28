@@ -10,6 +10,8 @@ plugins {
     id 'de.aaschmid.cpd' version '3.3'
     id "com.github.spotbugs" version "5.0.4"
     id 'jacoco'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group 'org.kryptokrona.sdk'
@@ -30,9 +32,16 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
     implementation 'com.google.http-client:google-http-client:1.41.8'
     implementation "io.reactivex.rxjava3:rxjava:3.1.4"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation group: 'org.springframework.data', name: 'spring-data-commons', version: '2.5.2'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // Test
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.2'

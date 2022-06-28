@@ -68,6 +68,8 @@ Kryptokrona SDK in Java for building decentralized private communication and pay
 - Spotbugs
 - gson
 - IPAddress
+- Spring
+- Hibernate
 
 ## Installation
 
