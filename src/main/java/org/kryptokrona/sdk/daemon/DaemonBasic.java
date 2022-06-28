@@ -1,5 +1,6 @@
 package org.kryptokrona.sdk.daemon;
 
+import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
@@ -17,6 +18,7 @@ import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.http.NodeFee;
 import org.kryptokrona.sdk.http.NodeInfo;
+import org.kryptokrona.sdk.http.WalletSyncData;
 import org.kryptokrona.sdk.wallet.WalletError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -41,6 +44,7 @@ import java.util.Objects;
 public class DaemonBasic implements Daemon {
 
     private Gson                gson;
+    private HttpRequestFactory  requestFactory;
     private Type                feeInfoCollectionType;
     private Type                infoCollectionType;
     private NodeFee nodeFee;
@@ -60,6 +64,7 @@ public class DaemonBasic implements Daemon {
 
     public DaemonBasic(HostName hostname) {
         this.gson                       = new Gson();
+        this.requestFactory             = new NetHttpTransport().createRequestFactory();
         this.feeInfoCollectionType      = new TypeToken<NodeFee>(){}.getType();
         this.infoCollectionType         = new TypeToken<NodeInfo>(){}.getType();
         this.hostname                   = hostname;
@@ -137,7 +142,11 @@ public class DaemonBasic implements Daemon {
 
     @Override
     public Observable<Map<Integer, Boolean>> getWalletSyncData(
-            List<String> blockHashCheckPoints, int startHeight, int startTimestamp) {
+            WalletSyncData walletSyncData) throws IOException {
+        postRequest("/sync/raw", walletSyncData).subscribe(json -> {
+            System.out.println(json);
+        });
+
         return null;
     }
 
@@ -168,7 +177,6 @@ public class DaemonBasic implements Daemon {
 
     @Override
     public Observable<String> getRequest(String param) throws IOException {
-        HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
                 new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)));
 
@@ -176,8 +184,12 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<String> postRequest() {
-        return null;
+    public Observable<String> postRequest(String param, Object obj) throws IOException {
+        HttpRequest request = requestFactory.buildPostRequest(
+                new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)),
+                ByteArrayContent.fromString("application/json", gson.toJson(obj, new TypeToken<Object>(){}.getType())));
+
+        return Observable.just(request.getHeaders().setContentType("application/json").toString());
     }
 
 }

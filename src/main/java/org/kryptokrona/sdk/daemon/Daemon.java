@@ -5,6 +5,7 @@ import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.http.NodeFee;
+import org.kryptokrona.sdk.http.WalletSyncData;
 import org.kryptokrona.sdk.wallet.WalletError;
 
 import java.io.IOException;
@@ -45,12 +46,10 @@ public interface Daemon {
      * Gets blocks from the daemon. Blocks are returned starting from the last
      * known block hash (if higher than the startHeight/startTimestamp).
      *
-     * @param blockHashCheckPoints : List
-     * @param startHeight : int
-     * @param startTimestamp : int
+     * @param walletSyncData : WalletSyncData
      * @return Observable
      */
-    Observable<Map<Integer, Boolean>> getWalletSyncData(List<String> blockHashCheckPoints, int startHeight, int startTimestamp);
+    Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
 
     /**
      * Returns a mapping of transaction hashes to global indexes.
@@ -114,5 +113,5 @@ public interface Daemon {
      *
      * @return Observable
      */
-    Observable<String> postRequest();
+    Observable<String> postRequest(String param, Object obj) throws IOException;
 }
