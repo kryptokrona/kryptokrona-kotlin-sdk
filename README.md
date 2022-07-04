@@ -1,30 +1,4 @@
-![Kryptokrona SDK](kryptokrona-logo.png)
-
-Kryptokrona SDK in Java for building decentralized private communication and payment systems.
-
-<p>
-<a href="https://chat.kryptokrona.org">
-    <img src="https://img.shields.io/discord/562673808582901793?label=Discord&logo=Discord&logoColor=white&style=flat">
-</a>
-<a href="https://github.com/kryptokrona/kryptokrona-sdk/issues">
-    <img src="https://img.shields.io/github/issues/kryptokrona/kryptokrona-sdk">
-</a>
-<a href="https://github.com/kryptokrona/kryptokrona-sdk/pulls">
-    <img src="https://img.shields.io/github/issues-pr/kryptokrona/kryptokrona-sdk">
-</a>
-<a href="https://github.com/kryptokrona/kryptokrona-sdk/commits/main">
-    <img src="https://img.shields.io/github/commit-activity/m/kryptokrona/kryptokrona-sdk">
-</a>
-<a href="https://github.com/kryptokrona/kryptokrona-sdk/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/kryptokrona/kryptokrona-sdk">
-</a>
-<a href="https://github.com/kryptokrona/kryptokrona-sdk/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/kryptokrona/kryptokrona-sdk">
-</a>
-<a href="https://twitter.com/kryptokrona">
-    <img src="https://img.shields.io/twitter/follow/kryptokrona">
-</a>
-</p>
+# <img src="https://raw.githubusercontent.com/kryptokrona/kryptokrona-python-sdk/master/kryptokrona.png" alt="XKR" height="36" /> Kryptokrona Java SDK [![issues](https://img.shields.io/github/issues/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/issues) [![pulls](https://img.shields.io/github/issues-pr/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/pulls) [![license](https://img.shields.io/github/license/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/blob/main/LICENSE)
 
 ## Table of Contents
 
