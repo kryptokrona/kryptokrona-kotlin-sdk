@@ -40,9 +40,9 @@ The following table summarizes the tools and libraries required to build.
 | Google HTTP Client | 1.41.8       | NO       | HTTP Request Library                        |
 | JUnit              | 5.8.2        | NO       | Unit Testing Library                        |
 | Lombok             | 1.18.24      | NO       | Lombok Library                              |
-| JaCoCo             | any          | NO       | For ZeroMQ                                  |
+| JaCoCo             | any          | NO       | Code Coverage Library                       |
 | Checkstyle         | any          | NO       | Styleguide checks                           |
-| PMD                | any          | NO       | DNS resolver                                |
+| PMD                | any          | NO       | Source Code Analyzer                        |
 | Spotbugs           | 5.0.4        | NO       | Find Bugs                                   |
 | gson               | 2.9.0        | NO       | JSON Parser                                 |
 | IPAddress          | 5.3.4        | NO       | IPAddress Handling IP Addresses and Subnets |
