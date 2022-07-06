@@ -1,17 +1,20 @@
 package org.kryptokrona.sdk.service;
 
+import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.exception.NetworkBlockCountException;
-import org.kryptokrona.sdk.wallet.Wallet;
-import org.kryptokrona.sdk.wallet.WalletBasic;
+import org.kryptokrona.sdk.model.wallet.Wallet;
+import org.kryptokrona.sdk.model.wallet.WalletBasic;
 
+import org.kryptokrona.sdk.model.wallet.WalletSub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
- * WalletServiceImpl.java
+ * WalletService.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
@@ -19,12 +22,26 @@ public class WalletService {
 
     private Daemon daemon;
 
+    private Config config;
+
+    private List<WalletSub> subWallets;
+
+    private WalletSynchronizerService walletSynchronizerService;
+
     private boolean started;
 
     private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
-    public WalletService(Daemon daemon) {
+    public WalletService(
+            Config config,
+            Daemon daemon,
+            List<WalletSub> subWallets,
+            WalletSynchronizerService walletSynchronizerService
+    ) {
+        this.config = config;
         this.daemon = daemon;
+        this.subWallets = subWallets;
+        this.walletSynchronizerService = walletSynchronizerService;
         this.started = false;
     }
 
