@@ -2,7 +2,7 @@ package org.kryptokrona.sdk.service;
 
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.wallet.Wallet;
 import org.kryptokrona.sdk.model.wallet.WalletBasic;
 

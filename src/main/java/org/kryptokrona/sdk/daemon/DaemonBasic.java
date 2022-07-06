@@ -15,11 +15,10 @@ import lombok.Setter;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.http.NodeFee;
 import org.kryptokrona.sdk.model.http.NodeInfo;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
-import org.kryptokrona.sdk.model.wallet.WalletError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

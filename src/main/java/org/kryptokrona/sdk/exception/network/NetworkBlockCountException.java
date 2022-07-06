@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.exception;
+package org.kryptokrona.sdk.exception.network;
 
 /**
  * NetworkBlockCount.java

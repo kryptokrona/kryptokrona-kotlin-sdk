@@ -3,10 +3,9 @@ package org.kryptokrona.sdk.daemon;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.http.NodeFee;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
-import org.kryptokrona.sdk.model.wallet.WalletError;
 
 import java.io.IOException;
 import java.util.List;

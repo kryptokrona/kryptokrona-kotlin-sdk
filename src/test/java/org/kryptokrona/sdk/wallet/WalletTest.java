@@ -1,13 +1,7 @@
 package org.kryptokrona.sdk.wallet;
 
-import inet.ipaddr.HostName;
-import org.junit.jupiter.api.*;
 import org.kryptokrona.sdk.daemon.Daemon;
-import org.kryptokrona.sdk.daemon.DaemonBasic;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
 import org.kryptokrona.sdk.service.WalletService;
-
-import java.io.IOException;
 
 class WalletTest {
 

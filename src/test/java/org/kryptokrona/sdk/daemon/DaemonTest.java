@@ -3,7 +3,7 @@ package org.kryptokrona.sdk.daemon;
 import inet.ipaddr.HostName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.kryptokrona.sdk.exception.NetworkBlockCountException;
+import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 
 import java.io.IOException;
 
