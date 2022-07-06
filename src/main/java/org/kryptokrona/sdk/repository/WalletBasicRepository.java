@@ -1,6 +1,6 @@
 package org.kryptokrona.sdk.repository;
 
-import org.kryptokrona.sdk.wallet.Wallet;
+import org.kryptokrona.sdk.wallet.WalletBasic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @author Marcus Cvjeticanin
  */
 @Repository
-public interface WalletRepository extends JpaRepository<Wallet, Long> {
+public interface WalletBasicRepository extends JpaRepository<WalletBasic, Long> {
 }

@@ -144,8 +144,10 @@ public class DaemonBasic implements Daemon {
     public Observable<Map<Integer, Boolean>> getWalletSyncData(
             WalletSyncData walletSyncData) throws IOException {
         postRequest("/sync/raw", walletSyncData).subscribe(json -> {
-            System.out.println(json);
+            logger.info(json);
         });
+
+        //TODO: should be implemented in WalletSyncronizer
 
         return null;
     }
