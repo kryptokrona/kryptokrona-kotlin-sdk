@@ -46,8 +46,8 @@ public class DaemonBasic implements Daemon {
     private HttpRequestFactory  requestFactory;
     private Type                feeInfoCollectionType;
     private Type                infoCollectionType;
-    private NodeFee nodeFee;
-    private NodeInfo nodeInfo;
+    private NodeFee             nodeFee;
+    private NodeInfo            nodeInfo;
     private HostName            hostname;
     private long                localDaemonBlockCount;
     private long                networkBlockCount;
