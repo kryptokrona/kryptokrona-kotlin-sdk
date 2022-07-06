@@ -89,7 +89,7 @@ public interface Daemon {
      * @param rawTransaction : String
      * @return Observable
      */
-    Observable<WalletError> sendTransaction(String rawTransaction);
+    Observable<Void> sendTransaction(String rawTransaction);
 
     /**
      * Convert raw blocks to blocks.

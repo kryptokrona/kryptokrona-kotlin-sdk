@@ -166,7 +166,8 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<WalletError> sendTransaction(String rawTransaction) {
+    public Observable<Void> sendTransaction(String rawTransaction) {
+        //TODO need to check this return type
         return null;
     }
 
