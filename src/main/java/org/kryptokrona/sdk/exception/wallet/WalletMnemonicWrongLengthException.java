@@ -1,0 +1,14 @@
+package org.kryptokrona.sdk.exception.wallet;
+
+/**
+ * WalletMnemonicWrongLengthException.java
+ *
+ * Mnemonic seed is not 25 words.
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
+public class WalletMnemonicWrongLengthException extends WalletException {
+    public WalletMnemonicWrongLengthException(String errorMessage) {
+        super(errorMessage);
+    }
+}
