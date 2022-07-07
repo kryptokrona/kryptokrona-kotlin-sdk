@@ -14,13 +14,10 @@ import java.util.List;
 @Setter
 public class SynchronizationStatus {
 
-    private List<String> blockHashCheckpoints;
-
-    private List<String> lastKnownBlockHashes;
-
-    private long lastKnownBlockHeight;
-
-    private long lastSavedCheckpointAt;
+    private List<String>    blockHashCheckpoints;
+    private List<String>    lastKnownBlockHashes;
+    private long            lastKnownBlockHeight;
+    private long            lastSavedCheckpointAt;
 
     public SynchronizationStatus(
             List<String> blockHashCheckpoints,

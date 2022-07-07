@@ -29,17 +29,17 @@ import java.util.Map;
 @NoArgsConstructor
 public class WalletSynchronizerService {
 
-    private DaemonBasic daemon;
-    private long startTimestamp;
-    private long startHeight;
-    private String privateViewKey;
-    private SynchronizationStatus synchronizationStatus;
-    private List<WalletSub> subWallets;
-    private boolean fetchingBlocks;
-    private List<Block> storedBlocks;
-    private Map<String, Long> cancelledTransactionsFailCount;
-    private Instant lastDownloadedBlocks;
-    private Config config;
+    private DaemonBasic             daemon;
+    private long                    startTimestamp;
+    private long                    startHeight;
+    private String                  privateViewKey;
+    private SynchronizationStatus   synchronizationStatus;
+    private List<WalletSub>         subWallets;
+    private boolean                 fetchingBlocks;
+    private List<Block>             storedBlocks;
+    private Map<String, Long>       cancelledTransactionsFailCount;
+    private Instant                 lastDownloadedBlocks;
+    private Config                  config;
 
     public WalletSynchronizerService(
             DaemonBasic daemon,

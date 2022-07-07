@@ -20,16 +20,11 @@ import java.util.List;
  */
 public class WalletService {
 
-    private Daemon daemon;
-
-    private Config config;
-
-    private List<WalletSub> subWallets;
-
-    private WalletSynchronizerService walletSynchronizerService;
-
-    private boolean started;
-
+    private Daemon                      daemon;
+    private Config                      config;
+    private List<WalletSub>             subWallets;
+    private WalletSynchronizerService   walletSynchronizerService;
+    private boolean                     started;
     private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
     public WalletService(

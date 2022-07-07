@@ -14,10 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MixinLimit {
 
-    private long height;
-    private long minMixin;
-    private double maxMixin;
-    private long defaultMixin;
+    private long    height;
+    private long    minMixin;
+    private double  maxMixin;
+    private long    defaultMixin;
 
     public MixinLimit(int height, int minMixin, int maxMixin, int defaultMixin) {
         this.height = height;

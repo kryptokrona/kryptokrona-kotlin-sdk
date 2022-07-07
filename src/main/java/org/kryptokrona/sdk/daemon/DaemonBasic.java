@@ -81,7 +81,7 @@ public class DaemonBasic implements Daemon {
 
         Observable.merge(updateNodeInfo(), updateFeeInfo()).subscribe(result -> {
             if (networkBlockCount == 0) {
-                throw new NetworkBlockCountException("Network block count cannot be 0.");
+                throw new NetworkBlockCountException();
             }
         });
     }
