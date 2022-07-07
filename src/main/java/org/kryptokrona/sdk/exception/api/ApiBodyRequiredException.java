@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiBodyRequiredException extends ApiException {
-    public ApiBodyRequiredException(String errorMessage) {
-        super(errorMessage);
+    public ApiBodyRequiredException() {
+        super("This API endpoint requires the submission of a body for processing.");
     }
 }

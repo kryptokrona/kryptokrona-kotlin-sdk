@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiNodeNotSyncedException extends ApiException {
-    public ApiNodeNotSyncedException(String errorMessage) {
-        super(errorMessage);
+    public ApiNodeNotSyncedException() {
+        super("Daemon must be synced to process this RPC method call, please retry when synced.");
     }
 }

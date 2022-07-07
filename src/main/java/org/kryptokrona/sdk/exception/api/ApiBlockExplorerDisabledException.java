@@ -8,7 +8,11 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiBlockExplorerDisabledException extends ApiException {
-    public ApiBlockExplorerDisabledException(String errorMessage) {
-        super(errorMessage);
+    public ApiBlockExplorerDisabledException() {
+        super(
+                "This method has been disabled by the administrator. " +
+                "If you are the administrator relaunch your daemon with " +
+                "the --enable-blockexplorer command line option to access this method."
+        );
     }
 }

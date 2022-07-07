@@ -92,15 +92,6 @@ public class DaemonBasic implements Daemon {
             // parse json to Info object
             nodeInfo = gson.fromJson(json, infoCollectionType);
 
-            //TODO: add more logic in here (check wallet-backend-js)
-
-            /*Instant diff1 = Instant.now(lastUpdatedNetworkHeight / 1000);
-            Instant diff2 = Instant.now(lastUpdatedLocalHeight / 1000);
-
-            if (diff1 > config.getMaxLastUpdatedNetworkHeightInterval() || diff2 > config.getMaxLastUpdatedLocalHeightInterval()) {
-                // this.emit('deadnode');
-            }*/
-
             localDaemonBlockCount = nodeInfo.getHeight();
             networkBlockCount = nodeInfo.getNetworkHeight();
 

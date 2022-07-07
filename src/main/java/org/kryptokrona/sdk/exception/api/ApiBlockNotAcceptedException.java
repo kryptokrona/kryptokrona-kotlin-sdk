@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiBlockNotAcceptedException extends ApiException {
-    public ApiBlockNotAcceptedException(String errorMessage) {
-        super(errorMessage);
+    public ApiBlockNotAcceptedException() {
+        super("Could not add block candidate to blockchain.");
     }
 }

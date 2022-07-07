@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiInternalErrorException extends ApiException {
-    public ApiInternalErrorException(String errorMessage) {
-        super(errorMessage);
+    public ApiInternalErrorException() {
+        super("An internal error occurred.");
     }
 }

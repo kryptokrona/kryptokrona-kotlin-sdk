@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiInvalidArgumentsException extends ApiException {
-    public ApiInvalidArgumentsException(String errorMessage) {
-        super(errorMessage);
+    public ApiInvalidArgumentsException() {
+        super("An argument supplied could not be properly decoded.");
     }
 }

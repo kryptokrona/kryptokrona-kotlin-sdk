@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.api;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiHashNotFoundException extends ApiException {
-    public ApiHashNotFoundException(String errorMessage) {
-        super(errorMessage);
+    public ApiHashNotFoundException() {
+        super("The requested hash could not be found.");
     }
 }
