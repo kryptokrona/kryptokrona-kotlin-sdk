@@ -9,7 +9,10 @@ package org.kryptokrona.sdk.exception.daemon;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class DaemonOfflineException extends DaemonException {
-    public DaemonOfflineException(String errorMessage) {
-        super(errorMessage);
+    public DaemonOfflineException() {
+        super(
+                "We were not able to submit our request to the daemon. " +
+                "Ensure it is online and not frozen."
+        );
     }
 }

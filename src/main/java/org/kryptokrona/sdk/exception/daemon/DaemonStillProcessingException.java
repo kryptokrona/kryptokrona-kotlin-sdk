@@ -9,7 +9,12 @@ package org.kryptokrona.sdk.exception.daemon;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class DaemonStillProcessingException extends DaemonException {
-    public DaemonStillProcessingException(String errorMessage) {
-        super(errorMessage);
+    public DaemonStillProcessingException() {
+        super(
+                "The transaction was sent to the daemon, but the connection " +
+                "timed out before we could determine if the transaction " +
+                "succeeded. Wait a few minutes before retrying the transaction, " +
+                "as it may still succeed."
+        );
     }
 }
