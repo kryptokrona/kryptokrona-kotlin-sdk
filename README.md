@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/kryptokrona/kryptokrona-python-sdk/master/kryptokrona.png" alt="XKR" height="36" /> Kryptokrona Java SDK [![issues](https://img.shields.io/github/issues/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/issues) [![pulls](https://img.shields.io/github/issues-pr/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/pulls) [![license](https://img.shields.io/github/license/kryptokrona/kryptokrona-java-sdk)](https://github.com/kryptokrona/kryptokrona-java-sdk/blob/main/LICENSE)
+# <img src="https://raw.githubusercontent.com/kryptokrona/kryptokrona-python-sdk/master/kryptokrona.png" alt="XKR" height="36" /> Kryptokrona Java SDK [![Kryptokrona SDK Main Pipeline](https://github.com/kryptokrona/kryptokrona-java-sdk/actions/workflows/main-ci.yml/badge.svg)](https://github.com/kryptokrona/kryptokrona-java-sdk/actions/workflows/main-ci.yml) 
 
 ## Table of Contents
 
