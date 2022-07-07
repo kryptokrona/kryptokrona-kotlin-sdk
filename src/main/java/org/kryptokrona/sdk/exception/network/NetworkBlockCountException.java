@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.network;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class NetworkBlockCountException extends Exception {
-    public NetworkBlockCountException(String errorMessage) {
-        super(errorMessage);
+    public NetworkBlockCountException() {
+        super("Network block count cannot be 0.");
     }
 }

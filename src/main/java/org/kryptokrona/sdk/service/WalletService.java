@@ -53,7 +53,7 @@ public class WalletService {
             try {
                 daemon.init();
             } catch (NetworkBlockCountException e) {
-                logger.error("Network block count cannot be 0.");
+                logger.error("%s", e);
             }
 
             // merge obserables
