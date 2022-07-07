@@ -9,7 +9,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletWrongPasswordException extends WalletException {
-    public WalletWrongPasswordException(String errorMessage) {
-        super(errorMessage);
+    public WalletWrongPasswordException() {
+        super("The password given for this wallet is incorrect.");
     }
 }

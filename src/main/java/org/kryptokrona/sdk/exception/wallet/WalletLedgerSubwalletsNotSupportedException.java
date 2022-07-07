@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletLedgerSubwalletsNotSupportedException extends WalletException {
-    public WalletLedgerSubwalletsNotSupportedException(String errorMessage) {
-        super(errorMessage);
+    public WalletLedgerSubwalletsNotSupportedException() {
+        super("Ledger based wallets do not currently support subwallets.");
     }
 }

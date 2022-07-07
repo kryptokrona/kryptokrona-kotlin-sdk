@@ -8,7 +8,11 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletTransactionUnexpectedFeeException extends WalletException {
-    public WalletTransactionUnexpectedFeeException(String errorMessage) {
-        super(errorMessage);
+    public WalletTransactionUnexpectedFeeException() {
+        super(
+                "The fee of the created transaction is not the same as that " +
+                "which was specified (0 for fusion transactions). Almost " +
+                "certainly a programmer error. Cancelling transaction."
+        );
     }
 }

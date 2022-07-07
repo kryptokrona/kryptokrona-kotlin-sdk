@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletFailedToCreateRingSignatureException extends WalletException {
-    public WalletFailedToCreateRingSignatureException(String errorMessage) {
-        super(errorMessage);
+    public WalletFailedToCreateRingSignatureException() {
+        super(
+                "Failed to create ring signature - probably a programmer " +
+                "error, or a corrupted wallet."
+        );
     }
 }

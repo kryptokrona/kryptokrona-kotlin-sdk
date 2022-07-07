@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletNotEnoughInputsForFusionTransactionException extends WalletException {
-    public WalletNotEnoughInputsForFusionTransactionException(String errorMessage) {
-        super(errorMessage);
+    public WalletNotEnoughInputsForFusionTransactionException() {
+        super("Cannot send fusion transaction - wallet is already fully optimized.");
     }
 }

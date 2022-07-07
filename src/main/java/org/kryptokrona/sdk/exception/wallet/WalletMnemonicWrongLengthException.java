@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletMnemonicWrongLengthException extends WalletException {
-    public WalletMnemonicWrongLengthException(String errorMessage) {
-        super(errorMessage);
+    public WalletMnemonicWrongLengthException() {
+        super("The mnemonic seed given is the wrong length.");
     }
 }

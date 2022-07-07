@@ -9,7 +9,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletFusionMixinTooLargeException extends WalletException {
-    public WalletFusionMixinTooLargeException(String errorMessage) {
-        super(errorMessage);
+    public WalletFusionMixinTooLargeException() {
+        super(
+                "The mixin value given is too high to be accepted by the " +
+                "network (based on the current height known by the wallet)"
+        );
     }
 }

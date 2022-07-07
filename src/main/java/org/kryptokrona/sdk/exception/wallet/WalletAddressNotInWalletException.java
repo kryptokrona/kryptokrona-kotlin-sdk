@@ -9,7 +9,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAddressNotInWalletException extends WalletException {
-    public WalletAddressNotInWalletException(String errorMessage) {
-        super(errorMessage);
+    public WalletAddressNotInWalletException() {
+        super(
+                "The address given does not exist in the wallet container, " +
+                "but is required to exist for this operation."
+        );
     }
 }

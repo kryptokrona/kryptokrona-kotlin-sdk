@@ -9,7 +9,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletInvalidFilenameException extends WalletException {
-    public WalletInvalidFilenameException(String errorMessage) {
-        super(errorMessage);
+    public WalletInvalidFilenameException() {
+        super(
+                "We could not open/save to the filename given. Possibly " +
+                "invalid characters, or permission issues."
+        );
     }
 }

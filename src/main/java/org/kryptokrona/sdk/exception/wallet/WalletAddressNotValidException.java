@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAddressNotValidException extends WalletException {
-    public WalletAddressNotValidException(String errorMessage) {
-        super(errorMessage);
+    public WalletAddressNotValidException() {
+        super(
+                "The address given is not valid. Possibly invalid checksum. " +
+                "Most likely a typo."
+        );
     }
 }

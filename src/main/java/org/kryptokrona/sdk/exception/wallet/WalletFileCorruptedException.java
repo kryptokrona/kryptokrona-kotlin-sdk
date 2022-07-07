@@ -9,7 +9,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletFileCorruptedException extends WalletException {
-    public WalletFileCorruptedException(String errorMessage) {
-        super(errorMessage);
+    public WalletFileCorruptedException() {
+        super("This wallet file appears to have gotten corrupted.");
     }
 }

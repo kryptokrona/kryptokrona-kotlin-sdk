@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletHashWrongLengthException extends WalletException {
-    public WalletHashWrongLengthException(String errorMessage) {
-        super(errorMessage);
+    public WalletHashWrongLengthException() {
+        super("The hash given is not 64 characters long.");
     }
 }

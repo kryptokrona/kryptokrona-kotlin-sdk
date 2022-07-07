@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletNonIntegerGivenException extends WalletException {
-    public WalletNonIntegerGivenException(String errorMessage) {
-        super(errorMessage);
+    public WalletNonIntegerGivenException() {
+        super("The number given is a float, not an integer.");
     }
 }

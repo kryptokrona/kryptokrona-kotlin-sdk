@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletKeysNotDeterministicException extends WalletException {
-    public WalletKeysNotDeterministicException(String errorMessage) {
-        super(errorMessage);
+    public WalletKeysNotDeterministicException() {
+        super(
+                "You cannot get a mnemonic seed for this address, as the " +
+                "view key is derived in terms of the spend key."
+        );
     }
 }

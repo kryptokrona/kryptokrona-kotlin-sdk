@@ -9,7 +9,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAmountUglyException extends WalletException {
-    public WalletAmountUglyException(String errorMessage) {
-        super(errorMessage);
+    public WalletAmountUglyException() {
+        super(
+                "The amount given does not have only a single significant digit. " +
+                "For example, 20000 or 100000 would be fine, but 20001 or 123456 would not."
+        );
     }
 }

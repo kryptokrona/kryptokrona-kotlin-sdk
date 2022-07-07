@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletPaymentIdInvalidException extends WalletException {
-    public WalletPaymentIdInvalidException(String errorMessage) {
-        super(errorMessage);
+    public WalletPaymentIdInvalidException() {
+        super("The payment ID given is not a hex string (A-Za-z0-9)");
     }
 }

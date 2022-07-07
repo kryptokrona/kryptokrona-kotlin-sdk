@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAmountIsZeroException extends WalletException {
-    public WalletAmountIsZeroException(String errorMessage) {
-        super(errorMessage);
+    public WalletAmountIsZeroException() {
+        super("One of the destination parameters has an amount given of zero.");
     }
 }

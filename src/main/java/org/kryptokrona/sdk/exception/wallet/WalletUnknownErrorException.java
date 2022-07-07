@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletUnknownErrorException extends WalletException {
-    public WalletUnknownErrorException(String errorMessage) {
-        super(errorMessage);
+    public WalletUnknownErrorException() {
+        super("An unknown error occurred.");
     }
 }

@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletPaymentIdWrongLengthException extends WalletException {
-    public WalletPaymentIdWrongLengthException(String errorMessage) {
-        super(errorMessage);
+    public WalletPaymentIdWrongLengthException() {
+        super("The payment ID given is not 64 characters long.");
     }
 }

@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletIncorrectFilePrefixException extends WalletException {
-    public WalletIncorrectFilePrefixException(String errorMessage) {
-        super(errorMessage);
+    public WalletIncorrectFilePrefixException() {
+        super(
+                "This file is not a wallet file, or is not a wallet file " +
+                "type supported by this wallet version."
+        );
     }
 }

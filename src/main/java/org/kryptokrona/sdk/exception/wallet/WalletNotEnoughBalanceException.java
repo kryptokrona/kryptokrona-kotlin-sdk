@@ -9,7 +9,11 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletNotEnoughBalanceException extends WalletException {
-    public WalletNotEnoughBalanceException(String errorMessage) {
-        super(errorMessage);
+    public WalletNotEnoughBalanceException() {
+        super(
+                "Not enough unlocked funds were found to cover this " +
+                "transaction in the subwallets specified (or all wallets, " +
+                "if not specified). (Sum of amounts + fee + node fee)"
+        );
     }
 }

@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletWillOverflowException extends WalletException {
-    public WalletWillOverflowException(String errorMessage) {
-        super(errorMessage);
+    public WalletWillOverflowException() {
+        super(
+                "This operation will cause integer overflow. Please decrease " +
+                "the amounts you are sending."
+        );
     }
 }

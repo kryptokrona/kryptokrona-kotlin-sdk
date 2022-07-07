@@ -9,7 +9,13 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletOutputDecompositionException extends WalletException {
-    public WalletOutputDecompositionException(String errorMessage) {
-        super(errorMessage);
+    public WalletOutputDecompositionException() {
+        super(
+                "The transaction contains more outputs than what is permitted " +
+                "by the number of inputs that have been supplied for the " +
+                "transaction. Please try to send your transaction again. " +
+                "If the problem persists, please reduce the number of " +
+                "destinations that you are trying to send to."
+        );
     }
 }

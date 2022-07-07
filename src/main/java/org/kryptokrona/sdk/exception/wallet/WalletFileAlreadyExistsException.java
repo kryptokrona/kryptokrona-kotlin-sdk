@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletFileAlreadyExistsException extends WalletException {
-    public WalletFileAlreadyExistsException(String errorMessage) {
-        super(errorMessage);
+    public WalletFileAlreadyExistsException() {
+        super(
+                "The wallet file you are attempting to create already " +
+                "exists. Please delete it first."
+        );
     }
 }

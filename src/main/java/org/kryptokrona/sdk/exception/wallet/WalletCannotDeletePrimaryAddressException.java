@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletCannotDeletePrimaryAddressException extends WalletException {
-    public WalletCannotDeletePrimaryAddressException(String errorMessage) {
-        super(errorMessage);
+    public WalletCannotDeletePrimaryAddressException() {
+        super("Each wallet has a primary address when created, this address cannot be removed.");
     }
 }

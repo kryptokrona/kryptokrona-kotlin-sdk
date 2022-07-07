@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletInvalidGeneratedKeyimageException extends WalletException {
-    public WalletInvalidGeneratedKeyimageException(String errorMessage) {
-        super(errorMessage);
+    public WalletInvalidGeneratedKeyimageException() {
+        super(
+                "The key image we generated is invalid - probably a " +
+                "programmer error, or a corrupted wallet."
+        );
     }
 }

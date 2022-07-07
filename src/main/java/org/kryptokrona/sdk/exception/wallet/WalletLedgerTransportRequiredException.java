@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletLedgerTransportRequiredException extends WalletException {
-    public WalletLedgerTransportRequiredException(String errorMessage) {
-        super(errorMessage);
+    public WalletLedgerTransportRequiredException() {
+        super("A ledger device transport is required.");
     }
 }

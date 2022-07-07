@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletCantGetFakeOutputsException extends WalletException {
-    public WalletCantGetFakeOutputsException(String errorMessage) {
-        super(errorMessage);
+    public WalletCantGetFakeOutputsException() {
+        super(
+                "Failed to get fake outputs from the daemon to obscure " +
+                "our transaction, and mixin is not zero."
+        );
     }
 }

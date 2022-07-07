@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletInvalidExtraDataException extends WalletException {
-    public WalletInvalidExtraDataException(String errorMessage) {
-        super(errorMessage);
+    public WalletInvalidExtraDataException() {
+        super("The extra data given for the transaction could not be decoded.");
     }
 }

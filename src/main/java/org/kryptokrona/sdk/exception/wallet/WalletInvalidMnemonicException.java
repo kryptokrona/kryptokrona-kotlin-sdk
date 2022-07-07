@@ -9,7 +9,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletInvalidMnemonicException extends WalletException {
-    public WalletInvalidMnemonicException(String errorMessage) {
-        super(errorMessage);
+    public WalletInvalidMnemonicException() {
+        super("The mnemonic seed given is invalid.");
     }
 }

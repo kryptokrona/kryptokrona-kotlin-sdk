@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletIntegratedAddressPaymentIdInvalidException extends WalletException {
-    public WalletIntegratedAddressPaymentIdInvalidException(String errorMessage) {
-        super(errorMessage);
+    public WalletIntegratedAddressPaymentIdInvalidException() {
+        super(
+                "The payment ID stored in the integrated address supplied " +
+                "is not valid."
+        );
     }
 }

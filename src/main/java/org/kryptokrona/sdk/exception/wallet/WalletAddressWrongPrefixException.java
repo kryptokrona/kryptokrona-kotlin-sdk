@@ -9,7 +9,11 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAddressWrongPrefixException extends WalletException {
-    public WalletAddressWrongPrefixException(String errorMessage) {
-        super(errorMessage);
+    public WalletAddressWrongPrefixException() {
+        super(
+                "The address does not have the correct prefix corresponding " +
+                "to this coin - it appears to be an address for another " +
+                "cryptocurrency."
+        );
     }
 }

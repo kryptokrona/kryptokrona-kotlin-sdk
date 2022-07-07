@@ -8,7 +8,12 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletTransactionPrivateKeyNotFoundException extends WalletException {
-    public WalletTransactionPrivateKeyNotFoundException(String errorMessage) {
-        super(errorMessage);
+    public WalletTransactionPrivateKeyNotFoundException() {
+        super(
+                "Couldn't find the private key for this transaction. The " +
+                "transaction must exist, and have been sent by this program. " +
+                "Transaction private keys cannot be found upon rescanning/" +
+                "reimporting."
+        );
     }
 }

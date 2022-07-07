@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletInvalidPrivateKeyException extends WalletException {
-    public WalletInvalidPrivateKeyException(String errorMessage) {
-        super(errorMessage);
+    public WalletInvalidPrivateKeyException() {
+        super("The private key given is not a valid ed25519 private key.");
     }
 }

@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletSubWalletAlreadyExistsException extends WalletException {
-    public WalletSubWalletAlreadyExistsException(String errorMessage) {
-        super(errorMessage);
+    public WalletSubWalletAlreadyExistsException() {
+        super("A subwallet with the given key already exists.");
     }
 }

@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletFeeTooSmallException extends WalletException {
-    public WalletFeeTooSmallException(String errorMessage) {
-        super(errorMessage);
+    public WalletFeeTooSmallException() {
+        super(
+                "The fee given for this transaction is below the minimum " +
+                "allowed network fee."
+        );
     }
 }

@@ -13,7 +13,11 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletTooManyInputsToFitInBlockException extends WalletException {
-    public WalletTooManyInputsToFitInBlockException(String errorMessage) {
-        super(errorMessage);
+    public WalletTooManyInputsToFitInBlockException() {
+        super(
+                "The transaction is too large (in BYTES, not AMOUNT) to fit " +
+                "in a block. Either decrease the amount you are sending, " +
+                "perform fusion transactions, or decrease mixin (if possible)."
+        );
     }
 }

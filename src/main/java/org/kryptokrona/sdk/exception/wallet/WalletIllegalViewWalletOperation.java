@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletIllegalViewWalletOperation extends WalletException {
-    public WalletIllegalViewWalletOperation(String errorMessage) {
-        super(errorMessage);
+    public WalletIllegalViewWalletOperation() {
+        super("This function cannot be called when using a view wallet.");
     }
 }

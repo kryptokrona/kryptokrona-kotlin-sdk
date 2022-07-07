@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletLedgerCouldNotGetKeysException extends WalletException {
-    public WalletLedgerCouldNotGetKeysException(String errorMessage) {
-        super(errorMessage);
+    public WalletLedgerCouldNotGetKeysException() {
+        super("Could not retrieve wallet keys from Ledger device.");
     }
 }

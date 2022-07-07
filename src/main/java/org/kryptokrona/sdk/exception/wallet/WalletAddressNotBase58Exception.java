@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAddressNotBase58Exception extends WalletException {
-    public WalletAddressNotBase58Exception(String errorMessage) {
-        super(errorMessage);
+    public WalletAddressNotBase58Exception() {
+        super(
+                "The address contains invalid characters, that are not in " +
+                "the base58 set."
+        );
     }
 }

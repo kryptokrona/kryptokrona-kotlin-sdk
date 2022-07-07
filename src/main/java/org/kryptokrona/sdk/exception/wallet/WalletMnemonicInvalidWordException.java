@@ -8,7 +8,10 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletMnemonicInvalidWordException extends WalletException {
-    public WalletMnemonicInvalidWordException(String errorMessage) {
-        super(errorMessage);
+    public WalletMnemonicInvalidWordException() {
+        super(
+                "The mnemonic seed given has a word that is not present in " +
+                "the english word list."
+        );
     }
 }

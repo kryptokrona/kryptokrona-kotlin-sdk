@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAddressWrongLengthException extends WalletException {
-    public WalletAddressWrongLengthException(String errorMessage) {
-        super(errorMessage);
+    public WalletAddressWrongLengthException() {
+        super("The address given is too short or too long.");
     }
 }

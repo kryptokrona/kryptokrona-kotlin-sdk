@@ -8,7 +8,7 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletMnemonicInvalidChecksumException extends WalletException {
-    public WalletMnemonicInvalidChecksumException(String errorMessage) {
-        super(errorMessage);
+    public WalletMnemonicInvalidChecksumException() {
+        super("The mnemonic seed given has an invalid checksum word.");
     }
 }

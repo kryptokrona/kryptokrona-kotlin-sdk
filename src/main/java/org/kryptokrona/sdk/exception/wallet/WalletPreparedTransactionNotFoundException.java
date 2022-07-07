@@ -10,7 +10,13 @@ package org.kryptokrona.sdk.exception.wallet;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletPreparedTransactionNotFoundException extends WalletException {
-    public WalletPreparedTransactionNotFoundException(String errorMessage) {
-        super(errorMessage);
+    public WalletPreparedTransactionNotFoundException() {
+        super(
+                "The prepared transaction hash given does not exist, either " +
+                "because it never existed or because the wallet process was " +
+                "restarted and the previously prepared transactions were lost. " +
+                "Please re-prepare and re-send the transaction, ensuring you " +
+                "specify the correct transaction hash."
+        );
     }
 }
