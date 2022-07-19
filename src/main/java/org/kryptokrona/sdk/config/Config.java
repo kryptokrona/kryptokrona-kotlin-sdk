@@ -1,8 +1,5 @@
 package org.kryptokrona.sdk.config;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Arrays;
 
 /**
@@ -10,74 +7,72 @@ import java.util.Arrays;
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
-@Getter
-@Setter
 public class Config {
 
     /**
      * The amount of decimal places.
      */
-    private final int decimalPlaces                          = 5;
+    public final static int DECIMAL_PLACES                              = 5;
 
     /**
      * The address prefix Kryptokrona uses - you can find this in CryptoNoteConfig.h.
      */
-    private final long addressPrefix                         = 2239254;
+    public final static long ADDRESS_PREFIX                             = 2239254;
 
     /**
      * Request timeout for daemon operations in milliseconds.
      */
-    private final long requestTimeout                        = 10 * 1000;
+    public final static long REQUEST_TIMEOUT                            = 10 * 1000;
 
     /**
      * The block time of Kryptokrona, in seconds.
      */
-    private final long blockTargetTime                       = 90;
+    public final static long BLOCK_TARGET_TIME                          = 90;
 
     /**
      * How often to process blocks, in millseconds.
      */
-    private final long syncThreadInterval                    = 10;
+    public final static long SYNC_THREAD_INTERVAL                       = 10;
 
     /**
      * How often to update the daemon info.
      */
-    private final long daemonUpdateInterval                  = 10 * 1000;
+    public final static long DAEMON_UPDATE_INTERVAL                     = 10 * 1000;
 
     /**
      * How often to check on locked transactions.
      */
-    private final long lockedTransactionsCheckInterval       = 30 * 1000;
+    public final static long LOCKED_TRANSACTIONS_CHECK_INTERVAL         = 30 * 1000;
 
     /**
      * The amount of blocks to process per 'tick' of the mainloop. Note: too
      * high a value will cause the event loop to be blocked, and your interaction
      * to be laggy.
      */
-    private final long blocksPerTick                         = 1;
+    public final static long BLOCKS_PER_TICK                            = 1;
 
     /**
      * Kryptokrona 'ticker'
      */
-    private final String ticker                              = "XKR";
+    public final static String TICKER                                   = "XKR";
 
     /**
      * Most people haven't mined any blocks, so lets not waste time scanning
      * them.
      */
-    private final boolean scanCoinbaseTransactions           = false;
+    public final static boolean SCAN_COINBASE_TRANSACTIONS              = false;
 
     /**
      * The minimum fee allowed for transactions, in ATOMIC units.
      */
-    private final long minimumFee                            = 10;
+    public final static long MINIMUM_FEE                                = 10;
 
     /**
      * Fee per byte is rounded up in chunks. This helps makes estimates
      * more accurate. It's suggested to make this a power of two, to relate
      * to the underlying storage cost / page sizes for storing a transaction.
      */
-    private final int feePerByteChunkSize                    = 256;
+    public final static int FEE_PER_BYTE_CHUNK_SIZE                    = 256;
 
     /** Fee to charge per byte of transaction. Will be applied in chunks, see
      * above. This value comes out to 1.953125. We use this value instead of
@@ -85,12 +80,12 @@ public class Config {
      * - 5 XKR vs 5.12 XKR. You can read this as the fee per chunk
      * is 500 atomic units. The fee per byte is 500 / chunk size.
      */
-    private final double minimumFeePerByte                   = 500.00 / feePerByteChunkSize;
+    public final static double MINIMUM_FEE_PER_BYTE                     = 500.00 / feePerByteChunkSize;
 
     /**
      * Mapping of height to mixin maximum and mixin minimum.
      */
-    public final MixinLimits mixinLimits                     = new MixinLimits(Arrays.asList(
+    public final static MixinLimits MIXIN_LIMITS                        = new MixinLimits(Arrays.asList(
                 // Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
                 new MixinLimit(440000, 0, 100, 3),
 
@@ -104,7 +99,7 @@ public class Config {
     /**
      * The length of a standard address for Kryptokrona.
      */
-    private final long standardAddressLength                 = 99;
+    public final static long STANDARD_ADDRESS_LENGTH                    = 99;
 
     /**
      * The length of an integrated address for Kryptokrona - It's the same as
@@ -113,18 +108,18 @@ public class Config {
      * chunks of 8 chars at once into blocks of 11 chars, we can calculate
      * this automatically.
      */
-    private final long integratedAddressLength               = 99 + ((64 * 11) / 8);
+    public final static long INTEGRATED_ADDRESS_LENGTH                  = 99 + ((64 * 11) / 8);
 
     /**
      * The amount of memory to use storing downloaded blocks - 50MB
      */
-    private final long blockStoreMemoryLimit                 = 1024 * 1024 * 50;
+    public final static long BLOCK_STORE_MEMORY_LIMIT                   = 1024 * 1024 * 50;
 
     /**
      * The amount of blocks to take from the daemon per request. Cannot take
      * more than 100.
      */
-    private final long blocksPerDaemonRequest                = 100;
+    public final static long BLOCKS_PER_DAEMON_REQUEST                  = 100;
 
     /**
      * The amount of seconds to permit not having fetched a block from the
@@ -132,24 +127,24 @@ public class Config {
      * the daemon for data - if you are synced and it returns TopBlock - the
      * event will not be emitted.
      */
-    private final long maxLastFetchedBlockInterval           = 60 * 3;
+    public final static long MAX_LAST_FETCHED_BLOCK_INTERVAL            = 60 * 3;
 
     /**
      * The amount of seconds to permit not having fetched a new network height
      * from the daemon before emitting 'deadnode'.
      */
-    private final long maxLastUpdatedNetworkHeightInterval   = 60 * 3;
+    public final static long MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL   = 60 * 3;
 
     /**
      * The amount of seconds to permit not having fetched a new local height
      * from the daemon before emitting 'deadnode'.
      */
-    private final long maxLastUpdatedLocalHeightInterval     = 60 * 3;
+    public final static long MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL     = 60 * 3;
 
     /**
      * Allows setting a custom user agent string
      */
-    private final String customUserAgentString               = String.format(
-            "%s-sdk-%s", ticker.toLowerCase(), System.getProperty("sdk-version"));
+    public final static String CUSTOM_USER_AGENT_STRING                 = String.format(
+            "%s-sdk-%s", TICKER.toLowerCase(), System.getProperty("sdk-version"));
 
 }
