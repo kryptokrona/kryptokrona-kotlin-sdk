@@ -80,7 +80,7 @@ public class Config {
      * - 5 XKR vs 5.12 XKR. You can read this as the fee per chunk
      * is 500 atomic units. The fee per byte is 500 / chunk size.
      */
-    public final static double MINIMUM_FEE_PER_BYTE                     = 500.00 / feePerByteChunkSize;
+    public final static double MINIMUM_FEE_PER_BYTE                     = 500.00 / FEE_PER_BYTE_CHUNK_SIZE;
 
     /**
      * Mapping of height to mixin maximum and mixin minimum.
