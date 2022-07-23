@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
@@ -18,14 +19,14 @@ public interface Daemon {
      *
      * @throws IOException : If no connection
      */
-    void init() throws IOException, NetworkBlockCountException;
+    void init() throws IOException, NetworkBlockCountException, NodeDeadException;
 
     /**
      * Update the daemon info.
      *
      * @return Observable
      */
-    Observable<Void> updateNodeInfo() throws IOException;
+    Observable<Void> updateNodeInfo() throws IOException, NodeDeadException;
 
     /**
      * Update the fee address and amount.

@@ -12,6 +12,7 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
@@ -75,7 +76,7 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public void init() throws IOException, NetworkBlockCountException {
+    public void init() throws IOException, NetworkBlockCountException, NodeDeadException {
         logger.info("Initializing Daemon.");
 
         Observable.merge(updateNodeInfo(), updateFeeInfo()).subscribe(result -> {
@@ -86,7 +87,7 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<Void> updateNodeInfo() {
+    public Observable<Void> updateNodeInfo() throws NodeDeadException {
         try {
             getRequest("info").subscribe(json -> {
                 // parse json to Info object
@@ -107,8 +108,7 @@ public class DaemonBasic implements Daemon {
                     var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
 
                     if (diff1 > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL) {
-                        // emit dead node
-                        throw new
+                        throw new NodeDeadException();
                     }
                 }
 
@@ -125,7 +125,7 @@ public class DaemonBasic implements Daemon {
             var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
 
             if (diff1 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL) {
-                logger.error("Dead Node");
+                throw new NodeDeadException();
             }
         }
 
