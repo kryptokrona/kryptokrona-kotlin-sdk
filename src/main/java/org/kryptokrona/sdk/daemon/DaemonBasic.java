@@ -72,7 +72,6 @@ public class DaemonBasic implements Daemon {
         this.lastKnownHashrate          = 0;
         this.blockCount                 = 100;
         this.connected                  = true;
-        this.config                     = new Config();
     }
 
     @Override
@@ -87,21 +86,48 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<Void> updateNodeInfo() throws IOException {
-        getRequest("info").subscribe(json -> {
-            // parse json to Info object
-            nodeInfo = gson.fromJson(json, infoCollectionType);
+    public Observable<Void> updateNodeInfo() {
+        try {
+            getRequest("info").subscribe(json -> {
+                // parse json to Info object
+                nodeInfo = gson.fromJson(json, infoCollectionType);
 
-            localDaemonBlockCount = nodeInfo.getHeight();
-            networkBlockCount = nodeInfo.getNetworkHeight();
+                localDaemonBlockCount = nodeInfo.getHeight();
+                networkBlockCount = nodeInfo.getNetworkHeight();
 
-            if (nodeInfo.getNetworkHeight() > 0) {
-                nodeInfo.setNetworkHeight(nodeInfo.getNetworkHeight() - 1);
+                if (localDaemonBlockCount != nodeInfo.getHeight() || networkBlockCount != nodeInfo.getNetworkHeight()) {
+                    /*this.emit('heightchange', info.height, info.networkHeight); */
+
+                    lastUpdatedNetworkHeight = Instant.now();
+                    lastUpdatedLocalHeight = Instant.now();
+
+                    // emit some data with observable
+                } else {
+                    var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+                    var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+
+                    if (diff1 > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL) {
+                        // emit dead node
+                        logger.error("Dead Node");
+                    }
+                }
+
+                if (nodeInfo.getNetworkHeight() > 0) {
+                    nodeInfo.setNetworkHeight(nodeInfo.getNetworkHeight() - 1);
+                }
+
+                peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
+                lastKnownHashrate = nodeInfo.getHashrate();
+                logger.info("Node information, updated.");
+            });
+        } catch (IOException e) {
+            var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+            var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+
+            if (diff1 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL) {
+                logger.error("Dead Node");
             }
-
-            peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
-            logger.info("Node information, updated.");
-        });
+        }
 
         return Observable.empty();
     }
