@@ -108,7 +108,7 @@ public class DaemonBasic implements Daemon {
 
                     if (diff1 > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL) {
                         // emit dead node
-                        logger.error("Dead Node");
+                        throw new
                     }
                 }
 
