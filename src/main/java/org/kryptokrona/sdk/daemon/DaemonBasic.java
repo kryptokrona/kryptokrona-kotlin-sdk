@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.exception.node.NodeFeeInfoAddressEmptyException;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
@@ -138,7 +139,25 @@ public class DaemonBasic implements Daemon {
             // parse json to FeeInfo object
             NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
-            //TODO: add more logic in here (check wallet-backend-js)
+            if (Objects.equals(nodeFeeObj.getAddress(), "")) {
+                throw new NodeFeeInfoAddressEmptyException();
+            }
+
+            boolean integratedAddressesAllowed = false;
+
+            /*const err: WalletErrorCode = (await validateAddresses(
+                    new Array(feeInfo.address), integratedAddressesAllowed, this.config,
+                    )).errorCode;
+
+            if (err !== WalletErrorCode.SUCCESS) {
+                logger.log(
+                        'Failed to validate address from daemon fee info: ' + err.toString(),
+                        LogLevel.WARNING,
+                        [LogCategory.DAEMON],
+            );
+
+                return;
+            }*/
 
             // check if both amount is more than 0 and address is set
             if (nodeFeeObj.getAmount() > 0 && !Objects.equals(nodeFeeObj.getAddress(), "")) {

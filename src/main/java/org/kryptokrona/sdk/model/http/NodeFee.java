@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * FeeInfo.java
+ * NodeFee.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
