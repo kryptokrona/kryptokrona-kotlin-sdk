@@ -12,7 +12,7 @@ public class DaemonTest {
     @Test
     @DisplayName("Initializing Daemon")
     void initializeDaemonTest() throws IOException, NetworkBlockCountException {
-        Daemon daemon = new DaemonBasic(new HostName("gota.kryptokrona.se:11898"));
+        Daemon daemon = new DaemonImpl(new HostName("gota.kryptokrona.se:11898"));
         // daemon.init().subscribe(System.out::println);
     }
 

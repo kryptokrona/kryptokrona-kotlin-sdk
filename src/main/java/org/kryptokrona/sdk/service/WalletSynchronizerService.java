@@ -4,9 +4,9 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.daemon.DaemonBasic;
 import org.kryptokrona.sdk.model.transaction.TransactionData;
 import org.kryptokrona.sdk.model.transaction.TransactionInput;
 import org.kryptokrona.sdk.model.transaction.TransactionRaw;
@@ -29,7 +29,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class WalletSynchronizerService {
 
-    private DaemonBasic             daemon;
+    private DaemonImpl daemon;
     private long                    startTimestamp;
     private long                    startHeight;
     private String                  privateViewKey;
@@ -42,7 +42,7 @@ public class WalletSynchronizerService {
     private Config                  config;
 
     public WalletSynchronizerService(
-            DaemonBasic daemon,
+            DaemonImpl daemon,
             List<WalletSub> subWallets,
             long startTimestamp,
             long startHeight,
@@ -60,7 +60,7 @@ public class WalletSynchronizerService {
 
     public void initAfterLoad(
             List<WalletSub> subWallets,
-            DaemonBasic daemon,
+            DaemonImpl daemon,
             Config config
     ) {
         this.subWallets = subWallets;

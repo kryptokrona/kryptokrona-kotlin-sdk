@@ -61,7 +61,7 @@ public interface Daemon {
      * @param endHeight : int
      * @return Observable
      */
-    Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight);
+    Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) throws IOException;
 
     /**
      * Returns all cancelled transactions.

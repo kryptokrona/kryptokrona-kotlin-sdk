@@ -2,6 +2,7 @@ package org.kryptokrona.sdk.service;
 
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
+import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.wallet.Wallet;
 import org.kryptokrona.sdk.model.wallet.WalletBasic;
@@ -28,12 +29,10 @@ public class WalletService {
     private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
     public WalletService(
-            Config config,
-            Daemon daemon,
+            DaemonImpl daemon,
             List<WalletSub> subWallets,
             WalletSynchronizerService walletSynchronizerService
     ) {
-        this.config = config;
         this.daemon = daemon;
         this.subWallets = subWallets;
         this.walletSynchronizerService = walletSynchronizerService;

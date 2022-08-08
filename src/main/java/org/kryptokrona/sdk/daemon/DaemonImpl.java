@@ -41,7 +41,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DaemonBasic implements Daemon {
+public class DaemonImpl implements Daemon {
 
     private Gson                gson;
     private HttpRequestFactory  requestFactory;
@@ -60,9 +60,9 @@ public class DaemonBasic implements Daemon {
     private Instant             lastUpdatedLocalHeight;
     private boolean             connected;
 
-    private static final Logger logger = LoggerFactory.getLogger(DaemonBasic.class);
+    private static final Logger logger = LoggerFactory.getLogger(DaemonImpl.class);
 
-    public DaemonBasic(HostName hostname) {
+    public DaemonImpl(HostName hostname) {
         this.gson                       = new Gson();
         this.requestFactory             = new NetHttpTransport().createRequestFactory();
         this.feeInfoCollectionType      = new TypeToken<NodeFee>(){}.getType();
@@ -187,7 +187,18 @@ public class DaemonBasic implements Daemon {
     }
 
     @Override
-    public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) {
+    public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) throws IOException {
+        /*getRequest(String.format("indexes/%s/%s", startHeight, endHeight)).subscribe(json -> {
+            // parse json
+
+
+            Map<String, List<Long>> indexes = new HashMap<>();
+
+            for (long index : data) {
+
+            }
+        });*/
+
         return null;
     }
 
