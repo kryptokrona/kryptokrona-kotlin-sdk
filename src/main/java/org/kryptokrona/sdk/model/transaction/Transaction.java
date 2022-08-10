@@ -1,7 +1,12 @@
 package org.kryptokrona.sdk.model.transaction;
 
-public interface Transaction {
-    /*Transaction getTransaction();
+import com.google.gson.Gson;
 
-    void setTransaction(Transaction transaction);*/
+public interface Transaction {
+
+    double totalAmount();
+
+    boolean isFusionTransaction();
+
+    Gson toJson();
 }
