@@ -4,8 +4,8 @@ import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
+import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.model.wallet.Wallet;
-import org.kryptokrona.sdk.model.wallet.WalletBasic;
 
 import org.kryptokrona.sdk.model.wallet.WalletSub;
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ public class WalletService {
 
             try {
                 daemon.init();
-            } catch (NetworkBlockCountException e) {
+            } catch (NetworkBlockCountException | NodeDeadException e) {
                 logger.error("%s", e);
             }
 
@@ -75,9 +75,9 @@ public class WalletService {
      * @param daemon : Daemon
      * @return Wallet
      */
-    public WalletBasic createWallet(Daemon daemon) {
+    public Wallet createWallet(Daemon daemon) {
         logger.info("New Wallet was created.");
-        return new WalletBasic();
+        return new Wallet();
     }
 
     public boolean saveWalletToFile(Wallet wallet, String password) {
