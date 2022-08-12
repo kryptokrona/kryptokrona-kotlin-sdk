@@ -27,7 +27,7 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 ## Development Resources
 
 - Web: kryptokrona.org
-- Mail: mjovanc@protonmail.com
+- Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona
 - Hugin: sdkdevs board on Hugin Messenger
 - It is HIGHLY recommended to join our board on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
