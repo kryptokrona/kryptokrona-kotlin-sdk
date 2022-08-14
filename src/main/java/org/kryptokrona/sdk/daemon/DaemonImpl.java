@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * DaemonBasic.java
+ * DaemonImp.java
  *
  * Represents a Daemon for communicating to a node.
  *
@@ -77,7 +77,7 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public void init() throws IOException, NetworkBlockCountException, NodeDeadException {
+    public void init() throws IOException, NodeDeadException {
         logger.info("Initializing Daemon.");
 
         Observable.merge(updateNodeInfo(), updateFeeInfo()).subscribe(result -> {
