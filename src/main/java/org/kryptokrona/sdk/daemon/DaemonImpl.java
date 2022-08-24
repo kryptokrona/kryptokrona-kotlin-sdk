@@ -21,15 +21,20 @@ import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.http.NodeFee;
 import org.kryptokrona.sdk.model.http.NodeInfo;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
+import org.kryptokrona.sdk.validator.WalletValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL;
+import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL;
 
 /**
  * DaemonImp.java
@@ -60,6 +65,8 @@ public class DaemonImpl implements Daemon {
     private Instant             lastUpdatedLocalHeight;
     private boolean             connected;
 
+    private WalletValidator     walletValidator;
+
     private static final Logger logger = LoggerFactory.getLogger(DaemonImpl.class);
 
     public DaemonImpl(HostName hostname) {
@@ -80,7 +87,7 @@ public class DaemonImpl implements Daemon {
     public void init() throws IOException, NodeDeadException {
         logger.info("Initializing Daemon.");
 
-        Observable.merge(updateNodeInfo(), updateFeeInfo()).subscribe(result -> {
+        Observable.merge(updateDaemonInfo(), updateFeeInfo()).subscribe(result -> {
             if (networkBlockCount == 0) {
                 throw new NetworkBlockCountException();
             }
@@ -88,17 +95,17 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public Observable<Void> updateNodeInfo() throws NodeDeadException {
+    public Observable<Void> updateDaemonInfo() throws NodeDeadException {
         try {
             getRequest("info").subscribe(json -> {
                 // parse json to Info object
                 nodeInfo = gson.fromJson(json, infoCollectionType);
 
-                localDaemonBlockCount = nodeInfo.getHeight();
+                /*localDaemonBlockCount = nodeInfo.getHeight();
                 networkBlockCount = nodeInfo.getNetworkHeight();
 
                 if (localDaemonBlockCount != nodeInfo.getHeight() || networkBlockCount != nodeInfo.getNetworkHeight()) {
-                    /*this.emit('heightchange', info.height, info.networkHeight); */
+                    *//*this.emit('heightchange', info.height, info.networkHeight); *//*
 
                     lastUpdatedNetworkHeight = Instant.now();
                     lastUpdatedLocalHeight = Instant.now();
@@ -118,17 +125,40 @@ public class DaemonImpl implements Daemon {
                 }
 
                 peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
-                lastKnownHashrate = nodeInfo.getHashrate();
+                lastKnownHashrate = nodeInfo.getHashrate();*/
                 logger.info("Node information, updated.");
             });
         } catch (IOException e) {
+            logger.error("Failed to update daemon info: " + e.toString());
             var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
             var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
 
-            if (diff1 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL) {
+            if (diff1 > MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL || diff2 > MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL) {
                 throw new NodeDeadException();
             }
         }
+
+        if (localDaemonBlockCount != nodeInfo.getHeight() || networkBlockCount != nodeInfo.getNetworkHeight()) {
+            lastUpdatedNetworkHeight = Instant.now();
+            lastUpdatedLocalHeight = Instant.now();
+        } else {
+            var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+            var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
+
+            if (diff1 > MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL || diff2 > MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL) {
+                throw new NodeDeadException();
+            }
+        }
+
+        localDaemonBlockCount = nodeInfo.getHeight();
+        networkBlockCount = nodeInfo.getNetworkHeight();
+
+        if (networkBlockCount > 0) {
+            networkBlockCount--;
+        }
+
+        peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
+        lastKnownHashrate = nodeInfo.getHashrate();
 
         return Observable.empty();
     }
@@ -139,28 +169,15 @@ public class DaemonImpl implements Daemon {
             // parse json to FeeInfo object
             NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
-            if (Objects.equals(nodeFeeObj.getAddress(), "")) {
-                throw new NodeFeeInfoAddressEmptyException();
-            }
+            /*if (!Objects.equals(nodeFeeObj.getAddress(), "")) {
+                boolean integratedAddressesAllowed = false;
 
-            boolean integratedAddressesAllowed = false;
-
-            /*const err: WalletErrorCode = (await validateAddresses(
-                    new Array(feeInfo.address), integratedAddressesAllowed, this.config,
-                    )).errorCode;
-
-            if (err !== WalletErrorCode.SUCCESS) {
-                logger.log(
-                        'Failed to validate address from daemon fee info: ' + err.toString(),
-                        LogLevel.WARNING,
-                        [LogCategory.DAEMON],
-            );
-
-                return;
+                walletValidator.validateAddresses(new ArrayList<>("d", "d"), integratedAddressesAllowed)
+                        .subscribe();
             }*/
 
             // check if both amount is more than 0 and address is set
-            if (nodeFeeObj.getAmount() > 0 && !Objects.equals(nodeFeeObj.getAddress(), "")) {
+            if (nodeFeeObj.getAmount() > 0) {
                 nodeFee = nodeFeeObj;
                 logger.info("Node fee information, updated.");
             }

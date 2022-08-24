@@ -26,7 +26,7 @@ public interface Daemon {
      *
      * @return Observable
      */
-    Observable<Void> updateNodeInfo() throws IOException, NodeDeadException;
+    Observable<Void> updateDaemonInfo() throws IOException, NodeDeadException;
 
     /**
      * Update the fee address and amount.

@@ -1,5 +1,6 @@
 package org.kryptokrona.sdk.model.http;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,26 +20,59 @@ import java.util.List;
 @NoArgsConstructor
 public class NodeInfo {
 
+    @SerializedName("alt_blocks_count")
     private int                 altBlocksCount;
+
     private int                 difficulty;
+    @SerializedName("grey_peerlist_size")
     private int                 greyPeerlistSize;
+
     private int                 hashrate;
+
     private int                 height;
+
+    @SerializedName("incoming_connections_count")
     private int                 incomingConnectionsCount;
+
+    @SerializedName("last_known_block_index")
     private int                 lastKnownBlockIndex;
+
+    @SerializedName("major_version")
     private int                 majorVersion;
+
+    @SerializedName("minor_version")
     private int                 minorVersion;
+
+    @SerializedName("network_height")
     private int                 networkHeight;
+
+    @SerializedName("outgoing_connections_count")
     private int                 outgoingConnectionsCount;
+
+    @SerializedName("start_time")
     private int                 startTime;
+
     private String              status;
+
+    @SerializedName("supported_height")
     private int                 supportedHeight;
+
     private boolean             synced;
+
     private boolean             testnet;
+
+    @SerializedName("tx_count")
     private int                 txCount;
+
+    @SerializedName("tx_pool_size")
     private int                 txPoolSize;
+
+    @SerializedName("upgrade_heights")
     private List<Integer>       upgradeHeights;
+
     private String              version;
+
+    @SerializedName("white_peerlist_size")
     private int                 whitePeerlistSize;
 
     public NodeInfo(
