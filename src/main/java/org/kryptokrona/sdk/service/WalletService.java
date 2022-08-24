@@ -76,8 +76,4 @@ public class WalletService {
         return new Wallet();
     }
 
-    public boolean saveWalletToFile(Wallet wallet, String password) {
-        // save wallet to wallet.sqlite3
-        return true;
-    }
 }
