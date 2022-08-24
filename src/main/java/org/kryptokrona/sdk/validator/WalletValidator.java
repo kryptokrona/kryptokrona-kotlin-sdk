@@ -13,7 +13,7 @@ public class WalletValidator {
 		return Observable.empty();
 	}
 
-	public Observable<Void> validateAddresses(List<String> addresses, boolean integratedAddressesAllowed) {
+	public Observable<Boolean> validateAddresses(List<String> addresses, boolean integratedAddressesAllowed) {
 		return Observable.empty();
 	}
 

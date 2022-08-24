@@ -29,23 +29,20 @@ public class WalletService {
     private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
     public WalletService(
-            DaemonImpl daemon,
-            List<WalletSub> subWallets,
-            WalletSynchronizerService walletSynchronizerService
+            DaemonImpl daemon
     ) {
         this.daemon = daemon;
-        this.subWallets = subWallets;
-        this.walletSynchronizerService = walletSynchronizerService;
         this.started = false;
     }
 
     public void start() throws IOException {
         if (!started) {
-            logger.info("Starting the wallet sync process.");
             started = true;
 
             try {
                 daemon.init();
+
+                logger.info("Starting the wallet sync process.");
             } catch (NetworkBlockCountException | NodeDeadException e) {
                 logger.error("%s", e);
             }
@@ -72,10 +69,9 @@ public class WalletService {
     /**
      * Creates a new wallet instance with a random key pair.
      *
-     * @param daemon : Daemon
      * @return Wallet
      */
-    public Wallet createWallet(Daemon daemon) {
+    public Wallet createWallet() {
         logger.info("New Wallet was created.");
         return new Wallet();
     }

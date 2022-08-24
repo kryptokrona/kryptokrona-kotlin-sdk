@@ -8,7 +8,9 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import inet.ipaddr.HostName;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,10 +30,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL;
 import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL;
@@ -98,34 +97,7 @@ public class DaemonImpl implements Daemon {
     public Observable<Void> updateDaemonInfo() throws NodeDeadException {
         try {
             getRequest("info").subscribe(json -> {
-                // parse json to Info object
                 nodeInfo = gson.fromJson(json, infoCollectionType);
-
-                /*localDaemonBlockCount = nodeInfo.getHeight();
-                networkBlockCount = nodeInfo.getNetworkHeight();
-
-                if (localDaemonBlockCount != nodeInfo.getHeight() || networkBlockCount != nodeInfo.getNetworkHeight()) {
-                    *//*this.emit('heightchange', info.height, info.networkHeight); *//*
-
-                    lastUpdatedNetworkHeight = Instant.now();
-                    lastUpdatedLocalHeight = Instant.now();
-
-                    // emit some data with observable
-                } else {
-                    var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
-                    var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
-
-                    if (diff1 > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL || diff2 > Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL) {
-                        throw new NodeDeadException();
-                    }
-                }
-
-                if (nodeInfo.getNetworkHeight() > 0) {
-                    nodeInfo.setNetworkHeight(nodeInfo.getNetworkHeight() - 1);
-                }
-
-                peerCount = nodeInfo.getIncomingConnectionsCount() + nodeInfo.getOutgoingConnectionsCount();
-                lastKnownHashrate = nodeInfo.getHashrate();*/
                 logger.info("Node information, updated.");
             });
         } catch (IOException e) {
@@ -165,23 +137,23 @@ public class DaemonImpl implements Daemon {
 
     @Override
     public Observable<Void> updateFeeInfo() throws IOException {
-        getRequest("fee").subscribe(json -> {
-            // parse json to FeeInfo object
-            NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
+        try {
+            getRequest("fee").subscribe(json -> {
+                NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
-            /*if (!Objects.equals(nodeFeeObj.getAddress(), "")) {
                 boolean integratedAddressesAllowed = false;
 
-                walletValidator.validateAddresses(new ArrayList<>("d", "d"), integratedAddressesAllowed)
-                        .subscribe();
-            }*/
+                // TODO: validate addresses here
 
-            // check if both amount is more than 0 and address is set
-            if (nodeFeeObj.getAmount() > 0) {
-                nodeFee = nodeFeeObj;
-                logger.info("Node fee information, updated.");
-            }
-        });
+                if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
+                    nodeFee.setAddress(nodeFeeObj.getAddress());
+                    nodeFee.setAmount(nodeFeeObj.getAmount());
+                    logger.info("Node fee information, updated.");
+                }
+            });
+        } catch (IOException e) {
+            logger.error("Failed to update fee info: " + e.toString());
+        }
 
         return Observable.empty();
     }
