@@ -23,6 +23,7 @@ import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.http.NodeFee;
 import org.kryptokrona.sdk.model.http.NodeInfo;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
+import org.kryptokrona.sdk.model.http.WalletSyncResponseData;
 import org.kryptokrona.sdk.validator.WalletValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,7 @@ import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.*;
 
-import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL;
-import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL;
+import static org.kryptokrona.sdk.config.Config.*;
 
 /**
  * DaemonImp.java
@@ -48,31 +48,51 @@ import static org.kryptokrona.sdk.config.Config.MAX_LAST_UPDATED_NETWORK_HEIGHT_
 public class DaemonImpl implements Daemon {
 
     private Gson                gson;
+
     private HttpRequestFactory  requestFactory;
+
     private Type                feeInfoCollectionType;
+
     private Type                infoCollectionType;
+
+    private Type                walletSyncResponseDataType;
+
     private NodeFee             nodeFee;
+
     private NodeInfo            nodeInfo;
+
     private HostName            hostname;
+
     private long                localDaemonBlockCount;
+
     private long                networkBlockCount;
+
     private long                peerCount;
+
     private long                lastKnownHashrate;
-    private long                blockCount;
+
+    private double              blockCount;
+
     private Config              config;
+
     private Instant             lastUpdatedNetworkHeight;
+
     private Instant             lastUpdatedLocalHeight;
+
     private boolean             connected;
+
+    private boolean             useRawBlocks;
 
     private WalletValidator     walletValidator;
 
     private static final Logger logger = LoggerFactory.getLogger(DaemonImpl.class);
 
-    public DaemonImpl(HostName hostname) {
+    public DaemonImpl(HostName hostname, boolean useRawBlocks) {
         this.gson                       = new Gson();
         this.requestFactory             = new NetHttpTransport().createRequestFactory();
         this.feeInfoCollectionType      = new TypeToken<NodeFee>(){}.getType();
         this.infoCollectionType         = new TypeToken<NodeInfo>(){}.getType();
+        this.walletSyncResponseDataType = new TypeToken<WalletSyncResponseData>(){}.getType();
         this.hostname                   = hostname;
         this.localDaemonBlockCount      = 0;
         this.networkBlockCount          = 0;
@@ -80,6 +100,7 @@ public class DaemonImpl implements Daemon {
         this.lastKnownHashrate          = 0;
         this.blockCount                 = 100;
         this.connected                  = true;
+        this.useRawBlocks               = useRawBlocks;
     }
 
     @Override
@@ -164,13 +185,27 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public Observable<Map<Integer, Boolean>> getWalletSyncData(
-            WalletSyncData walletSyncData) throws IOException {
-        postRequest("/sync/raw", walletSyncData).subscribe(json -> {
-            logger.info(json);
-        });
+    public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException {
+        String endpoint = useRawBlocks ? "/sync/raw" : "/sync";
 
-        //TODO: should be implemented in WalletSyncronizer
+        walletSyncData.setBlockCount(blockCount);
+        walletSyncData.setSkipCoinbaseTransactions(!SCAN_COINBASE_TRANSACTIONS);
+
+        WalletSyncResponseData walletSyncResponseData;
+
+        try {
+            postRequest(endpoint, walletSyncData).subscribe(json -> {
+                 gson.fromJson(json, walletSyncResponseDataType);
+            });
+        } catch (Exception e) {
+            blockCount = Math.ceil(blockCount / 4.0);
+            logger.error("Failed to get wallet sync data: " + e.toString() + " Lowering block count to: " + blockCount);
+        }
+
+        // the node is not dead if we're fetching blocks.
+        /*if (response.length >= 0) {
+
+        }*/
 
         return null;
     }

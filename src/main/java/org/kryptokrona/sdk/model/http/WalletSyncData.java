@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class WalletSyncData {
 
-    private long blockCount;
+    private double blockCount;
 
     private ArrayList<String> checkpoints;
 
