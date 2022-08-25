@@ -185,8 +185,8 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException {
-        String endpoint = useRawBlocks ? "/sync/raw" : "/sync";
+    public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) {
+        String endpoint = useRawBlocks ? "sync/raw" : "sync";
 
         walletSyncData.setBlockCount(blockCount);
         walletSyncData.setSkipCoinbaseTransactions(!SCAN_COINBASE_TRANSACTIONS);
@@ -197,7 +197,7 @@ public class DaemonImpl implements Daemon {
             postRequest(endpoint, walletSyncData).subscribe(json -> {
                  gson.fromJson(json, walletSyncResponseDataType);
             });
-        } catch (Exception e) {
+        } catch (IOException e) {
             blockCount = Math.ceil(blockCount / 4.0);
             logger.error("Failed to get wallet sync data: " + e.toString() + " Lowering block count to: " + blockCount);
         }
@@ -211,17 +211,13 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) throws IOException {
-        /*getRequest(String.format("indexes/%s/%s", startHeight, endHeight)).subscribe(json -> {
-            // parse json
-
-
-            Map<String, List<Long>> indexes = new HashMap<>();
-
-            for (long index : data) {
-
-            }
-        });*/
+    public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) {
+        try {
+            getRequest("indexes/" + startHeight + "/" + endHeight)
+                    .subscribe(logger::info);
+        } catch (IOException e) {
+            logger.error("Failed to get global indexes: " + e.toString());
+        }
 
         return null;
     }
