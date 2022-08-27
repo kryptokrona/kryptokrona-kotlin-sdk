@@ -6,6 +6,7 @@ import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.model.http.NodeFee;
+import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 
 import java.io.IOException;
@@ -82,7 +83,7 @@ public interface Daemon {
      * @param requestedOuts : int
      * @return Observable
      */
-    Observable<List<Integer>> getRandomOutputsByAmount(List<Integer> amounts, int requestedOuts);
+    Observable<List<Integer>> getRandomOutputsByAmount(RandomOutputsByAmount randomOutputsByAmount);
 
     /**
      * Sending a transaction.
