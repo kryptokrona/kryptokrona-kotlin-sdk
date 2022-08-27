@@ -20,10 +20,7 @@ import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
-import org.kryptokrona.sdk.model.http.NodeFee;
-import org.kryptokrona.sdk.model.http.NodeInfo;
-import org.kryptokrona.sdk.model.http.WalletSyncData;
-import org.kryptokrona.sdk.model.http.WalletSyncResponseData;
+import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -239,8 +236,27 @@ public class DaemonImpl implements Daemon {
     }
 
     @Override
-    public Observable<List<Integer>> getRandomOutputsByAmount(List<Integer> amounts, int requestedOuts) {
-        return null;
+    public Observable<List<Integer>> getRandomOutputsByAmount(RandomOutputsByAmount randomOutputsByAmount) {
+        try {
+            postRequest("indexes/random", randomOutputsByAmount).subscribe(logger::info);
+        } catch (IOException e) {
+            logger.error("Failed to get random outs: " + e.toString());
+        }
+
+        /*const outputs: [number, [number, string][]][] = [];
+
+        for (const output of data) {
+            const indexes: [number, string][] = [];
+
+            for (const outs of output.outputs) {
+                indexes.push([outs.index, outs.key]);
+            }
+
+            *//* Sort by output index to make it hard to determine real one *//*
+            outputs.push([output.amount, _.sortBy(indexes, ([index]) => index)]);
+        }*/
+
+        return Observable.empty();
     }
 
     @Override
