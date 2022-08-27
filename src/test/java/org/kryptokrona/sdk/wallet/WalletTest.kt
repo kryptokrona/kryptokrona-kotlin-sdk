@@ -5,8 +5,8 @@ import org.kryptokrona.sdk.service.WalletService;
 
 class WalletTest {
 
-    private Daemon daemon;
-    private WalletService walletService;
+    /*private Daemon daemon;
+    private WalletService walletService;*/
 
     /*@BeforeEach
     void beforeEach() {

@@ -45,32 +45,30 @@ java {
 //---------------------------------------------------------------------------------
 
 dependencies {
+    // implementation
     implementation("com.github.seancfoley:ipaddress:5.3.4")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("org.slf4j:slf4j-api:2.0.0")
-
     implementation("com.google.http-client:google-http-client:1.41.8")
     implementation("io.reactivex.rxjava3:rxjava:3.1.4")
-
     implementation("org.slf4j:slf4j-simple:2.0.0")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.18.0")
 
-    compileOnly("org.projectlombok:lombok:1.18.24")
-    annotationProcessor("org.projectlombok:lombok:1.18.24")
-
-    // Test
+    // test
     testImplementation(kotlin("stdlib-jdk8"))
-
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
-
     testCompileOnly("org.projectlombok:lombok:1.18.24")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
-
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 
+    // runtime
     runtimeOnly("org.junit.jupiter:junit-jupiter-api:5.9.0")
     runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+
+    // various
+    compileOnly("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 
 //---------------------------------------------------------------------------------
