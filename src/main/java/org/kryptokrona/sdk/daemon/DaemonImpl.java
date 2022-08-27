@@ -213,18 +213,29 @@ public class DaemonImpl implements Daemon {
     @Override
     public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) {
         try {
+            // save the data from the get request here
             getRequest("indexes/" + startHeight + "/" + endHeight)
                     .subscribe(logger::info);
+
+            // return the indexes here from the data
         } catch (IOException e) {
             logger.error("Failed to get global indexes: " + e.toString());
         }
 
-        return null;
+        return Observable.empty();
     }
 
     @Override
-    public Observable<String> getCancelledTransactions(List<String> transactionHashes) {
-        return null;
+    public Observable<List<String>> getCancelledTransactions(List<String> transactionHashes) {
+        try {
+            postRequest("transaction/status", transactionHashes).subscribe(logger::info);
+
+            // return data.notFound or empty array
+        } catch (IOException e) {
+            logger.error("Failed to get transactions status: " + e.toString());
+        }
+
+        return Observable.empty();
     }
 
     @Override

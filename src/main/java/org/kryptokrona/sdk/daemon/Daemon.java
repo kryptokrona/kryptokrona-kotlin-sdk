@@ -69,7 +69,7 @@ public interface Daemon {
      * @param transactionHashes : List
      * @return Observable
      */
-    Observable<String> getCancelledTransactions(List<String> transactionHashes);
+    Observable<List<String>> getCancelledTransactions(List<String> transactionHashes);
 
     /**
      * Gets random outputs for the given amounts. requestedOuts per. Usually mixin+1.
