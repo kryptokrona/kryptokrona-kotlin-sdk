@@ -79,8 +79,7 @@ public interface Daemon {
 	 * should be requestedOuts indexes if the daemon fully fulfilled
 	 * our request.
 	 *
-	 * @param amounts       : List
-	 * @param requestedOuts : int
+	 * @param randomOutputsByAmount : RandomOutputsByAmount
 	 * @return Observable
 	 */
 	Observable<List<Integer>> getRandomOutputsByAmount(RandomOutputsByAmount randomOutputsByAmount);
