@@ -15,7 +15,7 @@ set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are
 set(CMAKE_CONFIGURATION_TYPES Debug RelWithDebInfo Release CACHE TYPE INTERNAL)
 set(ARCH native CACHE STRING "CPU to build for: -march value or default")
 
-project(turtlecoin-crypto)
+project(kryptokrona-crypto)
 
 # Required for finding Threads on ARM
 enable_language(C)
@@ -222,34 +222,34 @@ include_directories(external/ed25519)
 add_library(crypto STATIC ${BASE_CRYPTO})
 
 set(SOURCES
-  src/turtlecoin-crypto.cpp
+  crypto/src/kryptokrona-crypto.cpp
 )
 
-add_library(turtlecoin-crypto-static STATIC ${SOURCES})
-target_link_libraries(turtlecoin-crypto-static crypto argon2 ed25519)
+add_library(kryptokrona-crypto-static STATIC ${SOURCES})
+target_link_libraries(kryptokrona-crypto-static crypto argon2 ed25519)
 
 if(NOT BUILD_JS AND NOT BUILD_WASM)
   if(WIN32)
-    add_library(turtlecoin-crypto-shared SHARED ${SOURCES})
-    target_link_libraries(turtlecoin-crypto-shared crypto argon2 ed25519)
-    target_link_libraries(turtlecoin-crypto-static ws2_32)
-    target_link_libraries(turtlecoin-crypto-shared ws2_32)
+    add_library(kryptokrona-crypto-shared SHARED ${SOURCES})
+    target_link_libraries(kryptokrona-crypto-shared crypto argon2 ed25519)
+    target_link_libraries(kryptokrona-crypto-static ws2_32)
+    target_link_libraries(kryptokrona-crypto-shared ws2_32)
   endif()
 
   set(CRYPTOTEST_SOURCES
-    tests/cryptotest.cpp
+    crypto/tests/cryptotest.cpp
   )
 
   add_executable(cryptotest ${CRYPTOTEST_SOURCES})
-  target_link_libraries(cryptotest turtlecoin-crypto-static)
+  target_link_libraries(cryptotest kryptokrona-crypto-static)
   set_property(TARGET cryptotest PROPERTY OUTPUT_NAME "cryptotest")
 else()
   set(JAVSCRIPT_SOURCES
-    src/turtlecoin-crypto-js.cpp
+    crypto/src/kryptokrona-crypto-js.cpp
   )
 
-  add_executable(turtlecoin-crypto ${JAVSCRIPT_SOURCES})
-  target_link_libraries(turtlecoin-crypto turtlecoin-crypto-static)
+  add_executable(kryptokrona-crypto ${JAVSCRIPT_SOURCES})
+  target_link_libraries(kryptokrona-crypto kryptokrona-crypto-static)
 
   # Override our release flags for emscripten compatibility
   set(CMAKE_C_FLAGS_DEBUG "")
@@ -262,7 +262,7 @@ else()
     --llvm-lto 3
     --closure 1
     -s SINGLE_FILE=1
-    -s EXPORT_NAME="'TurtleCoinCrypto'"
+    -s EXPORT_NAME="'KryptokronaCrypto'"
     -s POLYFILL_OLD_MATH_FUNCTIONS=1
     -s MODULARIZE=1
     --bind
@@ -274,13 +274,13 @@ else()
     set(CMAKE_EXECUTABLE_SUFFIX ".js")
     set(JS_LINKFLAGS_STR "${JS_LINKFLAGS_STR} -s WASM=0 --js-opts 1")
     message(STATUS "emcc flags: ${JS_LINKFLAGS_STR}")
-    set_target_properties(turtlecoin-crypto PROPERTIES LINK_FLAGS "${JS_LINKFLAGS_STR}")
+    set_target_properties(kryptokrona-crypto PROPERTIES LINK_FLAGS "${JS_LINKFLAGS_STR}")
   endif()
 
   if(BUILD_WASM)
     set(CMAKE_EXECUTABLE_SUFFIX "-wasm.js")
     set(JS_LINKFLAGS_STR "${JS_LINKFLAGS_STR} -s WASM=1 -s BINARYEN_METHOD='native-wasm'")
     message(STATUS "emcc flags: ${JS_LINKFLAGS_STR}")
-    set_target_properties(turtlecoin-crypto PROPERTIES LINK_FLAGS "${JS_LINKFLAGS_STR} -s WASM=1 -s BINARYEN_METHOD='native-wasm'")
+    set_target_properties(kryptokrona-crypto PROPERTIES LINK_FLAGS "${JS_LINKFLAGS_STR} -s WASM=1 -s BINARYEN_METHOD='native-wasm'")
   endif()
 endif()

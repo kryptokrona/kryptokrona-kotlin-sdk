@@ -157,7 +157,7 @@ STATIC INLINE int force_software_aes(void)
         return use;
     }
 
-    const char *env = getenv("TURTLECOIN_USE_SOFTWARE_AES");
+    const char *env = getenv("KRYPTOKRONA_USE_SOFTWARE_AES");
     if (!env)
     {
         use = 0;

@@ -5,7 +5,7 @@
 #include <emscripten/bind.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <turtlecoin-crypto.h>
+#include <kryptokrona-crypto.h>
 
 using namespace emscripten;
 

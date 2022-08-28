@@ -4,7 +4,7 @@
 
 #include <StringTools.h>
 #include <string.h>
-#include <turtlecoin-crypto.h>
+#include <kryptokrona-crypto.h>
 
 #ifndef NO_CRYPTO_EXPORTS
 #ifdef _WIN32
