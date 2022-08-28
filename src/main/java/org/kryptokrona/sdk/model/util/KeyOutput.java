@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.model.util;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.model.transaction.TransactionOutput;
 
 /**
  * KeyOutput.java
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class KeyOutput {
+public class KeyOutput implements TransactionOutput {
 
 	private String key;
 	private double amount;

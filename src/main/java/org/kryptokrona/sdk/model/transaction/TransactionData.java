@@ -22,7 +22,7 @@ public class TransactionData {
 	/**
 	 * Mapping of public spend key to inputs.
 	 */
-	private List<Map<String, TransactionInput>> inputsToAdd;
+	private List<Map<String, TransactionInputImpl>> inputsToAdd;
 
 	/**
 	 * Mapping of public spend key to key image.

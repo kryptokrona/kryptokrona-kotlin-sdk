@@ -8,7 +8,7 @@ import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.model.block.Block;
 import org.kryptokrona.sdk.model.transaction.TransactionData;
-import org.kryptokrona.sdk.model.transaction.TransactionInput;
+import org.kryptokrona.sdk.model.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.model.transaction.TransactionRaw;
 import org.kryptokrona.sdk.model.transaction.TransactionRawCoinbase;
 import org.kryptokrona.sdk.model.wallet.WalletSub;
@@ -71,11 +71,11 @@ public class WalletSynchronizerService {
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
-	public TransactionData processBlock(Block block, List<Map<String, TransactionInput>> ourInputs) {
+	public TransactionData processBlock(Block block, List<Map<String, TransactionInputImpl>> ourInputs) {
 		return null;
 	}
 
-	public Observable<List<Map<String, TransactionInput>>> processBlockOutputs(
+	public Observable<List<Map<String, TransactionInputImpl>>> processBlockOutputs(
 			Block block,
 			String privateViewKey,
 			List<Map<String, String>> spendKeys,
@@ -144,16 +144,16 @@ public class WalletSynchronizerService {
 		return null;
 	}
 
-	private Observable<List<Map<String, List<TransactionInput>>>> processTransactionOutputs(
+	private Observable<List<Map<String, List<TransactionInputImpl>>>> processTransactionOutputs(
 			TransactionRawCoinbase rawTx,
 			long blockHeight
 	) {
 		return null;
 	}
 
-	private Observable<List<Map<String, List<TransactionInput>>>> processCoinbaseTransaction(
+	private Observable<List<Map<String, List<TransactionInputImpl>>>> processCoinbaseTransaction(
 			Block block,
-			List<Map<String, TransactionInput>> ourInputs
+			List<Map<String, TransactionInputImpl>> ourInputs
 	) {
 		return null;
 	}
@@ -161,7 +161,7 @@ public class WalletSynchronizerService {
 	//TODO should return another type
 	private Observable<Void> processTransaction(
 			Block block,
-			List<Map<String, TransactionInput>> ourInputs,
+			List<Map<String, TransactionInputImpl>> ourInputs,
 			TransactionRaw rawTx
 	) {
 		return null;
