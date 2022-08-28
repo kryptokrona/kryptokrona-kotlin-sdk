@@ -3,7 +3,7 @@ package org.kryptokrona.sdk.service;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Objects;
 
 import static org.kryptokrona.sdk.config.Constants.BLOCK_HASH_CHECKPOINTS_INTERVAL;
@@ -18,14 +18,14 @@ import static org.kryptokrona.sdk.config.Constants.LAST_KNOWN_BLOCK_HASHES_SIZE;
 @Setter
 public class SynchronizationStatus {
 
-    private List<String>    blockHashCheckpoints;
-    private List<String>    lastKnownBlockHashes;
-    private long            lastKnownBlockHeight;
-    private long            lastSavedCheckpointAt;
+    private LinkedList<String>      blockHashCheckpoints;
+    private LinkedList<String>      lastKnownBlockHashes;
+    private long                    lastKnownBlockHeight;
+    private long                    lastSavedCheckpointAt;
 
     public SynchronizationStatus(
-            List<String> blockHashCheckpoints,
-            List<String> lastKnownBlockHashes,
+            LinkedList<String> blockHashCheckpoints,
+            LinkedList<String> lastKnownBlockHashes,
             long lastKnownBlockHeight,
             long lastSavedCheckpointAt
     ) {
@@ -43,19 +43,20 @@ public class SynchronizationStatus {
             return;
         }
 
-        /* If we're at a checkpoint height, add the hash to the infrequent
-           checkpoints (at the beginning of the queue) */
-        if (lastSavedCheckpointAt + BLOCK_HASH_CHECKPOINTS_INTERVAL < blockHeight) {
+        /*
+         * If we're at a checkpoint height, add the hash to the infrequent
+         * checkpoints (at the beginning of the queue)
+         */
+        if ((lastSavedCheckpointAt + BLOCK_HASH_CHECKPOINTS_INTERVAL) < blockHeight) {
             lastSavedCheckpointAt = blockHeight;
-            // blockHashCheckpoints.unshift(blockHash); // Cannot resolve method 'unshift' in 'List' (find another method)
+            blockHashCheckpoints.addFirst(blockHash);
         }
 
-        // this.lastKnownBlockHashes.unshift(blockHash);
+        this.lastKnownBlockHashes.addFirst(blockHash);
 
         // If we're exceeding capacity, remove the last (oldest) hash
         if (lastKnownBlockHashes.size() > LAST_KNOWN_BLOCK_HASHES_SIZE) {
-            // lastKnownBlockHashes.pop();
+            lastKnownBlockHashes.pollLast();
         }
     }
-
 }
