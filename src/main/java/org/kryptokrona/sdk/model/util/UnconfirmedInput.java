@@ -14,13 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UnconfirmedInput {
 
-    private double amount;
-    private String key;
-    private String parentTransactionHash;
+	private double amount;
+	private String key;
+	private String parentTransactionHash;
 
-    public UnconfirmedInput(double amount, String key, String parentTransactionHash) {
-        this.amount = amount;
-        this.key = key;
-        this.parentTransactionHash = parentTransactionHash;
-    }
+	public UnconfirmedInput(double amount, String key, String parentTransactionHash) {
+		this.amount = amount;
+		this.key = key;
+		this.parentTransactionHash = parentTransactionHash;
+	}
 }

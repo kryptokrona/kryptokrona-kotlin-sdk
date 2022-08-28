@@ -16,13 +16,13 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class WalletSyncData {
 
-    private double blockCount;
+	private double blockCount;
 
-    private ArrayList<String> checkpoints;
+	private ArrayList<String> checkpoints;
 
-    private boolean skipCoinbaseTransactions;
+	private boolean skipCoinbaseTransactions;
 
-    private long height;
+	private long height;
 
-    private long timestamp;
+	private long timestamp;
 }

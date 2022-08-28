@@ -18,17 +18,17 @@ import java.util.List;
 @NoArgsConstructor
 public class Block {
 
-    private TransactionRawCoinbase  transactionRawCoinbase;
-    private List<TransactionRaw>    transactions;
-    private long                    blockHeight;
-    private String                  blockHash;
-    private long                    blockTimestamp;
+	private TransactionRawCoinbase transactionRawCoinbase;
+	private List<TransactionRaw> transactions;
+	private long blockHeight;
+	private String blockHash;
+	private long blockTimestamp;
 
-    public Block(TransactionRawCoinbase transactionRawCoinbase, List<TransactionRaw> transactions, long blockHeight, String blockHash, long blockTimestamp) {
-        this.transactionRawCoinbase = transactionRawCoinbase;
-        this.transactions = transactions;
-        this.blockHeight = blockHeight;
-        this.blockHash = blockHash;
-        this.blockTimestamp = blockTimestamp;
-    }
+	public Block(TransactionRawCoinbase transactionRawCoinbase, List<TransactionRaw> transactions, long blockHeight, String blockHash, long blockTimestamp) {
+		this.transactionRawCoinbase = transactionRawCoinbase;
+		this.transactions = transactions;
+		this.blockHeight = blockHeight;
+		this.blockHash = blockHash;
+		this.blockTimestamp = blockTimestamp;
+	}
 }

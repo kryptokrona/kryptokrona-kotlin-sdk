@@ -1,8 +1,5 @@
 package org.kryptokrona.sdk.daemon;
 
-import inet.ipaddr.HostName;
-import org.junit.jupiter.api.Test;
-
 class DaemonTest {
 
     /*@Inject

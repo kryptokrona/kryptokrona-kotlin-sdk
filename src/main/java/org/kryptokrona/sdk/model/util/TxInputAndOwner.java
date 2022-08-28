@@ -15,13 +15,13 @@ import org.kryptokrona.sdk.model.transaction.TransactionInput;
 @NoArgsConstructor
 public class TxInputAndOwner {
 
-    private TransactionInput    input;
-    private String              privateSpendKey;
-    private String              publicSpendKey;
+	private TransactionInput input;
+	private String privateSpendKey;
+	private String publicSpendKey;
 
-    public TxInputAndOwner(TransactionInput input, String privateSpendKey, String publicSpendKey) {
-        this.input = input;
-        this.privateSpendKey = privateSpendKey;
-        this.publicSpendKey = publicSpendKey;
-    }
+	public TxInputAndOwner(TransactionInput input, String privateSpendKey, String publicSpendKey) {
+		this.input = input;
+		this.privateSpendKey = privateSpendKey;
+		this.publicSpendKey = publicSpendKey;
+	}
 }

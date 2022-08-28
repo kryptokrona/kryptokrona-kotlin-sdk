@@ -6,14 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.model.transaction.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * SubWallet.java
- *
+ * <p>
  * Represents a subwallet.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

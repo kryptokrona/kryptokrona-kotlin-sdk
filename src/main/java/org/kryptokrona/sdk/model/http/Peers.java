@@ -16,11 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Peers {
 
-    private List<String>    peers;
-    private String          status;
+	private List<String> peers;
+	private String status;
 
-    public Peers(List<String> peers, String status) {
-        this.peers  = peers;
-        this.status = status;
-    }
+	public Peers(List<String> peers, String status) {
+		this.peers = peers;
+		this.status = status;
+	}
 }

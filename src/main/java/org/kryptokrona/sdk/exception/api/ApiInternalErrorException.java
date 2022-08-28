@@ -2,13 +2,13 @@ package org.kryptokrona.sdk.exception.api;
 
 /**
  * ApiBodyRequiredException.java
- *
+ * <p>
  * An internal API error occurred.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class ApiInternalErrorException extends ApiException {
-    public ApiInternalErrorException() {
-        super("An internal error occurred.");
-    }
+	public ApiInternalErrorException() {
+		super("An internal error occurred.");
+	}
 }

@@ -16,13 +16,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Transactions {
 
-    private List<Integer>       missedTx;
-    private String              status;
-    private List<Integer>       txsAsHex;
+	private List<Integer> missedTx;
+	private String status;
+	private List<Integer> txsAsHex;
 
-    public Transactions(List<Integer> missedTx, String status, List<Integer> txsAsHex) {
-        this.missedTx   = missedTx;
-        this.status     = status;
-        this.txsAsHex   = txsAsHex;
-    }
+	public Transactions(List<Integer> missedTx, String status, List<Integer> txsAsHex) {
+		this.missedTx = missedTx;
+		this.status = status;
+		this.txsAsHex = txsAsHex;
+	}
 }

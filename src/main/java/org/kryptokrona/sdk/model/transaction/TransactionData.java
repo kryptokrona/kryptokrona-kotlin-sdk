@@ -17,15 +17,15 @@ import java.util.Map;
 @NoArgsConstructor
 public class TransactionData {
 
-    private List<Transaction> transactionToAdd;
+	private List<Transaction> transactionToAdd;
 
-    /**
-     * Mapping of public spend key to inputs.
-     */
-    private List<Map<String, TransactionInput>> inputsToAdd;
+	/**
+	 * Mapping of public spend key to inputs.
+	 */
+	private List<Map<String, TransactionInput>> inputsToAdd;
 
-    /**
-     * Mapping of public spend key to key image.
-     */
-    private List<Map<String, String>> keyImagesToMarkSpent;
+	/**
+	 * Mapping of public spend key to key image.
+	 */
+	private List<Map<String, String>> keyImagesToMarkSpent;
 }

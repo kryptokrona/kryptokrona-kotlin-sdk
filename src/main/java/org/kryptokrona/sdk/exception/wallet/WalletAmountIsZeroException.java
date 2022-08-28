@@ -2,13 +2,13 @@ package org.kryptokrona.sdk.exception.wallet;
 
 /**
  * WalletAmountIsZeroException.java
- *
+ * <p>
  * One of the destination parameters has an amount given of zero.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class WalletAmountIsZeroException extends WalletException {
-    public WalletAmountIsZeroException() {
-        super("One of the destination parameters has an amount given of zero.");
-    }
+	public WalletAmountIsZeroException() {
+		super("One of the destination parameters has an amount given of zero.");
+	}
 }

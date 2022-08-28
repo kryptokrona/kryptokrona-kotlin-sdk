@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 
 public interface Transaction {
 
-    double totalAmount();
+	double totalAmount();
 
-    boolean isFusionTransaction();
+	boolean isFusionTransaction();
 
-    Gson toJson();
+	Gson toJson();
 }

@@ -1,8 +1,5 @@
 package org.kryptokrona.sdk.wallet;
 
-import org.kryptokrona.sdk.daemon.Daemon;
-import org.kryptokrona.sdk.service.WalletService;
-
 class WalletTest {
 
     /*private Daemon daemon;

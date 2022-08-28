@@ -14,11 +14,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TopBlock {
 
-    private String  hash;
-    private long    height;
+	private String hash;
+	private long height;
 
-    public TopBlock(String hash, long height) {
-        this.hash = hash;
-        this.height = height;
-    }
+	public TopBlock(String hash, long height) {
+		this.hash = hash;
+		this.height = height;
+	}
 }

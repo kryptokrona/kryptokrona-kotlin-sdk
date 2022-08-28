@@ -14,12 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class KeyOutput {
 
-    private String  key;
-    private double  amount;
-    private long    globalIndex;
+	private String key;
+	private double amount;
+	private long globalIndex;
 
-    public KeyOutput(String key, double amount) {
-        this.key = key;
-        this.amount = amount;
-    }
+	public KeyOutput(String key, double amount) {
+		this.key = key;
+		this.amount = amount;
+	}
 }
