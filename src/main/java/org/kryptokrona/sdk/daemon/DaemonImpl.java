@@ -160,7 +160,7 @@ public class DaemonImpl implements Daemon {
 			getRequest("fee").subscribe(json -> {
 				NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
-				boolean integratedAddressesAllowed = false;
+				var integratedAddressesAllowed = false;
 
 				// TODO: validate addresses here
 
@@ -184,7 +184,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) {
-		String endpoint = useRawBlocks ? "sync/raw" : "sync";
+		var endpoint = useRawBlocks ? "sync/raw" : "sync";
 
 		walletSyncData.setBlockCount(blockCount);
 		walletSyncData.setSkipCoinbaseTransactions(!SCAN_COINBASE_TRANSACTIONS);
@@ -273,7 +273,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<String> getRequest(String param) throws IOException {
-		HttpRequest request = requestFactory.buildGetRequest(
+		var request = requestFactory.buildGetRequest(
 				new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)));
 
 		return Observable.just(request.execute().parseAsString());
@@ -281,7 +281,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<String> postRequest(String param, Object obj) throws IOException {
-		HttpRequest request = requestFactory.buildPostRequest(
+		var request = requestFactory.buildPostRequest(
 				new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)),
 				ByteArrayContent.fromString("application/json", gson.toJson(obj, new TypeToken<Object>() {
 				}.getType())));

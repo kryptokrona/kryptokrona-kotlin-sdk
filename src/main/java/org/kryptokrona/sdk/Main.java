@@ -9,12 +9,12 @@ import java.io.IOException;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		DaemonImpl daemon = new DaemonImpl(new HostName("pool.gamersnest.org:11898"), false);
+		var daemon = new DaemonImpl(new HostName("pool.gamersnest.org:11898"), false);
 
-		WalletService walletService = new WalletService(daemon);
+		var walletService = new WalletService(daemon);
 		walletService.start();
 		daemon.getGlobalIndexesForRange(1, 2);
-		Wallet wallet = walletService.createWallet();
+		var wallet = walletService.createWallet();
 		walletService.stop();
 	}
 }
