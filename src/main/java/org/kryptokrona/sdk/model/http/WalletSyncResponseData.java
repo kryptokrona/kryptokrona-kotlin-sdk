@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.exception.model.http;
+package org.kryptokrona.sdk.model.http;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

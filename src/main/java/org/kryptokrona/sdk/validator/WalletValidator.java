@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.validator;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.exception.model.util.FeeType;
+import org.kryptokrona.sdk.model.util.FeeType;
 import org.kryptokrona.sdk.wallet.WalletSub;
 
 import java.util.List;

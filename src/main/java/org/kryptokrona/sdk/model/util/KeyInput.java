@@ -1,25 +1,24 @@
-package org.kryptokrona.sdk.exception.model.util;
+package org.kryptokrona.sdk.model.util;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.transaction.TransactionOutput;
 
 /**
- * KeyOutput.java
+ * KeyInput.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class KeyOutput implements TransactionOutput {
+public class KeyInput {
 
 	private String key;
 	private double amount;
 	private long globalIndex;
 
-	public KeyOutput(String key, double amount) {
+	public KeyInput(String key, double amount) {
 		this.key = key;
 		this.amount = amount;
 	}
