@@ -12,7 +12,8 @@ public class Main {
 
 		var walletService = new WalletService(daemon);
 		walletService.start();
-		daemon.getGlobalIndexesForRange(1, 2);
+		daemon.updateFeeInfo();
+
 		var wallet = walletService.createWallet();
 		walletService.stop();
 	}

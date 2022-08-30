@@ -1,13 +1,15 @@
 package org.kryptokrona.sdk.daemon;
 
-class DaemonTest {
+import inet.ipaddr.HostName
+import org.junit.jupiter.api.Test
 
-    /*@Inject
-    lateinit var daemon: DaemonImpl
+class DaemonTest {
 
     @Test
     fun `initialize daemon`() {
-        daemon = new DaemonImpl(new HostName("gota.kryptokrona.se:11898", false))
-    }*/
+        // val daemon = DaemonImpl(HostName("gota.kryptokrona.se:11898"), false)
+        // daemon.init()
+        print("hello")
+    }
 
 }

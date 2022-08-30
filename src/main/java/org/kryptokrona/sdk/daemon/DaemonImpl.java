@@ -207,6 +207,7 @@ public class DaemonImpl implements Daemon {
 		return null;
 	}
 
+	// might not work with our current node since we have not implemented this - not sure though
 	@Override
 	public Observable<Map<String, Integer>> getGlobalIndexesForRange(int startHeight, int endHeight) {
 		try {

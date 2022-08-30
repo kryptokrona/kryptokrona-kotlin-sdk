@@ -56,15 +56,9 @@ dependencies {
 
     // test
     testImplementation(kotlin("stdlib-jdk8"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation(kotlin("test"))
     testCompileOnly("org.projectlombok:lombok:1.18.24")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
-
-    // runtime
-    runtimeOnly("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 
     // various
     compileOnly("org.projectlombok:lombok:1.18.24")
@@ -77,6 +71,7 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("--illegal-access=warn")
     failFast = true // stop early to avoid running whole test suit if one fails
     finalizedBy("jacocoTestReport") // report is always generated after tests run
 }
