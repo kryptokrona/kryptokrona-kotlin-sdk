@@ -2,7 +2,7 @@ package org.kryptokrona.sdk.exception.daemon;
 
 /**
  * DaemonOfflineException.java
- * <p>
+ *
  * Could not contact the daemon to complete the request. Ensure it is
  * online and not frozen.
  *

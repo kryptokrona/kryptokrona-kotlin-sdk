@@ -2,7 +2,7 @@ package org.kryptokrona.sdk.exception.daemon;
 
 /**
  * DaemonStillProcessingException.java
- * <p>
+ *
  * The daemon received our request but we timed out before we could figure
  * out if it completed.
  *
