@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.service;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
+import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.wallet.Wallet;
@@ -43,6 +44,8 @@ public class WalletService {
 
 				logger.info("Starting the wallet sync process.");
 			} catch (NetworkBlockCountException | NodeDeadException e) {
+				logger.error("%s", e);
+			} catch (DaemonOfflineException e) {
 				logger.error("%s", e);
 			}
 

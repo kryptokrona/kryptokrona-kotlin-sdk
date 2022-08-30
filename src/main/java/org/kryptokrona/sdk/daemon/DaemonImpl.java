@@ -102,6 +102,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public void init() throws IOException, NodeDeadException {
+		daemonReachable().subscribe(System.out::println);
 		logger.info("Initializing Daemon.");
 
 		Observable.merge(updateDaemonInfo(), updateFeeInfo()).subscribe(result -> {
@@ -289,4 +290,10 @@ public class DaemonImpl implements Daemon {
 		return Observable.just(request.getHeaders().setContentType("application/json").toString());
 	}
 
+	public Observable<Boolean> daemonReachable() throws IOException {
+		var request = requestFactory.buildGetRequest(
+				new GenericUrl(String.format("http://%s/info", this.hostname.toString())));
+
+		return Observable.just((request.execute()).getStatusCode() == 200);
+	}
 }

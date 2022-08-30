@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		var daemon = new DaemonImpl(new HostName("pool.gamersnest.org:11898"), false);
+		var daemon = new DaemonImpl(new HostName("swepool.org:11898"), false);
 
 		var walletService = new WalletService(daemon);
 		walletService.start();

@@ -71,7 +71,6 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    jvmArgs("--illegal-access=warn")
     failFast = true // stop early to avoid running whole test suit if one fails
     finalizedBy("jacocoTestReport") // report is always generated after tests run
 }
