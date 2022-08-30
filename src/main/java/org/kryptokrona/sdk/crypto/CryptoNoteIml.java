@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.model.crypto;
+package org.kryptokrona.sdk.crypto;
 
 public class CryptoNoteIml implements CryptoNote {
 }

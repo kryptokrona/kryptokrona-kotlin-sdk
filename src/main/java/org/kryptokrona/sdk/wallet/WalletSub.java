@@ -1,10 +1,10 @@
-package org.kryptokrona.sdk.model.wallet;
+package org.kryptokrona.sdk.wallet;
 
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.model.transaction.Transaction;
+import org.kryptokrona.sdk.transaction.Transaction;
 
 import java.util.List;
 import java.util.Map;

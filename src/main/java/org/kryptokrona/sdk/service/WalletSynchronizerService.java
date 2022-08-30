@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
-import org.kryptokrona.sdk.model.block.Block;
-import org.kryptokrona.sdk.model.transaction.TransactionData;
-import org.kryptokrona.sdk.model.transaction.TransactionInputImpl;
-import org.kryptokrona.sdk.model.transaction.TransactionRaw;
-import org.kryptokrona.sdk.model.transaction.TransactionRawCoinbase;
-import org.kryptokrona.sdk.model.wallet.WalletSub;
+import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.transaction.TransactionData;
+import org.kryptokrona.sdk.transaction.TransactionInputImpl;
+import org.kryptokrona.sdk.transaction.TransactionRaw;
+import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
+import org.kryptokrona.sdk.wallet.WalletSub;
 
 import java.time.Instant;
 import java.util.ArrayList;

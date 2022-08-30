@@ -3,7 +3,7 @@ package org.kryptokrona.sdk.model.util;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.model.transaction.TransactionOutput;
+import org.kryptokrona.sdk.transaction.TransactionOutput;
 
 /**
  * KeyOutput.java

@@ -1,9 +1,9 @@
-package org.kryptokrona.sdk.model.wallet;
+package org.kryptokrona.sdk.wallet;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.model.transaction.Transaction;
+import org.kryptokrona.sdk.transaction.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.model.transaction;
+package org.kryptokrona.sdk.transaction;
 
 import com.google.gson.Gson;
 

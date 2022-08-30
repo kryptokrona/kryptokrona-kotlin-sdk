@@ -1,10 +1,10 @@
-package org.kryptokrona.sdk.model.block;
+package org.kryptokrona.sdk.block;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.model.transaction.TransactionRaw;
-import org.kryptokrona.sdk.model.transaction.TransactionRawCoinbase;
+import org.kryptokrona.sdk.transaction.TransactionRaw;
+import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
 
 import java.util.List;
 

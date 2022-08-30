@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.model.block;
+package org.kryptokrona.sdk.block;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

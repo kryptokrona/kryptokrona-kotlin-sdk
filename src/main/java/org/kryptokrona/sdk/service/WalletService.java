@@ -5,8 +5,8 @@ import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
-import org.kryptokrona.sdk.model.wallet.Wallet;
-import org.kryptokrona.sdk.model.wallet.WalletSub;
+import org.kryptokrona.sdk.wallet.Wallet;
+import org.kryptokrona.sdk.wallet.WalletSub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

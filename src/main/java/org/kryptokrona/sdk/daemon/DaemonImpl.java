@@ -2,7 +2,6 @@ package org.kryptokrona.sdk.daemon;
 
 import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.gson.Gson;
@@ -15,8 +14,8 @@ import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
-import org.kryptokrona.sdk.model.block.Block;
-import org.kryptokrona.sdk.model.block.RawBlock;
+import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
 import org.slf4j.Logger;
