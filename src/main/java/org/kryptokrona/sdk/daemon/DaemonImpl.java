@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
+import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.block.Block;
@@ -102,8 +103,9 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public void init() throws IOException, NodeDeadException {
-		daemonReachable().subscribe(System.out::println);
-		logger.info("Initializing Daemon.");
+		daemonReachable().subscribe(status -> {
+			logger.info("Initializing Daemon.");
+		});
 
 		Observable.merge(updateDaemonInfo(), updateFeeInfo()).subscribe(result -> {
 			if (networkBlockCount == 0) {
