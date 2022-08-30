@@ -168,6 +168,7 @@ public class DaemonImpl implements Daemon {
 				if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
 					nodeFee.setAddress(nodeFeeObj.getAddress());
 					nodeFee.setAmount(nodeFeeObj.getAmount());
+					nodeFee.setStatus(nodeFee.getStatus());
 					logger.info("Node fee information, updated.");
 				}
 			});

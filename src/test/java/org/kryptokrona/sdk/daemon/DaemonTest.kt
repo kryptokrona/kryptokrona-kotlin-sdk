@@ -34,4 +34,12 @@ class DaemonTest {
         }
     }
 
+    @Test
+    fun `node status is OK when getting fee info`() {
+        val daemon = DaemonImpl(HostName(correctDaemonUrl), false)
+        daemon.init()
+        daemon.updateFeeInfo()
+        // status = daemon.
+    }
+
 }
