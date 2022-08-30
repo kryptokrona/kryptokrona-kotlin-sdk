@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.util;
+package org.kryptokrona.sdk.crypto;
 
 // import kryptokrona-utils here
 
