@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.config;
 
-import org.kryptokrona.sdk.model.util.MixinLimit;
-import org.kryptokrona.sdk.model.util.MixinLimits;
+import org.kryptokrona.sdk.exception.model.util.MixinLimit;
+import org.kryptokrona.sdk.exception.model.util.MixinLimits;
 
 import java.util.Arrays;
 

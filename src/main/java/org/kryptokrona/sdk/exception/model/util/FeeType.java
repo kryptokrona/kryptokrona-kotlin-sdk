@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.model.util;
+package org.kryptokrona.sdk.exception.model.util;
 
 import lombok.Getter;
 import lombok.Setter;

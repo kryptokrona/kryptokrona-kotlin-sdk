@@ -5,9 +5,9 @@ import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.RawBlock;
-import org.kryptokrona.sdk.model.http.NodeFee;
-import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
-import org.kryptokrona.sdk.model.http.WalletSyncData;
+import org.kryptokrona.sdk.exception.model.http.NodeFee;
+import org.kryptokrona.sdk.exception.model.http.RandomOutputsByAmount;
+import org.kryptokrona.sdk.exception.model.http.WalletSyncData;
 
 import java.io.IOException;
 import java.util.List;

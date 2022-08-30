@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.model.http;
+package org.kryptokrona.sdk.exception.model.http;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;

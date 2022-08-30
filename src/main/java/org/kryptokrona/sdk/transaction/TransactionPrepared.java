@@ -1,6 +1,6 @@
 package org.kryptokrona.sdk.transaction;
 
-import org.kryptokrona.sdk.model.util.TxInputAndOwner;
+import org.kryptokrona.sdk.exception.model.util.TxInputAndOwner;
 
 import java.util.List;
 
