@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.block.Block;
@@ -157,7 +156,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<Void> updateFeeInfo() throws IOException {
+	public Observable<Void> updateFeeInfo() {
 		try {
 			getRequest("fee").subscribe(json -> {
 				NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
@@ -292,6 +291,7 @@ public class DaemonImpl implements Daemon {
 		return Observable.just(request.getHeaders().setContentType("application/json").toString());
 	}
 
+	@Override
 	public Observable<Boolean> daemonReachable() throws IOException {
 		var request = requestFactory.buildGetRequest(
 				new GenericUrl(String.format("http://%s/info", this.hostname.toString())));

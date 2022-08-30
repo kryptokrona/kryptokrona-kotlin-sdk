@@ -43,9 +43,7 @@ public class WalletService {
 				daemon.init();
 
 				logger.info("Starting the wallet sync process.");
-			} catch (NetworkBlockCountException | NodeDeadException e) {
-				logger.error("%s", e);
-			} catch (DaemonOfflineException e) {
+			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
 			}
 

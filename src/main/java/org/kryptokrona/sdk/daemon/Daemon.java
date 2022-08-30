@@ -116,4 +116,11 @@ public interface Daemon {
 	 * @return Observable
 	 */
 	Observable<String> postRequest(String param, Object obj) throws IOException;
+
+	/**
+	 * Make a GET request and checks if status code is 200.
+	 *
+	 * @return Observable
+	 */
+	Observable<Boolean> daemonReachable() throws IOException;
 }
