@@ -27,15 +27,6 @@ class DaemonTest {
     }
 
     @Test
-    fun `can not initialize daemon with a network block count of 0`() {
-        assertFailsWith<NetworkBlockCountException> {
-            val daemon = DaemonImpl(HostName(correctDaemonUrl), false)
-            daemon.init()
-            daemon.networkBlockCount = 0
-        }
-    }
-
-    @Test
     fun `node status is OK when getting fee info`() {
         val daemon = DaemonImpl(HostName(correctDaemonUrl), false)
         daemon.init()
