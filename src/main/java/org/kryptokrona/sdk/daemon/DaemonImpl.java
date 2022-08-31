@@ -180,11 +180,6 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<NodeFee> getNodeFee() {
-		return Observable.just(nodeFee);
-	}
-
-	@Override
 	public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) {
 		var endpoint = useRawBlocks ? "sync/raw" : "sync";
 

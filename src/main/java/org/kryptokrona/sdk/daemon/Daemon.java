@@ -39,13 +39,6 @@ public interface Daemon {
 	Observable<Void> updateFeeInfo() throws IOException;
 
 	/**
-	 * Get the node fee.
-	 *
-	 * @return Observable
-	 */
-	Observable<NodeFee> getNodeFee();
-
-	/**
 	 * Gets blocks from the daemon. Blocks are returned starting from the last
 	 * known block hash (if higher than the startHeight/startTimestamp).
 	 *

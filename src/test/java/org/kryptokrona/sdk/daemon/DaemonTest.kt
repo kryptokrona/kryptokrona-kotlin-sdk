@@ -4,6 +4,7 @@ import inet.ipaddr.HostName
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException
 import java.net.UnknownHostException
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class DaemonTest {
@@ -38,8 +39,11 @@ class DaemonTest {
     fun `node status is OK when getting fee info`() {
         val daemon = DaemonImpl(HostName(correctDaemonUrl), false)
         daemon.init()
-        daemon.updateFeeInfo()
-        // status = daemon.
-    }
 
+        daemon.updateFeeInfo().subscribe {
+            val status = daemon.nodeFee.status
+
+            assertEquals("OK", status)
+        }
+    }
 }
