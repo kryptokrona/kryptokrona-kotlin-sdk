@@ -52,4 +52,16 @@ public class ParentBlock {
 	 */
 	private List<String> blockchainBranch;
 
+	public ParentBlock(
+			int majorVersion, int minorVersion, String previousBlockHash, long transactionCount,
+			List<String> baseTransactionBranch, Transaction minerTransaction, List<String> blockchainBranch
+	) {
+		this.majorVersion = majorVersion;
+		this.minorVersion = minorVersion;
+		this.previousBlockHash = previousBlockHash;
+		this.transactionCount = transactionCount;
+		this.baseTransactionBranch = baseTransactionBranch;
+		this.minerTransaction = minerTransaction;
+		this.blockchainBranch = blockchainBranch;
+	}
 }
