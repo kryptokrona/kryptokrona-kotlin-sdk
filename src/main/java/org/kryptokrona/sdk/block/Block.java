@@ -19,9 +19,13 @@ import java.util.List;
 public class Block {
 
 	private TransactionRawCoinbase transactionRawCoinbase;
+
 	private List<TransactionRaw> transactions;
+
 	private long blockHeight;
+
 	private String blockHash;
+
 	private long blockTimestamp;
 
 	public Block(TransactionRawCoinbase transactionRawCoinbase, List<TransactionRaw> transactions, long blockHeight, String blockHash, long blockTimestamp) {
