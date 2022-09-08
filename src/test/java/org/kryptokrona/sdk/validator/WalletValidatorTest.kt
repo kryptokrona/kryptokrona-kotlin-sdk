@@ -2,7 +2,6 @@ package org.kryptokrona.sdk.validator;
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class WalletValidatorTest {
@@ -30,8 +29,11 @@ class WalletValidatorTest {
             }
     }
 
-    /*@Test
+    @Test
     fun `can validate wallet addresses when integrated addresses are not allowed`() {
-
-    }*/
+        walletValidator.validateAddresses(correctAddresses, false)
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
+    }
 }
