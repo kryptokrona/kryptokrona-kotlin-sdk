@@ -38,6 +38,34 @@ public class Address {
 		this.cached = new Cache();
 	}
 
+	public String getMnemonicSeed() {
+		return seed.length() > 0 ? encodeSeed(this.seed) : "";
+	}
+
+	public String getPaymentId() {
+		return "";
+	}
+
+	public KeyPair getSpendKeys() {
+		return null;
+	}
+
+	public void setSpendKeys(KeyPair spendKeys) {
+
+	}
+
+	public KeyPair getViewKeys() {
+		return null;
+	}
+
+	public void setViewKeys(KeyPair viewKeys) {
+
+	}
+
+	private String encodeSeed(String seed) {
+		return "";
+	}
+
 	private enum Sizes {
 		KEY(32),
 		CHECKSUM(4);
