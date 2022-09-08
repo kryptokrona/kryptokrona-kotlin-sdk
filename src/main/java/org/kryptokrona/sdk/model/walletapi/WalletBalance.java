@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.walletapi;
+package org.kryptokrona.sdk.model.walletapi;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

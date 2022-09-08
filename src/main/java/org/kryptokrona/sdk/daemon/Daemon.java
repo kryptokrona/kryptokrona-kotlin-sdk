@@ -1,17 +1,15 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
-import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.block.RawBlock;
-import org.kryptokrona.sdk.model.http.NodeFee;
 import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
 

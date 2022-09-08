@@ -3,7 +3,6 @@ package org.kryptokrona.sdk.transaction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.transaction.TransactionInput;
 
 /**
  * KeyInput.java
