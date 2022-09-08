@@ -53,17 +53,20 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Checking Style
-        run: ./gradlew checkstyleMain
+      - name: Temporarily
+        run: echo "hello"
 
-      - name: Checking Duplicated Code
-        run: ./gradlew cpdCheck
-
-      - name: Checking Bugs
-        run: ./gradlew spotbugsMain
-
-      - name: Checking Code Standard
-        run: ./gradlew pmdMain
+#      - name: Checking Style
+#        run: ./gradlew checkstyleMain
+#
+#      - name: Checking Duplicated Code
+#        run: ./gradlew cpdCheck
+#
+#      - name: Checking Bugs
+#        run: ./gradlew spotbugsMain
+#
+#      - name: Checking Code Standard
+#        run: ./gradlew pmdMain
 
   unit-test:
     name: Unit Test
