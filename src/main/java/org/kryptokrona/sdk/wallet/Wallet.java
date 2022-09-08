@@ -11,8 +11,6 @@ import java.util.List;
 
 /**
  * WalletImpl.java
- * <p>
- * Represents a Wallet.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
