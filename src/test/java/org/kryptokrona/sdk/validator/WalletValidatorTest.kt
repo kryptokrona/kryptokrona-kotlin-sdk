@@ -2,10 +2,7 @@ package org.kryptokrona.sdk.validator;
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.exception.wallet.WalletAddressIsIntegratedException
-import org.kryptokrona.sdk.exception.wallet.WalletAddressNotBase58Exception
-import org.kryptokrona.sdk.exception.wallet.WalletAddressWrongLengthException
-import org.kryptokrona.sdk.exception.wallet.WalletPaymentIdWrongLengthException
+import org.kryptokrona.sdk.exception.wallet.*
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -91,7 +88,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can validate 64 length payment ID when integrated addresses are allowed`() {
+    fun `can validate 64 char length payment ID when integrated addresses are allowed`() {
         walletValidator.validatePaymentID(
             "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20a",
             true)
@@ -101,7 +98,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can not validate payment ID with more or less than 64 when integrated addresses are not allowed`() {
+    fun `can not validate payment ID with more or less than 64 char length when integrated addresses are not allowed`() {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
             walletValidator.validatePaymentID("ecd4621085009655b82f0eb19c3c", false)
                 .subscribe { }
@@ -111,6 +108,14 @@ class WalletValidatorTest {
             walletValidator.validatePaymentID(
                 "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20adasdasd2d12d",
                 false)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate payment ID with specical chars when integrated addresses are not allowed`() {
+        assertFailsWith<WalletPaymentIdInvalidException> {
+            walletValidator.validatePaymentID("ecd4621+8500#655b82f0eb19c3ccd0e4cc882!b87497c97d15b23b0fdabd20a", false)
                 .subscribe { }
         }
     }
