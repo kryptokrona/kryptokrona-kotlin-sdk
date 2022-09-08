@@ -3,9 +3,13 @@ package org.kryptokrona.sdk.address;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.Setter;
+import org.kryptokrona.sdk.crypto.Base58;
 import org.kryptokrona.sdk.crypto.Cache;
 import org.kryptokrona.sdk.crypto.KeyPair;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 
 /**
@@ -68,9 +72,17 @@ public class Address {
 	}
 
 	public static Observable<Address> fromAddress(String address, long prefix) {
+		var decodedAddress = Base58.decode(address);
 
-		/* const decodedAddress = Base58.decode(address);
+		Reader reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
 
+		// var decodedPrefix = reader.read()
+
+		var paymentId = "";
+
+
+
+		/*
         const reader = new Reader(decodedAddress);
 
         const decodedPrefix = reader.bytes(prefix.size).toString('hex');
