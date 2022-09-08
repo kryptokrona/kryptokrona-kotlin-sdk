@@ -1,6 +1,9 @@
 package org.kryptokrona.sdk.util;
 
-// import kryptokrona-utils here
-
+/**
+ * CnUtils.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public class CnUtils {
 }

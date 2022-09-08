@@ -6,6 +6,11 @@ import io.reactivex.rxjava3.core.Observable;
 
 import java.util.Map;
 
+/**
+ * CryptoWrapper.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public class CryptoWrapper {
 
 	public Observable<String> generateKeyDerivation() {
