@@ -1,5 +1,6 @@
 package org.kryptokrona.sdk.address;
 
+import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.Setter;
 import org.kryptokrona.sdk.crypto.Cache;
@@ -64,6 +65,50 @@ public class Address {
 
 	private String encodeSeed(String seed) {
 		return "";
+	}
+
+	public static Observable<Address> fromAddress(String address, long prefix) {
+
+		/* const decodedAddress = Base58.decode(address);
+
+        const reader = new Reader(decodedAddress);
+
+        const decodedPrefix = reader.bytes(prefix.size).toString('hex');
+
+		if (decodedPrefix !== prefix.hex) {
+			throw new Error('Invalid address prefix');
+		}
+
+		let paymentId = '';
+
+		if (reader.unreadBytes > ((SIZES.KEY * 2) + SIZES.CHECKSUM)) {
+			paymentId = reader.hex(SIZES.KEY * 2);
+		}
+
+        const publicSpend = reader.hash();
+        const publicView = reader.hash();
+        const expectedChecksum = reader.bytes(SIZES.CHECKSUM).toString('hex');
+
+        const checksum = (new Reader(
+				await TurtleCoinCrypto.cn_fast_hash(decodedPrefix + paymentId + publicSpend + publicView)
+		)).bytes(SIZES.CHECKSUM).toString('hex');
+
+		if (expectedChecksum !== checksum) {
+			throw new Error('Could not parse address: checksum mismatch');
+		}
+
+        const result = new Address();
+
+		result.m_paymentId = paymentId;
+
+		result.m_keys = await ED25519.Keys.from(
+				await ED25519.KeyPair.from(publicSpend),
+				await ED25519.KeyPair.from(publicView)
+		);
+
+		return result;*/
+
+		return null;
 	}
 
 	private enum Sizes {

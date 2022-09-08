@@ -16,6 +16,7 @@ import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.exception.wallet.WalletException;
 import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static org.kryptokrona.sdk.config.Config.*;
 
 /**
@@ -121,7 +123,7 @@ public class DaemonImpl implements Daemon {
 				logger.info("Node information, updated.");
 			});
 		} catch (IOException e) {
-			logger.error("Failed to update daemon info: " + e.toString());
+			logger.error("Failed to update daemon info: " + e);
 			var diff1 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
 			var diff2 = (Instant.now().toEpochMilli() - lastUpdatedNetworkHeight.toEpochMilli()) / 1000;
 
@@ -163,17 +165,22 @@ public class DaemonImpl implements Daemon {
 
 				var integratedAddressesAllowed = false;
 
-				// TODO: validate addresses here
+				try {
+					walletValidator.validateAddresses(List.of(nodeFee.getAddress()), integratedAddressesAllowed)
+							.subscribe();
 
-				if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
-					nodeFee.setAddress(nodeFeeObj.getAddress());
-					nodeFee.setAmount(nodeFeeObj.getAmount());
-					nodeFee.setStatus(nodeFee.getStatus());
-					logger.info("Node fee information, updated.");
+					if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
+						nodeFee.setAddress(nodeFeeObj.getAddress());
+						nodeFee.setAmount(nodeFeeObj.getAmount());
+						nodeFee.setStatus(nodeFee.getStatus());
+						logger.info("Node fee information, updated.");
+					}
+				} catch (WalletException e) {
+					logger.error("Failed to validate address from daemon fee info: " + e);
 				}
 			});
 		} catch (IOException e) {
-			logger.error("Failed to update fee info: " + e.toString());
+			logger.error("Failed to update fee info: " + e);
 		}
 
 		return Observable.empty();
@@ -194,7 +201,7 @@ public class DaemonImpl implements Daemon {
 			});
 		} catch (IOException e) {
 			blockCount = Math.ceil(blockCount / 4.0);
-			logger.error("Failed to get wallet sync data: " + e.toString() + " Lowering block count to: " + blockCount);
+			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
 		}
 
 		// the node is not dead if we're fetching blocks.
@@ -215,7 +222,7 @@ public class DaemonImpl implements Daemon {
 
 			// return the indexes here from the data
 		} catch (IOException e) {
-			logger.error("Failed to get global indexes: " + e.toString());
+			logger.error("Failed to get global indexes: " + e);
 		}
 
 		return Observable.empty();
@@ -228,7 +235,7 @@ public class DaemonImpl implements Daemon {
 
 			// return data.notFound or empty array
 		} catch (IOException e) {
-			logger.error("Failed to get transactions status: " + e.toString());
+			logger.error("Failed to get transactions status: " + e);
 		}
 
 		return Observable.empty();
@@ -239,7 +246,7 @@ public class DaemonImpl implements Daemon {
 		try {
 			postRequest("indexes/random", randomOutputsByAmount).subscribe(logger::info);
 		} catch (IOException e) {
-			logger.error("Failed to get random outs: " + e.toString());
+			logger.error("Failed to get random outs: " + e);
 		}
 
         /*const outputs: [number, [number, string][]][] = [];
