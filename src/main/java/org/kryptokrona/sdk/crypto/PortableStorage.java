@@ -35,7 +35,17 @@ public class PortableStorage {
 		return false;
 	}
 
-	public void toBuffer(boolean skipHeader) {
-		// should change return type
+	public Buffer toBuffer(boolean skipHeader) {
+		return null;
 	}
+
+	private List<PortableStorageEntry> blobToEntries() {
+		return null;
+	}
+
+	private Buffer entriesToBuffer(List<PortableStorageEntry> entries) {
+		return null;
+	}
+
+
 }
