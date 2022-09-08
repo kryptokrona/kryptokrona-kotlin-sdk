@@ -72,7 +72,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can validate empty payment ID when integrated addresses are allowed`() {
+    fun `can validate empty payment ID when empty string are allowed`() {
         walletValidator.validatePaymentID("", true)
             .subscribe { validity ->
                 assertTrue { validity }
@@ -80,7 +80,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can not validate empty payment ID when integrated addresses are not allowed`() {
+    fun `can not validate empty payment ID when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
             walletValidator.validatePaymentID("", false)
                 .subscribe { }
@@ -88,7 +88,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can validate 64 char length payment ID when integrated addresses are allowed`() {
+    fun `can validate 64 char length payment ID when empty string are allowed`() {
         walletValidator.validatePaymentID(
             "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20a",
             true)
@@ -98,7 +98,7 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can not validate payment ID with more or less than 64 char length when integrated addresses are not allowed`() {
+    fun `can not validate payment ID with more or less than 64 char length when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
             walletValidator.validatePaymentID("ecd4621085009655b82f0eb19c3c", false)
                 .subscribe { }
@@ -113,9 +113,11 @@ class WalletValidatorTest {
     }
 
     @Test
-    fun `can not validate payment ID with specical chars when integrated addresses are not allowed`() {
+    fun `can not validate payment ID with specical chars when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdInvalidException> {
-            walletValidator.validatePaymentID("ecd4621+8500#655b82f0eb19c3ccd0e4cc882!b87497c97d15b23b0fdabd20a", false)
+            walletValidator.validatePaymentID(
+                "ecd4621+8500#655b82f0eb19c3ccd0e4cc882!b87497c97d15b23b0fdabd20a",
+                false)
                 .subscribe { }
         }
     }
