@@ -48,7 +48,7 @@ public class WalletValidator {
 			});
 		}
 
-		return Observable.empty();
+		return Observable.just(true);
 	}
 
 	public Observable<Void> validateDestionations(List<Map<String, Number>> destinations) {
