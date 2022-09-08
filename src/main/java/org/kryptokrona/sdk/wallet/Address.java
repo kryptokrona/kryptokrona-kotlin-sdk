@@ -85,7 +85,7 @@ public class Address {
 
 		var checksum = "change this later";
 
-		if (expectedChecksum != checksum) {
+		if (!expectedChecksum.equals(checksum)) {
 			throw new WalletAddressChecksumMismatchException();
 		}
 

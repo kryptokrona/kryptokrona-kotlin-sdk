@@ -69,7 +69,7 @@ public class LedgerNote implements CryptoNote {
 	}
 
 	@Override
-	public Observable<String> createIntegratedAddress(String address, String paymentId, AddressPrefix prefix) {
+	public Observable<String> createIntegratedAddress(String address, String paymentId, long prefix) {
 		return null;
 	}
 

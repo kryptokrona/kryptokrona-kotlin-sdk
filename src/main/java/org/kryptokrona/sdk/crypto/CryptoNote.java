@@ -49,7 +49,7 @@ public interface CryptoNote {
 
 	long calculateMinimumTransactionFee(long txSize);
 
-	Observable<String> createIntegratedAddress(String address, String paymentId, AddressPrefix prefix);
+	Observable<String> createIntegratedAddress(String address, String paymentId, long prefix);
 
 	String formatMoney(long amount);
 
