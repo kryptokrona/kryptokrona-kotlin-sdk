@@ -1,7 +1,6 @@
 package org.kryptokrona.sdk.crypto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.transaction.Transaction;
