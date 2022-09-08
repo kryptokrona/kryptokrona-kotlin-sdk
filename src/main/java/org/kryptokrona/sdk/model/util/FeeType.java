@@ -5,6 +5,11 @@ import lombok.Setter;
 
 import static org.kryptokrona.sdk.config.Config.MINIMUM_FEE_PER_BYTE;
 
+/**
+ * FeeType.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 @Getter
 @Setter
 public class FeeType {
