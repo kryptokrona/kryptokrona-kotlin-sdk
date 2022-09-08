@@ -74,9 +74,10 @@ public class Address {
 	public static Observable<Address> fromAddress(String address, long prefix) {
 		var decodedAddress = Base58.decode(address);
 
-		Reader reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
+		var reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
 
-		// var decodedPrefix = reader.read()
+		var decodedPrefix = reader.toString();
+		System.out.println(decodedPrefix);
 
 		var paymentId = "";
 

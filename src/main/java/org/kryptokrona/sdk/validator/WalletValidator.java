@@ -41,11 +41,11 @@ public class WalletValidator {
 			}
 
 			// verify it's not an integrated, if those aren't allowed
-			Address.fromAddress(address, Config.ADDRESS_PREFIX).subscribe(a -> {
+			/*Address.fromAddress(address, Config.ADDRESS_PREFIX).subscribe(a -> {
 				if (a.getPaymentId().length() != 0 && !integratedAddressesAllowed) {
 					throw new WalletAddressIsIntegratedException();
 				}
-			});
+			});*/
 		}
 
 		return Observable.just(true);
