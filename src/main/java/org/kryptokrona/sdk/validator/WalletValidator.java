@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.validator;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.address.Address;
+import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.wallet.WalletAddressIsIntegratedException;
 import org.kryptokrona.sdk.exception.wallet.WalletAddressNotBase58Exception;
@@ -41,11 +41,11 @@ public class WalletValidator {
 			}
 
 			// verify it's not an integrated, if those aren't allowed
-			/*Address.fromAddress(address, Config.ADDRESS_PREFIX).subscribe(a -> {
+			Address.fromAddress(address, Config.ADDRESS_PREFIX).subscribe(a -> {
 				if (a.getPaymentId().length() != 0 && !integratedAddressesAllowed) {
 					throw new WalletAddressIsIntegratedException();
 				}
-			});*/
+			});
 		}
 
 		return Observable.just(true);

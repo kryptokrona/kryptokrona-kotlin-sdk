@@ -1,4 +1,4 @@
-package org.kryptokrona.sdk.address;
+package org.kryptokrona.sdk.wallet;
 
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
@@ -6,10 +6,10 @@ import lombok.Setter;
 import org.kryptokrona.sdk.crypto.Base58;
 import org.kryptokrona.sdk.crypto.Cache;
 import org.kryptokrona.sdk.crypto.KeyPair;
+import org.kryptokrona.sdk.exception.wallet.WalletAddressChecksumMismatchException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.List;
 
 /**
@@ -31,15 +31,13 @@ public class Address {
 
 	private long subwalletIndex;
 
-	private AddressPrefix prefix;
+	private long prefix;
 
 	private Cache cached;
 
 	public Address() {
-		// this.keys =
+		// this.keys = new Keys();
 		this.language = "english";
-		this.subwalletIndex = 0;
-		this.prefix = new AddressPrefix();
 		this.cached = new Cache();
 	}
 
@@ -71,7 +69,7 @@ public class Address {
 		return "";
 	}
 
-	public static Observable<Address> fromAddress(String address, long prefix) {
+	public static Observable<Address> fromAddress(String address, long prefix) throws WalletAddressChecksumMismatchException {
 		var decodedAddress = Base58.decode(address);
 
 		var reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
@@ -81,7 +79,20 @@ public class Address {
 
 		var paymentId = "";
 
+		var publicSpend = reader.hashCode();
+		var publicView = reader.hashCode();
+		var expectedChecksum = "change this later";
 
+		var checksum = "change this later";
+
+		if (expectedChecksum != checksum) {
+			throw new WalletAddressChecksumMismatchException();
+		}
+
+		var result = new Address();
+		result.setPaymentId(paymentId);
+
+		// result.setKeys();
 
 		/*
         const reader = new Reader(decodedAddress);
@@ -106,22 +117,13 @@ public class Address {
 				await TurtleCoinCrypto.cn_fast_hash(decodedPrefix + paymentId + publicSpend + publicView)
 		)).bytes(SIZES.CHECKSUM).toString('hex');
 
-		if (expectedChecksum !== checksum) {
-			throw new Error('Could not parse address: checksum mismatch');
-		}
-
-        const result = new Address();
-
-		result.m_paymentId = paymentId;
-
 		result.m_keys = await ED25519.Keys.from(
 				await ED25519.KeyPair.from(publicSpend),
 				await ED25519.KeyPair.from(publicView)
 		);
+			*/
 
-		return result;*/
-
-		return null;
+		return Observable.just(result);
 	}
 
 	private enum Sizes {

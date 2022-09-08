@@ -1,6 +1,8 @@
 package org.kryptokrona.sdk.crypto;
 
+import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,14 +12,23 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class Keys {
 
-	private KeyPair mSpendKeys;
+	private KeyPair spendKeys;
 
-	private KeyPair mViewKeys;
+	private KeyPair viewKeys;
 
-	public Keys(KeyPair mSpendKeys, KeyPair mViewKeys) {
-		this.mSpendKeys = mSpendKeys;
-		this.mViewKeys = mViewKeys;
+	public Keys(KeyPair spendKeys, KeyPair viewKeys) {
+		this.spendKeys = spendKeys;
+		this.viewKeys = viewKeys;
+	}
+
+	public Observable<Keys> from(KeyPair spendKeys, KeyPair viewKeys) {
+		var keys = new Keys();
+		keys.setSpendKeys(spendKeys);
+		keys.setViewKeys(viewKeys);
+
+		return Observable.just(keys);
 	}
 }
