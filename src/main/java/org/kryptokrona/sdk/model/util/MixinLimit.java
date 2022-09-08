@@ -15,7 +15,7 @@ import lombok.Setter;
 public class MixinLimit {
 
 	private long height;
-	private long minMixin;
+	private double minMixin;
 	private double maxMixin;
 	private long defaultMixin;
 

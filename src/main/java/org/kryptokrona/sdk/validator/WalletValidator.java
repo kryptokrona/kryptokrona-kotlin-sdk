@@ -70,8 +70,23 @@ public class WalletValidator {
 		return Observable.empty();
 	}
 
-	public Observable<Void> validateMixin(long mixin, long height) {
-		return Observable.empty();
+	public Observable<Boolean> validateMixin(long mixin, long height)
+			throws WalletNegativeValueGivenException, WalletMixinTooSmallException, WalletMixinTooBigException {
+		if (mixin < 0) {
+			throw new WalletNegativeValueGivenException();
+		}
+
+		Map<String, Double> mixinLimitsByHeight = Config.MIXIN_LIMITS.getMixinLimitsByHeight(height);
+
+		if (mixin < mixinLimitsByHeight.get("minMixin")) {
+			throw new WalletMixinTooSmallException();
+		}
+
+		if (mixin > mixinLimitsByHeight.get("maxMixin")) {
+			throw new WalletMixinTooBigException();
+		}
+
+		return Observable.just(true);
 	}
 
 	public Observable<Boolean> validatePaymentID(String paymentID, boolean allowEmptyString)

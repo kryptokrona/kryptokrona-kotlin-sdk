@@ -57,14 +57,15 @@ public class MixinLimits {
 	 * @param height : long
 	 * @return HashMap
 	 */
-	public Map<Long, Double> getMixinLimitsByHeight(long height) {
+	public Map<String, Double> getMixinLimitsByHeight(long height) {
 		long minimumMixin = 0;
 		double maximumMixin = Math.pow(2, 64);
-		HashMap<Long, Double> minMaxMixin = new HashMap<Long, Double>();
+		HashMap<String, Double> minMaxMixin = new HashMap<>();
 
 		for (MixinLimit limit : limits) {
 			if (height > limit.getHeight()) {
-				minMaxMixin.put(limit.getMinMixin(), limit.getMaxMixin());
+				minMaxMixin.put("minMixin", limit.getMinMixin());
+				minMaxMixin.put("maxMixin", limit.getMaxMixin());
 			}
 		}
 
