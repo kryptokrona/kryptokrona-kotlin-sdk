@@ -1,17 +1,15 @@
 package org.kryptokrona.sdk.validator;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.exception.wallet.*;
 import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.exception.wallet.WalletAddressIsIntegratedException;
-import org.kryptokrona.sdk.exception.wallet.WalletAddressNotBase58Exception;
-import org.kryptokrona.sdk.exception.wallet.WalletAddressWrongLengthException;
-import org.kryptokrona.sdk.exception.wallet.WalletException;
 import org.kryptokrona.sdk.model.util.FeeType;
 import org.kryptokrona.sdk.wallet.WalletSub;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class WalletValidator {
 
@@ -76,8 +74,22 @@ public class WalletValidator {
 		return Observable.empty();
 	}
 
-	public Observable<Void> validatePaymentID(String paymentID, boolean allowEmptyString) {
-		return Observable.empty();
+	public Observable<Boolean> validatePaymentID(String paymentID, boolean allowEmptyString)
+			throws WalletPaymentIdWrongLengthException, WalletPaymentIdInvalidException {
+
+		if (Objects.equals(paymentID, "") && allowEmptyString) {
+			return Observable.just(true);
+		}
+
+		if (paymentID.length() != 64) {
+			throw new WalletPaymentIdWrongLengthException();
+		}
+
+		if (!paymentID.matches("^([a-zA-Z0-9]{64})?$")) {
+			throw new WalletPaymentIdInvalidException();
+		}
+
+		return Observable.just(true);
 	}
 
 	private boolean contains(char c, char[] array) {
