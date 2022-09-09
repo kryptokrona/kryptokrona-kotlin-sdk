@@ -96,6 +96,14 @@ class WalletValidatorTest {
     }
 
     @Test
+    fun `can not validate mixin if more than max mixin value`() {
+        assertFailsWith<WalletMixinTooBigException> {
+            walletValidator.validateMixin(101, 900000)
+                .subscribe { }
+        }
+    }
+
+    @Test
     fun `can validate empty payment ID when empty string are allowed`() {
         walletValidator.validatePaymentID("", true)
             .subscribe { validity ->
