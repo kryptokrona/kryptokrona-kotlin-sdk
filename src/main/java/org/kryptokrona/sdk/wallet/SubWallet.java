@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.wallet;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.Setter;
+import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.TransactionInput;
 
@@ -72,9 +73,83 @@ public class SubWallet {
 	 * The wallet has one 'main' address which we will use by default
 	 * when treating it as a single user wallet
 	 */
-	private boolean primaryAddress;
+	private boolean isPrimaryAddress;
 
-	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
+	public SubWallet(
+			List<TransactionInput> unspentInputs, List<TransactionInput> lockedInputs,
+			List<TransactionInput> spentInputs, List<UnconfirmedInput> unconfirmedIncomingAmounts,
+			String publicSpendKey, String privateSpendKey, long syncStartTimestamp,
+			long syncStartHeight, String address, boolean isPrimaryAddress
+	) {
+		this.unspentInputs = unspentInputs;
+		this.lockedInputs = lockedInputs;
+		this.spentInputs = spentInputs;
+		this.unconfirmedIncomingAmounts = unconfirmedIncomingAmounts;
+		this.publicSpendKey = publicSpendKey;
+		this.privateSpendKey = privateSpendKey;
+		this.syncStartTimestamp = syncStartTimestamp;
+		this.syncStartHeight = syncStartHeight;
+		this.address = address;
+		this.isPrimaryAddress = isPrimaryAddress;
+	}
+
+	public void pruneSpentInputs(long pruneHeight) {
+
+	}
+
+	public void reset(long scanHeight, long scanTimestamp) {
+
+	}
+
+	public void storeTransactionInput(TransactionInput transactionInput, boolean isViewWallet) {
+
+	}
+
+	public void markInputAsSpent(String keyImage, long spendHeight) {
+
+	}
+
+	public void markInputAsLocked(String keyImage, String transactionHash) {
+
+	}
+
+	public void removeCancelledTransaction(String transactionHash) {
+
+	}
+
+	public List<String> removeForkedTransactions(long forkHeight) {
+		return null;
+	}
+
+	public void convertSyncTimestampToHeight(long startTimestamp, long startHeight) {
+
+	}
+
+	public List<String> getKeyImages() {
+		return null;
+	}
+
+	public Observable<Map<String, String>> getTxInputKeyImage(String derivation, long outputIndex) {
 		return Observable.empty();
+	}
+
+	public Map<Double, Double> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
+		return null;
+	}
+
+	public long getUnconfirmedChange() {
+		return 0;
+	}
+
+	public boolean haveSpendableInput(TransactionInput transactionInput, long currentHeight) {
+		return false;
+	}
+
+	public List<TxInputAndOwner> getSpendableInputs(long currentHeight) {
+		return null;
+	}
+
+	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput) {
+
 	}
 }
