@@ -194,16 +194,4 @@ public class WalletValidator {
 		}
 		return false;
 	}
-
-
-	private void assertList(Object correctType, List list) {
-
-	}
-
-	private void assertType() {
-		// assert the type here
-	}
-
-
-
 }
