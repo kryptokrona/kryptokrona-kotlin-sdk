@@ -91,7 +91,7 @@ public class Config {
 	 */
 	public final static MixinLimits MIXIN_LIMITS = new MixinLimits(Arrays.asList(
 			// Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
-			new MixinLimit(440000, 0, 100, 3),
+			new MixinLimit(440000, 1, 100, 3),
 
 			// At height of 620000, static mixin of 7
 			new MixinLimit(620000, 7),

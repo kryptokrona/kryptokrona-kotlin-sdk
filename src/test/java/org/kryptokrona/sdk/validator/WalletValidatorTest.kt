@@ -73,10 +73,26 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate mixin if not more or less than min or max mixin`() {
-        walletValidator.validateMixin(0, 900000)
+        walletValidator.validateMixin(1, 900000)
             .subscribe { validity ->
                 assertTrue { validity }
             }
+    }
+
+    @Test
+    fun `can not validate mixin if negative value`() {
+        assertFailsWith<WalletNegativeValueGivenException> {
+            walletValidator.validateMixin(-10, 900000)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate mixin if less than min mixin value`() {
+        assertFailsWith<WalletMixinTooSmallException> {
+            walletValidator.validateMixin(0, 900000)
+                .subscribe { }
+        }
     }
 
     @Test
