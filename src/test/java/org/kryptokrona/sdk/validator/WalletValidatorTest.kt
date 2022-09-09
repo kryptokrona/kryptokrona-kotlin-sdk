@@ -37,8 +37,11 @@ class WalletValidatorTest {
     private var emptyWalletDestinations = emptyMap<String, Double>()
 
     private var amountWalletDestinationsIsZero = mapOf(
-        "Key1" to 0,
-        "Key2" to 0
+        "SEKReTFuVRPQaiwzPBD1Gx4oyYUNSABLe3eQANxMEYKTbRRgYJNKf1yG5VJpbq4wuY67y2uWwMBcA9Xb9gft8XXoUU2DguV9yzj" to 0.0,
+        "SEKReWU9LE8HLPRAGu2dyMF8jE93xabHv1Yf92YLtqZn7L3evAQ8Sbm3y8KnZf2LGPgP1bwqD9qua3z57q2qgBavjVKTmSeq4oK" to 0.0,
+        "SEKReSywEaajP1hsreeveEhdY48Vu6vZn2uN6dy1tiH96d8gzHT4xzZfNx9xfuhK8kWjfouGYaLg8WXifDHPKMAufLt2dAwbmbH" to 0.0,
+        "SEKReWtkaTbBWT645J5nz83SRzGhUui1qaa6AWYGUBNN9nRxQitMjtWUhSHLiKrkxBCkamZxrMNWvAGKRBBpnMS7bn9Gi5mPfu8" to 0.0,
+        "SEKReV7v3hV9BnhNoYNJGkB3WiNvapTAFJEkc3PbDVpMMQrDABbTwi9gJtQyghxs66Xwpj8BDqX4KEis3M4SkRqx3Gfwf4DBEiV" to 0.0,
     )
 
     @BeforeEach
@@ -82,6 +85,14 @@ class WalletValidatorTest {
     fun `can not validate destinations when wallet destinations are empty`() {
         assertFailsWith<WalletNoDestinationGivenException> {
             walletValidator.validateDestinations(emptyWalletDestinations)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate destinations when wallet amount is 0`() {
+        assertFailsWith<WalletAmountIsZeroException> {
+            walletValidator.validateDestinations(amountWalletDestinationsIsZero)
                 .subscribe { }
         }
     }
