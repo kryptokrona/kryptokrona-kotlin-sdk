@@ -34,6 +34,13 @@ class WalletValidatorTest {
         "SEKReWD8q3EKsT1yD7jTrj5tpDPS64Xwd5h9TSYRkLFx2GBuDFtBhTKRHAYr7a9yJnZ9Dgr9qJZ7VGwwTDkKDoUhUF7Krhf9pg="
     )
 
+    private var emptyWalletDestinations = emptyMap<String, Double>()
+
+    private var amountWalletDestinationsIsZero = mapOf(
+        "Key1" to 0,
+        "Key2" to 0
+    )
+
     @BeforeEach
     fun setup() {
         walletValidator = WalletValidator()
@@ -67,6 +74,14 @@ class WalletValidatorTest {
     fun `can not validate incorrect base58 wallet addresses when integrated addresses are not allowed`() {
         assertFailsWith<WalletAddressNotBase58Exception> {
             walletValidator.validateAddresses(incorrectAddressesNotBase58, false)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate destinations when wallet destinations are empty`() {
+        assertFailsWith<WalletNoDestinationGivenException> {
+            walletValidator.validateDestinations(emptyWalletDestinations)
                 .subscribe { }
         }
     }

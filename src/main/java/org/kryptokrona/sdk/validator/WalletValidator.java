@@ -69,14 +69,14 @@ public class WalletValidator {
 	 *
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
-	public Observable<Boolean> validateDestinations(Map<String, Number> destinations) throws WalletException {
+	public Observable<Boolean> validateDestinations(Map<String, Double> destinations) throws WalletException {
 		if (destinations.size() == 0) {
 			throw new WalletNoDestinationGivenException();
 		}
 
 		List<String> destinationAddresses = new ArrayList<>();
 
-		for (Map.Entry<String, Number> entry : destinations.entrySet()) {
+		for (Map.Entry<String, Double> entry : destinations.entrySet()) {
 			if (entry.getValue().intValue() == 0) {
 				throw new WalletAmountIsZeroException();
 			}
