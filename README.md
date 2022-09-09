@@ -7,6 +7,7 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 ## Table of Contents
 
 - [Development resources](#development-resources)
+- [Releases](#releases)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -19,6 +20,13 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 - GitHub: https://github.com/kryptokrona
 - Hugin: sdkdevs board on Hugin Messenger
 - It is HIGHLY recommended to join our board on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
+
+## Releases
+
+| NAME | RELEASE DATE | VERSION | MAINTAINER         | EOL     | DESCRIPTION |
+|------|--------------|---------|--------------------|---------|-------------|
+| Morpheus | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done. |
+
 
 ## Contributors
 
