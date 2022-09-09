@@ -15,18 +15,18 @@ import lombok.Setter;
 public class MixinLimit {
 
 	private long height;
-	private double minMixin;
-	private double maxMixin;
+	private long minMixin;
+	private long maxMixin;
 	private long defaultMixin;
 
-	public MixinLimit(int height, int minMixin, int maxMixin, int defaultMixin) {
+	public MixinLimit(int height, long minMixin, long maxMixin, long defaultMixin) {
 		this.height = height;
 		this.minMixin = minMixin;
 		this.maxMixin = maxMixin;
 		this.defaultMixin = defaultMixin;
 	}
 
-	public MixinLimit(int height, int minMixin) {
+	public MixinLimit(int height, long minMixin) {
 		this.height = height;
 		this.minMixin = minMixin;
 		this.maxMixin = minMixin;

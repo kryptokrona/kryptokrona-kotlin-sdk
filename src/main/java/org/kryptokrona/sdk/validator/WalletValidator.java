@@ -76,7 +76,7 @@ public class WalletValidator {
 			throw new WalletNegativeValueGivenException();
 		}
 
-		Map<String, Double> mixinLimitsByHeight = Config.MIXIN_LIMITS.getMixinLimitsByHeight(height);
+		Map<String, Long> mixinLimitsByHeight = Config.MIXIN_LIMITS.getMixinLimitsByHeight(height);
 
 		if (mixin < mixinLimitsByHeight.get("minMixin")) {
 			throw new WalletMixinTooSmallException();

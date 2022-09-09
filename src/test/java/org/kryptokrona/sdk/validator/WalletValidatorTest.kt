@@ -72,6 +72,14 @@ class WalletValidatorTest {
     }
 
     @Test
+    fun `can validate mixin if not more or less than min or max mixin`() {
+        walletValidator.validateMixin(0, 900000)
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
+    }
+
+    @Test
     fun `can validate empty payment ID when empty string are allowed`() {
         walletValidator.validatePaymentID("", true)
             .subscribe { validity ->
