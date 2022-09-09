@@ -179,6 +179,13 @@ public class WalletValidator {
 		return Observable.just(true);
 	}
 
+	/**
+	 * Check if character exists in char array
+	 *
+	 * @param c The character to check if it contains in char array
+	 * @param array The char array to check against
+	 * @return Returns true if it contains, otherwise false
+	 */
 	private boolean contains(char c, char[] array) {
 		for (char x : array) {
 			if (x == c) {
