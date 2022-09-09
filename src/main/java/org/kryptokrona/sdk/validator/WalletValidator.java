@@ -7,6 +7,7 @@ import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.model.util.FeeType;
 import org.kryptokrona.sdk.wallet.WalletSub;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -68,8 +69,26 @@ public class WalletValidator {
 	 *
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
-	public Observable<Boolean> validateDestionations(List<Map<String, Number>> destinations) {
-		return Observable.empty();
+	public Observable<Boolean> validateDestinations(Map<String, Number> destinations) throws WalletException {
+		if (destinations.size() == 0) {
+			throw new WalletNoDestinationGivenException();
+		}
+
+		List<String> destinationAddresses = new ArrayList<>();
+
+		for (Map.Entry<String, Number> entry : destinations.entrySet()) {
+			if (entry.getValue().intValue() == 0) {
+				throw new WalletAmountIsZeroException();
+			}
+
+			if (entry.getValue().intValue() < 0) {
+				throw new WalletNegativeValueGivenException();
+			}
+
+			destinationAddresses.add(entry.getKey());
+		}
+
+		return validateAddresses(destinationAddresses, true);
 	}
 
 	/**
