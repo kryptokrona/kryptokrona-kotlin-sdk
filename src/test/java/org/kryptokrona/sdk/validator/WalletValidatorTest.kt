@@ -34,6 +34,14 @@ class WalletValidatorTest {
         "SEKReWD8q3EKsT1yD7jTrj5tpDPS64Xwd5h9TSYRkLFx2GBuDFtBhTKRHAYr7a9yJnZ9Dgr9qJZ7VGwwTDkKDoUhUF7Krhf9pg="
     )
 
+    private var correctAmountWalletDestinations = mapOf(
+        "SEKReTFuVRPQaiwzPBD1Gx4oyYUNSABLe3eQANxMEYKTbRRgYJNKf1yG5VJpbq4wuY67y2uWwMBcA9Xb9gft8XXoUU2DguV9yzj" to 10.0,
+        "SEKReWU9LE8HLPRAGu2dyMF8jE93xabHv1Yf92YLtqZn7L3evAQ8Sbm3y8KnZf2LGPgP1bwqD9qua3z57q2qgBavjVKTmSeq4oK" to 5.0,
+        "SEKReSywEaajP1hsreeveEhdY48Vu6vZn2uN6dy1tiH96d8gzHT4xzZfNx9xfuhK8kWjfouGYaLg8WXifDHPKMAufLt2dAwbmbH" to 2.0,
+        "SEKReWtkaTbBWT645J5nz83SRzGhUui1qaa6AWYGUBNN9nRxQitMjtWUhSHLiKrkxBCkamZxrMNWvAGKRBBpnMS7bn9Gi5mPfu8" to 120.0,
+        "SEKReV7v3hV9BnhNoYNJGkB3WiNvapTAFJEkc3PbDVpMMQrDABbTwi9gJtQyghxs66Xwpj8BDqX4KEis3M4SkRqx3Gfwf4DBEiV" to 500.0,
+    )
+
     private var emptyWalletDestinations = emptyMap<String, Double>()
 
     private var amountWalletDestinationsIsZero = mapOf(
@@ -87,6 +95,14 @@ class WalletValidatorTest {
             walletValidator.validateAddresses(incorrectAddressesNotBase58, false)
                 .subscribe { }
         }
+    }
+
+    @Test
+    fun `can validate destinations`() {
+            walletValidator.validateDestinations(correctAmountWalletDestinations)
+                .subscribe { validity ->
+                    assertTrue { validity }
+                }
     }
 
     @Test
