@@ -133,7 +133,7 @@ public class SubWallet {
 		return Observable.empty();
 	}
 
-	public Map<Double, Double> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
+	public Map<Double, Double> getBalance(long currentHeight) {
 		return null;
 	}
 

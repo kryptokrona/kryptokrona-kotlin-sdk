@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.exception.wallet.*
 import org.kryptokrona.sdk.model.util.FeeType
 import org.kryptokrona.sdk.wallet.SubWallet
+import org.kryptokrona.sdk.wallet.SubWallets
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -144,11 +145,11 @@ class WalletValidatorTest {
             "f2e1a6ec23c143ff4a959a8ebe2ddb1e02ec0b2634a2fe1bb4c4b8571abcf3dc",
             "466d5db56c5dbf193f4643988a0e932fdb23996c2a89a81f5a2db4605ed262b0"
         )
-        val subWallet = SubWallet()
+        val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
         val currentHeight = 0L;
 
         assertFailsWith<WalletFeeTooSmallException> {
-            walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallet, currentHeight)
+            walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
                 .subscribe { }
         }
     }

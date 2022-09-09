@@ -129,14 +129,14 @@ public class WalletValidator {
 			Map<String, Number> destinations,
 			FeeType feeType,
 			List<String> subWalletsToTakeFrom,
-			SubWallet subWallet,
+			SubWallets subWallets,
 			long currentHeight) throws WalletFeeTooSmallException {
 
 		if (!feeType.isFeePerByte() && !feeType.isFixedFee()) {
 			throw new WalletFeeTooSmallException();
 		}
 
-		subWallet.getBalance(currentHeight, subWalletsToTakeFrom)
+		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
 				.subscribe(availableBalance -> {
 					var totalAmount = 0.0; //TODO: fix this.
 
@@ -145,7 +145,7 @@ public class WalletValidator {
 					}
 
 					for (Double amount : availableBalance.keySet()) {
-						if (totalAmount > amount.doubleValue()) {
+						if (totalAmount > amount) {
 							throw new WalletNotEnoughBalanceException();
 						}
 					}

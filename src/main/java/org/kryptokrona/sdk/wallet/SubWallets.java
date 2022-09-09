@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class SubWallets {
 
 	/**
@@ -67,6 +68,10 @@ public class SubWallets {
 	}
 
 	public static Observable<List<SubWallets>> init() {
+		return Observable.empty();
+	}
+
+	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
 		return Observable.empty();
 	}
 
