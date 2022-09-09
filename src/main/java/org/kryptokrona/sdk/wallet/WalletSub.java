@@ -63,10 +63,9 @@ public class WalletSub {
 	 */
 	private Map<String, String> keyImageOwners;
 
-	public WalletSub(boolean isViewWallet, Map<String, WalletSub> subWallets, List<String> publicSpendKeys, String privateViewKey) {
+	public WalletSub(boolean isViewWallet, List<String> publicSpendKeys, String privateViewKey) {
 		this.isViewWallet = isViewWallet;
 		this.publicSpendKeys = publicSpendKeys;
-		this.subWallets = subWallets;
 		this.privateViewKey = privateViewKey;
 	}
 

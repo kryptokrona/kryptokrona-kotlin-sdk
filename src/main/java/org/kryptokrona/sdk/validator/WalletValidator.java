@@ -5,6 +5,7 @@ import org.kryptokrona.sdk.exception.wallet.*;
 import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.model.util.FeeType;
+import org.kryptokrona.sdk.wallet.SubWallets;
 import org.kryptokrona.sdk.wallet.WalletSub;
 
 import java.util.ArrayList;
@@ -121,11 +122,35 @@ public class WalletValidator {
 	 */
 	public Observable<Boolean> validateAmount(
 			List<Map<String, Number>> destinations,
-			FeeType feetype,
+			FeeType feeType,
 			List<String> subWalletsToTakeFrom,
-			List<WalletSub> subWallets,
-			long currentHeight) {
-		return Observable.empty();
+			SubWallets subWallets,
+			long currentHeight) throws WalletFeeTooSmallException {
+
+		if (!feeType.isFeePerByte() && !feeType.isFixedFee()) {
+			throw new WalletFeeTooSmallException();
+		}
+
+		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
+				.subscribe(availableBalance -> {
+					var totalAmount = 0.0; //TODO: fix this.
+
+					if (feeType.isFixedFee()) {
+						totalAmount += feeType.getFixedFee();
+					}
+
+					for (Double amount : availableBalance.keySet()) {
+						if (totalAmount > amount.doubleValue()) {
+							throw new WalletNotEnoughBalanceException();
+						}
+					}
+
+					if (totalAmount >= 2 * Math.pow(2, 64)) {
+						throw new WalletWillOverflowException();
+					}
+				});
+
+		return Observable.just(true);
 	}
 
 	/**
