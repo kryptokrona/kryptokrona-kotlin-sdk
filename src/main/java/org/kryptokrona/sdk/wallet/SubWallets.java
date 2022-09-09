@@ -24,7 +24,7 @@ public class SubWallets {
 
 	/**
 	 * Whether the wallet is a view only wallet (cannot send transactions,
-	 * only can view)
+	 * only can view).
 	 */
 	private boolean isViewWallet;
 
@@ -35,32 +35,32 @@ public class SubWallets {
 	private List<String> publicSpendKeys;
 
 	/**
-	 * Mapping of public spend key to subwallet
+	 * Mapping of public spend key to sub wallet.
 	 */
 	private Map<String, SubWallets> subWallets;
 
 	/**
-	 * Our transactions
+	 * Our transactions.
 	 */
 	private List<Transaction> transactions;
 
 	/**
-	 * Transactions we sent, but haven't been confirmed yet
+	 * Transactions we sent, but haven't been confirmed yet.
 	 */
 	private List<Transaction> lockedTransactions;
 
 	/**
-	 * The shared private view key
+	 * The shared private view key.
 	 */
 	private String privateViewKey;
 
 	/**
-	 * A mapping of transaction hashes, to transaction private keys
+	 * A mapping of transaction hashes, to transaction private keys.
 	 */
 	private Map<String, String> transactionPrivateKeys;
 
 	/**
-	 * A mapping of key images to the subwallet public spend key that owns them
+	 * A mapping of key images to the sub wallet public spend key that owns them.
 	 */
 	private Map<String, String> keyImageOwners;
 
@@ -118,10 +118,24 @@ public class SubWallets {
 
 	}
 
+	/**
+	 * Store the transaction input in the corresponding sub wallet.
+	 *
+	 * @param publicSpendKey The public spend key of the sub wallet to add this input to
+	 * @param transactionInput The transaction input to store
+	 */
 	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) {
 
 	}
 
+	/**
+	 * Marks an input as spent by us, no longer part of balance or available
+	 * for spending. Input is identified by keyImage (unique).
+	 *
+	 * @param publicSpendKey The public spend key of the sub wallet to mark the corresponding input spent in
+	 * @param keyImage The key image to use
+	 * @param spendHeight The height the input was spent at
+	 */
 	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) {
 
 	}
@@ -154,6 +168,14 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
+	/**
+	 * Returns the summed balance of the given sub wallet addresses. If none are given,
+	 * take from all.
+	 *
+	 * @param currentHeight The current height to use
+	 * @param subWalletsToTakeFrom Which sub wallets to take from
+	 * @return Observable with a map
+	 */
 	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
 		return Observable.empty();
 	}
