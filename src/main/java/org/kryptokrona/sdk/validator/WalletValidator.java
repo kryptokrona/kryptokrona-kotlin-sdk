@@ -5,14 +5,19 @@ import org.kryptokrona.sdk.exception.wallet.*;
 import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.model.util.FeeType;
+import org.kryptokrona.sdk.wallet.SubWallet;
 import org.kryptokrona.sdk.wallet.SubWallets;
-import org.kryptokrona.sdk.wallet.WalletSub;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * WalletValidator.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public class WalletValidator {
 
 	/**
@@ -109,7 +114,7 @@ public class WalletValidator {
 	 * @param subWallets List of sub wallets to use in validation
 	 * @return Returns SUCCESS if valid, otherwise a WalletError describing the error
 	 */
-	public Observable<Boolean> validateOurAddresses(List<String> addresses, List<WalletSub> subWallets) {
+	public Observable<Boolean> validateOurAddresses(List<String> addresses, List<SubWallets> subWallets) {
 		return Observable.empty();
 	}
 
@@ -121,17 +126,17 @@ public class WalletValidator {
 	 * @return Returns true if valid, otherwise an exception describing the error
 	 */
 	public Observable<Boolean> validateAmount(
-			List<Map<String, Number>> destinations,
+			Map<String, Number> destinations,
 			FeeType feeType,
 			List<String> subWalletsToTakeFrom,
-			SubWallets subWallets,
+			SubWallet subWallet,
 			long currentHeight) throws WalletFeeTooSmallException {
 
 		if (!feeType.isFeePerByte() && !feeType.isFixedFee()) {
 			throw new WalletFeeTooSmallException();
 		}
 
-		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
+		subWallet.getBalance(currentHeight, subWalletsToTakeFrom)
 				.subscribe(availableBalance -> {
 					var totalAmount = 0.0; //TODO: fix this.
 

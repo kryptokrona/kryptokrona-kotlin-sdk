@@ -11,7 +11,7 @@ import org.kryptokrona.sdk.transaction.TransactionData;
 import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
 import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
-import org.kryptokrona.sdk.wallet.WalletSub;
+import org.kryptokrona.sdk.wallet.SubWallets;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class WalletSynchronizerService {
 	private long startHeight;
 	private String privateViewKey;
 	private SynchronizationStatus synchronizationStatus;
-	private List<WalletSub> subWallets;
+	private List<SubWallets> subWallets;
 	private boolean fetchingBlocks;
 	private List<Block> storedBlocks;
 	private Map<String, Long> cancelledTransactionsFailCount;
@@ -43,7 +43,7 @@ public class WalletSynchronizerService {
 
 	public WalletSynchronizerService(
 			DaemonImpl daemon,
-			List<WalletSub> subWallets,
+			List<SubWallets> subWallets,
 			long startTimestamp,
 			long startHeight,
 			String privateViewKey,
@@ -59,7 +59,7 @@ public class WalletSynchronizerService {
 	}
 
 	public void initAfterLoad(
-			List<WalletSub> subWallets,
+			List<SubWallets> subWallets,
 			DaemonImpl daemon,
 			Config config
 	) {

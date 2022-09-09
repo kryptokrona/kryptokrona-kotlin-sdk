@@ -7,7 +7,7 @@ import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.wallet.Wallet;
-import org.kryptokrona.sdk.wallet.WalletSub;
+import org.kryptokrona.sdk.wallet.SubWallets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class WalletService {
 
 	private Daemon daemon;
 	private Config config;
-	private List<WalletSub> subWallets;
+	private List<SubWallets> subWallets;
 	private WalletSynchronizerService walletSynchronizerService;
 	private boolean started;
 	private static final Logger logger = LoggerFactory.getLogger(WalletService.class);

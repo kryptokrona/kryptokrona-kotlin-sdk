@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.kryptokrona.sdk.daemon.DaemonImpl,java.util.List,long,long,java.lang.String,org.kryptokrona.sdk.config.Config)" class="member-name-link">WalletSynchronizerService</a><wbr>(<a href="../daemon/DaemonImpl.html" title="class in org.kryptokrona.sdk.daemon">DaemonImpl</a>&nbsp;daemon,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallet,
  long&nbsp;startTimestamp,
  long&nbsp;startHeight,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,
@@ -140,7 +140,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalletSyncDataHashes()" class="member-name-link">getWalletSyncDataHashes</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initAfterLoad(java.util.List,org.kryptokrona.sdk.daemon.DaemonImpl,org.kryptokrona.sdk.config.Config)" class="member-name-link">initAfterLoad</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallets,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initAfterLoad(java.util.List,org.kryptokrona.sdk.daemon.DaemonImpl,org.kryptokrona.sdk.config.Config)" class="member-name-link">initAfterLoad</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallet,
  <a href="../daemon/DaemonImpl.html" title="class in org.kryptokrona.sdk.daemon">DaemonImpl</a>&nbsp;daemon,
  <a href="../config/Config.html" title="class in org.kryptokrona.sdk.config">Config</a>&nbsp;config)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -183,7 +183,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(org.kryptokrona.sdk.daemon.DaemonImpl,java.util.List,long,long,java.lang.String,org.kryptokrona.sdk.config.Config)">
 <h3>WalletSynchronizerService</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WalletSynchronizerService</span><wbr><span class="parameters">(<a href="../daemon/DaemonImpl.html" title="class in org.kryptokrona.sdk.daemon">DaemonImpl</a>&nbsp;daemon,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallet,
  long&nbsp;startTimestamp,
  long&nbsp;startHeight,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,
@@ -201,7 +201,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="initAfterLoad(java.util.List,org.kryptokrona.sdk.daemon.DaemonImpl,org.kryptokrona.sdk.config.Config)">
 <h3>initAfterLoad</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initAfterLoad</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallets,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initAfterLoad</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/wallet/WalletSub.html" title="class in org.kryptokrona.sdk.model.wallet">WalletSub</a>&gt;&nbsp;subWallet,
  <a href="../daemon/DaemonImpl.html" title="class in org.kryptokrona.sdk.daemon">DaemonImpl</a>&nbsp;daemon,
  <a href="../config/Config.html" title="class in org.kryptokrona.sdk.config">Config</a>&nbsp;config)</span></div>
 </section>

@@ -3,6 +3,8 @@ package org.kryptokrona.sdk.validator;
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.exception.wallet.*
+import org.kryptokrona.sdk.model.util.FeeType
+import org.kryptokrona.sdk.wallet.SubWallet
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -125,6 +127,28 @@ class WalletValidatorTest {
     fun `can not validate destinations when wallet amount is negative`() {
         assertFailsWith<WalletNegativeValueGivenException> {
             walletValidator.validateDestinations(amountWalletDestinationsIsNegative)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate transfer amount and fee when wallet amount is negative`() {
+        val feeType = FeeType()
+        feeType.isFeePerByte = false
+        feeType.isFixedFee = false
+
+        val subWalletsToTakeFrom = listOf(
+            "5fd3e4dc30f0ddaa0abff82d3c0b891216e7b908670dcb8c3fc3896a7a07cd06",
+            "f185315f831f8411bc19f6bbf67689eaaab4a73453c01db3468f3a296bd584ef",
+            "6e072c297356994934c5ca7ca80938e088794591a5ecc16dbdb4e8047cd47007",
+            "f2e1a6ec23c143ff4a959a8ebe2ddb1e02ec0b2634a2fe1bb4c4b8571abcf3dc",
+            "466d5db56c5dbf193f4643988a0e932fdb23996c2a89a81f5a2db4605ed262b0"
+        )
+        val subWallet = SubWallet()
+        val currentHeight = 0L;
+
+        assertFailsWith<WalletFeeTooSmallException> {
+            walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallet, currentHeight)
                 .subscribe { }
         }
     }
