@@ -44,6 +44,14 @@ class WalletValidatorTest {
         "SEKReV7v3hV9BnhNoYNJGkB3WiNvapTAFJEkc3PbDVpMMQrDABbTwi9gJtQyghxs66Xwpj8BDqX4KEis3M4SkRqx3Gfwf4DBEiV" to 0.0,
     )
 
+    private var amountWalletDestinationsIsNegative = mapOf(
+        "SEKReTFuVRPQaiwzPBD1Gx4oyYUNSABLe3eQANxMEYKTbRRgYJNKf1yG5VJpbq4wuY67y2uWwMBcA9Xb9gft8XXoUU2DguV9yzj" to -4.0,
+        "SEKReWU9LE8HLPRAGu2dyMF8jE93xabHv1Yf92YLtqZn7L3evAQ8Sbm3y8KnZf2LGPgP1bwqD9qua3z57q2qgBavjVKTmSeq4oK" to -2.0,
+        "SEKReSywEaajP1hsreeveEhdY48Vu6vZn2uN6dy1tiH96d8gzHT4xzZfNx9xfuhK8kWjfouGYaLg8WXifDHPKMAufLt2dAwbmbH" to -10.0,
+        "SEKReWtkaTbBWT645J5nz83SRzGhUui1qaa6AWYGUBNN9nRxQitMjtWUhSHLiKrkxBCkamZxrMNWvAGKRBBpnMS7bn9Gi5mPfu8" to 5.0,
+        "SEKReV7v3hV9BnhNoYNJGkB3WiNvapTAFJEkc3PbDVpMMQrDABbTwi9gJtQyghxs66Xwpj8BDqX4KEis3M4SkRqx3Gfwf4DBEiV" to 2.0,
+    )
+
     @BeforeEach
     fun setup() {
         walletValidator = WalletValidator()
@@ -93,6 +101,14 @@ class WalletValidatorTest {
     fun `can not validate destinations when wallet amount is 0`() {
         assertFailsWith<WalletAmountIsZeroException> {
             walletValidator.validateDestinations(amountWalletDestinationsIsZero)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not validate destinations when wallet amount is negative`() {
+        assertFailsWith<WalletNegativeValueGivenException> {
+            walletValidator.validateDestinations(amountWalletDestinationsIsNegative)
                 .subscribe { }
         }
     }
