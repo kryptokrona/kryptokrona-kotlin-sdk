@@ -21,8 +21,8 @@ public class WalletValidator {
 	 * @param integratedAddressAllowed Should an integrated address be allowed?
 	 * @return Returns true if the address is valid, otherwise throws exception descripting the error
 	 */
-	public Observable<Boolean> validateAddress(String address, boolean integratedAddressAllowed) {
-		return Observable.empty();
+	public Observable<Boolean> validateAddress(String address, boolean integratedAddressAllowed) throws WalletException {
+		return validateAddresses(List.of(address), integratedAddressAllowed);
 	}
 
 	/**
