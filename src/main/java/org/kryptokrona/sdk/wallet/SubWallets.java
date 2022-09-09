@@ -4,7 +4,10 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.model.util.TxInputAndOwner;
+import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
+import org.kryptokrona.sdk.transaction.TransactionInput;
 
 import java.util.List;
 import java.util.Map;
@@ -71,10 +74,6 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
-	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
-		return Observable.empty();
-	}
-
 	public void initKeyImageMap() {
 
 	}
@@ -91,5 +90,135 @@ public class SubWallets {
 
 	}
 
+	public String getPrivateSpendKey(String publicSpendKey) {
+		return "";
+	}
 
+	public SubWallet getPrimarySubWallet() {
+		return null;
+	}
+
+	public String getPrimaryAddress() {
+		return null;
+	}
+
+	public String getPrimaryPrivateSpendKey() {
+		return null;
+	}
+
+	public List<String> getLockedTransactionHashes() {
+		return null;
+	}
+
+	public void addTransaction(Transaction transaction) {
+
+	}
+
+	public void addUnconfirmedTransaction(Transaction transaction) {
+
+	}
+
+	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) {
+
+	}
+
+	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) {
+
+	}
+
+	public void markInputAsLocked(String publicSpendKey, String keyImage, String transactionHash) {
+
+	}
+
+	public void removeCancelledTransaction(String transactionHash) {
+
+	}
+
+	public void removeForkedTransactions(long forkHeight) {
+
+	}
+
+	public void convertSyncTimestampToHeight(long timestamp, long height) {
+
+	}
+
+	public boolean haveSpendableInput(TransactionInput transactionInput, long height) {
+		return false;
+	}
+
+	public Map<Boolean, String> getKeyImageOwner(String keyImage) {
+		return null;
+	}
+
+	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) {
+		return Observable.empty();
+	}
+
+	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
+		return Observable.empty();
+	}
+
+	public List<String> getAddresses() {
+		return null;
+	}
+
+	public Observable<List<TxInputAndOwner>> getSpendableTransactionInputs(List<String> subWalletsToTakeFrom, long currentHeight) {
+		return Observable.empty();
+	}
+
+	public Observable<Map<List<TxInputAndOwner>, Long>> getFusionTransactionInputs(List<String> subWalletsToTakeFrom, long mixin, long currentHeight) {
+		return Observable.empty();
+	}
+
+	public void storeTxPrivateKey(String txPrivateKey, String txHash) {
+
+	}
+
+	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) {
+
+	}
+
+	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
+		return Observable.empty();
+	}
+
+	public Observable<Long> getNumTransactions(String address, boolean includeFusions) {
+		return Observable.empty();
+	}
+
+	public Observable<List<Transaction>> getUnconfirmedTransactions(String address, boolean includeFusions) {
+		return Observable.empty();
+	}
+
+	public Observable<Long> getNumUnconfirmedTransactions(String address, boolean includeFusions) {
+		return Observable.empty();
+	}
+
+	public Observable<Void> addSubWallet(long scanHeight) {
+		return Observable.empty();
+	}
+
+	public Observable<Void> importSubWallet(String privateSpendKey, long scanHeight) {
+		return Observable.empty();
+	}
+
+	public Observable<Void> importViewSubWallet(String publicSpendKey, long scanHeight) {
+		return Observable.empty();
+	}
+
+	public Observable<Boolean> deleteSubWallet(String address) {
+		return Observable.empty();
+	}
+
+	public long getWalletCount() {
+		return 0;
+	}
+
+	private void deleteAddressTransactions(List<Transaction> transactions, String publicSpendKey) {
+
+	}
+
+	private Observable<List<Transaction>> filterTransactions(List<Transaction> transactions, String address, boolean includeFusions) {
+		return Observable.empty();
+	}
 }
