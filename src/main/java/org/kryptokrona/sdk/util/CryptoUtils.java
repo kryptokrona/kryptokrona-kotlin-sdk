@@ -18,6 +18,11 @@ public class CryptoUtils {
 		return Observable.empty();
 	}
 
+	public static long getLowerBound(long val, long nearestMultiple) {
+		var remainder = val % nearestMultiple;
+		return val - remainder;
+	}
+
 	public static boolean isInputUnlocked(long unlockTime, long currenHeight) {
 		/* Might as well return fast with the case that is true for nearly all
            transactions (excluding coinbase) */
