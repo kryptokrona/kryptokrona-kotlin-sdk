@@ -143,4 +143,10 @@ public class CryptoUtils {
 		return 0.0;
 	}
 
+	public static long estimatedTransactionSize(long mixin, long numInputs, long numOutputs, boolean havePaymentID, long extraDataSize) {
+		return 0;
+	}
+
+
+
 }
