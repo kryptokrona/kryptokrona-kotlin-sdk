@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.util;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
 import org.kryptokrona.sdk.wallet.Address;
 
@@ -134,6 +135,12 @@ public class CryptoUtils {
 		return Observable.empty();
 	}
 
+	public static double getMinimumTransactionFee(long transactionSize, long height) {
+		return getTransactionFee(transactionSize, height, Config.MINIMUM_FEE_PER_BYTE);
+	}
 
+	public static double getTransactionFee(long transactionSize, long height, double feePerByte) {
+		return 0.0;
+	}
 
 }
