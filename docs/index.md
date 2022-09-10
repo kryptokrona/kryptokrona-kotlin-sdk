@@ -5,9 +5,9 @@
 To see in depth SDK documentation press the release number on first column. To see full detail of release notes press the link
 in the second column.
 
-| Release | Notes                                                | Summary                                                                                                                           |
-|---------|:-----------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
-| [1.0.0](1.0.0/index.html)  | [1.0.0 release notes](notes/release_1.0.0_notes.md) | Initial release |
+| Release                   | Notes                                               | Summary                                                                                                                           |
+|---------------------------|:----------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| [0.1.0](0.1.0/index.html) | [0.1.0 release notes](notes/release_0.1.0_notes.md) | Initial release |
 
 
 ## Installation
@@ -17,7 +17,7 @@ in the second column.
 To add the dependency in Gradle, just add the following line inside `dependencies` tag:
 
 ```
-compile 'org.kryptokrona.sdk:kryptokrona-sdk:1.0.0'
+compile 'org.kryptokrona.sdk:kryptokrona-sdk:0.1.0'
 ```
 
 ### Maven
@@ -49,7 +49,7 @@ buildscript {
       }
    }
    dependencies {
-      classpath("org.kryptokrona.sdk:kryptokrona-sdk:1.0.0")
+      classpath("org.kryptokrona.sdk:kryptokrona-sdk:0.1.0")
    }
 }
 ```
