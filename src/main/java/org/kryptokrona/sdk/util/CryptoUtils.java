@@ -111,4 +111,29 @@ public class CryptoUtils {
 	public static String prettyPrintBytes(long bytes) {
 		return null;
 	}
+
+	/**
+	 * Returns whether the given word is in the mnemonic english dictionary. Note that
+	 * just because all the words are valid, does not mean the mnemonic is valid.
+	 *
+	 * Use isValidMnemonic to verify that.
+	 *
+	 * @param word The word to test
+	 */
+	public static boolean isValidMnemonicWord(String word) {
+		return false;
+	}
+
+	/**
+	 * Verifies whether a mnemonic is valid. Returns a boolean, and an error messsage
+	 * describing what is invalid.
+	 *
+	 * @param mnemonic The mnemonic to verify
+	 */
+	public static Observable<Map<Boolean, String>> isValidMnemonic(String mnemonic) {
+		return Observable.empty();
+	}
+
+
+
 }
