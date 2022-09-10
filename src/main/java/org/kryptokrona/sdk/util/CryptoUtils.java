@@ -23,6 +23,10 @@ public class CryptoUtils {
 		return val - remainder;
 	}
 
+	public static long getUpperBound(long val, long nearestMultiple) {
+		return getLowerBound(val, nearestMultiple) + nearestMultiple;
+	}
+
 	public static boolean isInputUnlocked(long unlockTime, long currenHeight) {
 		/* Might as well return fast with the case that is true for nearly all
            transactions (excluding coinbase) */
