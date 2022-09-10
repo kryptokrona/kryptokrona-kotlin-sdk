@@ -28,7 +28,7 @@ To add our dependency to your Maven build tool, add this inside the `<dependenci
 <dependency>
 	<groupId>org.kryptokrona.sdk</groupId>
 	<artifactId>kryptokrona-sdk</artifactId>
-	<version>1.0.0</version>
+	<version>0.1.0</version>
 </dependency>
 ```
 
