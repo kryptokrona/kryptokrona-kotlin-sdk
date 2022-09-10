@@ -101,4 +101,14 @@ public class CryptoUtils {
 		/* Need space for the miner transaction */
 		return Math.min(x, y) - Constants.CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE;
 	}
+
+	/**
+	 * Converts an amount in bytes, say, 10000, into 9.76 KB
+	 *
+	 * @param bytes The amount of bytes to convert
+	 * @return Gets the amount in bytes to human readable format
+	 */
+	public static String prettyPrintBytes(long bytes) {
+		return null;
+	}
 }
