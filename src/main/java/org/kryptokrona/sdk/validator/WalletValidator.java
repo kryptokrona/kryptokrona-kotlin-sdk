@@ -102,8 +102,20 @@ public class WalletValidator {
 	 *
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
-	public Observable<Boolean> validateIntegratedAddresses(List<Map<String, Number>> destinations, String paymentID) {
-		return Observable.empty();
+	public Observable<Boolean> validateIntegratedAddresses(List<Map<String, Number>> destinations, final String paymentID) throws WalletAddressChecksumMismatchException {
+		for (var destination : destinations) {
+			if (destination.keySet().size() != Config.INTEGRATED_ADDRESS_LENGTH) {
+				continue;
+			}
+
+			Address.fromAddress(destination.keySet().toString(), Config.ADDRESS_PREFIX).subscribe(parsedAddress -> {
+				if (paymentID != parsedAddress.getPaymentId()) {
+					throw new WalletConflictingPaymentIdsException();
+				}
+			});
+		}
+
+		return Observable.just(true);
 	}
 
 	/**
