@@ -21,57 +21,57 @@ public class SubWallet {
 
 	/**
 	 * A vector of the stored transaction input data, to be used for
-	 * sending transactions later
+	 * sending transactions later.
 	 */
 	private List<TransactionInput> unspentInputs;
 
 	/**
 	 * Inputs which have been used in a transaction, and are waiting to
-	 * either be put into a block, or return to our wallet
+	 * either be put into a block, or return to our wallet.
 	 */
 	private List<TransactionInput> lockedInputs;
 
 	/**
-	 * Inputs which have been spent in a transaction
+	 * Inputs which have been spent in a transaction.
 	 */
 	private List<TransactionInput> spentInputs;
 
 	/**
 	 * Inputs which have come in from a transaction we sent - either from
 	 * change or from sending to ourself - we use this to display unlocked
-	 * balance correctly
+	 * balance correctly.
 	 */
 	private List<UnconfirmedInput> unconfirmedIncomingAmounts;
 
 	/**
-	 * This subwallet's public spend key
+	 * This subwallet's public spend key.
 	 */
 	private String publicSpendKey;
 
 	/**
-	 * The subwallet's private spend key (undefined if view wallet)
+	 * The subwallet's private spend key (undefined if view wallet).
 	 */
 	private String privateSpendKey;
 
 	/**
 	 * The timestamp to begin syncing the wallet at
-	 * (usually creation time or zero)
+	 * (usually creation time or zero).
 	 */
 	private long syncStartTimestamp;
 
 	/**
-	 * The height to begin syncing the wallet at
+	 * The height to begin syncing the wallet at.
 	 */
 	private long syncStartHeight;
 
 	/**
-	 * This subwallet's public address
+	 * This subwallet's public address.
 	 */
 	private String address;
 
 	/**
 	 * The wallet has one 'main' address which we will use by default
-	 * when treating it as a single user wallet
+	 * when treating it as a single user wallet.
 	 */
 	private boolean isPrimaryAddress;
 

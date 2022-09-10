@@ -137,14 +137,14 @@ public class WalletValidator {
 		}
 
 		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
-				.subscribe(availableBalance -> {
+				.subscribe(summedBalance -> {
 					var totalAmount = 0.0; //TODO: fix this.
 
 					if (feeType.isFixedFee()) {
 						totalAmount += feeType.getFixedFee();
 					}
 
-					for (Double amount : availableBalance.keySet()) {
+					for (Double amount : summedBalance.keySet()) {
 						if (totalAmount > amount) {
 							throw new WalletNotEnoughBalanceException();
 						}

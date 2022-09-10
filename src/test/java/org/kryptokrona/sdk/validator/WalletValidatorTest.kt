@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.exception.wallet.*
 import org.kryptokrona.sdk.model.util.FeeType
-import org.kryptokrona.sdk.wallet.SubWallet
 import org.kryptokrona.sdk.wallet.SubWallets
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue

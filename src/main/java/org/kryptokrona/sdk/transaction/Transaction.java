@@ -9,4 +9,6 @@ public interface Transaction {
 	boolean isFusionTransaction();
 
 	Gson toJson();
+
+	long getUnlockTime();
 }

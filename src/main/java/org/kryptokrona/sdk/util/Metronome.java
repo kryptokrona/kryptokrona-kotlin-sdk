@@ -2,6 +2,11 @@ package org.kryptokrona.sdk.util;
 
 import io.reactivex.rxjava3.core.Observable;
 
+/**
+ * Metronome.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 public class Metronome {
 
 	private long interval;

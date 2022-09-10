@@ -8,7 +8,10 @@ import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
 import org.kryptokrona.sdk.transaction.TransactionInput;
+import org.kryptokrona.sdk.util.CryptoUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -177,6 +180,30 @@ public class SubWallets {
 	 * @return Observable with a map
 	 */
 	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
+		List<String> publicSpendKeys = new ArrayList<String>();
+
+		if (subWalletsToTakeFrom.size() == 0) {
+			publicSpendKeys = this.publicSpendKeys;
+		} else {
+			for (var address : subWalletsToTakeFrom) {
+				CryptoUtils.addressToKeys(address).subscribe(str -> {
+					this.publicSpendKeys.add(str.keySet().toString());
+				});
+			}
+		}
+
+		var unlockedBalance = 0.0;
+		var lockedBalance = 0.0;
+
+		/* For faster lookups in case we have a ton of transactions or
+           sub wallets to take from */
+		// var lookupMap = new HashMap(publicSpendKeys)
+
+		for (var transaction : transactions) {
+			var unlocked = CryptoUtils.isInputUnlocked(transaction.getUnlockTime(), currentHeight);
+
+		}
+
 		return Observable.empty();
 	}
 
