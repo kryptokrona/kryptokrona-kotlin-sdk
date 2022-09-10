@@ -19,8 +19,8 @@ package org.kryptokrona.sdk.crypto;
  * limitations under the License.
  */
 
-import java.util.Arrays;
 import java.math.BigInteger;
+import java.util.Arrays;
 
 /**
  * Base58.java

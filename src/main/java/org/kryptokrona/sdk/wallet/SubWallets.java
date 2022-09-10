@@ -11,7 +11,6 @@ import org.kryptokrona.sdk.transaction.TransactionInput;
 import org.kryptokrona.sdk.util.CryptoUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -201,6 +200,7 @@ public class SubWallets {
 
 		for (var transaction : transactions) {
 			var unlocked = CryptoUtils.isInputUnlocked(transaction.getUnlockTime(), currentHeight);
+			//TODO: finish this implementation
 
 		}
 

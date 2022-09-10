@@ -2,7 +2,6 @@ package org.kryptokrona.sdk.daemon;
 
 import inet.ipaddr.HostName
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.exception.network.NetworkBlockCountException
 import java.net.UnknownHostException
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

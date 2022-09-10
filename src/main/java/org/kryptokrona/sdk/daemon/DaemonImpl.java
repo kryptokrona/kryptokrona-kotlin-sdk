@@ -28,7 +28,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
 import static org.kryptokrona.sdk.config.Config.*;
 
 /**
