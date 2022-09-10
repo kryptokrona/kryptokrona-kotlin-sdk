@@ -47,4 +47,15 @@ public class CryptoUtils {
 			return currenHeight + 1 >= unlockTime;
 		}
 	}
+
+	public static long getMaxTxSize(long currentHeight, long blockTime) {
+		long numerator = currentHeight * Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR;
+		long denominator = (Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR / blockTime);
+		long growth = numerator / denominator;
+		long x = Constants.MAX_BLOCK_SIZE_INITIAL + growth;
+		long y = 125000;
+
+		/* Need space for the miner transaction */
+		return Math.min(x, y) - Constants.CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE;
+	}
 }
