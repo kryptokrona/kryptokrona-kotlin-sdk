@@ -3,7 +3,6 @@ package org.kryptokrona.sdk.util;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
-import org.kryptokrona.sdk.wallet.Address;
 
 import java.time.Instant;
 import java.util.List;
@@ -146,7 +145,4 @@ public class CryptoUtils {
 	public static long estimatedTransactionSize(long mixin, long numInputs, long numOutputs, boolean havePaymentID, long extraDataSize) {
 		return 0;
 	}
-
-
-
 }

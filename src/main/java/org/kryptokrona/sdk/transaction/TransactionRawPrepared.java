@@ -17,4 +17,9 @@ public class TransactionRawPrepared implements Transaction {
 	public Gson toJson() {
 		return null;
 	}
+
+	@Override
+	public long getUnlockTime() {
+		return 0;
+	}
 }
