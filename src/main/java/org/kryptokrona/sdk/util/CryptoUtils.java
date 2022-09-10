@@ -27,6 +27,13 @@ public class CryptoUtils {
 		return getLowerBound(val, nearestMultiple) + nearestMultiple;
 	}
 
+	public static long getCurrentTimestampAdjusted(long blockTargetTime) {
+		var timestamp = Math.floor((double) Instant.now().toEpochMilli() / 1000);
+		var currentTimestampAdjusted = timestamp - (100 * blockTargetTime);
+
+		return (long) currentTimestampAdjusted;
+	}
+
 	public static boolean isInputUnlocked(long unlockTime, long currenHeight) {
 		/* Might as well return fast with the case that is true for nearly all
            transactions (excluding coinbase) */
