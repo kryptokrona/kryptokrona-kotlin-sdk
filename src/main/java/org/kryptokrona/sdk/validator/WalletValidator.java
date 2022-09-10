@@ -108,11 +108,13 @@ public class WalletValidator {
 				continue;
 			}
 
-			Address.fromAddress(destination.keySet().toString(), Config.ADDRESS_PREFIX).subscribe(parsedAddress -> {
-				if (paymentID != parsedAddress.getPaymentId()) {
-					throw new WalletConflictingPaymentIdsException();
-				}
-			});
+			/* Extract the payment ID */
+			Address.fromAddress(destination.keySet().toString(), Config.ADDRESS_PREFIX)
+					.subscribe(parsedAddress -> {
+						if (paymentID != parsedAddress.getPaymentId()) {
+							throw new WalletConflictingPaymentIdsException();
+						}
+					});
 		}
 
 		return Observable.just(true);
@@ -125,8 +127,23 @@ public class WalletValidator {
 	 * @param subWallets List of sub wallets to use in validation
 	 * @return Returns SUCCESS if valid, otherwise a WalletError describing the error
 	 */
-	public Observable<Boolean> validateOurAddresses(List<String> addresses, List<SubWallets> subWallets) {
-		return Observable.empty();
+	public Observable<Boolean> validateOurAddresses(List<String> addresses, SubWallets subWallets) throws WalletException {
+		validateAddresses(addresses, false)
+				.subscribe(validity -> {
+					for (var address : addresses) {
+						Address.fromAddress(address, Config.ADDRESS_PREFIX)
+								.subscribe(parsedAddress -> {
+									var keys = subWallets.getPublicSpendKeys();
+
+									//TODO: below is probably not finished yet
+									if (!keys.contains(parsedAddress.getSpendKeys())) {
+										throw new WalletAddressNotInWalletException();
+									}
+								});
+					}
+				});
+
+		return Observable.just(true);
 	}
 
 	/**
