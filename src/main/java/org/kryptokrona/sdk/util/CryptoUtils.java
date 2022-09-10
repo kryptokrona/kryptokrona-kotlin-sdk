@@ -5,6 +5,7 @@ import org.kryptokrona.sdk.config.Constants;
 import org.kryptokrona.sdk.wallet.Address;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,6 +49,48 @@ public class CryptoUtils {
 		}
 	}
 
+	public static String prettyPrintAmount(double amount) {
+		return null;
+	}
+
+	public Observable<Void> delay(long ms) {
+		return Observable.empty();
+	}
+
+	public static List<Long> splitAmountIntoDenominations(double amount, boolean preventTooLargeOutputs) {
+		return null;
+	}
+
+	/**
+	 * The formula for the block size is as follows. Calculate the
+	 * maxBlockCumulativeSize. This is equal to:
+	 * 100,000 + ((height * 102,400) / 1,051,200)
+	 * At a block height of 400k, this gives us a size of 138,964.
+	 * The constants this calculation arise from can be seen below, or in
+	 * src/CryptoNoteCore/Currency.cpp::maxBlockCumulativeSize(). Call this value
+	 * x.
+	 *
+	 * Next, calculate the median size of the last 100 blocks. Take the max of
+	 * this value, and 100,000. Multiply this value by 1.25. Call this value y.
+	 *
+	 * Finally, return the minimum of x and y.
+	 *
+	 * Or, in short: min(140k (slowly rising), 1.25 * max(100k, median(last 100 blocks size)))
+	 * Block size will always be 125k or greater (Assuming non testnet)
+	 *
+	 * To get the max transaction size, remove 600 from this value, for the
+	 * reserved miner transaction.
+	 *
+	 * We are going to ignore the median(last 100 blocks size), as it is possible
+	 * for a transaction to be valid for inclusion in a block when it is submitted,
+	 * but not when it actually comes to be mined, for example if the median
+	 * block size suddenly decreases. This gives a bit of a lower cap of max
+	 * tx sizes, but prevents anything getting stuck in the pool.
+	 *
+	 * @param currentHeight The current height to use
+	 * @param blockTime The blocktime to use
+	 * @return Gets the max transaction size
+	 */
 	public static long getMaxTxSize(long currentHeight, long blockTime) {
 		long numerator = currentHeight * Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR;
 		long denominator = (Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR / blockTime);
