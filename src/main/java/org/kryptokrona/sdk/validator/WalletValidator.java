@@ -102,15 +102,15 @@ public class WalletValidator {
 	 *
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
-	public Observable<Boolean> validateIntegratedAddresses(List<Map<String, Number>> destinations, final String paymentID)
+	public Observable<Boolean> validateIntegratedAddresses(Map<String, Number> destinations, final String paymentID)
 			throws WalletAddressChecksumMismatchException {
-		for (var destination : destinations) {
-			if (destination.keySet().size() != Config.INTEGRATED_ADDRESS_LENGTH) {
+		for (var destination : destinations.keySet()) {
+			if (destination.length() != Config.INTEGRATED_ADDRESS_LENGTH) {
 				continue;
 			}
 
 			/* Extract the payment ID */
-			Address.fromAddress(destination.keySet().toString(), Config.ADDRESS_PREFIX)
+			Address.fromAddress(destination, Config.ADDRESS_PREFIX)
 					.subscribe(parsedAddress -> {
 						if (!Objects.equals(paymentID, parsedAddress.getPaymentId())) {
 							throw new WalletConflictingPaymentIdsException();

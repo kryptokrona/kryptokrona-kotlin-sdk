@@ -131,6 +131,13 @@ class WalletValidatorTest {
         }
     }
 
+    // validate integrated addresses here
+    @Test
+    fun `can not validate integrated addresses when it's empty`() {
+
+    }
+
+
     @Test
     fun `can not validate transfer amount and fee when wallet amount is negative`() {
         val feeType = FeeType()
