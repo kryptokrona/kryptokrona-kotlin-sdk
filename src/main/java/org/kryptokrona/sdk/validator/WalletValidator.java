@@ -102,7 +102,7 @@ public class WalletValidator {
 	 *
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
-	public Observable<Boolean> validateIntegratedAddresses(Map<String, Number> destinations, final String paymentID)
+	public Observable<Boolean> validateIntegratedAddresses(Map<String, Double> destinations, final String paymentID)
 			throws WalletAddressChecksumMismatchException {
 		for (var destination : destinations.keySet()) {
 			if (destination.length() != Config.INTEGRATED_ADDRESS_LENGTH) {

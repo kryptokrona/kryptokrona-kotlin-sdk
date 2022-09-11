@@ -131,10 +131,24 @@ class WalletValidatorTest {
         }
     }
 
-    // validate integrated addresses here
     @Test
-    fun `can not validate integrated addresses when it's empty`() {
+    fun `can validate integrated addresses`() {
+        walletValidator.validateIntegratedAddresses(
+            correctAmountWalletDestinations,
+            "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03")
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
+    }
 
+    @Test
+    fun `can not validate integrated addresses when conflicting payment ids`() {
+        assertFailsWith<WalletConflictingPaymentIdsException> {
+            walletValidator.validateIntegratedAddresses(
+                correctAmountWalletDestinations,
+                "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03")
+                .subscribe { }
+        }
     }
 
 
