@@ -210,8 +210,18 @@ public class SubWallets {
 		subWallet.markInputAsSpent(keyImage, spendHeight);
 	}
 
-	public void markInputAsLocked(String publicSpendKey, String keyImage, String transactionHash) {
+	public void markInputAsLocked(String publicSpendKey, String keyImage, String transactionHash) throws WalletSubNotFoundException {
+		var subWallet = subWallets.values()
+				.stream()
+				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
 
+		if (subWallet == null) {
+			throw new WalletSubNotFoundException();
+		}
+
+		subWallet.markInputAsLocked(keyImage, transactionHash);
 	}
 
 	public void removeCancelledTransaction(String transactionHash) {
