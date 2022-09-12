@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * SubWallets.java
@@ -240,8 +242,26 @@ public class SubWallets {
 		}
 	}
 
+	/**
+	 * Remove transactions which occured in a forked block. If they got added
+	 * in another block, we'll add them back again then.
+	 *
+	 * @param forkHeight Remove transactions on a specific fork block
+	 */
 	public void removeForkedTransactions(long forkHeight) {
+		transactions.removeIf(t -> t.getBlockHeight() >= forkHeight);
 
+		var keyImagesToRemove = new ArrayList<String>();
+
+		for (var subWallet : subWallets.values()) {
+			keyImagesToRemove.addAll(subWallet.removeForkedTransactions(forkHeight));
+		}
+
+		if (!isViewWallet) {
+			for (var keyImage : keyImagesToRemove) {
+				keyImageOwners.keySet().removeIf(ki -> ki.equals(keyImage));
+			}
+		}
 	}
 
 	public void convertSyncTimestampToHeight(long timestamp, long height) {

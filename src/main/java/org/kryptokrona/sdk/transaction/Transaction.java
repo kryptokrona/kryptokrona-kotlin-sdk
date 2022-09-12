@@ -13,4 +13,6 @@ public interface Transaction {
 	long getUnlockTime();
 
 	String getHash();
+
+	long getBlockHeight();
 }
