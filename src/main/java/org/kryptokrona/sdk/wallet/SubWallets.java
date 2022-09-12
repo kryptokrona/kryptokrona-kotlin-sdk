@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
+import org.kryptokrona.sdk.exception.wallet.WalletSubNotFoundException;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
@@ -42,7 +43,7 @@ public class SubWallets {
 	/**
 	 * Mapping of public spend key to sub wallet.
 	 */
-	private Map<String, SubWallets> subWallets;
+	private Map<String, SubWallet> subWallets;
 
 	/**
 	 * Our transactions.
@@ -167,8 +168,24 @@ public class SubWallets {
 	 * @param publicSpendKey The public spend key of the sub wallet to add this input to
 	 * @param transactionInput The transaction input to store
 	 */
-	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) {
+	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) throws WalletSubNotFoundException {
+		var subWallet = subWallets.values()
+				.stream()
+				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
 
+		if (subWallet == null) {
+			throw new WalletSubNotFoundException();
+		}
+
+		logger.trace("Input key image " + transactionInput.getKeyImage());
+
+		if (!isViewWallet) {
+			keyImageOwners.put(transactionInput.getKeyImage(), publicSpendKey);
+		}
+
+		subWallet.storeTransactionInput(transactionInput, isViewWallet);
 	}
 
 	/**

@@ -101,10 +101,6 @@ public class SubWallet {
 
 	}
 
-	public void storeTransactionInput(TransactionInput transactionInput, boolean isViewWallet) {
-
-	}
-
 	public void markInputAsSpent(String keyImage, long spendHeight) {
 
 	}
@@ -147,6 +143,10 @@ public class SubWallet {
 
 	public List<TxInputAndOwner> getSpendableInputs(long currentHeight) {
 		return null;
+	}
+
+	public void storeTransactionInput(TransactionInput transactionInput, boolean visViewWallet) {
+
 	}
 
 	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput) {
