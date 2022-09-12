@@ -481,8 +481,25 @@ public class SubWallets {
 		transactionPrivateKeys.put(txHash, txPrivateKey);
 	}
 
-	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) {
+	/**
+	 * Store an unconfirmed incoming amount, so we can correctly display locked
+	 * balances.
+	 *
+	 * @param unconfirmedInput The unconfirmed input object to store
+	 * @param publicSpendKey The public spend key to use to store
+	 */
+	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) throws WalletSubNotFoundException {
+		var subWallet = subWallets.values()
+				.stream()
+				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
 
+		if (subWallet == null) {
+			throw new WalletSubNotFoundException();
+		}
+
+		subWallet.storeUnconfirmedIncomingInput(unconfirmedInput);
 	}
 
 	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
