@@ -264,8 +264,18 @@ public class SubWallets {
 		}
 	}
 
+	/**
+	 * Convert a timestamp to a block height. Block heights are more dependable
+	 * than timestamps, which sometimes get treated a little funkily by the
+	 * daemon.
+	 *
+	 * @param timestamp The timestamp to convert
+	 * @param height The block height to use
+	 */
 	public void convertSyncTimestampToHeight(long timestamp, long height) {
-
+		for (var subWallet : subWallets.values()) {
+			subWallet.convertSyncTimestampToHeight(timestamp, height);
+		}
 	}
 
 	public boolean haveSpendableInput(TransactionInput transactionInput, long height) {
