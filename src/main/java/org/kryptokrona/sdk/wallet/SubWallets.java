@@ -502,8 +502,15 @@ public class SubWallets {
 		subWallet.storeUnconfirmedIncomingInput(unconfirmedInput);
 	}
 
+	/**
+	 * Get the transactions of the given sub wallet address. If no sub wallet address is given,
+	 * gets all transactions.
+	 *
+	 * @param address The sub wallet address to get the transaction
+	 * @param includeFusions Use include fusions
+	 */
 	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
-		return Observable.empty();
+		return Observable.just(filterTransactions(transactions, address, includeFusions));
 	}
 
 	public Observable<Long> getNumTransactions(String address, boolean includeFusions) {
