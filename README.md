@@ -25,8 +25,8 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 
 | NAME     | RELEASE DATE | VERSION | MAINTAINER         | EOL     | DESCRIPTION              |
 |----------|--------------|---------|--------------------|---------|--------------------------|
-| Morpheus | Not set      | 0.2.0   | Marcus Cvjeticanin | Not set | To be done.              |
-| Morpheus | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done.              |
+| Mjölnir | Not set      | 0.2.0   | Marcus Cvjeticanin | Not set | To be done.              |
+| Mjölnir | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done.              |
 
 ## Contributors
 
