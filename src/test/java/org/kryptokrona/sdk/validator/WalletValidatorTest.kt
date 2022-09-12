@@ -62,6 +62,14 @@ class WalletValidatorTest {
         "SEKReV7v3hV9BnhNoYNJGkB3WiNvapTAFJEkc3PbDVpMMQrDABbTwi9gJtQyghxs66Xwpj8BDqX4KEis3M4SkRqx3Gfwf4DBEiV" to 2.0,
     )
 
+    private val subWalletsToTakeFrom = listOf(
+        "5fd3e4dc30f0ddaa0abff82d3c0b891216e7b908670dcb8c3fc3896a7a07cd06",
+        "f185315f831f8411bc19f6bbf67689eaaab4a73453c01db3468f3a296bd584ef",
+        "6e072c297356994934c5ca7ca80938e088794591a5ecc16dbdb4e8047cd47007",
+        "f2e1a6ec23c143ff4a959a8ebe2ddb1e02ec0b2634a2fe1bb4c4b8571abcf3dc",
+        "466d5db56c5dbf193f4643988a0e932fdb23996c2a89a81f5a2db4605ed262b0"
+    )
+
     @BeforeEach
     fun setup() {
         walletValidator = WalletValidator()
@@ -143,6 +151,7 @@ class WalletValidatorTest {
 
     @Test
     fun `can not validate integrated addresses when conflicting payment ids`() {
+        //TODO: need to implement Address method fromAddress first before this will pass
         assertFailsWith<WalletConflictingPaymentIdsException> {
             walletValidator.validateIntegratedAddresses(
                 correctAmountWalletDestinations,
@@ -151,6 +160,16 @@ class WalletValidatorTest {
         }
     }
 
+    @Test
+    fun `can validate transfer amount and fee`() {
+        val feeType = FeeType.minimumFee()
+
+        val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
+        val currentHeight = 0L;
+
+        walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
+            .subscribe { }
+    }
 
     @Test
     fun `can not validate transfer amount and fee when wallet amount is negative`() {
@@ -158,13 +177,6 @@ class WalletValidatorTest {
         feeType.isFeePerByte = false
         feeType.isFixedFee = false
 
-        val subWalletsToTakeFrom = listOf(
-            "5fd3e4dc30f0ddaa0abff82d3c0b891216e7b908670dcb8c3fc3896a7a07cd06",
-            "f185315f831f8411bc19f6bbf67689eaaab4a73453c01db3468f3a296bd584ef",
-            "6e072c297356994934c5ca7ca80938e088794591a5ecc16dbdb4e8047cd47007",
-            "f2e1a6ec23c143ff4a959a8ebe2ddb1e02ec0b2634a2fe1bb4c4b8571abcf3dc",
-            "466d5db56c5dbf193f4643988a0e932fdb23996c2a89a81f5a2db4605ed262b0"
-        )
         val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
         val currentHeight = 0L;
 

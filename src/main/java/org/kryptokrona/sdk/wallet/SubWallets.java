@@ -4,11 +4,14 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
 import org.kryptokrona.sdk.transaction.TransactionInput;
 import org.kryptokrona.sdk.util.CryptoUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,8 @@ public class SubWallets {
 	 */
 	private Map<String, String> keyImageOwners;
 
+	private static final Logger logger = LoggerFactory.getLogger(SubWallets.class);
+
 	public SubWallets(boolean isViewWallet, List<String> publicSpendKeys, String privateViewKey) {
 		this.isViewWallet = isViewWallet;
 		this.publicSpendKeys = publicSpendKeys;
@@ -112,8 +117,25 @@ public class SubWallets {
 		return null;
 	}
 
+	/**
+	 * Add this transaction to the container. If the transaction was previously
+	 * sent by us, remove it from the locked container
+	 *
+	 * @param transaction The transaction to be added
+	 */
 	public void addTransaction(Transaction transaction) {
+		/* Remove this transaction from the locked data structure, if we had
+           added it previously as an outgoing tx */
+		transactions.removeIf(t -> t.getHash().equals(transaction.getHash()));
 
+		// check if transaction is already in list of transactions
+		var transactionInTransaction = transactions.stream().filter(t -> t.getHash().equals(transaction.getHash())).findAny();
+
+		if (transactionInTransaction.isPresent()) {
+			logger.debug("Already seen transaction " + transaction.getHash() + ", ignoring.");
+		}
+
+		transactions.add(transaction);
 	}
 
 	public void addUnconfirmedTransaction(Transaction transaction) {
@@ -179,7 +201,7 @@ public class SubWallets {
 	 * @return Observable with a map
 	 */
 	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
-		List<String> publicSpendKeys = new ArrayList<String>();
+		List<String> publicSpendKeys = new ArrayList<>();
 
 		if (subWalletsToTakeFrom.size() == 0) {
 			publicSpendKeys = this.publicSpendKeys;

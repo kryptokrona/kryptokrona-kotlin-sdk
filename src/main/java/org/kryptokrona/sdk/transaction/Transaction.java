@@ -11,4 +11,6 @@ public interface Transaction {
 	Gson toJson();
 
 	long getUnlockTime();
+
+	String getHash();
 }

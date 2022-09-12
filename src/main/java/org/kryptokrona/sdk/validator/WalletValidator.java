@@ -155,7 +155,7 @@ public class WalletValidator {
 	 * @return Returns true if valid, otherwise an exception describing the error
 	 */
 	public Observable<Boolean> validateAmount(
-			Map<String, Number> destinations,
+			Map<String, Double> destinations,
 			FeeType feeType,
 			List<String> subWalletsToTakeFrom,
 			SubWallets subWallets,
@@ -167,7 +167,8 @@ public class WalletValidator {
 
 		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
 				.subscribe(summedBalance -> {
-					var totalAmount = 0.0; //TODO: fix this.
+					// gets the sum of all map values of destinations
+					var totalAmount = destinations.values().stream().mapToDouble(Double::doubleValue).sum();
 
 					if (feeType.isFixedFee()) {
 						totalAmount += feeType.getFixedFee();
