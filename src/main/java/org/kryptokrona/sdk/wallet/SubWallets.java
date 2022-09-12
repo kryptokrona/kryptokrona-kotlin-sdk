@@ -196,8 +196,18 @@ public class SubWallets {
 	 * @param keyImage The key image to use
 	 * @param spendHeight The height the input was spent at
 	 */
-	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) {
+	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) throws WalletSubNotFoundException {
+		var subWallet = subWallets.values()
+				.stream()
+				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
 
+		if (subWallet == null) {
+			throw new WalletSubNotFoundException();
+		}
+
+		subWallet.markInputAsSpent(keyImage, spendHeight);
 	}
 
 	public void markInputAsLocked(String publicSpendKey, String keyImage, String transactionHash) {
