@@ -279,6 +279,12 @@ public class SubWallets {
 	}
 
 	public boolean haveSpendableInput(TransactionInput transactionInput, long height) {
+		for (var subWallet : subWallets.values()) {
+			if (subWallet.haveSpendableInput(transactionInput, height)) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
