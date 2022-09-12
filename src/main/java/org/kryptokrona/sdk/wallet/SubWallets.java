@@ -540,7 +540,17 @@ public class SubWallets {
 		return filterTransactions(lockedTransactions, address, includeFusions);
 	}
 
+	/**
+	 * Get the number of unconfirmed transactions for the given subWallet, if no subWallet is given,
+	 * gets the total number of unconfirmed transactions in the wallet container. Can be used
+	 * if you want to avoid fetching every transactions repeatedly when nothing
+	 * has changed.
+	 *
+	 * @param address The sub wallet address to use
+	 * @param includeFusions If we include fusions
+	 */
 	public Observable<Long> getNumUnconfirmedTransactions(String address, boolean includeFusions) {
+//		return Observable.just(getUnconfirmedTransactions(address, includeFusions));
 		return Observable.empty();
 	}
 
