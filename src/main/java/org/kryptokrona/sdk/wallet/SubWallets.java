@@ -224,8 +224,20 @@ public class SubWallets {
 		subWallet.markInputAsLocked(keyImage, transactionHash);
 	}
 
+	/**
+	 * Remove a transaction that we sent by didn't get included in a block and
+	 * returned to us. Removes the correspoding inputs, too.
+	 *
+	 * @param transactionHash The transaction hash of the transaction to remove
+	 */
 	public void removeCancelledTransaction(String transactionHash) {
+		// remove the transaction if it was locked
+		lockedTransactions.removeIf(t -> t.getHash().equals(transactionHash));
 
+		// remove the corresponding inputs
+		for (var subWallet : subWallets.values()) {
+			subWallet.removeCancelledTransaction(transactionHash);
+		}
 	}
 
 	public void removeForkedTransactions(long forkHeight) {
