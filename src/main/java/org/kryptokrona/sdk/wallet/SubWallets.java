@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -288,8 +289,32 @@ public class SubWallets {
 		return false;
 	}
 
+	/**
+	 * Get the owner (i.e., the public spend key of the sub wallet) of this
+	 * keyImage.
+	 *
+	 * @param keyImage The keyimage to use
+	 * @return Returns a map of boolean and publicSpendKey if found, if not an empty map
+	 */
 	public Map<Boolean, String> getKeyImageOwner(String keyImage) {
-		return null;
+		var ownerMap = new HashMap<Boolean, String>();
+
+		if (isViewWallet) {
+			return ownerMap;
+		}
+
+		var owner = keyImageOwners.values()
+				.stream()
+				.filter(ki -> ki.equals(keyImage))
+				.findFirst()
+				.orElse(null);
+
+		if (owner != null) {
+			ownerMap.put(true, owner);
+			return ownerMap;
+		}
+
+		return ownerMap;
 	}
 
 	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) {
