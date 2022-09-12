@@ -124,12 +124,16 @@ public class SubWallets {
 	 * @param transaction The transaction to be added
 	 */
 	public void addTransaction(Transaction transaction) {
+		logger.trace("Transaction " + transaction.getHash());
+
 		/* Remove this transaction from the locked data structure, if we had
            added it previously as an outgoing tx */
-		transactions.removeIf(t -> t.getHash().equals(transaction.getHash()));
+		lockedTransactions.removeIf(t -> t.getHash().equals(transaction.getHash()));
 
 		// check if transaction is already in list of transactions
-		var transactionInTransaction = transactions.stream().filter(t -> t.getHash().equals(transaction.getHash())).findAny();
+		var transactionInTransaction = transactions.stream()
+				.filter(t -> t.getHash().equals(transaction.getHash()))
+				.findAny();
 
 		if (transactionInTransaction.isPresent()) {
 			logger.debug("Already seen transaction " + transaction.getHash() + ", ignoring.");
@@ -138,8 +142,23 @@ public class SubWallets {
 		transactions.add(transaction);
 	}
 
+	/**
+	 * Adds a transaction we sent to the locked transactions container
+	 *
+	 * @param transaction The transaction to be added
+	 */
 	public void addUnconfirmedTransaction(Transaction transaction) {
+		logger.trace("Unconfirmed transaction " + transaction.getHash());
 
+		var transactionInLockedTransaction = lockedTransactions.stream()
+				.filter(t -> t.getHash().equals(transaction.getHash()))
+				.findAny();
+
+		if (transactionInLockedTransaction.isPresent()) {
+			logger.debug("Already seen unconfirmed transaction " + transaction.getHash() + ", ignoring.");
+		}
+
+		lockedTransactions.add(transaction);
 	}
 
 	/**
