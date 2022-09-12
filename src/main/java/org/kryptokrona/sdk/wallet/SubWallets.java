@@ -317,8 +317,32 @@ public class SubWallets {
 		return ownerMap;
 	}
 
-	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) {
-		return Observable.empty();
+	/**
+	 * Generate the key image for an input.
+	 *
+	 * @param publicSpendKey The public spend key to use
+	 * @param derivation The derivation value
+	 * @param outputIndex The output index value
+	 */
+	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) throws WalletSubNotFoundException {
+		var subWallet = subWallets.values()
+				.stream()
+				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
+
+		if (subWallet == null) {
+			throw new WalletSubNotFoundException();
+		}
+
+		if (isViewWallet) {
+			var nullKey = "";
+			var map = new HashMap<String, String>();
+			map.put(nullKey, nullKey);
+			return Observable.just(map);
+		}
+
+		return subWallet.getTxInputKeyImage(derivation, outputIndex);
 	}
 
 	/**
