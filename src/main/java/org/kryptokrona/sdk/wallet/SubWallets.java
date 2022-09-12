@@ -471,8 +471,14 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
+	/**
+	 * Store the private key for a given transaction.
+	 *
+	 * @param txPrivateKey The private transaction key to store
+	 * @param txHash The transaction hash to store
+	 */
 	public void storeTxPrivateKey(String txPrivateKey, String txHash) {
-
+		transactionPrivateKeys.put(txHash, txPrivateKey);
 	}
 
 	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) {
