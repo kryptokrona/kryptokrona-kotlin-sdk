@@ -507,13 +507,25 @@ public class SubWallets {
 	 * gets all transactions.
 	 *
 	 * @param address The sub wallet address to get the transaction
-	 * @param includeFusions Use include fusions
+	 * @param includeFusions If we include fusions
 	 */
 	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
 		return Observable.just(filterTransactions(transactions, address, includeFusions));
 	}
 
+	/**
+	 * Get the number of transactions for the given subWallet, if no subWallet is given,
+	 * gets the total number of transactions in the wallet container. Can be used
+	 * if you want to avoid fetching every transactions repeatedly when nothing
+	 * has changed.
+	 *
+	 * @param address The sub wallet address to use
+	 * @param includeFusions If we include fusions
+	 */
 	public Observable<Long> getNumTransactions(String address, boolean includeFusions) {
+		/*var numberOfTransactions = getTransactions(address, includeFusions)
+				.subscribe(List::size);
+		return Observable.(numberOfTransactions);*/
 		return Observable.empty();
 	}
 
