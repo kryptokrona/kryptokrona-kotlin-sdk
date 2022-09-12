@@ -510,7 +510,7 @@ public class SubWallets {
 	 * @param includeFusions If we include fusions
 	 */
 	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
-		return Observable.just(filterTransactions(transactions, address, includeFusions));
+		return filterTransactions(transactions, address, includeFusions);
 	}
 
 	/**
@@ -529,8 +529,15 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
+	/**
+	 * Get the unconfirmed transactions of the given subwallet address. If no subwallet address
+	 * is given, gets all unconfirmed transactions.
+	 *
+	 * @param address The sub wallet address to use
+	 * @param includeFusions If we include fusions
+	 */
 	public Observable<List<Transaction>> getUnconfirmedTransactions(String address, boolean includeFusions) {
-		return Observable.empty();
+		return filterTransactions(lockedTransactions, address, includeFusions);
 	}
 
 	public Observable<Long> getNumUnconfirmedTransactions(String address, boolean includeFusions) {
