@@ -14,10 +14,8 @@ import org.kryptokrona.sdk.util.CryptoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -395,8 +393,78 @@ public class SubWallets {
 		return addresses;
 	}
 
+	/**
+	 * Get input sufficient to spend the amount passed in, from the given
+	 * sub wallets, along with the keys for that inputs owner.
+	 *
+	 * Throws if the sub wallets don't exist, or not enough money is found.
+	 *
+	 * @param subWalletsToTakeFrom The sub wallets to use
+	 * @param currentHeight The current height to use
+	 * @return Returns the inputs and their owners, and the sum of their money
+	 */
 	public Observable<List<TxInputAndOwner>> getSpendableTransactionInputs(List<String> subWalletsToTakeFrom, long currentHeight) {
-		return Observable.empty();
+		var availableInputs = new ArrayList<TxInputAndOwner>();
+
+		// loop through each sub wallet that we can take from
+		for (var address : subWalletsToTakeFrom) {
+			CryptoUtils.addressToKeys(address)
+					.subscribe(publicSpendKeys -> {
+						var key = publicSpendKeys.values()
+								.stream()
+								.findFirst()
+								.orElse(null);
+
+						var subWallet = subWallets.values()
+								.stream()
+								.filter(sw -> sw.getPublicSpendKey().equals(key))
+								.findFirst()
+								.orElse(null);
+
+						if (subWallet == null) {
+							throw new WalletSubNotFoundException();
+						}
+
+						// fetch the spendable inputs
+						availableInputs.addAll(subWallet.getSpendableInputs(currentHeight));
+					});
+		}
+
+		// sorting by amount
+		availableInputs.sort(Comparator.comparing(ai -> ai.getInput().getAmount()));
+
+		/* push into base 10 buckets. Smallest amount buckets will come first, and
+		 * largest amounts within those buckets come first */
+		var buckets = new HashMap<Double, List<TxInputAndOwner>>();
+
+		for (var input : availableInputs) {
+			/* find out how many digits the amount has, i.e. 1337 has 4 digits,
+               420 has 3 digits */
+			var numberOfDigits = Math.floor(Math.log10(input.getInput().getAmount()) + 1);
+
+			// grab existing array or make a new one
+			var bucketTmpArr = buckets.values();
+			var tmpArr = new ArrayList(bucketTmpArr);
+
+			// add input to array
+			tmpArr.add(input);
+
+			// Update bucket with new array
+			buckets.put(numberOfDigits, tmpArr);
+		}
+
+		// sorting the buckets we want first in the resulting map, first. */
+		// Collections.sort(buckets.values());
+		//TODO: fix this later
+
+		var orderedList = new ArrayList<TxInputAndOwner>();
+
+		//TODO: implement while loop
+		/*while (buckets.size() > 0) {
+
+		}*/
+
+		return Observable.just(orderedList);
 	}
 
 	public Observable<Map<List<TxInputAndOwner>, Long>> getFusionTransactionInputs(List<String> subWalletsToTakeFrom, long mixin, long currentHeight) {
