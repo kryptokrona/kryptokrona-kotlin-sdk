@@ -382,8 +382,17 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
+	/**
+	 * Gets all addresses contained in this SubWallets container.
+	 */
 	public List<String> getAddresses() {
-		return null;
+		var addresses = new ArrayList<String>();
+
+		for (var subWallet : subWallets.values()) {
+			addresses.add(subWallet.getAddress());
+		}
+
+		return addresses;
 	}
 
 	public Observable<List<TxInputAndOwner>> getSpendableTransactionInputs(List<String> subWalletsToTakeFrom, long currentHeight) {
