@@ -96,8 +96,20 @@ public class SubWallets {
 
 	}
 
-	public String getPrivateSpendKey(String publicSpendKey) {
-		return "";
+	/**
+	 * Get the private spend key for the given public spend key, if it exists.
+	 *
+	 * @param publicSpendKey The public spend key
+	 * @return Gets the private spend key
+	 */
+	public String getPrivateSpendKey(String publicSpendKey) throws WalletAddressNotInWalletException {
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
+
+		if (subWallet == null) {
+			throw new WalletAddressNotInWalletException();
+		}
+
+		return subWallet.getSpendKeys().getPrivateKey();
 	}
 
 	public SubWallet getPrimarySubWallet() {
