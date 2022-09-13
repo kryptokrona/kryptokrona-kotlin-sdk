@@ -1,9 +1,17 @@
 package org.kryptokrona.sdk.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +22,14 @@ import java.util.Map;
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 public class CryptoUtils {
+
+	private static Gson gson;
+
+	private List<String> words;
+
+	private static final String jsonFileName = "wordlist.json";
+
+	private static final Type collectionType = new TypeToken<List<String>>(){}.getType();
 
 	public static Observable<Map<String, String>> addressToKeys(String address) {
 		return Observable.empty();
@@ -121,6 +137,23 @@ public class CryptoUtils {
 	 * @param word The word to test
 	 */
 	public static boolean isValidMnemonicWord(String word) {
+		try {
+			var reader = new JsonReader(new FileReader(jsonFileName));
+			JsonElement wordsData = gson.fromJson(reader , collectionType);
+			var jsonStr = wordsData.getAsJsonObject().getAsJsonArray("words");
+
+			if (jsonStr != null) {
+
+			}
+
+			reader.close();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			System.out.println("IO");
+			throw new RuntimeException(e);
+		}
+
 		return false;
 	}
 
