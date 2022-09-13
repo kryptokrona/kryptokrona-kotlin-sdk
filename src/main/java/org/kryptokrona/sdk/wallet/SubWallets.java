@@ -94,7 +94,8 @@ public class SubWallets {
 	}
 
 	public void rewind(long scanHeight) {
-
+		lockedTransactions = new ArrayList<>();
+		removeForkedTransactions(scanHeight);
 	}
 
 	/**
