@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
-import org.kryptokrona.sdk.exception.wallet.WalletIllegalViewWalletOperationException;
-import org.kryptokrona.sdk.exception.wallet.WalletSubNotFoundException;
-import org.kryptokrona.sdk.exception.wallet.WalletSubWalletAlreadyExistsException;
+import org.kryptokrona.sdk.exception.wallet.*;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
@@ -582,7 +580,15 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
-	public Observable<Void> importSubWallet(String privateSpendKey, long scanHeight) {
+	public Observable<Void> importSubWallet(String privateSpendKey, long scanHeight) throws WalletIllegalViewWalletOperationException {
+		if (isViewWallet) {
+			// it makes no sense to add a random sub wallet to a view wallet so we throw exception
+			throw new WalletIllegalViewWalletOperationException();
+		}
+
+		// TODO: need to implement cryptonote from c/cpp library first to implement this method
+		// var publicSpendKey = CryptoUtils.pri
+
 		return Observable.empty();
 	}
 
@@ -591,11 +597,28 @@ public class SubWallets {
 	}
 
 	public Observable<Boolean> deleteSubWallet(String address) {
+		/*CryptoUtils.addressToKeys(address)
+				.subscribe(publicSpendKeys -> {
+					var subWallet = null;
+
+					if (subWallet == null) {
+						throw new WalletAddressNotInWalletException();
+					}
+
+					if (subWallet.isPrimaryAddress()) {
+						throw new WalletCannotDeletePrimaryAddressException();
+					}
+
+					subWallets.remove(publicSpendKey);
+
+					deleteAddressTransactions(transactions, publicSpendKey);
+					deleteAddressTransactions(lockedTransactions, publicSpendKey);
+				});*/
 		return Observable.empty();
 	}
 
 	public long getWalletCount() {
-		return 0;
+		return subWallets.size();
 	}
 
 	private void deleteAddressTransactions(List<Transaction> transactions, String publicSpendKey) {
