@@ -16,7 +16,9 @@ import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 public class TxInputAndOwner {
 
 	private TransactionInputImpl input;
+
 	private String privateSpendKey;
+
 	private String publicSpendKey;
 
 	public TxInputAndOwner(TransactionInputImpl input, String privateSpendKey, String publicSpendKey) {

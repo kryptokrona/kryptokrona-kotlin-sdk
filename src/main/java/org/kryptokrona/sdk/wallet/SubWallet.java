@@ -3,12 +3,11 @@ package org.kryptokrona.sdk.wallet;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.Setter;
+import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.TransactionInput;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,14 +45,9 @@ public class SubWallet {
 	private List<UnconfirmedInput> unconfirmedIncomingAmounts;
 
 	/**
-	 * This subwallet's public spend key.
+	 * This subwallet's public and private spend key.
 	 */
-	private String publicSpendKey;
-
-	/**
-	 * The subwallet's private spend key (undefined if view wallet).
-	 */
-	private String privateSpendKey;
+	private KeyPair spendKeys;
 
 	/**
 	 * The timestamp to begin syncing the wallet at
@@ -80,15 +74,14 @@ public class SubWallet {
 	public SubWallet(
 			List<TransactionInput> unspentInputs, List<TransactionInput> lockedInputs,
 			List<TransactionInput> spentInputs, List<UnconfirmedInput> unconfirmedIncomingAmounts,
-			String publicSpendKey, String privateSpendKey, long syncStartTimestamp,
+			KeyPair spendKeys, long syncStartTimestamp,
 			long syncStartHeight, String address, boolean isPrimaryAddress
 	) {
 		this.unspentInputs = unspentInputs;
 		this.lockedInputs = lockedInputs;
 		this.spentInputs = spentInputs;
 		this.unconfirmedIncomingAmounts = unconfirmedIncomingAmounts;
-		this.publicSpendKey = publicSpendKey;
-		this.privateSpendKey = privateSpendKey;
+		this.spendKeys = spendKeys;
 		this.syncStartTimestamp = syncStartTimestamp;
 		this.syncStartHeight = syncStartHeight;
 		this.address = address;

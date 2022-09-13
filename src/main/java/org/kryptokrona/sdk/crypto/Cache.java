@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.crypto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,14 +11,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class Cache {
 
 	private String addressPrefix;
 
 	private String address;
-
-	public Cache() {
-		this.addressPrefix = "";
-		this.address = "";
-	}
 }
