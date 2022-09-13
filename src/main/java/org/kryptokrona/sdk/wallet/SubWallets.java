@@ -86,7 +86,11 @@ public class SubWallets {
 	}
 
 	public void pruneSpentInputs(long pruneHeight) {
-
+		for (var subWallet : subWallets.values()) {
+			for (var keyImage : subWallet.getKeyImages()) {
+				keyImageOwners.put(keyImage, subWallet.getSpendKeys().getPublicKey());
+			}
+		}
 	}
 
 	public void reset(long scanHeight, long scanTimestamp) {
