@@ -82,14 +82,16 @@ public class SubWallets {
 	}
 
 	public void initKeyImageMap() {
-
-	}
-
-	public void pruneSpentInputs(long pruneHeight) {
 		for (var subWallet : subWallets.values()) {
 			for (var keyImage : subWallet.getKeyImages()) {
 				keyImageOwners.put(keyImage, subWallet.getSpendKeys().getPublicKey());
 			}
+		}
+	}
+
+	public void pruneSpentInputs(long pruneHeight) {
+		for (var subWallet : subWallets.values()) {
+			subWallet.pruneSpentInputs(pruneHeight);
 		}
 	}
 
