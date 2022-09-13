@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Payload {
 
-	private List<PublicSpendKey> publicSpendKeys;
+	private List<String> publicSpendKeys;
 
 	private String privateViewKey;
 
