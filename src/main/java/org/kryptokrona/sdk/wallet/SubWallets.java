@@ -622,7 +622,7 @@ public class SubWallets {
 	}
 
 	private void deleteAddressTransactions(List<Transaction> transactions, String publicSpendKey) {
-
+		// transactions.removeIf(t -> t.getHash().equals(transaction.getHash()));
 	}
 
 	private Observable<List<Transaction>> filterTransactions(List<Transaction> transactions, String address, boolean includeFusions) {
