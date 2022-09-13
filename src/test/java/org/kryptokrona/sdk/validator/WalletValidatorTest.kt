@@ -12,6 +12,8 @@ class WalletValidatorTest {
 
     private lateinit var walletValidator: WalletValidator
 
+    private var correctAddress = "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu"
+
     private var correctAddresses = listOf(
         "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu",
         "SEKReWjf8bYKDhnLcuLRqEBVMd2uXsV288rMkoNkmUJa3K8QhBiCbX7LeKs5qj3wqbNYm13ErCSRwbee7b8sbNmdj4sRYEkbhXF",
@@ -73,6 +75,22 @@ class WalletValidatorTest {
     @BeforeEach
     fun setup() {
         walletValidator = WalletValidator()
+    }
+
+    @Test
+    fun `can validate wallet addresse when integrated addresses are allowed`() {
+        walletValidator.validateAddress(correctAddress, true)
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
+    }
+
+    @Test
+    fun `can validate wallet addresse when integrated addresses are not allowed`() {
+        walletValidator.validateAddress(correctAddress, false)
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
     }
 
     @Test
