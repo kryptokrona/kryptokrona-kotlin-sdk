@@ -69,23 +69,16 @@ public class SubWallet {
 	 * The wallet has one 'main' address which we will use by default
 	 * when treating it as a single user wallet.
 	 */
-	private boolean isPrimaryAddress;
+	private boolean primaryAddress;
 
 	public SubWallet(
-			List<TransactionInput> unspentInputs, List<TransactionInput> lockedInputs,
-			List<TransactionInput> spentInputs, List<UnconfirmedInput> unconfirmedIncomingAmounts,
-			KeyPair spendKeys, long syncStartTimestamp,
-			long syncStartHeight, String address, boolean isPrimaryAddress
+			String address, long scanHeight, long timestamp, KeyPair spendKeys, boolean primaryAddress
 	) {
-		this.unspentInputs = unspentInputs;
-		this.lockedInputs = lockedInputs;
-		this.spentInputs = spentInputs;
-		this.unconfirmedIncomingAmounts = unconfirmedIncomingAmounts;
-		this.spendKeys = spendKeys;
-		this.syncStartTimestamp = syncStartTimestamp;
-		this.syncStartHeight = syncStartHeight;
 		this.address = address;
-		this.isPrimaryAddress = isPrimaryAddress;
+		this.syncStartHeight = scanHeight;
+		this.syncStartTimestamp = timestamp;
+		this.spendKeys = spendKeys;
+		this.primaryAddress = primaryAddress;
 	}
 
 	public void pruneSpentInputs(long pruneHeight) {

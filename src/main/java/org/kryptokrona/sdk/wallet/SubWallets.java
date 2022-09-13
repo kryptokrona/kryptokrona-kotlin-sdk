@@ -71,13 +71,38 @@ public class SubWallets {
 
 	private static final Logger logger = LoggerFactory.getLogger(SubWallets.class);
 
-	public SubWallets(boolean isViewWallet, List<String> publicSpendKeys, String privateViewKey) {
+	public SubWallets(boolean isViewWallet, List<String> publicSpendKeys, String privateViewKey, Map<String, SubWallet> subWallets) {
 		this.isViewWallet = isViewWallet;
 		this.publicSpendKeys = publicSpendKeys;
 		this.privateViewKey = privateViewKey;
+		this.subWallets = subWallets;
 	}
 
-	public static Observable<List<SubWallets>> init() {
+	public static Observable<SubWallets> init(
+			String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
+	) throws WalletAddressChecksumMismatchException {
+		var timestamp = 0L;
+
+		if (newWallet) {
+			timestamp = CryptoUtils.getCurrentTimestampAdjusted(Config.BLOCK_TARGET_TIME);
+		}
+
+		long finalTimestamp = timestamp;
+		Address.fromAddress(address, Config.ADDRESS_PREFIX)
+				.subscribe(decodedAddress -> {
+					var publicSpendKeys = new ArrayList<String>();
+
+					publicSpendKeys.add(decodedAddress.getSpendKeys().getPublicKey());
+
+					var subWallet = new SubWallet(address, scanHeight, finalTimestamp, decodedAddress.getSpendKeys(), true);
+
+					var subWallets = new HashMap<String, SubWallet>();
+					subWallets.put(decodedAddress.getSpendKeys().getPublicKey(), subWallet);
+
+					//TODO: this method is not done
+					// return Observable.just();
+				});
+
 		return Observable.empty();
 	}
 
