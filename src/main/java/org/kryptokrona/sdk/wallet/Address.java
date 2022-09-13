@@ -143,7 +143,7 @@ public class Address {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromKeys(String publicSpendKey, String publicViewKey, long addressPrefix) {
+	public static Observable<Address> fromKeys(KeyPair spendKeys, long addressPrefix) {
 		return Observable.empty();
 	}
 

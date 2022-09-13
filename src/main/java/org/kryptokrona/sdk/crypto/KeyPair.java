@@ -7,7 +7,7 @@ package org.kryptokrona.sdk.crypto;
  */
 public class KeyPair {
 
-	private String mPrivateKey;
+	private String privateKey;
 
-	private String mPublicKey;
+	private String publicKey;
 }

@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
+import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.exception.wallet.WalletIllegalViewWalletOperationException;
 import org.kryptokrona.sdk.exception.wallet.WalletSubNotFoundException;
+import org.kryptokrona.sdk.exception.wallet.WalletSubWalletAlreadyExistsException;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
 import org.kryptokrona.sdk.transaction.Transaction;
@@ -356,9 +358,11 @@ public class SubWallets {
 			publicSpendKeys = this.publicSpendKeys;
 		} else {
 			for (var address : subWalletsToTakeFrom) {
-				CryptoUtils.addressToKeys(address).subscribe(str -> {
-					this.publicSpendKeys.add(str.keySet().toString());
-				});
+				CryptoUtils.addressToKeys(address)
+						.subscribe(str -> {
+							this.publicSpendKeys.add(str.keySet().toString());
+						}
+				);
 			}
 		}
 
@@ -558,7 +562,22 @@ public class SubWallets {
 			throw new WalletIllegalViewWalletOperationException();
 		}
 
-		var address = Address.fromEntropy("", "", Config.ADDRESS_PREFIX).subscribe()
+		Address.fromEntropy("", "", Config.ADDRESS_PREFIX)
+				.subscribe(address -> {
+					// checking if the aderess spendkeys already exists in the sub wallet
+					//TODO: Fix implementation in this
+
+					// if they exist throw exception
+					/*if (spendKeys != null) {
+						throw new WalletSubWalletAlreadyExistsException();
+					}*/
+
+					// publicSpendKeys.add(address.getSpendKeys());
+
+					Address.fromKeys(address.getSpendKeys(), Config.ADDRESS_PREFIX)
+							.subscribe(newAddr -> {
+							});
+				});
 
 		return Observable.empty();
 	}
