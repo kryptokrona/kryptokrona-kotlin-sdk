@@ -136,8 +136,13 @@ public class SubWallets {
 		return getPrimarySubWallet().getAddress();
 	}
 
-	public String getPrimaryPrivateSpendKey() {
-		return null;
+	/**
+	 * Gets the private spend key of the primary sub wallet
+	 *
+	 * @return Returns the primary private spend key
+	 */
+	public String getPrimaryPrivateSpendKey() throws WalletSubWalletNoPrimaryAddressException {
+		return getPrimarySubWallet().getSpendKeys().getPrivateKey();
 	}
 
 	public List<String> getLockedTransactionHashes() {
