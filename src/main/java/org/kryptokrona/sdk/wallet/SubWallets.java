@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * SubWallets.java
@@ -145,8 +146,17 @@ public class SubWallets {
 		return getPrimarySubWallet().getSpendKeys().getPrivateKey();
 	}
 
+	/**
+	 * Get the hashes of the locked transactions (ones we've sent but not
+	 * confirmed).
+	 *
+	 * @return Returns the locked transaction hashes
+	 */
 	public List<String> getLockedTransactionHashes() {
-		return null;
+		return lockedTransactions
+				.stream()
+				.map(lt -> lt.getHash())
+				.collect(Collectors.toList());
 	}
 
 	/**
