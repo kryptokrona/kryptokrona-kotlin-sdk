@@ -167,11 +167,7 @@ public class SubWallets {
 	 * @param transactionInput The transaction input to store
 	 */
 	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) throws WalletSubNotFoundException {
-		var subWallet = subWallets.values()
-				.stream()
-				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
 
 		if (subWallet == null) {
 			throw new WalletSubNotFoundException();
@@ -195,11 +191,7 @@ public class SubWallets {
 	 * @param spendHeight The height the input was spent at
 	 */
 	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) throws WalletSubNotFoundException {
-		var subWallet = subWallets.values()
-				.stream()
-				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
 
 		if (subWallet == null) {
 			throw new WalletSubNotFoundException();
@@ -209,11 +201,7 @@ public class SubWallets {
 	}
 
 	public void markInputAsLocked(String publicSpendKey, String keyImage, String transactionHash) throws WalletSubNotFoundException {
-		var subWallet = subWallets.values()
-				.stream()
-				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
 
 		if (subWallet == null) {
 			throw new WalletSubNotFoundException();
@@ -320,11 +308,7 @@ public class SubWallets {
 	 * @param outputIndex The output index value
 	 */
 	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) throws WalletSubNotFoundException {
-		var subWallet = subWallets.values()
-				.stream()
-				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
 
 		if (subWallet == null) {
 			throw new WalletSubNotFoundException();
@@ -416,7 +400,7 @@ public class SubWallets {
 
 						var subWallet = subWallets.values()
 								.stream()
-								.filter(sw -> sw.getPublicSpendKey().equals(key))
+								.filter(sw -> sw.getSpendKeys().getPublicKey().equals(key))
 								.findFirst()
 								.orElse(null);
 
@@ -488,11 +472,7 @@ public class SubWallets {
 	 * @param publicSpendKey The public spend key to use to store
 	 */
 	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) throws WalletSubNotFoundException {
-		var subWallet = subWallets.values()
-				.stream()
-				.filter(sw -> sw.getPublicSpendKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
 
 		if (subWallet == null) {
 			throw new WalletSubNotFoundException();
@@ -626,5 +606,13 @@ public class SubWallets {
 
 	private Observable<List<Transaction>> filterTransactions(List<Transaction> transactions, String address, boolean includeFusions) {
 		return Observable.empty();
+	}
+
+	private SubWallet getSubWalletByPublicSpendKey(String publicSpendKey) {
+		return subWallets.values()
+				.stream()
+				.filter(sw -> sw.getSpendKeys().getPublicKey().equals(publicSpendKey))
+				.findFirst()
+				.orElse(null);
 	}
 }
