@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.daemon.DaemonImpl;
+import org.kryptokrona.sdk.exception.wallet.WalletIllegalViewWalletOperationException;
 import org.kryptokrona.sdk.exception.wallet.WalletSubNotFoundException;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
@@ -14,10 +14,7 @@ import org.kryptokrona.sdk.util.CryptoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Array;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * SubWallets.java
@@ -554,7 +551,14 @@ public class SubWallets {
 		return Observable.empty();
 	}
 
-	public Observable<Void> addSubWallet(long scanHeight) {
+	public Observable<Void> addSubWallet(long scanHeight) throws WalletIllegalViewWalletOperationException {
+		if (isViewWallet) {
+			// it makes no sense to add a random sub wallet to a view wallet so we throw exception
+			throw new WalletIllegalViewWalletOperationException();
+		}
+
+		var address = Address.fromEntropy()
+
 		return Observable.empty();
 	}
 

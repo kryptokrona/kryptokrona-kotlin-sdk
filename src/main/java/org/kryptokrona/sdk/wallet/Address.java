@@ -126,6 +126,47 @@ public class Address {
 		return Observable.just(result);
 	}
 
+	/**
+	 * Creates a new address object using the supplied public keys.
+	 *
+	 * @param publicSpendKey the public spend key
+	 * @param publicViewKey the public view key
+	 * @param paymentId the payment ID
+	 * @param addressPrefix the address prefix
+	 * @return A new address Object
+	 */
+	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<Address> fromViewOnlyKeys(String publicSpendKey, String publicViewKey, String paymentId, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<Address> fromKeys(String publicSpendKey, String publicViewKey, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<Address> fromMnemonic(String mnemonic, String language, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<Address> fromSeed(String seed, String language, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<Address> fromEntropy(String entropy, String language, String addressPrefix) {
+		return Observable.empty();
+	}
+
+	public static Observable<String> generateSeed(String entropy, long iterations) {
+		return Observable.empty();
+	}
+
+	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language, String addressPrefix) {
+		return Observable.empty();
+	}
+
 	private enum Sizes {
 		KEY(32),
 		CHECKSUM(4);
