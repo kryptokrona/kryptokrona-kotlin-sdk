@@ -69,7 +69,7 @@ public class Address {
 		return "";
 	}
 
-	public static Observable<Address> fromAddress(String address, long prefix) throws WalletAddressChecksumMismatchException {
+	public static Observable<Address> fromAddress(String address, long addressPrefix) throws WalletAddressChecksumMismatchException {
 		var decodedAddress = Base58.decode(address);
 
 		var reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
@@ -135,27 +135,27 @@ public class Address {
 	 * @param addressPrefix the address prefix
 	 * @return A new address Object
 	 */
-	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId, String addressPrefix) {
+	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId, long addressPrefix) {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromViewOnlyKeys(String publicSpendKey, String publicViewKey, String paymentId, String addressPrefix) {
+	public static Observable<Address> fromViewOnlyKeys(String publicSpendKey, String publicViewKey, String paymentId, long addressPrefix) {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromKeys(String publicSpendKey, String publicViewKey, String addressPrefix) {
+	public static Observable<Address> fromKeys(String publicSpendKey, String publicViewKey, long addressPrefix) {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromMnemonic(String mnemonic, String language, String addressPrefix) {
+	public static Observable<Address> fromMnemonic(String mnemonic, String language, long addressPrefix) {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromSeed(String seed, String language, String addressPrefix) {
+	public static Observable<Address> fromSeed(String seed, String language, long addressPrefix) {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromEntropy(String entropy, String language, String addressPrefix) {
+	public static Observable<Address> fromEntropy(String entropy, String language, long addressPrefix) {
 		return Observable.empty();
 	}
 
@@ -163,7 +163,7 @@ public class Address {
 		return Observable.empty();
 	}
 
-	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language, String addressPrefix) {
+	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language, long addressPrefix) {
 		return Observable.empty();
 	}
 

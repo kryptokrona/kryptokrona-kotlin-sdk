@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.wallet.WalletIllegalViewWalletOperationException;
 import org.kryptokrona.sdk.exception.wallet.WalletSubNotFoundException;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
@@ -557,7 +558,7 @@ public class SubWallets {
 			throw new WalletIllegalViewWalletOperationException();
 		}
 
-		var address = Address.fromEntropy()
+		var address = Address.fromEntropy("", "", Config.ADDRESS_PREFIX).subscribe()
 
 		return Observable.empty();
 	}
