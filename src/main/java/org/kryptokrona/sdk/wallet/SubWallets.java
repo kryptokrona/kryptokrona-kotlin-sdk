@@ -90,7 +90,14 @@ public class SubWallets {
 	}
 
 	public void reset(long scanHeight, long scanTimestamp) {
+		transactions = new ArrayList<>();
+		lockedTransactions = new ArrayList<>();
+		transactionPrivateKeys = new HashMap<>();
+		keyImageOwners = new HashMap<>();
 
+		for (var subWallet : subWallets.values()) {
+			subWallet.reset(scanHeight, scanTimestamp);
+		}
 	}
 
 	public void rewind(long scanHeight) {
