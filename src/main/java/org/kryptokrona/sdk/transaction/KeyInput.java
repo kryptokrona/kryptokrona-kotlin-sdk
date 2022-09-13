@@ -22,4 +22,9 @@ public class KeyInput implements TransactionInput {
 		this.key = key;
 		this.amount = amount;
 	}
+
+	@Override
+	public String getKeyImage() {
+		return null;
+	}
 }

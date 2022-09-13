@@ -159,7 +159,8 @@ public class WalletValidator {
 			FeeType feeType,
 			List<String> subWalletsToTakeFrom,
 			SubWallets subWallets,
-			long currentHeight) throws WalletFeeTooSmallException {
+			long currentHeight
+	) throws WalletFeeTooSmallException {
 
 		if (!feeType.isFeePerByte() && !feeType.isFixedFee()) {
 			throw new WalletFeeTooSmallException();

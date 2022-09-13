@@ -22,4 +22,14 @@ public class TransactionRawPrepared implements Transaction {
 	public long getUnlockTime() {
 		return 0;
 	}
+
+	@Override
+	public String getHash() {
+		return null;
+	}
+
+	@Override
+	public long getBlockHeight() {
+		return 0;
+	}
 }

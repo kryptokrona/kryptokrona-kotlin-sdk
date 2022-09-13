@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
-import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.exception.wallet.*;
 import org.kryptokrona.sdk.model.util.TxInputAndOwner;
 import org.kryptokrona.sdk.model.util.UnconfirmedInput;
@@ -371,11 +370,11 @@ public class SubWallets {
            sub wallets to take from */
 		// var lookupMap = new HashMap(publicSpendKeys)
 
-		for (var transaction : transactions) {
+		/*for (var transaction : transactions) {
 			var unlocked = CryptoUtils.isInputUnlocked(transaction.getUnlockTime(), currentHeight);
 			//TODO: finish this implementation
 
-		}
+		}*/
 
 		return Observable.empty();
 	}
