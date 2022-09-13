@@ -112,8 +112,19 @@ public class SubWallets {
 		return subWallet.getSpendKeys().getPrivateKey();
 	}
 
-	public SubWallet getPrimarySubWallet() {
-		return null;
+	/**
+	 * Gets the 'primary' sub wallet.
+	 *
+	 * @return Returns the sub wallet object
+	 */
+	public SubWallet getPrimarySubWallet() throws WalletSubWalletNoPrimaryAddressException {
+		for (var subWallet : subWallets.values()) {
+			if (subWallet.isPrimaryAddress()) {
+				return subWallet;
+			}
+		}
+
+		throw new WalletSubWalletNoPrimaryAddressException();
 	}
 
 	public String getPrimaryAddress() {
