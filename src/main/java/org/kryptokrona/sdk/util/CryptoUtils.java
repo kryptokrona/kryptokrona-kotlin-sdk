@@ -5,12 +5,16 @@ import com.google.gson.reflect.TypeToken;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
+import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException;
 import org.kryptokrona.sdk.model.util.WordList;
+import org.kryptokrona.sdk.wallet.Address;
+import org.kryptokrona.sdk.wallet.SubWallets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * CryptoUtils.java
@@ -26,6 +30,8 @@ public class CryptoUtils {
 	private static final String jsonFileName = "wordlist.json";
 
 	private static final Type collectionType = new TypeToken<List<String>>() {}.getType();
+
+	private static final Logger logger = LoggerFactory.getLogger(CryptoUtils.class);
 
 	public static Observable<Map<String, String>> addressToKeys(String address) {
 		return Observable.empty();
@@ -140,9 +146,28 @@ public class CryptoUtils {
 	 * Verifies whether a mnemonic is valid. Returns a boolean, and an error messsage
 	 * describing what is invalid.
 	 *
-	 * @param mnemonic The mnemonic to verify
+	 * @param mnemonicWords The mnemonic to verify
 	 */
-	public static Observable<Map<Boolean, String>> isValidMnemonic(String mnemonic) {
+	public static Observable<Boolean> isValidMnemonic(List<String> mnemonicWords) throws WalletMnemonicWrongLengthException {
+		if (mnemonicWords.size() != 25) {
+			throw new WalletMnemonicWrongLengthException();
+		}
+
+		var invalidWords = new ArrayList<String>();
+
+		for (var word : mnemonicWords) {
+			if (!isValidMnemonicWord(word)) {
+				invalidWords.add(word);
+			}
+		}
+
+		if (invalidWords.size() != 0) {
+			logger.error("The following mnemonic words are not in the english word list: " + invalidWords);
+		}
+
+		var address = Address.fromMnemonic(mnemonicWords, null, Config.ADDRESS_PREFIX);
+
+		//TODO: return true if it exists, false if not
 		return Observable.empty();
 	}
 

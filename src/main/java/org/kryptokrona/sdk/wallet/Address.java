@@ -147,7 +147,7 @@ public class Address {
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromMnemonic(String mnemonic, String language, long addressPrefix) {
+	public static Observable<Address> fromMnemonic(List<String> mnemonic, String language, long addressPrefix) {
 		return Observable.empty();
 	}
 
