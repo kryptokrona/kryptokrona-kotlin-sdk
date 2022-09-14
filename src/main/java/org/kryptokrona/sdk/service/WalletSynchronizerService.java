@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.config.Config;
+import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.transaction.TransactionData;
 import org.kryptokrona.sdk.transaction.TransactionInputImpl;
@@ -81,14 +82,37 @@ public class WalletSynchronizerService {
 		return txData;
 	}
 
-	public Observable<Map<String, TransactionInputImpl>> processBlockOutputs(
+	/**
+	 * Process transaction outputs of the given block. No external dependencies,
+	 * lets us easily swap out with a C++ replacement for SPEEEED
+	 *
+	 * @param block The block to use
+	 * @param privateViewKey The private view key
+	 * @param allSpendKeys List of spend keys
+	 * @param isViewWallet If its a view wallet
+	 * @param processCoinbaseTransactions If we should process coinbase transactions
+	 * @return Returns a map of transaction outputs
+	 */
+	public Observable<Map<String, List<TransactionInputImpl>>> processBlockOutputs(
 			Block block,
 			String privateViewKey,
-			List<Map<String, String>> spendKeys,
+			List<KeyPair> allSpendKeys,
 			boolean isViewWallet,
-			boolean processCoinbaseTransaction
+			boolean processCoinbaseTransactions
 	) {
-		return null;
+		var inputs = new HashMap<String, List<TransactionInputImpl>>();
+
+		if (processCoinbaseTransactions && (block.getTransactionRawCoinbase() != null)) {
+			// inputs.values().addAll(processTransactionOutputs(block.getTransactionRawCoinbase(), block.getBlockHeight()))
+		}
+
+		for (var tx : block.getTransactions()) {
+			processTransactionOutputs(tx, block.getBlockHeight()).subscribe(list -> {
+				inputs.values().addAll(list.values());
+			});
+		}
+
+		return Observable.just(inputs);
 	}
 
 	/**
@@ -150,7 +174,7 @@ public class WalletSynchronizerService {
 		return null;
 	}
 
-	private Observable<List<Map<String, List<TransactionInputImpl>>>> processTransactionOutputs(
+	private Observable<Map<String, List<TransactionInputImpl>>> processTransactionOutputs(
 			TransactionRawCoinbase rawTx,
 			long blockHeight
 	) {
