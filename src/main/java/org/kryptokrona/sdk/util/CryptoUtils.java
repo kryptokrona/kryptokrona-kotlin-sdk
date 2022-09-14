@@ -126,8 +126,17 @@ public class CryptoUtils {
 	 * @param bytes The amount of bytes to convert
 	 * @return Gets the amount in bytes to human readable format
 	 */
-	public static String prettyPrintBytes(long bytes) {
-		return null;
+	public static String prettyPrintBytes(double bytes) {
+		var suffixes = new ArrayList<String>(List.of("B", "KB", "MB", "GB", "TB"));
+
+		var selectedSuffixes = 0;
+
+		while (bytes >= 1024 && selectedSuffixes < suffixes.size() - 1) {
+			selectedSuffixes++;
+			bytes /= 1024;
+		}
+
+		return String.format("%.2f %s", bytes, suffixes.get(selectedSuffixes));
 	}
 
 	/**
