@@ -72,8 +72,13 @@ public class WalletSynchronizerService {
 	}
 
 	public TransactionData processBlock(Block block, Map<String, TransactionInputImpl> ourInputs) {
+		var txData = new TransactionData();
 
-		return null;
+		// TODO: implement if statement and logic inside when crypto library is available in java
+
+		txData.setInputsToAdd(ourInputs);
+
+		return txData;
 	}
 
 	public Observable<Map<String, TransactionInputImpl>> processBlockOutputs(
