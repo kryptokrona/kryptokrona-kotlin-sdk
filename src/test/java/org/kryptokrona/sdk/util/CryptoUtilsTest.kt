@@ -1,7 +1,6 @@
 package org.kryptokrona.sdk.util;
 
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.exception.wallet.WalletAddressWrongLengthException
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicInvalidWordException
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException
 import kotlin.test.assertEquals

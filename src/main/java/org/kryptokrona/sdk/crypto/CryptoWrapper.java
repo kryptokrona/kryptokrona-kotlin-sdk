@@ -13,19 +13,19 @@ import java.util.Map;
  */
 public class CryptoWrapper {
 
-	public Observable<String> generateKeyDerivation() {
+	public Observable<String> generateKeyDerivation(String transactionPublicKey, String privateViewKey) {
 		return Observable.empty();
 	}
 
-	public Observable<Map<String, String>> generateKeyImagePrimitive() {
+	public Observable<Map<String, String>> generateKeyImagePrimitive(KeyPair spendKeys, long outputIndex, String derivation) {
 		return Observable.empty();
 	}
 
-	public Observable<Map<String, String>> generateKeyImage() {
+	public Observable<Map<String, String>> generateKeyImage(String transactionPublicKey, String privateViewKey, KeyPair spendKeys, long transactionIndex) {
 		return Observable.empty();
 	}
 
-	public Observable<String> underivePublicKey() {
+	public Observable<String> underivePublicKey(String derivation, long outputIndex) {
 		return Observable.empty();
 	}
 }
