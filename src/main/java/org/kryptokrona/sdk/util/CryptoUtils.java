@@ -67,8 +67,23 @@ public class CryptoUtils {
 		}
 	}
 
+	/**
+	 * Takes an amount in atomic units and pretty prints it.
+	 * Example: 12345607 -> 123,456.07 XKR
+	 *
+	 * @param amount The amount to pretty print
+	 * @return Returns a pretty print representation of the amount
+	 */
 	public static String prettyPrintAmount(double amount) {
-		return null;
+		var divisor = Math.pow(10, Config.DECIMAL_PLACES);
+
+		var dollars = amount >= 0 ? Math.floor(amount / divisor) : Math.ceil(amount / divisor);
+
+		var cents = String.format("%" + Config.DECIMAL_PLACES + "s", Math.abs(amount % divisor)).replace(' ', '0');
+
+		var formatted = String.valueOf(dollars).replace("\\B(?=(\\d{3})+(?!\\d))",",");
+
+		return formatted + "." + cents + " " + Config.TICKER;
 	}
 
 	public Observable<Void> delay(long ms) {
