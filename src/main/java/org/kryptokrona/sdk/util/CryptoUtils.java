@@ -182,6 +182,33 @@ public class CryptoUtils {
 	}
 
 	public static long estimatedTransactionSize(long mixin, long numInputs, long numOutputs, boolean havePaymentID, long extraDataSize) {
-		return 0;
+		var KEY_IMAGE_SIZE = 32;
+		var OUTPUT_KEY_SIZE = 32;
+		var AMOUNT_SIZE = 8 + 2;
+		var GLOBAL_INDEXES_VECTOR_SIZE_SIZE = 1;
+		var GLOBAL_INDEXES_INITIAL_VALUE_SIZE = 4;
+		var SIGNATURE_SIZE = 64;
+		var EXTRA_TAG_SIZE = 1;
+		var INPUT_TAG_SIZE = 1;
+		var OUTPUT_TAG_SIZE = 1;
+		var PUBLIC_KEY_SIZE = 32;
+		var TRANSACTION_VERSION_SIZE = 1;
+		var TRANSACTION_UNLOCK_TIME_SIZE = 8 + 2;
+		var EXTRA_DATA_SIZE = extraDataSize > 0 ? extraDataSize + 4 : 0;
+		var PAYMENT_ID_SIZE = havePaymentID ? 34 : 0;
+
+		// the size of the transaction header
+		var headerSize = TRANSACTION_VERSION_SIZE + TRANSACTION_UNLOCK_TIME_SIZE + EXTRA_TAG_SIZE + EXTRA_DATA_SIZE + PUBLIC_KEY_SIZE + PAYMENT_ID_SIZE;
+
+		// the size of each transaction input
+		var inputSize = INPUT_TAG_SIZE + AMOUNT_SIZE + KEY_IMAGE_SIZE + SIGNATURE_SIZE + GLOBAL_INDEXES_VECTOR_SIZE_SIZE + GLOBAL_INDEXES_INITIAL_VALUE_SIZE + mixin * SIGNATURE_SIZE;
+
+		var inputsSize = inputSize * numInputs;
+
+		var outputSize = OUTPUT_TAG_SIZE + OUTPUT_KEY_SIZE + AMOUNT_SIZE;
+
+		var outputsSize = outputSize * numOutputs;
+
+		return headerSize + inputsSize + outputsSize;
 	}
 }
