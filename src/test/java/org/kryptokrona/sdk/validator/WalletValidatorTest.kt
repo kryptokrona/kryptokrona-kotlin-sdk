@@ -183,7 +183,7 @@ class WalletValidatorTest {
         val feeType = FeeType.minimumFee()
 
         val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
-        val currentHeight = 0L;
+        val currentHeight = 0L
 
         walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
             .subscribe { }
@@ -196,7 +196,7 @@ class WalletValidatorTest {
         feeType.isFixedFee = false
 
         val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
-        val currentHeight = 0L;
+        val currentHeight = 0L
 
         assertFailsWith<WalletFeeTooSmallException> {
             walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
