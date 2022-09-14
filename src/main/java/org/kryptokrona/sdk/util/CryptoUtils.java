@@ -11,7 +11,6 @@ import org.kryptokrona.sdk.config.Constants;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.List;
@@ -28,7 +27,7 @@ public class CryptoUtils {
 
 	private List<String> words;
 
-	private static final String jsonFileName = "wordlist.json";
+	private static final String jsonFileName = "/wordlist.json";
 
 	private static final Type collectionType = new TypeToken<List<String>>(){}.getType();
 
@@ -139,12 +138,13 @@ public class CryptoUtils {
 	 */
 	public static boolean isValidMnemonicWord(String word) {
 		try {
-			var reader = new InputStreamReader(CryptoUtils.class.getResourceAsStream(jsonFileName));
+			var reader = new JsonReader(new FileReader(jsonFileName));
 			JsonElement wordsData = gson.fromJson(reader , collectionType);
 			var jsonStr = wordsData.getAsJsonObject().getAsJsonArray("words");
 
 			if (jsonStr != null) {
 				System.out.println(jsonStr);
+				// check here for word in array
 			}
 
 			reader.close();

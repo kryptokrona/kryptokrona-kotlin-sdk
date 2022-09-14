@@ -40,6 +40,14 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs ("src/main/resources")
+        }
+    }
+}
+
 //---------------------------------------------------------------------------------
 // DEPENDENCIES
 //---------------------------------------------------------------------------------
