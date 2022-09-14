@@ -35,10 +35,10 @@ class CryptoUtilsTest {
         val prettyPrintedAmount4 = CryptoUtils.prettyPrintAmount(12345678.01)
         val prettyPrintedAmount5 = CryptoUtils.prettyPrintAmount(123456789.01)
 
-        assertEquals("12345.01 XKR", prettyPrintedAmount1)
-        assertEquals("123,456.01 XKR", prettyPrintedAmount2)
-        assertEquals("1,234,567.01 XKR", prettyPrintedAmount3)
-        assertEquals("12,345,678.01 XKR", prettyPrintedAmount4)
-        assertEquals("123,456,789.01 XKR", prettyPrintedAmount5)
+        assertEquals("XKR 12,345.01", prettyPrintedAmount1)
+        assertEquals("XKR 123,456.01", prettyPrintedAmount2)
+        assertEquals("XKR 1,234,567.01", prettyPrintedAmount3)
+        assertEquals("XKR 12,345,678.01", prettyPrintedAmount4)
+        assertEquals("XKR 123,456,789.01", prettyPrintedAmount5)
     }
 }

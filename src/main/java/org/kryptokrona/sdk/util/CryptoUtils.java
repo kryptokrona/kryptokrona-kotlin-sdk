@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.*;
 
@@ -75,15 +77,13 @@ public class CryptoUtils {
 	 * @return Returns a pretty print representation of the amount
 	 */
 	public static String prettyPrintAmount(double amount) {
-		var divisor = Math.pow(10, Config.DECIMAL_PLACES);
+		var locale = new Locale("en","US");
+		DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
+		DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance(locale);
+		dfs.setCurrencySymbol("XKR ");
+		decimalFormat.setDecimalFormatSymbols(dfs);
 
-		var dollars = amount >= 0 ? Math.floor(amount / divisor) : Math.ceil(amount / divisor);
-
-		var cents = String.format("%" + Config.DECIMAL_PLACES + "s", Math.abs(amount % divisor)).replace(' ', '0');
-
-		var formatted = String.valueOf(dollars).replace("\\B(?=(\\d{3})+(?!\\d))",",");
-
-		return formatted + "." + cents + " " + Config.TICKER;
+		return String.format("%s", decimalFormat.format(amount));
 	}
 
 	public Observable<Void> delay(long ms) {
