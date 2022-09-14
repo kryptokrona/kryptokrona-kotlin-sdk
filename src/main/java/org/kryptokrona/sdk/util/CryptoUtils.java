@@ -75,8 +75,43 @@ public class CryptoUtils {
 		return Observable.empty();
 	}
 
-	public static List<Long> splitAmountIntoDenominations(double amount, boolean preventTooLargeOutputs) {
-		return null;
+	/**
+	 * Split each amount into uniform amounts, e.g.
+	 * 1234567 = 1000000 + 200000 + 30000 + 4000 + 500 + 60 + 7
+	 *
+	 * @param amount The amount to split
+	 * @param preventTooLargeOutputs If we should prevent too large outputs
+	 * @return Returns a list of uniform amounts
+	 */
+	public static List<Double> splitAmountIntoDenominations(double amount, boolean preventTooLargeOutputs) {
+		var multiplier = 1;
+
+		var splitAmounts = new ArrayList<Double>();
+
+		while (amount >= 1) {
+			var denomination = multiplier * (amount % 10);
+
+			if (denomination > Constants.MAX_OUTPUT_SIZE_CLIENT && preventTooLargeOutputs) {
+				// split amounts into ten chunks
+				var numSplitAmounts = 10;
+				var splitAmount = denomination / 10;
+
+				while (splitAmount > Constants.MAX_OUTPUT_SIZE_CLIENT) {
+					splitAmount = Math.floor(splitAmount / 10);
+					numSplitAmounts *= 10.0;
+				}
+
+				// TODO: assignment below should be fixed
+				// splitAmounts = splitAmounts.add(numSplitAmounts);
+			} else {
+				splitAmounts.add(denomination);
+			}
+
+			amount = Math.floor(amount / 10);
+			multiplier *= 10;
+		}
+
+		return splitAmounts;
 	}
 
 	/**
