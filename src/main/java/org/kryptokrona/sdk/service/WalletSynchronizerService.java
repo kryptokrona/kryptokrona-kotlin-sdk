@@ -103,7 +103,10 @@ public class WalletSynchronizerService {
 		var inputs = new HashMap<String, List<TransactionInputImpl>>();
 
 		if (processCoinbaseTransactions && (block.getTransactionRawCoinbase() != null)) {
-			// inputs.values().addAll(processTransactionOutputs(block.getTransactionRawCoinbase(), block.getBlockHeight()))
+			processTransactionOutputs(block.getTransactionRawCoinbase(), block.getBlockHeight())
+					.subscribe(outputs -> {
+						inputs.values().addAll(outputs.values());
+					});
 		}
 
 		for (var tx : block.getTransactions()) {
