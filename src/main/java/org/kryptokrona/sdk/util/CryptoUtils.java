@@ -176,7 +176,9 @@ public class CryptoUtils {
 	}
 
 	public static double getTransactionFee(long transactionSize, long height, double feePerByte) {
-		return 0.0;
+		var numChunks = Math.ceil(transactionSize / Config.FEE_PER_BYTE_CHUNK_SIZE);
+
+		return numChunks * feePerByte * Config.FEE_PER_BYTE_CHUNK_SIZE;
 	}
 
 	public static long estimatedTransactionSize(long mixin, long numInputs, long numOutputs, boolean havePaymentID, long extraDataSize) {
