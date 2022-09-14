@@ -103,9 +103,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public void init() throws IOException, NodeDeadException {
-		daemonReachable().subscribe(status -> {
-			logger.info("Initializing Daemon.");
-		});
+		daemonReachable().subscribe(status -> logger.info("Initializing Daemon."));
 
 		Observable.merge(updateDaemonInfo(), updateFeeInfo()).subscribe(result -> {
 			if (networkBlockCount == 0) {

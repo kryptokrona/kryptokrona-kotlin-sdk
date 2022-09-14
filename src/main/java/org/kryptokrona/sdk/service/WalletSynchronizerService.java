@@ -71,11 +71,12 @@ public class WalletSynchronizerService {
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
-	public TransactionData processBlock(Block block, List<Map<String, TransactionInputImpl>> ourInputs) {
+	public TransactionData processBlock(Block block, Map<String, TransactionInputImpl> ourInputs) {
+
 		return null;
 	}
 
-	public Observable<List<Map<String, TransactionInputImpl>>> processBlockOutputs(
+	public Observable<Map<String, TransactionInputImpl>> processBlockOutputs(
 			Block block,
 			String privateViewKey,
 			List<Map<String, String>> spendKeys,
