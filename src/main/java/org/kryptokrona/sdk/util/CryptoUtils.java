@@ -1,22 +1,13 @@
 package org.kryptokrona.sdk.util;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
 import org.kryptokrona.sdk.model.util.WordList;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.StringReader;
 import java.lang.reflect.Type;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
