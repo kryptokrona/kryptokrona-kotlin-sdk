@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
+import org.kryptokrona.sdk.exception.wallet.WalletMnemonicInvalidWordException;
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException;
 import org.kryptokrona.sdk.model.util.WordList;
 import org.kryptokrona.sdk.wallet.Address;
@@ -207,7 +208,7 @@ public class CryptoUtils {
 	 *
 	 * @param mnemonicWords The mnemonic to verify
 	 */
-	public static Observable<Boolean> isValidMnemonic(List<String> mnemonicWords) throws WalletMnemonicWrongLengthException {
+	public static Observable<Boolean> isValidMnemonic(List<String> mnemonicWords) throws WalletMnemonicWrongLengthException, WalletMnemonicInvalidWordException {
 		if (mnemonicWords.size() != 25) {
 			throw new WalletMnemonicWrongLengthException();
 		}
@@ -221,7 +222,7 @@ public class CryptoUtils {
 		}
 
 		if (invalidWords.size() != 0) {
-			logger.error("The following mnemonic words are not in the english word list: " + invalidWords);
+			throw new WalletMnemonicInvalidWordException();
 		}
 
 		var address = Address.fromMnemonic(mnemonicWords, null, Config.ADDRESS_PREFIX);

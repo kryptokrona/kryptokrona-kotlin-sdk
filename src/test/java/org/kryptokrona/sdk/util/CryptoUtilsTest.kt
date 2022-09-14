@@ -1,11 +1,40 @@
 package org.kryptokrona.sdk.util;
 
 import org.junit.jupiter.api.Test
+import org.kryptokrona.sdk.exception.wallet.WalletAddressWrongLengthException
+import org.kryptokrona.sdk.exception.wallet.WalletMnemonicInvalidWordException
+import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class CryptoUtilsTest {
+
+    private var validMnemonicWords = listOf(
+        "abducts", "ability", "ablaze", "abnormal", "abort",
+        "abrasive", "absorb", "abyss", "academy", "aces",
+        "aching", "acidic", "acoustic", "acquire", "across",
+        "actress", "acumen", "adapt", "addicted", "adept",
+        "adhesive", "adjust", "adopt", "adrenalin", "adult"
+    )
+
+    private var invalidMnemonicWords = listOf(
+        "mjovanc", "kryptoknugen", "nilsjr", "coffeboi", "techyguy",
+        "swepool", "bingo1168", "czmsl", "zyf2021", "hoover",
+        "exbitron", "freiexchange", "hugin", "munin", "svelte",
+        "kryptokrona", "xkr", "java", "rxjava", "gradle",
+        "kotlin", "spring", "sdk", "daemon", "pool"
+    )
+
+    private var invalidMnemonicWordsLength = listOf(
+        "abducts", "ability", "ablaze", "abnormal", "abort",
+        "abrasive", "absorb", "abyss", "academy", "aces",
+        "aching", "acidic", "acoustic", "acquire", "across",
+        "actress", "acumen", "adapt", "addicted", "adept",
+        "adhesive", "adjust", "adopt", "adrenalin", "adult",
+        "afar", "affair", "afield",
+    )
 
     @Test
     fun `can enter valid mnemonic word`() {
@@ -15,6 +44,30 @@ class CryptoUtilsTest {
     @Test
     fun `can not enter invalid mnemonic word`() {
         assertFalse(CryptoUtils.isValidMnemonicWord("mjovanc"))
+    }
+
+    @Test
+    fun `can enter valid mnemonic words`() {
+        CryptoUtils.isValidMnemonic(validMnemonicWords)
+            .subscribe { validity ->
+                assertTrue(validity)
+            }
+    }
+
+    @Test
+    fun `can not enter mnemonic words with invalid words`() {
+        assertFailsWith<WalletMnemonicInvalidWordException> {
+            CryptoUtils.isValidMnemonic(invalidMnemonicWords)
+                .subscribe { }
+        }
+    }
+
+    @Test
+    fun `can not enter valid mnemonic words with lower or higher than 25 words`() {
+        assertFailsWith<WalletMnemonicWrongLengthException> {
+            CryptoUtils.isValidMnemonic(invalidMnemonicWordsLength)
+                .subscribe { }
+        }
     }
 
     @Test
