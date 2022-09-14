@@ -71,7 +71,7 @@ public class CryptoUtils {
 
 	/**
 	 * Takes an amount in atomic units and pretty prints it.
-	 * Example: 12345607 -> 123,456.07 XKR
+	 * Example: 12345607 -> XKR 123,456.07
 	 *
 	 * @param amount The amount to pretty print
 	 * @return Returns a pretty print representation of the amount
@@ -231,10 +231,10 @@ public class CryptoUtils {
 	}
 
 	public static double getMinimumTransactionFee(long transactionSize, long height) {
-		return getTransactionFee(transactionSize, height, Config.MINIMUM_FEE_PER_BYTE);
+		return getTransactionFee(transactionSize, Config.MINIMUM_FEE_PER_BYTE);
 	}
 
-	public static double getTransactionFee(long transactionSize, long height, double feePerByte) {
+	public static double getTransactionFee(long transactionSize, double feePerByte) {
 		var numChunks = Math.ceil(transactionSize / Config.FEE_PER_BYTE_CHUNK_SIZE);
 
 		return numChunks * feePerByte * Config.FEE_PER_BYTE_CHUNK_SIZE;
