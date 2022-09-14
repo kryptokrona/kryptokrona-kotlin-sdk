@@ -7,11 +7,16 @@ import com.google.gson.stream.JsonReader;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
+import org.kryptokrona.sdk.model.util.WordList;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +28,13 @@ import java.util.Map;
  */
 public class CryptoUtils {
 
-	private static Gson gson;
+	private static Gson gson = new Gson();
 
 	private List<String> words;
 
-	private static final String jsonFileName = "/wordlist.json";
+	private static final String jsonFileName = "wordlist.json";
 
-	private static final Type collectionType = new TypeToken<List<String>>(){}.getType();
+	private static final Type collectionType = new TypeToken<List<String>>() {}.getType();
 
 	public static Observable<Map<String, String>> addressToKeys(String address) {
 		return Observable.empty();
@@ -137,25 +142,7 @@ public class CryptoUtils {
 	 * @param word The word to test
 	 */
 	public static boolean isValidMnemonicWord(String word) {
-		try {
-			var reader = new JsonReader(new FileReader(jsonFileName));
-			JsonElement wordsData = gson.fromJson(reader , collectionType);
-			var jsonStr = wordsData.getAsJsonObject().getAsJsonArray("words");
-
-			if (jsonStr != null) {
-				System.out.println(jsonStr);
-				// check here for word in array
-			}
-
-			reader.close();
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			System.out.println("IO");
-			throw new RuntimeException(e);
-		}
-
-		return false;
+		return WordList.WORD_LIST.contains(word);
 	}
 
 	/**
