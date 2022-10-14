@@ -9,7 +9,6 @@ import org.kryptokrona.sdk.exception.wallet.WalletMnemonicInvalidWordException;
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException;
 import org.kryptokrona.sdk.model.util.WordList;
 import org.kryptokrona.sdk.wallet.Address;
-import org.kryptokrona.sdk.wallet.SubWallets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +17,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static com.google.common.primitives.Doubles.asList;
 
 /**
  * CryptoUtils.java
