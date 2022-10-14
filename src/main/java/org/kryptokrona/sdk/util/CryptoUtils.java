@@ -18,6 +18,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.google.common.primitives.Doubles.asList;
 
@@ -119,11 +121,10 @@ public class CryptoUtils {
 					numSplitAmounts *= 10.0;
 				}
 
-				var arr = asList(numSplitAmounts);
-
-				// TODO: assignment below should be fixed
+				var arr = new ArrayList<>(List.of(numSplitAmounts));
 				Collections.fill(arr, splitAmount);
-				// splitAmounts = splitAmounts.addAll(arr);
+
+				splitAmounts.addAll(arr);
 			} else if (denomination != 0) {
 				splitAmounts.add(denomination);
 			}
