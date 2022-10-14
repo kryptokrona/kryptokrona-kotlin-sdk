@@ -88,6 +88,20 @@ public class WalletService {
         await this.lockedTransactionsCheckThread.stop();*/
 	}
 
+	public Observable<Boolean> processBlocks(boolean sleep) {
+		return Observable.just(true);
+	}
+
+	public Observable<Boolean> sync(boolean sleep) {
+		try {
+			return processBlocks(sleep);
+		} catch(Exception e) {
+			logger.error("Error processing blocks: " e.toString());
+		}
+
+		return Observable.just(false);
+	}
+
 	public void setupMetronomes() {
 		syncThread = new Metronome();
 		daemonUpdateThread = new Metronome();
