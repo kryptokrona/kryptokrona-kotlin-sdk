@@ -15,7 +15,8 @@ class DaemonTest {
     fun `can initialize daemon`() {
         val daemon = DaemonImpl(HostName(correctDaemonUrl), false)
         daemon.init()
-        // TODO: fix asserts on on this one
+
+        assertEquals(true, daemon.isConnected)
     }
 
     @Test

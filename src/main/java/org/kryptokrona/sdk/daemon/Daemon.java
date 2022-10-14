@@ -83,7 +83,7 @@ public interface Daemon {
 	 * @param rawTransaction : String
 	 * @return Observable
 	 */
-	Observable<Void> sendTransaction(String rawTransaction);
+	Observable<Map<Boolean, String>> sendTransaction(String rawTransaction) throws IOException;
 
 	/**
 	 * Convert raw blocks to blocks.

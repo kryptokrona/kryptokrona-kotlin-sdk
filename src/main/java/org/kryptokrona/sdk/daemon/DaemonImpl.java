@@ -263,9 +263,13 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<Void> sendTransaction(String rawTransaction) {
-		//TODO need to check this return type
-		return null;
+	public Observable<Map<Boolean, String>> sendTransaction(String rawTransaction) throws IOException {
+		this.postRequest("sendrawtransaction", rawTransaction)
+				.subscribe(result -> {
+					System.out.println(result);
+				});
+
+		return Observable.empty();
 	}
 
 	@Override
