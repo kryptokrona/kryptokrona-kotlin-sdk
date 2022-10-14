@@ -83,9 +83,9 @@ public class WalletService {
 		started = false;
 		// daemon.stop();
 
-        /*await this.syncThread.stop();
-        await this.daemonUpdateThread.stop();
-        await this.lockedTransactionsCheckThread.stop();*/
+        syncThread.stop().subscribe();
+		daemonUpdateThread.stop().subscribe();
+		lockedTransactionsCheckThread.stop().subscribe();
 	}
 
 	public Observable<Boolean> processBlocks(boolean sleep) {
@@ -96,7 +96,7 @@ public class WalletService {
 		try {
 			return processBlocks(sleep);
 		} catch(Exception e) {
-			logger.error("Error processing blocks: " e.toString());
+			logger.error("Error processing blocks: " + e);
 		}
 
 		return Observable.just(false);
