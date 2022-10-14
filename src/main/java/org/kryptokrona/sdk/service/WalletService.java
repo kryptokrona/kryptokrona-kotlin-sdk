@@ -48,6 +48,7 @@ public class WalletService {
 	) {
 		this.daemon = daemon;
 		this.started = false;
+		this.setupMetronomes();
 	}
 
 	public void start() throws IOException {
@@ -85,6 +86,10 @@ public class WalletService {
         /*await this.syncThread.stop();
         await this.daemonUpdateThread.stop();
         await this.lockedTransactionsCheckThread.stop();*/
+	}
+
+	public void setupMetronomes() {
+
 	}
 
 	/**
