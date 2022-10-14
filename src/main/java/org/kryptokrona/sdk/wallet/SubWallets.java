@@ -412,7 +412,7 @@ public class SubWallets {
 	 *
 	 * @param currentHeight        The current height to use
 	 * @param subWalletsToTakeFrom Which sub wallets to take from
-	 * @return Observable with a map
+	 * @return Observable
 	 */
 	public Observable<Map<Double, Double>> getBalance(long currentHeight, List<String> subWalletsToTakeFrom) {
 		List<String> publicSpendKeys = new ArrayList<>();
@@ -422,10 +422,7 @@ public class SubWallets {
 		} else {
 			for (var address : subWalletsToTakeFrom) {
 				CryptoUtils.addressToKeys(address)
-						.subscribe(str -> {
-									this.publicSpendKeys.add(str.keySet().toString());
-								}
-						);
+					.subscribe(str -> this.publicSpendKeys.add(str.keySet().toString()));
 			}
 		}
 

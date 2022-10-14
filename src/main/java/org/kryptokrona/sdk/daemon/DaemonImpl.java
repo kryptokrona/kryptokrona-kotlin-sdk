@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -199,6 +200,8 @@ public class DaemonImpl implements Daemon {
 		} catch (IOException e) {
 			blockCount = Math.ceil(blockCount / 4.0);
 			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
+
+			return Observable.just(Map.of(0, false));
 		}
 
 		// the node is not dead if we're fetching blocks.
