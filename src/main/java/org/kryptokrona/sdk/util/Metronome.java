@@ -20,8 +20,6 @@ public class Metronome {
 
 	private boolean started;
 
-	private Config config;
-
 	public Metronome(long interval) {
 		this.interval = interval;
 	}
