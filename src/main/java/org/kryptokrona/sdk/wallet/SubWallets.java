@@ -245,7 +245,7 @@ public class SubWallets {
 	/**
 	 * Store the transaction input in the corresponding sub wallet.
 	 *
-	 * @param publicSpendKey The public spend key of the sub wallet to add this input to
+	 * @param publicSpendKey   The public spend key of the sub wallet to add this input to
 	 * @param transactionInput The transaction input to store
 	 */
 	public void storeTransactionInput(String publicSpendKey, TransactionInput transactionInput) throws WalletSubNotFoundException {
@@ -269,8 +269,8 @@ public class SubWallets {
 	 * for spending. Input is identified by keyImage (unique).
 	 *
 	 * @param publicSpendKey The public spend key of the sub wallet to mark the corresponding input spent in
-	 * @param keyImage The key image to use
-	 * @param spendHeight The height the input was spent at
+	 * @param keyImage       The key image to use
+	 * @param spendHeight    The height the input was spent at
 	 */
 	public void markInputAsSpent(String publicSpendKey, String keyImage, long spendHeight) throws WalletSubNotFoundException {
 		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
@@ -336,7 +336,7 @@ public class SubWallets {
 	 * daemon.
 	 *
 	 * @param timestamp The timestamp to convert
-	 * @param height The block height to use
+	 * @param height    The block height to use
 	 */
 	public void convertSyncTimestampToHeight(long timestamp, long height) {
 		for (var subWallet : subWallets.values()) {
@@ -386,8 +386,8 @@ public class SubWallets {
 	 * Generate the key image for an input.
 	 *
 	 * @param publicSpendKey The public spend key to use
-	 * @param derivation The derivation value
-	 * @param outputIndex The output index value
+	 * @param derivation     The derivation value
+	 * @param outputIndex    The output index value
 	 */
 	public Observable<Map<String, String>> getTxInputKeyImage(String publicSpendKey, String derivation, long outputIndex) throws WalletSubNotFoundException {
 		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
@@ -410,7 +410,7 @@ public class SubWallets {
 	 * Returns the summed balance of the given sub wallet addresses. If none are given,
 	 * take from all.
 	 *
-	 * @param currentHeight The current height to use
+	 * @param currentHeight        The current height to use
 	 * @param subWalletsToTakeFrom Which sub wallets to take from
 	 * @return Observable with a map
 	 */
@@ -423,9 +423,9 @@ public class SubWallets {
 			for (var address : subWalletsToTakeFrom) {
 				CryptoUtils.addressToKeys(address)
 						.subscribe(str -> {
-							this.publicSpendKeys.add(str.keySet().toString());
-						}
-				);
+									this.publicSpendKeys.add(str.keySet().toString());
+								}
+						);
 			}
 		}
 
@@ -461,11 +461,11 @@ public class SubWallets {
 	/**
 	 * Get input sufficient to spend the amount passed in, from the given
 	 * sub wallets, along with the keys for that inputs owner.
-	 *
+	 * <p>
 	 * Throws if the sub wallets don't exist, or not enough money is found.
 	 *
 	 * @param subWalletsToTakeFrom The sub wallets to use
-	 * @param currentHeight The current height to use
+	 * @param currentHeight        The current height to use
 	 * @return Returns the inputs and their owners, and the sum of their money
 	 */
 	public Observable<List<TxInputAndOwner>> getSpendableTransactionInputs(List<String> subWalletsToTakeFrom, long currentHeight) {
@@ -540,7 +540,7 @@ public class SubWallets {
 	 * Store the private key for a given transaction.
 	 *
 	 * @param txPrivateKey The private transaction key to store
-	 * @param txHash The transaction hash to store
+	 * @param txHash       The transaction hash to store
 	 */
 	public void storeTxPrivateKey(String txPrivateKey, String txHash) {
 		transactionPrivateKeys.put(txHash, txPrivateKey);
@@ -551,7 +551,7 @@ public class SubWallets {
 	 * balances.
 	 *
 	 * @param unconfirmedInput The unconfirmed input object to store
-	 * @param publicSpendKey The public spend key to use to store
+	 * @param publicSpendKey   The public spend key to use to store
 	 */
 	public void storeUnconfirmedIncomingInput(UnconfirmedInput unconfirmedInput, String publicSpendKey) throws WalletSubNotFoundException {
 		var subWallet = getSubWalletByPublicSpendKey(publicSpendKey);
@@ -567,7 +567,7 @@ public class SubWallets {
 	 * Get the transactions of the given sub wallet address. If no sub wallet address is given,
 	 * gets all transactions.
 	 *
-	 * @param address The sub wallet address to get the transaction
+	 * @param address        The sub wallet address to get the transaction
 	 * @param includeFusions If we include fusions
 	 */
 	public Observable<List<Transaction>> getTransactions(String address, boolean includeFusions) {
@@ -580,7 +580,7 @@ public class SubWallets {
 	 * if you want to avoid fetching every transactions repeatedly when nothing
 	 * has changed.
 	 *
-	 * @param address The sub wallet address to use
+	 * @param address        The sub wallet address to use
 	 * @param includeFusions If we include fusions
 	 */
 	public Observable<Long> getNumTransactions(String address, boolean includeFusions) {
@@ -594,7 +594,7 @@ public class SubWallets {
 	 * Get the unconfirmed transactions of the given subwallet address. If no subwallet address
 	 * is given, gets all unconfirmed transactions.
 	 *
-	 * @param address The sub wallet address to use
+	 * @param address        The sub wallet address to use
 	 * @param includeFusions If we include fusions
 	 */
 	public Observable<List<Transaction>> getUnconfirmedTransactions(String address, boolean includeFusions) {
@@ -607,7 +607,7 @@ public class SubWallets {
 	 * if you want to avoid fetching every transactions repeatedly when nothing
 	 * has changed.
 	 *
-	 * @param address The sub wallet address to use
+	 * @param address        The sub wallet address to use
 	 * @param includeFusions If we include fusions
 	 */
 	public Observable<Long> getNumUnconfirmedTransactions(String address, boolean includeFusions) {

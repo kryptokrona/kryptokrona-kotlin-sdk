@@ -130,19 +130,19 @@ public class WalletValidator {
 	 */
 	public Observable<Boolean> validateOurAddresses(List<String> addresses, SubWallets subWallets) throws WalletException {
 		validateAddresses(addresses, false)
-				.subscribe(validity -> {
-					for (var address : addresses) {
-						Address.fromAddress(address, Config.ADDRESS_PREFIX)
-								.subscribe(parsedAddress -> {
-									var keys = subWallets.getPublicSpendKeys();
+			.subscribe(validity -> {
+				for (var address : addresses) {
+					Address.fromAddress(address, Config.ADDRESS_PREFIX)
+						.subscribe(parsedAddress -> {
+							var keys = subWallets.getPublicSpendKeys();
 
-									//TODO: below is probably not finished yet
-									if (!keys.contains(parsedAddress.getSpendKeys())) {
-										throw new WalletAddressNotInWalletException();
-									}
-								});
-					}
-				});
+							//TODO: below is probably not finished yet
+							if (!keys.contains(parsedAddress.getSpendKeys())) {
+								throw new WalletAddressNotInWalletException();
+							}
+						});
+				}
+			});
 
 		return Observable.just(true);
 	}
