@@ -106,11 +106,12 @@ public class DaemonImpl implements Daemon {
 	public void init() throws IOException, NodeDeadException {
 		daemonReachable().subscribe(status -> logger.info("Initializing Daemon."));
 
-		Observable.merge(updateDaemonInfo(), updateFeeInfo()).subscribe(result -> {
-			if (networkBlockCount == 0) {
-				throw new NetworkBlockCountException();
-			}
-		});
+		Observable.merge(updateDaemonInfo(), updateFeeInfo())
+			.subscribe(result -> {
+				if (networkBlockCount == 0) {
+					throw new NetworkBlockCountException();
+				}
+			});
 	}
 
 	@Override
@@ -164,7 +165,7 @@ public class DaemonImpl implements Daemon {
 				var integratedAddressesAllowed = false;
 
 				try {
-					walletValidator.validateAddresses(List.of(nodeFee.getAddress()), integratedAddressesAllowed)
+					walletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
 							.subscribe();
 
 					if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
