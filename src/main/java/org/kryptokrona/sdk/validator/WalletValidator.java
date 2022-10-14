@@ -109,7 +109,7 @@ public class WalletValidator {
 				continue;
 			}
 
-			/* Extract the payment ID */
+			// extract the payment id
 			Address.fromAddress(destination, Config.ADDRESS_PREFIX)
 					.subscribe(parsedAddress -> {
 						if (!Objects.equals(paymentID, parsedAddress.getPaymentId())) {

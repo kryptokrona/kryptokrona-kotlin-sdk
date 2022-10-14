@@ -19,6 +19,8 @@ import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.*;
 
+import static com.google.common.primitives.Doubles.asList;
+
 /**
  * CryptoUtils.java
  *
@@ -109,7 +111,7 @@ public class CryptoUtils {
 
 			if (denomination > Constants.MAX_OUTPUT_SIZE_CLIENT && preventTooLargeOutputs) {
 				// split amounts into ten chunks
-				var numSplitAmounts = 10;
+				var numSplitAmounts = 10.0;
 				var splitAmount = denomination / 10;
 
 				while (splitAmount > Constants.MAX_OUTPUT_SIZE_CLIENT) {
@@ -117,9 +119,12 @@ public class CryptoUtils {
 					numSplitAmounts *= 10.0;
 				}
 
+				var arr = asList(numSplitAmounts);
+
 				// TODO: assignment below should be fixed
-				// splitAmounts = splitAmounts.add(numSplitAmounts);
-			} else {
+				Collections.fill(arr, splitAmount);
+				// splitAmounts = splitAmounts.addAll(arr);
+			} else if (denomination != 0) {
 				splitAmounts.add(denomination);
 			}
 

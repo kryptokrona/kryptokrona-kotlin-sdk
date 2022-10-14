@@ -81,6 +81,7 @@ public class Address {
 
 		var reader = new InputStreamReader(new ByteArrayInputStream(decodedAddress));
 
+		//TODO: need to implement the rest here
 		var decodedPrefix = reader.toString();
 		System.out.println(decodedPrefix);
 
