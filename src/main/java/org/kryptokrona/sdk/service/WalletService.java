@@ -1,11 +1,13 @@
 package org.kryptokrona.sdk.service;
 
+import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.util.Metronome;
 import org.kryptokrona.sdk.wallet.SubWallets;
 import org.kryptokrona.sdk.wallet.Wallet;
 import org.slf4j.Logger;
@@ -22,10 +24,23 @@ import java.util.List;
 public class WalletService {
 
 	private Daemon daemon;
+
 	private Config config;
+
 	private List<SubWallets> subWallets;
+
 	private WalletSynchronizerService walletSynchronizerService;
+
+	private Metronome syncThread;
+
+	private Metronome daemonUpdateThread;
+
+	private Metronome lockedTransactionsCheckThread;
+
 	private boolean started;
+
+	private boolean synced;
+
 	private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
 	public WalletService(
@@ -41,6 +56,12 @@ public class WalletService {
 
 			try {
 				daemon.init();
+
+				Observable.merge(
+						syncThread.start(),
+						daemonUpdateThread.start(),
+						lockedTransactionsCheckThread.start()
+				).subscribe();
 
 				logger.info("Starting the wallet sync process.");
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {

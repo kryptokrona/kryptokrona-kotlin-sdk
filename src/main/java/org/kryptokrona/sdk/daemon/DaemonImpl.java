@@ -79,7 +79,7 @@ public class DaemonImpl implements Daemon {
 
 	private boolean useRawBlocks;
 
-	private WalletValidator walletValidator;
+	private static WalletValidator walletValidator;
 
 	private static final Logger logger = LoggerFactory.getLogger(DaemonImpl.class);
 
@@ -165,13 +165,13 @@ public class DaemonImpl implements Daemon {
 				var integratedAddressesAllowed = false;
 
 				try {
-					walletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
+					WalletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
 							.subscribe();
 
 					if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
 						nodeFee.setAddress(nodeFeeObj.getAddress());
 						nodeFee.setAmount(nodeFeeObj.getAmount());
-						nodeFee.setStatus(nodeFee.getStatus());
+						nodeFee.setStatus(nodeFeeObj.getStatus());
 						logger.info("Node fee information, updated.");
 					}
 				} catch (WalletException e) {
