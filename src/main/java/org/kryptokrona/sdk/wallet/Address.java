@@ -69,6 +69,13 @@ public class Address {
 		return "";
 	}
 
+	/**
+	 * Creates a new address object from a Base58 address
+	 *
+	 * @param address The public address to decode
+	 * @param addressPrefix The address prefix
+	 * @return Address object
+	 */
 	public static Observable<Address> fromAddress(String address, long addressPrefix) throws WalletAddressChecksumMismatchException {
 		var decodedAddress = Base58.decode(address);
 
