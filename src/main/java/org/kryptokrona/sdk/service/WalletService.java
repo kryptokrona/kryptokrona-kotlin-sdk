@@ -89,7 +89,9 @@ public class WalletService {
 	}
 
 	public void setupMetronomes() {
-
+		syncThread = new Metronome();
+		daemonUpdateThread = new Metronome();
+		lockedTransactionsCheckThread = new Metronome();
 	}
 
 	/**

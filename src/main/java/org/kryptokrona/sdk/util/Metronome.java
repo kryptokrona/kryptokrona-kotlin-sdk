@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.util;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.config.Config;
 
 /**
  * Metronome.java
@@ -18,6 +19,8 @@ public class Metronome {
 	private boolean inTick;
 
 	private boolean started;
+
+	private Config config;
 
 	public Metronome(long interval) {
 		this.interval = interval;
