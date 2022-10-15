@@ -24,21 +24,21 @@ public class Metronome {
 
 	private boolean started;
 
-	private long bpm;
+	private final long interval;
 
-	public Metronome(long bpm) {
+	public Metronome(long interval) {
 		this.elapsedTime = new AtomicLong();
 		this.resumed = new AtomicBoolean();
 		this.stopped = new AtomicBoolean();
 		this.started = false;
-		this.bpm = bpm;
+		this.interval = interval;
 	}
 
 	public Flowable<Long> start() {
 		resumed.set(true);
 		stopped.set(false);
 
-		return Flowable.interval(1, TimeUnit.SECONDS)
+		return Flowable.interval(this.interval, TimeUnit.MILLISECONDS)
 				.takeWhile(tick -> !stopped.get())
 				.filter(tick -> resumed.get())
 				.map(tick -> elapsedTime.addAndGet(1000));
