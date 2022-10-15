@@ -22,15 +22,12 @@ public class Metronome {
 
 	private AtomicBoolean stopped;
 
-	private boolean started;
-
 	private final long interval;
 
 	public Metronome(long interval) {
 		this.elapsedTime = new AtomicLong();
 		this.resumed = new AtomicBoolean();
 		this.stopped = new AtomicBoolean();
-		this.started = false;
 		this.interval = interval;
 	}
 
