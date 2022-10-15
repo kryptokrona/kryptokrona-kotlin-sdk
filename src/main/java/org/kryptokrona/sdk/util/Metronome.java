@@ -10,7 +10,7 @@ import org.kryptokrona.sdk.config.Config;
  */
 public class Metronome {
 
-	private long interval;
+	private long bpm;
 
 	private String timer; // change this to correct data type
 
@@ -20,19 +20,35 @@ public class Metronome {
 
 	private boolean started;
 
-	public Metronome(long interval) {
-		this.interval = interval;
+	public Metronome(long bpm) {
+		this.started = true;
+		this.bpm = bpm;
 	}
 
-	public Observable<Void> start() {
+	public Observable<String> start() {
+		while (started)
+		{
+			try
+			{
+				Thread.sleep((long) (1000 * (60.0 / bpm)));
+			}
+			catch(InterruptedException e)
+			{
+				//TODO: perhaps add logger heres
+				e.printStackTrace();
+			}
+
+			System.out.println("RUNNING");
+		}
 		return Observable.empty();
 	}
 
-	public Observable<Void> stop() {
+	public Observable<String> stop() {
+		started = false;
 		return Observable.empty();
 	}
 
-	public Observable<Void> tick() {
+	public Observable<String> tick() {
 		return Observable.empty();
 	}
 }

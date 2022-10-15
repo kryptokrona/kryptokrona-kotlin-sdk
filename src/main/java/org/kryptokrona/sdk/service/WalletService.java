@@ -107,9 +107,15 @@ public class WalletService {
 		daemonUpdateThread = new Metronome(Config.DAEMON_UPDATE_INTERVAL);
 		lockedTransactionsCheckThread = new Metronome(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL);
 
-		syncThread.start().subscribe();
-		daemonUpdateThread.start().subscribe();
-		lockedTransactionsCheckThread.start().subscribe();
+		syncThread.start().subscribe(tick -> {
+			System.out.println(tick);
+		});
+		daemonUpdateThread.start().subscribe(tick -> {
+			System.out.println(tick);
+		});
+		lockedTransactionsCheckThread.start().subscribe(tick -> {
+			System.out.println(tick);
+		});
 	}
 
 	/**
