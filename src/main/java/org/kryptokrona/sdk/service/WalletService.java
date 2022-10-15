@@ -1,5 +1,6 @@
 package org.kryptokrona.sdk.service;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
@@ -58,7 +59,7 @@ public class WalletService {
 			try {
 				daemon.init();
 
-				Observable.merge(
+				Flowable.concat(
 						syncThread.start(),
 						daemonUpdateThread.start(),
 						lockedTransactionsCheckThread.start()
@@ -76,9 +77,9 @@ public class WalletService {
 		started = false;
 		// daemon.stop();
 
-        syncThread.stop().subscribe();
-		daemonUpdateThread.stop().subscribe();
-		lockedTransactionsCheckThread.stop().subscribe();
+        syncThread.stop();
+		daemonUpdateThread.stop();
+		lockedTransactionsCheckThread.stop();
 	}
 
 	public Observable<Boolean> processBlocks(boolean sleep) {

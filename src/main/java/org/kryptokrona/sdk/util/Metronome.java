@@ -44,15 +44,15 @@ public class Metronome {
 				.map(tick -> elapsedTime.addAndGet(1000));
 	}
 
-	public void pauseTimer() {
+	public void pause() {
 		resumed.set(false);
 	}
 
-	public void resumeTimer() {
+	public void resume() {
 		resumed.set(true);
 	}
 
-	public void stopTimer() {
+	public void stop() {
 		stopped.set(true);
 	}
 
