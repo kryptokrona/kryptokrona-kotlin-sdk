@@ -63,7 +63,7 @@ public class WalletService {
 						syncThread.start(),
 						daemonUpdateThread.start(),
 						lockedTransactionsCheckThread.start()
-				).subscribe();
+				).subscribe(System.out::println);
 
 				logger.info("Starting the wallet sync process.");
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {

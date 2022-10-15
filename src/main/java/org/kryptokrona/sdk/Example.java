@@ -9,7 +9,7 @@ import org.kryptokrona.sdk.wallet.Wallet;
 import java.io.IOException;
 
 public class Example {
-	public static void main(String[] args) throws IOException, NodeDeadException {
+	public static void main(String[] args) throws IOException, NodeDeadException, InterruptedException {
 		// initialize a daemon
 		var daemon = new DaemonImpl(new HostName("swepool.org:11898"), false);
 
@@ -19,15 +19,15 @@ public class Example {
 		// start wallet service sync
 		walletService.start();
 
-		walletService.stop();
-
 		// create a new wallet
 		Wallet wallet = walletService.createWallet();
 
 		// save the wallet to a file
 		// walletService.saveWalletToFile(wallet, "mjovanc");
 
+		Thread.sleep(5000);
+
 		// stop the wallet sync
-		// walletService.stop();
+		walletService.stop();
 	}
 }
