@@ -19,6 +19,8 @@ public class Example {
 		// start wallet service sync
 		walletService.start();
 
+		walletService.stop();
+
 		// create a new wallet
 		Wallet wallet = walletService.createWallet();
 

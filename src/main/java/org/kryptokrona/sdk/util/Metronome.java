@@ -1,7 +1,13 @@
 package org.kryptokrona.sdk.util;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
+import org.reactivestreams.Subscription;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Metronome.java
@@ -10,45 +16,47 @@ import org.kryptokrona.sdk.config.Config;
  */
 public class Metronome {
 
-	private long bpm;
+	private AtomicLong elapsedTime;
 
-	private String timer; // change this to correct data type
+	private AtomicBoolean resumed;
 
-	private boolean shouldStop;
-
-	private boolean inTick;
+	private AtomicBoolean stopped;
 
 	private boolean started;
 
+	private long bpm;
+
 	public Metronome(long bpm) {
-		this.started = true;
+		this.elapsedTime = new AtomicLong();
+		this.resumed = new AtomicBoolean();
+		this.stopped = new AtomicBoolean();
+		this.started = false;
 		this.bpm = bpm;
 	}
 
-	public Observable<String> start() {
-		while (started)
-		{
-			try
-			{
-				Thread.sleep((long) (1000 * (60.0 / bpm)));
-			}
-			catch(InterruptedException e)
-			{
-				//TODO: perhaps add logger heres
-				e.printStackTrace();
-			}
+	public Flowable<Long> start() {
+		resumed.set(true);
+		stopped.set(false);
 
-			System.out.println("RUNNING");
-		}
-		return Observable.empty();
+		return Flowable.interval(1, TimeUnit.SECONDS)
+				.takeWhile(tick -> !stopped.get())
+				.filter(tick -> resumed.get())
+				.map(tick -> elapsedTime.addAndGet(1000));
 	}
 
-	public Observable<String> stop() {
-		started = false;
-		return Observable.empty();
+	public void pauseTimer() {
+		resumed.set(false);
 	}
 
-	public Observable<String> tick() {
-		return Observable.empty();
+	public void resumeTimer() {
+		resumed.set(true);
+	}
+
+	public void stopTimer() {
+		stopped.set(true);
+	}
+
+	public void addToTimer(int seconds) {
+		elapsedTime.addAndGet(seconds * 1000L);
 	}
 }

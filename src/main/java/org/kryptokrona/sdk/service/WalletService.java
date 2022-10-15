@@ -68,13 +68,6 @@ public class WalletService {
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
 			}
-
-			// merge obserables
-            /*await Promise.all([
-                    this.syncThread.start(),
-                    this.daemonUpdateThread.start(),
-                    this.lockedTransactionsCheckThread.start()
-            ]);*/
 		}
 	}
 
@@ -106,16 +99,6 @@ public class WalletService {
 		syncThread = new Metronome(Config.SYNC_THREAD_INTERVAL);
 		daemonUpdateThread = new Metronome(Config.DAEMON_UPDATE_INTERVAL);
 		lockedTransactionsCheckThread = new Metronome(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL);
-
-		syncThread.start().subscribe(tick -> {
-			System.out.println(tick);
-		});
-		daemonUpdateThread.start().subscribe(tick -> {
-			System.out.println(tick);
-		});
-		lockedTransactionsCheckThread.start().subscribe(tick -> {
-			System.out.println(tick);
-		});
 	}
 
 	/**
