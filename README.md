@@ -4,13 +4,6 @@ Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, w
 
 Kryptokrona SDK for Java is currently the most fully featured implementation of the Kryptokrona Network protocols and includes many useful components and tools for building decentralized private communication and payment systems.
 
-Our primary goals are:
-
-- d
-- d
-- d
-- d
-
 ## Table of Contents
 
 - [Development resources](#development-resources)
