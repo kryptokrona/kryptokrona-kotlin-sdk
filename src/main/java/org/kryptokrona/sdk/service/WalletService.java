@@ -86,6 +86,7 @@ public class WalletService {
 
 			try {
 				daemon.init();
+				logger.info("Starting the wallet sync process.");
 
 				Flowable.concat(
 					syncThread.start(),
@@ -93,7 +94,7 @@ public class WalletService {
 					lockedTransactionsCheckThread.start()
 				).subscribe(System.out::println);
 
-				logger.info("Starting the wallet sync process.");
+
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
 			}
