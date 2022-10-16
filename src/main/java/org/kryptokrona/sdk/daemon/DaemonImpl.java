@@ -191,20 +191,22 @@ public class DaemonImpl implements Daemon {
 			getRequest("fee").subscribe(json -> {
 				NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
 
-				var integratedAddressesAllowed = false;
+				if (!nodeFeeObj.getAddress().equals("")) {
+					var integratedAddressesAllowed = false;
 
-				try {
-					WalletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
-						.subscribe();
+					try {
+						WalletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
+							.subscribe();
 
-					if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
-						nodeFee.setAddress(nodeFeeObj.getAddress());
-						nodeFee.setAmount(nodeFeeObj.getAmount());
-						nodeFee.setStatus(nodeFeeObj.getStatus());
-						logger.info("Node fee information, updated.");
+						if (nodeFeeObj.getAmount() > 0) {
+							nodeFee.setAddress(nodeFeeObj.getAddress());
+							nodeFee.setAmount(nodeFeeObj.getAmount());
+							nodeFee.setStatus(nodeFeeObj.getStatus());
+							logger.info("Node fee information, updated.");
+						}
+					} catch (WalletException e) {
+						logger.error("Failed to validate address from daemon fee info: " + e);
 					}
-				} catch (WalletException e) {
-					logger.error("Failed to validate address from daemon fee info: " + e);
 				}
 			});
 		} catch (IOException e) {

@@ -25,7 +25,7 @@ public class Example {
 		// walletService.saveWalletToFile(wallet, "mjovanc");
 
 		// sleep to keep processing more blocks before we stop it
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 
 		// stop the wallet sync
 		walletService.stop();
