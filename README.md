@@ -69,6 +69,35 @@ dependencies {
 }
 ```
 
+Basic example of how to can create a Kryptokrona Wallet:
+
+```java
+public class Main {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		// initialize a daemon
+		var daemon = new DaemonImpl(new HostName("swepool.org:11898"), false);
+
+		// initialize a wallet service
+		var walletService = new WalletService(daemon);
+
+		// start wallet service sync
+		walletService.start();
+
+		// create a new wallet
+		Wallet wallet = walletService.createWallet();
+
+		// save the wallet to a file
+		walletService.saveWalletToFile(wallet, "mjovanc");
+
+		// sleep to keep processing more blocks before we stop it
+		Thread.sleep(5000);
+
+		// stop the wallet sync
+		walletService.stop();
+	}
+}
+```
+
 ## Getting Help
 
 Are you having trouble with Kryptokrona SDK? We want to help!
@@ -97,7 +126,7 @@ Kryptokrona SDK uses GitHub’s integrated issue tracking system to record bugs 
 
 ## Guides
 
-If you had made a guide of how to use the Kryptokrona SDK feel free to send a PR and add your link to a list below.
+If you have made a guide of how to use the Kryptokrona SDK feel free to send a PR and add your link to a list below.
 
 Official guide is coming soon.
 

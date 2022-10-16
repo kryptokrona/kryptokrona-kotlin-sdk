@@ -2,14 +2,13 @@ package org.kryptokrona.sdk;
 
 import inet.ipaddr.HostName;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
-import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.service.WalletService;
 import org.kryptokrona.sdk.wallet.Wallet;
 
 import java.io.IOException;
 
 public class Example {
-	public static void main(String[] args) throws IOException, NodeDeadException, InterruptedException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// initialize a daemon
 		var daemon = new DaemonImpl(new HostName("swepool.org:11898"), false);
 
@@ -23,8 +22,9 @@ public class Example {
 		Wallet wallet = walletService.createWallet();
 
 		// save the wallet to a file
-		// walletService.saveWalletToFile(wallet, "mjovanc");
+		walletService.saveWalletToFile(wallet, "mjovanc");
 
+		// sleep to keep processing more blocks before we stop it
 		Thread.sleep(5000);
 
 		// stop the wallet sync
