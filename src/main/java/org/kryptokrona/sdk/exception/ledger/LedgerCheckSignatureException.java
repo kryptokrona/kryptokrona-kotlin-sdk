@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerCheckSignatureException.java
- *
+ * <p>
  * Error encountered when checking the signature using the supplied values.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

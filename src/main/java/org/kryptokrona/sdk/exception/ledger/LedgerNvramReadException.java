@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerNvramReadException.java
- *
+ * <p>
  * There was an error reading information from device NVRAM.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

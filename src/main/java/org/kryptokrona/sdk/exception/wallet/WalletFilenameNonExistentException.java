@@ -41,8 +41,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletFilenameNonExistentException extends WalletException {
 	public WalletFilenameNonExistentException() {
 		super(
-				"The filename you are attempting to open does not exist, " +
-						"or the wallet does not have permission to open it."
+			"The filename you are attempting to open does not exist, " +
+				"or the wallet does not have permission to open it."
 		);
 	}
 }

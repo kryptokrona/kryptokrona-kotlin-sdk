@@ -73,7 +73,7 @@ public class WalletService {
 	private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
 	public WalletService(
-			DaemonImpl daemon
+		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
 		this.started = false;
@@ -88,9 +88,9 @@ public class WalletService {
 				daemon.init();
 
 				Flowable.concat(
-						syncThread.start(),
-						daemonUpdateThread.start(),
-						lockedTransactionsCheckThread.start()
+					syncThread.start(),
+					daemonUpdateThread.start(),
+					lockedTransactionsCheckThread.start()
 				).subscribe(System.out::println);
 
 				logger.info("Starting the wallet sync process.");
@@ -105,7 +105,7 @@ public class WalletService {
 		started = false;
 		// daemon.stop();
 
-        syncThread.stop();
+		syncThread.stop();
 		daemonUpdateThread.stop();
 		lockedTransactionsCheckThread.stop();
 	}
@@ -117,7 +117,7 @@ public class WalletService {
 	public Observable<Boolean> sync(boolean sleep) {
 		try {
 			return processBlocks(sleep);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("Error processing blocks: " + e);
 		}
 

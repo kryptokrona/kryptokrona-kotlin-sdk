@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerOperationFailedToCompleteException.java
- *
+ * <p>
  * Operation failed to complete.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerWrongInputLengthException.java
- *
+ * <p>
  * The input data supplied is of an incorrect length required.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

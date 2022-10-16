@@ -55,8 +55,8 @@ public class MixinLimits {
 
 	public MixinLimits(List<MixinLimit> limits, int defaultMixin) {
 		this.limits = limits.stream()
-				.sorted(Comparator.comparing(MixinLimit::getHeight).reversed())
-				.collect(Collectors.toList());
+			.sorted(Comparator.comparing(MixinLimit::getHeight).reversed())
+			.collect(Collectors.toList());
 		this.defaultMixin = defaultMixin;
 	}
 

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionInitException.java
- *
+ * <p>
  * Could not reset transaction state tracking information on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionInitException extends LedgerException {
 	public LedgerTransactionInitException() {
 		super(
-				"Could not reset transaction state tracking information on the device."
+			"Could not reset transaction state tracking information on the device."
 		);
 	}
 }

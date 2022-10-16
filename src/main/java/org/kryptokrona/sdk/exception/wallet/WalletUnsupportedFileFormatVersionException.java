@@ -41,8 +41,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletUnsupportedFileFormatVersionException extends WalletException {
 	public WalletUnsupportedFileFormatVersionException() {
 		super(
-				"This wallet file appears to be from a newer or older " +
-						"version of the software, that we do not support."
+			"This wallet file appears to be from a newer or older " +
+				"version of the software, that we do not support."
 		);
 	}
 }

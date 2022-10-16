@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionInputOutputOutOfRangeException.java
- *
+ * <p>
  * Could not finalize the transaction prefix on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionFinalizePrefixException extends LedgerException {
 	public LedgerTransactionFinalizePrefixException() {
 		super(
-				"Could not finalize the transaction prefix on the device."
+			"Could not finalize the transaction prefix on the device."
 		);
 	}
 }

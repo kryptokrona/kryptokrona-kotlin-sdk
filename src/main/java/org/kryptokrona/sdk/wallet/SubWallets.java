@@ -109,7 +109,7 @@ public class SubWallets {
 	}
 
 	public static Observable<SubWallets> init(
-			String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
+		String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
 	) throws WalletAddressChecksumMismatchException {
 		var timestamp = 0L;
 
@@ -119,19 +119,19 @@ public class SubWallets {
 
 		long finalTimestamp = timestamp;
 		Address.fromAddress(address, Config.ADDRESS_PREFIX)
-				.subscribe(decodedAddress -> {
-					var publicSpendKeys = new ArrayList<String>();
+			.subscribe(decodedAddress -> {
+				var publicSpendKeys = new ArrayList<String>();
 
-					publicSpendKeys.add(decodedAddress.getSpendKeys().getPublicKey());
+				publicSpendKeys.add(decodedAddress.getSpendKeys().getPublicKey());
 
-					var subWallet = new SubWallet(address, scanHeight, finalTimestamp, decodedAddress.getSpendKeys(), true);
+				var subWallet = new SubWallet(address, scanHeight, finalTimestamp, decodedAddress.getSpendKeys(), true);
 
-					var subWallets = new HashMap<String, SubWallet>();
-					subWallets.put(decodedAddress.getSpendKeys().getPublicKey(), subWallet);
+				var subWallets = new HashMap<String, SubWallet>();
+				subWallets.put(decodedAddress.getSpendKeys().getPublicKey(), subWallet);
 
-					//TODO: this method is not done
-					// return Observable.just();
-				});
+				//TODO: this method is not done
+				// return Observable.just();
+			});
 
 		return Observable.empty();
 	}
@@ -223,9 +223,9 @@ public class SubWallets {
 	 */
 	public List<String> getLockedTransactionHashes() {
 		return lockedTransactions
-				.stream()
-				.map(lt -> lt.getHash())
-				.collect(Collectors.toList());
+			.stream()
+			.map(lt -> lt.getHash())
+			.collect(Collectors.toList());
 	}
 
 	/**
@@ -243,8 +243,8 @@ public class SubWallets {
 
 		// check if transaction is already in list of transactions
 		var transactionInTransaction = transactions.stream()
-				.filter(t -> t.getHash().equals(transaction.getHash()))
-				.findAny();
+			.filter(t -> t.getHash().equals(transaction.getHash()))
+			.findAny();
 
 		if (transactionInTransaction.isPresent()) {
 			logger.debug("Already seen transaction " + transaction.getHash() + ", ignoring.");
@@ -262,8 +262,8 @@ public class SubWallets {
 		logger.trace("Unconfirmed transaction " + transaction.getHash());
 
 		var transactionInLockedTransaction = lockedTransactions.stream()
-				.filter(t -> t.getHash().equals(transaction.getHash()))
-				.findAny();
+			.filter(t -> t.getHash().equals(transaction.getHash()))
+			.findAny();
 
 		if (transactionInLockedTransaction.isPresent()) {
 			logger.debug("Already seen unconfirmed transaction " + transaction.getHash() + ", ignoring.");
@@ -399,10 +399,10 @@ public class SubWallets {
 		}
 
 		var owner = keyImageOwners.values()
-				.stream()
-				.filter(ki -> ki.equals(keyImage))
-				.findFirst()
-				.orElse(null);
+			.stream()
+			.filter(ki -> ki.equals(keyImage))
+			.findFirst()
+			.orElse(null);
 
 		if (owner != null) {
 			ownerMap.put(true, owner);
@@ -501,25 +501,25 @@ public class SubWallets {
 		// loop through each sub wallet that we can take from
 		for (var address : subWalletsToTakeFrom) {
 			CryptoUtils.addressToKeys(address)
-					.subscribe(publicSpendKeys -> {
-						var key = publicSpendKeys.values()
-								.stream()
-								.findFirst()
-								.orElse(null);
+				.subscribe(publicSpendKeys -> {
+					var key = publicSpendKeys.values()
+						.stream()
+						.findFirst()
+						.orElse(null);
 
-						var subWallet = subWallets.values()
-								.stream()
-								.filter(sw -> sw.getSpendKeys().getPublicKey().equals(key))
-								.findFirst()
-								.orElse(null);
+					var subWallet = subWallets.values()
+						.stream()
+						.filter(sw -> sw.getSpendKeys().getPublicKey().equals(key))
+						.findFirst()
+						.orElse(null);
 
-						if (subWallet == null) {
-							throw new WalletSubNotFoundException();
-						}
+					if (subWallet == null) {
+						throw new WalletSubNotFoundException();
+					}
 
-						// fetch the spendable inputs
-						availableInputs.addAll(subWallet.getSpendableInputs(currentHeight));
-					});
+					// fetch the spendable inputs
+					availableInputs.addAll(subWallet.getSpendableInputs(currentHeight));
+				});
 		}
 
 		// sorting by amount
@@ -649,21 +649,21 @@ public class SubWallets {
 		}
 
 		Address.fromEntropy("", "", Config.ADDRESS_PREFIX)
-				.subscribe(address -> {
-					// checking if the aderess spendkeys already exists in the sub wallet
-					//TODO: Fix implementation in this
+			.subscribe(address -> {
+				// checking if the aderess spendkeys already exists in the sub wallet
+				//TODO: Fix implementation in this
 
-					// if they exist throw exception
+				// if they exist throw exception
 					/*if (spendKeys != null) {
 						throw new WalletSubWalletAlreadyExistsException();
 					}*/
 
-					// publicSpendKeys.add(address.getSpendKeys());
+				// publicSpendKeys.add(address.getSpendKeys());
 
-					Address.fromKeys(address.getSpendKeys(), Config.ADDRESS_PREFIX)
-							.subscribe(newAddr -> {
-							});
-				});
+				Address.fromKeys(address.getSpendKeys(), Config.ADDRESS_PREFIX)
+					.subscribe(newAddr -> {
+					});
+			});
 
 		return Observable.empty();
 	}
@@ -719,9 +719,9 @@ public class SubWallets {
 
 	private SubWallet getSubWalletByPublicSpendKey(String publicSpendKey) {
 		return subWallets.values()
-				.stream()
-				.filter(sw -> sw.getSpendKeys().getPublicKey().equals(publicSpendKey))
-				.findFirst()
-				.orElse(null);
+			.stream()
+			.filter(sw -> sw.getSpendKeys().getPublicKey().equals(publicSpendKey))
+			.findFirst()
+			.orElse(null);
 	}
 }

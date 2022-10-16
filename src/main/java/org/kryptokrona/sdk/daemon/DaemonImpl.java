@@ -55,7 +55,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -196,7 +195,7 @@ public class DaemonImpl implements Daemon {
 
 				try {
 					WalletValidator.validateAddresses(List.of(nodeFeeObj.getAddress()), integratedAddressesAllowed)
-							.subscribe();
+						.subscribe();
 
 					if (nodeFeeObj.getAmount() > 0 && !nodeFeeObj.getAddress().equals("")) {
 						nodeFee.setAddress(nodeFeeObj.getAddress());
@@ -249,7 +248,7 @@ public class DaemonImpl implements Daemon {
 		try {
 			// save the data from the get request here
 			getRequest("indexes/" + startHeight + "/" + endHeight)
-					.subscribe(logger::info);
+				.subscribe(logger::info);
 
 			// return the indexes here from the data
 		} catch (IOException e) {
@@ -299,9 +298,9 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<Map<Boolean, String>> sendTransaction(String rawTransaction) throws IOException {
 		this.postRequest("sendrawtransaction", rawTransaction)
-				.subscribe(result -> {
-					System.out.println(result);
-				});
+			.subscribe(result -> {
+				System.out.println(result);
+			});
 
 		return Observable.empty();
 	}
@@ -314,7 +313,7 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<String> getRequest(String param) throws IOException {
 		var request = requestFactory.buildGetRequest(
-				new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)));
+			new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)));
 
 		return Observable.just(request.execute().parseAsString());
 	}
@@ -322,9 +321,9 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<String> postRequest(String param, Object obj) throws IOException {
 		var request = requestFactory.buildPostRequest(
-				new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)),
-				ByteArrayContent.fromString("application/json", gson.toJson(obj, new TypeToken<Object>() {
-				}.getType())));
+			new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)),
+			ByteArrayContent.fromString("application/json", gson.toJson(obj, new TypeToken<Object>() {
+			}.getType())));
 
 		return Observable.just(request.getHeaders().setContentType("application/json").toString());
 	}
@@ -332,7 +331,7 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<Boolean> daemonReachable() throws IOException {
 		var request = requestFactory.buildGetRequest(
-				new GenericUrl(String.format("http://%s/info", this.hostname.toString())));
+			new GenericUrl(String.format("http://%s/info", this.hostname.toString())));
 
 		return Observable.just((request.execute()).getStatusCode() == 200);
 	}

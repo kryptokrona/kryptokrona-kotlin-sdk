@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerDerivationToScalarException.java
- *
+ * <p>
  * Error encountered when calculating the scalar of the derivation.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

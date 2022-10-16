@@ -22,7 +22,7 @@ public class Example {
 		Wallet wallet = walletService.createWallet();
 
 		// save the wallet to a file
-		walletService.saveWalletToFile(wallet, "mjovanc");
+		// walletService.saveWalletToFile(wallet, "mjovanc");
 
 		// sleep to keep processing more blocks before we stop it
 		Thread.sleep(5000);

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerStartTransactionException.java
- *
+ * <p>
  * Could not initiate a transaction construction process on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerStartTransactionException extends LedgerException {
 	public LedgerStartTransactionException() {
 		super(
-				"Could not initiate a transaction construction process on the device."
+			"Could not initiate a transaction construction process on the device."
 		);
 	}
 }

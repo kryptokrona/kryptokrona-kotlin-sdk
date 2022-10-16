@@ -43,10 +43,10 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletConflictingPaymentIdsException extends WalletException {
 	public WalletConflictingPaymentIdsException() {
 		super(
-				"Conflicting payment IDs were given. This could mean " +
-						"an integrated address + payment ID were given, where " +
-						"they are not the same, or that multiple integrated " +
-						"addresses with different payment IDs were given."
+			"Conflicting payment IDs were given. This could mean " +
+				"an integrated address + payment ID were given, where " +
+				"they are not the same, or that multiple integrated " +
+				"addresses with different payment IDs were given."
 		);
 	}
 }

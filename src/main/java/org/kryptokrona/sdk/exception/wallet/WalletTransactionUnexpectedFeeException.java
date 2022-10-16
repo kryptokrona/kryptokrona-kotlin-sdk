@@ -40,9 +40,9 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletTransactionUnexpectedFeeException extends WalletException {
 	public WalletTransactionUnexpectedFeeException() {
 		super(
-				"The fee of the created transaction is not the same as that " +
-						"which was specified (0 for fusion transactions). Almost " +
-						"certainly a programmer error. Cancelling transaction."
+			"The fee of the created transaction is not the same as that " +
+				"which was specified (0 for fusion transactions). Almost " +
+				"certainly a programmer error. Cancelling transaction."
 		);
 	}
 }

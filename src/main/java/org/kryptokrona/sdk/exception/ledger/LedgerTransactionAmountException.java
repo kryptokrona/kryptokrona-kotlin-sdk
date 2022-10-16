@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionAmountException.java
- *
+ * <p>
  * Could not process the amount value supplied.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionAmountException extends LedgerException {
 	public LedgerTransactionAmountException() {
 		super(
-				"Could not process the amount value supplied."
+			"Could not process the amount value supplied."
 		);
 	}
 }

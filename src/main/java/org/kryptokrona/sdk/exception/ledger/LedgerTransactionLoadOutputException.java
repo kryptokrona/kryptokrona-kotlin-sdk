@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionLoadOutputException.java
- *
+ * <p>
  * Could not load the transaction output to the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionLoadOutputException extends LedgerException {
 	public LedgerTransactionLoadOutputException() {
 		super(
-				"Could not load the transaction output to the device."
+			"Could not load the transaction output to the device."
 		);
 	}
 }

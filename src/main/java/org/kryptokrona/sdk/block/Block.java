@@ -59,8 +59,8 @@ public class Block {
 	private long blockTimestamp;
 
 	public Block(
-			TransactionRawCoinbase transactionRawCoinbase, List<TransactionRaw> transactions,
-			long blockHeight, String blockHash, long blockTimestamp
+		TransactionRawCoinbase transactionRawCoinbase, List<TransactionRaw> transactions,
+		long blockHeight, String blockHash, long blockTimestamp
 	) {
 		this.transactionRawCoinbase = transactionRawCoinbase;
 		this.transactions = transactions;

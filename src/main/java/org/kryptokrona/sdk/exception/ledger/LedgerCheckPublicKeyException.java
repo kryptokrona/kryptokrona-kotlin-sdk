@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerCheckPublicKeyException.java
- *
+ * <p>
  * Error encountered when checking public key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerNotPublicKeyException.java
- *
+ * <p>
  * The value supplied is not a valid public key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

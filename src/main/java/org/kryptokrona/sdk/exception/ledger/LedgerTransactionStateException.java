@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionStateException.java
- *
+ * <p>
  * The device is currently in a transaction construction state and this operation is
  * prohibited at this time.
  *
@@ -41,8 +41,8 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionStateException extends LedgerException {
 	public LedgerTransactionStateException() {
 		super(
-				"The device is currently in a transaction construction state and this operation is " +
-						"prohibited at this time."
+			"The device is currently in a transaction construction state and this operation is " +
+				"prohibited at this time."
 		);
 	}
 }

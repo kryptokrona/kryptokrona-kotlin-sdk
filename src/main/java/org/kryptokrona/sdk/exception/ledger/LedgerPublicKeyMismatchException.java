@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerPublicKeyMismatchException.java
- *
+ * <p>
  * The public key supplied does not match the calculated public key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

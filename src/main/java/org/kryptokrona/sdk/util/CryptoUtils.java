@@ -61,7 +61,8 @@ public class CryptoUtils {
 
 	private static final String jsonFileName = "wordlist.json";
 
-	private static final Type collectionType = new TypeToken<List<String>>() {}.getType();
+	private static final Type collectionType = new TypeToken<List<String>>() {
+	}.getType();
 
 	private static final Logger logger = LoggerFactory.getLogger(CryptoUtils.class);
 
@@ -107,7 +108,7 @@ public class CryptoUtils {
 	 * @return Returns a pretty print representation of the amount
 	 */
 	public static String prettyPrintAmount(double amount) {
-		var locale = new Locale("en","US");
+		var locale = new Locale("en", "US");
 		DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
 		DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance(locale);
 		dfs.setCurrencySymbol("XKR ");
@@ -124,7 +125,7 @@ public class CryptoUtils {
 	 * Split each amount into uniform amounts, e.g.
 	 * 1234567 = 1000000 + 200000 + 30000 + 4000 + 500 + 60 + 7
 	 *
-	 * @param amount The amount to split
+	 * @param amount                 The amount to split
 	 * @param preventTooLargeOutputs If we should prevent too large outputs
 	 * @return Returns a list of uniform amounts
 	 */
@@ -169,18 +170,18 @@ public class CryptoUtils {
 	 * The constants this calculation arise from can be seen below, or in
 	 * src/CryptoNoteCore/Currency.cpp::maxBlockCumulativeSize(). Call this value
 	 * x.
-	 *
+	 * <p>
 	 * Next, calculate the median size of the last 100 blocks. Take the max of
 	 * this value, and 100,000. Multiply this value by 1.25. Call this value y.
-	 *
+	 * <p>
 	 * Finally, return the minimum of x and y.
-	 *
+	 * <p>
 	 * Or, in short: min(140k (slowly rising), 1.25 * max(100k, median(last 100 blocks size)))
 	 * Block size will always be 125k or greater (Assuming non testnet)
-	 *
+	 * <p>
 	 * To get the max transaction size, remove 600 from this value, for the
 	 * reserved miner transaction.
-	 *
+	 * <p>
 	 * We are going to ignore the median(last 100 blocks size), as it is possible
 	 * for a transaction to be valid for inclusion in a block when it is submitted,
 	 * but not when it actually comes to be mined, for example if the median
@@ -188,7 +189,7 @@ public class CryptoUtils {
 	 * tx sizes, but prevents anything getting stuck in the pool.
 	 *
 	 * @param currentHeight The current height to use
-	 * @param blockTime The blocktime to use
+	 * @param blockTime     The blocktime to use
 	 * @return Gets the max transaction size
 	 */
 	public static long getMaxTxSize(long currentHeight, long blockTime) {
@@ -224,7 +225,7 @@ public class CryptoUtils {
 	/**
 	 * Returns whether the given word is in the mnemonic english dictionary. Note that
 	 * just because all the words are valid, does not mean the mnemonic is valid.
-	 *
+	 * <p>
 	 * Use isValidMnemonic to verify that.
 	 *
 	 * @param word The word to test

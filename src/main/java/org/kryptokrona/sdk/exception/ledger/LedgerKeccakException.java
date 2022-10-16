@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerKeccakException.java
- *
+ * <p>
  * Error encountered performing Keccak hashing method on device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

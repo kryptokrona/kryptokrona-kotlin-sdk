@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionSignException.java
- *
+ * <p>
  * Could not sign the transaction on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionSignException extends LedgerException {
 	public LedgerTransactionSignException() {
 		super(
-				"Could not sign the transaction on the device."
+			"Could not sign the transaction on the device."
 		);
 	}
 }

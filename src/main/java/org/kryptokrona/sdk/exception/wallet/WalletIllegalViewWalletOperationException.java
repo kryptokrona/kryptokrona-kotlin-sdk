@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.wallet;
 
 /**
  * WalletIllegalViewWalletOperationException.java
- *
+ * <p>
  * Cannot perform this operation when using a view wallet.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

@@ -102,7 +102,7 @@ public class SubWallet {
 	private boolean primaryAddress;
 
 	public SubWallet(
-			String address, long scanHeight, long timestamp, KeyPair spendKeys, boolean primaryAddress
+		String address, long scanHeight, long timestamp, KeyPair spendKeys, boolean primaryAddress
 	) {
 		this.address = address;
 		this.syncStartHeight = scanHeight;

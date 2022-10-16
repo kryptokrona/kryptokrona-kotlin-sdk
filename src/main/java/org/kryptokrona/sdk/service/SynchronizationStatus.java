@@ -52,10 +52,10 @@ public class SynchronizationStatus {
 	private long lastSavedCheckpointAt;
 
 	public SynchronizationStatus(
-			LinkedList<String> blockHashCheckpoints,
-			LinkedList<String> lastKnownBlockHashes,
-			long lastKnownBlockHeight,
-			long lastSavedCheckpointAt
+		LinkedList<String> blockHashCheckpoints,
+		LinkedList<String> lastKnownBlockHashes,
+		long lastKnownBlockHeight,
+		long lastSavedCheckpointAt
 	) {
 		this.blockHashCheckpoints = blockHashCheckpoints;
 		this.lastKnownBlockHashes = lastKnownBlockHashes;

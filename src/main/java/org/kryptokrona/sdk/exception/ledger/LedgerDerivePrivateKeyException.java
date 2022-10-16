@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerDerivePrivateKeyException.java
- *
+ * <p>
  * TCould not derive the private key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

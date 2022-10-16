@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerCompleteRingSignatureException.java
- *
+ * <p>
  * Error encountered completing the ring signatures for the supplied values.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

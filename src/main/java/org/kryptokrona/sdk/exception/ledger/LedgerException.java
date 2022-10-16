@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerException.java
- *
+ * <p>
  * Abstract Daemon Exception.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

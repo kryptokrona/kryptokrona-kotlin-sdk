@@ -102,7 +102,7 @@ public class Address {
 	/**
 	 * Creates a new address object from a Base58 address
 	 *
-	 * @param address The public address to decode
+	 * @param address       The public address to decode
 	 * @param addressPrefix The address prefix
 	 * @return Address object
 	 */
@@ -168,9 +168,9 @@ public class Address {
 	 * Creates a new address object using the supplied public keys.
 	 *
 	 * @param publicSpendKey the public spend key
-	 * @param publicViewKey the public view key
-	 * @param paymentId the payment ID
-	 * @param addressPrefix the address prefix
+	 * @param publicViewKey  the public view key
+	 * @param paymentId      the payment ID
+	 * @param addressPrefix  the address prefix
 	 * @return A new address Object
 	 */
 	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId, long addressPrefix) {

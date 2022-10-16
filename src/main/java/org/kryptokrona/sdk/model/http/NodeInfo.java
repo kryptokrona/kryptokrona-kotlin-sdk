@@ -106,11 +106,11 @@ public class NodeInfo {
 	private int whitePeerlistSize;
 
 	public NodeInfo(
-			int altBlocksCount, int difficulty, int greyPeerlistSize, int hashrate, int height,
-			int incomingConnectionsCount, int lastKnownBlockIndex, int majorVersion, int minorVersion,
-			int networkHeight, int outgoingConnectionsCount, int startTime, String status,
-			int supportedHeight, boolean synced, boolean testnet, int txCount, int txPoolSize,
-			List<Integer> upgradeHeights, String version, int whitePeerlistSize
+		int altBlocksCount, int difficulty, int greyPeerlistSize, int hashrate, int height,
+		int incomingConnectionsCount, int lastKnownBlockIndex, int majorVersion, int minorVersion,
+		int networkHeight, int outgoingConnectionsCount, int startTime, String status,
+		int supportedHeight, boolean synced, boolean testnet, int txCount, int txPoolSize,
+		List<Integer> upgradeHeights, String version, int whitePeerlistSize
 	) {
 		this.altBlocksCount = altBlocksCount;
 		this.difficulty = difficulty;

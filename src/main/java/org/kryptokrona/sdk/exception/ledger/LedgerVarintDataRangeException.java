@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerVarintDataRangeException.java
- *
+ * <p>
  * The data provided could not be encoded or decoded given the maximum buffer length.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerDerivePublicKeyException.java
- *
+ * <p>
  * Could not derive public key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

@@ -120,14 +120,14 @@ public class Config {
 	 * Mapping of height to mixin maximum and mixin minimum.
 	 */
 	public final static MixinLimits MIXIN_LIMITS = new MixinLimits(Arrays.asList(
-			// Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
-			new MixinLimit(440000, 1, 100, 3),
+		// Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
+		new MixinLimit(440000, 1, 100, 3),
 
-			// At height of 620000, static mixin of 7
-			new MixinLimit(620000, 7),
+		// At height of 620000, static mixin of 7
+		new MixinLimit(620000, 7),
 
-			// At height of 800000, static mixin of 3
-			new MixinLimit(800000, 3)
+		// At height of 800000, static mixin of 3
+		new MixinLimit(800000, 3)
 	), 3);
 
 	/**
@@ -179,6 +179,6 @@ public class Config {
 	 * Allows setting a custom user agent string
 	 */
 	public final static String CUSTOM_USER_AGENT_STRING = String.format(
-			"%s-sdk-%s", TICKER.toLowerCase(), System.getProperty("sdk-version"));
+		"%s-sdk-%s", TICKER.toLowerCase(), System.getProperty("sdk-version"));
 
 }

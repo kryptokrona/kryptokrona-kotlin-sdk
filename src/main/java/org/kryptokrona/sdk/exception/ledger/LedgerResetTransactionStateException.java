@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerResetTransactionStateException.java
- *
+ * <p>
  * Could not reset the transaction state. Please close and re-open the application
  * on the device.
  *
@@ -41,8 +41,8 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerResetTransactionStateException extends LedgerException {
 	public LedgerResetTransactionStateException() {
 		super(
-				"Could not reset the transaction state. Please close and re-open the application " +
-						"on the device."
+			"Could not reset the transaction state. Please close and re-open the application " +
+				"on the device."
 		);
 	}
 }

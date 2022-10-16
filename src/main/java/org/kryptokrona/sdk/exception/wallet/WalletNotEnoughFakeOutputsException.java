@@ -47,9 +47,9 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletNotEnoughFakeOutputsException extends WalletException {
 	public WalletNotEnoughFakeOutputsException() {
 		super(
-				"We could not get enough fake outputs for this transaction " +
-						"to complete. If possible, try lowering the mixin value " +
-						"used, or decrease the amount you are sending."
+			"We could not get enough fake outputs for this transaction " +
+				"to complete. If possible, try lowering the mixin value " +
+				"used, or decrease the amount you are sending."
 		);
 	}
 }

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerPrivateSpendException.java
- *
+ * <p>
  * Could not access the private spend key on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerPrivateSpendException extends LedgerException {
 	public LedgerPrivateSpendException() {
 		super(
-				"Could not access the private spend key on the device."
+			"Could not access the private spend key on the device."
 		);
 	}
 }

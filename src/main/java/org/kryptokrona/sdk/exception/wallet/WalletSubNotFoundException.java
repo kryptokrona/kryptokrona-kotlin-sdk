@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.wallet;
 
 /**
  * WalletSubNotFoundException.java
- *
+ * <p>
  * Subwallet not found.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

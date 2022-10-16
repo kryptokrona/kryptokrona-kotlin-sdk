@@ -12,7 +12,8 @@ class WalletValidatorTest {
 
     private lateinit var walletValidator: WalletValidator
 
-    private var correctAddress = "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu"
+    private var correctAddress =
+        "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu"
 
     private var correctAddresses = listOf(
         "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu",
@@ -127,10 +128,10 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate destinations`() {
-            walletValidator.validateDestinations(correctAmountWalletDestinations)
-                .subscribe { validity ->
-                    assertTrue { validity }
-                }
+        walletValidator.validateDestinations(correctAmountWalletDestinations)
+            .subscribe { validity ->
+                assertTrue { validity }
+            }
     }
 
     @Test
@@ -161,7 +162,8 @@ class WalletValidatorTest {
     fun `can validate integrated addresses`() {
         walletValidator.validateIntegratedAddresses(
             correctAmountWalletDestinations,
-            "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03")
+            "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03"
+        )
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -173,7 +175,8 @@ class WalletValidatorTest {
         assertFailsWith<WalletConflictingPaymentIdsException> {
             walletValidator.validateIntegratedAddresses(
                 correctAmountWalletDestinations,
-                "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03")
+                "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03"
+            )
                 .subscribe { }
         }
     }
@@ -182,10 +185,17 @@ class WalletValidatorTest {
     fun `can validate transfer amount and fee`() {
         val feeType = FeeType.minimumFee()
 
-        val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
+        val subWallets =
+            SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
         val currentHeight = 0L
 
-        walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
+        walletValidator.validateAmount(
+            correctAmountWalletDestinations,
+            feeType,
+            subWalletsToTakeFrom,
+            subWallets,
+            currentHeight
+        )
             .subscribe { }
     }
 
@@ -195,11 +205,18 @@ class WalletValidatorTest {
         feeType.isFeePerByte = false
         feeType.isFixedFee = false
 
-        val subWallets = SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
+        val subWallets =
+            SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
         val currentHeight = 0L
 
         assertFailsWith<WalletFeeTooSmallException> {
-            walletValidator.validateAmount(correctAmountWalletDestinations, feeType, subWalletsToTakeFrom, subWallets, currentHeight)
+            walletValidator.validateAmount(
+                correctAmountWalletDestinations,
+                feeType,
+                subWalletsToTakeFrom,
+                subWallets,
+                currentHeight
+            )
                 .subscribe { }
         }
     }
@@ -256,7 +273,8 @@ class WalletValidatorTest {
     fun `can validate 64 char length payment ID when empty string are allowed`() {
         walletValidator.validatePaymentID(
             "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20a",
-            true)
+            true
+        )
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -272,7 +290,8 @@ class WalletValidatorTest {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
             walletValidator.validatePaymentID(
                 "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20adasdasd2d12d",
-                false)
+                false
+            )
                 .subscribe { }
         }
     }
@@ -282,7 +301,8 @@ class WalletValidatorTest {
         assertFailsWith<WalletPaymentIdInvalidException> {
             walletValidator.validatePaymentID(
                 "ecd4621+8500#655b82f0eb19c3ccd0e4cc882!b87497c97d15b23b0fdabd20a",
-                false)
+                false
+            )
                 .subscribe { }
         }
     }

@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerGenerateKeyImageException.java
- *
+ * <p>
  * Error encountered generating a key image using the supplied values.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

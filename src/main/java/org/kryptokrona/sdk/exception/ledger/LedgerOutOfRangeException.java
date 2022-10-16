@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerOutOfRangeException.java
- *
+ * <p>
  * The value supplied exceeds the permitted range of such values.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

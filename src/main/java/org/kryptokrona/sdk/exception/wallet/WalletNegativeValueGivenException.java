@@ -40,8 +40,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletNegativeValueGivenException extends WalletException {
 	public WalletNegativeValueGivenException() {
 		super(
-				"The input for this operation must be greater than or " +
-						"equal to zero, but a negative number was given."
+			"The input for this operation must be greater than or " +
+				"equal to zero, but a negative number was given."
 		);
 	}
 }

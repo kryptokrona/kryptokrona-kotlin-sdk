@@ -40,8 +40,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletInvalidKeyFormatException extends WalletException {
 	public WalletInvalidKeyFormatException() {
 		super(
-				"The public/private key or hash given is not a 64 char " +
-						"hex string."
+			"The public/private key or hash given is not a 64 char " +
+				"hex string."
 		);
 	}
 }

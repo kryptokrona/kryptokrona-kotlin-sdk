@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.wallet;
 
 /**
  * WalletAddressChecksumMismatchException.java
- *
+ * <p>
  * Checksum mismatch when parsing wallet address.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

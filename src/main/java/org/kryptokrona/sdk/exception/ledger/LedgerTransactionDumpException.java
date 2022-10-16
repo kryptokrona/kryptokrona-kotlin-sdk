@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerTransactionDumpException.java
- *
+ * <p>
  * Could not export the completed transaction from the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerTransactionDumpException extends LedgerException {
 	public LedgerTransactionDumpException() {
 		super(
-				"Could not export the completed transaction from the device."
+			"Could not export the completed transaction from the device."
 		);
 	}
 }

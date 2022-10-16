@@ -69,7 +69,7 @@ public class BlockTemplate {
 	}
 
 	public void setActivateParentBlockVersion(long value) {
-		
+
 	}
 
 	/**

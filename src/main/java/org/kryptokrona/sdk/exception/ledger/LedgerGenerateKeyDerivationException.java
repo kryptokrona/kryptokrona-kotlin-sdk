@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerGenerateKeyDerivationException.java
- *
+ * <p>
  * Could not generate key derivation.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

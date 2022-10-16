@@ -40,8 +40,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletMixinTooSmallException extends WalletException {
 	public WalletMixinTooSmallException() {
 		super(
-				"The mixin value given is too low to be accepted by the " +
-						"network (based on the current height known by the wallet)"
+			"The mixin value given is too low to be accepted by the " +
+				"network (based on the current height known by the wallet)"
 		);
 	}
 }

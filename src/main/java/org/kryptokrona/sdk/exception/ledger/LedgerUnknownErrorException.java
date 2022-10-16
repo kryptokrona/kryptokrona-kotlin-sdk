@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerUnknownErrorException.java
- *
+ * <p>
  * An unknown error occurred.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

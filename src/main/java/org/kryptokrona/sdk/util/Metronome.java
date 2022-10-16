@@ -31,9 +31,6 @@
 package org.kryptokrona.sdk.util;
 
 import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.config.Config;
-import org.reactivestreams.Subscription;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -66,9 +63,9 @@ public class Metronome {
 		stopped.set(false);
 
 		return Flowable.interval(this.interval, TimeUnit.MILLISECONDS)
-				.takeWhile(tick -> !stopped.get())
-				.filter(tick -> resumed.get())
-				.map(tick -> elapsedTime.addAndGet(1000));
+			.takeWhile(tick -> !stopped.get())
+			.filter(tick -> resumed.get())
+			.map(tick -> elapsedTime.addAndGet(1000));
 	}
 
 	public void pause() {

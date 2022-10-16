@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerPrivateToPublicKeyException.java
- *
+ * <p>
  * Error encountered calculating the public key for the supplied private key.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

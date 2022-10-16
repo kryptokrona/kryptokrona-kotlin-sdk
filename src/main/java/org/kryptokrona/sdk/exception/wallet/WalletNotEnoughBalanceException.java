@@ -41,9 +41,9 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletNotEnoughBalanceException extends WalletException {
 	public WalletNotEnoughBalanceException() {
 		super(
-				"Not enough unlocked funds were found to cover this " +
-						"transaction in the subwallets specified (or all wallets, " +
-						"if not specified). (Sum of amounts + fee + node fee)"
+			"Not enough unlocked funds were found to cover this " +
+				"transaction in the subwallets specified (or all wallets, " +
+				"if not specified). (Sum of amounts + fee + node fee)"
 		);
 	}
 }

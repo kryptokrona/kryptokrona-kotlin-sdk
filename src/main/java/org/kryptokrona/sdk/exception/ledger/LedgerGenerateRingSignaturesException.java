@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerGenerateRingSignaturesException.java
- *
+ * <p>
  * Error encountered generating the ring signatures for the supplied values.
  *
  * @author Marcus Cvjeticanin (@mjovanc)

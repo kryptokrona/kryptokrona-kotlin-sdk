@@ -52,7 +52,7 @@ public class WalletValidator {
 	/**
 	 * Verifies that the address given is valid.
 	 *
-	 * @param address The address to validate.
+	 * @param address                  The address to validate.
 	 * @param integratedAddressAllowed Should an integrated address be allowed?
 	 * @return Returns true if the address is valid, otherwise throws exception descripting the error
 	 */
@@ -63,19 +63,19 @@ public class WalletValidator {
 	/**
 	 * Verifies that the addresses given are valid.
 	 *
-	 * @param addresses The addresses to validate
+	 * @param addresses                  The addresses to validate
 	 * @param integratedAddressesAllowed Should we allow integrated addresses?
 	 * @return Returns an Observable of type boolean if address is valid, otherwise throws exception describing the error
 	 */
 	public static Observable<Boolean> validateAddresses(List<String> addresses, boolean integratedAddressesAllowed)
-			throws WalletException {
+		throws WalletException {
 
 		var alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 		for (String address : addresses) {
 			// verify that address lengths are correct
 			if (
-					address.length() != Config.STANDARD_ADDRESS_LENGTH &&
+				address.length() != Config.STANDARD_ADDRESS_LENGTH &&
 					address.length() != Config.INTEGRATED_ADDRESS_LENGTH) {
 				throw new WalletAddressWrongLengthException();
 			}
@@ -133,7 +133,7 @@ public class WalletValidator {
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
 	public static Observable<Boolean> validateIntegratedAddresses(Map<String, Double> destinations, final String paymentID)
-			throws WalletAddressChecksumMismatchException {
+		throws WalletAddressChecksumMismatchException {
 		for (var destination : destinations.keySet()) {
 			if (destination.length() != Config.INTEGRATED_ADDRESS_LENGTH) {
 				continue;
@@ -141,11 +141,11 @@ public class WalletValidator {
 
 			// extract the payment id
 			Address.fromAddress(destination, Config.ADDRESS_PREFIX)
-					.subscribe(parsedAddress -> {
-						if (!Objects.equals(paymentID, parsedAddress.getPaymentId())) {
-							throw new WalletConflictingPaymentIdsException();
-						}
-					});
+				.subscribe(parsedAddress -> {
+					if (!Objects.equals(paymentID, parsedAddress.getPaymentId())) {
+						throw new WalletConflictingPaymentIdsException();
+					}
+				});
 		}
 
 		return Observable.just(true);
@@ -154,7 +154,7 @@ public class WalletValidator {
 	/**
 	 * Validate the addresses given are both valid, and exist in the sub wallet.
 	 *
-	 * @param addresses List of addresses to validate
+	 * @param addresses  List of addresses to validate
 	 * @param subWallets List of sub wallets to use in validation
 	 * @return Returns SUCCESS if valid, otherwise a WalletError describing the error
 	 */
@@ -185,11 +185,11 @@ public class WalletValidator {
 	 * @return Returns true if valid, otherwise an exception describing the error
 	 */
 	public static Observable<Boolean> validateAmount(
-			Map<String, Double> destinations,
-			FeeType feeType,
-			List<String> subWalletsToTakeFrom,
-			SubWallets subWallets,
-			long currentHeight
+		Map<String, Double> destinations,
+		FeeType feeType,
+		List<String> subWalletsToTakeFrom,
+		SubWallets subWallets,
+		long currentHeight
 	) throws WalletFeeTooSmallException {
 
 		if (!feeType.isFeePerByte() && !feeType.isFixedFee()) {
@@ -197,24 +197,24 @@ public class WalletValidator {
 		}
 
 		subWallets.getBalance(currentHeight, subWalletsToTakeFrom)
-				.subscribe(summedBalance -> {
-					// gets the sum of all map values of destinations
-					var totalAmount = destinations.values().stream().mapToDouble(Double::doubleValue).sum();
+			.subscribe(summedBalance -> {
+				// gets the sum of all map values of destinations
+				var totalAmount = destinations.values().stream().mapToDouble(Double::doubleValue).sum();
 
-					if (feeType.isFixedFee()) {
-						totalAmount += feeType.getFixedFee();
-					}
+				if (feeType.isFixedFee()) {
+					totalAmount += feeType.getFixedFee();
+				}
 
-					for (Double amount : summedBalance.keySet()) {
-						if (totalAmount > amount) {
-							throw new WalletNotEnoughBalanceException();
-						}
+				for (Double amount : summedBalance.keySet()) {
+					if (totalAmount > amount) {
+						throw new WalletNotEnoughBalanceException();
 					}
+				}
 
-					if (totalAmount >= 2 * Math.pow(2, 64)) {
-						throw new WalletWillOverflowException();
-					}
-				});
+				if (totalAmount >= 2 * Math.pow(2, 64)) {
+					throw new WalletWillOverflowException();
+				}
+			});
 
 		return Observable.just(true);
 	}
@@ -222,12 +222,12 @@ public class WalletValidator {
 	/**
 	 * Validates mixin is valid and in allowed range
 	 *
-	 * @param mixin The mixin to validate
+	 * @param mixin  The mixin to validate
 	 * @param height Height for getting the mixin
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
 	public static Observable<Boolean> validateMixin(long mixin, long height)
-			throws WalletNegativeValueGivenException, WalletMixinTooSmallException, WalletMixinTooBigException {
+		throws WalletNegativeValueGivenException, WalletMixinTooSmallException, WalletMixinTooBigException {
 		if (mixin < 0) {
 			throw new WalletNegativeValueGivenException();
 		}
@@ -248,12 +248,12 @@ public class WalletValidator {
 	/**
 	 * Validates the payment ID is valid (or an empty string)
 	 *
-	 * @param paymentID The payment ID to validate
+	 * @param paymentID        The payment ID to validate
 	 * @param allowEmptyString If we want to allow an empty string
 	 * @return Returns true if valid, otherwise throws an exception describing the error
 	 */
 	public static Observable<Boolean> validatePaymentID(String paymentID, boolean allowEmptyString)
-			throws WalletPaymentIdWrongLengthException, WalletPaymentIdInvalidException {
+		throws WalletPaymentIdWrongLengthException, WalletPaymentIdInvalidException {
 
 		if (Objects.equals(paymentID, "") && allowEmptyString) {
 			return Observable.just(true);
@@ -273,7 +273,7 @@ public class WalletValidator {
 	/**
 	 * Check if character exists in char array
 	 *
-	 * @param c The character to check if it contains in char array
+	 * @param c     The character to check if it contains in char array
 	 * @param array The char array to check against
 	 * @return Returns true if it contains, otherwise false
 	 */

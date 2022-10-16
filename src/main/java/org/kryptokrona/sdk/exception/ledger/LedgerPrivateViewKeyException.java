@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerPrivateViewKeyException.java
- *
+ * <p>
  * Could not access the private view key on the device.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerPrivateViewKeyException extends LedgerException {
 	public LedgerPrivateViewKeyException() {
 		super(
-				"Could not access the private view key on the device."
+			"Could not access the private view key on the device."
 		);
 	}
 }

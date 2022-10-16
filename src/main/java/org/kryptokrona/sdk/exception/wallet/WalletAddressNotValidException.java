@@ -40,8 +40,8 @@ package org.kryptokrona.sdk.exception.wallet;
 public class WalletAddressNotValidException extends WalletException {
 	public WalletAddressNotValidException() {
 		super(
-				"The address given is not valid. Possibly invalid checksum. " +
-						"Most likely a typo."
+			"The address given is not valid. Possibly invalid checksum. " +
+				"Most likely a typo."
 		);
 	}
 }

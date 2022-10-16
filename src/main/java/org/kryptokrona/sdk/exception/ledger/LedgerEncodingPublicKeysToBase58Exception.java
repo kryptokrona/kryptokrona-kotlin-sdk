@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.exception.ledger;
 
 /**
  * LedgerEncodingPublicKeysToBase58Exception.java
- *
+ * <p>
  * Error encountered encoding the public keys to a Base58 wallet address.
  *
  * @author Marcus Cvjeticanin (@mjovanc)
@@ -40,7 +40,7 @@ package org.kryptokrona.sdk.exception.ledger;
 public class LedgerEncodingPublicKeysToBase58Exception extends LedgerException {
 	public LedgerEncodingPublicKeysToBase58Exception() {
 		super(
-				"Error encountered encoding the public keys to a Base58 wallet address."
+			"Error encountered encoding the public keys to a Base58 wallet address."
 		);
 	}
 }

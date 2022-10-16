@@ -71,12 +71,12 @@ public class WalletSynchronizerService {
 	private Config config;
 
 	public WalletSynchronizerService(
-			DaemonImpl daemon,
-			List<SubWallets> subWallets,
-			long startTimestamp,
-			long startHeight,
-			String privateViewKey,
-			Config config
+		DaemonImpl daemon,
+		List<SubWallets> subWallets,
+		long startTimestamp,
+		long startHeight,
+		String privateViewKey,
+		Config config
 	) {
 		this.daemon = daemon;
 		this.subWallets = subWallets;
@@ -88,9 +88,9 @@ public class WalletSynchronizerService {
 	}
 
 	public void initAfterLoad(
-			List<SubWallets> subWallets,
-			DaemonImpl daemon,
-			Config config
+		List<SubWallets> subWallets,
+		DaemonImpl daemon,
+		Config config
 	) {
 		this.subWallets = subWallets;
 		this.daemon = daemon;
@@ -114,27 +114,27 @@ public class WalletSynchronizerService {
 	 * Process transaction outputs of the given block. No external dependencies,
 	 * lets us easily swap out with a C++ replacement for SPEEEED
 	 *
-	 * @param block The block to use
-	 * @param privateViewKey The private view key
-	 * @param allSpendKeys List of spend keys
-	 * @param isViewWallet If its a view wallet
+	 * @param block                       The block to use
+	 * @param privateViewKey              The private view key
+	 * @param allSpendKeys                List of spend keys
+	 * @param isViewWallet                If its a view wallet
 	 * @param processCoinbaseTransactions If we should process coinbase transactions
 	 * @return Returns a map of transaction outputs
 	 */
 	public Observable<Map<String, List<TransactionInputImpl>>> processBlockOutputs(
-			Block block,
-			String privateViewKey,
-			List<KeyPair> allSpendKeys,
-			boolean isViewWallet,
-			boolean processCoinbaseTransactions
+		Block block,
+		String privateViewKey,
+		List<KeyPair> allSpendKeys,
+		boolean isViewWallet,
+		boolean processCoinbaseTransactions
 	) {
 		var inputs = new HashMap<String, List<TransactionInputImpl>>();
 
 		if (processCoinbaseTransactions && (block.getTransactionRawCoinbase() != null)) {
 			processTransactionOutputs(block.getTransactionRawCoinbase(), block.getBlockHeight())
-					.subscribe(outputs -> {
-						inputs.values().addAll(outputs.values());
-					});
+				.subscribe(outputs -> {
+					inputs.values().addAll(outputs.values());
+				});
 		}
 
 		for (var tx : block.getTransactions()) {
@@ -206,24 +206,24 @@ public class WalletSynchronizerService {
 	}
 
 	private Observable<Map<String, List<TransactionInputImpl>>> processTransactionOutputs(
-			TransactionRawCoinbase rawTx,
-			long blockHeight
+		TransactionRawCoinbase rawTx,
+		long blockHeight
 	) {
 		return null;
 	}
 
 	private Observable<List<Map<String, List<TransactionInputImpl>>>> processCoinbaseTransaction(
-			Block block,
-			List<Map<String, TransactionInputImpl>> ourInputs
+		Block block,
+		List<Map<String, TransactionInputImpl>> ourInputs
 	) {
 		return null;
 	}
 
 	//TODO should return another type
 	private Observable<Void> processTransaction(
-			Block block,
-			List<Map<String, TransactionInputImpl>> ourInputs,
-			TransactionRaw rawTx
+		Block block,
+		List<Map<String, TransactionInputImpl>> ourInputs,
+		TransactionRaw rawTx
 	) {
 		return null;
 	}
