@@ -84,7 +84,7 @@ public class Main {
 		walletService.start();
 
 		// create a new wallet
-		Wallet wallet = walletService.createWallet();
+		var wallet = walletService.createWallet();
 
 		// save the wallet to a file
 		walletService.saveWalletToFile(wallet, "mjovanc");
