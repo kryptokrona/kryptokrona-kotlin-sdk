@@ -30,7 +30,6 @@ package org.kryptokrona.sdk.service;
 
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
@@ -45,6 +44,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.List;
 
+import static org.kryptokrona.sdk.config.Config.*;
+
 /**
  * WalletService.java
  *
@@ -52,9 +53,7 @@ import java.util.List;
  */
 public class WalletService {
 
-	private Daemon daemon;
-
-	private Config config;
+	private final Daemon daemon;
 
 	private List<SubWallets> subWallets;
 
@@ -126,9 +125,9 @@ public class WalletService {
 	}
 
 	public void setupMetronomes() {
-		syncThread = new Metronome(Config.SYNC_THREAD_INTERVAL);
-		daemonUpdateThread = new Metronome(Config.DAEMON_UPDATE_INTERVAL);
-		lockedTransactionsCheckThread = new Metronome(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL);
+		syncThread = new Metronome(SYNC_THREAD_INTERVAL);
+		daemonUpdateThread = new Metronome(DAEMON_UPDATE_INTERVAL);
+		lockedTransactionsCheckThread = new Metronome(LOCKED_TRANSACTIONS_CHECK_INTERVAL);
 	}
 
 	/**
