@@ -89,13 +89,14 @@ public class WalletService {
 				daemon.init();
 				logger.info("Starting the wallet sync process.");
 
-				ConnectableFlowable<Long> st = syncThread.start().publish();
-				ConnectableFlowable<Long> dut = daemonUpdateThread.start().publish();
-				ConnectableFlowable<Long> ltct = lockedTransactionsCheckThread.start().publish();
+				var st = syncThread.start().publish();
+				var dut = daemonUpdateThread.start().publish();
+				var ltct = lockedTransactionsCheckThread.start().publish();
 
 				st.subscribe(result -> {
-					System.out.println("Sync thread intervall...");
-					// sync(true).subscribe();
+					// System.out.println("Sync thread interval...");
+
+					sync(true).blockingSubscribe();
 				});
 
 				dut.subscribe(result -> {
@@ -111,7 +112,6 @@ public class WalletService {
 				st.connect();
 				dut.connect();
 				ltct.connect();
-
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
 			}
