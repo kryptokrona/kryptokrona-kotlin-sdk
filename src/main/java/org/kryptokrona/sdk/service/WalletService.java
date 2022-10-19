@@ -87,12 +87,11 @@ public class WalletService {
 				daemon.init();
 				logger.info("Starting the wallet sync process.");
 
-				Flowable.concat(
+				Flowable.merge(
 					syncThread.start(),
 					daemonUpdateThread.start(),
 					lockedTransactionsCheckThread.start()
 				).subscribe(System.out::println);
-
 
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
