@@ -94,19 +94,15 @@ public class WalletService {
 				var ltct = lockedTransactionsCheckThread.start().publish();
 
 				st.subscribe(result -> {
-					// System.out.println("Sync thread interval...");
-
 					sync(true).blockingSubscribe();
 				});
 
 				dut.subscribe(result -> {
-					System.out.println("Update daemon info...");
-					// updateDaemonInfo()
+					updateDaemonInfo().blockingSubscribe();
 				});
 
 				ltct.subscribe(result -> {
-					System.out.println("Checking locked transactions...");
-					// checkLockedTransactions()
+					checkLockedTransactions().blockingSubscribe();
 				});
 
 				st.connect();
@@ -141,6 +137,28 @@ public class WalletService {
 		}
 
 		return Observable.just(false);
+	}
+
+	/**
+	 * Update daemon status.
+	 *
+	 * @return Observable
+	 */
+	public Observable<Void> updateDaemonInfo() {
+		logger.info("Updating daemon info...");
+
+		return Observable.empty();
+	}
+
+	/**
+	 * Remove any transactions that have been cancelled.
+	 *
+	 * @return Observable
+	 */
+	public Observable<Void> checkLockedTransactions() {
+		logger.info("Checking locked transactions...");
+
+		return Observable.empty();
 	}
 
 	public void setupMetronomes() {
