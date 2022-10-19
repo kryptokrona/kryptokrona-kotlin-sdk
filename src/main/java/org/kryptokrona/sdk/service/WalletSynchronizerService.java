@@ -173,7 +173,7 @@ public class WalletSynchronizerService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<Map<List<Block>, Boolean>> fetchBlocks() {
+	public Observable<Map<Block, Boolean>> fetchBlocks() {
 		return null;
 	}
 

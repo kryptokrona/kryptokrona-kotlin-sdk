@@ -118,6 +118,8 @@ public class WalletService {
 
 	public Observable<Boolean> processBlocks(boolean sleep) {
 		logger.info("Processing blocks...");
+		walletSynchronizerService.fetchBlocks().blockingSubscribe();
+
 		return Observable.just(true);
 	}
 
