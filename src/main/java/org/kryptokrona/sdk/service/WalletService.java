@@ -94,20 +94,17 @@ public class WalletService {
 				ConnectableFlowable<Long> ltct = lockedTransactionsCheckThread.start().publish();
 
 				st.subscribe(result -> {
-					System.out.println("st");
-					System.out.println(result);
-					sync(true).subscribe();
+					System.out.println("Sync thread intervall...");
+					// sync(true).subscribe();
 				});
 
 				dut.subscribe(result -> {
-					System.out.println("dut");
-					System.out.println(result);
+					System.out.println("Update daemon info...");
 					// updateDaemonInfo()
 				});
 
 				ltct.subscribe(result -> {
-					System.out.println("ltct");
-					System.out.println(result);
+					System.out.println("Checking locked transactions...");
 					// checkLockedTransactions()
 				});
 
@@ -131,19 +128,19 @@ public class WalletService {
 		lockedTransactionsCheckThread.stop();
 	}
 
-	public Flowable<Boolean> processBlocks(boolean sleep) {
+	public Observable<Boolean> processBlocks(boolean sleep) {
 		logger.info("Processing blocks...");
-		return Flowable.just(true);
+		return Observable.just(true);
 	}
 
-	public Flowable<Boolean> sync(boolean sleep) {
+	public Observable<Boolean> sync(boolean sleep) {
 		try {
 			return processBlocks(sleep);
 		} catch (Exception e) {
 			logger.error("Error processing blocks: " + e);
 		}
 
-		return Flowable.just(false);
+		return Observable.just(false);
 	}
 
 	public void setupMetronomes() {
