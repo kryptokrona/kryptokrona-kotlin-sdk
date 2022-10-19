@@ -19,13 +19,13 @@ public class Example {
 		walletService.start();
 
 		// create a new wallet
-		var wallet = walletService.createWallet();
+		// var wallet = walletService.createWallet();
 
 		// save the wallet to a file
 		// walletService.saveWalletToFile(wallet, "mjovanc");
 
 		// sleep to keep processing more blocks before we stop it
-		Thread.sleep(1000);
+		Thread.sleep(50000);
 
 		// stop the wallet sync
 		walletService.stop();

@@ -30,6 +30,7 @@ package org.kryptokrona.sdk.service;
 
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.flowables.ConnectableFlowable;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
@@ -43,6 +44,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Flow;
 
 import static org.kryptokrona.sdk.config.Config.*;
 
@@ -87,11 +89,31 @@ public class WalletService {
 				daemon.init();
 				logger.info("Starting the wallet sync process.");
 
-				Flowable.merge(
-					syncThread.start(),
-					daemonUpdateThread.start(),
-					lockedTransactionsCheckThread.start()
-				).subscribe(System.out::println);
+				ConnectableFlowable<Long> st = syncThread.start().publish();
+				ConnectableFlowable<Long> dut = daemonUpdateThread.start().publish();
+				ConnectableFlowable<Long> ltct = lockedTransactionsCheckThread.start().publish();
+
+				st.subscribe(result -> {
+					System.out.println("st");
+					System.out.println(result);
+					sync(true).subscribe();
+				});
+
+				dut.subscribe(result -> {
+					System.out.println("dut");
+					System.out.println(result);
+					// updateDaemonInfo()
+				});
+
+				ltct.subscribe(result -> {
+					System.out.println("ltct");
+					System.out.println(result);
+					// checkLockedTransactions()
+				});
+
+				st.connect();
+				dut.connect();
+				ltct.connect();
 
 			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
 				logger.error("%s", e);
@@ -109,18 +131,19 @@ public class WalletService {
 		lockedTransactionsCheckThread.stop();
 	}
 
-	public Observable<Boolean> processBlocks(boolean sleep) {
-		return Observable.just(true);
+	public Flowable<Boolean> processBlocks(boolean sleep) {
+		logger.info("Processing blocks...");
+		return Flowable.just(true);
 	}
 
-	public Observable<Boolean> sync(boolean sleep) {
+	public Flowable<Boolean> sync(boolean sleep) {
 		try {
 			return processBlocks(sleep);
 		} catch (Exception e) {
 			logger.error("Error processing blocks: " + e);
 		}
 
-		return Observable.just(false);
+		return Flowable.just(false);
 	}
 
 	public void setupMetronomes() {
