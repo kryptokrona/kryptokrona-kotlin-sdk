@@ -93,17 +93,9 @@ public class WalletService {
 				var dut = daemonUpdateThread.start().publish();
 				var ltct = lockedTransactionsCheckThread.start().publish();
 
-				st.subscribe(result -> {
-					sync(true).blockingSubscribe();
-				});
-
-				dut.subscribe(result -> {
-					updateDaemonInfo().blockingSubscribe();
-				});
-
-				ltct.subscribe(result -> {
-					checkLockedTransactions().blockingSubscribe();
-				});
+				st.subscribe(r -> sync(true).blockingSubscribe());
+				dut.subscribe(r -> updateDaemonInfo().blockingSubscribe());
+				ltct.subscribe(r -> checkLockedTransactions().blockingSubscribe());
 
 				st.connect();
 				dut.connect();
