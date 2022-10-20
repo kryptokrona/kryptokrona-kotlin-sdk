@@ -59,16 +59,24 @@ import java.util.Map;
 public class WalletSynchronizerService {
 
 	private DaemonImpl daemon;
+
 	private long startTimestamp;
+
 	private long startHeight;
+
 	private String privateViewKey;
+
 	private SynchronizationStatus synchronizationStatus;
+
 	private List<SubWallets> subWallets;
+
 	private boolean fetchingBlocks;
+
 	private List<Block> storedBlocks;
+
 	private Map<String, Long> cancelledTransactionsFailCount;
+
 	private Instant lastDownloadedBlocks;
-	private Config config;
 
 	public WalletSynchronizerService(
 		DaemonImpl daemon,
@@ -84,7 +92,6 @@ public class WalletSynchronizerService {
 		this.startHeight = startHeight;
 		this.privateViewKey = privateViewKey;
 		this.lastDownloadedBlocks = Instant.now();
-		this.config = config;
 	}
 
 	public void initAfterLoad(

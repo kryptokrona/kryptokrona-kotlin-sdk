@@ -77,6 +77,7 @@ public class WalletService {
 		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
+		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
 		this.setupMetronomes();
 	}
