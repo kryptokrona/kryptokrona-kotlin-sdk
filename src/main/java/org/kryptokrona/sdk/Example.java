@@ -3,7 +3,6 @@ package org.kryptokrona.sdk;
 import inet.ipaddr.HostName;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.service.WalletService;
-import org.kryptokrona.sdk.wallet.Wallet;
 
 import java.io.IOException;
 

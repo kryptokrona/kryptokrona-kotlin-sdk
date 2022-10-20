@@ -94,7 +94,7 @@ public class WalletSynchronizerService {
 
 	public void initAfterLoad(
 		List<SubWallets> subWallets,
-		DaemonImpl daemon,
+		DaemonImpl daemon
 	) {
 		this.subWallets = subWallets;
 		this.daemon = daemon;

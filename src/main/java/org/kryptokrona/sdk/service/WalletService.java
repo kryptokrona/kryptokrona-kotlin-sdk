@@ -28,9 +28,7 @@
 
 package org.kryptokrona.sdk.service;
 
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.flowables.ConnectableFlowable;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
@@ -44,7 +42,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Flow;
 
 import static org.kryptokrona.sdk.config.Config.*;
 
