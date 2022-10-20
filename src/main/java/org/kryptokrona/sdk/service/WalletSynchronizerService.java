@@ -33,7 +33,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.transaction.TransactionData;
@@ -83,8 +82,7 @@ public class WalletSynchronizerService {
 		List<SubWallets> subWallets,
 		long startTimestamp,
 		long startHeight,
-		String privateViewKey,
-		Config config
+		String privateViewKey
 	) {
 		this.daemon = daemon;
 		this.subWallets = subWallets;
@@ -97,11 +95,9 @@ public class WalletSynchronizerService {
 	public void initAfterLoad(
 		List<SubWallets> subWallets,
 		DaemonImpl daemon,
-		Config config
 	) {
 		this.subWallets = subWallets;
 		this.daemon = daemon;
-		this.config = config;
 		this.storedBlocks = new ArrayList<>();
 		this.cancelledTransactionsFailCount = new HashMap<>();
 		this.lastDownloadedBlocks = Instant.now();
@@ -181,7 +177,7 @@ public class WalletSynchronizerService {
 	 * @return Observable
 	 */
 	public Observable<Map<Block, Boolean>> fetchBlocks() {
-		return null;
+		return Observable.empty();
 	}
 
 	public void dropBlock(long blockHeight, String blockHash) {
