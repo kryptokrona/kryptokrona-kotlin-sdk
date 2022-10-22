@@ -41,6 +41,8 @@ import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
 import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
 import org.kryptokrona.sdk.wallet.SubWallets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -79,6 +81,8 @@ public class WalletSynchronizerService {
 	private Map<String, Long> cancelledTransactionsFailCount;
 
 	private Instant lastDownloadedBlocks;
+
+	private static final Logger logger = LoggerFactory.getLogger(WalletSynchronizerService.class);
 
 	public WalletSynchronizerService(
 		DaemonImpl daemon,
@@ -180,6 +184,26 @@ public class WalletSynchronizerService {
 	 * @return Observable
 	 */
 	public Observable<Map<Boolean, List<Block>>> fetchBlocks() {
+		// fetch more blocks if we haven't got any downloaded yet
+		if (storedBlocks.size() == 0) {
+			if (!fetchingBlocks) {
+				logger.info("No blocks stored, attempting to fetch more.");
+			}
+
+			downloadBlocks().blockingSubscribe(r -> {
+				var shouldSleep = r.keySet();
+				var successOrBusy = r.values();
+
+				// not in the middle of fetching blocks.
+				if (!successOrBusy) {
+					// seconds since we last got a block
+				} else {
+					// lastDownloadedBlocks = new ();
+				}
+
+			});
+		}
+
 		var blockCount = BLOCKS_PER_TICK;
 		return Observable.empty();
 	}
