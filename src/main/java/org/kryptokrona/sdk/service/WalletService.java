@@ -256,14 +256,24 @@ public class WalletService {
 		return new Wallet();
 	}
 
-	private Observable<Void> performAutoOptimize() {
+	public Observable<Void> performAutoOptimize() {
 		shouldPerformAutoOptimize = false;
 
+		// already optimizing, don't optimize again
 		if (!currentlyOptimizing) {
 			currentlyOptimizing = true;
+
+			if (!currentlyTransacting) {
+				logger.info("Performing auto optimization.");
+
+				optimize();
+
+				logger.info("Auto optimization complete.");
+			}
 		}
 
-
+		// we're done with optimizing
+		currentlyOptimizing = false;
 
 		return Observable.empty();
 	}
