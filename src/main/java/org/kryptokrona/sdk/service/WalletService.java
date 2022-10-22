@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,6 +255,44 @@ public class WalletService {
 	public Wallet createWallet() {
 		logger.info("New Wallet was created.");
 		return new Wallet();
+	}
+
+	/**
+	 * Since we're going to use optimize() with auto optimizing, and auto
+	 * optimizing is enabled by default, we have to ensure we only optimize
+	 * a single wallet at once. Otherwise, we'll end up with everyones balance
+	 * in the primary wallet.
+	 */
+	public Observable<Map<List<String>, Long>> optimizeAddress(String address) {
+
+	}
+
+	/**
+	 * Optimizes your wallet as much as possible. It will optimize every single
+	 * subwallet correctly, if you have multiple subwallets. Note that this
+	 * method does not wait for the funds to return to your wallet before
+	 * returning, so, it is likely balances will remain locked.
+	 *
+	 * Note that if you want to alert the user in real time of the hashes or
+	 * number of transactions sent, you can subscribe to the `createdfusiontx`
+	 * event. This will be fired every time a fusion transaction is sent.
+	 *
+	 * You may also want to consider manually creating individual transactions
+	 * if you want more control over the process. See [[sendFusionTransactionBasic]].
+	 *
+	 * This method may take a *very long time* if your wallet is not optimized
+	 * at all. It is suggested to not block the UI/mainloop of your program
+	 * when using this method.
+	 */
+	public Observable<Map<List<String>, Long>> optimize() {
+		logger.info("Method optimize called.");
+
+		var numTxsSent = 0;
+		var hashes = new ArrayList<String>();
+
+		for (var address : subWallets.getAddresses()) {
+			optimizeAddress(address).blockingSingle();
+		}
 	}
 
 	public Observable<Void> performAutoOptimize() {
