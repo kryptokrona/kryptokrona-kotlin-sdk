@@ -33,6 +33,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.block.TopBlock;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
@@ -45,6 +46,7 @@ import org.kryptokrona.sdk.wallet.SubWallets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Array;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -245,6 +247,32 @@ public class WalletSynchronizerService {
 	}
 
 	private Observable<Map<Boolean, Boolean>> downloadBlocks() {
+		/* Middle of fetching blocks, wait for previous request to complete.
+		 * Don't need to sleep. */
+		if (fetchingBlocks) {
+			return Observable.just(Map.of(true, false));
+		}
+
+		fetchingBlocks = true;
+
+		var localDaemonBlockCount = daemon.getLocalDaemonBlockCount();
+		var walletBlockCount = getHeight();
+
+		if (localDaemonBlockCount < walletBlockCount) {
+			this.fetchingBlocks = false;
+			return Observable.just(Map.of(true, true));
+		}
+
+		/* Get the checkpoints of the blocks we've got stored, so we can fetch
+           later ones. Also use the checkpoints of the previously processed
+           ones, in case we don't have any blocks yet. */
+		var blockCheckpoints = getWalletSyncDataHashes();
+
+		var blocks = new ArrayList<Block>();
+		var topBlock = new TopBlock();
+
+
+
 		return Observable.empty();
 	}
 
