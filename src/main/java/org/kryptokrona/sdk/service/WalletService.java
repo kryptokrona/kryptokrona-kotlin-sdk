@@ -284,10 +284,10 @@ public class WalletService {
 	 * at all. It is suggested to not block the UI/mainloop of your program
 	 * when using this method.
 	 */
-	public Observable<Map<List<String>, Long>> optimize() {
+	public Observable<Map<ArrayList<String>, Long>> optimize() {
 		logger.info("Method optimize called.");
 
-		var numTxsSent = 0;
+		var numTxsSent = 0L;
 		var hashes = new ArrayList<String>();
 
 		for (var address : subWallets.getAddresses()) {
