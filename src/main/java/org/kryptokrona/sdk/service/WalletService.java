@@ -120,49 +120,47 @@ public class WalletService {
 	public Observable<Boolean> processBlocks(boolean sleep) {
 		walletSynchronizerService.fetchBlocks()
 			.blockingSubscribe(data -> {
-				var blocks = data.values();
-				var shouldSleep = data.keySet();
+				var blocks = data.values().iterator().next();
+				var shouldSleep = data.keySet().iterator().next();
 
 				if (blocks.size() == 0) {
 					// shouldSleep should be a second condition below
-					if (sleep) {
+					if (sleep && shouldSleep) {
 						Thread.sleep(1000);
 					}
 
 					// return Observable.just(false);
 				}
 
-				for (var blockList : blocks) {
-					for (var block : blockList) {
-						logger.info("Processing block " + block.getBlockHeight());
+				for (var block : blocks) {
+					logger.info("Processing block " + block.getBlockHeight());
 
-						// forked chain, remove old data
-						if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
-							logger.info("Removing forked transactions.");
+					// forked chain, remove old data
+					if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
+						logger.info("Removing forked transactions.");
 
-							subWallets.removeForkedTransactions(block.getBlockHeight());
-						}
-
-						if (block.getBlockHeight() % 5000 == 0 && block.getBlockHeight() != 0) {
-							subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
-						}
-
-						/* User can supply us a function to do the processing, possibly
-               			   utilizing native code for moar speed */
-						// var processFunction = external
-
-						var globalIndexes = new HashMap<String, List<Long>>();
-
-						// for (var input : blockInputs)
-
-						// var txData =
-
-						// storeTxData(txData, block.getBlockHeight());
-
-						// walletSynchronizer.dropBlock(block.getBlockHeight(), block.getBlockHash());
-
-						logger.info("Finishing process block " + block.getBlockHeight());
+						subWallets.removeForkedTransactions(block.getBlockHeight());
 					}
+
+					if (block.getBlockHeight() % 5000 == 0 && block.getBlockHeight() != 0) {
+						subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
+					}
+
+					/* User can supply us a function to do the processing, possibly
+					   utilizing native code for moar speed */
+					// var processFunction = external
+
+					var globalIndexes = new HashMap<String, List<Long>>();
+
+					// for (var input : blockInputs)
+
+					// var txData =
+
+					// storeTxData(txData, block.getBlockHeight());
+
+					// walletSynchronizer.dropBlock(block.getBlockHeight(), block.getBlockHash());
+
+					logger.info("Finishing process block " + block.getBlockHeight());
 				}
 			});
 

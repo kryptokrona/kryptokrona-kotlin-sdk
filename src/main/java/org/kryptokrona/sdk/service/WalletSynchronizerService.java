@@ -36,6 +36,7 @@ import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
+import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.transaction.TransactionData;
 import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
@@ -97,6 +98,7 @@ public class WalletSynchronizerService {
 		this.startTimestamp = startTimestamp;
 		this.startHeight = startHeight;
 		this.privateViewKey = privateViewKey;
+		this.storedBlocks = new ArrayList<>();
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
@@ -163,7 +165,7 @@ public class WalletSynchronizerService {
 	 * @return long : last known block height
 	 */
 	public long getHeight() {
-		return this.synchronizationStatus.getLastKnownBlockHeight();
+		return synchronizationStatus.getLastKnownBlockHeight();
 	}
 
 	public Observable<Void> reset(long scanHeight, long scanTimestamp) {
@@ -201,16 +203,23 @@ public class WalletSynchronizerService {
 					var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
 
 					if (diff > MAX_LAST_FETCHED_BLOCK_INTERVAL) {
-						// dead node
+						throw new NodeDeadException();
 					}
 				} else {
 					lastDownloadedBlocks = Instant.now();
 				}
 
+				// var map = new HashMap<List<Block>, Boolean>();
+				// map.put(storedBlocks.subList(0, 1), shouldSleep);
+
 			});
 		}
 
 		var blockCount = BLOCKS_PER_TICK;
+
+
+
+		// var test = storedBlocks.subList(0, blockCount);
 		return Observable.empty();
 	}
 
