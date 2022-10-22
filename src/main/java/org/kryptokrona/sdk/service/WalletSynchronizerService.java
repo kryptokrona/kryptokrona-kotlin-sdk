@@ -34,7 +34,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.TopBlock;
-import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
@@ -47,7 +46,6 @@ import org.kryptokrona.sdk.wallet.SubWallets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Array;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;

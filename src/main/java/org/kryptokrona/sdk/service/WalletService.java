@@ -29,11 +29,7 @@
 package org.kryptokrona.sdk.service;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
-import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
-import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.util.Metronome;
 import org.kryptokrona.sdk.wallet.SubWallets;
