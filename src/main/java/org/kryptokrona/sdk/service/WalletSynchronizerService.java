@@ -188,41 +188,36 @@ public class WalletSynchronizerService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<Map<Boolean, List<Block>>> fetchBlocks() {
+	public Observable<HashMap<List<Block>, Boolean>> fetchBlocks() throws NodeDeadException {
+		var map = new HashMap<List<Block>, Boolean>();
+
 		// fetch more blocks if we haven't got any downloaded yet
 		if (storedBlocks != null && storedBlocks.size() == 0) {
 			if (!fetchingBlocks) {
 				logger.info("No blocks stored, attempting to fetch more.");
 			}
 
-			downloadBlocks().blockingSubscribe(r -> {
-				var successOrBusy = r.keySet().iterator().next();
-				var shouldSleep = r.values().iterator().next();
+			var blocks = downloadBlocks().blockingSingle();
 
-				// not in the middle of fetching blocks.
-				if (!successOrBusy) {
-					// seconds since we last got a block
-					var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
+			var successOrBusy = blocks.keySet().iterator().next();
+			var shouldSleep = blocks.values().iterator().next();
 
-					if (diff > MAX_LAST_FETCHED_BLOCK_INTERVAL) {
-						throw new NodeDeadException();
-					}
-				} else {
-					lastDownloadedBlocks = Instant.now();
+			// not in the middle of fetching blocks.
+			if (!successOrBusy) {
+				// seconds since we last got a block
+				var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
+
+				if (diff > MAX_LAST_FETCHED_BLOCK_INTERVAL) {
+					throw new NodeDeadException();
 				}
+			} else {
+				lastDownloadedBlocks = Instant.now();
+			}
 
-				// var map = new HashMap<List<Block>, Boolean>();
-				// map.put(storedBlocks.subList(0, 1), shouldSleep);
-
-			});
+			map.put(storedBlocks.subList(0, (int) BLOCKS_PER_TICK), shouldSleep);
 		}
 
-		var blockCount = BLOCKS_PER_TICK;
-
-
-
-		// var test = storedBlocks.subList(0, blockCount);
-		return Observable.empty();
+		return Observable.just(map);
 	}
 
 	public void dropBlock(long blockHeight, String blockHash) {
@@ -250,7 +245,7 @@ public class WalletSynchronizerService {
 	}
 
 	private Observable<Map<Boolean, Boolean>> downloadBlocks() {
-		return null;
+		return Observable.empty();
 	}
 
 	private Observable<Map<String, List<TransactionInputImpl>>> processTransactionOutputs(
