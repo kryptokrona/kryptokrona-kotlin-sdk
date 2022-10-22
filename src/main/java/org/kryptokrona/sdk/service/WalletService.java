@@ -108,13 +108,14 @@ public class WalletService {
 	}
 
 	public void stop() {
-		logger.info("Stopping the wallet sync process.");
 		started = false;
 		// daemon.stop();
 
 		syncThread.stop();
 		daemonUpdateThread.stop();
 		lockedTransactionsCheckThread.stop();
+
+		logger.info("Stopping the wallet sync process.");
 	}
 
 	public Observable<Boolean> processBlocks(boolean sleep) {
@@ -195,6 +196,13 @@ public class WalletService {
 	 */
 	public Observable<Void> checkLockedTransactions() {
 		logger.info("Checking locked transactions...");
+
+		var lockedTxHashes = subWallets.getLockedTransactionHashes();
+		var cancelledTxs = walletSynchronizerService.findCancelledTransactions(lockedTxHashes).blockingSingle();
+
+		for (var cancelledTx : cancelledTxs) {
+			subWallets.removeCancelledTransaction(cancelledTx);
+		}
 
 		return Observable.empty();
 	}

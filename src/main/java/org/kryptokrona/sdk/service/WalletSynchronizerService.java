@@ -98,7 +98,6 @@ public class WalletSynchronizerService {
 		this.startTimestamp = startTimestamp;
 		this.startHeight = startHeight;
 		this.privateViewKey = privateViewKey;
-		this.storedBlocks = new ArrayList<>();
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
@@ -188,7 +187,7 @@ public class WalletSynchronizerService {
 	 */
 	public Observable<Map<Boolean, List<Block>>> fetchBlocks() {
 		// fetch more blocks if we haven't got any downloaded yet
-		if (storedBlocks.size() == 0) {
+		if (storedBlocks != null && storedBlocks.size() == 0) {
 			if (!fetchingBlocks) {
 				logger.info("No blocks stored, attempting to fetch more.");
 			}
