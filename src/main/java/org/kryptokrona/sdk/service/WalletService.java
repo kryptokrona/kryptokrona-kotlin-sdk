@@ -86,6 +86,7 @@ public class WalletService {
 		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
+		this.subWallets = new SubWallets();
 		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
 		this.autoOptimize = true;
@@ -199,7 +200,7 @@ public class WalletService {
 	public Observable<Void> updateDaemonInfo() throws IOException, NodeDeadException {
 		logger.info("Updating daemon info...");
 
-		daemon.updateDaemonInfo().blockingSingle();
+		daemon.updateDaemonInfo();
 
 		var walletHeight = walletSynchronizerService.getHeight();
 		var networkHeight = daemon.getNetworkBlockCount();
