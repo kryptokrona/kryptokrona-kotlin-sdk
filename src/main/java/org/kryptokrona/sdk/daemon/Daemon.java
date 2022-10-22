@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.daemon;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.RawBlock;
+import org.kryptokrona.sdk.block.TopBlock;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
@@ -73,7 +74,7 @@ public interface Daemon {
 	 * @param walletSyncData : WalletSyncData
 	 * @return Observable
 	 */
-	Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
+	Observable<Map<List<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
 
 	/**
 	 * Returns a mapping of transaction hashes to global indexes.

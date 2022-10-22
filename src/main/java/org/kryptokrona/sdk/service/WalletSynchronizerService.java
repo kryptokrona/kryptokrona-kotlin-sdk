@@ -243,7 +243,7 @@ public class WalletSynchronizerService {
 		return false;
 	}
 
-	public List<String> getWalletSyncDataHashes() {
+	public ArrayList<String> getWalletSyncDataHashes() {
 		return null;
 	}
 
@@ -269,17 +269,25 @@ public class WalletSynchronizerService {
            ones, in case we don't have any blocks yet. */
 		var blockCheckpoints = getWalletSyncDataHashes();
 
-		var blocks = new ArrayList<Block>();
+		List<Block> blocks = null;
 		var topBlock = new TopBlock();
-		var walletSyncData = new WalletSyncData();
+		var walletSyncData = new WalletSyncData(blockCheckpoints, startHeight, startTimestamp);
 
 		try {
-			var walletSyncData = daemon.getWalletSyncData(
-				blockCheckpoints, startHeight, startTimestamp
-			);
+			var data = daemon.getWalletSyncData(walletSyncData).blockingSingle();
+			blocks = data.keySet().iterator().next();
+			topBlock = data.values().iterator().next();
 		} catch (Exception e) {
+			logger.error("Failed to get blocks from daemon: ", e);
 
+			//TODO: finishedFunc?
+
+			fetchingBlocks = false;
+
+			return Observable.just(Map.of(false, true));
 		}
+
+		// TODO: implement the rest here
 
 		return Observable.empty();
 	}

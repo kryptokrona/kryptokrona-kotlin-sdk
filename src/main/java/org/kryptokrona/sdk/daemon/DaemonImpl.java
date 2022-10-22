@@ -43,6 +43,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.RawBlock;
+import org.kryptokrona.sdk.block.TopBlock;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
@@ -217,7 +218,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<Map<Integer, Boolean>> getWalletSyncData(WalletSyncData walletSyncData) {
+	public Observable<Map<List<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) {
 		var endpoint = useRawBlocks ? "sync/raw" : "sync";
 
 		walletSyncData.setBlockCount(blockCount);
@@ -233,7 +234,7 @@ public class DaemonImpl implements Daemon {
 			blockCount = Math.ceil(blockCount / 4.0);
 			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
 
-			return Observable.just(Map.of(0, false));
+			// return Observable.just(Map.of(0, false));
 		}
 
 		// the node is not dead if we're fetching blocks.
