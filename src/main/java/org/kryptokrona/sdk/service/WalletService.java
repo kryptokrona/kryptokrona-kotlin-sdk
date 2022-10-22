@@ -256,4 +256,16 @@ public class WalletService {
 		return new Wallet();
 	}
 
+	private Observable<Void> performAutoOptimize() {
+		shouldPerformAutoOptimize = false;
+
+		if (!currentlyOptimizing) {
+			currentlyOptimizing = true;
+		}
+
+
+
+		return Observable.empty();
+	}
+
 }
