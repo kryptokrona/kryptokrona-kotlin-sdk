@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.kryptokrona.sdk.config.Config.BLOCKS_PER_TICK;
+import static org.kryptokrona.sdk.config.Config.MAX_LAST_FETCHED_BLOCK_INTERVAL;
 
 /**
  * WalletSynchronizerService.java
@@ -191,14 +192,19 @@ public class WalletSynchronizerService {
 			}
 
 			downloadBlocks().blockingSubscribe(r -> {
-				var shouldSleep = r.keySet();
-				var successOrBusy = r.values();
+				var successOrBusy = r.keySet().iterator().next();
+				var shouldSleep = r.values().iterator().next();
 
 				// not in the middle of fetching blocks.
 				if (!successOrBusy) {
 					// seconds since we last got a block
+					var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
+
+					if (diff > MAX_LAST_FETCHED_BLOCK_INTERVAL) {
+						// dead node
+					}
 				} else {
-					// lastDownloadedBlocks = new ();
+					lastDownloadedBlocks = Instant.now();
 				}
 
 			});
