@@ -55,7 +55,7 @@ import static org.kryptokrona.sdk.config.Config.*;
  */
 public class WalletService {
 
-	private final Daemon daemon;
+	private final DaemonImpl daemon;
 
 	private SubWallets subWallets;
 
@@ -71,6 +71,14 @@ public class WalletService {
 
 	private boolean synced;
 
+	private boolean autoOptimize;
+
+	private boolean shouldPerformAutoOptimize;
+
+	private boolean currentlyOptimizing;
+
+	private boolean currentlyTransacting;
+
 	private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
 
 	public WalletService(
@@ -79,6 +87,10 @@ public class WalletService {
 		this.daemon = daemon;
 		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
+		this.autoOptimize = true;
+		this.shouldPerformAutoOptimize = true;
+		this.currentlyOptimizing = false;
+		this.currentlyTransacting = false;
 		this.setupMetronomes();
 	}
 
@@ -101,7 +113,7 @@ public class WalletService {
 				st.connect();
 				dut.connect();
 				ltct.connect();
-			} catch (NetworkBlockCountException | NodeDeadException | DaemonOfflineException e) {
+			} catch (NodeDeadException e) {
 				logger.error("%s", e);
 			}
 		}
@@ -183,8 +195,29 @@ public class WalletService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<Void> updateDaemonInfo() {
+	public Observable<Void> updateDaemonInfo() throws IOException, NodeDeadException {
 		logger.info("Updating daemon info...");
+
+		daemon.updateDaemonInfo().blockingSingle();
+
+		var walletHeight = walletSynchronizerService.getHeight();
+		var networkHeight = daemon.getNetworkBlockCount();
+
+		if (walletHeight >= networkHeight) {
+
+			// synced with the network
+			if (!synced) {
+				synced = true;
+			}
+
+			if (shouldPerformAutoOptimize && autoOptimize) {
+				try {
+					performAutoOptimize();
+				} catch (Exception e) {
+					logger.error("Auto-optimize error.");
+				}
+			}
+		}
 
 		return Observable.empty();
 	}
