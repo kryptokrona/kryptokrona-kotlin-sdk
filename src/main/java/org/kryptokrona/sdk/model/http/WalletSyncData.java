@@ -55,4 +55,11 @@ public class WalletSyncData {
 	private long height;
 
 	private long timestamp;
+
+	public WalletSyncData(ArrayList<String> checkpoints, long height, long timestamp) {
+		this.checkpoints = checkpoints;
+		this.height = height;
+		this.timestamp = timestamp;
+	}
+
 }

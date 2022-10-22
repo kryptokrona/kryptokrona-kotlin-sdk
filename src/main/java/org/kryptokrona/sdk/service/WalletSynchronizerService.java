@@ -38,6 +38,7 @@ import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.model.http.WalletSyncData;
 import org.kryptokrona.sdk.transaction.TransactionData;
 import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
@@ -270,8 +271,15 @@ public class WalletSynchronizerService {
 
 		var blocks = new ArrayList<Block>();
 		var topBlock = new TopBlock();
+		var walletSyncData = new WalletSyncData();
 
+		try {
+			var walletSyncData = daemon.getWalletSyncData(
+				blockCheckpoints, startHeight, startTimestamp
+			);
+		} catch (Exception e) {
 
+		}
 
 		return Observable.empty();
 	}
