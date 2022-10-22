@@ -202,7 +202,7 @@ public class WalletService {
 
 		daemon.updateDaemonInfo();
 
-		var walletHeight = walletSynchronizerService.getHeight();
+		// var walletHeight = walletSynchronizerService.getHeight(); //TODO: does not work yet, need to initialize the SynchronizationStatus with proper construtor parameters
 		var networkHeight = daemon.getNetworkBlockCount();
 
 		if (walletHeight >= networkHeight) {
