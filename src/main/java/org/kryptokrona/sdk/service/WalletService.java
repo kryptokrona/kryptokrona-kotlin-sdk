@@ -42,7 +42,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.kryptokrona.sdk.config.Config.*;
 
@@ -55,7 +57,7 @@ public class WalletService {
 
 	private final Daemon daemon;
 
-	private List<SubWallets> subWallets;
+	private SubWallets subWallets;
 
 	private WalletSynchronizerService walletSynchronizerService;
 
@@ -132,11 +134,28 @@ public class WalletService {
 
 				for (var blockList : blocks) {
 					for (var block : blockList) {
-						logger.info("Processing block " + block.getBlockHash());
+						logger.info("Processing block " + block.getBlockHeight());
 
-						/*if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
+						// forked chain, remove old data
+						if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
+							logger.info("Removing forked transactions.");
 
-						}*/
+							subWallets.removeForkedTransactions(block.getBlockHeight());
+						}
+
+						if (block.getBlockHeight() % 5000 == 0 && block.getBlockHeight() != 0) {
+							subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
+						}
+
+						/* User can supply us a function to do the processing, possibly
+               			   utilizing native code for moar speed */
+						// var processFunction = external
+
+						var globalIndexes = new HashMap<String, List<Long>>();
+
+						// for (var input : blockInputs)
+
+						logger.info("Finishing process block " + block.getBlockHeight());
 					}
 				}
 			});
