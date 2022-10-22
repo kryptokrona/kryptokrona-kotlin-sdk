@@ -29,6 +29,7 @@
 package org.kryptokrona.sdk.service;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.daemon.Daemon;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
@@ -115,8 +116,30 @@ public class WalletService {
 	}
 
 	public Observable<Boolean> processBlocks(boolean sleep) {
-		logger.info("Processing blocks...");
-		walletSynchronizerService.fetchBlocks().blockingSubscribe();
+		walletSynchronizerService.fetchBlocks()
+			.blockingSubscribe(data -> {
+				var blocks = data.values();
+				var shouldSleep = data.keySet();
+
+				if (blocks.size() == 0) {
+					// shouldSleep should be a second condition below
+					if (sleep) {
+						Thread.sleep(1000);
+					}
+
+					// return Observable.just(false);
+				}
+
+				for (var blockList : blocks) {
+					for (var block : blockList) {
+						logger.info("Processing block " + block.getBlockHash());
+
+						/*if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
+
+						}*/
+					}
+				}
+			});
 
 		return Observable.just(true);
 	}

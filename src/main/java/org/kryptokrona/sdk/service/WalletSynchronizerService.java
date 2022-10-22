@@ -33,6 +33,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.transaction.TransactionData;
@@ -46,6 +47,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.kryptokrona.sdk.config.Config.BLOCKS_PER_TICK;
 
 /**
  * WalletSynchronizerService.java
@@ -176,7 +179,8 @@ public class WalletSynchronizerService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<Map<Block, Boolean>> fetchBlocks() {
+	public Observable<Map<Boolean, List<Block>>> fetchBlocks() {
+		var blockCount = BLOCKS_PER_TICK;
 		return Observable.empty();
 	}
 
