@@ -98,6 +98,7 @@ public class WalletSynchronizerService {
 		this.startTimestamp = startTimestamp;
 		this.startHeight = startHeight;
 		this.privateViewKey = privateViewKey;
+		this.synchronizationStatus = new SynchronizationStatus();
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
@@ -164,7 +165,9 @@ public class WalletSynchronizerService {
 	 * @return long : last known block height
 	 */
 	public long getHeight() {
-		return synchronizationStatus.getLastKnownBlockHeight();
+		return 0;
+		//TODO: code below will result in null exception
+		// return synchronizationStatus.getLastKnownBlockHeight();
 	}
 
 	public Observable<Void> reset(long scanHeight, long scanTimestamp) {

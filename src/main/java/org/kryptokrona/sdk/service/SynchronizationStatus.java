@@ -51,6 +51,13 @@ public class SynchronizationStatus {
 	private long lastKnownBlockHeight;
 	private long lastSavedCheckpointAt;
 
+	public SynchronizationStatus() {
+		this.blockHashCheckpoints = new LinkedList<>();
+		this.lastKnownBlockHashes = new LinkedList<>();
+		this.lastKnownBlockHeight = 0;
+		this.lastSavedCheckpointAt = 0;
+	}
+
 	public SynchronizationStatus(
 		LinkedList<String> blockHashCheckpoints,
 		LinkedList<String> lastKnownBlockHashes,
@@ -66,7 +73,7 @@ public class SynchronizationStatus {
 	public void storeBlockHash(long blockHeight, String blockHash) {
 		this.lastKnownBlockHeight = blockHeight;
 
-		// Hash already exists
+		// hash already exists
 		if (lastKnownBlockHashes.size() > 0 && Objects.equals(lastKnownBlockHashes.get(0), blockHash)) {
 			return;
 		}
@@ -82,7 +89,7 @@ public class SynchronizationStatus {
 
 		this.lastKnownBlockHashes.addFirst(blockHash);
 
-		// If we're exceeding capacity, remove the last (oldest) hash
+		// if we're exceeding capacity, remove the last (oldest) hash
 		if (lastKnownBlockHashes.size() > LAST_KNOWN_BLOCK_HASHES_SIZE) {
 			lastKnownBlockHashes.pollLast();
 		}

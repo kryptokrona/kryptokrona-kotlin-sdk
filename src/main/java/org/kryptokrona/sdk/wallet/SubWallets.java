@@ -106,6 +106,7 @@ public class SubWallets {
 		this.publicSpendKeys = publicSpendKeys;
 		this.privateViewKey = privateViewKey;
 		this.subWallets = subWallets;
+		this.lockedTransactions = new ArrayList<>();
 	}
 
 	public static Observable<SubWallets> init(
