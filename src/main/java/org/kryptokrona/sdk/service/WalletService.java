@@ -264,7 +264,7 @@ public class WalletService {
 	 * in the primary wallet.
 	 */
 	public Observable<Map<List<String>, Long>> optimizeAddress(String address) {
-
+		return Observable.empty();
 	}
 
 	/**
@@ -291,8 +291,12 @@ public class WalletService {
 		var hashes = new ArrayList<String>();
 
 		for (var address : subWallets.getAddresses()) {
-			optimizeAddress(address).blockingSingle();
+			var data = optimizeAddress(address).blockingSingle();
+			numTxsSent += data.values().iterator().next();
+			hashes.addAll(data.keySet().iterator().next());
 		}
+
+		return Observable.just(Map.of(hashes, numTxsSent));
 	}
 
 	public Observable<Void> performAutoOptimize() {
