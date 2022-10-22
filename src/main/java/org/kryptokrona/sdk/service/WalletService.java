@@ -155,6 +155,12 @@ public class WalletService {
 
 						// for (var input : blockInputs)
 
+						// var txData =
+
+						// storeTxData(txData, block.getBlockHeight());
+
+						// walletSynchronizer.dropBlock(block.getBlockHeight(), block.getBlockHash());
+
 						logger.info("Finishing process block " + block.getBlockHeight());
 					}
 				}
