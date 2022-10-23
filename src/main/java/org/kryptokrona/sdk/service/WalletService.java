@@ -128,7 +128,7 @@ public class WalletService {
 		logger.info("Stopping the wallet sync process.");
 	}
 
-	public Observable<Boolean> processBlocks(boolean sleep) {
+	public Observable<Boolean> processBlocks(boolean sleep) throws NodeDeadException {
 		walletSynchronizerService.fetchBlocks()
 			.blockingSubscribe(data -> {
 				var blocks = data.values().iterator().next();
@@ -229,7 +229,9 @@ public class WalletService {
 		logger.info("Checking locked transactions...");
 
 		var lockedTxHashes = subWallets.getLockedTransactionHashes();
-		var cancelledTxs = walletSynchronizerService.findCancelledTransactions(lockedTxHashes).blockingSingle();
+		var cancelledTxs = walletSynchronizerService
+			.findCancelledTransactions(lockedTxHashes)
+			.blockingSingle();
 
 		for (var cancelledTx : cancelledTxs) {
 			subWallets.removeCancelledTransaction(cancelledTx);

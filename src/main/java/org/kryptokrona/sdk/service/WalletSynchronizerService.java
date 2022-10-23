@@ -189,8 +189,8 @@ public class WalletSynchronizerService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<HashMap<List<Block>, Boolean>> fetchBlocks() throws NodeDeadException {
-		var map = new HashMap<List<Block>, Boolean>();
+	public Observable<HashMap<Boolean, List<Block>>> fetchBlocks() throws NodeDeadException {
+		var map = new HashMap<Boolean, List<Block>>();
 
 		// fetch more blocks if we haven't got any downloaded yet
 		if (storedBlocks != null && storedBlocks.size() == 0) {
@@ -215,7 +215,7 @@ public class WalletSynchronizerService {
 				lastDownloadedBlocks = Instant.now();
 			}
 
-			map.put(storedBlocks.subList(0, (int) BLOCKS_PER_TICK), shouldSleep);
+			map.put(shouldSleep, storedBlocks.subList(0, (int) BLOCKS_PER_TICK));
 		}
 
 		return Observable.just(map);
