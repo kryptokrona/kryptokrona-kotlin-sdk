@@ -128,52 +128,53 @@ public class WalletService {
 		logger.info("Stopping the wallet sync process.");
 	}
 
-	public Observable<Boolean> processBlocks(boolean sleep) throws NodeDeadException {
-		walletSynchronizerService.fetchBlocks()
-			.blockingSubscribe(data -> {
-				var blocks = data.values().iterator().next();
-				var shouldSleep = data.keySet().iterator().next();
+	public Observable<Boolean> processBlocks(boolean sleep) throws NodeDeadException, InterruptedException {
+		var data = walletSynchronizerService.fetchBlocks().blockingSingle();
 
-				if (blocks.size() == 0) {
-					// shouldSleep should be a second condition below
-					if (sleep && shouldSleep) {
-						Thread.sleep(1000);
-					}
+		if (data.size() != 0) {
+			var shouldSleep = data.keySet().iterator().next();
+			var blocks = data.values().iterator().next();
 
-					// return Observable.just(false);
+			if (blocks.size() == 0) {
+				// shouldSleep should be a second condition below
+				if (sleep && shouldSleep) {
+					Thread.sleep(1000);
 				}
 
-				for (var block : blocks) {
-					logger.info("Processing block " + block.getBlockHeight());
+				// return Observable.just(false);
+			}
 
-					// forked chain, remove old data
-					if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
-						logger.info("Removing forked transactions.");
+			for (var block : blocks) {
+				logger.info("Processing block " + block.getBlockHeight());
 
-						subWallets.removeForkedTransactions(block.getBlockHeight());
-					}
+				// forked chain, remove old data
+				if (walletSynchronizerService.getHeight() >= block.getBlockHeight()) {
+					logger.info("Removing forked transactions.");
 
-					if (block.getBlockHeight() % 5000 == 0 && block.getBlockHeight() != 0) {
-						subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
-					}
+					subWallets.removeForkedTransactions(block.getBlockHeight());
+				}
+
+				if (block.getBlockHeight() % 5000 == 0 && block.getBlockHeight() != 0) {
+					subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
+				}
 
 					/* User can supply us a function to do the processing, possibly
 					   utilizing native code for moar speed */
-					// var processFunction = external
+				// var processFunction = external
 
-					var globalIndexes = new HashMap<String, List<Long>>();
+				var globalIndexes = new HashMap<String, List<Long>>();
 
-					// for (var input : blockInputs)
+				// for (var input : blockInputs)
 
-					// var txData =
+				// var txData =
 
-					// storeTxData(txData, block.getBlockHeight());
+				// storeTxData(txData, block.getBlockHeight());
 
-					// walletSynchronizer.dropBlock(block.getBlockHeight(), block.getBlockHash());
+				// walletSynchronizer.dropBlock(block.getBlockHeight(), block.getBlockHash());
 
-					logger.info("Finishing process block " + block.getBlockHeight());
-				}
-			});
+				logger.info("Finishing process block " + block.getBlockHeight());
+			}
+		}
 
 		return Observable.just(true);
 	}
