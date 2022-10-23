@@ -225,7 +225,7 @@ public class SubWallets {
 	public List<String> getLockedTransactionHashes() {
 		return lockedTransactions
 			.stream()
-			.map(lt -> lt.getHash())
+			.map(Transaction::getHash)
 			.collect(Collectors.toList());
 	}
 
