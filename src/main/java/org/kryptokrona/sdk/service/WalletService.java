@@ -141,7 +141,8 @@ public class WalletService {
 					Thread.sleep(1000);
 				}
 
-				// return Observable.just(false);
+				// we don't have any blocks, so we don't do any more processing
+				return Observable.just(false);
 			}
 
 			for (var block : blocks) {
@@ -158,8 +159,8 @@ public class WalletService {
 					subWallets.pruneSpentInputs(block.getBlockHeight() - 5000);
 				}
 
-					/* User can supply us a function to do the processing, possibly
-					   utilizing native code for moar speed */
+				/* User can supply us a function to do the processing, possibly
+				   utilizing native code for moar speed */
 				// var processFunction = external
 
 				var globalIndexes = new HashMap<String, List<Long>>();
