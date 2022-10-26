@@ -31,6 +31,7 @@ package org.kryptokrona.sdk.service;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.exception.wallet.WalletSubWalletNoPrimaryAddressException;
 import org.kryptokrona.sdk.util.Metronome;
 import org.kryptokrona.sdk.wallet.SubWallets;
 import org.kryptokrona.sdk.wallet.Wallet;
@@ -267,6 +268,18 @@ public class WalletService {
 		// await keys.address(), scanHeight, newWallet,
 		//            keys.view.privateKey, keys.spend.privateKey,
 		// this.subWallets = new SubWallets();
+	}
+
+	/**
+	 * Gets the private spend and private view for the primary address.
+	 * The primary address is the first created wallet in the container.
+	 */
+	public Observable<HashMap<String, String>> getPrimaryAddressPrivateKeys() throws WalletSubWalletNoPrimaryAddressException {
+		logger.info("Getting primary address private keys.");
+		var keys = new HashMap<String, String>();
+		keys.put(subWallets.getPrimaryPrivateSpendKey(), subWallets.getPrivateViewKey());
+
+		return Observable.just(keys);
 	}
 
 	/**
