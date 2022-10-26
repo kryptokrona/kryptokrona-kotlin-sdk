@@ -324,6 +324,8 @@ public class WalletService {
 	 * optimizing is enabled by default, we have to ensure we only optimize
 	 * a single wallet at once. Otherwise, we'll end up with everyones balance
 	 * in the primary wallet.
+	 *
+	 * @return Observable
 	 */
 	public Observable<Map<List<String>, Long>> optimizeAddress(String address) {
 		return Observable.empty();
