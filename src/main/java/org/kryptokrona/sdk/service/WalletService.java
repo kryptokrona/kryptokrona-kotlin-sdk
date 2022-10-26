@@ -273,6 +273,8 @@ public class WalletService {
 	/**
 	 * Gets the private spend and private view for the primary address.
 	 * The primary address is the first created wallet in the container.
+	 *
+	 * @return Observable
 	 */
 	public Observable<HashMap<String, String>> getPrimaryAddressPrivateKeys() throws WalletSubWalletNoPrimaryAddressException {
 		logger.info("Getting primary address private keys.");
