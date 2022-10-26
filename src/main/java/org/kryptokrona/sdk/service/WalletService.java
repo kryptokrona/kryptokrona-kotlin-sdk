@@ -301,6 +301,14 @@ public class WalletService {
 		return Observable.just(mnemonic);
 	}
 
+	/**
+	 * Get the mnemonic seed for the specified address. If the specified address
+	 * is invalid or the address isn't a deterministic wallet, it will return
+	 * a WalletError.
+	 *
+	 * @param address A valid address that exists in this container
+	 * @return Observable
+	 */
 	public Observable<ArrayList<String>> getMnemonicSeedForAddress(String address) {
 		logger.info("Getting mnemonic seed for address");
 
