@@ -39,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -276,12 +277,38 @@ public class WalletService {
 	 *
 	 * @return Observable
 	 */
-	public Observable<HashMap<String, String>> getPrimaryAddressPrivateKeys() throws WalletSubWalletNoPrimaryAddressException {
+	public Observable<HashMap<String, String>> getPrimaryAddressPrivateKeys()
+		throws WalletSubWalletNoPrimaryAddressException
+	{
 		logger.info("Getting primary address private keys.");
 		var keys = new HashMap<String, String>();
 		keys.put(subWallets.getPrimaryPrivateSpendKey(), subWallets.getPrivateViewKey());
 
 		return Observable.just(keys);
+	}
+
+	/**
+	 * Get the primary address mnemonic seed. If the primary address isn't
+	 * a deterministic wallet, it will return a WalletError.
+	 *
+	 * @return Observable
+	 */
+	public Observable<ArrayList<String>> getMnemonicSeed() throws WalletSubWalletNoPrimaryAddressException {
+		logger.info("Getting mnemonic seed.");
+
+		var mnemonic = getMnemonicSeedForAddress(subWallets.getPrimaryAddress()).blockingSingle();
+
+		return Observable.just(mnemonic);
+	}
+
+	public Observable<ArrayList<String>> getMnemonicSeedForAddress(String address) {
+		logger.info("Getting mnemonic seed for address");
+
+		var mnemonicSeed = new ArrayList<String>();
+
+		//TODO more implementation here
+
+		return Observable.just(mnemonicSeed);
 	}
 
 	/**
