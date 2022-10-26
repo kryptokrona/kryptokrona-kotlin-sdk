@@ -10,8 +10,6 @@ import kotlin.test.assertTrue
 
 class WalletValidatorTest {
 
-    private lateinit var walletValidator: WalletValidator
-
     private var correctAddress =
         "SEKReUGeSDdZA6Fq6EHrKENoKpYtzEjuyYNXF48Lps2qYhjYw7dBAZ7VKeSMs6zjy64e2tWGB1RCi9nSHVKgHgBUcvNgcd9maiu"
 
@@ -73,14 +71,9 @@ class WalletValidatorTest {
         "466d5db56c5dbf193f4643988a0e932fdb23996c2a89a81f5a2db4605ed262b0"
     )
 
-    @BeforeEach
-    fun setup() {
-        walletValidator = WalletValidator()
-    }
-
     @Test
     fun `can validate wallet addresse when integrated addresses are allowed`() {
-        walletValidator.validateAddress(correctAddress, true)
+        WalletValidator.validateAddress(correctAddress, true)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -88,7 +81,7 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate wallet addresse when integrated addresses are not allowed`() {
-        walletValidator.validateAddress(correctAddress, false)
+        WalletValidator.validateAddress(correctAddress, false)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -96,7 +89,7 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate wallet addresses when integrated addresses are allowed`() {
-        walletValidator.validateAddresses(correctAddresses, true)
+        WalletValidator.validateAddresses(correctAddresses, true)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -104,7 +97,7 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate wallet addresses when integrated addresses are not allowed`() {
-        walletValidator.validateAddresses(correctAddresses, false)
+        WalletValidator.validateAddresses(correctAddresses, false)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -113,7 +106,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate incorrect wallet addresses with wrong length when integrated addresses are allowed`() {
         assertFailsWith<WalletAddressWrongLengthException> {
-            walletValidator.validateAddresses(incorrectAddressesWithWrongLength, true)
+            WalletValidator.validateAddresses(incorrectAddressesWithWrongLength, true)
                 .subscribe { }
         }
     }
@@ -121,14 +114,14 @@ class WalletValidatorTest {
     @Test
     fun `can not validate incorrect base58 wallet addresses when integrated addresses are not allowed`() {
         assertFailsWith<WalletAddressNotBase58Exception> {
-            walletValidator.validateAddresses(incorrectAddressesNotBase58, false)
+            WalletValidator.validateAddresses(incorrectAddressesNotBase58, false)
                 .subscribe { }
         }
     }
 
     @Test
     fun `can validate destinations`() {
-        walletValidator.validateDestinations(correctAmountWalletDestinations)
+        WalletValidator.validateDestinations(correctAmountWalletDestinations)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -137,7 +130,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate destinations when wallet destinations are empty`() {
         assertFailsWith<WalletNoDestinationGivenException> {
-            walletValidator.validateDestinations(emptyWalletDestinations)
+            WalletValidator.validateDestinations(emptyWalletDestinations)
                 .subscribe { }
         }
     }
@@ -145,7 +138,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate destinations when wallet amount is 0`() {
         assertFailsWith<WalletAmountIsZeroException> {
-            walletValidator.validateDestinations(amountWalletDestinationsIsZero)
+            WalletValidator.validateDestinations(amountWalletDestinationsIsZero)
                 .subscribe { }
         }
     }
@@ -153,14 +146,14 @@ class WalletValidatorTest {
     @Test
     fun `can not validate destinations when wallet amount is negative`() {
         assertFailsWith<WalletNegativeValueGivenException> {
-            walletValidator.validateDestinations(amountWalletDestinationsIsNegative)
+            WalletValidator.validateDestinations(amountWalletDestinationsIsNegative)
                 .subscribe { }
         }
     }
 
     @Test
     fun `can validate integrated addresses`() {
-        walletValidator.validateIntegratedAddresses(
+        WalletValidator.validateIntegratedAddresses(
             correctAmountWalletDestinations,
             "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03"
         )
@@ -173,7 +166,7 @@ class WalletValidatorTest {
     fun `can not validate integrated addresses when conflicting payment ids`() {
         //TODO: need to implement Address method fromAddress first before this will pass
         assertFailsWith<WalletConflictingPaymentIdsException> {
-            walletValidator.validateIntegratedAddresses(
+            WalletValidator.validateIntegratedAddresses(
                 correctAmountWalletDestinations,
                 "1eb80df3811e0d6d9ba937fc0fa040e823dbd13eec0a68c9833dc3fcf9ad2b03"
             )
@@ -189,7 +182,7 @@ class WalletValidatorTest {
             SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
         val currentHeight = 0L
 
-        walletValidator.validateAmount(
+        WalletValidator.validateAmount(
             correctAmountWalletDestinations,
             feeType,
             subWalletsToTakeFrom,
@@ -210,7 +203,7 @@ class WalletValidatorTest {
         val currentHeight = 0L
 
         assertFailsWith<WalletFeeTooSmallException> {
-            walletValidator.validateAmount(
+            WalletValidator.validateAmount(
                 correctAmountWalletDestinations,
                 feeType,
                 subWalletsToTakeFrom,
@@ -223,7 +216,7 @@ class WalletValidatorTest {
 
     @Test
     fun `can validate mixin if not more or less than min or max mixin`() {
-        walletValidator.validateMixin(1, 900000)
+        WalletValidator.validateMixin(1, 900000)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -232,7 +225,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate mixin if negative value`() {
         assertFailsWith<WalletNegativeValueGivenException> {
-            walletValidator.validateMixin(-10, 900000)
+            WalletValidator.validateMixin(-10, 900000)
                 .subscribe { }
         }
     }
@@ -240,7 +233,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate mixin if less than min mixin value`() {
         assertFailsWith<WalletMixinTooSmallException> {
-            walletValidator.validateMixin(0, 900000)
+            WalletValidator.validateMixin(0, 900000)
                 .subscribe { }
         }
     }
@@ -248,14 +241,14 @@ class WalletValidatorTest {
     @Test
     fun `can not validate mixin if more than max mixin value`() {
         assertFailsWith<WalletMixinTooBigException> {
-            walletValidator.validateMixin(101, 900000)
+            WalletValidator.validateMixin(101, 900000)
                 .subscribe { }
         }
     }
 
     @Test
     fun `can validate empty payment ID when empty string are allowed`() {
-        walletValidator.validatePaymentID("", true)
+        WalletValidator.validatePaymentID("", true)
             .subscribe { validity ->
                 assertTrue { validity }
             }
@@ -264,14 +257,14 @@ class WalletValidatorTest {
     @Test
     fun `can not validate empty payment ID when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
-            walletValidator.validatePaymentID("", false)
+            WalletValidator.validatePaymentID("", false)
                 .subscribe { }
         }
     }
 
     @Test
     fun `can validate 64 char length payment ID when empty string are allowed`() {
-        walletValidator.validatePaymentID(
+        WalletValidator.validatePaymentID(
             "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20a",
             true
         )
@@ -283,12 +276,12 @@ class WalletValidatorTest {
     @Test
     fun `can not validate payment ID with more or less than 64 char length when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdWrongLengthException> {
-            walletValidator.validatePaymentID("ecd4621085009655b82f0eb19c3c", false)
+            WalletValidator.validatePaymentID("ecd4621085009655b82f0eb19c3c", false)
                 .subscribe { }
         }
 
         assertFailsWith<WalletPaymentIdWrongLengthException> {
-            walletValidator.validatePaymentID(
+            WalletValidator.validatePaymentID(
                 "ecd4621085009655b82f0eb19c3ccd0e4cc882bb87497c97d15b23b0fdabd20adasdasd2d12d",
                 false
             )
@@ -299,7 +292,7 @@ class WalletValidatorTest {
     @Test
     fun `can not validate payment ID with specical chars when empty string are not allowed`() {
         assertFailsWith<WalletPaymentIdInvalidException> {
-            walletValidator.validatePaymentID(
+            WalletValidator.validatePaymentID(
                 "ecd4621+8500#655b82f0eb19c3ccd0e4cc882!b87497c97d15b23b0fdabd20a",
                 false
             )
