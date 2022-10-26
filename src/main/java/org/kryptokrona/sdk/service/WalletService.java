@@ -82,7 +82,6 @@ public class WalletService {
 		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
-		this.subWallets = new SubWallets();
 		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
 		this.autoOptimize = true;
@@ -255,7 +254,19 @@ public class WalletService {
 	 */
 	public Wallet createWallet() {
 		logger.info("New Wallet was created.");
+		createSubWallets();
 		return new Wallet();
+	}
+
+	/**
+	 * Creates SubWallets for a wallet.
+	 *
+	 * @return Wallet
+	 */
+	public void createSubWallets() {
+		// await keys.address(), scanHeight, newWallet,
+		//            keys.view.privateKey, keys.spend.privateKey,
+		// this.subWallets = new SubWallets();
 	}
 
 	/**

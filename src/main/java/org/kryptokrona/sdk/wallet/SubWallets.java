@@ -54,7 +54,6 @@ import java.util.stream.Collectors;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class SubWallets {
 
 	/**
