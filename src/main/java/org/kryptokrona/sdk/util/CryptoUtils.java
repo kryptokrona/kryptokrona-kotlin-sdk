@@ -48,6 +48,8 @@ import java.time.Instant;
 import java.util.*;
 
 import static org.kryptokrona.sdk.config.Config.*;
+import static org.kryptokrona.sdk.config.Constants.*;
+import static org.kryptokrona.sdk.model.util.WordList.WORD_LIST;
 
 /**
  * CryptoUtils.java
@@ -94,7 +96,7 @@ public class CryptoUtils {
 			return true;
 		}
 
-		if (unlockTime >= Constants.MAX_BLOCK_NUMBER) {
+		if (unlockTime >= MAX_BLOCK_NUMBER) {
 			return (Math.floor((double) Instant.now().toEpochMilli() / 1000)) >= unlockTime;
 		} else {
 			return currenHeight + 1 >= unlockTime;
@@ -138,12 +140,12 @@ public class CryptoUtils {
 		while (amount >= 1) {
 			var denomination = multiplier * (amount % 10);
 
-			if (denomination > Constants.MAX_OUTPUT_SIZE_CLIENT && preventTooLargeOutputs) {
+			if (denomination > MAX_OUTPUT_SIZE_CLIENT && preventTooLargeOutputs) {
 				// split amounts into ten chunks
 				var numSplitAmounts = 10.0;
 				var splitAmount = denomination / 10;
 
-				while (splitAmount > Constants.MAX_OUTPUT_SIZE_CLIENT) {
+				while (splitAmount > MAX_OUTPUT_SIZE_CLIENT) {
 					splitAmount = Math.floor(splitAmount / 10);
 					numSplitAmounts *= 10.0;
 				}
@@ -194,14 +196,14 @@ public class CryptoUtils {
 	 * @return Gets the max transaction size
 	 */
 	public static long getMaxTxSize(long currentHeight, long blockTime) {
-		long numerator = currentHeight * Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR;
-		long denominator = (Constants.MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR / blockTime);
+		long numerator = currentHeight * MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR;
+		long denominator = (MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR / blockTime);
 		long growth = numerator / denominator;
 		long x = Constants.MAX_BLOCK_SIZE_INITIAL + growth;
 		long y = 125000;
 
 		/* Need space for the miner transaction */
-		return Math.min(x, y) - Constants.CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE;
+		return Math.min(x, y) - CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE;
 	}
 
 	/**
@@ -232,7 +234,7 @@ public class CryptoUtils {
 	 * @param word The word to test
 	 */
 	public static boolean isValidMnemonicWord(String word) {
-		return WordList.WORD_LIST.contains(word);
+		return WORD_LIST.contains(word);
 	}
 
 	/**

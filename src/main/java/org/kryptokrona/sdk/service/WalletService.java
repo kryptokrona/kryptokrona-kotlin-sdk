@@ -97,6 +97,12 @@ public class WalletService {
 	public SubWallets initializeSubWallets(
 		String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
 	) {
+		var timestamp = 0L;
+
+		if (newWallet) {
+			timestamp = getCurre
+		}
+
 		var subWallets = new SubWallets(address, scanHeight, newWallet, privateViewKey, privateSpendKey);
 	}
 
