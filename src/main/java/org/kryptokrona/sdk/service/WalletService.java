@@ -84,6 +84,7 @@ public class WalletService {
 		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
+		this.subWallets = initializeSubWallets();
 		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
 		this.autoOptimize = true;
@@ -91,6 +92,12 @@ public class WalletService {
 		this.currentlyOptimizing = false;
 		this.currentlyTransacting = false;
 		this.setupMetronomes();
+	}
+
+	public SubWallets initializeSubWallets(
+		String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
+	) {
+		var subWallets = new SubWallets(address, scanHeight, newWallet, privateViewKey, privateSpendKey);
 	}
 
 	public void start() throws IOException {
@@ -260,6 +267,8 @@ public class WalletService {
 		var newWallet = true;
 		var scanHeight = 0;
 		var address = Address.fromEntropy("", "").blockingSingle();
+
+		subWallets = initializeSubWallets();
 
 		//TODO: finish implementation here
 

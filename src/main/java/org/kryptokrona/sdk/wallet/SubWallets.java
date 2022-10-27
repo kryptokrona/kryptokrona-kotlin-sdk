@@ -57,6 +57,14 @@ import static org.kryptokrona.sdk.config.Config.BLOCK_TARGET_TIME;
 @Setter
 public class SubWallets {
 
+	private final String address;
+
+	private final long scanHeight;
+
+	private final boolean newWallet;
+
+	private final String privateSpendKey;
+
 	/**
 	 * Whether the wallet is a view only wallet (cannot send transactions,
 	 * only can view).
@@ -101,11 +109,12 @@ public class SubWallets {
 
 	private static final Logger logger = LoggerFactory.getLogger(SubWallets.class);
 
-	public SubWallets(boolean isViewWallet, List<String> publicSpendKeys, String privateViewKey, Map<String, SubWallet> subWallets) {
-		this.isViewWallet = isViewWallet;
-		this.publicSpendKeys = publicSpendKeys;
+	public SubWallets(String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey) {
+		this.address = address;
+		this.scanHeight = scanHeight;
+		this.newWallet = newWallet;
 		this.privateViewKey = privateViewKey;
-		this.subWallets = subWallets;
+		this.privateSpendKey = privateSpendKey;
 		this.lockedTransactions = new ArrayList<>();
 	}
 
