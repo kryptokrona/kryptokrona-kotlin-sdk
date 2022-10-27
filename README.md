@@ -54,14 +54,14 @@ To install Kryptokrona SDK into your Maven/Gradle project we need to include the
 **Gradle**
 ```gradle
 dependencies {
-    implementation 'org.kryptokrona.sdk:0.1.0'
+    implementation 'org.kryptokrona.sdk:kryptokrona-sdk:0.1.0'
 }
 ```
 
 **Gradle Kotlin DSL**
 ```kotlin
 dependencies {
-    implementation("org.kryptokrona:sdk:0.1.0")
+    implementation("org.kryptokrona.sdk:kryptokrona-sdk:0.1.0")
 }
 ```
 
