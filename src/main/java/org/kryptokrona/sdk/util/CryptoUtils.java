@@ -84,11 +84,19 @@ public class CryptoUtils {
 
 	/**
 	 * Get a decent value to start the sync process at
+	 *
+	 * @return timestamp
 	 */
 	public static long getCurrentTimestampAdjusted() {
 		return getCurrentTimestampAdjusted(30L);
 	}
 
+	/**
+	 * Get a decent value to start the sync process at
+	 *
+	 * @param blockTargetTime
+	 * @return timestamp
+	 */
 	public static long getCurrentTimestampAdjusted(long blockTargetTime) {
 		var timestamp = Math.floor((double) Instant.now().toEpochMilli() / 1000);
 		var currentTimestampAdjusted = timestamp - (100 * blockTargetTime);
