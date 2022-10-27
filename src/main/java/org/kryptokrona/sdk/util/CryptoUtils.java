@@ -82,6 +82,13 @@ public class CryptoUtils {
 		return getLowerBound(val, nearestMultiple) + nearestMultiple;
 	}
 
+	/**
+	 * Get a decent value to start the sync process at
+	 */
+	public static long getCurrentTimestampAdjusted() {
+		return getCurrentTimestampAdjusted(30L);
+	}
+
 	public static long getCurrentTimestampAdjusted(long blockTargetTime) {
 		var timestamp = Math.floor((double) Instant.now().toEpochMilli() / 1000);
 		var currentTimestampAdjusted = timestamp - (100 * blockTargetTime);
