@@ -1,4 +1,4 @@
-![Kryptokrona SDK](resources/logo_github.png)
+# ![Kryptokrona SDK](resources/logo_github.png)
 
 [![Kryptokrona SDK Main Pipeline](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml/badge.svg)](https://github.com/kryptokrona/kryptokrona-java-sdk/actions/workflows/main-ci.yml) 
 [![Release](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)
