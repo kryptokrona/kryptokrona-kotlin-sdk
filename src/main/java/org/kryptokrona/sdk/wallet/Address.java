@@ -196,7 +196,7 @@ public class Address {
 
 	public static Observable<Address> fromSeed(String seed, String language) {
 		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
-		return Observable.empty();
+		return Observable.just(new Address());
 	}
 
 	/**
@@ -223,7 +223,8 @@ public class Address {
 	 */
 	public static Observable<String> generateSeed(String entropy, String language) {
 		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
-		return Observable.empty();
+		// var random = await ED25519.KeyPair.from etc.
+		return Observable.just("test");
 	}
 
 	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language) {

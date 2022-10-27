@@ -301,8 +301,6 @@ public class WalletService {
 
 	/**
 	 * Creates SubWallets for a wallet.
-	 *
-	 * @return Wallet
 	 */
 	public void createSubWallets() {
 		logger.info("Creating subwallets.");
