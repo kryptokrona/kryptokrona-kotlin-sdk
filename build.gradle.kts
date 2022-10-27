@@ -122,7 +122,7 @@ model {
     }
 }
 
-tasks.<Classes> {
+tasks.classes {
     dependsOn("helloSharedLibrary")
 }
 
