@@ -172,7 +172,6 @@ public class Address {
 	 * @param publicSpendKey the public spend key
 	 * @param publicViewKey  the public view key
 	 * @param paymentId      the payment ID
-	 * @param addressPrefix  the address prefix
 	 * @return A new address Object
 	 */
 	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId) {
@@ -209,11 +208,20 @@ public class Address {
 	 * @return Observable - a new address object
 	 */
 	public static Observable<Address> fromEntropy(String entropy, String language) {
-		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
-		return Observable.just(new Address());
+		var seed = Address.generateSeed(entropy, language).blockingSingle();
+		var addressFromSeed = Address.fromSeed(seed, language).blockingSingle();
+
+		return Observable.just(addressFromSeed);
 	}
 
-	public static Observable<String> generateSeed(String entropy, long iterations) {
+	/**
+	 * Creates a new address object from entropy (new address)
+	 *
+	 * @param entropy data to use for entropy to feed to the underlying random generation function
+	 * @param language the language of the mnemonic phrase
+	 * @return a new address object
+	 */
+	public static Observable<String> generateSeed(String entropy, String language) {
 		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
