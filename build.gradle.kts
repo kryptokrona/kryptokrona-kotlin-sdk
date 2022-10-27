@@ -9,16 +9,16 @@ import org.gradle.internal.jvm.Jvm
 plugins {
     id("java")
     id("com.dorongold.task-tree") version "2.1.0"
-    checkstyle
-    pmd
+    id("checkstyle")
+    id("pmd")
     id("de.aaschmid.cpd") version "3.3"
     id("com.github.spotbugs") version "5.0.4"
-    jacoco
+    id("jacoco")
     kotlin("jvm") version "1.7.10"
     id("org.springframework.boot") version "2.5.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("c")
-    application
+    id("application")
 }
 
 group "org.kryptokrona.sdk"
