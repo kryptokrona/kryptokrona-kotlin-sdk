@@ -33,7 +33,6 @@ package org.kryptokrona.sdk.util;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicInvalidWordException;
 import org.kryptokrona.sdk.exception.wallet.WalletMnemonicWrongLengthException;
