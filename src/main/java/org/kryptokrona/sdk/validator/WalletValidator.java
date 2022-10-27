@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.kryptokrona.sdk.config.Config.*;
+
 /**
  * WalletValidator.java
  *
@@ -75,8 +77,8 @@ public class WalletValidator {
 		for (String address : addresses) {
 			// verify that address lengths are correct
 			if (
-				address.length() != Config.STANDARD_ADDRESS_LENGTH &&
-					address.length() != Config.INTEGRATED_ADDRESS_LENGTH) {
+				address.length() != STANDARD_ADDRESS_LENGTH &&
+					address.length() != INTEGRATED_ADDRESS_LENGTH) {
 				throw new WalletAddressWrongLengthException();
 			}
 
@@ -89,7 +91,7 @@ public class WalletValidator {
 			}
 
 			// verify it's not an integrated, if those aren't allowed
-			Address.fromAddress(address, Config.ADDRESS_PREFIX).subscribe(a -> {
+			Address.fromAddress(address, ADDRESS_PREFIX).subscribe(a -> {
 				if (a.getPaymentId().length() != 0 && !integratedAddressesAllowed) {
 					throw new WalletAddressIsIntegratedException();
 				}
@@ -135,12 +137,12 @@ public class WalletValidator {
 	public static Observable<Boolean> validateIntegratedAddresses(Map<String, Double> destinations, final String paymentID)
 		throws WalletAddressChecksumMismatchException {
 		for (var destination : destinations.keySet()) {
-			if (destination.length() != Config.INTEGRATED_ADDRESS_LENGTH) {
+			if (destination.length() != INTEGRATED_ADDRESS_LENGTH) {
 				continue;
 			}
 
 			// extract the payment id
-			Address.fromAddress(destination, Config.ADDRESS_PREFIX)
+			Address.fromAddress(destination, ADDRESS_PREFIX)
 				.subscribe(parsedAddress -> {
 					if (!Objects.equals(paymentID, parsedAddress.getPaymentId())) {
 						throw new WalletConflictingPaymentIdsException();
@@ -162,7 +164,7 @@ public class WalletValidator {
 		validateAddresses(addresses, false)
 			.subscribe(validity -> {
 				for (var address : addresses) {
-					Address.fromAddress(address, Config.ADDRESS_PREFIX)
+					Address.fromAddress(address, ADDRESS_PREFIX)
 						.subscribe(parsedAddress -> {
 							var keys = subWallets.getPublicSpendKeys();
 
@@ -232,7 +234,7 @@ public class WalletValidator {
 			throw new WalletNegativeValueGivenException();
 		}
 
-		Map<String, Long> mixinLimitsByHeight = Config.MIXIN_LIMITS.getMixinLimitsByHeight(height);
+		Map<String, Long> mixinLimitsByHeight = MIXIN_LIMITS.getMixinLimitsByHeight(height);
 
 		if (mixin < mixinLimitsByHeight.get("minMixin")) {
 			throw new WalletMixinTooSmallException();

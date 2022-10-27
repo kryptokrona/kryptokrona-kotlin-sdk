@@ -47,6 +47,9 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.kryptokrona.sdk.config.Config.ADDRESS_PREFIX;
+import static org.kryptokrona.sdk.config.Config.BLOCK_TARGET_TIME;
+
 /**
  * SubWallets.java
  *
@@ -114,11 +117,11 @@ public class SubWallets {
 		var timestamp = 0L;
 
 		if (newWallet) {
-			timestamp = CryptoUtils.getCurrentTimestampAdjusted(Config.BLOCK_TARGET_TIME);
+			timestamp = CryptoUtils.getCurrentTimestampAdjusted(BLOCK_TARGET_TIME);
 		}
 
 		long finalTimestamp = timestamp;
-		Address.fromAddress(address, Config.ADDRESS_PREFIX)
+		Address.fromAddress(address, ADDRESS_PREFIX)
 			.subscribe(decodedAddress -> {
 				var publicSpendKeys = new ArrayList<String>();
 
@@ -648,7 +651,7 @@ public class SubWallets {
 			throw new WalletIllegalViewWalletOperationException();
 		}
 
-		Address.fromEntropy("", "", Config.ADDRESS_PREFIX)
+		Address.fromEntropy("", "", ADDRESS_PREFIX)
 			.subscribe(address -> {
 				// checking if the aderess spendkeys already exists in the sub wallet
 				//TODO: Fix implementation in this
@@ -660,7 +663,7 @@ public class SubWallets {
 
 				// publicSpendKeys.add(address.getSpendKeys());
 
-				Address.fromKeys(address.getSpendKeys(), Config.ADDRESS_PREFIX)
+				Address.fromKeys(address.getSpendKeys(), ADDRESS_PREFIX)
 					.subscribe(newAddr -> {
 					});
 			});

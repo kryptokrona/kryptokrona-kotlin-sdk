@@ -48,6 +48,8 @@ import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.*;
 
+import static org.kryptokrona.sdk.config.Config.*;
+
 /**
  * CryptoUtils.java
  *
@@ -257,20 +259,20 @@ public class CryptoUtils {
 			throw new WalletMnemonicInvalidWordException();
 		}
 
-		var address = Address.fromMnemonic(mnemonicWords, null, Config.ADDRESS_PREFIX);
+		var address = Address.fromMnemonic(mnemonicWords, null, ADDRESS_PREFIX);
 
 		//TODO: return true if it exists, false if not
 		return Observable.empty();
 	}
 
 	public static double getMinimumTransactionFee(long transactionSize, long height) {
-		return getTransactionFee(transactionSize, Config.MINIMUM_FEE_PER_BYTE);
+		return getTransactionFee(transactionSize, MINIMUM_FEE_PER_BYTE);
 	}
 
 	public static double getTransactionFee(long transactionSize, double feePerByte) {
-		var numChunks = Math.ceil(transactionSize / Config.FEE_PER_BYTE_CHUNK_SIZE);
+		var numChunks = Math.ceil(transactionSize / FEE_PER_BYTE_CHUNK_SIZE);
 
-		return numChunks * feePerByte * Config.FEE_PER_BYTE_CHUNK_SIZE;
+		return numChunks * feePerByte * FEE_PER_BYTE_CHUNK_SIZE;
 	}
 
 	public static long estimatedTransactionSize(long mixin, long numInputs, long numOutputs, boolean havePaymentID, long extraDataSize) {

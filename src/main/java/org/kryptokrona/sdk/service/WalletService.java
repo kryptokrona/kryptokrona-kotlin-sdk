@@ -255,7 +255,7 @@ public class WalletService {
 	 * @return Wallet
 	 */
 	public Wallet createWallet() {
-		logger.info("New Wallet was created.");
+		logger.info("Creating new wallet.");
 		createSubWallets();
 		return new Wallet();
 	}
@@ -266,6 +266,7 @@ public class WalletService {
 	 * @return Wallet
 	 */
 	public void createSubWallets() {
+		logger.info("Creating subwallets.");
 		// await keys.address(), scanHeight, newWallet,
 		//            keys.view.privateKey, keys.spend.privateKey,
 		// this.subWallets = new SubWallets();
