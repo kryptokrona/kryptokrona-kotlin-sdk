@@ -258,7 +258,7 @@ public class CryptoUtils {
 			throw new WalletMnemonicInvalidWordException();
 		}
 
-		var address = Address.fromMnemonic(mnemonicWords, null, ADDRESS_PREFIX);
+		var address = Address.fromMnemonic(mnemonicWords, null);
 
 		//TODO: return true if it exists, false if not
 		return Observable.empty();

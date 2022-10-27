@@ -42,6 +42,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import static org.kryptokrona.sdk.config.Config.ADDRESS_PREFIX;
+
 /**
  * Address.java
  *
@@ -173,35 +175,51 @@ public class Address {
 	 * @param addressPrefix  the address prefix
 	 * @return A new address Object
 	 */
-	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId, long addressPrefix) {
+	public static Observable<Address> fromPublicKeys(String publicSpendKey, String publicViewKey, String paymentId) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromViewOnlyKeys(String publicSpendKey, String publicViewKey, String paymentId, long addressPrefix) {
+	public static Observable<Address> fromViewOnlyKeys(String publicSpendKey, String publicViewKey, String paymentId) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromKeys(KeyPair spendKeys, long addressPrefix) {
+	public static Observable<Address> fromKeys(KeyPair spendKeys) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromMnemonic(List<String> mnemonic, String language, long addressPrefix) {
+	public static Observable<Address> fromMnemonic(List<String> mnemonic, String language) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromSeed(String seed, String language, long addressPrefix) {
+	public static Observable<Address> fromSeed(String seed, String language) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<Address> fromEntropy(String entropy, String language, long addressPrefix) {
-		return Observable.empty();
+	/**
+	 * Creates a new address object from entropy (new address)
+	 *
+	 * @param entropy data to use for entropy to feed to the underlying random generation function
+	 * @param language the language of the mnemonic phrase
+	 *
+	 * @return Observable - a new address object
+	 */
+	public static Observable<Address> fromEntropy(String entropy, String language) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
+		return Observable.just(new Address());
 	}
 
 	public static Observable<String> generateSeed(String entropy, long iterations) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 
-	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language, long addressPrefix) {
+	public static Observable<String> generateSubWallet(String privateSpendKey, long subwalletIndex, String language) {
+		var addressPrefix = ADDRESS_PREFIX; // remove this later and just use ADDRESS_PREFIX
 		return Observable.empty();
 	}
 

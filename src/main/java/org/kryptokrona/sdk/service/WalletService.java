@@ -33,6 +33,7 @@ import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.exception.wallet.WalletSubWalletNoPrimaryAddressException;
 import org.kryptokrona.sdk.util.Metronome;
+import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.wallet.SubWallets;
 import org.kryptokrona.sdk.wallet.Wallet;
 import org.slf4j.Logger;
@@ -255,6 +256,13 @@ public class WalletService {
 	 */
 	public Wallet createWallet() {
 		logger.info("Creating new wallet.");
+
+		var newWallet = true;
+		var scanHeight = 0;
+		var address = Address.fromEntropy("", "").blockingSingle();
+
+		//TODO: finish implementation here
+
 		createSubWallets();
 		return new Wallet();
 	}
@@ -269,6 +277,8 @@ public class WalletService {
 		// await keys.address(), scanHeight, newWallet,
 		//            keys.view.privateKey, keys.spend.privateKey,
 		// this.subWallets = new SubWallets();
+
+		//TODO: finish implementation here
 	}
 
 	/**

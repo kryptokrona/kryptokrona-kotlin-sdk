@@ -649,7 +649,7 @@ public class SubWallets {
 			throw new WalletIllegalViewWalletOperationException();
 		}
 
-		Address.fromEntropy("", "", ADDRESS_PREFIX)
+		Address.fromEntropy("", "")
 			.subscribe(address -> {
 				// checking if the aderess spendkeys already exists in the sub wallet
 				//TODO: Fix implementation in this
@@ -661,7 +661,7 @@ public class SubWallets {
 
 				// publicSpendKeys.add(address.getSpendKeys());
 
-				Address.fromKeys(address.getSpendKeys(), ADDRESS_PREFIX)
+				Address.fromKeys(address.getSpendKeys())
 					.subscribe(newAddr -> {
 					});
 			});
