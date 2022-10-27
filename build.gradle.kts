@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
-import org.gradle.internal.jvm.Jvm
 
 //---------------------------------------------------------------------------------
 // PLUGINS
@@ -13,12 +12,12 @@ plugins {
     id("pmd")
     id("de.aaschmid.cpd") version "3.3"
     id("com.github.spotbugs") version "5.0.4"
-    id("jacoco")
+    id("jacoco") // if this does not work, remove the id around the name
     kotlin("jvm") version "1.7.10"
     id("org.springframework.boot") version "2.5.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("c")
-    id("application")
+    application
 }
 
 group "org.kryptokrona.sdk"
@@ -81,50 +80,7 @@ dependencies {
 // JAVA NATIVE INTERFACE (JNI)
 //---------------------------------------------------------------------------------
 
-application {
-    applicationDefaultJvmArgs = listOf("-Djava.library.path=" + file("${buildDir}/libs/hello/shared").absolutePath)
-}
-
-model {
-    platforms {
-        x64 {
-            architecture("x86_64")
-        }
-
-        // need to add all platforms so we can build
-    }
-
-    components {
-        hello(NativeLibrarySpec) {
-            targetPlatform.set("x64")
-
-            binaries.all {
-                var jvmHome = Jvm.current().javaHome
-                if (targetPlatform.operatingSystem.macOsX) {
-                    cCompiler.args('-I', "${jvmHome}/include")
-                    cCompiler.args('-I', "${jvmHome}/include/darwin")
-                    cCompiler.args('-mmacosx-version-min=10.9')
-                    linker.args('-mmacosx-version-min=10.9')
-                    linker.args('-stdlib=libc++')
-                } else if (targetPlatform.operatingSystem.linux) {
-                    cCompiler.args('-I', "${jvmHome}/include")
-                    cCompiler.args('-I', "${jvmHome}/include/linux")
-                    cCompiler.args('-D_FILE_OFFSET_BITS=64')
-                } else if (targetPlatform.operatingSystem.windows) {
-                    cCompiler.args("-I${jvmHome}/include")
-                    cCompiler.args("-I${jvmHome}/include/win32")
-                } else if (targetPlatform.operatingSystem.freeBSD) {
-                    cCompiler.args('-I', "${jvmHome}/include")
-                    cCompiler.args('-I', "${jvmHome}/include/freebsd")
-                }
-            }
-        }
-    }
-}
-
-tasks.classes {
-    dependsOn("helloSharedLibrary")
-}
+apply("model.gradle")
 
 //---------------------------------------------------------------------------------
 // TEST CONFIGURATION
