@@ -32,6 +32,7 @@ import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.exception.wallet.WalletSubWalletNoPrimaryAddressException;
+import org.kryptokrona.sdk.util.CryptoUtils;
 import org.kryptokrona.sdk.util.Metronome;
 import org.kryptokrona.sdk.wallet.Address;
 import org.kryptokrona.sdk.wallet.SubWallets;
@@ -84,8 +85,6 @@ public class WalletService {
 		DaemonImpl daemon
 	) {
 		this.daemon = daemon;
-		this.subWallets = initializeSubWallets();
-		this.walletSynchronizerService = new WalletSynchronizerService();
 		this.started = false;
 		this.autoOptimize = true;
 		this.shouldPerformAutoOptimize = true;
@@ -95,16 +94,32 @@ public class WalletService {
 	}
 
 	public SubWallets initializeSubWallets(
-		String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
+		Address address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey
 	) {
+		var subWallets = new SubWallets(address, scanHeight, newWallet, privateViewKey, privateSpendKey);
 		var timestamp = 0L;
 
 		if (newWallet) {
-			timestamp = getCurre
+			timestamp = CryptoUtils.getCurrentTimestampAdjusted();
 		}
 
-		var subWallets = new SubWallets(address, scanHeight, newWallet, privateViewKey, privateSpendKey);
+		walletSynchronizerService = new WalletSynchronizerService(
+			subWallets, timestamp, scanHeight, privateViewKey
+		);
+
+		/*if (!usingNativeCrypto()) {
+
+		}*/
+
+		return subWallets; // temporary return
 	}
+
+	//TODO: before we implement this we need to include the crypto library with JIT
+	/*public boolean usingNativeCrypto() {
+		logger.info("Checking if usage of native crypto.");
+
+		return Crypto.isNative;
+	}*/
 
 	public void start() throws IOException {
 		if (!started) {
@@ -274,7 +289,9 @@ public class WalletService {
 		var scanHeight = 0;
 		var address = Address.fromEntropy("", "").blockingSingle();
 
-		subWallets = initializeSubWallets();
+		subWallets = initializeSubWallets(
+			address, scanHeight, newWallet, address.getViewKeys().getPrivateKey(),
+			address.getSpendKeys().getPrivateKey());
 
 		//TODO: finish implementation here
 

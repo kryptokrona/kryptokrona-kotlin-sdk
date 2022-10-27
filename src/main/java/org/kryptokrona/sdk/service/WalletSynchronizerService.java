@@ -62,7 +62,6 @@ import static org.kryptokrona.sdk.config.Config.MAX_LAST_FETCHED_BLOCK_INTERVAL;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class WalletSynchronizerService {
 
 	private DaemonImpl daemon;
@@ -75,7 +74,7 @@ public class WalletSynchronizerService {
 
 	private SynchronizationStatus synchronizationStatus;
 
-	private List<SubWallets> subWallets;
+	private SubWallets subWallets;
 
 	private boolean fetchingBlocks;
 
@@ -88,13 +87,11 @@ public class WalletSynchronizerService {
 	private static final Logger logger = LoggerFactory.getLogger(WalletSynchronizerService.class);
 
 	public WalletSynchronizerService(
-		DaemonImpl daemon,
-		List<SubWallets> subWallets,
+		SubWallets subWallets,
 		long startTimestamp,
 		long startHeight,
 		String privateViewKey
 	) {
-		this.daemon = daemon;
 		this.subWallets = subWallets;
 		this.startTimestamp = startTimestamp;
 		this.startHeight = startHeight;
@@ -104,7 +101,7 @@ public class WalletSynchronizerService {
 	}
 
 	public void initAfterLoad(
-		List<SubWallets> subWallets,
+		SubWallets subWallets,
 		DaemonImpl daemon
 	) {
 		this.subWallets = subWallets;

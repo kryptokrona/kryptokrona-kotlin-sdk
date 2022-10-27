@@ -88,7 +88,7 @@ public class CryptoUtils {
 	 * @return timestamp
 	 */
 	public static long getCurrentTimestampAdjusted() {
-		return getCurrentTimestampAdjusted(30L);
+		return getCurrentTimestampAdjusted(BLOCK_TARGET_TIME);
 	}
 
 	/**

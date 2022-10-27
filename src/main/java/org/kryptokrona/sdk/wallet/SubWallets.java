@@ -57,7 +57,7 @@ import static org.kryptokrona.sdk.config.Config.BLOCK_TARGET_TIME;
 @Setter
 public class SubWallets {
 
-	private final String address;
+	private final Address address;
 
 	private final long scanHeight;
 
@@ -109,7 +109,7 @@ public class SubWallets {
 
 	private static final Logger logger = LoggerFactory.getLogger(SubWallets.class);
 
-	public SubWallets(String address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey) {
+	public SubWallets(Address address, long scanHeight, boolean newWallet, String privateViewKey, String privateSpendKey) {
 		this.address = address;
 		this.scanHeight = scanHeight;
 		this.newWallet = newWallet;
