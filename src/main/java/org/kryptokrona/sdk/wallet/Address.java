@@ -57,7 +57,7 @@ public class Address {
 
 	private String seed;
 
-	private List<KeyPair> keys;
+	private KeyPair keyPair;
 
 	private String language;
 
