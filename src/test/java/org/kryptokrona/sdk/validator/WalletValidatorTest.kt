@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.validator;
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.exception.wallet.*
 import org.kryptokrona.sdk.model.util.FeeType
+import org.kryptokrona.sdk.wallet.Address
 import org.kryptokrona.sdk.wallet.SubWallets
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
@@ -177,8 +178,9 @@ class WalletValidatorTest {
     fun `can validate transfer amount and fee`() {
         val feeType = FeeType.minimumFee()
 
+        var address = Address()
         val subWallets =
-            SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
+            SubWallets(address, 0, false, "", "")
         val currentHeight = 0L
 
         WalletValidator.validateAmount(
@@ -197,8 +199,9 @@ class WalletValidatorTest {
         feeType.isFeePerByte = false
         feeType.isFixedFee = false
 
+        var address = Address()
         val subWallets =
-            SubWallets() //TODO: might need to initialize some values here and remove the @NoArgsConstructor decorator in class
+            SubWallets(address, 0, false, "", "")
         val currentHeight = 0L
 
         assertFailsWith<WalletFeeTooSmallException> {
