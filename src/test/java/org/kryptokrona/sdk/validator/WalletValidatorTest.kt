@@ -178,7 +178,7 @@ class WalletValidatorTest {
     fun `can validate transfer amount and fee`() {
         val feeType = FeeType.minimumFee()
 
-        var address = Address()
+        val address = Address()
         val subWallets =
             SubWallets(address, 0, false, "", "")
         val currentHeight = 0L
@@ -199,7 +199,7 @@ class WalletValidatorTest {
         feeType.isFeePerByte = false
         feeType.isFixedFee = false
 
-        var address = Address()
+        val address = Address()
         val subWallets =
             SubWallets(address, 0, false, "", "")
         val currentHeight = 0L
