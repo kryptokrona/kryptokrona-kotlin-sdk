@@ -22,6 +22,8 @@ package org.kryptokrona.sdk.crypto;
 import java.math.BigInteger;
 import java.util.Arrays;
 
+//TODO: do we have a C/C++ library for this?
+
 /**
  * Base58.java
  *
