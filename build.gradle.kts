@@ -8,11 +8,12 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
     id("java")
     id("com.dorongold.task-tree") version "2.1.0"
-    id("checkstyle")
-    id("pmd")
-    id("de.aaschmid.cpd") version "3.3"
-    id("com.github.spotbugs") version "5.0.4"
-    id("jacoco") // if this does not work, remove the id around the name
+    //TODO: temporarily disable
+    // id("checkstyle")
+    // id("pmd")
+    // id("de.aaschmid.cpd") version "3.3"
+    // id("com.github.spotbugs") version "5.0.4"
+    // id("jacoco") // if this does not work, remove the id around the name
     kotlin("jvm") version "1.7.10"
     id("org.springframework.boot") version "2.5.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -89,10 +90,10 @@ apply("model.gradle")
 tasks.withType<Test> {
     useJUnitPlatform()
     failFast = true // stop early to avoid running whole test suit if one fails
-    finalizedBy("jacocoTestReport") // report is always generated after tests run
+    // finalizedBy("jacocoTestReport") // report is always generated after tests run
 }
 
-tasks.jacocoTestReport {
+/*tasks.jacocoTestReport {
     reports {
         xml.isEnabled = false
         csv.isEnabled = false
@@ -113,13 +114,13 @@ tasks.jacocoTestCoverageVerification {
             }
         }
     }
-}
+}*/
 
 //---------------------------------------------------------------------------------
 // STATIC CODE ANALYSIS CONFIGURATION
 //---------------------------------------------------------------------------------
 
-checkstyle {
+/*checkstyle {
     config = rootProject.resources.text.fromFile("${projectDir}/gradle/static-code-analysis/checkstyle/checkstyle.xml")
     toolVersion = "8.12"
     isIgnoreFailures = false
@@ -159,7 +160,7 @@ tasks.spotbugsMain {
     reports.maybeCreate("xml").isEnabled = false
     reports.maybeCreate("html").isEnabled = true
     maxHeapSize.set("256m")
-}
+}*/
 
 
 //---------------------------------------------------------------------------------
