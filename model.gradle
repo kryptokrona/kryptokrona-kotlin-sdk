@@ -4,8 +4,10 @@
 // if you have an idea how to fix this in kotlin DSL feel free to send a PR :)
 import org.gradle.internal.jvm.Jvm
 
+mainClassName = 'TestApp'
+
 application {
-    applicationDefaultJvmArgs = ["-Djava.library.path=" + file("${buildDir}/libs/hello/shared").absolutePath]
+    applicationDefaultJvmArgs = ["-Djava.library.path=${buildDir}/libs/testapp/shared"]
 }
 
 model {
@@ -16,7 +18,7 @@ model {
     }
 
     components {
-        hello(NativeLibrarySpec) {
+        testapp(NativeLibrarySpec) {
             targetPlatform "x64"
             binaries.all {
                 def jvmHome = Jvm.current().javaHome
@@ -42,4 +44,4 @@ model {
     }
 }
 
-classes.dependsOn 'helloSharedLibrary'
+// classes.dependsOn 'TestappSharedLibrary'
