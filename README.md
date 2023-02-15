@@ -25,11 +25,11 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 ## Development Resources
 
 - Web: https://kryptokrona.org
-- Docs: https://docs.kryptokrona.org
+- Docs: https://github.com/mjovanc/kryptokrona-sdk/wiki
 - Mail: mjovanc@icloud.com
-- GitHub: https://github.com/kryptokrona
-- Hugin: sdkdevs board on Hugin Messenger
-- It is HIGHLY recommended to join our board on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
+- GitHub: https://github.com/mjovanc/kryptokrona-sdk
+- Hugin: sdkdevs group on Hugin Messenger
+- It is HIGHLY recommended to join our group on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
 
 ## Releases
 
@@ -44,7 +44,7 @@ To install Kryptokrona SDK into your Maven/Gradle project we need to include the
 **Maven**
 ```xml
 <dependency>
-    <groupId>org.kryptokrona.sdk</groupId>
+    <groupId>org.mjovanc.kryptokrona</groupId>
     <artifactId>kryptokrona-sdk</artifactId>
     <version>0.1.0</version>
     <scope>implementation</scope>
@@ -54,14 +54,14 @@ To install Kryptokrona SDK into your Maven/Gradle project we need to include the
 **Gradle**
 ```gradle
 dependencies {
-    implementation 'org.kryptokrona.sdk:kryptokrona-sdk:0.1.0'
+    implementation 'org.mjovanc.kryptokrona:kryptokrona-sdk:0.1.0'
 }
 ```
 
 **Gradle Kotlin DSL**
 ```kotlin
 dependencies {
-    implementation("org.kryptokrona.sdk:kryptokrona-sdk:0.1.0")
+    implementation("org.mjovanc.kryptokrona:kryptokrona-sdk:0.1.0")
 }
 ```
 
@@ -98,13 +98,13 @@ public class Example {
 
 Are you having trouble with Kryptokrona SDK? We want to help!
 
-- Check the JavaDoc documentation: https://kryptokrona.github.io/kryptokrona-sdk/0.1.0/index.html
+- Check the JavaDoc documentation: https://mjovanc.github.io/kryptokrona-sdk/0.1.0/index.html
 
 - If you are upgrading, read the release notes for upgrade instructions and "new and noteworthy" features.
 
 - Ask a question we monitor stackoverflow.com for questions tagged with kryptokrona-sdk. You can also chat with the community on Hugin or Discord.
 
-- Report bugs with Kryptokrona SDK at github.com/kryptokrona/kryptokrona-sdk/issues.
+- Report bugs with Kryptokrona SDK at github.com/mjovanc/kryptokrona-sdk/issues.
 
 ## Reporting Issues
 
@@ -135,7 +135,7 @@ If you would like to contribute to this project there is two ways:
 
 ### Pull Request
 
-Read through the developer documentation at: [https://docs.kryptokrona.org/developer/kryptokrona-sdk](https://docs.kryptokrona.org/developer/kryptokrona-sdk).
+Read through the developer documentation at: [https://github.com/mjovanc/kryptokrona-sdk/wiki](https://github.com/mjovanc/kryptokrona-sdk/wiki).
 
 We recommend using IntelliJ to work on this project.
 
