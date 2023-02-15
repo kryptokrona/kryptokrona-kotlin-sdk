@@ -32,9 +32,9 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 
 ## Releases
 
-| NAME     | RELEASE DATE | VERSION | MAINTAINER         | EOL     | DESCRIPTION              |
-|----------|--------------|---------|--------------------|---------|--------------------------|
-| Mjölnir | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done.              |
+| NAME     | RELEASE DATE | VERSION   | MAINTAINER         | EOL     | DESCRIPTION              |
+|----------|--------------|-----------|--------------------|---------|--------------------------|
+| Mjölnir | Not set      | [0.1.0](https://mjovanc.github.io/kryptokrona-sdk/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
 
 
 ## Getting Help
