@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2022, The Kryptokrona Project
+// Copyright (c) 2022-2023, The Kryptokrona Developers
 //
 // Written by Marcus Cvjeticanin
 //
