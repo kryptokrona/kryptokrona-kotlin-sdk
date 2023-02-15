@@ -1,7 +1,6 @@
 package org.mjovanc.kryptokrona.validator;
 
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.exception.wallet.*
 import org.mjovanc.kryptokrona.exception.wallet.*
 import org.mjovanc.kryptokrona.model.util.FeeType
 import org.mjovanc.kryptokrona.wallet.Address

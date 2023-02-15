@@ -31,7 +31,7 @@
 package org.mjovanc.kryptokrona.crypto;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.transaction.*;
+import org.mjovanc.kryptokrona.transaction.*;
 import org.mjovanc.kryptokrona.transaction.*;
 import org.mjovanc.kryptokrona.wallet.Address;
 

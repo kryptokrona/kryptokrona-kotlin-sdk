@@ -48,7 +48,7 @@ import org.mjovanc.kryptokrona.config.Config;
 import org.mjovanc.kryptokrona.exception.network.NetworkBlockCountException;
 import org.mjovanc.kryptokrona.exception.node.NodeDeadException;
 import org.mjovanc.kryptokrona.exception.wallet.WalletException;
-import org.kryptokrona.sdk.model.http.*;
+import org.mjovanc.kryptokrona.model.http.*;
 import org.mjovanc.kryptokrona.model.http.*;
 import org.mjovanc.kryptokrona.validator.WalletValidator;
 import org.slf4j.Logger;

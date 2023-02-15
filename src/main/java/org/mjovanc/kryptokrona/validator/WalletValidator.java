@@ -31,7 +31,7 @@
 package org.mjovanc.kryptokrona.validator;
 
 import io.reactivex.rxjava3.core.Observable;
-import org.kryptokrona.sdk.exception.wallet.*;
+import org.mjovanc.kryptokrona.exception.wallet.*;
 import org.mjovanc.kryptokrona.model.util.FeeType;
 import org.mjovanc.kryptokrona.wallet.Address;
 import org.mjovanc.kryptokrona.wallet.SubWallets;

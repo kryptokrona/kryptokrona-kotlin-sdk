@@ -33,7 +33,7 @@ package org.mjovanc.kryptokrona.wallet;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.Setter;
-import org.kryptokrona.sdk.exception.wallet.*;
+import org.mjovanc.kryptokrona.exception.wallet.*;
 import org.mjovanc.kryptokrona.exception.wallet.*;
 import org.mjovanc.kryptokrona.model.util.TxInputAndOwner;
 import org.mjovanc.kryptokrona.model.util.UnconfirmedInput;
