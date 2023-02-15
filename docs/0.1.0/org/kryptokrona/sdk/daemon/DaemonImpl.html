@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class DaemonImpl" class="title">Class DaemonImpl</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.kryptokrona.sdk.daemon.DaemonImpl</div>
+<div class="inheritance">daemon.org.mjovanc.kryptokrona.DaemonImpl</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -130,7 +130,7 @@ implements <a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon"
 <div class="block">Returns a mapping of transaction hashes to global indexes.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRandomOutputsByAmount(org.kryptokrona.sdk.model.http.RandomOutputsByAmount)" class="member-name-link">getRandomOutputsByAmount</a><wbr>(<a href="../model/http/RandomOutputsByAmount.html" title="class in org.kryptokrona.sdk.model.http">RandomOutputsByAmount</a>&nbsp;randomOutputsByAmount)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRandomOutputsByAmount(http.model.org.mjovanc.kryptokrona.RandomOutputsByAmount)" class="member-name-link">getRandomOutputsByAmount</a><wbr>(<a href="../model/http/RandomOutputsByAmount.html" title="class in org.kryptokrona.sdk.model.http">RandomOutputsByAmount</a>&nbsp;randomOutputsByAmount)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets random outputs for the given amounts. requestedOuts per.</div>
 </div>
@@ -140,7 +140,7 @@ implements <a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon"
 <div class="block">Make a GET request.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalletSyncData(org.kryptokrona.sdk.model.http.WalletSyncData)" class="member-name-link">getWalletSyncData</a><wbr>(<a href="../model/http/WalletSyncData.html" title="class in org.kryptokrona.sdk.model.http">WalletSyncData</a>&nbsp;walletSyncData)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalletSyncData(http.model.org.mjovanc.kryptokrona.WalletSyncData)" class="member-name-link">getWalletSyncData</a><wbr>(<a href="../model/http/WalletSyncData.html" title="class in org.kryptokrona.sdk.model.http">WalletSyncData</a>&nbsp;walletSyncData)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets blocks from the daemon.</div>
 </div>
@@ -256,15 +256,15 @@ implements <a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon"
 </section>
 </li>
 <li>
-<section class="detail" id="getWalletSyncData(org.kryptokrona.sdk.model.http.WalletSyncData)">
+<section class="detail" id="getWalletSyncData(http.model.org.mjovanc.kryptokrona.WalletSyncData)">
 <h3>getWalletSyncData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&gt;</span>&nbsp;<span class="element-name">getWalletSyncData</span><wbr><span class="parameters">(<a href="../model/http/WalletSyncData.html" title="class in org.kryptokrona.sdk.model.http">WalletSyncData</a>&nbsp;walletSyncData)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Daemon.html#getWalletSyncData(org.kryptokrona.sdk.model.http.WalletSyncData)">Daemon</a></code></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Daemon.html#getWalletSyncData(http.model.org.mjovanc.kryptokrona.WalletSyncData)">Daemon</a></code></span></div>
 <div class="block">Gets blocks from the daemon. Blocks are returned starting from the last
  known block hash (if higher than the startHeight/startTimestamp).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Daemon.html#getWalletSyncData(org.kryptokrona.sdk.model.http.WalletSyncData)">getWalletSyncData</a></code>&nbsp;in interface&nbsp;<code><a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon">Daemon</a></code></dd>
+<dd><code><a href="Daemon.html#getWalletSyncData(http.model.org.mjovanc.kryptokrona.WalletSyncData)">getWalletSyncData</a></code>&nbsp;in interface&nbsp;<code><a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon">Daemon</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>walletSyncData</code> - : WalletSyncData</dd>
 <dt>Returns:</dt>
@@ -310,10 +310,10 @@ implements <a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon"
 </section>
 </li>
 <li>
-<section class="detail" id="getRandomOutputsByAmount(org.kryptokrona.sdk.model.http.RandomOutputsByAmount)">
+<section class="detail" id="getRandomOutputsByAmount(http.model.org.mjovanc.kryptokrona.RandomOutputsByAmount)">
 <h3>getRandomOutputsByAmount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&gt;</span>&nbsp;<span class="element-name">getRandomOutputsByAmount</span><wbr><span class="parameters">(<a href="../model/http/RandomOutputsByAmount.html" title="class in org.kryptokrona.sdk.model.http">RandomOutputsByAmount</a>&nbsp;randomOutputsByAmount)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Daemon.html#getRandomOutputsByAmount(org.kryptokrona.sdk.model.http.RandomOutputsByAmount)">Daemon</a></code></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Daemon.html#getRandomOutputsByAmount(http.model.org.mjovanc.kryptokrona.RandomOutputsByAmount)">Daemon</a></code></span></div>
 <div class="block">Gets random outputs for the given amounts. requestedOuts per. Usually mixin+1.
  <p>
  Returns an array of amounts to global indexes and keys. There
@@ -321,7 +321,7 @@ implements <a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon"
  our request.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Daemon.html#getRandomOutputsByAmount(org.kryptokrona.sdk.model.http.RandomOutputsByAmount)">getRandomOutputsByAmount</a></code>&nbsp;in interface&nbsp;<code><a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon">Daemon</a></code></dd>
+<dd><code><a href="Daemon.html#getRandomOutputsByAmount(http.model.org.mjovanc.kryptokrona.RandomOutputsByAmount)">getRandomOutputsByAmount</a></code>&nbsp;in interface&nbsp;<code><a href="Daemon.html" title="interface in org.kryptokrona.sdk.daemon">Daemon</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>randomOutputsByAmount</code> - : RandomOutputsByAmount</dd>
 <dt>Returns:</dt>

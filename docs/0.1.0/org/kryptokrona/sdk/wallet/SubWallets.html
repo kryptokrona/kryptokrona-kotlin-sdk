@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SubWallets" class="title">Class SubWallets</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.kryptokrona.sdk.wallet.SubWallets</div>
+<div class="inheritance">wallet.org.mjovanc.kryptokrona.SubWallets</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -111,10 +111,10 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addSubWallet(long)" class="member-name-link">addSubWallet</a><wbr>(long&nbsp;scanHeight)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTransaction(org.kryptokrona.sdk.transaction.Transaction)" class="member-name-link">addTransaction</a><wbr>(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTransaction(transaction.org.mjovanc.kryptokrona.Transaction)" class="member-name-link">addTransaction</a><wbr>(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addUnconfirmedTransaction(org.kryptokrona.sdk.transaction.Transaction)" class="member-name-link">addUnconfirmedTransaction</a><wbr>(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addUnconfirmedTransaction(transaction.org.mjovanc.kryptokrona.Transaction)" class="member-name-link">addUnconfirmedTransaction</a><wbr>(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convertSyncTimestampToHeight(long,long)" class="member-name-link">convertSyncTimestampToHeight</a><wbr>(long&nbsp;timestamp,
@@ -184,7 +184,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalletCount()" class="member-name-link">getWalletCount</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#haveSpendableInput(org.kryptokrona.sdk.transaction.TransactionInput,long)" class="member-name-link">haveSpendableInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.kryptokrona.sdk.transaction">TransactionInput</a>&nbsp;transactionInput,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#haveSpendableInput(transaction.org.mjovanc.kryptokrona.TransactionInput,long)" class="member-name-link">haveSpendableInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.kryptokrona.sdk.transaction">TransactionInput</a>&nbsp;transactionInput,
  long&nbsp;height)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
@@ -231,7 +231,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rewind(long)" class="member-name-link">rewind</a><wbr>(long&nbsp;scanHeight)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeTransactionInput(java.lang.String,org.kryptokrona.sdk.transaction.TransactionInput)" class="member-name-link">storeTransactionInput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;publicSpendKey,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeTransactionInput(java.lang.String,transaction.org.mjovanc.kryptokrona.TransactionInput)" class="member-name-link">storeTransactionInput</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;publicSpendKey,
  <a href="../transaction/TransactionInput.html" title="interface in org.kryptokrona.sdk.transaction">TransactionInput</a>&nbsp;transactionInput)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Store the transaction input in the corresponding sub wallet.</div>
@@ -241,7 +241,7 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;txHash)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeUnconfirmedIncomingInput(org.kryptokrona.sdk.model.util.UnconfirmedInput,java.lang.String)" class="member-name-link">storeUnconfirmedIncomingInput</a><wbr>(<a href="../model/util/UnconfirmedInput.html" title="class in org.kryptokrona.sdk.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeUnconfirmedIncomingInput(util.model.org.mjovanc.kryptokrona.UnconfirmedInput,java.lang.String)" class="member-name-link">storeUnconfirmedIncomingInput</a><wbr>(<a href="../model/util/UnconfirmedInput.html" title="class in org.kryptokrona.sdk.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;publicSpendKey)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
@@ -339,19 +339,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="addTransaction(org.kryptokrona.sdk.transaction.Transaction)">
+<section class="detail" id="addTransaction(transaction.org.mjovanc.kryptokrona.Transaction)">
 <h3>addTransaction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTransaction</span><wbr><span class="parameters">(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="addUnconfirmedTransaction(org.kryptokrona.sdk.transaction.Transaction)">
+<section class="detail" id="addUnconfirmedTransaction(transaction.org.mjovanc.kryptokrona.Transaction)">
 <h3>addUnconfirmedTransaction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addUnconfirmedTransaction</span><wbr><span class="parameters">(<a href="../transaction/Transaction.html" title="interface in org.kryptokrona.sdk.transaction">Transaction</a>&nbsp;transaction)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="storeTransactionInput(java.lang.String,org.kryptokrona.sdk.transaction.TransactionInput)">
+<section class="detail" id="storeTransactionInput(java.lang.String,transaction.org.mjovanc.kryptokrona.TransactionInput)">
 <h3>storeTransactionInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">storeTransactionInput</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;publicSpendKey,
  <a href="../transaction/TransactionInput.html" title="interface in org.kryptokrona.sdk.transaction">TransactionInput</a>&nbsp;transactionInput)</span></div>
@@ -407,7 +407,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="haveSpendableInput(org.kryptokrona.sdk.transaction.TransactionInput,long)">
+<section class="detail" id="haveSpendableInput(transaction.org.mjovanc.kryptokrona.TransactionInput,long)">
 <h3>haveSpendableInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">haveSpendableInput</span><wbr><span class="parameters">(<a href="../transaction/TransactionInput.html" title="interface in org.kryptokrona.sdk.transaction">TransactionInput</a>&nbsp;transactionInput,
  long&nbsp;height)</span></div>
@@ -472,7 +472,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="storeUnconfirmedIncomingInput(org.kryptokrona.sdk.model.util.UnconfirmedInput,java.lang.String)">
+<section class="detail" id="storeUnconfirmedIncomingInput(util.model.org.mjovanc.kryptokrona.UnconfirmedInput,java.lang.String)">
 <h3>storeUnconfirmedIncomingInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">storeUnconfirmedIncomingInput</span><wbr><span class="parameters">(<a href="../model/util/UnconfirmedInput.html" title="class in org.kryptokrona.sdk.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;publicSpendKey)</span></div>

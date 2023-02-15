@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class WalletValidator" class="title">Class WalletValidator</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.kryptokrona.sdk.validator.WalletValidator</div>
+<div class="inheritance">validator.org.mjovanc.kryptokrona.WalletValidator</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -118,7 +118,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Verifies that the addresses given are valid.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateAmount(java.util.Map,org.kryptokrona.sdk.model.util.FeeType,java.util.List,org.kryptokrona.sdk.wallet.SubWallets,long)" class="member-name-link">validateAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;&nbsp;destinations,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateAmount(java.util.Map,util.model.org.mjovanc.kryptokrona.FeeType,java.util.List,wallet.org.mjovanc.kryptokrona.SubWallets,long)" class="member-name-link">validateAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;&nbsp;destinations,
  <a href="../model/util/FeeType.html" title="class in org.kryptokrona.sdk.model.util">FeeType</a>&nbsp;feeType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;subWalletsToTakeFrom,
  <a href="../wallet/SubWallets.html" title="class in org.kryptokrona.sdk.wallet">SubWallets</a>&nbsp;subWallets,
@@ -146,7 +146,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Validates mixin is valid and in allowed range</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOurAddresses(java.util.List,org.kryptokrona.sdk.wallet.SubWallets)" class="member-name-link">validateOurAddresses</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;addresses,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOurAddresses(java.util.List,wallet.org.mjovanc.kryptokrona.SubWallets)" class="member-name-link">validateOurAddresses</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;addresses,
  <a href="../wallet/SubWallets.html" title="class in org.kryptokrona.sdk.wallet">SubWallets</a>&nbsp;subWallets)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validate the addresses given are both valid, and exist in the sub wallet.</div>
@@ -255,7 +255,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="validateOurAddresses(java.util.List,org.kryptokrona.sdk.wallet.SubWallets)">
+<section class="detail" id="validateOurAddresses(java.util.List,wallet.org.mjovanc.kryptokrona.SubWallets)">
 <h3>validateOurAddresses</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">validateOurAddresses</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;addresses,
  <a href="../wallet/SubWallets.html" title="class in org.kryptokrona.sdk.wallet">SubWallets</a>&nbsp;subWallets)</span>
@@ -273,7 +273,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="validateAmount(java.util.Map,org.kryptokrona.sdk.model.util.FeeType,java.util.List,org.kryptokrona.sdk.wallet.SubWallets,long)">
+<section class="detail" id="validateAmount(java.util.Map,util.model.org.mjovanc.kryptokrona.FeeType,java.util.List,wallet.org.mjovanc.kryptokrona.SubWallets,long)">
 <h3>validateAmount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">validateAmount</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;&nbsp;destinations,
  <a href="../model/util/FeeType.html" title="class in org.kryptokrona.sdk.model.util">FeeType</a>&nbsp;feeType,
