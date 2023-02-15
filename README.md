@@ -11,7 +11,6 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 
 - [Development resources](#development-resources)
 - [Releases](#releases)
-- [Installation and Getting Started](#installation-and-getting-started)
 - [Getting Help](#getting-help)
 - [Reporting Issues](#reporting-issues)
 - [Guides](#guides)
@@ -37,66 +36,12 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 |----------|--------------|---------|--------------------|---------|--------------------------|
 | Mjölnir | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done.              |
 
-## Installation and Getting Started
-
-To install Kryptokrona SDK into your Maven/Gradle project we need to include the dependency:
-
-**Maven**
-```xml
-<dependency>
-    <groupId>org.mjovanc.kryptokrona</groupId>
-    <artifactId>kryptokrona-sdk</artifactId>
-    <version>0.1.0</version>
-    <scope>implementation</scope>
-</dependency>
-```
-
-**Gradle**
-```gradle
-dependencies {
-    implementation 'org.mjovanc.kryptokrona:kryptokrona-sdk:0.1.0'
-}
-```
-
-**Gradle Kotlin DSL**
-```kotlin
-dependencies {
-    implementation("org.mjovanc.kryptokrona:kryptokrona-sdk:0.1.0")
-}
-```
-
-Basic example of how to create a Kryptokrona Wallet:
-
-```java
-public class Example {
-  public static void main(String[] args) throws IOException, InterruptedException {
-    // initialize a daemon
-    var daemon = new DaemonImpl(new HostName("swepool.org:11898"), false);
-
-    // initialize a wallet service
-    var walletService = new WalletService(daemon);
-
-    // start wallet service sync
-    walletService.start();
-
-    // create a new wallet
-    var wallet = walletService.createWallet();
-
-    // save the wallet to a file
-    walletService.saveWalletToFile(wallet, "mjovanc");
-
-    // sleep to keep processing more blocks before we stop it
-    Thread.sleep(5000);
-
-    // stop the wallet sync
-    walletService.stop();
-  }
-}
-```
 
 ## Getting Help
 
 Are you having trouble with Kryptokrona SDK? We want to help!
+
+- Read through all documentation on our Wiki: https://github.com/mjovanc/kryptokrona-sdk/wiki
 
 - Check the JavaDoc documentation: https://mjovanc.github.io/kryptokrona-sdk/0.1.0/index.html
 
