@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class LedgerNote" class="title">Class LedgerNote</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.mjovanc.kryptokrona.crypto.LedgerNote</div>
+<div class="inheritance">crypto.org.mjovanc.kryptokrona.api.LedgerNote</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -119,7 +119,7 @@ implements <a href="CryptoNote.html" title="interface in org.mjovanc.kryptokrona
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateMinimumTransactionFee(long)" class="member-name-link">calculateMinimumTransactionFee</a><wbr>(long&nbsp;txSize)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="../transaction/Transaction.html" title="interface in org.mjovanc.kryptokrona.transaction">Transaction</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#completeTransaction(org.mjovanc.kryptokrona.transaction.TransactionPrepared,java.lang.String)" class="member-name-link">completeTransaction</a><wbr>(<a href="../transaction/TransactionPrepared.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionPrepared</a>&nbsp;preparedTransaction,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#completeTransaction(transaction.org.mjovanc.kryptokrona.api.TransactionPrepared,java.lang.String)" class="member-name-link">completeTransaction</a><wbr>(<a href="../transaction/TransactionPrepared.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionPrepared</a>&nbsp;preparedTransaction,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateSpendKey)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
@@ -497,13 +497,13 @@ implements <a href="CryptoNote.html" title="interface in org.mjovanc.kryptokrona
 </section>
 </li>
 <li>
-<section class="detail" id="completeTransaction(org.mjovanc.kryptokrona.transaction.TransactionPrepared,java.lang.String)">
+<section class="detail" id="completeTransaction(transaction.org.mjovanc.kryptokrona.api.TransactionPrepared,java.lang.String)">
 <h3>completeTransaction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="../transaction/Transaction.html" title="interface in org.mjovanc.kryptokrona.transaction">Transaction</a>&gt;</span>&nbsp;<span class="element-name">completeTransaction</span><wbr><span class="parameters">(<a href="../transaction/TransactionPrepared.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionPrepared</a>&nbsp;preparedTransaction,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateSpendKey)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="CryptoNote.html#completeTransaction(org.mjovanc.kryptokrona.transaction.TransactionPrepared,java.lang.String)">completeTransaction</a></code>&nbsp;in interface&nbsp;<code><a href="CryptoNote.html" title="interface in org.mjovanc.kryptokrona.crypto">CryptoNote</a></code></dd>
+<dd><code><a href="CryptoNote.html#completeTransaction(transaction.org.mjovanc.kryptokrona.api.TransactionPrepared,java.lang.String)">completeTransaction</a></code>&nbsp;in interface&nbsp;<code><a href="CryptoNote.html" title="interface in org.mjovanc.kryptokrona.crypto">CryptoNote</a></code></dd>
 </dl>
 </section>
 </li>

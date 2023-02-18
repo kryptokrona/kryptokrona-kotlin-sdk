@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SubWallet" class="title">Class SubWallet</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.mjovanc.kryptokrona.wallet.SubWallet</div>
+<div class="inheritance">wallet.org.mjovanc.kryptokrona.api.SubWallet</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,long,long,org.mjovanc.kryptokrona.crypto.KeyPair,boolean)" class="member-name-link">SubWallet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;address,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,long,long,crypto.org.mjovanc.kryptokrona.api.KeyPair,boolean)" class="member-name-link">SubWallet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;address,
  long&nbsp;scanHeight,
  long&nbsp;timestamp,
  <a href="../crypto/KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&nbsp;spendKeys,
@@ -130,7 +130,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUnconfirmedChange()" class="member-name-link">getUnconfirmedChange</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#haveSpendableInput(org.mjovanc.kryptokrona.transaction.TransactionInput,long)" class="member-name-link">haveSpendableInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#haveSpendableInput(transaction.org.mjovanc.kryptokrona.api.TransactionInput,long)" class="member-name-link">haveSpendableInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
  long&nbsp;currentHeight)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
@@ -155,11 +155,11 @@ loadScripts(document, 'script');</script>
  long&nbsp;scanTimestamp)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeTransactionInput(org.mjovanc.kryptokrona.transaction.TransactionInput,boolean)" class="member-name-link">storeTransactionInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeTransactionInput(transaction.org.mjovanc.kryptokrona.api.TransactionInput,boolean)" class="member-name-link">storeTransactionInput</a><wbr>(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
  boolean&nbsp;visViewWallet)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeUnconfirmedIncomingInput(org.mjovanc.kryptokrona.model.util.UnconfirmedInput)" class="member-name-link">storeUnconfirmedIncomingInput</a><wbr>(<a href="../model/util/UnconfirmedInput.html" title="class in org.mjovanc.kryptokrona.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#storeUnconfirmedIncomingInput(util.model.org.mjovanc.kryptokrona.api.UnconfirmedInput)" class="member-name-link">storeUnconfirmedIncomingInput</a><wbr>(<a href="../model/util/UnconfirmedInput.html" title="class in org.mjovanc.kryptokrona.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
@@ -179,7 +179,7 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,long,long,org.mjovanc.kryptokrona.crypto.KeyPair,boolean)">
+<section class="detail" id="&lt;init&gt;(java.lang.String,long,long,crypto.org.mjovanc.kryptokrona.api.KeyPair,boolean)">
 <h3>SubWallet</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SubWallet</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;address,
  long&nbsp;scanHeight,
@@ -268,7 +268,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="haveSpendableInput(org.mjovanc.kryptokrona.transaction.TransactionInput,long)">
+<section class="detail" id="haveSpendableInput(transaction.org.mjovanc.kryptokrona.api.TransactionInput,long)">
 <h3>haveSpendableInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">haveSpendableInput</span><wbr><span class="parameters">(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
  long&nbsp;currentHeight)</span></div>
@@ -281,14 +281,14 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="storeTransactionInput(org.mjovanc.kryptokrona.transaction.TransactionInput,boolean)">
+<section class="detail" id="storeTransactionInput(transaction.org.mjovanc.kryptokrona.api.TransactionInput,boolean)">
 <h3>storeTransactionInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">storeTransactionInput</span><wbr><span class="parameters">(<a href="../transaction/TransactionInput.html" title="interface in org.mjovanc.kryptokrona.transaction">TransactionInput</a>&nbsp;transactionInput,
  boolean&nbsp;visViewWallet)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="storeUnconfirmedIncomingInput(org.mjovanc.kryptokrona.model.util.UnconfirmedInput)">
+<section class="detail" id="storeUnconfirmedIncomingInput(util.model.org.mjovanc.kryptokrona.api.UnconfirmedInput)">
 <h3>storeUnconfirmedIncomingInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">storeUnconfirmedIncomingInput</span><wbr><span class="parameters">(<a href="../model/util/UnconfirmedInput.html" title="class in org.mjovanc.kryptokrona.model.util">UnconfirmedInput</a>&nbsp;unconfirmedInput)</span></div>
 </section>

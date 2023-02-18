@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class CryptoWrapper" class="title">Class CryptoWrapper</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.mjovanc.kryptokrona.crypto.CryptoWrapper</div>
+<div class="inheritance">crypto.org.mjovanc.kryptokrona.api.CryptoWrapper</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -110,13 +110,13 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateKeyImage(java.lang.String,java.lang.String,org.mjovanc.kryptokrona.crypto.KeyPair,long)" class="member-name-link">generateKeyImage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionPublicKey,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateKeyImage(java.lang.String,java.lang.String,crypto.org.mjovanc.kryptokrona.api.KeyPair,long)" class="member-name-link">generateKeyImage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionPublicKey,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,
  <a href="KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&nbsp;spendKeys,
  long&nbsp;transactionIndex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateKeyImagePrimitive(org.mjovanc.kryptokrona.crypto.KeyPair,long,java.lang.String)" class="member-name-link">generateKeyImagePrimitive</a><wbr>(<a href="KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&nbsp;spendKeys,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateKeyImagePrimitive(crypto.org.mjovanc.kryptokrona.api.KeyPair,long,java.lang.String)" class="member-name-link">generateKeyImagePrimitive</a><wbr>(<a href="KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&nbsp;spendKeys,
  long&nbsp;outputIndex,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;derivation)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -163,7 +163,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="generateKeyImagePrimitive(org.mjovanc.kryptokrona.crypto.KeyPair,long,java.lang.String)">
+<section class="detail" id="generateKeyImagePrimitive(crypto.org.mjovanc.kryptokrona.api.KeyPair,long,java.lang.String)">
 <h3>generateKeyImagePrimitive</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</span>&nbsp;<span class="element-name">generateKeyImagePrimitive</span><wbr><span class="parameters">(<a href="KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&nbsp;spendKeys,
  long&nbsp;outputIndex,
@@ -171,7 +171,7 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="generateKeyImage(java.lang.String,java.lang.String,org.mjovanc.kryptokrona.crypto.KeyPair,long)">
+<section class="detail" id="generateKeyImage(java.lang.String,java.lang.String,crypto.org.mjovanc.kryptokrona.api.KeyPair,long)">
 <h3>generateKeyImage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</span>&nbsp;<span class="element-name">generateKeyImage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;transactionPublicKey,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,

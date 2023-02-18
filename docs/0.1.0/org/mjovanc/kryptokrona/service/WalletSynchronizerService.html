@@ -71,7 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class WalletSynchronizerService" class="title">Class WalletSynchronizerService</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.mjovanc.kryptokrona.service.WalletSynchronizerService</div>
+<div class="inheritance">service.org.mjovanc.kryptokrona.api.WalletSynchronizerService</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.mjovanc.kryptokrona.wallet.SubWallets,long,long,java.lang.String)" class="member-name-link">WalletSynchronizerService</a><wbr>(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(wallet.org.mjovanc.kryptokrona.api.SubWallets,long,long,java.lang.String)" class="member-name-link">WalletSynchronizerService</a><wbr>(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
  long&nbsp;startTimestamp,
  long&nbsp;startHeight,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey)</code></div>
@@ -138,15 +138,15 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalletSyncDataHashes()" class="member-name-link">getWalletSyncDataHashes</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initAfterLoad(org.mjovanc.kryptokrona.wallet.SubWallets,org.mjovanc.kryptokrona.daemon.DaemonImpl)" class="member-name-link">initAfterLoad</a><wbr>(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initAfterLoad(wallet.org.mjovanc.kryptokrona.api.SubWallets,daemon.org.mjovanc.kryptokrona.api.DaemonImpl)" class="member-name-link">initAfterLoad</a><wbr>(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
  <a href="../daemon/DaemonImpl.html" title="class in org.mjovanc.kryptokrona.daemon">DaemonImpl</a>&nbsp;daemon)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../transaction/TransactionData.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#processBlock(org.mjovanc.kryptokrona.block.Block,java.util.Map)" class="member-name-link">processBlock</a><wbr>(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#processBlock(block.org.mjovanc.kryptokrona.api.Block,java.util.Map)" class="member-name-link">processBlock</a><wbr>(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../transaction/TransactionInputImpl.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionInputImpl</a>&gt;&nbsp;ourInputs)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../transaction/TransactionInputImpl.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionInputImpl</a>&gt;&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#processBlockOutputs(org.mjovanc.kryptokrona.block.Block,java.lang.String,java.util.List,boolean,boolean)" class="member-name-link">processBlockOutputs</a><wbr>(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#processBlockOutputs(block.org.mjovanc.kryptokrona.api.Block,java.lang.String,java.util.List,boolean,boolean)" class="member-name-link">processBlockOutputs</a><wbr>(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../crypto/KeyPair.html" title="class in org.mjovanc.kryptokrona.crypto">KeyPair</a>&gt;&nbsp;allSpendKeys,
  boolean&nbsp;isViewWallet,
@@ -179,7 +179,7 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.mjovanc.kryptokrona.wallet.SubWallets,long,long,java.lang.String)">
+<section class="detail" id="&lt;init&gt;(wallet.org.mjovanc.kryptokrona.api.SubWallets,long,long,java.lang.String)">
 <h3>WalletSynchronizerService</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WalletSynchronizerService</span><wbr><span class="parameters">(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
  long&nbsp;startTimestamp,
@@ -196,21 +196,21 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="initAfterLoad(org.mjovanc.kryptokrona.wallet.SubWallets,org.mjovanc.kryptokrona.daemon.DaemonImpl)">
+<section class="detail" id="initAfterLoad(wallet.org.mjovanc.kryptokrona.api.SubWallets,daemon.org.mjovanc.kryptokrona.api.DaemonImpl)">
 <h3>initAfterLoad</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initAfterLoad</span><wbr><span class="parameters">(<a href="../wallet/SubWallets.html" title="class in org.mjovanc.kryptokrona.wallet">SubWallets</a>&nbsp;subWallets,
  <a href="../daemon/DaemonImpl.html" title="class in org.mjovanc.kryptokrona.daemon">DaemonImpl</a>&nbsp;daemon)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="processBlock(org.mjovanc.kryptokrona.block.Block,java.util.Map)">
+<section class="detail" id="processBlock(block.org.mjovanc.kryptokrona.api.Block,java.util.Map)">
 <h3>processBlock</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../transaction/TransactionData.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionData</a></span>&nbsp;<span class="element-name">processBlock</span><wbr><span class="parameters">(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../transaction/TransactionInputImpl.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionInputImpl</a>&gt;&nbsp;ourInputs)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="processBlockOutputs(org.mjovanc.kryptokrona.block.Block,java.lang.String,java.util.List,boolean,boolean)">
+<section class="detail" id="processBlockOutputs(block.org.mjovanc.kryptokrona.api.Block,java.lang.String,java.util.List,boolean,boolean)">
 <h3>processBlockOutputs</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">io.reactivex.rxjava3.core.Observable&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../transaction/TransactionInputImpl.html" title="class in org.mjovanc.kryptokrona.transaction">TransactionInputImpl</a>&gt;&gt;&gt;</span>&nbsp;<span class="element-name">processBlockOutputs</span><wbr><span class="parameters">(<a href="../block/Block.html" title="class in org.mjovanc.kryptokrona.block">Block</a>&nbsp;block,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;privateViewKey,
