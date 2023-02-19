@@ -14,11 +14,11 @@ public class Example {
 		// initialize a wallet service
 		var walletService = new WalletService(daemon);
 
-		// start wallet service sync
-		walletService.start();
-
 		// create a new wallet
 		var wallet = walletService.createWallet();
+
+		// start wallet service sync
+		walletService.start();
 
 		// save the wallet to a file
 		// walletService.saveWalletToFile(wallet, "mjovanc");

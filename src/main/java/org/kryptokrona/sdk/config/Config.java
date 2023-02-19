@@ -65,7 +65,7 @@ public class Config {
 	/**
 	 * How often to process blocks, in millseconds.
 	 */
-	public final static long SYNC_THREAD_INTERVAL = 10;
+	public final static long SYNC_THREAD_INTERVAL = 500;
 
 	/**
 	 * How often to update the daemon info.

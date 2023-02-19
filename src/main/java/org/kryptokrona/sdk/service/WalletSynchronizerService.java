@@ -94,6 +94,7 @@ public class WalletSynchronizerService {
 		this.startHeight = startHeight;
 		this.privateViewKey = privateViewKey;
 		this.synchronizationStatus = new SynchronizationStatus();
+		this.storedBlocks = new ArrayList<>();
 		this.lastDownloadedBlocks = Instant.now();
 	}
 
@@ -190,32 +191,30 @@ public class WalletSynchronizerService {
 		var map = new HashMap<Boolean, List<Block>>();
 
 		// fetch more blocks if we haven't got any downloaded yet
-		if (storedBlocks != null) {
+		if (!storedBlocks.isEmpty()) {
 
-			if (storedBlocks.size() == 0) {
-				if (!fetchingBlocks) {
-					logger.info("No blocks stored, attempting to fetch more.");
-				}
-
-				var blocks = downloadBlocks().blockingSingle();
-
-				var successOrBusy = blocks.keySet().iterator().next();
-				var shouldSleep = blocks.values().iterator().next();
-
-				// not in the middle of fetching blocks.
-				if (!successOrBusy) {
-					// seconds since we last got a block
-					var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
-
-					if (diff > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL) {
-						throw new NodeDeadException();
-					}
-				} else {
-					lastDownloadedBlocks = Instant.now();
-				}
-
-				map.put(shouldSleep, storedBlocks.subList(0, (int) Config.BLOCKS_PER_TICK));
+			if (!fetchingBlocks) {
+				logger.info("No blocks stored, attempting to fetch more.");
 			}
+
+			var blocks = downloadBlocks().blockingSingle();
+
+			var successOrBusy = blocks.keySet().iterator().next();
+			var shouldSleep = blocks.values().iterator().next();
+
+			// not in the middle of fetching blocks.
+			if (!successOrBusy) {
+				// seconds since we last got a block
+				var diff = (Instant.now().toEpochMilli() - lastDownloadedBlocks.toEpochMilli()) / 1000;
+
+				if (diff > Config.MAX_LAST_FETCHED_BLOCK_INTERVAL) {
+					throw new NodeDeadException();
+				}
+			} else {
+				lastDownloadedBlocks = Instant.now();
+			}
+
+			map.put(shouldSleep, storedBlocks.subList(0, (int) Config.BLOCKS_PER_TICK));
 		}
 
 		return Observable.just(map);
