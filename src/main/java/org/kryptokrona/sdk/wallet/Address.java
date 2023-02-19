@@ -56,7 +56,9 @@ public class Address {
 
 	private String seed;
 
-	private KeyPair keyPair;
+	private KeyPair viewKeys;
+
+	private KeyPair spendKeys;
 
 	private String language;
 
@@ -67,7 +69,8 @@ public class Address {
 	private Cache cached;
 
 	public Address() {
-		// this.keys = new Keys();
+		this.viewKeys = new KeyPair();
+		this.spendKeys = new KeyPair();
 		this.language = "english";
 		this.cached = new Cache();
 	}
@@ -81,19 +84,19 @@ public class Address {
 	}
 
 	public KeyPair getSpendKeys() {
-		return null;
+		return spendKeys;
 	}
 
 	public void setSpendKeys(KeyPair spendKeys) {
-
+		this.spendKeys = spendKeys;
 	}
 
 	public KeyPair getViewKeys() {
-		return null;
+		return viewKeys;
 	}
 
 	public void setViewKeys(KeyPair viewKeys) {
-
+		this.viewKeys = viewKeys;
 	}
 
 	private String encodeSeed(String seed) {

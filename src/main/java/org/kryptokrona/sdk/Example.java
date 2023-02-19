@@ -18,7 +18,7 @@ public class Example {
 		walletService.start();
 
 		// create a new wallet
-		// var wallet = walletService.createWallet();
+		var wallet = walletService.createWallet();
 
 		// save the wallet to a file
 		// walletService.saveWalletToFile(wallet, "mjovanc");

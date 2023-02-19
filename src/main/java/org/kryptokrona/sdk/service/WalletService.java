@@ -102,9 +102,9 @@ public class WalletService {
 			timestamp = CryptoUtils.getCurrentTimestampAdjusted();
 		}
 
-		/*walletSynchronizerService = new WalletSynchronizerService(
+		walletSynchronizerService = new WalletSynchronizerService(
 			subWallets, timestamp, scanHeight, privateViewKey
-		);*/
+		);
 
 		/*if (!usingNativeCrypto()) {
 
@@ -228,7 +228,7 @@ public class WalletService {
 
 		daemon.updateDaemonInfo();
 
-		var walletHeight = walletSynchronizerService.getHeight();
+		/*var walletHeight = walletSynchronizerService.getHeight();
 		var networkHeight = daemon.getNetworkBlockCount();
 
 		if (walletHeight >= networkHeight) {
@@ -245,7 +245,7 @@ public class WalletService {
 					logger.error("Auto-optimize error.");
 				}
 			}
-		}
+		}*/
 
 		return Observable.empty();
 	}
