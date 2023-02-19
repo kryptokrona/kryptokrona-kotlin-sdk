@@ -174,7 +174,10 @@ public class WalletSynchronizerService {
 	}
 
 	public Observable<List<String>> findCancelledTransactions(List<String> transactionHashes) {
-		return null;
+		//TODO: not finished implemented
+
+		var toRemove = new ArrayList<String>();
+		return Observable.just(toRemove);
 	}
 
 	/**
