@@ -84,11 +84,13 @@ public class WalletSynchronizerService {
 	private static final Logger logger = LoggerFactory.getLogger(WalletSynchronizerService.class);
 
 	public WalletSynchronizerService(
+			DaemonImpl deamon,
 		SubWallets subWallets,
 		long startTimestamp,
 		long startHeight,
 		String privateViewKey
 	) {
+		this.daemon = deamon;
 		this.subWallets = subWallets;
 		this.startTimestamp = startTimestamp;
 		this.startHeight = startHeight;
@@ -191,7 +193,7 @@ public class WalletSynchronizerService {
 		var map = new HashMap<Boolean, List<Block>>();
 
 		// fetch more blocks if we haven't got any downloaded yet
-		if (!storedBlocks.isEmpty()) {
+		if (storedBlocks.isEmpty()) {
 
 			if (!fetchingBlocks) {
 				logger.info("No blocks stored, attempting to fetch more.");

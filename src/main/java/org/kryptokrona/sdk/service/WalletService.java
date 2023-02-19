@@ -103,7 +103,7 @@ public class WalletService {
 		}
 
 		walletSynchronizerService = new WalletSynchronizerService(
-			subWallets, timestamp, scanHeight, privateViewKey
+				daemon, subWallets, timestamp, scanHeight, privateViewKey
 		);
 
 		/*if (!usingNativeCrypto()) {
@@ -157,6 +157,7 @@ public class WalletService {
 	}
 
 	public Observable<Boolean> processBlocks(boolean sleep) throws NodeDeadException, InterruptedException {
+		logger.info("Processing blocks...");
 		var data = walletSynchronizerService.fetchBlocks().blockingSingle();
 
 		if (data.size() != 0) {
