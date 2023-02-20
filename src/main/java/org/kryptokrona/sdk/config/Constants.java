@@ -33,7 +33,7 @@ package org.kryptokrona.sdk.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.primitives.Longs.asList;
+import static java.util.Arrays.asList;
 
 public class Constants {
 
@@ -105,7 +105,7 @@ public class Constants {
 	/**
 	 * Valid output amounts to be mixable
 	 */
-	public final static List<Long> PRETTY_AMOUNTS = new ArrayList<>(asList(
+	/*public final static List<Long> PRETTY_AMOUNTS = new ArrayList<>(asList(
 		1, 2, 3, 4, 5, 6, 7, 8, 9,
 
 		10, 20, 30, 40, 50, 60, 70, 80, 90,
@@ -160,7 +160,7 @@ public class Constants {
 		1000000000000000000L, 2000000000000000000L, 3000000000000000000L, 4000000000000000000L,
 		5000000000000000000L, 6000000000000000000L, 7000000000000000000L, 8000000000000000000L,
 		9000000000000000000L
-	));
+	));*/
 
 	/**
 	 * Part of the how fast blocks can grow formula

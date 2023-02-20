@@ -30,7 +30,7 @@
 
 package org.kryptokrona.sdk.model.http;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,59 +50,59 @@ import java.util.List;
 @NoArgsConstructor
 public class NodeInfo {
 
-	@SerializedName("alt_blocks_count")
+	@JsonProperty("alt_blocks_count")
 	private int altBlocksCount;
 
 	private int difficulty;
-	@SerializedName("grey_peerlist_size")
+	@JsonProperty("grey_peerlist_size")
 	private int greyPeerlistSize;
 
 	private int hashrate;
 
 	private int height;
 
-	@SerializedName("incoming_connections_count")
+	@JsonProperty("incoming_connections_count")
 	private int incomingConnectionsCount;
 
-	@SerializedName("last_known_block_index")
+	@JsonProperty("last_known_block_index")
 	private int lastKnownBlockIndex;
 
-	@SerializedName("major_version")
+	@JsonProperty("major_version")
 	private int majorVersion;
 
-	@SerializedName("minor_version")
+	@JsonProperty("minor_version")
 	private int minorVersion;
 
-	@SerializedName("network_height")
+	@JsonProperty("network_height")
 	private int networkHeight;
 
-	@SerializedName("outgoing_connections_count")
+	@JsonProperty("outgoing_connections_count")
 	private int outgoingConnectionsCount;
 
-	@SerializedName("start_time")
+	@JsonProperty("start_time")
 	private int startTime;
 
 	private String status;
 
-	@SerializedName("supported_height")
+	@JsonProperty("supported_height")
 	private int supportedHeight;
 
 	private boolean synced;
 
 	private boolean testnet;
 
-	@SerializedName("tx_count")
+	@JsonProperty("tx_count")
 	private int txCount;
 
-	@SerializedName("tx_pool_size")
+	@JsonProperty("tx_pool_size")
 	private int txPoolSize;
 
-	@SerializedName("upgrade_heights")
+	@JsonProperty("upgrade_heights")
 	private List<Integer> upgradeHeights;
 
 	private String version;
 
-	@SerializedName("white_peerlist_size")
+	@JsonProperty("white_peerlist_size")
 	private int whitePeerlistSize;
 
 	public NodeInfo(

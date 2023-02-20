@@ -57,7 +57,9 @@ sourceSets {
 
 dependencies {
     // implementation
+    implementation("io.github.classgraph:classgraph:4.8.149")
     implementation("com.github.seancfoley:ipaddress:5.3.4")
+    implementation("com.fasterxml.jackson:jackson-bom:2.13.4")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4.1")
     implementation("org.slf4j:slf4j-api:2.0.0")
     implementation("org.apache.httpcomponents.client5:httpclient5:5.1.3")

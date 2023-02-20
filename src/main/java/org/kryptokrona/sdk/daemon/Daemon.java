@@ -31,6 +31,8 @@
 package org.kryptokrona.sdk.daemon;
 
 import io.reactivex.rxjava3.core.Observable;
+import org.apache.hc.client5.http.fluent.Content;
+import org.apache.hc.client5.http.fluent.Response;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
@@ -130,14 +132,14 @@ public interface Daemon {
 	 * @param param : String
 	 * @return Observable
 	 */
-	Observable<String> getRequest(String param) throws IOException;
+	Observable<Content> getRequest(String param) throws IOException;
 
 	/**
-	 * Make a POST request.
-	 *
-	 * @return Observable
-	 */
-	Observable<String> postRequest(String param, Object obj) throws IOException;
+     * Make a POST request.
+     *
+     * @return Observable
+     */
+	Observable<Response> postRequest(String param, Object obj) throws IOException;
 
 	/**
 	 * Make a GET request and checks if status code is 200.

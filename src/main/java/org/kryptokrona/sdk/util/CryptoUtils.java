@@ -30,8 +30,6 @@
 
 package org.kryptokrona.sdk.util;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import io.reactivex.rxjava3.core.Observable;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.config.Constants;
@@ -55,14 +53,9 @@ import java.util.*;
  */
 public class CryptoUtils {
 
-	private static Gson gson = new Gson();
-
 	private List<String> words;
 
 	private static final String jsonFileName = "wordlist.json";
-
-	private static final Type collectionType = new TypeToken<List<String>>() {
-	}.getType();
 
 	private static final Logger logger = LoggerFactory.getLogger(CryptoUtils.class);
 

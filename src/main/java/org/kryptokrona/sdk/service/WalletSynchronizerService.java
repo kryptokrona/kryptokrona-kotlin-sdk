@@ -273,9 +273,9 @@ public class WalletSynchronizerService {
 		var walletSyncData = new WalletSyncData(blockCheckpoints, startHeight, startTimestamp);
 
 		try {
-			var data = daemon.getWalletSyncData(walletSyncData).blockingSingle();
+			/*var data = daemon.getWalletSyncData(walletSyncData).blockingSingle();
 			blocks = data.keySet().iterator().next();
-			topBlock = data.values().iterator().next();
+			topBlock = data.values().iterator().next();*/
 		} catch (Exception e) {
 			logger.error("Failed to get blocks from daemon: ", e);
 

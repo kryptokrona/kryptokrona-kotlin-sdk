@@ -30,33 +30,30 @@
 
 package org.kryptokrona.sdk.daemon;
 
-import com.google.api.client.http.ByteArrayContent;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.hc.client5.http.fluent.Content;
+import org.apache.hc.client5.http.fluent.Request;
 import inet.ipaddr.HostName;
 import io.reactivex.rxjava3.core.Observable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.hc.client5.http.fluent.Response;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.exception.wallet.WalletException;
 import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
-import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.block.Block;
 import org.kryptokrona.sdk.block.RawBlock;
 import org.kryptokrona.sdk.block.TopBlock;
-import org.kryptokrona.sdk.model.http.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.io.StringReader;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -73,15 +70,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class DaemonImpl implements Daemon {
 
-	private Gson gson;
-
-	private HttpRequestFactory requestFactory;
-
-	private Type feeInfoCollectionType;
-
-	private Type infoCollectionType;
-
-	private Type walletSyncResponseDataType;
+	private WalletSyncResponseData walletSyncResponseData;
 
 	private NodeFee nodeFee;
 
@@ -114,14 +103,6 @@ public class DaemonImpl implements Daemon {
 	private static final Logger logger = LoggerFactory.getLogger(DaemonImpl.class);
 
 	public DaemonImpl(HostName hostname, boolean useRawBlocks) {
-		this.gson = new Gson();
-		this.requestFactory = new NetHttpTransport().createRequestFactory();
-		this.feeInfoCollectionType = new TypeToken<NodeFee>() {
-		}.getType();
-		this.infoCollectionType = new TypeToken<NodeInfo>() {
-		}.getType();
-		this.walletSyncResponseDataType = new TypeToken<WalletSyncResponseData>() {
-		}.getType();
 		this.hostname = hostname;
 		this.localDaemonBlockCount = 0;
 		this.networkBlockCount = 0;
@@ -147,8 +128,11 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<Void> updateDaemonInfo() throws NodeDeadException {
 		try {
-			getRequest("info").subscribe(json -> {
-				nodeInfo = gson.fromJson(json, infoCollectionType);
+			getRequest("info").subscribe(response -> {
+				var objectMapper = new ObjectMapper();
+				var reader = new StringReader(response.asString());
+				nodeInfo = objectMapper.readValue(reader, NodeInfo.class);
+
 				logger.info("Node information, updated.");
 			});
 		} catch (IOException e) {
@@ -189,8 +173,10 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<Void> updateFeeInfo() {
 		try {
-			getRequest("fee").subscribe(json -> {
-				NodeFee nodeFeeObj = gson.fromJson(json, feeInfoCollectionType);
+			getRequest("fee").subscribe(response -> {
+				var objectMapper = new ObjectMapper();
+				var reader = new StringReader(response.asString());
+				NodeFee nodeFeeObj = objectMapper.readValue(reader, NodeFee.class);
 
 				if (!nodeFeeObj.getAddress().equals("")) {
 					var integratedAddressesAllowed = false;
@@ -219,20 +205,22 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<Map<List<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) {
-		var endpoint = useRawBlocks ? "sync/raw" : "sync";
+		var endpoint = useRawBlocks ? "getrawblocks" : "getwalletsyncdata";
 
 		walletSyncData.setBlockCount(blockCount);
 		walletSyncData.setSkipCoinbaseTransactions(!Config.SCAN_COINBASE_TRANSACTIONS);
 
-		WalletSyncResponseData walletSyncResponseData;
-
 		try {
-			postRequest(endpoint, walletSyncData).subscribe(json -> {
-				gson.fromJson(json, walletSyncResponseDataType);
+			postRequest(endpoint, walletSyncData).subscribe(response -> {
+				var objectMapper = new ObjectMapper();
+				var reader = new StringReader(response.toString());
+				walletSyncResponseData = objectMapper.readValue(reader, WalletSyncResponseData.class);
 			});
 		} catch (IOException e) {
 			blockCount = Math.ceil(blockCount / 4.0);
 			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
+
+			//TODO: check if 404 and do another call using getwalletsyncdata
 
 			// return Observable.just(Map.of(0, false));
 		}
@@ -251,7 +239,7 @@ public class DaemonImpl implements Daemon {
 		try {
 			// save the data from the get request here
 			getRequest("indexes/" + startHeight + "/" + endHeight)
-				.subscribe(logger::info);
+				.subscribe(response -> logger.info(response.asString()));
 
 			// return the indexes here from the data
 		} catch (IOException e) {
@@ -264,7 +252,9 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<List<String>> getCancelledTransactions(List<String> transactionHashes) {
 		try {
-			postRequest("transaction/status", transactionHashes).subscribe(logger::info);
+			postRequest("transaction/status", transactionHashes).subscribe(response -> {
+				logger.info(response.returnResponse().toString());
+			});
 
 			// return data.notFound or empty array
 		} catch (IOException e) {
@@ -277,7 +267,9 @@ public class DaemonImpl implements Daemon {
 	@Override
 	public Observable<List<Integer>> getRandomOutputsByAmount(RandomOutputsByAmount randomOutputsByAmount) {
 		try {
-			postRequest("indexes/random", randomOutputsByAmount).subscribe(logger::info);
+			postRequest("indexes/random", randomOutputsByAmount).subscribe(response -> {
+				logger.info(response.returnResponse().toString());
+			});
 		} catch (IOException e) {
 			logger.error("Failed to get random outs: " + e);
 		}
@@ -300,7 +292,7 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<Map<Boolean, String>> sendTransaction(String rawTransaction) throws IOException {
-		this.postRequest("sendrawtransaction", rawTransaction)
+		postRequest("sendrawtransaction", rawTransaction)
 			.subscribe(result -> {
 				System.out.println(result);
 			});
@@ -314,7 +306,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<String> getRequest(String param) throws IOException {
+	public Observable<Content> getRequest(String param) throws IOException {
 		var request = Request.get(String.format("http://%s/%s", this.hostname, param))
 				.execute().returnContent();
 
@@ -322,20 +314,22 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<String> postRequest(String param, Object obj) throws IOException {
-		var request = requestFactory.buildPostRequest(
-			new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)),
-			ByteArrayContent.fromString("application/json", gson.toJson(obj, new TypeToken<Object>() {
-			}.getType())));
+	public Observable<Response> postRequest(String param, Object obj) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		StringEntity body = new StringEntity(mapper.writeValueAsString(obj));
 
-		return Observable.just(request.getHeaders().setContentType("application/json").toString());
+		var request = Request.post(String.format("http://%s/%s", this.hostname, param));
+		request.addHeader("content-type", "application/json");
+		request.body(body);
+
+		return Observable.just(request.execute());
 	}
 
 	@Override
 	public Observable<Boolean> daemonReachable() throws IOException {
-		var request = requestFactory.buildGetRequest(
-			new GenericUrl(String.format("http://%s/info", this.hostname.toString())));
+		var request = Request.get(String.format("http://%s/info", this.hostname))
+				.execute();
 
-		return Observable.just((request.execute()).getStatusCode() == 200);
+		return Observable.just((request.returnResponse().getCode() == 200));
 	}
 }
