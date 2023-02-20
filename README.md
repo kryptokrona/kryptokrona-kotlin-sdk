@@ -1,7 +1,7 @@
 # ![Kryptokrona SDK](resources/logo_github.png)
 
-[![Kryptokrona SDK Main Pipeline](https://github.com/mjovanc/kryptokrona-sdk/actions/workflows/main-ci.yml/badge.svg)](https://github.com/mjovanc/kryptokrona-sdk/actions/workflows/main-ci.yml) 
-[![Release](https://img.shields.io/github/release-date/mjovanc/kryptokrona-sdk)](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)
+[![Kryptokrona SDK Main Pipeline](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml/badge.svg)](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml) 
+[![Release](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
@@ -24,9 +24,9 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 ## Development Resources
 
 - Web: https://kryptokrona.org
-- Docs: https://github.com/mjovanc/kryptokrona-sdk/wiki
+- Docs: https://github.com/kryptokrona/kryptokrona-sdk/wiki
 - Mail: mjovanc@icloud.com
-- GitHub: https://github.com/mjovanc/kryptokrona-sdk
+- GitHub: https://github.com/kryptokrona/kryptokrona-sdk
 - Hugin: sdkdevs group on Hugin Messenger
 - It is HIGHLY recommended to join our group on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
 
@@ -34,22 +34,22 @@ Kryptokrona SDK for Java is currently the most fully featured implementation of 
 
 | NAME     | RELEASE DATE | VERSION   | MAINTAINER         | EOL     | DESCRIPTION              |
 |----------|--------------|-----------|--------------------|---------|--------------------------|
-| Mjölnir | Not set      | [0.1.0](https://mjovanc.github.io/kryptokrona-sdk/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
+| Mjölnir | Not set      | [0.1.0](https://kryptokrona.github.io/kryptokrona-sdk/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
 
 
 ## Getting Help
 
 Are you having trouble with Kryptokrona SDK? We want to help!
 
-- Read through all documentation on our Wiki: https://github.com/mjovanc/kryptokrona-sdk/wiki
+- Read through all documentation on our Wiki: https://github.com/kryptokrona/kryptokrona-sdk/wiki
 
-- Check the JavaDoc documentation: https://mjovanc.github.io/kryptokrona-sdk/0.1.0/index.html
+- Check the JavaDoc documentation: https://kryptokrona.github.io/kryptokrona-sdk/0.1.0/index.html
 
 - If you are upgrading, read the release notes for upgrade instructions and "new and noteworthy" features.
 
 - Ask a question we monitor stackoverflow.com for questions tagged with kryptokrona-sdk. You can also chat with the community on Hugin or Discord.
 
-- Report bugs with Kryptokrona SDK at github.com/mjovanc/kryptokrona-sdk/issues.
+- Report bugs with Kryptokrona SDK at https://github.com/kryptokrona/kryptokrona-sdk/issues.
 
 ## Reporting Issues
 
@@ -80,7 +80,7 @@ If you would like to contribute to this project there is two ways:
 
 ### Pull Request
 
-Read through the developer documentation at: [https://github.com/mjovanc/kryptokrona-sdk/wiki](https://github.com/mjovanc/kryptokrona-sdk/wiki).
+Read through the developer documentation at: [https://github.com/kryptokrona/kryptokrona-sdk/wiki](https://github.com/kryptokrona/kryptokrona-sdk/wiki).
 
 We recommend using IntelliJ to work on this project.
 
