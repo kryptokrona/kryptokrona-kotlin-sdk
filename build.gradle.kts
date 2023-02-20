@@ -58,7 +58,7 @@ sourceSets {
 dependencies {
     // implementation
     implementation("com.github.seancfoley:ipaddress:5.3.4")
-    implementation("com.google.code.gson:gson:2.9.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
     implementation("org.slf4j:slf4j-api:2.0.0")
     implementation("com.google.http-client:google-http-client:1.41.8")
     implementation("io.reactivex.rxjava3:rxjava:3.1.4")
