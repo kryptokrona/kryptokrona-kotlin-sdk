@@ -315,10 +315,10 @@ public class DaemonImpl implements Daemon {
 
 	@Override
 	public Observable<String> getRequest(String param) throws IOException {
-		var request = requestFactory.buildGetRequest(
-			new GenericUrl(String.format("http://%s/%s", this.hostname.toString(), param)));
+		var request = Request.get(String.format("http://%s/%s", this.hostname, param))
+				.execute().returnContent();
 
-		return Observable.just(request.execute().parseAsString());
+		return Observable.just(request);
 	}
 
 	@Override
