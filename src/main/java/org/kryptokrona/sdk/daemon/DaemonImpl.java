@@ -55,6 +55,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -204,7 +205,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<Map<List<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) {
+	public Observable<Map<ArrayList<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) {
 		var endpoint = useRawBlocks ? "getrawblocks" : "getwalletsyncdata";
 
 		walletSyncData.setBlockCount(blockCount);
@@ -224,28 +225,41 @@ public class DaemonImpl implements Daemon {
 					if (blockCount != Config.BLOCKS_PER_DAEMON_REQUEST)  {
 						blockCount = Math.min(Config.BLOCKS_PER_DAEMON_REQUEST, blockCount * 2);
 
-						logger.info(String.format("Successfully fetched sync data, raising block count to ", blockCount));
+						logger.info(String.format("Successfully fetched sync data, raising block count to " + blockCount));
 					}
 
 					lastUpdatedNetworkHeight = Instant.now();
 					lastUpdatedLocalHeight = Instant.now();
 				}
+
+				/*if (data.synced && data.topBlock && data.topBlock.height && data.topBlock.hash) {
+					if (this.useRawBlocks) {
+						return [await this.rawBlocksToBlocks(data.items), data.topBlock];
+					} else {
+						return [data.items.map(Block.fromJSON), data.topBlock];
+					}
+				}
+
+				if (this.useRawBlocks) {
+					return [await this.rawBlocksToBlocks(data.items), true];
+				} else {
+					return [data.items.map(Block.fromJSON), true];
+				}*/
+
 			});
 		} catch (IOException e) {
-			blockCount = Math.ceil(blockCount / 4.0);
 			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
 
-			//TODO: check if 404 and do another call using getwalletsyncdata
+			blockCount = Math.ceil(blockCount / 4.0);
+			var result = Map.of(new ArrayList<Block>(), new TopBlock());
 
-			// return Observable.just(Map.of(0, false));
+			return Observable.just(result);
 		}
 
-		// the node is not dead if we're fetching blocks.
-        /*if (response.length >= 0) {
+		// TODO: temporary we want to actually return data here if everything goes well in the try/catch
+		var result = Map.of(new ArrayList<Block>(), new TopBlock());
 
-        }*/
-
-		return null;
+		return Observable.just(result);
 	}
 
 	// might not work with our current node since we have not implemented this - not sure though

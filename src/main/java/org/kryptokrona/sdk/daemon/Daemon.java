@@ -43,6 +43,7 @@ import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +77,7 @@ public interface Daemon {
 	 * @param walletSyncData : WalletSyncData
 	 * @return Observable
 	 */
-	Observable<Map<List<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
+	Observable<Map<ArrayList<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
 
 	/**
 	 * Returns a mapping of transaction hashes to global indexes.
