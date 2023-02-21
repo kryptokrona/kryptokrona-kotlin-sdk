@@ -129,16 +129,16 @@ public class WalletService {
 				logger.info("Starting the wallet sync process.");
 
 				var st = syncThread.start().publish();
-				var dut = daemonUpdateThread.start().publish();
-				var ltct = lockedTransactionsCheckThread.start().publish();
+				/*var dut = daemonUpdateThread.start().publish();
+				var ltct = lockedTransactionsCheckThread.start().publish();*/
 
 				st.subscribe(r -> sync(true).blockingSubscribe());
-				dut.subscribe(r -> updateDaemonInfo().blockingSubscribe());
-				ltct.subscribe(r -> checkLockedTransactions().blockingSubscribe());
+				/*dut.subscribe(r -> updateDaemonInfo().blockingSubscribe());
+				ltct.subscribe(r -> checkLockedTransactions().blockingSubscribe());*/
 
 				st.connect();
-				dut.connect();
-				ltct.connect();
+				/*dut.connect();
+				ltct.connect();*/
 			} catch (NodeDeadException e) {
 				logger.error("%s", e);
 			}
