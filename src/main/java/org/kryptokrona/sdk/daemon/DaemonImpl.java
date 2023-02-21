@@ -212,7 +212,7 @@ public class DaemonImpl implements Daemon {
 		try {
 			postRequest(endpoint, walletSyncData).subscribe(response -> {
 				var objectMapper = new ObjectMapper();
-				var reader = new StringReader(response.toString());
+				var reader = new StringReader(response.returnContent().asString());
 				walletSyncResponseData = objectMapper.readValue(reader, WalletSyncResponseData.class);
 				var numberOfBlocks = walletSyncResponseData.getItems().size();
 
