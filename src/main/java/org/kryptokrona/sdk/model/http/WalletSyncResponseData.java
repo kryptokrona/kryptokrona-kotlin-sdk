@@ -34,6 +34,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,11 +47,11 @@ import java.util.List;
 @NoArgsConstructor
 public class WalletSyncResponseData {
 
-	private List<Block> items;
+	private ArrayList<Block> items;
 
 	private String status;
 
-	public WalletSyncResponseData(List<Block> items, String status) {
+	public WalletSyncResponseData(ArrayList<Block> items, String status) {
 		this.items = items;
 		this.status = status;
 	}

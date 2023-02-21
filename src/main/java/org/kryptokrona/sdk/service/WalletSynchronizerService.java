@@ -34,11 +34,12 @@ import lombok.Setter;
 import org.kryptokrona.sdk.config.Config;
 import org.kryptokrona.sdk.crypto.KeyPair;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
+import org.kryptokrona.sdk.model.http.CoinbaseTransaction;
 import org.kryptokrona.sdk.transaction.TransactionData;
 import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
 import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
-import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.model.http.Block;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 import org.kryptokrona.sdk.wallet.SubWallets;
@@ -140,18 +141,18 @@ public class WalletSynchronizerService {
 	) {
 		var inputs = new HashMap<String, List<TransactionInputImpl>>();
 
-		if (processCoinbaseTransactions && (block.getTransactionRawCoinbase() != null)) {
-			processTransactionOutputs(block.getTransactionRawCoinbase(), block.getBlockHeight())
+		if (processCoinbaseTransactions && (block.getCoinbaseTransaction() != null)) {
+			processTransactionOutputs(block.getCoinbaseTransaction(), block.getBlockHeight())
 				.subscribe(outputs -> {
 					inputs.values().addAll(outputs.values());
 				});
 		}
 
-		for (var tx : block.getTransactions()) {
+		/*for (var tx : block.getTransactions()) {
 			processTransactionOutputs(tx, block.getBlockHeight()).subscribe(list -> {
 				inputs.values().addAll(list.values());
 			});
-		}
+		}*/
 
 		return Observable.just(inputs);
 	}
@@ -248,9 +249,9 @@ public class WalletSynchronizerService {
 	private Observable<Map<Boolean, Boolean>> downloadBlocks() {
 		/* Middle of fetching blocks, wait for previous request to complete.
 		 * Don't need to sleep. */
-		if (fetchingBlocks) {
+		/*if (fetchingBlocks) {
 			return Observable.just(Map.of(true, false));
-		}
+		}*/
 
 		fetchingBlocks = true;
 
@@ -313,7 +314,7 @@ public class WalletSynchronizerService {
 	}
 
 	private Observable<Map<String, List<TransactionInputImpl>>> processTransactionOutputs(
-		TransactionRawCoinbase rawTx,
+		CoinbaseTransaction rawTx,
 		long blockHeight
 	) {
 		return null;

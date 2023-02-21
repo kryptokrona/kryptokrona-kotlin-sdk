@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.crypto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.model.http.Block;
 import org.kryptokrona.sdk.transaction.Transaction;
 
 import java.nio.Buffer;

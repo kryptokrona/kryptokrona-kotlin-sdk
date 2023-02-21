@@ -36,7 +36,7 @@ import org.apache.hc.client5.http.fluent.Response;
 import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
-import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.model.http.Block;
 import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 

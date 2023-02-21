@@ -46,7 +46,7 @@ import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.exception.wallet.WalletException;
 import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
-import org.kryptokrona.sdk.block.Block;
+import org.kryptokrona.sdk.model.http.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -250,12 +250,15 @@ public class DaemonImpl implements Daemon {
 
 			blockCount = Math.ceil(blockCount / 4.0);
 			var result = Map.of(new ArrayList<Block>(), new Block());
+			logger.info("Amount of blocks: " + result.size());
 
 			return Observable.just(result);
 		}
 
+		var blocks = walletSyncResponseData.getItems();
+
 		// TODO: temporary we want to actually return data here if everything goes well in the try/catch
-		var result = Map.of(new ArrayList<Block>(), new Block());
+		var result = Map.of(blocks, new Block());
 
 		return Observable.just(result);
 	}
