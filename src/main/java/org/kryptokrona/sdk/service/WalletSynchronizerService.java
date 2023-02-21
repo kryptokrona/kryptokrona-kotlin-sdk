@@ -268,27 +268,49 @@ public class WalletSynchronizerService {
            ones, in case we don't have any blocks yet. */
 		var blockCheckpoints = getWalletSyncDataHashes();
 
-		List<Block> blocks = null;
-		var topBlock = new TopBlock();
 		var walletSyncData = new WalletSyncData(blockCheckpoints, startHeight, startTimestamp);
 
 		try {
-			/*var data = daemon.getWalletSyncData(walletSyncData).blockingSingle();
-			blocks = data.keySet().iterator().next();
-			topBlock = data.values().iterator().next();*/
+			var data = daemon.getWalletSyncData(walletSyncData).blockingSingle();
+			var blocks = data.keySet().iterator().next();
+			var topBlock = data.values().iterator().next();
+
+			if (blocks.size() == 0) {
+				/* Synced, store the top block so sync status displays correctly if
+               	we are not scanning coinbase tx only blocks.
+               	Only store top block if we have finished processing stored
+               	blocks */
+				if (storedBlocks.size() == 0) {
+					// this.emit('heightchange', topBlock.height);
+					synchronizationStatus.storeBlockHash(topBlock.getHeight(), topBlock.getHash());
+				}
+				logger.debug("Zero blocks received from daemon, fully synced.");
+
+				fetchingBlocks = false;
+
+				return Observable.just(Map.of(true, true));
+			}
+
+			/* Timestamp is transient and can change - block height is constant. */
+			if (startTimestamp != 0) {
+				startTimestamp = 0;
+				startHeight = blocks.get(0).getBlockHeight();
+
+				subWallets.convertSyncTimestampToHeight(startTimestamp, startHeight);
+			}
+
+			/* Add the new blocks to the store */
+        	// this.storedBlocks = this.storedBlocks.concat(blocks);
+
+			fetchingBlocks = false;
 		} catch (Exception e) {
 			logger.error("Failed to get blocks from daemon: ", e);
-
-			//TODO: finishedFunc?
-
 			fetchingBlocks = false;
 
 			return Observable.just(Map.of(false, true));
 		}
 
-		// TODO: implement the rest here
-
-		return Observable.empty();
+		return Observable.just(Map.of(true, false));
 	}
 
 	private Observable<Map<String, List<TransactionInputImpl>>> processTransactionOutputs(

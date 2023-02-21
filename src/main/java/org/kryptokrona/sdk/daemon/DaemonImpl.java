@@ -215,6 +215,21 @@ public class DaemonImpl implements Daemon {
 				var objectMapper = new ObjectMapper();
 				var reader = new StringReader(response.toString());
 				walletSyncResponseData = objectMapper.readValue(reader, WalletSyncResponseData.class);
+				var numberOfBlocks = walletSyncResponseData.getItems().size();
+
+				/* The node is not dead if we're fetching blocks. */
+				if (numberOfBlocks >= 0) {
+					logger.info(String.format(numberOfBlocks + " blocks from the daemon."));
+
+					if (blockCount != Config.BLOCKS_PER_DAEMON_REQUEST)  {
+						blockCount = Math.min(Config.BLOCKS_PER_DAEMON_REQUEST, blockCount * 2);
+
+						logger.info(String.format("Successfully fetched sync data, raising block count to ", blockCount));
+					}
+
+					lastUpdatedNetworkHeight = Instant.now();
+					lastUpdatedLocalHeight = Instant.now();
+				}
 			});
 		} catch (IOException e) {
 			blockCount = Math.ceil(blockCount / 4.0);

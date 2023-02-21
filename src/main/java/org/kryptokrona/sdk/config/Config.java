@@ -120,14 +120,17 @@ public class Config {
 	 * Mapping of height to mixin maximum and mixin minimum.
 	 */
 	public final static MixinLimits MIXIN_LIMITS = new MixinLimits(Arrays.asList(
-		// Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3
+		// Height: 440,000, minMixin: 1, maxMixin: 100, defaultMixin: 3
 		new MixinLimit(440000, 1, 100, 3),
 
 		// At height of 620000, static mixin of 7
 		new MixinLimit(620000, 7),
 
 		// At height of 800000, static mixin of 3
-		new MixinLimit(800000, 3)
+		new MixinLimit(800000, 3),
+
+		// Height: 1,250,000, minMixin: 1, maxMixin: 100, defaultMixin: 5
+		new MixinLimit(1250000, 1, 100, 5)
 	), 3);
 
 	/**
