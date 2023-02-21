@@ -28,70 +28,42 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.block;
+package org.kryptokrona.sdk.model.http;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kryptokrona.sdk.transaction.Transaction;
 
 import java.util.List;
 
 /**
- * ParentBlock.java
+ * Block.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class ParentBlock {
+public class Block {
 
-	/**
-	 * The major block version number
-	 */
-	private int majorVersion;
+    private String blockHash;
 
-	/**
-	 * The minor block version number
-	 */
-	private int minorVersion;
+    private long blockHeight;
 
-	/**
-	 * The previous block hash
-	 */
-	private String previousBlockHash;
+    private long blockTimestamp;
 
-	/**
-	 * The number of transactions in the block
-	 */
-	private long transactionCount;
+    @JsonProperty("coinbaseTX")
+    private CoinbaseTransaction coinbaseTransaction;
 
-	/**
-	 * The base transaction branches
-	 */
-	private List<String> baseTransactionBranch;
+    private List<String> transactions;
 
-	/**
-	 * The miner reward transaction
-	 */
-	private Transaction minerTransaction;
+    public Block(String blockHash, long blockHeight, long blockTimestamp, CoinbaseTransaction coinbaseTransaction, List<String> transactions) {
+        this.blockHash = blockHash;
+        this.blockHeight = blockHeight;
+        this.blockTimestamp = blockTimestamp;
+        this.coinbaseTransaction = coinbaseTransaction;
+        this.transactions = transactions;
+    }
 
-	/**
-	 * The blockchain branches
-	 */
-	private List<String> blockchainBranch;
-
-	public ParentBlock(
-		int majorVersion, int minorVersion, String previousBlockHash, long transactionCount,
-		List<String> baseTransactionBranch, Transaction minerTransaction, List<String> blockchainBranch
-	) {
-		this.majorVersion = majorVersion;
-		this.minorVersion = minorVersion;
-		this.previousBlockHash = previousBlockHash;
-		this.transactionCount = transactionCount;
-		this.baseTransactionBranch = baseTransactionBranch;
-		this.minerTransaction = minerTransaction;
-		this.blockchainBranch = blockchainBranch;
-	}
 }

@@ -28,27 +28,29 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.block;
+package org.kryptokrona.sdk.model.http;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * TopBlock.java
+ * Block.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class TopBlock {
+public class Output {
 
-	private String hash;
-	private long height;
+    private long amount;
 
-	public TopBlock(String hash, long height) {
-		this.hash = hash;
-		this.height = height;
-	}
+    private String key;
+
+    public Output(long amount, String key) {
+        this.amount = amount;
+        this.key = key;
+    }
+
 }

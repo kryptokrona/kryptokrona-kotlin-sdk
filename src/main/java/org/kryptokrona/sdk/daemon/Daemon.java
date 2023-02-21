@@ -37,8 +37,6 @@ import org.kryptokrona.sdk.exception.daemon.DaemonOfflineException;
 import org.kryptokrona.sdk.exception.network.NetworkBlockCountException;
 import org.kryptokrona.sdk.exception.node.NodeDeadException;
 import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.block.RawBlock;
-import org.kryptokrona.sdk.block.TopBlock;
 import org.kryptokrona.sdk.model.http.RandomOutputsByAmount;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 
@@ -77,7 +75,7 @@ public interface Daemon {
 	 * @param walletSyncData : WalletSyncData
 	 * @return Observable
 	 */
-	Observable<Map<ArrayList<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
+	Observable<Map<ArrayList<Block>, Block>> getWalletSyncData(WalletSyncData walletSyncData) throws IOException;
 
 	/**
 	 * Returns a mapping of transaction hashes to global indexes.
@@ -125,7 +123,7 @@ public interface Daemon {
 	 * @param rawBlocks : List
 	 * @return Observable
 	 */
-	Observable<List<Block>> rawBlocksToBlocks(List<RawBlock> rawBlocks);
+	Observable<List<Block>> rawBlocksToBlocks(List<Block> rawBlocks);
 
 	/**
 	 * Make a GET request.
@@ -141,6 +139,13 @@ public interface Daemon {
      * @return Observable
      */
 	Observable<Response> postRequest(String param, Object obj) throws IOException;
+
+	/**
+     * Make a POST request.
+     *
+     * @return Observable
+     */
+	Observable<Response> postRequest(String param) throws IOException;
 
 	/**
 	 * Make a GET request and checks if status code is 200.

@@ -47,8 +47,6 @@ import org.kryptokrona.sdk.exception.wallet.WalletException;
 import org.kryptokrona.sdk.model.http.*;
 import org.kryptokrona.sdk.validator.WalletValidator;
 import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.block.RawBlock;
-import org.kryptokrona.sdk.block.TopBlock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -205,7 +203,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<Map<ArrayList<Block>, TopBlock>> getWalletSyncData(WalletSyncData walletSyncData) {
+	public Observable<Map<ArrayList<Block>, Block>> getWalletSyncData(WalletSyncData walletSyncData) {
 		var endpoint = useRawBlocks ? "getrawblocks" : "getwalletsyncdata";
 
 		walletSyncData.setBlockCount(blockCount);
@@ -251,13 +249,13 @@ public class DaemonImpl implements Daemon {
 			logger.error("Failed to get wallet sync data: " + e + " Lowering block count to: " + blockCount);
 
 			blockCount = Math.ceil(blockCount / 4.0);
-			var result = Map.of(new ArrayList<Block>(), new TopBlock());
+			var result = Map.of(new ArrayList<Block>(), new Block());
 
 			return Observable.just(result);
 		}
 
 		// TODO: temporary we want to actually return data here if everything goes well in the try/catch
-		var result = Map.of(new ArrayList<Block>(), new TopBlock());
+		var result = Map.of(new ArrayList<Block>(), new Block());
 
 		return Observable.just(result);
 	}
@@ -330,7 +328,7 @@ public class DaemonImpl implements Daemon {
 	}
 
 	@Override
-	public Observable<List<Block>> rawBlocksToBlocks(List<RawBlock> rawBlocks) {
+	public Observable<List<Block>> rawBlocksToBlocks(List<Block> rawBlocks) {
 		return null;
 	}
 
@@ -350,6 +348,13 @@ public class DaemonImpl implements Daemon {
 		var request = Request.post(String.format("http://%s/%s", this.hostname, param));
 		request.addHeader("content-type", "application/json");
 		request.body(body);
+
+		return Observable.just(request.execute());
+	}
+
+	@Override
+	public Observable<Response> postRequest(String param) throws IOException {
+		var request = Request.post(String.format("http://%s/%s", this.hostname, param));
 
 		return Observable.just(request.execute());
 	}

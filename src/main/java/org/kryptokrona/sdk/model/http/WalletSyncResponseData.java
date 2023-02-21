@@ -36,12 +36,23 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * WalletSyncResponseData.java
+ *
+ * @author Marcus Cvjeticanin (@mjovanc)
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 public class WalletSyncResponseData {
 
-	private List<String> items;
+	private List<Block> items;
 
 	private String status;
+
+	public WalletSyncResponseData(List<Block> items, String status) {
+		this.items = items;
+		this.status = status;
+	}
+
 }

@@ -39,7 +39,6 @@ import org.kryptokrona.sdk.transaction.TransactionInputImpl;
 import org.kryptokrona.sdk.transaction.TransactionRaw;
 import org.kryptokrona.sdk.transaction.TransactionRawCoinbase;
 import org.kryptokrona.sdk.block.Block;
-import org.kryptokrona.sdk.block.TopBlock;
 import org.kryptokrona.sdk.daemon.DaemonImpl;
 import org.kryptokrona.sdk.model.http.WalletSyncData;
 import org.kryptokrona.sdk.wallet.SubWallets;
@@ -243,7 +242,7 @@ public class WalletSynchronizerService {
 	}
 
 	public ArrayList<String> getWalletSyncDataHashes() {
-		return null;
+		return new ArrayList<>(); //TODO: temporary
 	}
 
 	private Observable<Map<Boolean, Boolean>> downloadBlocks() {
@@ -282,7 +281,7 @@ public class WalletSynchronizerService {
                	blocks */
 				if (storedBlocks.size() == 0) {
 					// this.emit('heightchange', topBlock.height);
-					synchronizationStatus.storeBlockHash(topBlock.getHeight(), topBlock.getHash());
+					synchronizationStatus.storeBlockHash(topBlock.getBlockHeight(), topBlock.getBlockHash());
 				}
 				logger.debug("Zero blocks received from daemon, fully synced.");
 

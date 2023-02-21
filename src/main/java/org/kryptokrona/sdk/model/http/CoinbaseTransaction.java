@@ -28,19 +28,37 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.block;
+package org.kryptokrona.sdk.model.http;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
- * RawBlock.java
+ * CoinbaseTransaction.java
  *
  * @author Marcus Cvjeticanin (@mjovanc)
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class RawBlock {
+public class CoinbaseTransaction {
+
+    private String hash;
+
+    private List<Output> outputs;
+
+    private String txPublicKey;
+
+    private long unlockTime;
+
+    public CoinbaseTransaction(String hash, List<Output> outputs, String txPublicKey, long unlockTime) {
+        this.hash = hash;
+        this.outputs = outputs;
+        this.txPublicKey = txPublicKey;
+        this.unlockTime = unlockTime;
+    }
+
 }
