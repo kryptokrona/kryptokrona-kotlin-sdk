@@ -130,7 +130,7 @@ public class Config {
 		new MixinLimit(800000, 3),
 
 		// Height: 1,250,000, minMixin: 1, maxMixin: 100, defaultMixin: 5
-		new MixinLimit(1250000, 1, 100, 5)
+		new MixinLimit(1250000, 1, 5, 3)
 	), 3);
 
 	/**

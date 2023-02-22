@@ -291,7 +291,7 @@ public class WalletSynchronizerService {
 				return Observable.just(Map.of(true, true));
 			}
 
-			/* Timestamp is transient and can change - block height is constant. */
+			// Timestamp is transient and can change - block height is constant.
 			if (startTimestamp != 0) {
 				startTimestamp = 0;
 				startHeight = blocks.get(0).getBlockHeight();
@@ -299,7 +299,7 @@ public class WalletSynchronizerService {
 				subWallets.convertSyncTimestampToHeight(startTimestamp, startHeight);
 			}
 
-			/* Add the new blocks to the store */
+			// Add the new blocks to the store
         	// this.storedBlocks = this.storedBlocks.concat(blocks);
 
 			fetchingBlocks = false;
