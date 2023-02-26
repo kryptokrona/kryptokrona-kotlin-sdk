@@ -30,146 +30,197 @@
 
 package org.kryptokrona.sdk.config
 
-import java.util.*
 
 object Constants {
 
     /**
-     * The amount of decimal places.
+     * What version of the file format are we on (to make it easier to
+     * upgrade the wallet format in the future)
      */
-    const val DECIMAL_PLACES = 5
+    const val WALLET_FILE_FORMAT_VERSION = 0
 
     /**
-     * The address prefix Kryptokrona uses - you can find this in CryptoNoteConfig.h.
+     * The number of iterations of PBKDF2 to perform on the wallet
+     * password.
      */
-    const val ADDRESS_PREFIX: Long = 2239254
+    const val PBKDF2_ITERATIONS = 500000
 
     /**
-     * Request timeout for daemon operations in milliseconds.
+     * We use this to check that the file is a wallet file, this bit does
+     * not get encrypted, and we can check if it exists before decrypting.
+     * If it isn't, it's not a wallet file.
      */
-    const val REQUEST_TIMEOUT = (10 * 1000).toLong()
-
-    /**
-     * The block time of Kryptokrona, in seconds.
-     */
-    const val BLOCK_TARGET_TIME: Long = 90
-
-    /**
-     * How often to process blocks, in millseconds.
-     */
-    const val SYNC_THREAD_INTERVAL: Long = 500
-
-    /**
-     * How often to update the daemon info.
-     */
-    const val DAEMON_UPDATE_INTERVAL = (10 * 1000).toLong()
-
-    /**
-     * How often to check on locked transactions.
-     */
-    const val LOCKED_TRANSACTIONS_CHECK_INTERVAL = (30 * 1000).toLong()
-
-    /**
-     * The amount of blocks to process per 'tick' of the mainloop. Note: too
-     * high a value will cause the event loop to be blocked, and your interaction
-     * to be laggy.
-     */
-    const val BLOCKS_PER_TICK: Long = 1
-
-    /**
-     * Kryptokrona 'ticker'
-     */
-    const val TICKER = "XKR"
-
-    /**
-     * Most people haven't mined any blocks, so lets not waste time scanning
-     * them.
-     */
-    const val SCAN_COINBASE_TRANSACTIONS = false
-
-    /**
-     * The minimum fee allowed for transactions, in ATOMIC units.
-     */
-    const val MINIMUM_FEE: Long = 10
-
-    /**
-     * Fee per byte is rounded up in chunks. This helps makes estimates
-     * more accurate. It's suggested to make this a power of two, to relate
-     * to the underlying storage cost / page sizes for storing a transaction.
-     */
-    const val FEE_PER_BYTE_CHUNK_SIZE = 256
-
-    /**
-     * Fee to charge per byte of transaction. Will be applied in chunks, see
-     * above. This value comes out to 1.953125. We use this value instead of
-     * something like 2 because it makes for pretty resulting fees
-     * - 5 XKR vs 5.12 XKR. You can read this as the fee per chunk
-     * is 500 atomic units. The fee per byte is 500 / chunk size.
-     */
-    const val MINIMUM_FEE_PER_BYTE = 500.00 / FEE_PER_BYTE_CHUNK_SIZE
-
-    /**
-     * Mapping of height to mixin maximum and mixin minimum.
-     */
-    /*const val MIXIN_LIMITS: MixinLimits = MixinLimits(
-        Arrays.asList( // Height: 440,000, minMixin: 1, maxMixin: 100, defaultMixin: 3
-            MixinLimit(440000, 1, 100, 3),  // At height of 620000, static mixin of 7
-            MixinLimit(620000, 7),  // At height of 800000, static mixin of 3
-            MixinLimit(800000, 3),  // Height: 1,250,000, minMixin: 1, maxMixin: 100, defaultMixin: 5
-            MixinLimit(1250000, 1, 5, 3)
-        ), 3
+    /*val IS_A_WALLET_IDENTIFIER: List<Int> = ArrayList<Any?>(
+        java.util.List.of(
+            0x49, 0x66, 0x20, 0x49, 0x20, 0x70, 0x75, 0x6c, 0x6c, 0x20, 0x74,
+            0x68, 0x61, 0x74, 0x20, 0x6f, 0x66, 0x66, 0x2c, 0x20, 0x77, 0x69,
+            0x6c, 0x6c, 0x20, 0x79, 0x6f, 0x75, 0x20, 0x64, 0x69, 0x65, 0x3f,
+            0x0a, 0x49, 0x74, 0x20, 0x77, 0x6f, 0x75, 0x6c, 0x64, 0x20, 0x62,
+            0x65, 0x20, 0x65, 0x78, 0x74, 0x72, 0x65, 0x6d, 0x65, 0x6c, 0x79,
+            0x20, 0x70, 0x61, 0x69, 0x6e, 0x66, 0x75, 0x6c, 0x2e
+        )
     )*/
 
     /**
-     * The length of a standard address for Kryptokrona.
+     * We use this to check if the file has been correctly decoded, i.e.
+     * is the password correct. This gets encrypted into the file, and
+     * then when unencrypted the file should start with this - if it
+     * doesn't, the password is wrong
      */
-    const val STANDARD_ADDRESS_LENGTH: Long = 99
+   /* val IS_CORRECT_PASSWORD_IDENTIFIER: ArrayList<Any?> = listOf(
+            0x59, 0x6f, 0x75, 0x27, 0x72, 0x65, 0x20, 0x61, 0x20, 0x62, 0x69,
+            0x67, 0x20, 0x67, 0x75, 0x79, 0x2e, 0x0a, 0x46, 0x6f, 0x72, 0x20,
+            0x79, 0x6f, 0x75, 0x2e
+    )*/
 
     /**
-     * The length of an integrated address for Kryptokrona - It's the same as
-     * a normal address, but there is a paymentID included in there - since
-     * payment ID's are 64 chars, and base58 encoding is done by encoding
-     * chunks of 8 chars at once into blocks of 11 chars, we can calculate
-     * this automatically.
+     * How large should the lastKnownBlockHashes container be
      */
-    const val INTEGRATED_ADDRESS_LENGTH = (99 + 64 * 11 / 8).toLong()
+    const val LAST_KNOWN_BLOCK_HASHES_SIZE = 50
 
     /**
-     * The amount of memory to use storing downloaded blocks - 50MB
+     * Save a block hash checkpoint every BLOCK_HASH_CHECKPOINTS_INTERVAL
+     * blocks
      */
-    const val BLOCK_STORE_MEMORY_LIMIT = (1024 * 1024 * 50).toLong()
+    const val BLOCK_HASH_CHECKPOINTS_INTERVAL = 5000
 
     /**
-     * The amount of blocks to take from the daemon per request. Cannot take
-     * more than 100.
+     * When we get the global indexes, we pass in a range of blocks, to obscure
+     * which transactions we are interested in - the ones that belong to us.
+     * To do this, we get the global indexes for all transactions in a range.
+     * For example, if we want the global indexes for a transaction in block
+     * 17, we get all the indexes from block 10 to block 20.
+     *
+     *
+     * This value determines how many blocks to take from.
      */
-    const val BLOCKS_PER_DAEMON_REQUEST: Long = 100
+    const val GLOBAL_INDEXES_OBSCURITY = 10
 
     /**
-     * The amount of seconds to permit not having fetched a block from the
-     * daemon before emitting 'deadnode'. Note that this just means contacting
-     * the daemon for data - if you are synced and it returns TopBlock - the
-     * event will not be emitted.
+     * Used to determine whether an unlock time is a height, or a timestamp
      */
-    const val MAX_LAST_FETCHED_BLOCK_INTERVAL = (60 * 3).toLong()
+    const val MAX_BLOCK_NUMBER: Long = 500000000
 
     /**
-     * The amount of seconds to permit not having fetched a new network height
-     * from the daemon before emitting 'deadnode'.
+     * Valid output amounts to be mixable
      */
-    const val MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL = (60 * 3).toLong()
+    /*public final static List<Long> PRETTY_AMOUNTS = new ArrayList<>(asList(
+		1, 2, 3, 4, 5, 6, 7, 8, 9,
+		10, 20, 30, 40, 50, 60, 70, 80, 90,
+		100, 200, 300, 400, 500, 600, 700, 800, 900,
+		1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+		10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000,
+		100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000,
+		1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000,
+		10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000,
+		80000000, 90000000,
+		100000000, 200000000, 300000000, 400000000, 500000000, 600000000, 700000000,
+		800000000, 900000000,
+		1000000000, 2000000000, 3000000000L, 4000000000L, 5000000000L, 6000000000L,
+		7000000000L, 8000000000L, 9000000000L,
+		10000000000L, 20000000000L, 30000000000L, 40000000000L, 50000000000L, 60000000000L,
+		70000000000L, 80000000000L, 90000000000L,
+		100000000000L, 200000000000L, 300000000000L, 400000000000L, 500000000000L,
+		600000000000L, 700000000000L, 800000000000L, 900000000000L,
+		1000000000000L, 2000000000000L, 3000000000000L, 4000000000000L, 5000000000000L,
+		6000000000000L, 7000000000000L, 8000000000000L, 9000000000000L,
+		10000000000000L, 20000000000000L, 30000000000000L, 40000000000000L, 50000000000000L,
+		60000000000000L, 70000000000000L, 80000000000000L, 90000000000000L,
+		100000000000000L, 200000000000000L, 300000000000000L, 400000000000000L,
+		500000000000000L, 600000000000000L, 700000000000000L, 800000000000000L,
+		900000000000000L,
+		1000000000000000L, 2000000000000000L, 3000000000000000L, 4000000000000000L,
+		5000000000000000L, 6000000000000000L, 7000000000000000L, 8000000000000000L,
+		9000000000000000L,
+		10000000000000000L, 20000000000000000L, 30000000000000000L, 40000000000000000L,
+		50000000000000000L, 60000000000000000L, 70000000000000000L, 80000000000000000L,
+		90000000000000000L,
+		100000000000000000L, 200000000000000000L, 300000000000000000L, 400000000000000000L,
+		500000000000000000L, 600000000000000000L, 700000000000000000L, 800000000000000000L,
+		900000000000000000L,
+		1000000000000000000L, 2000000000000000000L, 3000000000000000000L, 4000000000000000000L,
+		5000000000000000000L, 6000000000000000000L, 7000000000000000000L, 8000000000000000000L,
+		9000000000000000000L
+	));*/
 
     /**
-     * The amount of seconds to permit not having fetched a new local height
-     * from the daemon before emitting 'deadnode'.
+     * Valid output amounts to be mixable
      */
-    const val MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL = (60 * 3).toLong()
+    /*public final static List<Long> PRETTY_AMOUNTS = new ArrayList<>(asList(
+		1, 2, 3, 4, 5, 6, 7, 8, 9,
+		10, 20, 30, 40, 50, 60, 70, 80, 90,
+		100, 200, 300, 400, 500, 600, 700, 800, 900,
+		1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+		10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000,
+		100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000,
+		1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000,
+		10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000,
+		80000000, 90000000,
+		100000000, 200000000, 300000000, 400000000, 500000000, 600000000, 700000000,
+		800000000, 900000000,
+		1000000000, 2000000000, 3000000000L, 4000000000L, 5000000000L, 6000000000L,
+		7000000000L, 8000000000L, 9000000000L,
+		10000000000L, 20000000000L, 30000000000L, 40000000000L, 50000000000L, 60000000000L,
+		70000000000L, 80000000000L, 90000000000L,
+		100000000000L, 200000000000L, 300000000000L, 400000000000L, 500000000000L,
+		600000000000L, 700000000000L, 800000000000L, 900000000000L,
+		1000000000000L, 2000000000000L, 3000000000000L, 4000000000000L, 5000000000000L,
+		6000000000000L, 7000000000000L, 8000000000000L, 9000000000000L,
+		10000000000000L, 20000000000000L, 30000000000000L, 40000000000000L, 50000000000000L,
+		60000000000000L, 70000000000000L, 80000000000000L, 90000000000000L,
+		100000000000000L, 200000000000000L, 300000000000000L, 400000000000000L,
+		500000000000000L, 600000000000000L, 700000000000000L, 800000000000000L,
+		900000000000000L,
+		1000000000000000L, 2000000000000000L, 3000000000000000L, 4000000000000000L,
+		5000000000000000L, 6000000000000000L, 7000000000000000L, 8000000000000000L,
+		9000000000000000L,
+		10000000000000000L, 20000000000000000L, 30000000000000000L, 40000000000000000L,
+		50000000000000000L, 60000000000000000L, 70000000000000000L, 80000000000000000L,
+		90000000000000000L,
+		100000000000000000L, 200000000000000000L, 300000000000000000L, 400000000000000000L,
+		500000000000000000L, 600000000000000000L, 700000000000000000L, 800000000000000000L,
+		900000000000000000L,
+		1000000000000000000L, 2000000000000000000L, 3000000000000000000L, 4000000000000000000L,
+		5000000000000000000L, 6000000000000000000L, 7000000000000000000L, 8000000000000000000L,
+		9000000000000000000L
+	));*/
+    /**
+     * Part of the how fast blocks can grow formula
+     */
+    const val MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR = 100 * 1024
 
     /**
-     * Allows setting a custom user agent string
+     * Part of the how fast blocks can grow
      */
-    val CUSTOM_USER_AGENT_STRING = String.format(
-        "%s-sdk-%s", TICKER.lowercase(Locale.getDefault()), System.getProperty("sdk-version")
-    )
+    const val MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR = 365 * 24 * 60 * 60
 
+    /**
+     * Initial block size
+     */
+    const val MAX_BLOCK_SIZE_INITIAL = 100000
+
+    /**
+     * Reserved space for miner transaction in block
+     */
+    const val CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE = 600
+
+    /**
+     * Minimum number of inputs a fusion transaction must have
+     */
+    const val FUSION_TX_MIN_INPUT_COUNT = 12
+
+    /**
+     * Max size in bytes a fusion transaction can be
+     */
+    const val MAX_FUSION_TX_SIZE = 30000
+
+    /**
+     * Required ratio of inputs to outputs in fusion transactions
+     */
+    const val FUSION_TX_MIN_IN_OUT_COUNT_RATIO = 4
+
+    /**
+     * Max amount to create a single output of
+     */
+    const val MAX_OUTPUT_SIZE_CLIENT = 100000000000L
 }
