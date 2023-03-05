@@ -27,7 +27,7 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - Docs: https://github.com/kryptokrona/kryptokrona-sdk/wiki
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-sdk
-- Hugin: sdkdevs group on Hugin Messenger
+- Hugin: Kryptokrona group on Hugin Messenger `33909fb89783fb15b5c2df50ff7107c112c3b232681f77814c024c909c07e932`
 - It is HIGHLY recommended to join our group on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
 
 ## Releases
