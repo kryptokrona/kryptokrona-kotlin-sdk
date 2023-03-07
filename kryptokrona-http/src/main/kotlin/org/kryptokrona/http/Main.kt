@@ -1,10 +1,16 @@
 package org.kryptokrona.http
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.kryptokrona.http.common.get
+
 
 fun main(args: Array<String>) {
-    println("Hello World!")
+    GlobalScope.launch {
+        get()
+        delay(5000)
+    }
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    print("Ending coroutine...")
 }

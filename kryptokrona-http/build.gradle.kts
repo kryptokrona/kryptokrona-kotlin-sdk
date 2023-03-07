@@ -1,3 +1,6 @@
+val ktor_version: String by project
+val coroutines_version: String by project
+
 plugins {
     kotlin("jvm") version "1.8.10"
     application
@@ -11,6 +14,12 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":kryptokrona-core"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+
     testImplementation(kotlin("test"))
 }
 
