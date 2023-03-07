@@ -1,12 +1,19 @@
 package org.kryptokrona.http
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kryptokrona.http.common.get
 
 
-fun main(args: Array<String>) {
+fun main(args: Array<String>) = runBlocking {
 
-    runBlocking { get() }
+    println("Kotlin Start")
 
-    print("Ending coroutine...")
+    launch {
+        delay(2000)
+        println("Kotlin Inside")
+
+    }
+    println("Kotlin End")
 }
