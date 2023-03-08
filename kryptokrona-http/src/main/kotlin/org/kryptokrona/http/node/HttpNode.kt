@@ -28,61 +28,32 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.node
 
-import io.ktor.client.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
+import io.ktor.client.call.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import org.slf4j.LoggerFactory
-
-
-private val log = LoggerFactory.getLogger("HttpCommon")
-private val client = HttpClient {
-    install(ContentNegotiation) {
-        json()
-    }
-}
+import org.kryptokrona.http.common.get
+import org.kryptokrona.http.model.Info
 
 
 /**
- * Make a GET request
+ * Check if the node is running
  *
- * @param url: String
- * @return HttpResponse?
+ * @return Boolean
  */
-suspend fun get(url: String): HttpResponse? {
-    try {
-        return client.get(url) {
-            headers {
-                append(HttpHeaders.Accept, "application/json")
-            }
-        }
-    } catch (e: Exception) {
-        log.error("Error: $e")
+suspend fun isNodeRunning(): Boolean {
+    get("http://privacymine.net:11898/info")?.let {
+        return it.status.isSuccess()
     }
 
-    return null
+    return false
 }
 
-/**
- * Make a POST request
- *
- * @param url: String
- * @param body: Any
- * @return HttpResponse?
- */
-suspend fun post(url: String, body: Any): HttpResponse? {
-    try {
-        return client.post(url) {
-            contentType(ContentType.Application.Json)
-            setBody(body)
-        }
-    } catch (e: Exception) {
-        log.error("Error: $e")
-    }
+suspend fun getNodeInfo(): Info? {
+    return get("http://privacymine.net:11898/info")?.body()
+}
 
-    return null
+fun getNodeFee() {
+    println("Hello World!")
 }
