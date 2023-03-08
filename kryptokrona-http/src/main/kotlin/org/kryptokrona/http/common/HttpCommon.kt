@@ -41,6 +41,12 @@ private val log = LoggerFactory.getLogger("HttpCommon")
 private val client = HttpClient()
 
 
+/**
+ * Make a GET request
+ *
+ * @param url: String
+ * @return HttpResponse?
+ */
 suspend fun get(url: String): HttpResponse? {
     try {
         return client.get(url) {
@@ -55,6 +61,13 @@ suspend fun get(url: String): HttpResponse? {
     return null
 }
 
+/**
+ * Make a POST request
+ *
+ * @param url: String
+ * @param body: Any
+ * @return HttpResponse?
+ */
 suspend fun post(url: String, body: Any): HttpResponse? {
     try {
         return client.post(url) {
