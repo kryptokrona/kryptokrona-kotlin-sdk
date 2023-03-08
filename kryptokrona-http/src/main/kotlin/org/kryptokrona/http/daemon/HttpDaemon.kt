@@ -30,20 +30,14 @@
 
 package org.kryptokrona.http.daemon
 
-// perhaps not needed to be a class
-class HttpDaemon {
+fun isDeamonRunning() {
+    println("Hello World!")
+}
 
+fun getDaemonInfo() {
+    println("Hello World!")
+}
 
-    fun isDeamonRunning() {
-        println("Hello World!")
-    }
-
-    fun getDaemonInfo() {
-        println("Hello World!")
-    }
-
-    fun getFeeInfo() {
-        println("Hello World!")
-    }
-
+fun getFeeInfo() {
+    println("Hello World!")
 }

@@ -33,14 +33,22 @@ package org.kryptokrona.http.common
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 
 private val client = HttpClient()
 
-suspend fun get() {
-    val response: HttpResponse = client.get("https://kryptokrona.com")
-    println(response.status)
+suspend fun get(url: String): HttpResponse {
+    // TODO: add error handling and logging
+    return client.get(url) {
+        headers {
+            append(HttpHeaders.Accept, "application/json")
+        }
+    }
 }
 
-suspend fun post() {
-    println("Hello World!")
+suspend fun post(url: String, body: Any): HttpResponse {
+    return client.post(url) {
+        contentType(ContentType.Application.Json)
+        setBody(body)
+    }
 }
