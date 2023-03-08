@@ -1,8 +1,6 @@
 package org.kryptokrona.http
 
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import org.kryptokrona.http.model.Info
 import org.kryptokrona.http.node.getNodeInfo
 import org.kryptokrona.http.node.isNodeRunning
 
