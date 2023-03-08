@@ -34,8 +34,12 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import org.slf4j.LoggerFactory
 
+
+private val log = LoggerFactory.getLogger("HttpCommon")
 private val client = HttpClient()
+
 
 suspend fun get(url: String): HttpResponse? {
     try {
@@ -45,7 +49,7 @@ suspend fun get(url: String): HttpResponse? {
             }
         }
     } catch (e: Exception) {
-        println("Error: $e")
+        log.error("Error: $e")
     }
 
     return null
@@ -58,7 +62,7 @@ suspend fun post(url: String, body: Any): HttpResponse? {
             setBody(body)
         }
     } catch (e: Exception) {
-        println("Error: $e")
+        log.error("Error: $e")
     }
 
     return null
