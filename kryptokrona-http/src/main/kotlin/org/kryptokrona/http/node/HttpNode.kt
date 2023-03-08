@@ -33,6 +33,7 @@ package org.kryptokrona.http.node
 import io.ktor.client.call.*
 import io.ktor.http.*
 import org.kryptokrona.http.common.get
+import org.kryptokrona.http.model.Fee
 import org.kryptokrona.http.model.Info
 
 
@@ -53,6 +54,6 @@ suspend fun getNodeInfo(): Info? {
     return get("http://privacymine.net:11898/info")?.body()
 }
 
-fun getNodeFee() {
-    println("Hello World!")
+suspend fun getNodeFee(): Fee? {
+    return get("http://privacymine.net:11898/fee")?.body()
 }
