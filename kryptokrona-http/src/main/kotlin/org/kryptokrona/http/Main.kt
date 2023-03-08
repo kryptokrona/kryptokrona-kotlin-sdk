@@ -10,10 +10,10 @@ fun main(args: Array<String>) = runBlocking {
 
     println("Kotlin Start")
 
-    launch {
-        delay(2000)
-        println("Kotlin Inside")
-
+    val job = launch {
+        get("https://kryptokrona.se")
     }
+    job.cancel()
+
     println("Kotlin End")
 }

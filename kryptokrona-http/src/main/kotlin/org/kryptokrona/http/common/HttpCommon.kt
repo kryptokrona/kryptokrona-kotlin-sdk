@@ -37,18 +37,29 @@ import io.ktor.http.*
 
 private val client = HttpClient()
 
-suspend fun get(url: String): HttpResponse {
-    // TODO: add error handling and logging
-    return client.get(url) {
-        headers {
-            append(HttpHeaders.Accept, "application/json")
+suspend fun get(url: String): HttpResponse? {
+    try {
+        return client.get(url) {
+            headers {
+                append(HttpHeaders.Accept, "application/json")
+            }
         }
+    } catch (e: Exception) {
+        println("Error: $e")
     }
+
+    return null
 }
 
-suspend fun post(url: String, body: Any): HttpResponse {
-    return client.post(url) {
-        contentType(ContentType.Application.Json)
-        setBody(body)
+suspend fun post(url: String, body: Any): HttpResponse? {
+    try {
+        return client.post(url) {
+            contentType(ContentType.Application.Json)
+            setBody(body)
+        }
+    } catch (e: Exception) {
+        println("Error: $e")
     }
+
+    return null
 }
