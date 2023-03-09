@@ -30,22 +30,6 @@
 
 package org.kryptokrona.http.common
 
-suspend fun getTransactions() {
-    println("Hello World!")
-}
-
-suspend fun sendRawTransaction() {
-    println("Hello World!")
-}
-
-suspend fun getTransactionDetailsByHashes() {
-    println("Hello World!")
-}
-
-suspend fun getTransactionHashesByPaymentId() {
-    println("Hello World!")
-}
-
-suspend fun getTransactionStatus() {
+suspend fun getRandomOuts() {
     println("Hello World!")
 }

@@ -6,6 +6,8 @@ import org.kryptokrona.http.common.*
 
 fun main(args: Array<String>) = runBlocking {
 
+    // TODO: should we rename the http to rpc?
+
     isNodeRunning().let {
         println("Node is running")
     }
