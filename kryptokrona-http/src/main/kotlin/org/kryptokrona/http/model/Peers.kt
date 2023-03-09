@@ -28,54 +28,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.node
+package org.kryptokrona.http.model
 
-import io.ktor.client.call.*
-import io.ktor.http.*
-import org.kryptokrona.http.common.get
-import org.kryptokrona.http.model.Fee
-import org.kryptokrona.http.model.Height
-import org.kryptokrona.http.model.Info
-import org.kryptokrona.http.model.Peers
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
-/**
- * Check if the node is running
- *
- * @return Boolean
- */
-suspend fun isNodeRunning(): Boolean {
-    get("http://privacymine.net:11898/info")?.let {
-        return it.status.isSuccess()
-    }
-
-    return false
-}
-
-/*
- * Get node info
- */
-suspend fun getNodeInfo(): Info? {
-    return get("http://privacymine.net:11898/info")?.body()
-}
-
-/*
- * Get node height
- */
-suspend fun getNodeHeight(): Height? {
-    return get("http://privacymine.net:11898/height")?.body()
-}
-
-/*
- * Get node peers
- */
-suspend fun getNodePeers(): Peers? {
-    return get("http://privacymine.net:11898/peers")?.body()
-}
-
-/*
- * Get node fee
- */
-suspend fun getNodeFee(): Fee? {
-    return get("http://privacymine.net:11898/fee")?.body()
-}
+@Serializable
+data class Peers(@SerialName("gray_peers") val grayPeers: List<String>, val peers: List<String>, val status: String)
