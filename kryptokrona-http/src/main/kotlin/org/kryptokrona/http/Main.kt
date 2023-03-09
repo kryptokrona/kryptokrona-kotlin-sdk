@@ -56,7 +56,7 @@ fun main(args: Array<String>) = runBlocking {
     queryBlocks?.let {
         println("Query Blocks: ${it}")
     }
-g
+
     println("Kotlin End")
 
 }
