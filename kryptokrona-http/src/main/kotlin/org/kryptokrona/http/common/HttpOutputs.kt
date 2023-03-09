@@ -30,6 +30,9 @@
 
 package org.kryptokrona.http.common
 
-suspend fun getRandomOuts() {
-    println("Hello World!")
+import io.ktor.client.call.*
+import org.kryptokrona.http.model.RandomOutputs
+
+suspend fun getRandomOuts(): RandomOutputs? {
+    return get("http://privacymine.net:11898/getrandom_outs")?.body()
 }
