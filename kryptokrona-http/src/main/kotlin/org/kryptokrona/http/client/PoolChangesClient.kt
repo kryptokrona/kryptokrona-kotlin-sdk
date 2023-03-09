@@ -31,10 +31,15 @@
 package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
+import org.kryptokrona.core.node.Node
 import org.kryptokrona.http.common.get
 import org.kryptokrona.http.model.PoolChangesLite
+import org.slf4j.LoggerFactory
 
-class PoolChangesClient {
+class PoolChangesClient(private val node: Node) {
+
+    private val logger = LoggerFactory.getLogger("PoolChangesClient")
+
     suspend fun getPoolChangesLite(): PoolChangesLite? {
         return get("http://privacymine.net:11898/get_pool_changes_lite")?.body()
     }

@@ -13,7 +13,4 @@ fun main(args: Array<String>) = runBlocking {
     blockClient.getBlocks().let {
         println("Blocks: ${it}")
     }
-
-    println("Kotlin End")
-
 }

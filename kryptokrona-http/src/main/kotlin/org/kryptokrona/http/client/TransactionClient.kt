@@ -31,22 +31,26 @@
 package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
+import org.kryptokrona.core.node.Node
 import org.kryptokrona.http.common.get
 import org.kryptokrona.http.model.transaction.TransactionDetailsHashes
 import org.kryptokrona.http.model.transaction.TransactionHashesPaymentId
 import org.kryptokrona.http.model.transaction.Transactions
 import org.kryptokrona.http.model.transaction.TransactionsStatus
+import org.slf4j.LoggerFactory
 
 
-class TransactionClient {
+class TransactionClient(private val node: Node) {
+
+    private val logger = LoggerFactory.getLogger("TransactionClient")
 
     suspend fun getTransactions(): Transactions? {
         return get("http://privacymine.net:11898/gettransactions")?.body()
     }
 
-    suspend fun sendRawTransaction() {
+    /*suspend fun sendRawTransaction() {
         println("Hello World!")
-    }
+    }*/
 
     suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
         return get("http://privacymine.net:11898/get_transaction_details_by_hashes")?.body()

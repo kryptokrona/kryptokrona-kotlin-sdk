@@ -32,14 +32,18 @@ package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
 import io.ktor.http.*
+import org.kryptokrona.core.node.Node
 import org.kryptokrona.http.common.get
 import org.kryptokrona.http.model.node.Fee
 import org.kryptokrona.http.model.node.Height
 import org.kryptokrona.http.model.node.Info
 import org.kryptokrona.http.model.node.Peers
+import org.slf4j.LoggerFactory
 
 
-class NodeClient {
+class NodeClient(private val node: Node) {
+
+    private val logger = LoggerFactory.getLogger("NodeClient")
 
     /**
      * Check if the node is running

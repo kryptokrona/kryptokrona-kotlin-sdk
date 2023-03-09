@@ -59,27 +59,99 @@ class BlockClient(private val node: Node) {
     }
 
     suspend fun getQueryBlocks(): QueryBlocks? {
-        return get("http://privacymine.net:11898/queryblocks")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/queryblocks").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/queryblocks").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting query blocks", e)
+        }
+
+        return null
     }
 
     suspend fun getQueryBlocksLite(): QueryBlocksLite? {
-        return get("http://privacymine.net:11898/queryblockslite")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/queryblockslite").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/queryblockslite").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting query blocks lite", e)
+        }
+
+        return null
     }
 
     suspend fun getBlockDetailsByHeight(): BlockDetail? {
-        return get("http://privacymine.net:11898/get_block_details_by_height")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_block_details_by_height").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_block_details_by_height").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting block details by height", e)
+        }
+
+        return null
     }
 
     suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
-        return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_heights").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_blocks_details_by_heights").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting blocks details by height", e)
+        }
+
+        return null
     }
 
     suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
-        return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_hashes").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_blocks_details_by_hashes").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting blocks details by hashes", e)
+        }
+
+        return null
     }
 
     suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
-        return get("http://privacymine.net:11898/get_blocks_hashes_by_timestamps")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting blocks details by hashes", e)
+        }
+
+        return null
     }
 
 }

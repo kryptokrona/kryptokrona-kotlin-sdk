@@ -31,10 +31,15 @@
 package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
+import org.kryptokrona.core.node.Node
 import org.kryptokrona.http.common.get
 import org.kryptokrona.http.model.RandomOutputs
+import org.slf4j.LoggerFactory
 
-class OutputsClient {
+class OutputsClient(private val node: Node) {
+
+    private val logger = LoggerFactory.getLogger("OutputsClient")
+
     suspend fun getRandomOuts(): RandomOutputs? {
         return get("http://privacymine.net:11898/getrandom_outs")?.body()
     }

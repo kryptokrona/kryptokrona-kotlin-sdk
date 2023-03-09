@@ -31,16 +31,45 @@
 package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
+import org.kryptokrona.core.node.Node
 import org.kryptokrona.http.common.get
 import org.kryptokrona.http.model.GlobalIndexesForRange
 import org.kryptokrona.http.model.OIndexes
+import org.slf4j.LoggerFactory
 
-class IndexesClient {
+class IndexesClient(private val node: Node) {
+
+    private val logger = LoggerFactory.getLogger("IndexesClient")
+
     suspend fun getOIndexes(): OIndexes? {
-        return get("http://privacymine.net:11898/get_o_indexes")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_o_indexes").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_o_indexes").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting O Indexes", e)
+        }
+
+        return null
     }
 
     suspend fun getGlobalIndexesForRange(): GlobalIndexesForRange? {
-        return get("http://privacymine.net:11898/get_global_indexes_for_range")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_global_indexes_for_range").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_global_indexes_for_range").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting global indexes for range", e)
+        }
+
+        return null
     }
 }
