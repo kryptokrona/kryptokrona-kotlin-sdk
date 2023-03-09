@@ -33,7 +33,7 @@ package org.kryptokrona.http.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailByHeightBlockTransactionInput(
-    val data: BlockDetailByHeightBlockTransactionInputData,
+data class BlockDetailByHeightBlockTransactionOutputOutputTarget(
+    val data: BlockDetailByHeightBlockTransactionOutputOutputTargetData,
     val type: String
 )
