@@ -67,8 +67,13 @@ fun main(args: Array<String>) = runBlocking {
         println("Block Detail By Height: ${it}")
     }
 
-    val blocksDetailsHases = getBlocksDetailsByHeights()
-    blocksDetailsHases?.let {
+    val blocksDetailsByHeight = getBlocksDetailsByHeights()
+    blocksDetailsByHeight?.let {
+        println("Blocks Details By Height: ${it}")
+    }
+
+    val blocksDetailsHashes = getBlocksDetailsByHashes()
+    blocksDetailsHashes?.let {
         println("Block Detail By Hashes: ${it}")
     }
 

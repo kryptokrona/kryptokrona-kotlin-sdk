@@ -33,6 +33,7 @@ package org.kryptokrona.http.common
 import io.ktor.client.call.*
 import org.kryptokrona.http.model.block.BlockDetail
 import org.kryptokrona.http.model.block.Blocks
+import org.kryptokrona.http.model.block.BlocksDetails
 import org.kryptokrona.http.model.block.BlocksDetailsHashes
 import org.kryptokrona.http.model.queryblocks.QueryBlocks
 import org.kryptokrona.http.model.queryblocks.QueryBlocksLite
@@ -53,12 +54,12 @@ suspend fun getBlockDetailsByHeight(): BlockDetail? {
     return get("http://privacymine.net:11898/get_block_details_by_height")?.body()
 }
 
-suspend fun getBlocksDetailsByHeights(): BlocksDetailsHashes? {
+suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
     return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
 }
 
-suspend fun getBlocksDetailsByHashes() {
-    println("Hello World!")
+suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
+    return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
 }
 
 suspend fun getBlocksHashesByTimestamps() {
