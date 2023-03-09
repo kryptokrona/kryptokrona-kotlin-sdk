@@ -28,54 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.node
+package org.kryptokrona.http.common
 
-import io.ktor.client.call.*
-import io.ktor.http.*
-import org.kryptokrona.http.common.get
-import org.kryptokrona.http.model.Fee
-import org.kryptokrona.http.model.Height
-import org.kryptokrona.http.model.Info
-import org.kryptokrona.http.model.Peers
-
-
-/**
- * Check if the node is running
- *
- * @return Boolean
- */
-suspend fun isNodeRunning(): Boolean {
-    get("http://privacymine.net:11898/info")?.let {
-        return it.status.isSuccess()
-    }
-
-    return false
+suspend fun getTransactions() {
+    println("Hello World!")
 }
 
-/*
- * Get node info
- */
-suspend fun getNodeInfo(): Info? {
-    return get("http://privacymine.net:11898/info")?.body()
-}
-
-/*
- * Get node height
- */
-suspend fun getNodeHeight(): Height? {
-    return get("http://privacymine.net:11898/height")?.body()
-}
-
-/*
- * Get node peers
- */
-suspend fun getNodePeers(): Peers? {
-    return get("http://privacymine.net:11898/peers")?.body()
-}
-
-/*
- * Get node fee
- */
-suspend fun getNodeFee(): Fee? {
-    return get("http://privacymine.net:11898/fee")?.body()
+suspend fun sendRawTransaction() {
+    println("Hello World!")
 }
