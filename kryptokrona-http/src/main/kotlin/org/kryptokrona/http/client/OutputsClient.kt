@@ -41,6 +41,19 @@ class OutputsClient(private val node: Node) {
     private val logger = LoggerFactory.getLogger("OutputsClient")
 
     suspend fun getRandomOuts(): RandomOutputs? {
-        return get("http://privacymine.net:11898/getrandom_outs")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting random outputs", e)
+        }
+
+        return null
     }
+
 }

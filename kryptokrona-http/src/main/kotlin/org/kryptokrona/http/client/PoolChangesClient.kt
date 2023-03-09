@@ -41,6 +41,19 @@ class PoolChangesClient(private val node: Node) {
     private val logger = LoggerFactory.getLogger("PoolChangesClient")
 
     suspend fun getPoolChangesLite(): PoolChangesLite? {
-        return get("http://privacymine.net:11898/get_pool_changes_lite")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_pool_changes_lite").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_pool_changes_lite").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting pool changes lite", e)
+        }
+
+        return null
     }
+
 }

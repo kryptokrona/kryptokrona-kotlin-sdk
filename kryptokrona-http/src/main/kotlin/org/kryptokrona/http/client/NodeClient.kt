@@ -59,31 +59,79 @@ class NodeClient(private val node: Node) {
     }
 
     /*
-     * Get node info
+     * Get node information
      */
     suspend fun getNodeInfo(): Info? {
-        return get("http://privacymine.net:11898/info")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/info").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/info").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting node information", e)
+        }
+
+        return null
     }
 
     /*
      * Get node height
      */
     suspend fun getNodeHeight(): Height? {
-        return get("http://privacymine.net:11898/height")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/height").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/height").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting node height", e)
+        }
+
+        return null
     }
 
     /*
      * Get node peers
      */
     suspend fun getNodePeers(): Peers? {
-        return get("http://privacymine.net:11898/peers")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/peers").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/peers").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting node peers", e)
+        }
+
+        return null
     }
 
     /*
      * Get node fee
      */
     suspend fun getNodeFee(): Fee? {
-        return get("http://privacymine.net:11898/fee")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/fee").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/fee").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting node fee", e)
+        }
+
+        return null
     }
 
 }

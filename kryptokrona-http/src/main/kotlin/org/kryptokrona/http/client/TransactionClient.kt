@@ -45,7 +45,19 @@ class TransactionClient(private val node: Node) {
     private val logger = LoggerFactory.getLogger("TransactionClient")
 
     suspend fun getTransactions(): Transactions? {
-        return get("http://privacymine.net:11898/gettransactions")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/gettransactions").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/gettransactions").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting transactions", e)
+        }
+
+        return null
     }
 
     /*suspend fun sendRawTransaction() {
@@ -53,14 +65,51 @@ class TransactionClient(private val node: Node) {
     }*/
 
     suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
-        return get("http://privacymine.net:11898/get_transaction_details_by_hashes")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_transaction_details_by_hashes").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_transaction_details_by_hashes").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting transaction details by hashes", e)
+        }
+
+        return null
     }
 
     suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
-        return get("http://privacymine.net:11898/get_transaction_hashes_by_payment_id")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting transaction hashes by payment id", e)
+        }
+
+        return null
     }
 
     suspend fun getTransactionsStatus(): TransactionsStatus? {
-        return get("http://privacymine.net:11898/get_transactions_status")?.body()
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/get_transactions_status").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/get_transactions_status").body()
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting transaction status", e)
+        }
+
+        return null
     }
+
 }
