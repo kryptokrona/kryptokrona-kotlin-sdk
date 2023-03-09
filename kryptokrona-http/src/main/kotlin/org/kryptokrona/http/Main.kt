@@ -47,6 +47,11 @@ fun main(args: Array<String>) = runBlocking {
         println("Global Indexes for Range: ${it}")
     }
 
+    val poolChangesLite = getPoolChangesLite()
+    poolChangesLite?.let {
+        println("Pool Changes Lite: ${it}")
+    }
+
     println("Kotlin End")
 
 }

@@ -34,7 +34,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PoolChangesLite(
-    val addedTxes: List<Transaction>,
+    val addedTxs: List<Transaction>,
     val deletedTxsIds: List<String>, // Int here instead?
     val isTailBlockActual: Boolean,
     val status: String
