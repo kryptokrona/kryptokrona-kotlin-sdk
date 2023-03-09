@@ -28,41 +28,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.model
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.Blocks
-import org.kryptokrona.http.model.QueryBlocks
-import org.kryptokrona.http.model.QueryBlocksLite
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-suspend fun getBlocks(): Blocks? {
-    return get("http://privacymine.net:11898/info")?.body()
-}
-
-suspend fun getQueryBlocks(): QueryBlocks? {
-    return get("http://privacymine.net:11898/queryblocks")?.body()
-}
-
-suspend fun getQueryBlocksLite(): QueryBlocksLite? {
-    return get("http://privacymine.net:11898/queryblockslite")?.body()
-}
-
-suspend fun getQueryBlocksDetailed() {
-    println("Hello World!")
-}
-
-suspend fun getBlockDetailByHeight() {
-    println("Hello World!")
-}
-
-suspend fun getBlocksDetailsByHeights() {
-    println("Hello World!")
-}
-
-suspend fun getBlocksDetailsByHashes() {
-    println("Hello World!")
-}
-
-suspend fun getBlocksHashesByTimestamps() {
-    println("Hello World!")
-}
+@Serializable
+data class QueryBlocksLite(
+    @SerialName("current_height") val currentHeight: Int,
+    @SerialName("full_offset") val fullOffset: Int,
+    val items: List<QueryBlocksLiteItems>,
+    @SerialName("start_height") val startHeight: Int,
+    val status: String
+)
