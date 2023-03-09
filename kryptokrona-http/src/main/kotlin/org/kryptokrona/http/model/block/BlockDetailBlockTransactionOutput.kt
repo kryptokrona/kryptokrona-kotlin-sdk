@@ -28,10 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.model
+package org.kryptokrona.http.model.block
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Peers(@SerialName("gray_peers") val grayPeers: List<String>, val peers: List<String>, val status: String)
+data class BlockDetailBlockTransactionOutput(
+    val globalIndex: Int,
+    val output: BlockDetailBlockTransactionOutputOutput,
+)

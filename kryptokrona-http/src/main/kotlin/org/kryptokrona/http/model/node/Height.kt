@@ -28,9 +28,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.model
+package org.kryptokrona.http.model.node
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TransactionPrefixVoutTarget(val data: TransactionPrefixVoutTargetData, val type: String)
+data class Height(val height: Int, @SerialName("network_height") val networkHeight: Int, val status: String)

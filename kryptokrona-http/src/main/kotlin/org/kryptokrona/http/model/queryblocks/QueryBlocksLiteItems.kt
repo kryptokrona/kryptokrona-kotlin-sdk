@@ -28,13 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.model
+package org.kryptokrona.http.model.queryblocks
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.kryptokrona.http.model.transaction.TransactionPrefix
 
 @Serializable
-data class Transaction(
-    @SerialName("transactionPrefixInfo.txHash") val transactionHash: String,
-    @SerialName("transactionPrefixInfo.txPrefix") val transactionPrefix: TransactionPrefix
+data class QueryBlocksLiteItems(
+    @SerialName("blockShortInfo.block") val block: List<Int>,
+    @SerialName("blockShortInfo.blockId") val blockId: String,
+    @SerialName("blockShortInfo.txPrefixes") val transactionPrefixes: List<TransactionPrefix>
 )

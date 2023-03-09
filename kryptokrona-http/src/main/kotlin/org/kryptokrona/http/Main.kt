@@ -57,6 +57,21 @@ fun main(args: Array<String>) = runBlocking {
         println("Query Blocks: ${it}")
     }
 
+    val queryBlocksLite = getQueryBlocksLite()
+    queryBlocksLite?.let {
+        println("Query Blocks Lite: ${it}")
+    }
+
+    val blockDetailsByHeight = getBlockDetailsByHeight()
+    blockDetailsByHeight?.let {
+        println("Block Detail By Height: ${it}")
+    }
+
+    val blocksDetailsHases = getBlocksDetailsByHeights()
+    blocksDetailsHases?.let {
+        println("Block Detail By Hashes: ${it}")
+    }
+
     println("Kotlin End")
 
 }

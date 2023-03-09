@@ -32,10 +32,10 @@ package org.kryptokrona.http.common
 
 import io.ktor.client.call.*
 import io.ktor.http.*
-import org.kryptokrona.http.model.Fee
-import org.kryptokrona.http.model.Height
-import org.kryptokrona.http.model.Info
-import org.kryptokrona.http.model.Peers
+import org.kryptokrona.http.model.node.Fee
+import org.kryptokrona.http.model.node.Height
+import org.kryptokrona.http.model.node.Info
+import org.kryptokrona.http.model.node.Peers
 
 
 /**

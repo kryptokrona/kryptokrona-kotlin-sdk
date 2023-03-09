@@ -28,27 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.model
+package org.kryptokrona.http.model.transaction
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailByHeightBlockTransaction(
-    val blockHash: String,
-    val blockIndex: Int,
-    val extra: BlockDetailByHeightBlockTransactionExtra,
-    val fee: Int,
-    val hash: String,
-    val inBlockchain: Boolean,
-    val inputs: List<BlockDetailByHeightBlockTransactionInput>,
-    val mixin: Int,
-    val outputs: List<BlockDetailByHeightBlockTransactionOutput>,
-    val paymentId: String,
-    val signatures: List<String>,
-    val signatureSize: Int,
-    val size: Int,
-    val timestamp: Int,
-    val totalInputsAmount: Int,
-    val totalOutputsAmount: Int,
-    val unlockTime: Int
+data class Transaction(
+    @SerialName("transactionPrefixInfo.txHash") val transactionHash: String,
+    @SerialName("transactionPrefixInfo.txPrefix") val transactionPrefix: TransactionPrefix
 )
