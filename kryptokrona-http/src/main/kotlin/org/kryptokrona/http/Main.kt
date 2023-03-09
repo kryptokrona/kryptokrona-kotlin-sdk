@@ -32,6 +32,21 @@ fun main(args: Array<String>) = runBlocking {
         println("Peers: ${it}")
     }
 
+    val randomOutputs = getRandomOuts()
+    randomOutputs?.let {
+        println("Random Outputs: ${it}")
+    }
+
+    val oIndexes = getOIndexes()
+    oIndexes?.let {
+        println("O Indexes: ${it}")
+    }
+
+    val globalIndexesForRange = getGlobalIndexesForRange()
+    globalIndexesForRange?.let {
+        println("Global Indexes for Range: ${it}")
+    }
+
     println("Kotlin End")
 
 }

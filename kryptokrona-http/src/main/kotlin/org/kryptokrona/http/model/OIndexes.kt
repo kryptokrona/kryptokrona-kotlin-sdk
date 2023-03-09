@@ -28,16 +28,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.model
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.GlobalIndexesForRange
-import org.kryptokrona.http.model.OIndexes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-suspend fun getOIndexes(): OIndexes? {
-    return get("http://privacymine.net:11898/get_o_indexes")?.body()
-}
-
-suspend fun getGlobalIndexesForRange(): GlobalIndexesForRange? {
-    return get("http://privacymine.net:11898/get_global_indexes_for_range")?.body()
-}
+@Serializable
+data class OIndexes(@SerialName("o_indexes") val oIndexes: List<Long>, val status: String)
