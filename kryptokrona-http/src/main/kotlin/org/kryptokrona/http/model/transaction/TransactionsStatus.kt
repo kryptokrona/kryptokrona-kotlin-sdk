@@ -28,30 +28,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.model.transaction
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.transaction.TransactionDetailsHashes
-import org.kryptokrona.http.model.transaction.TransactionHashesPaymentId
-import org.kryptokrona.http.model.transaction.Transactions
-import org.kryptokrona.http.model.transaction.TransactionsStatus
+import kotlinx.serialization.Serializable
 
-suspend fun getTransactions(): Transactions? {
-    return get("http://privacymine.net:11898/gettransactions")?.body()
-}
-
-suspend fun sendRawTransaction() {
-    println("Hello World!")
-}
-
-suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
-    return get("http://privacymine.net:11898/get_transaction_details_by_hashes")?.body()
-}
-
-suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
-    return get("http://privacymine.net:11898/get_transaction_hashes_by_payment_id")?.body()
-}
-
-suspend fun getTransactionsStatus(): TransactionsStatus? {
-    return get("http://privacymine.net:11898/get_transaction_hashes_by_payment_id")?.body()
-}
+@Serializable
+data class TransactionsStatus(
+    val status: String,
+    val transactionsInBlock: List<String>,
+    val transactionsInPool: List<String>,
+    val transactionsUnknown: List<String>
+)

@@ -92,6 +92,21 @@ fun main(args: Array<String>) = runBlocking {
         println("Transactions: ${it}")
     }
 
+    val transactionDetailsHashes = getTransactionDetailsByHashes()
+    transactionDetailsHashes?.let {
+        println("Transactions Details By Hashes: ${it}")
+    }
+
+    val transactionHashesPaymentId = getTransactionHashesByPaymentId()
+    transactionHashesPaymentId?.let {
+        println("Transaction Hashes By Payment ID: ${it}")
+    }
+
+    val transactionsStatus = getTransactionsStatus()
+    transactionsStatus?.let {
+        println("Transaction Status: ${it}")
+    }
+
     println("Kotlin End")
 
 }
