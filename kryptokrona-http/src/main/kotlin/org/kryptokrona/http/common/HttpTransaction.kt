@@ -53,5 +53,5 @@ suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
 }
 
 suspend fun getTransactionsStatus(): TransactionsStatus? {
-    return get("http://privacymine.net:11898/get_transaction_hashes_by_payment_id")?.body()
+    return get("http://privacymine.net:11898/get_transactions_status")?.body()
 }
