@@ -40,6 +40,11 @@ class OutputsClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("OutputsClient")
 
+    /**
+     * Get random outputs
+     *
+     * @return RandomOutputs
+     */
     suspend fun getRandomOuts(): RandomOutputs? {
         try {
             node.ssl.let {

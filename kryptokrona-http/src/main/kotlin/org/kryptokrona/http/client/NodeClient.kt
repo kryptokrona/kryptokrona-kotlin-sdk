@@ -46,7 +46,7 @@ class NodeClient(private val node: Node) {
     private val logger = LoggerFactory.getLogger("NodeClient")
 
     /**
-     * Check if the node is running
+     * Check if node is running
      *
      * @return Boolean
      */
@@ -58,8 +58,10 @@ class NodeClient(private val node: Node) {
         return false
     }
 
-    /*
-     * Get node information
+    /**
+     * Get node peers
+     *
+     * @return Peers
      */
     suspend fun getNodeInfo(): Info? {
         try {
@@ -77,8 +79,10 @@ class NodeClient(private val node: Node) {
         return null
     }
 
-    /*
+    /**
      * Get node height
+     *
+     * @return Height
      */
     suspend fun getNodeHeight(): Height? {
         try {
@@ -96,8 +100,10 @@ class NodeClient(private val node: Node) {
         return null
     }
 
-    /*
+    /**
      * Get node peers
+     *
+     * @return Peers
      */
     suspend fun getNodePeers(): Peers? {
         try {
@@ -115,8 +121,10 @@ class NodeClient(private val node: Node) {
         return null
     }
 
-    /*
+    /**
      * Get node fee
+     *
+     * @return Fee
      */
     suspend fun getNodeFee(): Fee? {
         try {

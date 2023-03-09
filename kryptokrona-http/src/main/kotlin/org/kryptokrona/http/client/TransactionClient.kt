@@ -44,6 +44,11 @@ class TransactionClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("TransactionClient")
 
+    /**
+     * Get transactions
+     *
+     * @return Transactions
+     */
     suspend fun getTransactions(): Transactions? {
         try {
             node.ssl.let {
@@ -60,10 +65,11 @@ class TransactionClient(private val node: Node) {
         return null
     }
 
-    /*suspend fun sendRawTransaction() {
-        println("Hello World!")
-    }*/
-
+    /**
+     * Get transaction details by hashes
+     *
+     * @return TransactionDetailsHashes
+     */
     suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
         try {
             node.ssl.let {
@@ -80,6 +86,11 @@ class TransactionClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get transaction hashes by payment id
+     *
+     * @return TransactionHashesPaymentId
+     */
     suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
         try {
             node.ssl.let {
@@ -96,6 +107,11 @@ class TransactionClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get transactions status
+     *
+     * @return TransactionsStatus
+     */
     suspend fun getTransactionsStatus(): TransactionsStatus? {
         try {
             node.ssl.let {

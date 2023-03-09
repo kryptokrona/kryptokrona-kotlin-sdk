@@ -40,6 +40,11 @@ class PoolChangesClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("PoolChangesClient")
 
+    /**
+     * Get pool changes lite
+     *
+     * @return PoolChangesLite
+     */
     suspend fun getPoolChangesLite(): PoolChangesLite? {
         try {
             node.ssl.let {

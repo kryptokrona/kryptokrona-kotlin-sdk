@@ -41,6 +41,11 @@ class IndexesClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("IndexesClient")
 
+    /**
+     * Get O Indexes
+     *
+     * @return OIndexes
+     */
     suspend fun getOIndexes(): OIndexes? {
         try {
             node.ssl.let {
@@ -57,6 +62,11 @@ class IndexesClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get global indexes for range
+     *
+     * @return GlobalIndexesForRange
+     */
     suspend fun getGlobalIndexesForRange(): GlobalIndexesForRange? {
         try {
             node.ssl.let {

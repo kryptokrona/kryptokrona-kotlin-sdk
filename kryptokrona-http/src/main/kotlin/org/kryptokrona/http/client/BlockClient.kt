@@ -42,6 +42,11 @@ class BlockClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("BlockClient")
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getBlocks(): Blocks? {
         try {
             node.ssl.let {
@@ -58,6 +63,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getQueryBlocks(): QueryBlocks? {
         try {
             node.ssl.let {
@@ -74,6 +84,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getQueryBlocksLite(): QueryBlocksLite? {
         try {
             node.ssl.let {
@@ -90,6 +105,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getBlockDetailsByHeight(): BlockDetail? {
         try {
             node.ssl.let {
@@ -106,6 +126,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
         try {
             node.ssl.let {
@@ -122,6 +147,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block details by hash
+     *
+     * @return BlockDetailsHash
+     */
     suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
         try {
             node.ssl.let {
@@ -138,6 +168,11 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get blocks hashes by timestamps
+     *
+     * @return BlocksHashesTimestamp
+     */
     suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
         try {
             node.ssl.let {
