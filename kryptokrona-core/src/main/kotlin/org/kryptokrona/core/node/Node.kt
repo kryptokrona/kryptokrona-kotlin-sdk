@@ -28,11 +28,18 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.core.node
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.RandomOutputs
-
-suspend fun getRandomOuts(): RandomOutputs? {
-    return get("http://privacymine.net:11898/getrandom_outs")?.body()
-}
+/**
+ * Node is a data class that holds information about a node.
+ * The properties are mutable so that they can be changed during runtime.
+ *
+ * @param hostName The host name of the node.
+ * @param port The port of the node.
+ * @param ssl Whether the node is using SSL.
+ */
+data class Node(
+    var hostName: String,
+    var port: Int,
+    var ssl: Boolean
+)

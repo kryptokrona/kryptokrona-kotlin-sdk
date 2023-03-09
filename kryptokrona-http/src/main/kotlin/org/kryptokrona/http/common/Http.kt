@@ -30,9 +30,47 @@
 
 package org.kryptokrona.http.common
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.PoolChangesLite
+import io.ktor.client.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import org.slf4j.LoggerFactory
 
-suspend fun getPoolChangesLite(): PoolChangesLite? {
-    return get("http://privacymine.net:11898/get_pool_changes_lite")?.body()
+
+private val log = LoggerFactory.getLogger("Http")
+private val client = HttpClient {
+    install(ContentNegotiation) {
+        json()
+    }
+}
+
+
+/**
+ * Make a GET request
+ *
+ * @param url: String
+ * @return HttpResponse
+ */
+suspend fun get(url: String): HttpResponse {
+    return client.get(url) {
+        headers {
+            append(HttpHeaders.Accept, "application/json")
+        }
+    }
+}
+
+/**
+ * Make a POST request
+ *
+ * @param url: String
+ * @param body: Any
+ * @return HttpResponse
+ */
+suspend fun post(url: String, body: Any): HttpResponse {
+    return client.post(url) {
+        contentType(ContentType.Application.Json)
+        setBody(body)
+    }
 }

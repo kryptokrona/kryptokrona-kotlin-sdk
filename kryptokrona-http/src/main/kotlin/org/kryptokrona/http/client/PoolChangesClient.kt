@@ -28,16 +28,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
-import org.kryptokrona.http.model.GlobalIndexesForRange
-import org.kryptokrona.http.model.OIndexes
+import org.kryptokrona.http.common.get
+import org.kryptokrona.http.model.PoolChangesLite
 
-suspend fun getOIndexes(): OIndexes? {
-    return get("http://privacymine.net:11898/get_o_indexes")?.body()
-}
-
-suspend fun getGlobalIndexesForRange(): GlobalIndexesForRange? {
-    return get("http://privacymine.net:11898/get_global_indexes_for_range")?.body()
+class PoolChangesClient {
+    suspend fun getPoolChangesLite(): PoolChangesLite? {
+        return get("http://privacymine.net:11898/get_pool_changes_lite")?.body()
+    }
 }

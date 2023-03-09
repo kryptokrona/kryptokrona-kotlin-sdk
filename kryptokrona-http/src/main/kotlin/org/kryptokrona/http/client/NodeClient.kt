@@ -28,61 +28,58 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.client
 
-import io.ktor.client.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import io.ktor.client.call.*
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import org.slf4j.LoggerFactory
+import org.kryptokrona.http.common.get
+import org.kryptokrona.http.model.node.Fee
+import org.kryptokrona.http.model.node.Height
+import org.kryptokrona.http.model.node.Info
+import org.kryptokrona.http.model.node.Peers
 
 
-private val log = LoggerFactory.getLogger("HttpCommon")
-private val client = HttpClient {
-    install(ContentNegotiation) {
-        json()
-    }
-}
+class NodeClient {
 
-
-/**
- * Make a GET request
- *
- * @param url: String
- * @return HttpResponse?
- */
-suspend fun get(url: String): HttpResponse? {
-    try {
-        return client.get(url) {
-            headers {
-                append(HttpHeaders.Accept, "application/json")
-            }
+    /**
+     * Check if the node is running
+     *
+     * @return Boolean
+     */
+    suspend fun isNodeRunning(): Boolean {
+        get("http://privacymine.net:11898/info")?.let {
+            return it.status.isSuccess()
         }
-    } catch (e: Exception) {
-        log.error("Error: $e")
+
+        return false
     }
 
-    return null
-}
-
-/**
- * Make a POST request
- *
- * @param url: String
- * @param body: Any
- * @return HttpResponse?
- */
-suspend fun post(url: String, body: Any): HttpResponse? {
-    try {
-        return client.post(url) {
-            contentType(ContentType.Application.Json)
-            setBody(body)
-        }
-    } catch (e: Exception) {
-        log.error("Error: $e")
+    /*
+     * Get node info
+     */
+    suspend fun getNodeInfo(): Info? {
+        return get("http://privacymine.net:11898/info")?.body()
     }
 
-    return null
+    /*
+     * Get node height
+     */
+    suspend fun getNodeHeight(): Height? {
+        return get("http://privacymine.net:11898/height")?.body()
+    }
+
+    /*
+     * Get node peers
+     */
+    suspend fun getNodePeers(): Peers? {
+        return get("http://privacymine.net:11898/peers")?.body()
+    }
+
+    /*
+     * Get node fee
+     */
+    suspend fun getNodeFee(): Fee? {
+        return get("http://privacymine.net:11898/fee")?.body()
+    }
+
 }

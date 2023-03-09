@@ -28,37 +28,35 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.client
 
 import io.ktor.client.call.*
-import org.kryptokrona.http.model.block.*
-import org.kryptokrona.http.model.queryblocks.QueryBlocks
-import org.kryptokrona.http.model.queryblocks.QueryBlocksLite
+import org.kryptokrona.http.common.get
+import org.kryptokrona.http.model.transaction.TransactionDetailsHashes
+import org.kryptokrona.http.model.transaction.TransactionHashesPaymentId
+import org.kryptokrona.http.model.transaction.Transactions
+import org.kryptokrona.http.model.transaction.TransactionsStatus
 
-suspend fun getBlocks(): Blocks? {
-    return get("http://privacymine.net:11898/getblocks")?.body()
-}
 
-suspend fun getQueryBlocks(): QueryBlocks? {
-    return get("http://privacymine.net:11898/queryblocks")?.body()
-}
+class TransactionClient {
 
-suspend fun getQueryBlocksLite(): QueryBlocksLite? {
-    return get("http://privacymine.net:11898/queryblockslite")?.body()
-}
+    suspend fun getTransactions(): Transactions? {
+        return get("http://privacymine.net:11898/gettransactions")?.body()
+    }
 
-suspend fun getBlockDetailsByHeight(): BlockDetail? {
-    return get("http://privacymine.net:11898/get_block_details_by_height")?.body()
-}
+    suspend fun sendRawTransaction() {
+        println("Hello World!")
+    }
 
-suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
-    return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
-}
+    suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
+        return get("http://privacymine.net:11898/get_transaction_details_by_hashes")?.body()
+    }
 
-suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
-    return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
-}
+    suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
+        return get("http://privacymine.net:11898/get_transaction_hashes_by_payment_id")?.body()
+    }
 
-suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
-    return get("http://privacymine.net:11898/get_blocks_hashes_by_timestamps")?.body()
+    suspend fun getTransactionsStatus(): TransactionsStatus? {
+        return get("http://privacymine.net:11898/get_transactions_status")?.body()
+    }
 }
