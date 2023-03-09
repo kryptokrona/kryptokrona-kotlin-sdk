@@ -31,6 +31,7 @@
 package org.kryptokrona.http.common
 
 import io.ktor.client.call.*
+import org.kryptokrona.http.model.BlockDetailByHeight
 import org.kryptokrona.http.model.Blocks
 import org.kryptokrona.http.model.QueryBlocks
 import org.kryptokrona.http.model.QueryBlocksLite
@@ -47,8 +48,8 @@ suspend fun getQueryBlocksLite(): QueryBlocksLite? {
     return get("http://privacymine.net:11898/queryblockslite")?.body()
 }
 
-suspend fun getBlockDetailsByHeight() {
-    println("Hello World!")
+suspend fun getBlockDetailsByHeight(): BlockDetailByHeight? {
+    return get("http://privacymine.net:11898/get_block_details_by_height")?.body()
 }
 
 suspend fun getBlocksDetailsByHeights() {

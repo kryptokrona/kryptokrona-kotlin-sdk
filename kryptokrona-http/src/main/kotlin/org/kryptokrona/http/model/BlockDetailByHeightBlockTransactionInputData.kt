@@ -33,22 +33,7 @@ package org.kryptokrona.http.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailByHeightBlock(
-    val alreadyGeneratedCoins: Int,
-    val alreadyGeneratedTransactions: Int,
-    val baseReward: Int,
-    val blockSize: Int,
-    val difficulty: Int,
-    val hash: String,
-    val index: Int,
-    val majorVersion: Int,
-    val minorVersion: Int,
-    val nonce: Int,
-    val prevBlockHash: String,
-    val reward: Int,
-    val sizeMedian: Int,
-    val timestamp: Int,
-    val totalFeeAmount: Int,
-    val transactions: List<BlockDetailByHeightBlockTransaction>,
-    val transactionsCumulativeSize: Int
+data class BlockDetailByHeightBlockTransactionInputData(
+    val amount: Int,
+    val input: BlockDetailByHeightBlockTransactionInputDataInput
 )
