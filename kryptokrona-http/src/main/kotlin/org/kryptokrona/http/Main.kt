@@ -87,6 +87,11 @@ fun main(args: Array<String>) = runBlocking {
         println("Blocks Hashes By Timestamp: ${it}")
     }
 
+    val transactions = getTransactions()
+    transactions?.let {
+        println("Transactions: ${it}")
+    }
+
     println("Kotlin End")
 
 }
