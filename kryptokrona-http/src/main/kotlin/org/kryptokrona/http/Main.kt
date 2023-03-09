@@ -52,6 +52,11 @@ fun main(args: Array<String>) = runBlocking {
         println("Pool Changes Lite: ${it}")
     }
 
+    val blocks = getBlocks()
+    blocks?.let {
+        println("Blocks: ${it}")
+    }
+
     val queryBlocks = getQueryBlocks()
     queryBlocks?.let {
         println("Query Blocks: ${it}")
@@ -75,6 +80,11 @@ fun main(args: Array<String>) = runBlocking {
     val blocksDetailsHashes = getBlocksDetailsByHashes()
     blocksDetailsHashes?.let {
         println("Block Detail By Hashes: ${it}")
+    }
+
+    val blocksHashesByTimestamp = getBlocksHashesByTimestamps()
+    blocksHashesByTimestamp?.let {
+        println("Blocks Hashes By Timestamp: ${it}")
     }
 
     println("Kotlin End")

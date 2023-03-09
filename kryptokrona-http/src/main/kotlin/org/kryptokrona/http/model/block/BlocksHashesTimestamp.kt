@@ -28,37 +28,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.http.common
+package org.kryptokrona.http.model.block
 
-import io.ktor.client.call.*
-import org.kryptokrona.http.model.block.*
-import org.kryptokrona.http.model.queryblocks.QueryBlocks
-import org.kryptokrona.http.model.queryblocks.QueryBlocksLite
+import kotlinx.serialization.Serializable
 
-suspend fun getBlocks(): Blocks? {
-    return get("http://privacymine.net:11898/getblocks")?.body()
-}
-
-suspend fun getQueryBlocks(): QueryBlocks? {
-    return get("http://privacymine.net:11898/queryblocks")?.body()
-}
-
-suspend fun getQueryBlocksLite(): QueryBlocksLite? {
-    return get("http://privacymine.net:11898/queryblockslite")?.body()
-}
-
-suspend fun getBlockDetailsByHeight(): BlockDetail? {
-    return get("http://privacymine.net:11898/get_block_details_by_height")?.body()
-}
-
-suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
-    return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
-}
-
-suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
-    return get("http://privacymine.net:11898/get_blocks_details_by_heights")?.body()
-}
-
-suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
-    return get("http://privacymine.net:11898/get_blocks_hashes_by_timestamps")?.body()
-}
+@Serializable
+data class BlocksHashesTimestamp(val blockHashes: List<String>, val status: String) // the list should probably have its own data class
