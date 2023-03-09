@@ -30,7 +30,12 @@
 
 package org.kryptokrona.http.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class QueryBlocksItems()
+data class QueryBlocksItems(
+    @SerialName("blockFullInfo.block") val block: List<Int>,
+    @SerialName("blockFullInfo.block_id") val blockId: String,
+    @SerialName("txs") val transactions: List<String>
+)

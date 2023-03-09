@@ -52,6 +52,11 @@ fun main(args: Array<String>) = runBlocking {
         println("Pool Changes Lite: ${it}")
     }
 
+    val queryBlocks = getQueryBlocks()
+    queryBlocks?.let {
+        println("Query Blocks: ${it}")
+    }
+g
     println("Kotlin End")
 
 }

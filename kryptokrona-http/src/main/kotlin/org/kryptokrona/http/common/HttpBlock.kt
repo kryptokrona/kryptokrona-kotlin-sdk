@@ -32,20 +32,21 @@ package org.kryptokrona.http.common
 
 import io.ktor.client.call.*
 import org.kryptokrona.http.model.Blocks
+import org.kryptokrona.http.model.QueryBlocks
 
 suspend fun getBlocks(): Blocks? {
     return get("http://privacymine.net:11898/info")?.body()
 }
 
-suspend fun queryBlocks() {
+suspend fun getQueryBlocks(): QueryBlocks? {
+    return get("http://privacymine.net:11898/queryblocks")?.body()
+}
+
+suspend fun getQueryBlocksLite() {
     println("Hello World!")
 }
 
-suspend fun queryBlocksLite() {
-    println("Hello World!")
-}
-
-suspend fun queryBlocksDetailed() {
+suspend fun getQueryBlocksDetailed() {
     println("Hello World!")
 }
 
