@@ -30,12 +30,7 @@
 
 package org.kryptokrona.http.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Value(
-    val amount: Int,
-    @SerialName("k_image") val keyImage: String,
-    @SerialName("key_offsets") val keyOffsets: List<Int>
-)
+data class TransactionPrefixVout(val amount: Int, val target: TransactionPrefixVoutTarget)

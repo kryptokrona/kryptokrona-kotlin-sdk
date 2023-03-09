@@ -33,4 +33,4 @@ package org.kryptokrona.http.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VoutTarget(val data: VoutTargetData, val type: String)
+data class TransactionPrefixVin(val type: String, val value: TransactionPrefixVinValue)

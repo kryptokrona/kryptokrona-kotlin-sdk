@@ -35,6 +35,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Transaction(
-    @SerialName("transactionPrefixInfo.txHash") val txHash: String,
-    @SerialName("transactionPrefixInfo.txPrefix") val txPrefix: TxPrefix
+    @SerialName("transactionPrefixInfo.txHash") val transactionHash: String,
+    @SerialName("transactionPrefixInfo.txPrefix") val transactionPrefix: TransactionPrefix
 )

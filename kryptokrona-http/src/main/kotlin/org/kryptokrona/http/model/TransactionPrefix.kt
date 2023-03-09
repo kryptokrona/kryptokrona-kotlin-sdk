@@ -30,7 +30,14 @@
 
 package org.kryptokrona.http.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VoutTargetData(val key: String)
+data class TransactionPrefix(
+    val extra: String,
+    @SerialName("unlock_time") val unlockTime: Int,
+    val version: Int,
+    val vin: List<TransactionPrefixVin>,
+    val vout: List<TransactionPrefixVout>
+)
