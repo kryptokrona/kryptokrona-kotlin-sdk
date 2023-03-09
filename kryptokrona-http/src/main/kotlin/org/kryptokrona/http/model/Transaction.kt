@@ -30,7 +30,11 @@
 
 package org.kryptokrona.http.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Transaction(val txHash: String, val txPrefix: TxPrefix)
+data class Transaction(
+    @SerialName("transactionPrefixInfo.txHash") val txHash: String,
+    @SerialName("transactionPrefixInfo.txPrefix") val txPrefix: TxPrefix
+)

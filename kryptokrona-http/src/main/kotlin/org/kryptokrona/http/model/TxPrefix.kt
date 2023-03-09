@@ -30,12 +30,13 @@
 
 package org.kryptokrona.http.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class TxPrefix(
     val extra: String,
-    val unlockTime: Int,
+    @SerialName("unlock_time") val unlockTime: Int,
     val version: Int,
     val vin: List<Vin>,
     val vout: List<Vout>

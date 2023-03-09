@@ -33,4 +33,4 @@ package org.kryptokrona.http.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Vin()
+data class Vin(val type: String, val value: Value)
