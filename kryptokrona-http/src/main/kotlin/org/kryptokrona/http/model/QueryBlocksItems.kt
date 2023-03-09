@@ -30,14 +30,7 @@
 
 package org.kryptokrona.http.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class QueryBlocks(
-    @SerialName("current_height") val currentHeight: Int,
-    @SerialName("full_offset") val fullOffset: Int,
-    val items: List<QueryBlocksItems>,
-    @SerialName("start_height") val startHeight: Int,
-    val status: String
-)
+data class QueryBlocksItems()
