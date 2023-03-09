@@ -1,7 +1,12 @@
-# ![Kryptokrona SDK](resources/logo_github.png)
+# Kryptokrona SDK 
 
-[![Kryptokrona SDK Main Pipeline](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml/badge.svg)](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml) 
-[![Release](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)
+[![alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
+[![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-sdk/main-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-sdk/actions/workflows/main-ci.yml) 
+[![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![release](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)](https://img.shields.io/github/release-date/kryptokrona/kryptokrona-sdk)
+[![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![slack](https://badgen.net/badge/icon/slack?icon=slack&label)](https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA)
+[![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
@@ -27,8 +32,9 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - Docs: https://github.com/kryptokrona/kryptokrona-sdk/wiki
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-sdk
-- Hugin: Kryptokrona group on Hugin Messenger `33909fb89783fb15b5c2df50ff7107c112c3b232681f77814c024c909c07e932`
-- It is HIGHLY recommended to join our group on Hugin Messenger if you want to contribute to stay up to date on what is happening on the project.
+- Slack: https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA
+- Discord: https://discord.gg/VTgsTGS9b7
+- Twitter: https://twitter.com/mjovanc
 
 ## Releases
 
