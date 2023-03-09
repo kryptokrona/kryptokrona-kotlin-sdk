@@ -33,10 +33,6 @@ package org.kryptokrona.http.common
 import io.ktor.client.call.*
 import org.kryptokrona.http.model.PoolChangesLite
 
-suspend fun getPoolChanges() {
-    println("Hello World!")
-}
-
 suspend fun getPoolChangesLite(): PoolChangesLite? {
     return get("http://privacymine.net:11898/get_pool_changes_lite")?.body()
 }
