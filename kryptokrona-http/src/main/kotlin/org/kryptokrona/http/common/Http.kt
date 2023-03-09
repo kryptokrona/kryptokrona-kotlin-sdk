@@ -36,10 +36,8 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import org.slf4j.LoggerFactory
 
 
-private val log = LoggerFactory.getLogger("Http")
 private val client = HttpClient {
     install(ContentNegotiation) {
         json()
