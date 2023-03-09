@@ -37,3 +37,11 @@ suspend fun getTransactions() {
 suspend fun sendRawTransaction() {
     println("Hello World!")
 }
+
+suspend fun getTransactionDetailsByHashes() {
+    println("Hello World!")
+}
+
+suspend fun getTransactionHashesByPaymentId() {
+    println("Hello World!")
+}

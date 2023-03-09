@@ -45,3 +45,19 @@ suspend fun queryBlocksLite() {
 suspend fun queryBlocksDetailed() {
     println("Hello World!")
 }
+
+suspend fun getBlockDetailByHeight() {
+    println("Hello World!")
+}
+
+suspend fun getBlocksDetailsByHeights() {
+    println("Hello World!")
+}
+
+suspend fun getBlocksDetailsByHashes() {
+    println("Hello World!")
+}
+
+suspend fun getBlocksHashesByTimestamps() {
+    println("Hello World!")
+}
