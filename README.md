@@ -29,7 +29,7 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 ## Development Resources
 
 - Web: https://kryptokrona.org
-- Docs: https://github.com/kryptokrona/kryptokrona-sdk/wiki
+- Docs: https://docs.kryptokrona.org/developer/kryptokrona-sdk
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-sdk
 - Slack: https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA
@@ -47,7 +47,7 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 
 Are you having trouble with Kryptokrona SDK? We want to help!
 
-- Read through all documentation on our Wiki: https://github.com/kryptokrona/kryptokrona-sdk/wiki
+- Read through all documentation on our Wiki: https://docs.kryptokrona.org/developer/kryptokrona-sdk
 
 - If you are upgrading, read the release notes for upgrade instructions and "new and noteworthy" features.
 
@@ -84,7 +84,7 @@ If you would like to contribute to this project there is two ways:
 
 ### Pull Request
 
-Read through the developer documentation at: [https://github.com/kryptokrona/kryptokrona-sdk/wiki](https://github.com/kryptokrona/kryptokrona-sdk/wiki).
+Read through the developer documentation at: [https://docs.kryptokrona.org/developer/kryptokrona-sdk](https://docs.kryptokrona.org/developer/kryptokrona-sdk).
 
 We recommend using IntelliJ to work on this project.
 
