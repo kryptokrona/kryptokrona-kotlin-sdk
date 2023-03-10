@@ -1,7 +1,7 @@
 package org.kryptokrona.http.client
 
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.core.node.Node
 
