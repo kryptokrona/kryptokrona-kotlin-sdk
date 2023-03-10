@@ -6,6 +6,9 @@ plugins {
     signing
 }
 
+group = "org.kryptokrona.sdk"
+version = "0.1.0-SNAPSHOT"
+
 repositories {
     mavenCentral()
 }
