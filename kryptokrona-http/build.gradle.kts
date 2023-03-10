@@ -9,7 +9,7 @@ plugins {
     application
 }
 
-group = "org.kryptokrona"
+group = "org.kryptokrona.sdk"
 version = "0.1.0"
 
 repositories {
@@ -39,8 +39,4 @@ tasks.test {
 
 kotlin {
     jvmToolchain(8)
-}
-
-application {
-    mainClass.set("MainKt")
 }
