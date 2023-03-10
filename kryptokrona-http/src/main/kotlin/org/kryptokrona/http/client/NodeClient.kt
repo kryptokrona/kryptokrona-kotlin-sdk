@@ -51,8 +51,20 @@ class NodeClient(private val node: Node) {
      * @return Boolean
      */
     suspend fun isNodeRunning(): Boolean {
-        get("http://privacymine.net:11898/info")?.let {
-            return it.status.isSuccess()
+        try {
+            node.ssl.let { it ->
+                if (it) {
+                    get("https://${node.hostName}:${node.port}/info").let {
+                        return it.status.isSuccess()
+                    }
+                } else {
+                    get("http://${node.hostName}:${node.port}/info").let {
+                        return it.status.isSuccess()
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Error getting node information", e)
         }
 
         return false
