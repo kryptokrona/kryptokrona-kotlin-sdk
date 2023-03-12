@@ -9,7 +9,7 @@ class BlockClientTest {
 
     private val node = Node("privacymine.net", 11898, false)
 
-    private val client = org.kryptokrona.sdk.http.client.BlockClient(node)
+    private val client = BlockClient(node)
 
     @Test
     fun `can get blocks`() = runTest {
