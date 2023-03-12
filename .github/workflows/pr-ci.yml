@@ -1,4 +1,4 @@
-name: Kryptokrona SDK Pull Request Pipeline
+name: Kryptokrona Kotlin SDK Pull Request Pipeline
 
 on: [ pull_request ]
 

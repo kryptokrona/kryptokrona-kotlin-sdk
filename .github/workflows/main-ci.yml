@@ -1,4 +1,4 @@
-name: Kryptokrona SDK Main Pipeline
+name: Kryptokrona Kotlin SDK Main Pipeline
 
 on:
   push:

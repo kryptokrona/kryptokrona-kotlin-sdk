@@ -42,7 +42,7 @@ publishing {
                 licenses {
                     license {
                         name.set("The 3-Clause BSD License")
-                        url.set("https://github.com/kryptokrona/kryptokrona-sdk/blob/master/LICENSE")
+                        url.set("https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/LICENSE")
                     }
                 }
                 developers {
@@ -53,9 +53,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:git@github.com:kryptokrona/kryptokrona-sdk.git")
-                    developerConnection.set("scm:git@github.com:kryptokrona/kryptokrona-sdk.git")
-                    url.set("https://github.com/kryptokrona/kryptokrona-sdk")
+                    connection.set("scm:git:git@github.com:kryptokrona/kryptokrona-kotlin-sdk.git")
+                    developerConnection.set("scm:git@github.com:kryptokrona/kryptokrona-kotlin-sdk.git")
+                    url.set("https://github.com/kryptokrona/kryptokrona-kotlin-sdk")
                 }
             }
         }
