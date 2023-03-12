@@ -14,7 +14,7 @@ class PoolChangesClientTest {
     @Test
     fun `can get pool changes lite` () = runTest {
         val data = client.getPoolChangesLite()
-        // assertNotNull(data)
+        assertNotNull(data)
     }
 
 }
