@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The current supported version (which is not released as of writing) is v0.1.0.
+The current supported version is v0.1.0 however it's a pre-release (alpha) and things might not be stable.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -10,4 +10,5 @@ The current supported version (which is not released as of writing) is v0.1.0.
 
 ## Reporting a Vulnerability
 
-If you find any vulnerability, please report them as an issue here or on [Kryptokrona Discord](https://discord.gg/VTgsTGS9b7) or Hugin Messenger in the group "Hugin Development". Join the group by using this group key: `4820de8e26d21981afe6de2ff7b62fa6aa01126482ca0faeff151886c73619e5`.
+If you find any vulnerability, please report them as an issue here or on [Kryptokrona Discord](https://discord.gg/VTgsTGS9b7) or Hugin Messenger in the group "Kryptokrona". 
+Join the group by using this group key: `33909fb89783fb15b5c2df50ff7107c112c3b232681f77814c024c909c07e932` or by pressing "join" on the dashboard.
