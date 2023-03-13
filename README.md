@@ -3,7 +3,7 @@
 [![alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
 [![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-kotlin-sdk/main-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions/workflows/main-ci.yml) 
 [![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![release](https://img.shields.io/github/v/tag/kryptokrona/kryptokrona-kotlin-sdk?label=release)](https://img.shields.io/github/v/tag/kryptokrona/kryptokrona-kotlin-sdk?label=release)
+[![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![slack](https://badgen.net/badge/icon/slack?icon=slack&label)](https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA)
 [![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)

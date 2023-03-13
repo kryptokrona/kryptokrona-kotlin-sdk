@@ -11,6 +11,11 @@ plugins {
 
 version = "0.1.0"
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 repositories {
     mavenCentral()
 }
@@ -74,6 +79,8 @@ publishing {
             else "/service/local/staging/deploy/maven2/"
             url = uri(host.plus(path))
             println("> publish.url: $url")
+            println("> publish.path: $path")
+            println("> publish.version: $version")
 
             authentication {
                 create<BasicAuthentication>("basic")
