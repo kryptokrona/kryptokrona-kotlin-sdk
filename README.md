@@ -18,6 +18,7 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - [Getting Help](#getting-help)
 - [Reporting Issues](#reporting-issues)
 - [Guides](#guides)
+- [Usages](#usages)
 - [Contribute](#contribute)
   - [Pull Request](#pull-request)
   - [Donate](#donate)
@@ -67,6 +68,14 @@ Kryptokrona SDK uses GitHub’s integrated issue tracking system to record bugs 
 If you have made a guide of how to use the Kryptokrona SDK feel free to send a PR and add your link to a list below.
 
 Official guide is coming soon.
+
+## Usages
+
+Our Kotlin SDK is useful! Projects using Kryptokrona Kotlin SDK:
+
+- [Kryptokrona API](https://github.com/kryptokrona/kryptokrona-api)
+
+If you are using Kryptokrona Kotlin SDK, please fork and make a pull request into our repo with your added link.
 
 ## Contribute
 
