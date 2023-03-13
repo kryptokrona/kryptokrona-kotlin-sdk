@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Config</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../index.html">
+<span>kryptokrona-kotlin-sdk</span>            </a>    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kryptokrona-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kryptokrona-core::org.kryptokrona.sdk.core.config/Config///PointingToDeclaration//-308303682">
+  <div class="breadcrumbs"><a href="../../index.html">kryptokrona-core</a><span class="delimiter">/</span><a href="../index.html">org.kryptokrona.sdk.core.config</a><span class="delimiter">/</span><span class="current">Config</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Config</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Config</a></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-827298277%2FProperties%2F-308303682" anchor-label="ADDRESS_PREFIX" id="-827298277%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-d-d-r-e-s-s_-p-r-e-f-i-x.html"><span><span>ADDRESS_PREFIX</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-827298277%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-a-d-d-r-e-s-s_-p-r-e-f-i-x.html">ADDRESS_PREFIX</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">2239254</span></div><div class="brief "><p class="paragraph">The address prefix Kryptokrona uses - you can find this in CryptoNoteConfig.h.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1699436811%2FProperties%2F-308303682" anchor-label="BLOCK_STORE_MEMORY_LIMIT" id="1699436811%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-o-c-k_-s-t-o-r-e_-m-e-m-o-r-y_-l-i-m-i-t.html"><span><span>BLOCK_STORE_MEMORY_LIMIT</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1699436811%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-l-o-c-k_-s-t-o-r-e_-m-e-m-o-r-y_-l-i-m-i-t.html">BLOCK_STORE_MEMORY_LIMIT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The amount of memory to use storing downloaded blocks - 50MB</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="153236729%2FProperties%2F-308303682" anchor-label="BLOCK_TARGET_TIME" id="153236729%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-o-c-k_-t-a-r-g-e-t_-t-i-m-e.html"><span><span>BLOCK_TARGET_TIME</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="153236729%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-l-o-c-k_-t-a-r-g-e-t_-t-i-m-e.html">BLOCK_TARGET_TIME</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">90</span></div><div class="brief "><p class="paragraph">The block time of Kryptokrona, in seconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1473962003%2FProperties%2F-308303682" anchor-label="BLOCKS_PER_DAEMON_REQUEST" id="1473962003%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-o-c-k-s_-p-e-r_-d-a-e-m-o-n_-r-e-q-u-e-s-t.html"><span><span>BLOCKS_PER_DAEMON_REQUEST</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1473962003%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-l-o-c-k-s_-p-e-r_-d-a-e-m-o-n_-r-e-q-u-e-s-t.html">BLOCKS_PER_DAEMON_REQUEST</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">100</span></div><div class="brief "><p class="paragraph">The amount of blocks to take from the daemon per request. Cannot take more than 100.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1088172342%2FProperties%2F-308303682" anchor-label="BLOCKS_PER_TICK" id="-1088172342%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-l-o-c-k-s_-p-e-r_-t-i-c-k.html"><span><span>BLOCKS_PER_TICK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1088172342%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-b-l-o-c-k-s_-p-e-r_-t-i-c-k.html">BLOCKS_PER_TICK</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">1</span></div><div class="brief "><p class="paragraph">The amount of blocks to process per 'tick' of the mainloop. Note: too high a value will cause the event loop to be blocked, and your interaction to be laggy.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2108791065%2FProperties%2F-308303682" anchor-label="CUSTOM_USER_AGENT_STRING" id="-2108791065%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-u-s-t-o-m_-u-s-e-r_-a-g-e-n-t_-s-t-r-i-n-g.html"><span><span>CUSTOM_USER_AGENT_STRING</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2108791065%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="-c-u-s-t-o-m_-u-s-e-r_-a-g-e-n-t_-s-t-r-i-n-g.html">CUSTOM_USER_AGENT_STRING</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Allows setting a custom user agent string</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1513540120%2FProperties%2F-308303682" anchor-label="DAEMON_UPDATE_INTERVAL" id="1513540120%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-a-e-m-o-n_-u-p-d-a-t-e_-i-n-t-e-r-v-a-l.html"><span><span>DAEMON_UPDATE_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1513540120%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-d-a-e-m-o-n_-u-p-d-a-t-e_-i-n-t-e-r-v-a-l.html">DAEMON_UPDATE_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">How often to update the daemon info.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1887936766%2FProperties%2F-308303682" anchor-label="DECIMAL_PLACES" id="1887936766%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-e-c-i-m-a-l_-p-l-a-c-e-s.html"><span><span>DECIMAL_PLACES</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1887936766%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-d-e-c-i-m-a-l_-p-l-a-c-e-s.html">DECIMAL_PLACES</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">5</span></div><div class="brief "><p class="paragraph">The amount of decimal places.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2911437%2FProperties%2F-308303682" anchor-label="FEE_PER_BYTE_CHUNK_SIZE" id="-2911437%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-e-e_-p-e-r_-b-y-t-e_-c-h-u-n-k_-s-i-z-e.html"><span><span>FEE_PER_BYTE_CHUNK_SIZE</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2911437%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-f-e-e_-p-e-r_-b-y-t-e_-c-h-u-n-k_-s-i-z-e.html">FEE_PER_BYTE_CHUNK_SIZE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">256</span></div><div class="brief "><p class="paragraph">Fee per byte is rounded up in chunks. This helps makes estimates more accurate. It's suggested to make this a power of two, to relate to the underlying storage cost / page sizes for storing a transaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="611027013%2FProperties%2F-308303682" anchor-label="INTEGRATED_ADDRESS_LENGTH" id="611027013%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-t-e-g-r-a-t-e-d_-a-d-d-r-e-s-s_-l-e-n-g-t-h.html"><span><span>INTEGRATED_ADDRESS_LENGTH</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="611027013%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-i-n-t-e-g-r-a-t-e-d_-a-d-d-r-e-s-s_-l-e-n-g-t-h.html">INTEGRATED_ADDRESS_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The length of an integrated address for Kryptokrona - It's the same as a normal address, but there is a paymentID included in there - since payment ID's are 64 chars, and base58 encoding is done by encoding chunks of 8 chars at once into blocks of 11 chars, we can calculate this automatically.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-394197049%2FProperties%2F-308303682" anchor-label="LOCKED_TRANSACTIONS_CHECK_INTERVAL" id="-394197049%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-o-c-k-e-d_-t-r-a-n-s-a-c-t-i-o-n-s_-c-h-e-c-k_-i-n-t-e-r-v-a-l.html"><span><span>LOCKED_TRANSACTIONS_CHECK_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-394197049%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-l-o-c-k-e-d_-t-r-a-n-s-a-c-t-i-o-n-s_-c-h-e-c-k_-i-n-t-e-r-v-a-l.html">LOCKED_TRANSACTIONS_CHECK_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">How often to check on locked transactions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1567008137%2FProperties%2F-308303682" anchor-label="MAX_LAST_FETCHED_BLOCK_INTERVAL" id="-1567008137%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-l-a-s-t_-f-e-t-c-h-e-d_-b-l-o-c-k_-i-n-t-e-r-v-a-l.html"><span><span>MAX_LAST_FETCHED_BLOCK_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1567008137%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-l-a-s-t_-f-e-t-c-h-e-d_-b-l-o-c-k_-i-n-t-e-r-v-a-l.html">MAX_LAST_FETCHED_BLOCK_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The amount of seconds to permit not having fetched a block from the daemon before emitting 'deadnode'. Note that this just means contacting the daemon for data - if you are synced and it returns TopBlock - the event will not be emitted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-462006399%2FProperties%2F-308303682" anchor-label="MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL" id="-462006399%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-l-a-s-t_-u-p-d-a-t-e-d_-l-o-c-a-l_-h-e-i-g-h-t_-i-n-t-e-r-v-a-l.html"><span><span>MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-462006399%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-l-a-s-t_-u-p-d-a-t-e-d_-l-o-c-a-l_-h-e-i-g-h-t_-i-n-t-e-r-v-a-l.html">MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The amount of seconds to permit not having fetched a new local height from the daemon before emitting 'deadnode'.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1943331038%2FProperties%2F-308303682" anchor-label="MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL" id="1943331038%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-x_-l-a-s-t_-u-p-d-a-t-e-d_-n-e-t-w-o-r-k_-h-e-i-g-h-t_-i-n-t-e-r-v-a-l.html"><span><span>MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1943331038%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-x_-l-a-s-t_-u-p-d-a-t-e-d_-n-e-t-w-o-r-k_-h-e-i-g-h-t_-i-n-t-e-r-v-a-l.html">MAX_LAST_UPDATED_NETWORK_HEIGHT_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The amount of seconds to permit not having fetched a new network height from the daemon before emitting 'deadnode'.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1209367923%2FProperties%2F-308303682" anchor-label="MINIMUM_FEE" id="-1209367923%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-i-n-i-m-u-m_-f-e-e.html"><span><span>MINIMUM_FEE</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1209367923%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-i-n-i-m-u-m_-f-e-e.html">MINIMUM_FEE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">10</span></div><div class="brief "><p class="paragraph">The minimum fee allowed for transactions, in ATOMIC units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1125474980%2FProperties%2F-308303682" anchor-label="MINIMUM_FEE_PER_BYTE" id="1125474980%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-i-n-i-m-u-m_-f-e-e_-p-e-r_-b-y-t-e.html"><span><span>MINIMUM_FEE_PER_BYTE</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1125474980%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-i-n-i-m-u-m_-f-e-e_-p-e-r_-b-y-t-e.html">MINIMUM_FEE_PER_BYTE</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Fee to charge per byte of transaction. Will be applied in chunks, see above. This value comes out to 1.953125. We use this value instead of something like 2 because it makes for pretty resulting fees</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1615395761%2FProperties%2F-308303682" anchor-label="REQUEST_TIMEOUT" id="1615395761%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-q-u-e-s-t_-t-i-m-e-o-u-t.html"><span><span>REQUEST_TIMEOUT</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1615395761%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-r-e-q-u-e-s-t_-t-i-m-e-o-u-t.html">REQUEST_TIMEOUT</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Request timeout for daemon operations in milliseconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2081288456%2FProperties%2F-308303682" anchor-label="SCAN_COINBASE_TRANSACTIONS" id="2081288456%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-c-a-n_-c-o-i-n-b-a-s-e_-t-r-a-n-s-a-c-t-i-o-n-s.html"><span><span>SCAN_COINBASE_TRANSACTIONS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2081288456%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-c-a-n_-c-o-i-n-b-a-s-e_-t-r-a-n-s-a-c-t-i-o-n-s.html">SCAN_COINBASE_TRANSACTIONS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></div><div class="brief "><p class="paragraph">Most people haven't mined any blocks, so lets not waste time scanning them.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1905757969%2FProperties%2F-308303682" anchor-label="STANDARD_ADDRESS_LENGTH" id="-1905757969%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-a-n-d-a-r-d_-a-d-d-r-e-s-s_-l-e-n-g-t-h.html"><span><span>STANDARD_ADDRESS_LENGTH</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1905757969%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-t-a-n-d-a-r-d_-a-d-d-r-e-s-s_-l-e-n-g-t-h.html">STANDARD_ADDRESS_LENGTH</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">99</span></div><div class="brief "><p class="paragraph">The length of a standard address for Kryptokrona.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1195284386%2FProperties%2F-308303682" anchor-label="SYNC_THREAD_INTERVAL" id="1195284386%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-y-n-c_-t-h-r-e-a-d_-i-n-t-e-r-v-a-l.html"><span><span>SYNC_THREAD_INTERVAL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1195284386%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-s-y-n-c_-t-h-r-e-a-d_-i-n-t-e-r-v-a-l.html">SYNC_THREAD_INTERVAL</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">500</span></div><div class="brief "><p class="paragraph">How often to process blocks, in millseconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1340838898%2FProperties%2F-308303682" anchor-label="TICKER" id="-1340838898%2FProperties%2F-308303682" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-core:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-i-c-k-e-r.html"><span><span>TICKER</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1340838898%2FProperties%2F-308303682"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">const </span><span class="token keyword">val </span><a href="-t-i-c-k-e-r.html">TICKER</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Kryptokrona 'ticker'</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
+

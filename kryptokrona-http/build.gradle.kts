@@ -8,6 +8,7 @@ val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file sh
 plugins {
     kotlin("jvm") version "1.8.10"
     kotlin("plugin.serialization") version "1.8.10"
+    id("org.jetbrains.dokka")
     `java-library`
     `maven-publish`
     signing

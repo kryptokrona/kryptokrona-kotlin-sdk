@@ -7,6 +7,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    id("org.jetbrains.dokka")
 }
 
 version = "0.1.0"
