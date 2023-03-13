@@ -1,3 +1,6 @@
+val ossrhUsername: String = System.getProperty("ossrhUsername")
+val ossrhPassword: String = System.getProperty("ossrhPassword")
+
 plugins {
     kotlin("jvm") version "1.8.10"
     application
@@ -5,6 +8,8 @@ plugins {
     `maven-publish`
     signing
 }
+
+version = "0.1.0"
 
 repositories {
     mavenCentral()
@@ -25,7 +30,8 @@ kotlin {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifactId = "kryptokrona-http"
+            artifactId = "kryptokrona-core"
+            groupId = "org.kryptokrona.sdk"
             from(components["java"])
             versionMapping {
                 usage("java-api") {
@@ -36,8 +42,8 @@ publishing {
                 }
             }
             pom {
-                name.set("Kryptokrona HTTP")
-                description.set("A HTTP library for communicating with Kryptokrona nodes")
+                name.set("Kryptokrona Core")
+                description.set("The core library for communicating with Kryptokrona nodes")
                 url.set("https://kryptokrona.org")
                 licenses {
                     license {
@@ -62,10 +68,20 @@ publishing {
     }
     repositories {
         maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-            val releasesRepoUrl = uri(layout.buildDirectory.dir("repos/releases"))
-            val snapshotsRepoUrl = uri(layout.buildDirectory.dir("repos/snapshots"))
-            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+            name = "Sonatype"
+            val host = "https://s01.oss.sonatype.org"
+            val path = if (version.toString().endsWith("SNAPSHOT")) "/content/repositories/snapshots/"
+            else "/service/local/staging/deploy/maven2/"
+            url = uri(host.plus(path))
+            println("> publish.url: $url")
+
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
         }
     }
 }
