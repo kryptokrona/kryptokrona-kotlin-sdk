@@ -2,8 +2,8 @@ val ktor_version: String by project
 val coroutines_version: String by project
 val slf4j_version: String by project
 val kotlin_version: String by project
-val ossrhUsername: String = System.getProperty("ossrhUsername")
-val ossrhPassword: String = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
+val ossrhUsername: String? = System.getProperty("ossrhUsername")
+val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
     kotlin("jvm") version "1.8.10"

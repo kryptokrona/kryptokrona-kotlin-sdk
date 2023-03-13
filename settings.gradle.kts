@@ -1,4 +1,4 @@
-rootProject.name = "kryptokrona-kotlinsdk"
+rootProject.name = "kryptokrona-kotlin-sdk"
 
 // include libraries
 include("kryptokrona-core")

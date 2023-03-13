@@ -1,5 +1,5 @@
-val ossrhUsername: String = System.getProperty("ossrhUsername")
-val ossrhPassword: String = System.getProperty("ossrhPassword")
+val ossrhUsername: String? = System.getProperty("ossrhUsername")
+val ossrhPassword: String? = System.getProperty("ossrhPassword")
 
 plugins {
     kotlin("jvm") version "1.8.10"
