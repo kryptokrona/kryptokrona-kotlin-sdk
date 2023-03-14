@@ -54,6 +54,7 @@ class WalletClient(private val node: Node) {
      * @return Transactions
      */
     suspend fun getWalletSyncData(): WalletSyncData? {
+        //TODO: add possibility to send POST requests with body later
         try {
             node.ssl.let {
                 if (it) {
