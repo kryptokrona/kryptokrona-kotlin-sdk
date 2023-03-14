@@ -31,7 +31,9 @@
 package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
+import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.node.Info
+import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
@@ -47,9 +49,13 @@ class WalletService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("WalletService")
 
+    private val walletClient = WalletClient(node)
+
     private val nodeService = NodeService(node)
 
     private var syncJob: Job = Job()
+
+    private var walletSyncData: WalletSyncData? = null
 
     private var nodeInfo: Info? = null
 
@@ -60,6 +66,8 @@ class WalletService(node: Node) {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     logger.info("Fetching blocks...")
+                    walletSyncData = getSyncData()
+                    walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
             }
@@ -88,7 +96,8 @@ class WalletService(node: Node) {
         logger.info("Stopping sync process...")
     }
 
-    suspend fun getSyncData() {
-
+    private suspend fun getSyncData(): WalletSyncData? {
+        logger.info("Getting wallet sync data...")
+        return walletClient.getWalletSyncData()
     }
 }
