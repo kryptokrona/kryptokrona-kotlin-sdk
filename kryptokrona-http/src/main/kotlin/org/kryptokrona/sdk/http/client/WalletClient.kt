@@ -28,67 +28,43 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.core.service
+package org.kryptokrona.sdk.http.client
 
-import kotlinx.coroutines.*
-import org.kryptokrona.sdk.http.model.node.Info
-import org.kryptokrona.sdk.util.config.Config
+import io.ktor.client.call.*
+import org.kryptokrona.sdk.http.common.get
+import org.kryptokrona.sdk.http.model.transaction.Transactions
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**
- * WalletService class.
+ * Wallet client
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param node The node that the wallet service is connected to.
  */
-class WalletService(node: Node) {
+class WalletClient(private val node: Node) {
 
-    private val logger = LoggerFactory.getLogger("WalletService")
+    private val logger = LoggerFactory.getLogger("WalletClient")
 
-    private val nodeService = NodeService(node)
-
-    private var syncJob: Job = Job()
-
-    private var nodeInfo: Info? = null
-
-    suspend fun startSync() = coroutineScope {
-        logger.info("Starting sync process...")
-
-        syncJob = launch {
-            launch(Dispatchers.IO) {
-                while(isActive) {
-                    logger.info("Fetching blocks...")
-                    delay(Config.SYNC_THREAD_INTERVAL)
+    /**
+     * Get wallet sync data
+     *
+     * @return Transactions
+     */
+    suspend fun getWalletSyncData(): Transactions? {
+        try {
+            node.ssl.let {
+                if (it) {
+                    return get("https://${node.hostName}:${node.port}/getwalletsyncdata").body()
+                } else {
+                    return get("http://${node.hostName}:${node.port}/getwalletsyncdata").body()
                 }
             }
-
-            launch(Dispatchers.IO) {
-                while(isActive) {
-                    nodeInfo = nodeService.getNodeInfo()
-                    delay(Config.NODE_UPDATE_INTERVAL)
-                }
-            }
-
-            launch(Dispatchers.IO) {
-                while(isActive) {
-                    logger.info("Checking locked transactions...")
-                    delay(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL)
-                }
-            }
+        } catch (e: Exception) {
+            logger.error("Error getting wallet sync data", e)
         }
 
-        syncJob.children.forEach { it.join() }
+        return null
     }
 
-    suspend fun stopSync() = coroutineScope {
-        syncJob.children.forEach { it.cancel() }
-
-        logger.info("Stopping sync process...")
-    }
-
-    suspend fun getSyncData() {
-
-    }
 }
