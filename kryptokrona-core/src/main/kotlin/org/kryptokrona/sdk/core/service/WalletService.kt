@@ -31,7 +31,6 @@
 package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
@@ -47,7 +46,7 @@ class WalletService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("WalletService")
 
-    private val blockService = BlockService(node)
+    private val nodeService = NodeService(node)
 
     private var syncJob: Job = Job()
 
@@ -59,21 +58,22 @@ class WalletService(node: Node) {
         // checkLockedTransactions()
 
         syncJob = launch {
-            launch {
+            launch(Dispatchers.IO) {
                 while(isActive) {
-                    blockService.getBlocks()
+                    // blockService.getBlocks()
+                    println("Get blocks...")
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
             }
 
-            launch {
+            launch(Dispatchers.IO) {
                 while(isActive) {
-                    println("Get node info...")
+                    nodeService.getNodeInfo()
                     delay(Config.NODE_UPDATE_INTERVAL)
                 }
             }
 
-            launch {
+            launch(Dispatchers.IO) {
                 while(isActive) {
                     println("Checking locked transactions...")
                     delay(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL)
