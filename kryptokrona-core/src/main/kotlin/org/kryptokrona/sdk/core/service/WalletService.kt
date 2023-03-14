@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.core.service
 
 import org.kryptokrona.sdk.core.node.Node
+import org.slf4j.LoggerFactory
 
 /**
  * WalletService class.
@@ -38,11 +39,14 @@ import org.kryptokrona.sdk.core.node.Node
  * @param node The node that the wallet service is connected to.
  */
 class WalletService(node: Node) {
+
+    private val logger = LoggerFactory.getLogger("WalletService")
+
     fun startSync() {
-        // initialize the sync process
+        logger.info("Starting sync process...")
     }
 
     fun stopSync() {
-        // stop the sync process
+        logger.info("Stopping sync process...")
     }
 }

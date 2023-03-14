@@ -1,4 +1,5 @@
 val coroutines_version: String by project
+val slf4j_version: String by project
 
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword")
@@ -25,6 +26,8 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+    implementation("org.slf4j:slf4j-api:$slf4j_version")
+    implementation("org.slf4j:slf4j-simple:$slf4j_version")
 
     testImplementation(kotlin("test"))
 }
