@@ -30,63 +30,21 @@
 
 package org.kryptokrona.sdk.core.service
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import org.kryptokrona.sdk.core.config.Config
 import org.kryptokrona.sdk.core.node.Node
 import org.slf4j.LoggerFactory
 
 /**
- * WalletService class.
+ * BlockService class.
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param node The node that the wallet service is connected to.
  */
-class WalletService(node: Node) {
+class BlockService(node: Node) {
 
-    private val logger = LoggerFactory.getLogger("WalletService")
+    private val logger = LoggerFactory.getLogger("BlockService")
 
-    private val blockService = BlockService(node)
-
-    private var syncJob: Job = Job()
-
-    suspend fun startSync() = coroutineScope {
-        logger.info("Starting sync process...")
-
-        // sync()
-        // updateNodeInfo()
-        // checkLockedTransactions()
-
-        syncJob = launch {
-            launch {
-                while(isActive) {
-                    blockService.getBlocks()
-                    delay(Config.SYNC_THREAD_INTERVAL)
-                }
-            }
-
-            launch {
-                while(isActive) {
-                    println("Get node info...")
-                    delay(Config.NODE_UPDATE_INTERVAL)
-                }
-            }
-
-            launch {
-                while(isActive) {
-                    println("Checking locked transactions...")
-                    delay(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL)
-                }
-            }
-        }
-
-        syncJob.children.forEach { it.join() }
+    fun getBlocks() {
+        logger.info("Getting blocks...")
     }
 
-    suspend fun stopSync() = coroutineScope {
-        syncJob.children.forEach { it.cancel() }
-
-        logger.info("Stopping sync process...")
-    }
 }
