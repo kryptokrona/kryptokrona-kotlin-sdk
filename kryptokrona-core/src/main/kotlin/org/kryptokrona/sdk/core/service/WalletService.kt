@@ -28,20 +28,21 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.core.node
+package org.kryptokrona.sdk.core.service
+
+import org.kryptokrona.sdk.core.node.Node
 
 /**
- * Node is a data class that holds information about a node.
- * The properties are mutable so that they can be changed during runtime.
+ * WalletService class.
  *
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
+ * @param node The node that the wallet service is connected to.
  */
-data class Node(
-    var hostName: String,
-    var port: Int,
-    var ssl: Boolean
+class WalletService(node: Node) {
+    fun startSync() {
+        // initialize the sync process
+    }
 
-    //TODO: add more private properties here that we get from the WalletService
-)
+    fun stopSync() {
+        // stop the sync process
+    }
+}
