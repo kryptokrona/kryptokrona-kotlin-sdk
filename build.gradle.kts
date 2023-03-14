@@ -1,10 +1,19 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 
 val sdkVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
     id("org.jetbrains.dokka") version "1.8.10"
+}
+
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.dokka:dokka-base:1.8.10")
+    }
 }
 
 repositories {
@@ -22,6 +31,12 @@ tasks.named<Test>("test") {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
+}
+
+tasks.withType<DokkaTask>().configureEach {
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+        footerMessage = "(c) 2022-2023 Kryptokrona Developers"
+    }
 }
 
 tasks.register<Copy>("copyDokkaHtmlMultiModule") {

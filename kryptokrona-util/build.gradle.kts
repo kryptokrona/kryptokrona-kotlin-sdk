@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.10"
-    id("org.jetbrains.dokka")
+    // id("org.jetbrains.dokka")
     application
 }
 
