@@ -59,12 +59,12 @@ object Config {
     /**
      * How often to process blocks, in millseconds.
      */
-    const val SYNC_THREAD_INTERVAL: Long = 500
+    const val SYNC_THREAD_INTERVAL: Long = 5_00
 
     /**
-     * How often to update the daemon info.
+     * How often to get the node info.
      */
-    const val DAEMON_UPDATE_INTERVAL = (10 * 1000).toLong()
+    const val NODE_UPDATE_INTERVAL = (10 * 1000).toLong()
 
     /**
      * How often to check on locked transactions.

@@ -30,6 +30,9 @@
 
 package org.kryptokrona.sdk.core.service
 
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import org.kryptokrona.sdk.core.config.Config
 import org.kryptokrona.sdk.core.node.Node
 import org.slf4j.LoggerFactory
 
@@ -42,11 +45,62 @@ class WalletService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("WalletService")
 
-    fun startSync() {
+    private var syncJob: Job = Job()
+
+    suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
+
+        // sync()
+        // updateNodeInfo()
+        // checkLockedTransactions()
+
+        syncJob = launch {
+            launch {
+            (0..20)
+                .asSequence()
+                .asFlow()
+                .onEach {
+                    delay(Config.SYNC_THREAD_INTERVAL)
+                    println("Process block: ${it}")
+                }
+                .cancellable()
+                .catch {e -> println("$e") }
+                .collect { }
+            }
+
+            launch {
+                (0..20)
+                    .asSequence()
+                    .asFlow()
+                    .onEach {
+                        delay(Config.NODE_UPDATE_INTERVAL)
+                        println("Get node info: ${it}")
+                    }
+                    .cancellable()
+                    .catch {e -> println("$e") }
+                    .collect { }
+            }
+
+            launch {
+                (0..20)
+                    .asSequence()
+                    .asFlow()
+                    .onEach {
+                        delay(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL)
+                        println("Check locked transactions: ${it}")
+                    }
+                    .cancellable()
+                    .catch {e -> println("$e") }
+                    .collect { }
+            }
+        }
+
+        syncJob.children.forEach { it.join() }
     }
 
-    fun stopSync() {
+    suspend fun stopSync() = coroutineScope {
+        syncJob.cancelChildren()
+
         logger.info("Stopping sync process...")
     }
 }
