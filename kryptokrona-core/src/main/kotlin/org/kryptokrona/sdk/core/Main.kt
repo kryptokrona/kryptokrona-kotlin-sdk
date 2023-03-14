@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.core
 
 import kotlinx.coroutines.*
-import org.kryptokrona.sdk.core.node.Node
+import org.kryptokrona.sdk.util.node.Node
 import org.kryptokrona.sdk.core.service.WalletService
 
 suspend fun main(args: Array<String>) = coroutineScope {

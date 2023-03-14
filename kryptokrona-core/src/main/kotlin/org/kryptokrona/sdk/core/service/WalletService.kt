@@ -32,8 +32,8 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import org.kryptokrona.sdk.core.config.Config
-import org.kryptokrona.sdk.core.node.Node
+import org.kryptokrona.sdk.util.config.Config
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**

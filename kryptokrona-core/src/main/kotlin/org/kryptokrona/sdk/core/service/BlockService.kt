@@ -30,7 +30,8 @@
 
 package org.kryptokrona.sdk.core.service
 
-import org.kryptokrona.sdk.core.node.Node
+import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.http.client.BlockClient
 import org.slf4j.LoggerFactory
 
 /**
@@ -43,8 +44,11 @@ class BlockService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("BlockService")
 
-    fun getBlocks() {
-        logger.info("Getting blocks...")
+    private val blockClient = BlockClient(node)
+
+    suspend fun getBlocks() {
+        val numberOfBlocks = blockClient.getBlocks()?.blocks?.size
+        logger.info("Getting $numberOfBlocks blocks...")
     }
 
 }
