@@ -39,7 +39,12 @@ import org.kryptokrona.sdk.http.model.transaction.Transactions
 import org.kryptokrona.sdk.http.model.transaction.TransactionsStatus
 import org.slf4j.LoggerFactory
 
-
+/**
+ * Transaction client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class TransactionClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("TransactionClient")

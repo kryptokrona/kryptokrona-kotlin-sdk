@@ -40,7 +40,12 @@ import org.kryptokrona.sdk.http.model.node.Info
 import org.kryptokrona.sdk.http.model.node.Peers
 import org.slf4j.LoggerFactory
 
-
+/**
+ * Node client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class NodeClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("NodeClient")

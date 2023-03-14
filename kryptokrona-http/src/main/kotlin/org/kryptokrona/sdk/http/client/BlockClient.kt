@@ -38,6 +38,12 @@ import org.kryptokrona.sdk.http.model.queryblocks.QueryBlocks
 import org.kryptokrona.sdk.http.model.queryblocks.QueryBlocksLite
 import org.slf4j.LoggerFactory
 
+/**
+ * Block client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class BlockClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("BlockClient")

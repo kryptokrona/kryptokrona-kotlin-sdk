@@ -37,6 +37,12 @@ import org.kryptokrona.sdk.http.model.GlobalIndexesForRange
 import org.kryptokrona.sdk.http.model.OIndexes
 import org.slf4j.LoggerFactory
 
+/**
+ * Indexes client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class IndexesClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("IndexesClient")

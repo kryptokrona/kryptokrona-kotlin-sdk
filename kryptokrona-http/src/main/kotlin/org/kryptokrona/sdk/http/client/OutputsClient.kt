@@ -36,6 +36,12 @@ import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.RandomOutputs
 import org.slf4j.LoggerFactory
 
+/**
+ * Outputs client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class OutputsClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("OutputsClient")

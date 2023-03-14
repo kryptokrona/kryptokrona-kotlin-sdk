@@ -36,6 +36,12 @@ import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.PoolChangesLite
 import org.slf4j.LoggerFactory
 
+/**
+ * Pool changes client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 class PoolChangesClient(private val node: Node) {
 
     private val logger = LoggerFactory.getLogger("PoolChangesClient")
