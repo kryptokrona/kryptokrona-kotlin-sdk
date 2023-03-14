@@ -69,6 +69,7 @@ class WalletService(node: Node) {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     nodeService.getNodeInfo()
+                    logger.info("NodeInfo: ${nodeService.nodeInfo}")
                     delay(Config.NODE_UPDATE_INTERVAL)
                 }
             }

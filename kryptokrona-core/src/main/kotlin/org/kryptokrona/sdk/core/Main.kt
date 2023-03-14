@@ -10,7 +10,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
 
     val deferred = async { walletService.startSync() }
 
-    delay(10000)
+    delay(60*1000)
 
     walletService.stopSync()
 }

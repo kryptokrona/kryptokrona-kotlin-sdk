@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.core.service
 import org.kryptokrona.sdk.util.node.Node
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.NodeClient
+import org.kryptokrona.sdk.http.model.node.Info
 import org.slf4j.LoggerFactory
 
 /**
@@ -41,15 +42,21 @@ import org.slf4j.LoggerFactory
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-class NodeService(node: Node) {
+class NodeService(private var node: Node) {
 
     private val logger = LoggerFactory.getLogger("NodeService")
 
     private val nodeClient = NodeClient(node)
 
+    private var infoObj: Info? = null
+
+    val nodeInfo: Info?
+        get() = infoObj
+
     suspend fun getNodeInfo() {
-        val nodeInfo = nodeClient.getNodeInfo()
-        logger.info("Getting node info. Current height: $nodeInfo")
+        val data = nodeClient.getNodeInfo()
+        infoObj = data
+        logger.info("Getting node info...")
     }
 
 }
