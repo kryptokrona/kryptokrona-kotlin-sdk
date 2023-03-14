@@ -66,7 +66,7 @@ suspend fun get(url: String): HttpResponse {
  * @param body: Any
  * @return HttpResponse
  */
-suspend fun post(url: String, body: Any): HttpResponse {
+suspend fun post(url: String, body: Any? = null): HttpResponse {
     return client.post(url) {
         contentType(ContentType.Application.Json)
         setBody(body)

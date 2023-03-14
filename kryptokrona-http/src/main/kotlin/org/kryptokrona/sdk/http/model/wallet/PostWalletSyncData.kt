@@ -28,45 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
+package org.kryptokrona.sdk.http.model.wallet
 
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.common.post
-import org.kryptokrona.sdk.http.model.wallet.PostWalletSyncData
-import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
-import org.kryptokrona.sdk.util.node.Node
-import org.slf4j.LoggerFactory
+import kotlinx.serialization.Serializable
 
-/**
- * Wallet client
- *
- * @author Marcus Cvjeticanin
- * @since 0.2.0
- */
-class WalletClient(private val node: Node) {
-
-    private val logger = LoggerFactory.getLogger("WalletClient")
-
-    /**
-     * Get wallet sync data
-     *
-     * @return Transactions
-     */
-    suspend fun getWalletSyncData(): WalletSyncData? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getwalletsyncdata").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getwalletsyncdata").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting wallet sync data", e)
-        }
-
-        return null
-    }
-
-}
+@Serializable
+data class PostWalletSyncData(
+    val blockCount: Long,
+    val blockHashCheckpoints: List<String>,
+    val skipCoinbaseTransactions: Boolean,
+    val startHeight: Long,
+    val startTimestamp: Long,
+)
