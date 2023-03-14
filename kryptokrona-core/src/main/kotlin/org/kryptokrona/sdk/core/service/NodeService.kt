@@ -48,15 +48,9 @@ class NodeService(private var node: Node) {
 
     private val nodeClient = NodeClient(node)
 
-    private var infoObj: Info? = null
-
-    val nodeInfo: Info?
-        get() = infoObj
-
-    suspend fun getNodeInfo() {
-        val data = nodeClient.getNodeInfo()
-        infoObj = data
+    suspend fun getNodeInfo(): Info? {
         logger.info("Getting node info...")
+        return nodeClient.getNodeInfo()
     }
 
 }
