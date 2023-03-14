@@ -1,7 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sdkVersion: String by project
 
@@ -33,11 +33,22 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
 
-tasks.withType<DokkaTask>().configureEach {
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        footerMessage = "(c) 2022-2023 Kryptokrona Developers"
+// dokka configuration
+
+
+
+// applies to all libraries
+allprojects {
+    tasks.withType<DokkaTask>().configureEach {
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            footerMessage = "(c) 2022-2023 Kryptokrona Developers"
+        }
     }
 }
+
+tasks.dokkaHtmlMultiModule {
+        moduleName.set("Kryptokrona Kotlin SDK")
+    }
 
 tasks.register<Copy>("copyDokkaHtmlMultiModule") {
     dependsOn("dokkaHtmlMultiModule")
