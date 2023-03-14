@@ -8,7 +8,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
     val node = Node("privacymine.net", 11898, false)
     val walletService = WalletService(node)
 
-    val deferred = async {walletService.startSync() }
+    val deferred = async { walletService.startSync() }
 
     delay(10000)
 
