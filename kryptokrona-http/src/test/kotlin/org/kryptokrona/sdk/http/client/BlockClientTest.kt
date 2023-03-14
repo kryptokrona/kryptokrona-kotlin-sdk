@@ -12,18 +12,21 @@ class BlockClientTest {
     private val client = BlockClient(node)
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks`() = runTest {
         val data = client.getBlocks()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get query blocks`() = runTest {
         val data = client.getQueryBlocks()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get query blocks lite`() = runTest {
         val data = client.getQueryBlocksLite()
         assertNotNull(data)

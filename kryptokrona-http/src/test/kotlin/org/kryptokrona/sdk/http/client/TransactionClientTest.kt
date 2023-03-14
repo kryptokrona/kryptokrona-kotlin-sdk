@@ -12,24 +12,28 @@ class TransactionClientTest {
     private val client = TransactionClient(node)
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions` () = runTest {
         val data = client.getTransactions()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes` () = runTest {
         val data = client.getTransactionDetailsByHashes()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
         val data = client.getTransactionHashesByPaymentId()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status` () = runTest {
         val data = client.getTransactionsStatus()
         assertNotNull(data)

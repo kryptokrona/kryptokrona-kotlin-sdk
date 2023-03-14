@@ -12,6 +12,7 @@ class OutputsClientTest {
     private val client = OutputsClient(node)
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get random outs` () = runTest {
         val data = client.getRandomOuts()
         assertNotNull(data)

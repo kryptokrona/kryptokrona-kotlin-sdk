@@ -12,12 +12,14 @@ class IndexesClientTest {
     private val client = IndexesClient(node)
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get O Indexes` () = runTest {
         val data = client.getOIndexes()
         assertNotNull(data)
     }
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get global indexes for range` () = runTest {
         val data = client.getGlobalIndexesForRange()
         assertNotNull(data)

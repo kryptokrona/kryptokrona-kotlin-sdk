@@ -12,6 +12,7 @@ class PoolChangesClientTest {
     private val client = PoolChangesClient(node)
 
     @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get pool changes lite` () = runTest {
         val data = client.getPoolChangesLite()
         assertNotNull(data)
