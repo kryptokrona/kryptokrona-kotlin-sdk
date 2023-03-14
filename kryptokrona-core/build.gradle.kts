@@ -1,3 +1,5 @@
+val coroutines_version: String by project
+
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword")
 
@@ -22,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+
     testImplementation(kotlin("test"))
 }
 
