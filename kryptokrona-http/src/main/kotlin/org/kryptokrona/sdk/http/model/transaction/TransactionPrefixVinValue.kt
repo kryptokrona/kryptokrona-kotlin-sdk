@@ -35,7 +35,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TransactionPrefixVinValue(
-    val amount: Int,
+    val amount: Long,
     @SerialName("k_image") val keyImage: String,
-    @SerialName("key_offsets") val keyOffsets: List<Int>
+    @SerialName("key_offsets") val keyOffsets: List<Long>
 )

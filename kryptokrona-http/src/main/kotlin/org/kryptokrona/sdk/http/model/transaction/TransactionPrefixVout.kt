@@ -33,4 +33,4 @@ package org.kryptokrona.sdk.http.model.transaction
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TransactionPrefixVout(val amount: Int, val target: TransactionPrefixVoutTarget)
+data class TransactionPrefixVout(val amount: Long, val target: TransactionPrefixVoutTarget)
