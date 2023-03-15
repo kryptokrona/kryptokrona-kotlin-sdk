@@ -48,6 +48,11 @@ class NodeService(private var node: Node) {
 
     private val nodeClient = NodeClient(node)
 
+    /**
+     * Get the node info.
+     *
+     * @return The node info.
+     */
     suspend fun getNodeInfo(): Info? {
         logger.info("Getting node info...")
         return nodeClient.getNodeInfo()

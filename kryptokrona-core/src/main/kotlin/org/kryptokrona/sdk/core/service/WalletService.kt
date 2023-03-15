@@ -59,6 +59,9 @@ class WalletService(node: Node) {
 
     private var nodeInfo: Info? = null
 
+    /**
+     * Starts the sync process.
+     */
     suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
 
@@ -90,12 +93,20 @@ class WalletService(node: Node) {
         syncJob.children.forEach { it.join() }
     }
 
+    /**
+     * Stops the sync process.
+     */
     suspend fun stopSync() = coroutineScope {
         syncJob.children.forEach { it.cancel() }
 
         logger.info("Stopping sync process...")
     }
 
+    /**
+     * Gets the wallet sync data.
+     *
+     * @return The wallet sync data.
+     */
     private suspend fun getSyncData(): WalletSyncData? {
         logger.info("Getting wallet sync data...")
         return walletClient.getWalletSyncData()
