@@ -34,6 +34,8 @@ package org.kryptokrona.sdk.util.node
  * Node is a data class that holds information about a node.
  * The properties are mutable so that they can be changed during runtime.
  *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
  * @param hostName The host name of the node.
  * @param port The port of the node.
  * @param ssl Whether the node is using SSL.

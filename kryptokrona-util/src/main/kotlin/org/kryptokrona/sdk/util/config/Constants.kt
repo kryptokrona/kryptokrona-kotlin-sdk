@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.util.config
 
+/**
+ * Constants holds all the constants used in the SDK.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ */
 object Constants {
 
     /**

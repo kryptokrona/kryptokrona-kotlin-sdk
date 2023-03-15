@@ -33,7 +33,8 @@ package org.kryptokrona.sdk.util.config
 /**
  * CoinConfig.java
  *
- * @author Marcus Cvjeticanin (@mjovanc)
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
  */
 object CoinConfig {
     private const val ACTIVATE_PARENT_BLOCK_VERSION: Long = 2

@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory
  *
  * @author Marcus Cvjeticanin
  * @since 0.1.0
+ * @param node The node that the wallet service is connected to.
  */
 class PoolChangesClient(private val node: Node) {
 
