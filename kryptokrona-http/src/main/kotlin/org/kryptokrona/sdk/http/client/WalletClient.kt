@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory
  * Wallet client
  *
  * @author Marcus Cvjeticanin
- * @since 0.2.0
+ * @since 0.1.1
  */
 class WalletClient(private val node: Node) {
 

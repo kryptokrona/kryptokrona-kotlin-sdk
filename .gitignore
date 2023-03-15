@@ -176,3 +176,5 @@ gradle-app.setting
 
 # test file
 # src/main/java/org/kryptokrona/sdk/Main.java # remove this later
+
+*.hprof

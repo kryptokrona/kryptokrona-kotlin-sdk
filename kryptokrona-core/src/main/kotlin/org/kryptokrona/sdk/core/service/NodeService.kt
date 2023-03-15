@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory
  * BlockService class.
  *
  * @author Marcus Cvjeticanin
- * @since 0.2.0
+ * @since 0.1.1
  */
 class NodeService(private var node: Node) {
 

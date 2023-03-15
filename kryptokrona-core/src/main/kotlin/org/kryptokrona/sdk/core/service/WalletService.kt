@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory
  * WalletService class.
  *
  * @author Marcus Cvjeticanin
- * @since 0.2.0
+ * @since 0.1.1
  * @param node The node that the wallet service is connected to.
  */
 class WalletService(node: Node) {
