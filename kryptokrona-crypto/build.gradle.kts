@@ -18,6 +18,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.0")
+
     testImplementation(kotlin("test"))
 }
 
