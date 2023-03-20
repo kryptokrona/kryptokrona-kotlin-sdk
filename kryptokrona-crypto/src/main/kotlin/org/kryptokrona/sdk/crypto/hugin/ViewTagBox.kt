@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2023, The Kryptokrona Developers
+// Copyright (c) 2023-2023, The Kryptokrona Developers
 //
 // Written by Marcus Cvjeticanin
 //
@@ -28,20 +28,24 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto.hugin
+package org.kryptokrona.api.utils
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Simple sealed box object.
+ * Box object with view tag.
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
 @Serializable
-data class SealedBox(
-    @SerialName("sb") val secretBox: String,
+data class ViewTagBox(
+    val box: String,
 
-    @SerialName("t") val timestamp: Long
+    @SerialName("t") val timestamp: Long,
+
+    val txKey: String,
+
+    @SerialName("vt") val viewTag: String
 )

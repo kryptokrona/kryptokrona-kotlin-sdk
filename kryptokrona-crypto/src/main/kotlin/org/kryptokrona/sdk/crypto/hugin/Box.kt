@@ -35,7 +35,9 @@ import kotlinx.serialization.Serializable
 
 /**
  * Simple box object.
- * Will be removed once it will be implemented in SDK.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
  */
 @Serializable
 data class Box(
