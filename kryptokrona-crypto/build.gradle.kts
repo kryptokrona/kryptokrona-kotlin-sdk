@@ -101,3 +101,14 @@ tasks.javadoc {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }
+
+// compile the crypto rust library
+tasks.register<Exec>("rustCompile") {
+    workingDir = file("${rootDir}/crypto")
+    commandLine("cargo", "build")
+}
+
+// compile the crypto rust library before building the kotlin library
+tasks.named("build") {
+    dependsOn("rustCompile")
+}
