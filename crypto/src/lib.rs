@@ -28,29 +28,23 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-use std::os::raw::{c_char, c_int};
-use std::ffi::{CStr, CString};
+extern crate jni;
+use jni::JNIEnv;
+use jni::objects::{JClass};
+use jni::sys::{jint};
 
+#[allow(non_snake_case)]
 #[no_mangle]
-pub extern "C" fn add(a: c_int, b: c_int) -> c_int {
+pub extern "system" fn Java_org_kryptokrona_sdk_crypto_util_MathUtils_add(
+    // Java environment.
+    _env: JNIEnv,
+    // Static class which owns this method.
+    _class: JClass,
+    // First integer argument.
+    a: jint,
+    // Second integer argument.
+    b: jint,
+) -> jint {
     a + b
-}
-
-#[no_mangle]
-pub extern "C" fn greet(name: *const c_char) -> *mut c_char {
-    let c_str = unsafe { CStr::from_ptr(name) };
-    let name_str = c_str.to_str().unwrap();
-    let greeting = format!("Hello, {}!", name_str);
-    CString::new(greeting).unwrap().into_raw()
-}
-
-#[no_mangle]
-pub extern "C" fn free_greeting(greeting: *mut c_char) {
-    if greeting.is_null() {
-        return;
-    }
-    unsafe {
-        CString::from_raw(greeting);
-    }
 }
 

@@ -2,9 +2,11 @@
 name = "crypto"
 version = "0.1.0"
 edition = "2021"
+authors = ["Marcus Cvjeticanin <mjovanc@icloud.com>"]
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
 libc = "0.2"
+jni = "0.21.1"
