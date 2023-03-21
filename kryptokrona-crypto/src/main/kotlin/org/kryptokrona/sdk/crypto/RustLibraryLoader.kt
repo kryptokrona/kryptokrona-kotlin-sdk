@@ -5,9 +5,7 @@ import java.util.*
 
 open class RustLibraryLoader {
     init {
-        println("Loading Rust library...")
-        val libraryPath = "/Users/marcus.cvjeticanin/Repos/Kryptokrona/kryptokrona-kotlin-sdk/kryptokrona-crypto/build/libs/libcrypto.dylib"
-        System.load(libraryPath)
+        System.load(getLibraryPath())
     }
 
     private fun getLibraryPath(): String {
@@ -19,7 +17,7 @@ open class RustLibraryLoader {
         }
 
         val userDir = System.getProperty("user.dir")
-        val libraryPath = File(userDir, "build/libs/$libraryName")
+        val libraryPath = File(userDir, "kryptokrona-crypto/build/libs/$libraryName")
 
         if (!libraryPath.exists()) {
             throw RuntimeException("Failed to find the Rust shared library: $libraryName")
