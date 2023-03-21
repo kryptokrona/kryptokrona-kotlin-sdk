@@ -138,3 +138,30 @@ tasks.withType(KotlinNativeCompile::class.java) {
     dependsOn(copyRustLibrary)
     dependsOn(copyRustHeader)
 }
+
+// Install cbindgen
+tasks.register<Exec>("installCbindgen") {
+    commandLine("cargo", "install", "cbindgen")
+    doFirst {
+        val process = ProcessBuilder("cargo", "install", "--list")
+            .redirectOutput(ProcessBuilder.Redirect.PIPE)
+            .start()
+        process.waitFor()
+        val output = process.inputStream.bufferedReader().readText()
+        if (output.contains("cbindgen")) {
+            logger.lifecycle("cbindgen already installed")
+            throw StopExecutionException()
+        }
+    }
+}
+
+// generate the C header files using cbindgen
+tasks.register<Exec>("generateCHeaders") {
+    workingDir = file("${rootDir}/crypto")
+    commandLine("cbindgen", "--config", "cbindgen.toml", "--crate", "crypto", "--output", "target/crypto.h")
+    dependsOn("installCbindgen")
+}
+
+tasks.named("rustCompile") {
+    dependsOn("generateCHeaders")
+}
