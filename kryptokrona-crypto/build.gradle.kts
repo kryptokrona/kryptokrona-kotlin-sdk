@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
+
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
@@ -105,10 +107,34 @@ tasks.javadoc {
 // compile the crypto rust library
 tasks.register<Exec>("rustCompile") {
     workingDir = file("${rootDir}/crypto")
-    commandLine("cargo", "build")
+    commandLine("cargo", "build", "--release")
 }
 
-// compile the crypto rust library before building the kotlin library
+val rustCryptoDir = "${rootDir}/crypto"
+val sharedLibraryPath = when {
+    org.gradle.internal.os.OperatingSystem.current().isWindows -> "$rustCryptoDir/target/release/crypto.dll"
+    org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$rustCryptoDir/target/release/libcrypto.dylib"
+    else -> "$rustCryptoDir/target/release/libcrypto.so"
+}
+
+val copyRustLibrary by tasks.registering(Copy::class) {
+    from(sharedLibraryPath)
+    into("$buildDir/libs")
+}
+
+val copyRustHeader by tasks.registering(Copy::class) {
+    from("$rustCryptoDir/target/crypto.h")
+    into("$buildDir/headers")
+}
+
 tasks.named("build") {
     dependsOn("rustCompile")
+    dependsOn(copyRustLibrary)
+    dependsOn(copyRustHeader)
+}
+
+tasks.withType(KotlinNativeCompile::class.java) {
+    dependsOn("rustCompile")
+    dependsOn(copyRustLibrary)
+    dependsOn(copyRustHeader)
 }
