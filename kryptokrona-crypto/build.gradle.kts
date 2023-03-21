@@ -165,3 +165,13 @@ tasks.register<Exec>("generateCHeaders") {
 tasks.named("rustCompile") {
     dependsOn("generateCHeaders")
 }
+
+val runRustLibraryLoader by tasks.registering(JavaExec::class) {
+    dependsOn("build")
+    classpath = sourceSets["main"].runtimeClasspath
+    main = "org.kryptokrona.sdk.crypto.RustLibraryLoader"
+    environment(
+        if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "DYLD_LIBRARY_PATH"
+        else "LD_LIBRARY_PATH", "$buildDir/libs"
+    )
+}
