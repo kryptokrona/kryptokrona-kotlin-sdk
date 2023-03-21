@@ -36,13 +36,9 @@ use jni::sys::{jint};
 #[allow(non_snake_case)]
 #[no_mangle]
 pub extern "system" fn Java_org_kryptokrona_sdk_crypto_util_MathUtils_add(
-    // Java environment.
     _env: JNIEnv,
-    // Static class which owns this method.
     _class: JClass,
-    // First integer argument.
     a: jint,
-    // Second integer argument.
     b: jint,
 ) -> jint {
     a + b
