@@ -139,7 +139,7 @@ tasks.withType(KotlinNativeCompile::class.java) {
     dependsOn(copyRustHeader)
 }
 
-// Install cbindgen
+// install cbindgen
 tasks.register<Exec>("installCbindgen") {
     commandLine("cargo", "install", "cbindgen")
     doFirst {

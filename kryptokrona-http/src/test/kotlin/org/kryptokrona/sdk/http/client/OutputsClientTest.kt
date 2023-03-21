@@ -7,7 +7,7 @@ import org.kryptokrona.sdk.util.node.Node
 
 class OutputsClientTest {
 
-    private val node = Node("privacymine.net", 11898, false)
+    private val node = Node("techy.ddns.net", 11898, false)
 
     private val client = OutputsClient(node)
 

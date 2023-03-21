@@ -7,7 +7,7 @@ import org.kryptokrona.sdk.util.node.Node
 
 class PoolChangesClientTest {
 
-    private val node = Node("privacymine.net", 11898, false)
+    private val node = Node("techy.ddns.net", 11898, false)
 
     private val client = PoolChangesClient(node)
 
