@@ -1,10 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
+val coroutines_version: String by project
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
     kotlin("jvm") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10"
     id("org.jetbrains.dokka")
     `java-library`
     `maven-publish`
@@ -21,6 +23,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 
     testImplementation(kotlin("test"))
 }
