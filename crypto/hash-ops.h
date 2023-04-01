@@ -15,8 +15,6 @@
 
 #if !defined(__RUST_RAW_CRYPTO__)
 
-#include "../common/static_assert.h"
-
 #endif
 
 #if !defined(__cplusplus)

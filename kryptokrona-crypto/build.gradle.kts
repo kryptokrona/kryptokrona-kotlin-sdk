@@ -107,75 +107,48 @@ tasks.javadoc {
     }
 }
 
-/*
-// compile the crypto rust library
-tasks.register<Exec>("rustCompile") {
-    workingDir = file("${rootDir}/crypto")
-    commandLine("cargo", "build", "--release")
-}
-
-val rustCryptoDir = "${rootDir}/crypto"
+// compile the crypto C library
+val cryptoDir = "${rootDir}/crypto"
 val sharedLibraryPath = when {
-    org.gradle.internal.os.OperatingSystem.current().isWindows -> "$rustCryptoDir/target/release/crypto.dll"
-    org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$rustCryptoDir/target/release/libcrypto.dylib"
-    else -> "$rustCryptoDir/target/release/libcrypto.so"
+    org.gradle.internal.os.OperatingSystem.current().isWindows -> "$cryptoDir/build/crypto.dll"
+    org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$cryptoDir/build/libcrypto.dylib"
+    else -> "$cryptoDir/build/libcrypto.so"
 }
 
-val copyRustLibrary by tasks.registering(Copy::class) {
+tasks.register<Exec>("cCompile") {
+    workingDir = file("$cryptoDir")
+    commandLine("make")
+}
+
+val copyCLibrary by tasks.registering(Copy::class) {
     from(sharedLibraryPath)
     into("$buildDir/libs")
 }
 
-val copyRustHeader by tasks.registering(Copy::class) {
-    from("$rustCryptoDir/target/crypto.h")
+val copyCHeader by tasks.registering(Copy::class) {
+    from("$cryptoDir/crypto.h")
     into("$buildDir/headers")
 }
 
 tasks.named("build") {
-    dependsOn("rustCompile")
-    dependsOn(copyRustLibrary)
-    dependsOn(copyRustHeader)
+    dependsOn("cCompile")
+    dependsOn(copyCLibrary)
+    dependsOn(copyCHeader)
 }
 
 tasks.withType(KotlinNativeCompile::class.java) {
-    dependsOn("rustCompile")
-    dependsOn(copyRustLibrary)
-    dependsOn(copyRustHeader)
+    dependsOn("cCompile")
+    dependsOn(copyCLibrary)
+    dependsOn(copyCHeader)
 }
 
-// install cbindgen
-tasks.register<Exec>("installCbindgen") {
-    commandLine("cargo", "install", "cbindgen")
-    doFirst {
-        val process = ProcessBuilder("cargo", "install", "--list")
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .start()
-        process.waitFor()
-        val output = process.inputStream.bufferedReader().readText()
-        if (output.contains("cbindgen")) {
-            logger.lifecycle("cbindgen already installed")
-            throw StopExecutionException()
-        }
-    }
-}
-
-// generate the C header files using cbindgen
-tasks.register<Exec>("generateCHeaders") {
-    workingDir = file("${rootDir}/crypto")
-    commandLine("cbindgen", "--config", "cbindgen.toml", "--crate", "crypto", "--output", "target/crypto.h")
-    dependsOn("installCbindgen")
-}
-
-tasks.named("rustCompile") {
-    dependsOn("generateCHeaders")
-}
-
-val runRustLibraryLoader by tasks.registering(JavaExec::class) {
+val runCLibraryLoader by tasks.registering(JavaExec::class) {
     dependsOn("build")
     classpath = sourceSets["main"].runtimeClasspath
-    main = "org.kryptokrona.sdk.crypto.RustLibraryLoader"
+    main = "org.kryptokrona.sdk.crypto.CLibraryLoader"
     environment(
         if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "DYLD_LIBRARY_PATH"
         else "LD_LIBRARY_PATH", "$buildDir/libs"
     )
-}*/
+}
+
