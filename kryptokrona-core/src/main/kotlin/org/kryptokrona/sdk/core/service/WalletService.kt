@@ -59,6 +59,10 @@ class WalletService(node: Node) {
 
     private var nodeInfo: Info? = null
 
+    fun getWalletSyncData() = walletSyncData
+
+    fun getNodeInfo() = nodeInfo
+
     /**
      * Starts the sync process.
      */
@@ -79,13 +83,6 @@ class WalletService(node: Node) {
                 while(isActive) {
                     nodeInfo = nodeService.getNodeInfo()
                     delay(Config.NODE_UPDATE_INTERVAL)
-                }
-            }
-
-            launch(Dispatchers.IO) {
-                while(isActive) {
-                    logger.info("Checking locked transactions...")
-                    delay(Config.LOCKED_TRANSACTIONS_CHECK_INTERVAL)
                 }
             }
         }
@@ -111,4 +108,5 @@ class WalletService(node: Node) {
         logger.info("Getting wallet sync data...")
         return walletClient.getWalletSyncData()
     }
+
 }
