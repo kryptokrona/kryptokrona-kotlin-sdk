@@ -33,7 +33,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
 
-// dokka configuration
+// Dokka configuration
 // TODO: does not work ATM, if you can fix it, please do :)
 subprojects {
     apply(plugin = "org.jetbrains.dokka")
