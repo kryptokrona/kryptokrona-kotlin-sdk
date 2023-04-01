@@ -1,7 +1,7 @@
 # Kryptokrona Kotlin SDK 
 
 [![alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
-[![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-kotlin-sdk/main-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions/workflows/main-ci.yml) 
+[![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-kotlin-sdk/master-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions/workflows/master-ci.yml) 
 [![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)

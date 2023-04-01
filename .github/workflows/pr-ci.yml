@@ -55,7 +55,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ env.KRYPTOKRONA_HTTP_KOVER_XML }} # TODO: add additional modules later when unit tests are in place
-          flags: unittests # optional
+          flags: unittests, grid # optional
+          layout: horizontal
           name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
