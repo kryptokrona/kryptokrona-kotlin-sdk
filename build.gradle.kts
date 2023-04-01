@@ -1,10 +1,27 @@
+import java.io.File
+import org.w3c.dom.*
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.transform.OutputKeys
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.dom.DOMSource
+import javax.xml.transform.stream.StreamResult
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 val sdkVersion: String by project
+
+fun NodeList.toList(): List<Element> {
+    val list = mutableListOf<Element>()
+    for (i in 0 until this.length) {
+        val node = this.item(i)
+        if (node is Element) {
+            list.add(node)
+        }
+    }
+    return list
+}
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -35,8 +52,6 @@ tasks.withType<KotlinCompile> {
 }
 
 // dokka configuration
-
-// applies to all libraries
 // TODO: does not work ATM, if you can fix it, please do :)
 subprojects {
     apply(plugin = "org.jetbrains.dokka")

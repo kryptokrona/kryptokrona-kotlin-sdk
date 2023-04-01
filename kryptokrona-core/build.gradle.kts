@@ -11,6 +11,7 @@ plugins {
     `maven-publish`
     signing
     id("org.jetbrains.dokka")
+    id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
 }
 
 version = "0.2.0"
