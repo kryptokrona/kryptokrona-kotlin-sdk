@@ -47,6 +47,12 @@ tasks.named<Test>("test") {
     // failFast = true
 }
 
+subprojects {
+    tasks.named("koverXmlReport") {
+        dependsOn("test")
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
