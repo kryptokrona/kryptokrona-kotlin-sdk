@@ -1,27 +1,9 @@
-import java.io.File
-import org.w3c.dom.*
-import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.transform.OutputKeys
-import javax.xml.transform.TransformerFactory
-import javax.xml.transform.dom.DOMSource
-import javax.xml.transform.stream.StreamResult
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sdkVersion: String by project
-
-fun NodeList.toList(): List<Element> {
-    val list = mutableListOf<Element>()
-    for (i in 0 until this.length) {
-        val node = this.item(i)
-        if (node is Element) {
-            list.add(node)
-        }
-    }
-    return list
-}
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -45,12 +27,6 @@ dependencies {
 tasks.named<Test>("test") {
     useJUnitPlatform()
     // failFast = true
-}
-
-subprojects {
-    tasks.named("koverXmlReport") {
-        dependsOn("test")
-    }
 }
 
 tasks.withType<KotlinCompile> {
