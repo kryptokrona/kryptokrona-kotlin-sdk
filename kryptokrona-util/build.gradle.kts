@@ -2,7 +2,7 @@ val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.20"
     id("org.jetbrains.dokka")
     `java-library`
     `maven-publish`
