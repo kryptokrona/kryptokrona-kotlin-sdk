@@ -1,6 +1,6 @@
-# Kryptokrona Cryptographic Library in Rust
+# Kryptokrona Cryptographic Library in C
 
-Cryptographic Library for Kryptokrona Kotlin SDK in Rust with Kotlin bindings.
+Cryptographic Library for Kryptokrona Kotlin SDK in C with Kotlin bindings.
 
 ## Compile
 

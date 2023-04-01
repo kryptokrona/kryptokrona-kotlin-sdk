@@ -107,6 +107,7 @@ tasks.javadoc {
     }
 }
 
+/*
 // compile the crypto rust library
 tasks.register<Exec>("rustCompile") {
     workingDir = file("${rootDir}/crypto")
@@ -177,4 +178,4 @@ val runRustLibraryLoader by tasks.registering(JavaExec::class) {
         if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "DYLD_LIBRARY_PATH"
         else "LD_LIBRARY_PATH", "$buildDir/libs"
     )
-}
+}*/

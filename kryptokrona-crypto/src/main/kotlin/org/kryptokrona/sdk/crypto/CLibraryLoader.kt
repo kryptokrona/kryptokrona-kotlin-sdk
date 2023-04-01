@@ -3,7 +3,7 @@ package org.kryptokrona.sdk.crypto
 import java.io.File
 import java.util.*
 
-open class RustLibraryLoader {
+open class CLibraryLoader {
     init {
         System.load(getLibraryPath())
     }
@@ -20,7 +20,7 @@ open class RustLibraryLoader {
         val libraryPath = File(userDir, "kryptokrona-crypto/build/libs/$libraryName")
 
         if (!libraryPath.exists()) {
-            throw RuntimeException("Failed to find the Rust shared library: $libraryName")
+            throw RuntimeException("Failed to find the C shared library: $libraryName")
         }
 
         return libraryPath.absolutePath
