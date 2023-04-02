@@ -126,21 +126,23 @@ val copyCLibrary by tasks.registering(Copy::class) {
     into("$buildDir/libs")
 }
 
-val copyCHeader by tasks.registering(Copy::class) {
-    from("$cryptoDir/crypto.h")
+val copyCHeaders by tasks.registering(Copy::class) {
+    from("$cryptoDir") {
+        include("**/*.h") // copy all files with .h extension
+    }
     into("$buildDir/headers")
 }
 
 tasks.named("build") {
     dependsOn("cCompile")
     dependsOn(copyCLibrary)
-    dependsOn(copyCHeader)
+    dependsOn(copyCHeaders)
 }
 
 tasks.withType(KotlinNativeCompile::class.java) {
     dependsOn("cCompile")
     dependsOn(copyCLibrary)
-    dependsOn(copyCHeader)
+    dependsOn(copyCHeaders)
 }
 
 val runCLibraryLoader by tasks.registering(JavaExec::class) {
