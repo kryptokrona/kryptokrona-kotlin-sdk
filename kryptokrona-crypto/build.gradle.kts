@@ -147,11 +147,15 @@ tasks.withType(KotlinNativeCompile::class.java) {
 
 val runCLibraryLoader by tasks.registering(JavaExec::class) {
     dependsOn("build")
-    classpath = sourceSets["main"].runtimeClasspath
-    main = "org.kryptokrona.sdk.crypto.CLibraryLoader"
+    classpath = sourceSets.getByName("main").runtimeClasspath
+    mainClass.set("org.kryptokrona.sdk.crypto.CLibraryLoader")
     environment(
         if (org.gradle.internal.os.OperatingSystem.current().isMacOsX) "DYLD_LIBRARY_PATH"
         else "LD_LIBRARY_PATH", "$buildDir/libs"
     )
+}
+
+tasks.named<CreateStartScripts>("startScripts") {
+    dependsOn("copyCLibrary")
 }
 
