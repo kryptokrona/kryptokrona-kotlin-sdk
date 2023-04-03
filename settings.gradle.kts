@@ -5,3 +5,6 @@ include("kryptokrona-core")
 include("kryptokrona-http")
 include("kryptokrona-crypto")
 include("kryptokrona-util")
+
+// non-publishing libraries
+include("playground")
