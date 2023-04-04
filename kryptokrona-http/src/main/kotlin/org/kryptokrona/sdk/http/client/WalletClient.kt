@@ -30,13 +30,22 @@
 
 package org.kryptokrona.sdk.http.client
 
+import io.ktor.client.*
 import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.common.post
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
+
+private val client = HttpClient {
+    install(ContentNegotiation) {
+        json()
+    }
+}
 
 /**
  * Wallet client
@@ -58,9 +67,27 @@ class WalletClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return post("https://${node.hostName}:${node.port}/getwalletsyncdata", walletSyncData).body()
+                    return client.post("https://${node.hostName}:${node.port}/getwalletsyncdata") {
+                        contentType(ContentType.Application.Json)
+                        url {
+                            parameters.append("blockIds", walletSyncData.blockIds.toString())
+                            parameters.append("startHeight", walletSyncData.startHeight.toString())
+                            parameters.append("startTimestamp", walletSyncData.startTimestamp.toString())
+                            parameters.append("blockCount", walletSyncData.blockCount.toString())
+                            parameters.append("items", walletSyncData.items.toString())
+                        }
+                    }.body()
                 } else {
-                    return post("http://${node.hostName}:${node.port}/getwalletsyncdata", walletSyncData).body()
+                    return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
+                        contentType(ContentType.Application.Json)
+                        url {
+                            parameters.append("blockIds", walletSyncData.blockIds.toString())
+                            parameters.append("startHeight", walletSyncData.startHeight.toString())
+                            parameters.append("startTimestamp", walletSyncData.startTimestamp.toString())
+                            parameters.append("blockCount", walletSyncData.blockCount.toString())
+                            parameters.append("items", walletSyncData.items.toString())
+                        }
+                    }.body()
                 }
             }
         } catch (e: Exception) {
