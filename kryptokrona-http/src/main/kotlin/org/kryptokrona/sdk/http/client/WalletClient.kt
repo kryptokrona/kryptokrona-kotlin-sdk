@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import org.kryptokrona.sdk.http.common.get
+import org.kryptokrona.sdk.http.common.post
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.node.Node
@@ -54,13 +55,12 @@ class WalletClient(private val node: Node) {
      * @return Transactions
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
-        //TODO: add possibility to send POST requests with body later
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/getwalletsyncdata").body()
+                    return post("https://${node.hostName}:${node.port}/getwalletsyncdata", walletSyncData).body()
                 } else {
-                    return get("http://${node.hostName}:${node.port}/getwalletsyncdata").body()
+                    return post("http://${node.hostName}:${node.port}/getwalletsyncdata", walletSyncData).body()
                 }
             }
         } catch (e: Exception) {
