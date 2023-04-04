@@ -32,8 +32,6 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.common.post
-import org.kryptokrona.sdk.http.model.wallet.PostWalletSyncData
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory

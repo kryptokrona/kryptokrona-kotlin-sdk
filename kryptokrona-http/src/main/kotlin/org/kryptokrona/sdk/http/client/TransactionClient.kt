@@ -31,12 +31,12 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
-import org.kryptokrona.sdk.util.node.Node
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.transaction.TransactionDetailsHashes
 import org.kryptokrona.sdk.http.model.transaction.TransactionHashesPaymentId
 import org.kryptokrona.sdk.http.model.transaction.Transactions
 import org.kryptokrona.sdk.http.model.transaction.TransactionsStatus
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**

@@ -30,10 +30,9 @@
 
 package org.kryptokrona.sdk.core.service
 
-import org.kryptokrona.sdk.util.node.Node
-import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.NodeClient
 import org.kryptokrona.sdk.http.model.node.Info
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**

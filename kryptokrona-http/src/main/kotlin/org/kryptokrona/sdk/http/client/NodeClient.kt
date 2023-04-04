@@ -32,12 +32,12 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import io.ktor.http.*
-import org.kryptokrona.sdk.util.node.Node
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.node.Fee
 import org.kryptokrona.sdk.http.model.node.Height
 import org.kryptokrona.sdk.http.model.node.Info
 import org.kryptokrona.sdk.http.model.node.Peers
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**

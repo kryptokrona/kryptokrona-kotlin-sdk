@@ -31,9 +31,9 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
-import org.kryptokrona.sdk.util.node.Node
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.PoolChangesLite
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
 /**
