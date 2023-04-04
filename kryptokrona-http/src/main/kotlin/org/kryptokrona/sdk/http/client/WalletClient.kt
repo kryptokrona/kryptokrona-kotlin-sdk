@@ -34,7 +34,6 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
-import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
@@ -68,7 +67,6 @@ class WalletClient(private val node: Node) {
             node.ssl.let {
                 if (it) {
                     return client.post("https://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        contentType(ContentType.Application.Json)
                         url {
                             parameters.append("blockIds", walletSyncData.blockIds.toString())
                             parameters.append("startHeight", walletSyncData.startHeight.toString())
@@ -79,7 +77,6 @@ class WalletClient(private val node: Node) {
                     }.body()
                 } else {
                     return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        contentType(ContentType.Application.Json)
                         url {
                             parameters.append("blockIds", walletSyncData.blockIds.toString())
                             parameters.append("startHeight", walletSyncData.startHeight.toString())

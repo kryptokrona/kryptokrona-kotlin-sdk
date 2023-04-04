@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.http.client
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.node.Node
 
 class WalletClientTest {
@@ -14,7 +15,8 @@ class WalletClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data` () = runTest {
-        val data = client.getWalletSyncData()
+        val requestData = WalletSyncDataRequest(null, null, null, null, null)
+        val data = client.getWalletSyncData(requestData)
         assertNotNull(data)
     }
 }
