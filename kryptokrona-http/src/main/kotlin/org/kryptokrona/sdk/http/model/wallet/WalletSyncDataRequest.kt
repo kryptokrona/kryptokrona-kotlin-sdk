@@ -33,10 +33,10 @@ package org.kryptokrona.sdk.http.model.wallet
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PostWalletSyncData(
-    val blockCount: Long,
-    val blockHashCheckpoints: List<String>,
-    val skipCoinbaseTransactions: Boolean,
-    val startHeight: Long,
+data class WalletSyncDataRequest(
+    val blockIds: List<Int>,
+    val startHeight: Int,
     val startTimestamp: Long,
+    val blockCount: Long,
+    val items: List<WalletSyncDataItem>,
 )
