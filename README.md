@@ -30,14 +30,13 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - Docs: https://docs.kryptokrona.org/developer/kryptokrona-kotlin-sdk
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
-- Slack: https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
 
 
 ## Getting Help
 
-Are you having trouble with Kryptokrona SDK? We want to help!
+Are you having trouble with Kryptokrona Kotlin SDK? We want to help!
 
 - Read through all documentation on our Wiki: https://docs.kryptokrona.org/developer/kryptokrona-kotlin-sdk
 
@@ -45,17 +44,19 @@ Are you having trouble with Kryptokrona SDK? We want to help!
 
 - Ask a question we monitor stackoverflow.com for questions tagged with kryptokrona-kotlin-sdk. You can also chat with the community on Hugin or Discord.
 
-- Report bugs with Kryptokrona SDK at https://github.com/kryptokrona/kryptokrona-kotlin-sdk/issues.
+- Report bugs with Kryptokrona Kotlin SDK at https://github.com/kryptokrona/kryptokrona-kotlin-sdk/issues.
+
+- Join the Discussion and be part of the community at https://github.com/kryptokrona/kryptokrona-kotlin-sdk/discussions
 
 ## Reporting Issues
 
-Kryptokrona SDK uses GitHub’s integrated issue tracking system to record bugs and feature requests. If you want to raise an issue, please follow the recommendations below:
+Kryptokrona Kotlin SDK uses GitHub’s integrated issue tracking system to record bugs and feature requests. If you want to raise an issue, please follow the recommendations below:
 
 - Before you log a bug, please search the issue tracker to see if someone has already reported the problem.
 
 - If the issue doesn’t already exist, create a new issue.
 
-- Please provide as much information as possible with the issue report. We like to know the Kryptokrona SDK version, operating system, and JVM version you’re using.
+- Please provide as much information as possible with the issue report. We like to know the Kryptokrona Kotlin SDK version, operating system, and JVM version you’re using.
 
 - If you need to paste code or include a stack trace, use Markdown. ``` escapes before and after your text.
 
@@ -76,20 +77,6 @@ We recommend using IntelliJ to work on this project.
 
 We appreciate all contributions whether it be small changes such as documentation of source code to major improvement of code.
 The easiest way is to make a fork and then make a pull request into our develop branch.
-
-To make the PR go through make sure to include this information:
-
-```
-What does this PR do?
-
-Why are these changes required?
-
-This PR has been tested using (e.g. Unit Tests, Manual Testing):
-
-Extra details?
-```
-
-NOTE: Remember to update existing diagrams if there is some bigger improvements of code so it's up to date with the implementation.
 
 ### Donate
 
