@@ -7,21 +7,31 @@ import org.kryptokrona.sdk.util.node.Node
 
 class IndexesClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val client = IndexesClient(node)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
+
+    private val clientHTTP = IndexesClient(nodeHTTP)
+
+    private val clientHTTPS = IndexesClient(nodeHTTPS)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get O Indexes` () = runTest {
-        val data = client.getOIndexes()
+        var data = clientHTTP.getOIndexes()
+        assertNotNull(data)
+
+        data = clientHTTPS.getOIndexes()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get global indexes for range` () = runTest {
-        val data = client.getGlobalIndexesForRange()
+        var data = clientHTTP.getGlobalIndexesForRange()
+        assertNotNull(data)
+
+        data = clientHTTPS.getGlobalIndexesForRange()
         assertNotNull(data)
     }
 
