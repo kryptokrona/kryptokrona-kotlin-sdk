@@ -54,6 +54,35 @@ kotlin {
     jvmToolchain(17)
 }
 
+koverReport {
+    filters {
+        excludes {
+            classes("org.kryptokrona.sdk.http.model.*")
+        }
+    }
+
+    verify {
+        onCheck = true
+        rule {
+            isEnabled = true
+            entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
+
+            filters {
+                excludes {
+                    classes("org.kryptokrona.sdk.http.model.*")
+                }
+            }
+
+            bound {
+                minValue = 60
+                maxValue = 90
+                metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
+                aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+            }
+        }
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
