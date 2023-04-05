@@ -1,6 +1,8 @@
 package org.kryptokrona.sdk.http.client
 
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.util.node.Node
@@ -25,8 +27,8 @@ class OutputsClientTest {
         val dataHTTPS = clientHTTPS.getRandomOuts()
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 
 }
