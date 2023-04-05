@@ -53,7 +53,7 @@ class NodeService(private var node: Node) {
      *
      * @return The node info.
      */
-    suspend fun getNodeInfo(): org.kryptokrona.sdk.http.model.response.node.Info? {
+    suspend fun getNodeInfo(): Info? {
         logger.info("Getting node info...")
         return nodeClient.getNodeInfo()
     }

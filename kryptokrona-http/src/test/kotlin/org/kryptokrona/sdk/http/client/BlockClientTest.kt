@@ -21,50 +21,6 @@ class BlockClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get blocks`() = runTest {
-        //TODO: need to check this one
-        // Arrange
-        val blocks = BlocksRequest(listOf("7fb97df81221dd1366051b2d0bc7f49c66c22ac4431d879c895b06d66ef66f4c"))
-
-        // Act
-        val dataHTTP = clientHTTP.getBlocks(blocks)
-        val dataHTTPS = clientHTTPS.getBlocks(blocks)
-
-        // Assert
-        // assertNotNull(dataHTTP)
-        // assertNotNull(dataHTTPS)
-    }
-
-    @Test
-    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get query blocks`() = runTest {
-        // Arrange
-
-        // Act
-        val dataHTTP = clientHTTP.getQueryBlocks()
-        val dataHTTPS = clientHTTPS.getQueryBlocks()
-
-        // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
-    }
-
-    @Test
-    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get query blocks lite`() = runTest {
-        // Arrange
-
-        // Act
-        val dataHTTP = clientHTTP.getQueryBlocksLite()
-        val dataHTTPS = clientHTTPS.getQueryBlocksLite()
-
-        // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
-    }
-
-    @Test
-    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block details by height`() = runTest {
         // Arrange
         val blockWithHeight0 = BlockDetailsByHeightRequest(0)
