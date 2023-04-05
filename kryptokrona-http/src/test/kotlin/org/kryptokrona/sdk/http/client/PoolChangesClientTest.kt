@@ -18,11 +18,15 @@ class PoolChangesClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get pool changes lite` () = runTest {
-        var data = clientHTTP.getPoolChangesLite()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getPoolChangesLite()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getPoolChangesLite()
+        val dataHTTPS = clientHTTPS.getPoolChangesLite()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
 }
