@@ -7,37 +7,52 @@ import org.kryptokrona.sdk.util.node.Node
 
 class TransactionClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val client = TransactionClient(node)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
+
+    private val clientHTTP = TransactionClient(nodeHTTP)
+
+    private val clientHTTPS = TransactionClient(nodeHTTPS)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions` () = runTest {
-        val data = client.getTransactions()
+        var data = clientHTTP.getTransactions()
+        assertNotNull(data)
+
+        data = clientHTTPS.getTransactions()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes` () = runTest {
-        val data = client.getTransactionDetailsByHashes()
+        var data = clientHTTP.getTransactionDetailsByHashes()
+        assertNotNull(data)
+
+        data = clientHTTPS.getTransactionDetailsByHashes()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
-        val data = client.getTransactionHashesByPaymentId()
+        var data = clientHTTP.getTransactionHashesByPaymentId()
+        assertNotNull(data)
+
+        data = clientHTTPS.getTransactionHashesByPaymentId()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status` () = runTest {
-        val data = client.getTransactionsStatus()
+        var data = clientHTTP.getTransactionsStatus()
+        assertNotNull(data)
+
+        data = clientHTTPS.getTransactionsStatus()
         assertNotNull(data)
     }
-
 
 }
