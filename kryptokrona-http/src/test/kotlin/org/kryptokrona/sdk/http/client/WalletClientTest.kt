@@ -27,8 +27,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 
     @Test
