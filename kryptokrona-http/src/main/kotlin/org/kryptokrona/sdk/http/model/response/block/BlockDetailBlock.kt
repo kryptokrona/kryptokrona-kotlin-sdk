@@ -34,21 +34,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlockDetailBlock(
-    val alreadyGeneratedCoins: Int,
-    val alreadyGeneratedTransactions: Int,
-    val baseReward: Int,
-    val blockSize: Int,
-    val difficulty: Int,
+    val alreadyGeneratedCoins: Long,
+    val alreadyGeneratedTransactions: Long,
+    val baseReward: Long,
+    val blockSize: Long,
+    val difficulty: Long,
     val hash: String,
-    val index: Int,
+    val index: Long,
     val majorVersion: Int,
     val minorVersion: Int,
-    val nonce: Int,
+    val nonce: Long,
     val prevBlockHash: String,
-    val reward: Int,
-    val sizeMedian: Int,
-    val timestamp: Int,
-    val totalFeeAmount: Int,
+    val reward: Long,
+    val sizeMedian: Long,
+    val timestamp: Long,
+    val totalFeeAmount: Long,
     val transactions: List<BlockDetailBlockTransaction>,
-    val transactionsCumulativeSize: Int
+    val transactionsCumulativeSize: Long
 )
