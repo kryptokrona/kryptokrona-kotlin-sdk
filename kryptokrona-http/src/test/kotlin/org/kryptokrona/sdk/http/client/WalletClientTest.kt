@@ -8,15 +8,23 @@ import org.kryptokrona.sdk.util.node.Node
 
 class WalletClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val client = WalletClient(node)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
+
+    private val clientHTTP = WalletClient(nodeHTTP)
+
+    private val clientHTTPS = WalletClient(nodeHTTPS)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data without request parameters` () = runTest {
         val requestData = WalletSyncDataRequest()
-        val data = client.getWalletSyncData(requestData)
+
+        var data = clientHTTP.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        data = clientHTTPS.getWalletSyncData(requestData)
         assertNotNull(data)
     }
 
@@ -24,15 +32,24 @@ class WalletClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with request body` () = runTest {
         var requestData = WalletSyncDataRequest(startHeight = 10000)
-        var data = client.getWalletSyncData(requestData)
+        var data = clientHTTP.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        data = clientHTTPS.getWalletSyncData(requestData)
         assertNotNull(data)
 
         requestData = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 500)
-        data = client.getWalletSyncData(requestData)
+        data = clientHTTP.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        data = clientHTTPS.getWalletSyncData(requestData)
         assertNotNull(data)
 
         requestData = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
-        data = client.getWalletSyncData(requestData)
+        data = clientHTTP.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        data = clientHTTPS.getWalletSyncData(requestData)
         assertNotNull(data)
     }
 }

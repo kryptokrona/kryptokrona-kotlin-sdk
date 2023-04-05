@@ -53,6 +53,7 @@ class PoolChangesClient(private val node: Node) {
      * @return PoolChangesLite
      */
     suspend fun getPoolChangesLite(): PoolChangesLite? {
+        //TODO: we should probably make this a post request instead
         try {
             node.ssl.let {
                 if (it) {
