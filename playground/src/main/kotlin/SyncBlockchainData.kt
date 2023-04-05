@@ -9,6 +9,10 @@ fun main() = runBlocking {
     val node = Node("techy.ddns.net", 11898, false)
     val walletService = WalletService(node)
 
+    // setting initial start height to be sync from
+    // walletService.setStartHeight(10000)
+
+    // launching the sync process
     val job = launch {
         while(isActive) {
             walletService.startSync()

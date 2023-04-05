@@ -60,9 +60,15 @@ class WalletService(node: Node) {
 
     private var nodeInfo: Info? = null
 
+    private var startHeight: Long = 0
+
     fun getWalletSyncData() = walletSyncData
 
     fun getNodeInfo() = nodeInfo
+
+    fun setStartHeight(height: Long) {
+        startHeight = height
+    }
 
     /**
      * Starts the sync process.
@@ -74,7 +80,7 @@ class WalletService(node: Node) {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     logger.info("Fetching blocks...")
-                    val requestData = WalletSyncDataRequest(null, null, null, null, null)
+                    val requestData = WalletSyncDataRequest(null, startHeight, null, null, null)
                     walletSyncData = getSyncData(requestData)
                     walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
                     delay(Config.SYNC_THREAD_INTERVAL)

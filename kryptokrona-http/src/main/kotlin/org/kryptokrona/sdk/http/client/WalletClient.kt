@@ -36,6 +36,8 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.node.Node
@@ -64,23 +66,25 @@ class WalletClient(private val node: Node) {
      * @return Transactions
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
-        val params = ParametersBuilder().apply {
-            walletSyncData.blockIds?.let { append("blockIds", it.toString()) }
-            walletSyncData.startHeight?.let { append("startHeight", it.toString()) }
-            walletSyncData.startTimestamp?.let { append("startTimestamp", it.toString()) }
-            walletSyncData.blockCount?.let { append("blockCount", it.toString()) }
-            walletSyncData.items?.let { append("items", it.toString()) }
-        }.build()
+        val jsonBody = Json.encodeToString(walletSyncData)
 
         try {
             node.ssl.let {
                 if (it) {
                     return client.post("https://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        url { parameters.appendAll(params) }
+                        contentType(ContentType.Application.Json)
+                        headers {
+                            append("Content-Length", jsonBody.length.toString())
+                        }
+                        setBody(jsonBody)
                     }.body()
                 } else {
                     return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        url { parameters.appendAll(params) }
+                        contentType(ContentType.Application.Json)
+                        headers {
+                            append("Content-Length", jsonBody.length.toString())
+                        }
+                        setBody(jsonBody)
                     }.body()
                 }
             }

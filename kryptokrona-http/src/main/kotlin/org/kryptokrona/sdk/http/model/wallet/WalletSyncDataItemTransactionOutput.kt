@@ -33,11 +33,7 @@ package org.kryptokrona.sdk.http.model.wallet
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class WalletSyncDataItemTransaction(
-    val hash: String,
-    val inputs: List<WalletSyncDataItemTransactionInput>,
-    val outputs: List<WalletSyncDataItemTransactionOutput>,
-    val paymentID: String,
-    val txPublicKey: String,
-    val unlockTime: Long
+data class WalletSyncDataItemTransactionOutput(
+    val amount: Long,
+    val key: String
 )

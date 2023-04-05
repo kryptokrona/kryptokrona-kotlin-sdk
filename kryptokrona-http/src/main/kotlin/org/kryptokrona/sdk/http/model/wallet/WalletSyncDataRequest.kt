@@ -34,9 +34,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WalletSyncDataRequest(
-    val blockIds: List<Int>?,
-    val startHeight: Int?,
-    val startTimestamp: Long?,
-    val blockCount: Long?,
-    val items: List<WalletSyncDataItem>?,
+    val blockIds: List<Long>? = null,
+    val startHeight: Long? = null,
+    val startTimestamp: Long? = null,
+    val blockCount: Long? = null,
+    val items: List<WalletSyncDataItem>? = null,
 )

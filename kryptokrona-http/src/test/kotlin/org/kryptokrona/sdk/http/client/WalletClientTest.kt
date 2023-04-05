@@ -14,9 +14,25 @@ class WalletClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get wallet sync data` () = runTest {
-        val requestData = WalletSyncDataRequest(null, null, null, null, null)
+    fun `can get wallet sync data without request parameters` () = runTest {
+        val requestData = WalletSyncDataRequest()
         val data = client.getWalletSyncData(requestData)
+        assertNotNull(data)
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get wallet sync data with request body` () = runTest {
+        var requestData = WalletSyncDataRequest(startHeight = 10000)
+        var data = client.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        requestData = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 500)
+        data = client.getWalletSyncData(requestData)
+        assertNotNull(data)
+
+        requestData = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
+        data = client.getWalletSyncData(requestData)
         assertNotNull(data)
     }
 }
