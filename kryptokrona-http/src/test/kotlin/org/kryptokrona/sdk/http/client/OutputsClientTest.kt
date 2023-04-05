@@ -7,14 +7,21 @@ import org.kryptokrona.sdk.util.node.Node
 
 class OutputsClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val client = OutputsClient(node)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
+
+    private val clientHTTP = OutputsClient(nodeHTTP)
+
+    private val clientHTTPS = OutputsClient(nodeHTTPS)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get random outs` () = runTest {
-        val data = client.getRandomOuts()
+        var data = clientHTTP.getRandomOuts()
+        assertNotNull(data)
+
+        data = clientHTTPS.getRandomOuts()
         assertNotNull(data)
     }
 

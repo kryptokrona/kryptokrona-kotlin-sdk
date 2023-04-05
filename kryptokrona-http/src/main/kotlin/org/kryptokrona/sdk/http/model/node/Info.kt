@@ -40,21 +40,21 @@ import kotlinx.serialization.Serializable
 data class Info(
 
     @SerialName("alt_blocks_count")
-    val altBlocksCount: Int,
+    val altBlocksCount: Long,
 
-    val difficulty: Int,
+    val difficulty: Long,
 
     @SerialName("grey_peerlist_size")
-    val greyPeerlistSize: Int,
+    val greyPeerlistSize: Long,
 
-    val hashrate: Int,
-    val height: Int,
+    val hashrate: Long,
+    val height: Long,
 
     @SerialName("incoming_connections_count")
-    val incomingConnectionsCount: Int,
+    val incomingConnectionsCount: Long,
 
     @SerialName("last_known_block_index")
-    val lastKnownBlockIndex: Int,
+    val lastKnownBlockIndex: Long,
 
     @SerialName("major_version")
     val majorVersion: Int,
@@ -63,18 +63,18 @@ data class Info(
     val minorVersion: Int,
 
     @SerialName("network_height")
-    val networkHeight: Int,
+    val networkHeight: Long,
 
     @SerialName("outgoing_connections_count")
-    val outgoingConnectionsCount: Int,
+    val outgoingConnectionsCount: Long,
 
     @SerialName("start_time")
-    val startTime: Int,
+    val startTime: Long,
 
     val status: String,
 
     @SerialName("supported_height")
-    val supportedHeight: Int,
+    val supportedHeight: Long,
 
     val synced: Boolean,
     val testnet: Boolean,

@@ -7,53 +7,72 @@ import org.kryptokrona.sdk.util.node.Node
 
 class NodeClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val falseNode = Node("test.mjovanc.com", 11898, false)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
 
-    private val client = NodeClient(node)
+    private val falseNodeHTTP = Node("test.mjovanc.com", 11898, false)
 
-    private val client2 = NodeClient(falseNode)
+    private val clientHTTP = NodeClient(nodeHTTP)
+
+    private val clientHTTPS = NodeClient(nodeHTTPS)
+
+    private val clientHTTP2 = NodeClient(falseNodeHTTP)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can reach node` () = runTest {
-        val data = client.isNodeRunning()
+        var data = clientHTTP.isNodeRunning()
+        assertTrue(data)
+
+        data = clientHTTPS.isNodeRunning()
         assertTrue(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can not reach node` () = runTest {
-        val data = client2.isNodeRunning()
+        val data = clientHTTP2.isNodeRunning()
         assertFalse(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get node info` () = runTest {
-        val data = client.getNodeInfo()
+        var data = clientHTTP.getNodeInfo()
+        assertNotNull(data)
+
+        data = clientHTTPS.getNodeInfo()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get node height` () = runTest {
-        val data = client.getNodeHeight()
+        var data = clientHTTP.getNodeHeight()
+        assertNotNull(data)
+
+        data = clientHTTPS.getNodeHeight()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get node peers` () = runTest {
-        val data = client.getNodePeers()
+        var data = clientHTTP.getNodePeers()
+        assertNotNull(data)
+
+        data = clientHTTPS.getNodePeers()
         assertNotNull(data)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get node fee` () = runTest {
-        val data = client.getNodeFee()
+        var data = clientHTTP.getNodeFee()
+        assertNotNull(data)
+
+        data = clientHTTPS.getNodeFee()
         assertNotNull(data)
     }
 
