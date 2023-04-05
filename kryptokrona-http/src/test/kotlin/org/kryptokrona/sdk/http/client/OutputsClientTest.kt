@@ -18,11 +18,15 @@ class OutputsClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get random outs` () = runTest {
-        var data = clientHTTP.getRandomOuts()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getRandomOuts()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getRandomOuts()
+        val dataHTTPS = clientHTTPS.getRandomOuts()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
 }
