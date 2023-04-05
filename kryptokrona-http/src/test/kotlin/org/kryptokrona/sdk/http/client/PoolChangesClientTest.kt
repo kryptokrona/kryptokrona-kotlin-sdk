@@ -7,14 +7,21 @@ import org.kryptokrona.sdk.util.node.Node
 
 class PoolChangesClientTest {
 
-    private val node = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
 
-    private val client = PoolChangesClient(node)
+    private val nodeHTTPS = Node("privacymine.net", 21898, true)
+
+    private val clientHTTP = PoolChangesClient(nodeHTTP)
+
+    private val clientHTTPS = PoolChangesClient(nodeHTTPS)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get pool changes lite` () = runTest {
-        val data = client.getPoolChangesLite()
+        var data = clientHTTP.getPoolChangesLite()
+        assertNotNull(data)
+
+        data = clientHTTPS.getPoolChangesLite()
         assertNotNull(data)
     }
 
