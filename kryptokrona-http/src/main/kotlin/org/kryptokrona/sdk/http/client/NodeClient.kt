@@ -81,7 +81,7 @@ class NodeClient(private val node: Node) {
      *
      * @return Peers
      */
-    suspend fun getNodeInfo(): org.kryptokrona.sdk.http.model.response.node.Info? {
+    suspend fun getNodeInfo(): Info? {
         try {
             node.ssl.let {
                 if (it) {
@@ -102,7 +102,7 @@ class NodeClient(private val node: Node) {
      *
      * @return Height
      */
-    suspend fun getNodeHeight(): org.kryptokrona.sdk.http.model.response.node.Height? {
+    suspend fun getNodeHeight(): Height? {
         try {
             node.ssl.let {
                 if (it) {
@@ -123,7 +123,7 @@ class NodeClient(private val node: Node) {
      *
      * @return Peers
      */
-    suspend fun getNodePeers(): org.kryptokrona.sdk.http.model.response.node.Peers? {
+    suspend fun getNodePeers(): Peers? {
         try {
             node.ssl.let {
                 if (it) {
@@ -144,7 +144,7 @@ class NodeClient(private val node: Node) {
      *
      * @return Fee
      */
-    suspend fun getNodeFee(): org.kryptokrona.sdk.http.model.response.node.Fee? {
+    suspend fun getNodeFee(): Fee? {
         try {
             node.ssl.let {
                 if (it) {
