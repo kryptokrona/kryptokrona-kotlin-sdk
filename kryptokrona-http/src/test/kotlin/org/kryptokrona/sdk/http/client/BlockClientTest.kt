@@ -24,12 +24,12 @@ class BlockClientTest {
         // Arrange
 
         // Act
-        val data1 = clientHTTP.getBlocks()
-        val data2 = clientHTTPS.getBlocks()
+        val dataHTTP = clientHTTP.getBlocks()
+        val dataHTTPS = clientHTTPS.getBlocks()
 
         // Assert
-        assertNotNull(data1)
-        assertNotNull(data2)
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
@@ -38,12 +38,12 @@ class BlockClientTest {
         // Arrange
 
         // Act
-        val data1 = clientHTTP.getQueryBlocks()
-        val data2 = clientHTTPS.getQueryBlocks()
+        val dataHTTP = clientHTTP.getQueryBlocks()
+        val dataHTTPS = clientHTTPS.getQueryBlocks()
 
         // Assert
-        assertNotNull(data1)
-        assertNotNull(data2)
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
@@ -52,12 +52,12 @@ class BlockClientTest {
         // Arrange
 
         // Act
-        val data1 = clientHTTP.getQueryBlocksLite()
-        val data2 = clientHTTPS.getQueryBlocksLite()
+        val dataHTTP = clientHTTP.getQueryBlocksLite()
+        val dataHTTPS = clientHTTPS.getQueryBlocksLite()
 
         // Assert
-        assertNotNull(data1)
-        assertNotNull(data2)
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
