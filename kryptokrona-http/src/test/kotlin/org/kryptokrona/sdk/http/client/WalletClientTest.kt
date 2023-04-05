@@ -36,7 +36,7 @@ class WalletClientTest {
     fun `can get wallet sync data with request body` () = runTest {
         // Arrange
         val requestData1 = WalletSyncDataRequest(startHeight = 10000)
-        val requestData2 = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 500)
+        val requestData2 = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 100)
         val requestData3 = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
 
         // Act
@@ -49,12 +49,23 @@ class WalletClientTest {
         val dataHTTPS3 = clientHTTPS.getWalletSyncData(requestData3)
 
         // Assert
-        assertNotNull(dataHTTP1)
-        assertNotNull(dataHTTP2)
-        assertNotNull(dataHTTP3)
+        if (dataHTTP1 != null) assertEquals(dataHTTP1.status, "OK")
+        if (dataHTTP2 != null) assertEquals(dataHTTP2.status, "OK")
+        if (dataHTTP3 != null) assertEquals(dataHTTP3.status, "OK")
+        if (dataHTTPS1 != null) assertEquals(dataHTTPS1.status, "OK")
+        if (dataHTTPS2 != null) assertEquals(dataHTTPS2.status, "OK")
+        if (dataHTTPS3 != null) assertEquals(dataHTTPS3.status, "OK")
 
-        assertNotNull(dataHTTPS1)
-        assertNotNull(dataHTTPS2)
-        assertNotNull(dataHTTPS3)
+        dataHTTP1?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
+        dataHTTP2?.items?.get(0)?.let { assertEquals(it.blockHeight, 100000) }
+        dataHTTP3?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
+        dataHTTPS1?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
+        dataHTTPS2?.items?.get(0)?.let { assertEquals(it.blockHeight, 100000) }
+        dataHTTPS3?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
+
+        assertEquals(100, dataHTTP2?.items?.size)
+        assertEquals(50, dataHTTP3?.items?.size)
+        assertEquals(100, dataHTTPS2?.items?.size)
+        assertEquals(50, dataHTTPS3?.items?.size)
     }
 }
