@@ -28,44 +28,27 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
+package org.kryptokrona.sdk.http.model.response.block
 
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
-import org.kryptokrona.sdk.util.node.Node
-import org.slf4j.LoggerFactory
+import kotlinx.serialization.Serializable
 
-/**
- * Outputs client
- *
- * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param node The node that the wallet service is connected to.
- */
-class OutputsClient(private val node: Node) {
-
-    private val logger = LoggerFactory.getLogger("OutputsClient")
-
-    /**
-     * Get random outputs
-     *
-     * @return RandomOutputs
-     */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
-        }
-
-        return null
-    }
-
-}
+@Serializable
+data class BlockDetailBlock(
+    val alreadyGeneratedCoins: Int,
+    val alreadyGeneratedTransactions: Int,
+    val baseReward: Int,
+    val blockSize: Int,
+    val difficulty: Int,
+    val hash: String,
+    val index: Int,
+    val majorVersion: Int,
+    val minorVersion: Int,
+    val nonce: Int,
+    val prevBlockHash: String,
+    val reward: Int,
+    val sizeMedian: Int,
+    val timestamp: Int,
+    val totalFeeAmount: Int,
+    val transactions: List<org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransaction>,
+    val transactionsCumulativeSize: Int
+)

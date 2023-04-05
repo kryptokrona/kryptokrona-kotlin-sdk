@@ -32,8 +32,8 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.GlobalIndexesForRange
-import org.kryptokrona.sdk.http.model.OIndexes
+import org.kryptokrona.sdk.http.model.response.GlobalIndexesForRange
+import org.kryptokrona.sdk.http.model.response.OIndexes
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 

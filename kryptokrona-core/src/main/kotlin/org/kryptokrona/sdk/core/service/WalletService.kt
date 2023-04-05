@@ -32,9 +32,8 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.http.client.WalletClient
-import org.kryptokrona.sdk.http.model.node.Info
-import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
-import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
+import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
+import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
@@ -58,7 +57,7 @@ class WalletService(node: Node) {
 
     private var walletSyncData: WalletSyncData? = null
 
-    private var nodeInfo: Info? = null
+    private var nodeInfo: org.kryptokrona.sdk.http.model.response.node.Info? = null
 
     private var startHeight: Long = 0
 

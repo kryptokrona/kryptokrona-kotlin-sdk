@@ -38,8 +38,8 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.kryptokrona.sdk.http.model.wallet.WalletSyncData
-import org.kryptokrona.sdk.http.model.wallet.WalletSyncDataRequest
+import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
+import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 

@@ -33,8 +33,8 @@ package org.kryptokrona.sdk.http.client
 import io.ktor.client.call.*
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.block.*
-import org.kryptokrona.sdk.http.model.queryblocks.QueryBlocks
-import org.kryptokrona.sdk.http.model.queryblocks.QueryBlocksLite
+import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
+import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
@@ -54,7 +54,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlocks(): Blocks? {
+    suspend fun getBlocks(): org.kryptokrona.sdk.http.model.response.block.Blocks? {
         try {
             node.ssl.let {
                 if (it) {
@@ -75,7 +75,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getQueryBlocks(): QueryBlocks? {
+    suspend fun getQueryBlocks(): org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks? {
         try {
             node.ssl.let {
                 if (it) {
@@ -96,7 +96,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getQueryBlocksLite(): QueryBlocksLite? {
+    suspend fun getQueryBlocksLite(): org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite? {
         try {
             node.ssl.let {
                 if (it) {
@@ -117,7 +117,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlockDetailsByHeight(): BlockDetail? {
+    suspend fun getBlockDetailsByHeight(): org.kryptokrona.sdk.http.model.response.block.BlockDetail? {
         try {
             node.ssl.let {
                 if (it) {
@@ -138,7 +138,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
+    suspend fun getBlocksDetailsByHeights(): org.kryptokrona.sdk.http.model.response.block.BlocksDetails? {
         try {
             node.ssl.let {
                 if (it) {
@@ -159,7 +159,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
+    suspend fun getBlocksDetailsByHashes(): org.kryptokrona.sdk.http.model.response.block.BlocksDetailsHashes? {
         try {
             node.ssl.let {
                 if (it) {
@@ -180,7 +180,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlocksHashesTimestamp
      */
-    suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
+    suspend fun getBlocksHashesByTimestamps(): org.kryptokrona.sdk.http.model.response.block.BlocksHashesTimestamp? {
         try {
             node.ssl.let {
                 if (it) {

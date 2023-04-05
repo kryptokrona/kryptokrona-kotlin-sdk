@@ -31,7 +31,7 @@
 package org.kryptokrona.sdk.core.service
 
 import org.kryptokrona.sdk.http.client.NodeClient
-import org.kryptokrona.sdk.http.model.node.Info
+import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 
@@ -53,7 +53,7 @@ class NodeService(private var node: Node) {
      *
      * @return The node info.
      */
-    suspend fun getNodeInfo(): Info? {
+    suspend fun getNodeInfo(): org.kryptokrona.sdk.http.model.response.node.Info? {
         logger.info("Getting node info...")
         return nodeClient.getNodeInfo()
     }

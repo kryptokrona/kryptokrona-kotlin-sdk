@@ -28,44 +28,68 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
+package org.kryptokrona.sdk.http.model.response.node
 
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
-import org.kryptokrona.sdk.util.node.Node
-import org.slf4j.LoggerFactory
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
- * Outputs client
- *
- * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param node The node that the wallet service is connected to.
+ * Node info
  */
-class OutputsClient(private val node: Node) {
+@Serializable
+data class Info(
 
-    private val logger = LoggerFactory.getLogger("OutputsClient")
+    @SerialName("alt_blocks_count")
+    val altBlocksCount: Long,
 
-    /**
-     * Get random outputs
-     *
-     * @return RandomOutputs
-     */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
-        }
+    val difficulty: Long,
 
-        return null
-    }
+    @SerialName("grey_peerlist_size")
+    val greyPeerlistSize: Long,
 
-}
+    val hashrate: Long,
+    val height: Long,
+
+    @SerialName("incoming_connections_count")
+    val incomingConnectionsCount: Long,
+
+    @SerialName("last_known_block_index")
+    val lastKnownBlockIndex: Long,
+
+    @SerialName("major_version")
+    val majorVersion: Int,
+
+    @SerialName("minor_version")
+    val minorVersion: Int,
+
+    @SerialName("network_height")
+    val networkHeight: Long,
+
+    @SerialName("outgoing_connections_count")
+    val outgoingConnectionsCount: Long,
+
+    @SerialName("start_time")
+    val startTime: Long,
+
+    val status: String,
+
+    @SerialName("supported_height")
+    val supportedHeight: Long,
+
+    val synced: Boolean,
+    val testnet: Boolean,
+
+    @SerialName("tx_count")
+    val txCount: Int,
+
+    @SerialName("tx_pool_size")
+    val txPoolSize: Int,
+
+    @SerialName("upgrade_heights")
+    val upgradeHeights: List<Int>,
+
+    val version: String,
+
+    @SerialName("white_peerlist_size")
+    val whitePeerlistSize: Int
+)
