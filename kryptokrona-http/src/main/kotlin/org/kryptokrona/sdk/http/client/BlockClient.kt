@@ -43,6 +43,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
+import org.kryptokrona.sdk.http.model.request.block.BlocksRequest
 import org.kryptokrona.sdk.http.model.response.block.*
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
@@ -71,15 +72,27 @@ class BlockClient(private val node: Node) {
      *
      * @return Blocks
      */
-    suspend fun getBlocks(): Blocks? {
-        try {
+    suspend fun getBlocks(blocksRequest: BlocksRequest): Blocks? {
+        val jsonBody = Json.encodeToString(blocksRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/getblocks").body()
+                    url.takeFrom("https://${node.hostName}:${node.port}/getblocks")
                 } else {
-                    return get("http://${node.hostName}:${node.port}/getblocks").body()
+                    url.takeFrom("http://${node.hostName}:${node.port}/getblocks")
                 }
             }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            client.post(builder).body()
         } catch (e: Exception) {
             logger.error("Error getting blocks", e)
         }
