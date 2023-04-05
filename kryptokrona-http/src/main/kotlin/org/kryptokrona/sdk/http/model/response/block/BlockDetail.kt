@@ -33,4 +33,4 @@ package org.kryptokrona.sdk.http.model.response.block
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetail(val block: org.kryptokrona.sdk.http.model.response.block.BlockDetailBlock, val status: String)
+data class BlockDetail(val block: BlockDetailBlock, val status: String)

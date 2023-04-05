@@ -44,4 +44,14 @@ class BlockClientTest {
         data = clientHTTPS.getQueryBlocksLite()
         assertNotNull(data)
     }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block details by height`() = runTest {
+        var data = clientHTTP.getQueryBlocksLite()
+        assertNotNull(data)
+
+        data = clientHTTPS.getQueryBlocksLite()
+        assertNotNull(data)
+    }
 }

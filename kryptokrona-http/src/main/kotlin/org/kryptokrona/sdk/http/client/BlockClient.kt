@@ -30,13 +30,29 @@
 
 package org.kryptokrona.sdk.http.client
 
+import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.block.*
+import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
+import org.kryptokrona.sdk.http.model.response.block.BlockDetail
+import org.kryptokrona.sdk.http.model.response.block.Blocks
+import org.kryptokrona.sdk.http.model.response.block.BlocksDetailsHashes
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
+
+private val client = HttpClient {
+    install(ContentNegotiation) {
+        json()
+    }
+}
 
 /**
  * Block client
@@ -54,7 +70,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlocks(): org.kryptokrona.sdk.http.model.response.block.Blocks? {
+    suspend fun getBlocks(): Blocks? {
         try {
             node.ssl.let {
                 if (it) {
@@ -75,7 +91,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getQueryBlocks(): org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks? {
+    suspend fun getQueryBlocks(): QueryBlocks? {
         try {
             node.ssl.let {
                 if (it) {
@@ -96,7 +112,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getQueryBlocksLite(): org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite? {
+    suspend fun getQueryBlocksLite(): QueryBlocksLite? {
         try {
             node.ssl.let {
                 if (it) {
@@ -117,13 +133,27 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlockDetailsByHeight(): org.kryptokrona.sdk.http.model.response.block.BlockDetail? {
+    suspend fun getBlockDetailsByHeight(blockDetailsByHeightRequest: BlockDetailsByHeightRequest): BlockDetail? {
+        val jsonBody = Json.encodeToString(blockDetailsByHeightRequest)
+
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_block_details_by_height").body()
+                    return client.post("https://${node.hostName}:${node.port}/get_block_details_by_height") {
+                        contentType(ContentType.Application.Json)
+                        headers {
+                            append("Content-Length", jsonBody.length.toString())
+                        }
+                        setBody(jsonBody)
+                    }.body()
                 } else {
-                    return get("http://${node.hostName}:${node.port}/get_block_details_by_height").body()
+                    return client.post("http://${node.hostName}:${node.port}/get_block_details_by_height") {
+                        contentType(ContentType.Application.Json)
+                        headers {
+                            append("Content-Length", jsonBody.length.toString())
+                        }
+                        setBody(jsonBody)
+                    }.body()
                 }
             }
         } catch (e: Exception) {
@@ -159,7 +189,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlockDetailsHash
      */
-    suspend fun getBlocksDetailsByHashes(): org.kryptokrona.sdk.http.model.response.block.BlocksDetailsHashes? {
+    suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
         try {
             node.ssl.let {
                 if (it) {
