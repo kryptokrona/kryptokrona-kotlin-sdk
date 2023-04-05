@@ -43,9 +43,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.http.model.response.block.BlockDetail
-import org.kryptokrona.sdk.http.model.response.block.Blocks
-import org.kryptokrona.sdk.http.model.response.block.BlocksDetailsHashes
+import org.kryptokrona.sdk.http.model.response.block.*
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
 import org.kryptokrona.sdk.util.node.Node
@@ -71,7 +69,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return Blocks
      */
     suspend fun getBlocks(): Blocks? {
         try {
@@ -92,7 +90,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return QueryBlocks
      */
     suspend fun getQueryBlocks(): QueryBlocks? {
         try {
@@ -113,7 +111,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return QueryBlocksLite
      */
     suspend fun getQueryBlocksLite(): QueryBlocksLite? {
         try {
@@ -134,7 +132,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return BlockDetail
      */
     suspend fun getBlockDetailsByHeight(blockDetailsByHeightRequest: BlockDetailsByHeightRequest): BlockDetail? {
         val jsonBody = Json.encodeToString(blockDetailsByHeightRequest)
@@ -167,9 +165,9 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return BlocksDetails
      */
-    suspend fun getBlocksDetailsByHeights(): org.kryptokrona.sdk.http.model.response.block.BlocksDetails? {
+    suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
         try {
             node.ssl.let {
                 if (it) {
@@ -188,7 +186,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @return BlockDetailsHash
+     * @return BlocksDetailsHashes
      */
     suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
         try {
@@ -211,7 +209,7 @@ class BlockClient(private val node: Node) {
      *
      * @return BlocksHashesTimestamp
      */
-    suspend fun getBlocksHashesByTimestamps(): org.kryptokrona.sdk.http.model.response.block.BlocksHashesTimestamp? {
+    suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
         try {
             node.ssl.let {
                 if (it) {

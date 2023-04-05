@@ -30,12 +30,25 @@
 
 package org.kryptokrona.sdk.http.client
 
+import io.ktor.client.*
 import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.http.model.request.GlobalIndexesForRangeRequest
 import org.kryptokrona.sdk.http.model.response.GlobalIndexesForRange
 import org.kryptokrona.sdk.http.model.response.OIndexes
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
+
+private val client = HttpClient {
+    install(ContentNegotiation) {
+        json()
+    }
+}
 
 /**
  * Indexes client
@@ -49,40 +62,31 @@ class IndexesClient(private val node: Node) {
     private val logger = LoggerFactory.getLogger("IndexesClient")
 
     /**
-     * Get O Indexes
-     *
-     * @return OIndexes
-     */
-    suspend fun getOIndexes(): OIndexes? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_o_indexes").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_o_indexes").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting O Indexes", e)
-        }
-
-        return null
-    }
-
-    /**
      * Get global indexes for range
      *
      * @return GlobalIndexesForRange
      */
-    suspend fun getGlobalIndexesForRange(): GlobalIndexesForRange? {
-        try {
+    suspend fun getGlobalIndexesForRange(globalIndexesForRangeRequest: GlobalIndexesForRangeRequest): GlobalIndexesForRange? {
+        val jsonBody = Json.encodeToString(globalIndexesForRangeRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_global_indexes_for_range").body()
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_global_indexes_for_range")
                 } else {
-                    return get("http://${node.hostName}:${node.port}/get_global_indexes_for_range").body()
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_global_indexes_for_range")
                 }
             }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            client.post(builder).body()
         } catch (e: Exception) {
             logger.error("Error getting global indexes for range", e)
         }
