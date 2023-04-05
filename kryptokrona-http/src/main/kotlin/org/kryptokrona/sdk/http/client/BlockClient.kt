@@ -34,6 +34,9 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.client.utils.EmptyContent.contentType
+import io.ktor.client.utils.EmptyContent.headers
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
@@ -136,26 +139,24 @@ class BlockClient(private val node: Node) {
     suspend fun getBlockDetailsByHeight(blockDetailsByHeightRequest: BlockDetailsByHeightRequest): BlockDetail? {
         val jsonBody = Json.encodeToString(blockDetailsByHeightRequest)
 
-        try {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
             node.ssl.let {
                 if (it) {
-                    return client.post("https://${node.hostName}:${node.port}/get_block_details_by_height") {
-                        contentType(ContentType.Application.Json)
-                        headers {
-                            append("Content-Length", jsonBody.length.toString())
-                        }
-                        setBody(jsonBody)
-                    }.body()
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_block_details_by_height")
                 } else {
-                    return client.post("http://${node.hostName}:${node.port}/get_block_details_by_height") {
-                        contentType(ContentType.Application.Json)
-                        headers {
-                            append("Content-Length", jsonBody.length.toString())
-                        }
-                        setBody(jsonBody)
-                    }.body()
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_block_details_by_height")
                 }
             }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body()
         } catch (e: Exception) {
             logger.error("Error getting block details by height", e)
         }
