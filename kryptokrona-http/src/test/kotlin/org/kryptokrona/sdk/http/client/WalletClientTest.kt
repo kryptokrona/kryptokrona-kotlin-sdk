@@ -19,37 +19,42 @@ class WalletClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data without request parameters` () = runTest {
+        // Arrange
         val requestData = WalletSyncDataRequest()
 
-        var data = clientHTTP.getWalletSyncData(requestData)
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getWalletSyncData(requestData)
+        val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
-        data = clientHTTPS.getWalletSyncData(requestData)
-        assertNotNull(data)
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with request body` () = runTest {
-        var requestData = WalletSyncDataRequest(startHeight = 10000)
-        var data = clientHTTP.getWalletSyncData(requestData)
-        assertNotNull(data)
+        // Arrange
+        val requestData1 = WalletSyncDataRequest(startHeight = 10000)
+        val requestData2 = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 500)
+        val requestData3 = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
 
-        data = clientHTTPS.getWalletSyncData(requestData)
-        assertNotNull(data)
+        // Act
+        val dataHTTP1 = clientHTTP.getWalletSyncData(requestData1)
+        val dataHTTP2 = clientHTTP.getWalletSyncData(requestData2)
+        val dataHTTP3 = clientHTTP.getWalletSyncData(requestData3)
 
-        requestData = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50, blockCount = 500)
-        data = clientHTTP.getWalletSyncData(requestData)
-        assertNotNull(data)
+        val dataHTTPS1 = clientHTTPS.getWalletSyncData(requestData1)
+        val dataHTTPS2 = clientHTTPS.getWalletSyncData(requestData2)
+        val dataHTTPS3 = clientHTTPS.getWalletSyncData(requestData3)
 
-        data = clientHTTPS.getWalletSyncData(requestData)
-        assertNotNull(data)
+        // Assert
+        assertNotNull(dataHTTP1)
+        assertNotNull(dataHTTP2)
+        assertNotNull(dataHTTP3)
 
-        requestData = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
-        data = clientHTTP.getWalletSyncData(requestData)
-        assertNotNull(data)
-
-        data = clientHTTPS.getWalletSyncData(requestData)
-        assertNotNull(data)
+        assertNotNull(dataHTTPS1)
+        assertNotNull(dataHTTPS2)
+        assertNotNull(dataHTTPS3)
     }
 }
