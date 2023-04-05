@@ -21,31 +21,43 @@ class BlockClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks`() = runTest {
-        var data = clientHTTP.getBlocks()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getBlocks()
-        assertNotNull(data)
+        // Act
+        val data1 = clientHTTP.getBlocks()
+        val data2 = clientHTTPS.getBlocks()
+
+        // Assert
+        assertNotNull(data1)
+        assertNotNull(data2)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get query blocks`() = runTest {
-        var data = clientHTTP.getQueryBlocks()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getQueryBlocks()
-        assertNotNull(data)
+        // Act
+        val data1 = clientHTTP.getQueryBlocks()
+        val data2 = clientHTTPS.getQueryBlocks()
+
+        // Assert
+        assertNotNull(data1)
+        assertNotNull(data2)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get query blocks lite`() = runTest {
-        var data = clientHTTP.getQueryBlocksLite()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getQueryBlocksLite()
-        assertNotNull(data)
+        // Act
+        val data1 = clientHTTP.getQueryBlocksLite()
+        val data2 = clientHTTPS.getQueryBlocksLite()
+
+        // Assert
+        assertNotNull(data1)
+        assertNotNull(data2)
     }
 
     @Test
