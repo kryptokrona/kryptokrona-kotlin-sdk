@@ -18,41 +18,57 @@ class TransactionClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions` () = runTest {
-        var data = clientHTTP.getTransactions()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getTransactions()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getTransactions()
+        val dataHTTPS = clientHTTPS.getTransactions()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes` () = runTest {
-        var data = clientHTTP.getTransactionDetailsByHashes()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getTransactionDetailsByHashes()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getTransactionDetailsByHashes()
+        val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
-        var data = clientHTTP.getTransactionHashesByPaymentId()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getTransactionHashesByPaymentId()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getTransactionHashesByPaymentId()
+        val dataHTTPS = clientHTTPS.getTransactionHashesByPaymentId()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status` () = runTest {
-        var data = clientHTTP.getTransactionsStatus()
-        assertNotNull(data)
+        // Arrange
 
-        data = clientHTTPS.getTransactionsStatus()
-        assertNotNull(data)
+        // Act
+        val dataHTTP = clientHTTP.getTransactionsStatus()
+        val dataHTTPS = clientHTTPS.getTransactionsStatus()
+
+        // Assert
+        assertNotNull(dataHTTP)
+        assertNotNull(dataHTTPS)
     }
 
 }
