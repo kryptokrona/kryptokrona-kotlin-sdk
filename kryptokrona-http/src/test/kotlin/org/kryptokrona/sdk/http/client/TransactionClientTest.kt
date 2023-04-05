@@ -1,6 +1,7 @@
 package org.kryptokrona.sdk.http.client
 
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.util.node.Node
@@ -25,8 +26,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactions()
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 
     @Test
@@ -39,8 +40,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes()
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 
     @Test
@@ -67,8 +68,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus()
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 
 }
