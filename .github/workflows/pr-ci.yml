@@ -6,7 +6,6 @@ env:
 on: [ pull_request ]
 
 jobs:
-  # TODO: perhaps add a matrix to run on multiple JDKs and libraries
   assemble:
     name: Assemble
     runs-on: ubuntu-latest
