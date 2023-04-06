@@ -41,7 +41,7 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.model.request.GlobalIndexesForRangeRequest
 import org.kryptokrona.sdk.http.model.response.GlobalIndexesForRange
 import org.kryptokrona.sdk.http.model.response.OIndexes
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 private val client = HttpClient {

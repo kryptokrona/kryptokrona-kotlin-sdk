@@ -36,7 +36,7 @@ import org.kryptokrona.sdk.http.model.response.transaction.TransactionDetailsHas
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionHashesPaymentId
 import org.kryptokrona.sdk.http.model.response.transaction.Transactions
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionsStatus
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 /**

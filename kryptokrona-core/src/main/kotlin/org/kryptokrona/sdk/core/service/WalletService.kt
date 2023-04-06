@@ -35,7 +35,7 @@ import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.config.Config
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 /**

@@ -28,44 +28,36 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
+package org.kryptokrona.sdk.core.service
 
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
+import org.kryptokrona.sdk.util.model.block.Block
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 /**
- * Outputs client
+ * WalletSynchronizerService class.
  *
  * @author Marcus Cvjeticanin
- * @since 0.1.0
+ * @since 0.2.0
  * @param node The node that the wallet service is connected to.
  */
-class OutputsClient(private val node: Node) {
+class WalletSynchronizerService(node: Node) {
 
-    private val logger = LoggerFactory.getLogger("OutputsClient")
+    private val logger = LoggerFactory.getLogger("WalletSynchronizerService")
 
     /**
-     * Get random outputs
-     *
-     * @return RandomOutputs
+     * Stored blocks for later processing
      */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
-        }
+    private var storedBlocks = mutableListOf<Block>()
 
-        return null
+    /**
+     * Retrieve blockCount blocks from the internal store.
+     * Does not remove them.
+     */
+    suspend fun fetchBlocks(blockCount: Int) {
+        var shouldSleep = false
+
+
     }
 
 }

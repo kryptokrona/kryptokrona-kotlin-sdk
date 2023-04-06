@@ -28,44 +28,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
-
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
-import org.kryptokrona.sdk.util.model.node.Node
-import org.slf4j.LoggerFactory
+package org.kryptokrona.sdk.util.model.node
 
 /**
- * Outputs client
+ * Node is a data class that holds information about a node.
+ * The properties are mutable so that they can be changed during runtime.
  *
  * @author Marcus Cvjeticanin
  * @since 0.1.0
- * @param node The node that the wallet service is connected to.
+ * @param hostName The host name of the node.
+ * @param port The port of the node.
+ * @param ssl Whether the node is using SSL.
  */
-class OutputsClient(private val node: Node) {
+data class Node(
+    var hostName: String,
+    var port: Int,
+    var ssl: Boolean
 
-    private val logger = LoggerFactory.getLogger("OutputsClient")
-
-    /**
-     * Get random outputs
-     *
-     * @return RandomOutputs
-     */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
-        }
-
-        return null
-    }
-
-}
+    //TODO: add more private properties here that we get from the WalletService
+)

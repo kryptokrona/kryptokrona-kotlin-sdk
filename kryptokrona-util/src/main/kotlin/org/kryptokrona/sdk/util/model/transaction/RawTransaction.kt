@@ -28,44 +28,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.client
+package org.kryptokrona.sdk.util.model.transaction
 
-import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
-import org.kryptokrona.sdk.util.model.node.Node
-import org.slf4j.LoggerFactory
+import org.kryptokrona.sdk.util.model.output.KeyInput
+import org.kryptokrona.sdk.util.model.output.KeyOutput
 
-/**
- * Outputs client
- *
- * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param node The node that the wallet service is connected to.
- */
-class OutputsClient(private val node: Node) {
-
-    private val logger = LoggerFactory.getLogger("OutputsClient")
-
-    /**
-     * Get random outputs
-     *
-     * @return RandomOutputs
-     */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        try {
-            node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
-        }
-
-        return null
-    }
-
-}
+data class RawTransaction(
+    override var keyOutputs: List<KeyOutput>,
+    override val hash: String,
+    override val transactionPublishKey: String,
+    override val unlockTime: Long,
+    val paymentId: String,
+    val keyInputs: List<KeyInput>,
+) : RawCoinbaseTransaction

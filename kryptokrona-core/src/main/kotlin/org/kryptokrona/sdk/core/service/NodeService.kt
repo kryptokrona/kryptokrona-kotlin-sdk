@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.core.service
 
 import org.kryptokrona.sdk.http.client.NodeClient
 import org.kryptokrona.sdk.http.model.response.node.Info
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 /**

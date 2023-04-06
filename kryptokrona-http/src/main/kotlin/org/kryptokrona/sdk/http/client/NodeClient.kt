@@ -37,7 +37,7 @@ import org.kryptokrona.sdk.http.model.response.node.Fee
 import org.kryptokrona.sdk.http.model.response.node.Height
 import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.http.model.response.node.Peers
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 /**

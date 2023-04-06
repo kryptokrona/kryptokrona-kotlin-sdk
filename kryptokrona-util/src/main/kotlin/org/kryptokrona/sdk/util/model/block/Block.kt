@@ -28,22 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.node
+package org.kryptokrona.sdk.util.model.block
 
-/**
- * Node is a data class that holds information about a node.
- * The properties are mutable so that they can be changed during runtime.
- *
- * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
- */
-data class Node(
-    var hostName: String,
-    var port: Int,
-    var ssl: Boolean
+import org.kryptokrona.sdk.util.model.transaction.RawCoinbaseTransaction
+import org.kryptokrona.sdk.util.model.transaction.RawTransaction
 
-    //TODO: add more private properties here that we get from the WalletService
+data class Block(
+    val coinbaseTransaction: RawCoinbaseTransaction,
+    val transactions: List<RawTransaction>,
+    val blockHeight: Long,
+    val blockHash: String,
+    val blockTimestamp: Long,
 )

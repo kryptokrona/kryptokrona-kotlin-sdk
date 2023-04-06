@@ -3,7 +3,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kryptokrona.sdk.core.service.WalletService
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 
 fun main() = runBlocking {
     val node = Node("techy.ddns.net", 11898, false)

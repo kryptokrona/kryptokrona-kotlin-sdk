@@ -47,7 +47,7 @@ import org.kryptokrona.sdk.http.model.request.block.BlocksRequest
 import org.kryptokrona.sdk.http.model.response.block.*
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
 import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
-import org.kryptokrona.sdk.util.node.Node
+import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
 private val client = HttpClient {
