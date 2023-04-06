@@ -34,7 +34,9 @@ import kotlinx.coroutines.*
 import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
+import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.util.config.Config
+import org.kryptokrona.sdk.util.model.block.Block
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 
@@ -57,9 +59,19 @@ class WalletService(node: Node) {
 
     private var walletSyncData: WalletSyncData? = null
 
-    private var nodeInfo: org.kryptokrona.sdk.http.model.response.node.Info? = null
+    private var nodeInfo: Info? = null
 
     private var startHeight: Long = 0
+
+    /**
+     * Stored blocks for later processing
+     */
+    private var storedBlocks = mutableListOf<Block>()
+
+    /**
+     * Whether we are already downloading a chunk of blocks
+     */
+    private var fetchingBlocks: Boolean = false
 
     fun getWalletSyncData() = walletSyncData
 
@@ -114,6 +126,42 @@ class WalletService(node: Node) {
     private suspend fun getSyncData(walletSyncDataRequest: WalletSyncDataRequest): WalletSyncData? {
         logger.info("Getting wallet sync data...")
         return walletClient.getWalletSyncData(walletSyncDataRequest)
+    }
+
+    /**
+     * Retrieve blockCount blocks from the internal store.
+     * Does not remove them.
+     */
+    suspend fun fetchBlocks(blockCount: Int): List<Block>? {
+        var shouldSleep = false
+
+        // Fetch more blocks if we haven't got any downloaded yet
+        if (storedBlocks.isEmpty()) {
+            if (!fetchingBlocks) {
+                logger.info("No blocks stored, attempting to fetch more...")
+            }
+
+            //TODO: add more logic here
+
+        }
+
+        return null
+    }
+
+    suspend fun downloadBlocks(): Map<Boolean, Boolean>? {
+        if (fetchingBlocks) {
+            logger.info("Already fetching blocks, skipping...")
+            return mapOf(Pair(true, false))
+        }
+
+        fetchingBlocks = true
+
+        val localDaemonBlockCount: Long? = nodeInfo?.altBlocksCount
+        val walletBlockCount: Long? = nodeInfo?.height
+
+        //TODO: add more logic here
+
+        return mapOf(Pair(true, false))
     }
 
 }
