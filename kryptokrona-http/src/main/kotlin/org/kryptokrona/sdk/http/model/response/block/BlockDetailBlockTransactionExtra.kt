@@ -33,4 +33,4 @@ package org.kryptokrona.sdk.http.model.response.block
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailBlockTransactionExtra(val nonce: List<String>, val publicKey: String, val raw: String)
+data class BlockDetailBlockTransactionExtra(val nonce: List<Long>, val publicKey: String, val raw: String)

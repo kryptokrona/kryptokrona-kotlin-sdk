@@ -34,6 +34,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlockDetailBlockTransactionOutputOutputTarget(
-    val data: org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionOutputOutputTargetData,
+    val data: BlockDetailBlockTransactionOutputOutputTargetData,
     val type: String
 )

@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory
 
 private val client = HttpClient {
     install(ContentNegotiation) {
-        json()
+        json(Json { ignoreUnknownKeys = true })
     }
 }
 

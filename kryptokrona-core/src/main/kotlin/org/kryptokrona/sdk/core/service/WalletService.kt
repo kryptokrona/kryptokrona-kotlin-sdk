@@ -68,11 +68,11 @@ class WalletService(node: Node) {
 
     private var syncJob: Job = Job()
 
-    private var walletSyncData: WalletSyncData? = null
-
     private var nodeInfo: Info? = null
 
     private var startHeight: Long = 0
+
+    private var walletHeight: Long = 0
 
     private var checkpoints: List<String> = mutableListOf()
 
@@ -90,8 +90,6 @@ class WalletService(node: Node) {
 
     private var lastDownloadedBlocks: LocalDateTime = now()
 
-    fun getWalletSyncData() = walletSyncData
-
     fun getNodeInfo() = nodeInfo
 
     fun setStartHeight(height: Long) {
@@ -104,20 +102,21 @@ class WalletService(node: Node) {
     suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
 
-        val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(0))
+        val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(startHeight))
         val blockHeight = blockDetails?.block?.index
 
         // add the starting block to the checkpoints
         blockDetails?.block?.hash?.let { checkpoints += it }
 
         logger.info("Starting from block height: $blockHeight")
+        walletHeight = blockHeight ?: 0
 
         syncJob = launch {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     logger.info("Fetching blocks...")
                     val requestData = WalletSyncDataRequest(blockIds = checkpoints, startHeight = blockHeight)
-                    walletSyncData = getSyncData(requestData)
+                    val walletSyncData = getSyncData(requestData)
 
                     var lastBlock: String? = null
                     walletSyncData?.items?.forEach { block ->
@@ -130,7 +129,13 @@ class WalletService(node: Node) {
                     }
                     logger.info("Checkpoints size: ${checkpoints.size}")
 
-                    walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
+                    walletSyncData.let {
+                        walletHeight += it?.items?.size ?: 0
+                        logger.info("Fetched ${it?.items?.size} blocks")
+                    }
+
+                    logger.info("Wallet height: $walletHeight")
+
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
             }

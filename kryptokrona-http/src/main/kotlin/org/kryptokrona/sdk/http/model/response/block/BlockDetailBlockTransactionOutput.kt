@@ -34,6 +34,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlockDetailBlockTransactionOutput(
-    val globalIndex: Int,
-    val output: org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionOutputOutput,
+    val globalIndex: Long,
+    val output: BlockDetailBlockTransactionOutputOutput,
 )

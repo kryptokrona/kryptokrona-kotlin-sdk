@@ -34,6 +34,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlockDetailBlockTransactionInput(
-    val data: org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionInputData,
+    // val data: BlockDetailBlockTransactionInputData,
     val type: String
 )

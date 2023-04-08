@@ -33,4 +33,6 @@ package org.kryptokrona.sdk.http.model.response.block
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailBlockTransactionInputDataInput(val height: Int)
+data class BlockDetailBlockTransactionInputDataInput(
+    val height: Long
+)

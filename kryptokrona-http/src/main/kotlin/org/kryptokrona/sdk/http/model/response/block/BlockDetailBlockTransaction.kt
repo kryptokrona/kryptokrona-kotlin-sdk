@@ -35,20 +35,20 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BlockDetailBlockTransaction(
     val blockHash: String,
-    val blockIndex: Int,
-    val extra: org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionExtra,
-    val fee: Int,
+    val blockIndex: Long,
+    val extra: BlockDetailBlockTransactionExtra,
+    val fee: Long,
     val hash: String,
     val inBlockchain: Boolean,
-    val inputs: List<org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionInput>,
-    val mixin: Int,
-    val outputs: List<org.kryptokrona.sdk.http.model.response.block.BlockDetailBlockTransactionOutput>,
+    val inputs: List<BlockDetailBlockTransactionInput>,
+    val mixin: Long,
+    val outputs: List<BlockDetailBlockTransactionOutput>,
     val paymentId: String,
-    val signatures: List<String>,
-    val signaturesSize: Int,
-    val size: Int,
-    val timestamp: Int,
-    val totalInputsAmount: Int,
-    val totalOutputsAmount: Int,
-    val unlockTime: Int
+    // val signatures: List<String>, // TODO need to make an object for signatures to deserialize properly (JSON input: .....00000000000000","signatures":[{"first":0,"second":"fca84566a.....)
+    val signaturesSize: Long,
+    val size: Long,
+    val timestamp: Long,
+    val totalInputsAmount: Long,
+    val totalOutputsAmount: Long,
+    val unlockTime: Long
 )
