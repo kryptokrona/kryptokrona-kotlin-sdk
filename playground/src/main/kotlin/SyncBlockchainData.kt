@@ -19,10 +19,9 @@ fun main() = runBlocking {
         }
     }
 
-    delay(5000)
+    delay(100000)
     job.cancel()
 
-    walletService.getWalletSyncData()?.let { println(it) }
     walletService.getNodeInfo()?.let { println(it) }
 
     println("Hello, world!")

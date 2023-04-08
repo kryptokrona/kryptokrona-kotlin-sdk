@@ -28,16 +28,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.request.wallet
 
-import kotlinx.serialization.Serializable
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
+package org.kryptokrona.sdk.util.model.block
 
-@Serializable
-data class WalletSyncDataRequest(
-    val blockIds: List<String>? = null,
-    val startHeight: Long? = null,
-    val startTimestamp: Long? = null,
-    val blockCount: Long? = null,
-    val items: List<WalletSyncDataItem>? = null,
-)
+data class TopBlock(val hash: String, val height: Long)

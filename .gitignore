@@ -178,3 +178,4 @@ gradle-app.setting
 # src/main/java/org/kryptokrona/sdk/Main.java # remove this later
 
 *.hprof
+.DS_Store

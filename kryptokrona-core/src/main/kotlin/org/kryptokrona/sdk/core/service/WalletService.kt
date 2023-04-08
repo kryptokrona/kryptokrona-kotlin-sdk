@@ -31,14 +31,23 @@
 package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
+import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
+import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
 import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
+import org.kryptokrona.sdk.http.model.response.block.BlockDetailBlock
 import org.kryptokrona.sdk.http.model.response.node.Info
+import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
+import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItemCoinbaseTransaction
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.block.Block
+import org.kryptokrona.sdk.util.model.block.TopBlock
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 
 /**
  * WalletService class.
@@ -53,6 +62,8 @@ class WalletService(node: Node) {
 
     private val walletClient = WalletClient(node)
 
+    private val blockClient = BlockClient(node)
+
     private val nodeService = NodeService(node)
 
     private var syncJob: Job = Job()
@@ -63,6 +74,8 @@ class WalletService(node: Node) {
 
     private var startHeight: Long = 0
 
+    private var checkpoints: List<String> = mutableListOf()
+
     /**
      * Stored blocks for later processing
      */
@@ -72,6 +85,10 @@ class WalletService(node: Node) {
      * Whether we are already downloading a chunk of blocks
      */
     private var fetchingBlocks: Boolean = false
+
+    private var shouldSleep: Boolean = false
+
+    private var lastDownloadedBlocks: LocalDateTime = now()
 
     fun getWalletSyncData() = walletSyncData
 
@@ -87,12 +104,32 @@ class WalletService(node: Node) {
     suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
 
+        val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(0))
+        val blockHeight = blockDetails?.block?.index
+
+        // add the starting block to the checkpoints
+        blockDetails?.block?.hash?.let { checkpoints += it }
+
+        logger.info("Starting from block height: $blockHeight")
+
         syncJob = launch {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     logger.info("Fetching blocks...")
-                    val requestData = WalletSyncDataRequest(null, startHeight, null, null, null)
+                    val requestData = WalletSyncDataRequest(blockIds = checkpoints, startHeight = blockHeight)
                     walletSyncData = getSyncData(requestData)
+
+                    var lastBlock: String? = null
+                    walletSyncData?.items?.forEach { block ->
+                        lastBlock = block.blockHash
+                    }
+                    logger.info("Last block: $lastBlock")
+
+                    walletSyncData?.items?.map {
+                        checkpoints += it.blockHash
+                    }
+                    logger.info("Checkpoints size: ${checkpoints.size}")
+
                     walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
@@ -125,6 +162,7 @@ class WalletService(node: Node) {
      */
     private suspend fun getSyncData(walletSyncDataRequest: WalletSyncDataRequest): WalletSyncData? {
         logger.info("Getting wallet sync data...")
+        fetchBlocks(25)
         return walletClient.getWalletSyncData(walletSyncDataRequest)
     }
 
@@ -132,8 +170,8 @@ class WalletService(node: Node) {
      * Retrieve blockCount blocks from the internal store.
      * Does not remove them.
      */
-    suspend fun fetchBlocks(blockCount: Int): List<Block>? {
-        var shouldSleep = false
+    private suspend fun fetchBlocks(blockCount: Int): List<Block> {
+        shouldSleep = false
 
         // Fetch more blocks if we haven't got any downloaded yet
         if (storedBlocks.isEmpty()) {
@@ -141,27 +179,79 @@ class WalletService(node: Node) {
                 logger.info("No blocks stored, attempting to fetch more...")
             }
 
-            //TODO: add more logic here
+            val downloadedBlocks = downloadBlocks()
+            logger.info("Downloaded blocks: $downloadedBlocks")
 
+            if (downloadedBlocks) {
+                lastDownloadedBlocks = now()
+            }
         }
 
-        return null
+        return storedBlocks
     }
 
-    suspend fun downloadBlocks(): Map<Boolean, Boolean>? {
+    private suspend fun downloadBlocks(): Boolean {
         if (fetchingBlocks) {
             logger.info("Already fetching blocks, skipping...")
-            return mapOf(Pair(true, false))
+            return false
         }
 
         fetchingBlocks = true
 
-        val localDaemonBlockCount: Long? = nodeInfo?.altBlocksCount
-        val walletBlockCount: Long? = nodeInfo?.height
+        val localNodeBlockCount = nodeInfo?.altBlocksCount ?: 0
+        val walletBlockCount = nodeInfo?.height ?: 0
 
-        //TODO: add more logic here
+        logger.info("Local node block count: $localNodeBlockCount")
+        logger.info("Wallet block count: $walletBlockCount")
 
-        return mapOf(Pair(true, false))
+        if (localNodeBlockCount < walletBlockCount) {
+            fetchingBlocks = false
+            return true
+        }
+
+        // val blockCheckPoints = getWalletSyncDataHashes()
+
+        /*var blocks = mutableListOf<Block>()
+        var topBlock: TopBlock? = null
+
+        try {
+            // topBlock = getWalletSyncData()
+        } catch (e: Exception) {
+            logger.error("Failed to get block from node: ${e.message}")
+            this.fetchingBlocks = false
+
+            *//*if (finishedFunc) {
+                finishedFunc()
+            }*//*
+
+            return mapOf(Pair(false, true))
+        }
+
+        if (topBlock != null && blocks.size == 0) {
+            *//*if (finishedFunc) {
+                finishedFunc()
+            }*//*
+
+            *//* Synced, store the top block so sync status displays correctly if
+               we are not scanning coinbase tx only blocks.
+               Only store top block if we have finished processing stored
+               blocks *//*
+            if (storedBlocks.isEmpty()) {
+                // this.storeTopBlock(topBlock)
+                // synchronizationStatus.storeBlockHash(topBlock.height, topBlock.hash)
+            }
+
+            logger.info("Zero blocks received, assuming synced")
+
+            *//*if (finishedFunc) {
+                finishedFunc()
+            }*//*
+
+            fetchingBlocks = false
+
+            return mapOf(Pair(true, true))*/
+
+        return true
     }
 
 }
