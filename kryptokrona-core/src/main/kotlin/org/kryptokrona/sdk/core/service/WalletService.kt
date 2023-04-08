@@ -124,16 +124,13 @@ class WalletService(node: Node) {
                     }
                     logger.info("Last block: $lastBlock")
 
-                    walletSyncData?.items?.map {
-                        checkpoints += it.blockHash
+                    walletSyncData?.let { it ->
+                        checkpoints += it.items.map { it.blockHash }
+                        walletHeight += it.items.size
+                        logger.info("Fetched ${it.items.size} blocks")
                     }
+
                     logger.info("Checkpoints size: ${checkpoints.size}")
-
-                    walletSyncData.let {
-                        walletHeight += it?.items?.size ?: 0
-                        logger.info("Fetched ${it?.items?.size} blocks")
-                    }
-
                     logger.info("Wallet height: $walletHeight")
 
                     delay(Config.SYNC_THREAD_INTERVAL)
