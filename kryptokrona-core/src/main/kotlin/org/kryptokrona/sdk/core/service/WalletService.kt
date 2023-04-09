@@ -127,6 +127,8 @@ class WalletService(node: Node) {
                             val walletSyncData = getSyncData(requestData)
 
                             walletSyncData?.let { wsd ->
+                                //TODO checkpoints does not seem to be updated or we get the same data back.
+                                // it seems like the walletHeight is higher than the node height for some reason....
                                 checkpoints += wsd.items.last().blockHash
                                 logger.info("Checkpoint INSIDE: ${checkpoints.last()}")
                                 logger.info("Fetched ${wsd.items.size} blocks")
