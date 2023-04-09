@@ -8,7 +8,7 @@ import org.kryptokrona.sdk.util.model.node.Node
 fun main() = runBlocking {
     val node = Node("techy.ddns.net", 11898, false)
     val walletService = WalletService(node)
-    walletService.setStartHeight(1300000L)
+    walletService.setStartHeight(1364842L)
 
     // setting initial start height to be sync from
     // walletService.setStartHeight(10000)

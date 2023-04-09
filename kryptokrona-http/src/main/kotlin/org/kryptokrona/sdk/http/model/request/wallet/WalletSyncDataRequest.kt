@@ -35,7 +35,7 @@ import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
 
 @Serializable
 data class WalletSyncDataRequest(
-    val blockIds: List<String>? = null,
+    val blockHashCheckpoints: List<String>? = null,
     val startHeight: Long? = null,
     val startTimestamp: Long? = null,
     val blockCount: Long? = null,

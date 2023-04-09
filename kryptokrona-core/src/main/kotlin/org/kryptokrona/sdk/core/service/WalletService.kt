@@ -104,35 +104,45 @@ class WalletService(node: Node) {
 
         val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(startHeight))
         val blockHeight = blockDetails?.block?.index
+        logger.info("Block height: $blockHeight")
 
         // add the starting block to the checkpoints
         blockDetails?.block?.hash?.let { checkpoints += it }
 
-        logger.info("Starting from block height: $blockHeight")
-        walletHeight = blockHeight ?: 0
+        if (blockHeight != null) {
+            walletHeight = blockHeight
+        }
+        logger.info("Start height: $startHeight")
+        logger.info("Wallet height: $walletHeight")
 
         syncJob = launch {
             launch(Dispatchers.IO) {
                 while(isActive) {
-                    logger.info("Fetching blocks...")
-                    val requestData = WalletSyncDataRequest(blockIds = checkpoints, startHeight = blockHeight)
-                    val walletSyncData = getSyncData(requestData)
+                    logger.info("Syncing blocks...")
 
-                    var lastBlock: String? = null
-                    walletSyncData?.items?.forEach { block ->
-                        lastBlock = block.blockHash
+                    nodeInfo?.height?.let {
+                        logger.info("Node height inside nodeInfo?.height: $it")
+                        if (walletHeight < it) {
+                            val requestData = WalletSyncDataRequest(blockHashCheckpoints = checkpoints, startHeight = blockHeight)
+                            val walletSyncData = getSyncData(requestData)
+
+                            walletSyncData?.let { wsd ->
+                                checkpoints += wsd.items.last().blockHash
+                                logger.info("Checkpoint INSIDE: ${checkpoints.last()}")
+                                logger.info("Fetched ${wsd.items.size} blocks")
+                            }
+
+                            walletSyncData?.items?.forEach { _ -> walletHeight++ }
+
+                            logger.debug("Checkpoints size: ${checkpoints.size}")
+                            logger.info("Wallet height: $walletHeight")
+                        } else {
+                            logger.info("Synced...")
+                        }
                     }
-                    logger.info("Last block: $lastBlock")
 
-                    walletSyncData?.let { it ->
-                        checkpoints += it.items.map { it.blockHash }
-                        walletHeight += it.items.size
-                        logger.info("Fetched ${it.items.size} blocks")
-                    }
-
-                    logger.info("Checkpoints size: ${checkpoints.size}")
+                    logger.info("Checkpoint: ${checkpoints.last()}")
                     logger.info("Wallet height: $walletHeight")
-
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
             }
@@ -140,6 +150,7 @@ class WalletService(node: Node) {
             launch(Dispatchers.IO) {
                 while(isActive) {
                     nodeInfo = nodeService.getNodeInfo()
+                    logger.info("Node height: ${nodeInfo?.height}")
                     delay(Config.NODE_UPDATE_INTERVAL)
                 }
             }
@@ -192,7 +203,7 @@ class WalletService(node: Node) {
         return storedBlocks
     }
 
-    private suspend fun downloadBlocks(): Boolean {
+    private fun downloadBlocks(): Boolean {
         if (fetchingBlocks) {
             logger.info("Already fetching blocks, skipping...")
             return false
@@ -200,13 +211,12 @@ class WalletService(node: Node) {
 
         fetchingBlocks = true
 
-        val localNodeBlockCount = nodeInfo?.altBlocksCount ?: 0
-        val walletBlockCount = nodeInfo?.height ?: 0
+        val localNodeBlockCount = nodeInfo?.height ?: 0
 
         logger.info("Local node block count: $localNodeBlockCount")
-        logger.info("Wallet block count: $walletBlockCount")
+        logger.info("Current wallet height: $walletHeight")
 
-        if (localNodeBlockCount < walletBlockCount) {
+        if (localNodeBlockCount < walletHeight) {
             fetchingBlocks = false
             return true
         }
