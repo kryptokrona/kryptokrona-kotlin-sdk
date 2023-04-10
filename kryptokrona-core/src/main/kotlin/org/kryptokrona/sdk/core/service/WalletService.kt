@@ -107,7 +107,8 @@ class WalletService(node: Node) {
         val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(startHeight))
         blockDetails?.block?.hash?.let { checkpoints.plusAssign(it) }
 
-        val requestData = WalletSyncDataRequest(blockHashCheckpoints = checkpoints)
+        val lastCheckPoint = listOf(checkpoints.last())
+        val requestData = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)
         val walletSyncData = getSyncData(requestData)
         walletSyncData.let { wsd ->
             if (wsd != null) {
@@ -123,7 +124,8 @@ class WalletService(node: Node) {
 
                     nodeInfo?.height?.let {
                         if (walletHeight < it) {
-                            val data = WalletSyncDataRequest(blockHashCheckpoints = checkpoints)
+                            val lastCheckPoint = listOf(checkpoints.last())
+                            val data = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)
                             val syncData = getSyncData(data)
 
                             syncData?.let { sd ->
@@ -139,7 +141,6 @@ class WalletService(node: Node) {
                         }
                     }
 
-                    logger.info("Checkpoint inside COROUTINE: ${checkpoints}")
                     logger.info("Wallet height: $walletHeight")
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
