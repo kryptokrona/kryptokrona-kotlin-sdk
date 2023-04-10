@@ -123,6 +123,7 @@ class WalletService(node: Node) {
                     logger.debug("Syncing blocks...")
 
                     nodeInfo?.height?.let {
+                        //TODO need to perhaps update node info more often?
                         if (walletHeight < it) {
                             lastCheckPoint = listOf(checkpoints.last())
                             val data = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)
@@ -138,8 +139,6 @@ class WalletService(node: Node) {
                             }
 
                             logger.debug("Wallet height: $walletHeight")
-                        } else {
-                            logger.info("Fully synced...")
                         }
                     }
 

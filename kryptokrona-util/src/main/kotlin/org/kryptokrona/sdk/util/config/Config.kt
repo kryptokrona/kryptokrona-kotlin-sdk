@@ -70,7 +70,7 @@ object Config {
     /**
      * How often to get the node info.
      */
-    const val NODE_UPDATE_INTERVAL = (10 * 1000).toLong()
+    const val NODE_UPDATE_INTERVAL = (5 * 1000).toLong()
 
     /**
      * How often to check on locked transactions.
