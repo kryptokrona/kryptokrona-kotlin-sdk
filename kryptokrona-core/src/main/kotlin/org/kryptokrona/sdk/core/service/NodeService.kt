@@ -54,7 +54,7 @@ class NodeService(private var node: Node) {
      * @return The node info.
      */
     suspend fun getNodeInfo(): Info? {
-        logger.info("Getting node info...")
+        logger.debug("Getting node info...")
         return nodeClient.getNodeInfo()
     }
 

@@ -107,7 +107,7 @@ class WalletService(node: Node) {
         val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(startHeight))
         blockDetails?.block?.hash?.let { checkpoints.plusAssign(it) }
 
-        val lastCheckPoint = listOf(checkpoints.last())
+        var lastCheckPoint = listOf(checkpoints.last())
         val requestData = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)
         val walletSyncData = getSyncData(requestData)
         walletSyncData.let { wsd ->
@@ -120,28 +120,29 @@ class WalletService(node: Node) {
         syncJob = launch {
             launch(Dispatchers.IO) {
                 while(isActive) {
-                    logger.info("Syncing blocks...")
+                    logger.debug("Syncing blocks...")
 
                     nodeInfo?.height?.let {
                         if (walletHeight < it) {
-                            val lastCheckPoint = listOf(checkpoints.last())
+                            lastCheckPoint = listOf(checkpoints.last())
                             val data = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)
                             val syncData = getSyncData(data)
 
                             syncData?.let { sd ->
-                                checkpoints.plusAssign(sd.items.last().blockHash)
-                                checkpoints = checkpoints.distinct().toMutableList() // removing duplicates
-                                walletHeight += sd.items.size.toLong()
-                                logger.debug("Fetched ${sd.items.size} blocks")
+                                if (sd.items.isNotEmpty()) {
+                                    checkpoints.plusAssign(sd.items.last().blockHash)
+                                    checkpoints = checkpoints.distinct().toMutableList() // removing duplicates
+                                    walletHeight += sd.items.size.toLong()
+                                    logger.info("Fetched ${sd.items.size} block(s)")
+                                }
                             }
 
-                            logger.info("Wallet height: $walletHeight")
+                            logger.debug("Wallet height: $walletHeight")
                         } else {
-                            logger.info("Synced...")
+                            logger.info("Fully synced...")
                         }
                     }
 
-                    logger.info("Wallet height: $walletHeight")
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
             }
@@ -173,7 +174,7 @@ class WalletService(node: Node) {
      * @return The wallet sync data.
      */
     private suspend fun getSyncData(walletSyncDataRequest: WalletSyncDataRequest): WalletSyncData? {
-        logger.info("Getting wallet sync data...")
+        logger.debug("Getting wallet sync data...")
         fetchBlocks(25)
         return walletClient.getWalletSyncData(walletSyncDataRequest)
     }
@@ -188,11 +189,11 @@ class WalletService(node: Node) {
         // Fetch more blocks if we haven't got any downloaded yet
         if (storedBlocks.isEmpty()) {
             if (!fetchingBlocks) {
-                logger.info("No blocks stored, attempting to fetch more...")
+                logger.debug("No blocks stored, attempting to fetch more...")
             }
 
             val downloadedBlocks = downloadBlocks()
-            logger.info("Downloaded blocks: $downloadedBlocks")
+            logger.debug("Downloaded blocks: $downloadedBlocks")
 
             if (downloadedBlocks) {
                 lastDownloadedBlocks = now()
@@ -204,7 +205,7 @@ class WalletService(node: Node) {
 
     private fun downloadBlocks(): Boolean {
         if (fetchingBlocks) {
-            logger.info("Already fetching blocks, skipping...")
+            logger.debug("Already fetching blocks, skipping...")
             return false
         }
 
@@ -212,8 +213,8 @@ class WalletService(node: Node) {
 
         val localNodeBlockCount = nodeInfo?.height ?: 0
 
-        logger.info("Local node block count: $localNodeBlockCount")
-        logger.info("Current wallet height: $walletHeight")
+        logger.debug("Local node block count: $localNodeBlockCount")
+        logger.debug("Current wallet height: $walletHeight")
 
         if (localNodeBlockCount < walletHeight) {
             fetchingBlocks = false
