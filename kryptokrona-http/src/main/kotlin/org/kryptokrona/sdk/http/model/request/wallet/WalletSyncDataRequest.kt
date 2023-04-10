@@ -32,12 +32,13 @@ package org.kryptokrona.sdk.http.model.request.wallet
 
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
+import java.util.Arrays.asList
 
 @Serializable
 data class WalletSyncDataRequest(
-    val blockHashCheckpoints: List<String>? = null,
-    val startHeight: Long? = null,
-    val startTimestamp: Long? = null,
-    val blockCount: Long? = null,
-    val items: List<WalletSyncDataItem>? = null,
+    val blockHashCheckpoints: List<String> = listOf(),
+    val startHeight: Long = 0,
+    val startTimestamp: Long = 0,
+    val blockCount: Long = 5,
+    val skipCoinbaseTransactions: Boolean = false,
 )

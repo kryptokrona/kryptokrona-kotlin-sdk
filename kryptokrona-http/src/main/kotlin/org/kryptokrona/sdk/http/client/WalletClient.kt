@@ -67,6 +67,7 @@ class WalletClient(private val node: Node) {
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
         val jsonBody = Json.encodeToString(walletSyncData)
+        logger.info("jsonBody: $jsonBody")
 
         try {
             node.ssl.let {

@@ -74,7 +74,7 @@ class WalletService(node: Node) {
 
     private var walletHeight: Long = 0
 
-    private var checkpoints: List<String> = mutableListOf()
+    private var checkpoints: MutableList<String> = mutableListOf()
 
     /**
      * Stored blocks for later processing
@@ -101,19 +101,20 @@ class WalletService(node: Node) {
      */
     suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
+        walletHeight = startHeight
 
+        // get the first hash for the checkpoints
         val blockDetails = blockClient.getBlockDetailsByHeight(BlockDetailsByHeightRequest(startHeight))
-        val blockHeight = blockDetails?.block?.index
-        logger.info("Block height: $blockHeight")
+        blockDetails?.block?.hash?.let { checkpoints.plusAssign(it) }
 
-        // add the starting block to the checkpoints
-        blockDetails?.block?.hash?.let { checkpoints += it }
-
-        if (blockHeight != null) {
-            walletHeight = blockHeight
+        val requestData = WalletSyncDataRequest(blockHashCheckpoints = checkpoints)
+        val walletSyncData = getSyncData(requestData)
+        walletSyncData.let { wsd ->
+            if (wsd != null) {
+                checkpoints.plusAssign(wsd.items.last().blockHash)
+                walletHeight += wsd.items.size.toLong()
+            }
         }
-        logger.info("Start height: $startHeight")
-        logger.info("Wallet height: $walletHeight")
 
         syncJob = launch {
             launch(Dispatchers.IO) {
@@ -121,29 +122,24 @@ class WalletService(node: Node) {
                     logger.info("Syncing blocks...")
 
                     nodeInfo?.height?.let {
-                        logger.info("Node height inside nodeInfo?.height: $it")
                         if (walletHeight < it) {
-                            val requestData = WalletSyncDataRequest(blockHashCheckpoints = checkpoints, startHeight = blockHeight)
-                            val walletSyncData = getSyncData(requestData)
+                            val data = WalletSyncDataRequest(blockHashCheckpoints = checkpoints)
+                            val syncData = getSyncData(data)
 
-                            walletSyncData?.let { wsd ->
-                                //TODO checkpoints does not seem to be updated or we get the same data back.
-                                // it seems like the walletHeight is higher than the node height for some reason....
-                                checkpoints += wsd.items.last().blockHash
-                                logger.info("Checkpoint INSIDE: ${checkpoints.last()}")
-                                logger.info("Fetched ${wsd.items.size} blocks")
+                            syncData?.let { sd ->
+                                checkpoints.plusAssign(sd.items.last().blockHash)
+                                checkpoints = checkpoints.distinct().toMutableList() // removing duplicates
+                                walletHeight += sd.items.size.toLong()
+                                logger.debug("Fetched ${sd.items.size} blocks")
                             }
 
-                            walletSyncData?.items?.forEach { _ -> walletHeight++ }
-
-                            logger.debug("Checkpoints size: ${checkpoints.size}")
                             logger.info("Wallet height: $walletHeight")
                         } else {
                             logger.info("Synced...")
                         }
                     }
 
-                    logger.info("Checkpoint: ${checkpoints.last()}")
+                    logger.info("Checkpoint inside COROUTINE: ${checkpoints}")
                     logger.info("Wallet height: $walletHeight")
                     delay(Config.SYNC_THREAD_INTERVAL)
                 }
