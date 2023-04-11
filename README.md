@@ -17,9 +17,6 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - [Development resources](#development-resources)
 - [Getting Help](#getting-help)
 - [Reporting Issues](#reporting-issues)
-- [Contribute](#contribute)
-  - [Pull Request](#pull-request)
-  - [Donate](#donate)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -61,26 +58,6 @@ Kryptokrona Kotlin SDK uses GitHub’s integrated issue tracking system to recor
 - If you need to paste code or include a stack trace, use Markdown. ``` escapes before and after your text.
 
 - If possible, try to create a test case or project that replicates the problem and attach it to the issue.
-
-## Contribute
-
-If you would like to contribute to this project there is two ways:
-
-- Send a pull request
-- Donate to XKR address
-
-### Pull Request
-
-Read through the developer documentation at: [https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki).
-
-We recommend using IntelliJ to work on this project.
-
-We appreciate all contributions whether it be small changes such as documentation of source code to major improvement of code.
-The easiest way is to make a fork and then make a pull request into our develop branch.
-
-### Donate
-
-XKR: `SEKReXXU9aJPiwjX2XkpbK8ACMWbUNXcYPxUVSiUYpNdhj8Z2snEy8CjjorZUNyswQNfzAmVWuGksU72Sf3Kq79Zd3fJWHq4Nyx`
 
 ## Contributors
 
