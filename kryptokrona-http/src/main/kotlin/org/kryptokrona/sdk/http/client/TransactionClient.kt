@@ -31,6 +31,8 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
+import io.ktor.client.request.*
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionDetailsHashes
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionHashesPaymentId
@@ -60,10 +62,12 @@ class TransactionClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/gettransactions").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/gettransactions").body()
+                    return client.get("https://${node.hostName}:${node.port}/gettransactions")
+                        .body<Transactions>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/gettransactions")
+                    .body<Transactions>()
             }
         } catch (e: Exception) {
             logger.error("Error getting transactions", e)
@@ -82,10 +86,12 @@ class TransactionClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_transaction_details_by_hashes").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_transaction_details_by_hashes").body()
+                    return client.get("https://${node.hostName}:${node.port}/get_transaction_details_by_hashes")
+                        .body<TransactionDetailsHashes>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/get_transaction_details_by_hashes")
+                    .body<TransactionDetailsHashes>()
             }
         } catch (e: Exception) {
             logger.error("Error getting transaction details by hashes", e)
@@ -104,10 +110,12 @@ class TransactionClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id").body()
+                    return client.get("https://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id")
+                        .body<TransactionHashesPaymentId>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id")
+                    .body<TransactionHashesPaymentId>()
             }
         } catch (e: Exception) {
             logger.error("Error getting transaction hashes by payment id", e)
@@ -126,10 +134,13 @@ class TransactionClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_transactions_status").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_transactions_status").body()
+                    return client.get("https://${node.hostName}:${node.port}/get_transactions_status")
+                        .body<TransactionsStatus>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/get_transactions_status")
+                    .body<TransactionsStatus>()
+
             }
         } catch (e: Exception) {
             logger.error("Error getting transaction status", e)

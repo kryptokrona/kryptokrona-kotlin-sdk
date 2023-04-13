@@ -79,7 +79,7 @@ class IndexesClient(private val node: Node) {
         }
 
         try {
-            client.post(builder).body()
+            client.post(builder).body<GlobalIndexesForRange>()
         } catch (e: Exception) {
             logger.error("Error getting global indexes for range", e)
         }

@@ -83,7 +83,7 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body()
+            return client.post(builder).body<BlockDetail>()
         } catch (e: Exception) {
             logger.error("Error getting block details by height", e)
         }
@@ -101,10 +101,12 @@ class BlockClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_heights").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_blocks_details_by_heights").body()
+                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_heights")
+                        .body<BlocksDetails>()
                 }
+
+                return get("http://${node.hostName}:${node.port}/get_blocks_details_by_heights")
+                    .body<BlocksDetails>()
             }
         } catch (e: Exception) {
             logger.error("Error getting blocks details by height", e)
@@ -123,10 +125,12 @@ class BlockClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_hashes").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_blocks_details_by_hashes").body()
+                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_hashes")
+                        .body<BlocksDetailsHashes>()
                 }
+
+                return get("http://${node.hostName}:${node.port}/get_blocks_details_by_hashes")
+                    .body<BlocksDetailsHashes>()
             }
         } catch (e: Exception) {
             logger.error("Error getting blocks details by hashes", e)
@@ -145,10 +149,12 @@ class BlockClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps").body()
+                    return get("https://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps")
+                        .body<BlocksHashesTimestamp>()
                 }
+
+                return get("http://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps")
+                    .body<BlocksHashesTimestamp>()
             }
         } catch (e: Exception) {
             logger.error("Error getting blocks details by hashes", e)

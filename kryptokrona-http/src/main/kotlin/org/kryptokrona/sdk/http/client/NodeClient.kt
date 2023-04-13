@@ -31,8 +31,9 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
+import io.ktor.client.request.*
 import io.ktor.http.*
-import org.kryptokrona.sdk.http.common.get
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.node.Fee
 import org.kryptokrona.sdk.http.model.response.node.Height
 import org.kryptokrona.sdk.http.model.response.node.Info
@@ -61,13 +62,13 @@ class NodeClient(private val node: Node) {
         try {
             node.ssl.let { it ->
                 if (it) {
-                    get("https://${node.hostName}:${node.port}/info").let {
+                    client.get("https://${node.hostName}:${node.port}/info").let {
                         return it.status.isSuccess()
                     }
-                } else {
-                    get("http://${node.hostName}:${node.port}/info").let {
-                        return it.status.isSuccess()
-                    }
+                }
+
+                client.get("http://${node.hostName}:${node.port}/info").let {
+                    return it.status.isSuccess()
                 }
             }
         } catch (e: Exception) {
@@ -86,11 +87,9 @@ class NodeClient(private val node: Node) {
     suspend fun getNodeInfo(): Info? {
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/info").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/info").body()
-                }
+                if (it) return client.get("https://${node.hostName}:${node.port}/info").body<Info>()
+
+                return client.get("http://${node.hostName}:${node.port}/info").body<Info>()
             }
         } catch (e: Exception) {
             logger.error("Error getting node information", e)
@@ -108,11 +107,9 @@ class NodeClient(private val node: Node) {
     suspend fun getNodeHeight(): Height? {
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/height").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/height").body()
-                }
+                if (it) return client.get("https://${node.hostName}:${node.port}/height").body<Height>()
+
+                return client.get("http://${node.hostName}:${node.port}/height").body<Height>()
             }
         } catch (e: Exception) {
             logger.error("Error getting node height", e)
@@ -130,11 +127,9 @@ class NodeClient(private val node: Node) {
     suspend fun getNodePeers(): Peers? {
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/peers").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/peers").body()
-                }
+                if (it) return client.get("https://${node.hostName}:${node.port}/peers").body<Peers>()
+
+                return client.get("http://${node.hostName}:${node.port}/peers").body<Peers>()
             }
         } catch (e: Exception) {
             logger.error("Error getting node peers", e)
@@ -152,11 +147,9 @@ class NodeClient(private val node: Node) {
     suspend fun getNodeFee(): Fee? {
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/fee").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/fee").body()
-                }
+                if (it) return client.get("https://${node.hostName}:${node.port}/fee").body<Fee>()
+
+                return client.get("http://${node.hostName}:${node.port}/fee").body<Fee>()
             }
         } catch (e: Exception) {
             logger.error("Error getting node fee", e)

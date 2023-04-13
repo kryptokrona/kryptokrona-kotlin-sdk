@@ -31,7 +31,8 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
-import org.kryptokrona.sdk.http.common.get
+import io.ktor.client.request.*
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.PoolChangesLite
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
@@ -58,10 +59,12 @@ class PoolChangesClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_pool_changes_lite").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/get_pool_changes_lite").body()
+                    return client.get("https://${node.hostName}:${node.port}/get_pool_changes_lite")
+                        .body<PoolChangesLite>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/get_pool_changes_lite")
+                    .body<PoolChangesLite>()
             }
         } catch (e: Exception) {
             logger.error("Error getting pool changes lite", e)

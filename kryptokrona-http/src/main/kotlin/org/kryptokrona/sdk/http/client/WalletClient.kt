@@ -71,16 +71,16 @@ class WalletClient(private val node: Node) {
                             append("Content-Length", jsonBody.length.toString())
                         }
                         setBody(jsonBody)
-                    }.body()
-                } else {
-                    return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        contentType(ContentType.Application.Json)
-                        headers {
-                            append("Content-Length", jsonBody.length.toString())
-                        }
-                        setBody(jsonBody)
-                    }.body()
+                    }.body<WalletSyncData>()
                 }
+
+                return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
+                    contentType(ContentType.Application.Json)
+                    headers {
+                        append("Content-Length", jsonBody.length.toString())
+                    }
+                    setBody(jsonBody)
+                }.body<WalletSyncData>()
             }
         } catch (e: Exception) {
             logger.error("Error getting wallet sync data", e)

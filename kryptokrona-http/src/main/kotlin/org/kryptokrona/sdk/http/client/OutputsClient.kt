@@ -31,6 +31,8 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
+import io.ktor.client.request.*
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.response.RandomOutputs
 import org.kryptokrona.sdk.util.model.node.Node
@@ -57,10 +59,12 @@ class OutputsClient(private val node: Node) {
         try {
             node.ssl.let {
                 if (it) {
-                    return get("https://${node.hostName}:${node.port}/getrandom_outs").body()
-                } else {
-                    return get("http://${node.hostName}:${node.port}/getrandom_outs").body()
+                    return client.get("https://${node.hostName}:${node.port}/getrandom_outs")
+                        .body<RandomOutputs>()
                 }
+
+                return client.get("http://${node.hostName}:${node.port}/getrandom_outs")
+                    .body<RandomOutputs>()
             }
         } catch (e: Exception) {
             logger.error("Error getting random outputs", e)
