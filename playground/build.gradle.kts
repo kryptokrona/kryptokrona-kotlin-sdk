@@ -26,6 +26,10 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+tasks.named<CreateStartScripts>("startScripts") {
+    mustRunAfter(":kryptokrona-crypto:copyCLibrary")
+}
+
 tasks.test {
     useJUnitPlatform()
 }

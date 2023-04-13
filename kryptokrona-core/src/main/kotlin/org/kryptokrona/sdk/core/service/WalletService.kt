@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
+import org.kryptokrona.sdk.crypto.Crypto
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
@@ -142,7 +143,9 @@ class WalletService(node: Node) {
                                 }
                             }
 
-                            logger.debug("Wallet height: $walletHeight")
+                            processBlocks()
+
+                            logger.info("Wallet height: $walletHeight")
                         }
                     }
 
@@ -181,8 +184,10 @@ class WalletService(node: Node) {
         return walletClient.getWalletSyncData(walletSyncDataRequest)
     }
 
-    suspend fun processBlocks() {
+    private fun processBlocks() {
         logger.info("Processing blocks...")
+
+        val blocksToRemove = mutableListOf<Block>()
 
         storedBlocks.forEach { block ->
             block.transactions.forEach { transaction ->
@@ -193,20 +198,22 @@ class WalletService(node: Node) {
             walletHeight = block.blockHeight
 
             // remove the checked block from storedBlocks
-            storedBlocks.remove(block)
+            blocksToRemove.add(block)
         }
+
+        storedBlocks.removeAll(blocksToRemove)
     }
 
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
-        val privateViewKey = "b72c00a54aef2ee122ceeb1358c46357512d74846887eaf6bd5141556a797c01"
-        val publicSpendKey = "57b6a1553b053fd53b421a6ff1ab0092c9df7c2ad66fa4b28f9fe840905c7a9f"
+        val privateViewKey = "x"
+        val publicSpendKey = "y"
 
-        val pubSpend = convertHexToBytes("")
-        val privView = convertHexToBytes("")
-        val txPubKey = convertHexToBytes("")
+        val pubSpend = convertHexToBytes(privateViewKey)
+        val privView = convertHexToBytes(publicSpendKey)
+        val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
         val inputs = mutableListOf<TransactionInput>()
-        val derivation = ""
+        val derivation = Crypto.generate_key_derivation(txPubKey, privView)
 
         transaction.outputs.forEach { output ->
             val key = output.key
@@ -218,13 +225,13 @@ class WalletService(node: Node) {
             // if pub_spend != derived_spend_key
                 // continue
 
-            // this transaction contains outputs that belong to us. Create the key image and transaction input and save it.
+            // this transaction contains outputs that belong to us. create the key image and transaction input and save it.
             // let (key_image, private_ephemeral) = get_key_image_from_output(&derivation, index as u64, &pub_spend);
 
             // this is not spent yet. We just got it :)
             val spendHeight = 0
 
-            //Construct our transaction input, there may be more inputs from this transactions
+            // construct our transaction input, there may be more inputs from this transactions
             /*val txInput = TransactionInput(
                 keyImage = "",
                 amount = amount,

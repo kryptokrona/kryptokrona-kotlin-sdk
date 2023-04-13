@@ -28,19 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto.hugin
+package org.kryptokrona.sdk.crypto
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+class Crypto : CLibraryLoader() {
 
-/**
- * Simple sealed box object.
- *
- * @author Marcus Cvjeticanin
- * @since 0.2.0
- */
-@Serializable
-data class SealedBox(
-    @SerialName("sb") val secretBox: String,
-    @SerialName("t") val timestamp: Long
-)
+    companion object {
+        external fun generate_key_derivation(txPubKey: ByteArray, privView: ByteArray): Int
+    }
+
+}

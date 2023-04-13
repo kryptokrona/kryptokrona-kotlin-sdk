@@ -42,10 +42,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ViewTagBox(
     val box: String,
-
     @SerialName("t") val timestamp: Long,
-
     val txKey: String,
-
     @SerialName("vt") val viewTag: String
 )
