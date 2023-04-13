@@ -55,15 +55,16 @@ class PoolChangesClient(private val node: Node) {
      * @return PoolChangesLite
      */
     suspend fun getPoolChangesLite(): PoolChangesLite? {
-        //TODO: we should probably make this a post request instead
+        // Send post request with known transactions
+        // how should we send this data?
         try {
             node.ssl.let {
                 if (it) {
-                    return client.get("https://${node.hostName}:${node.port}/get_pool_changes_lite")
+                    return client.post("https://${node.hostName}:${node.port}/get_pool_changes_lite")
                         .body<PoolChangesLite>()
                 }
 
-                return client.get("http://${node.hostName}:${node.port}/get_pool_changes_lite")
+                return client.post("http://${node.hostName}:${node.port}/get_pool_changes_lite")
                     .body<PoolChangesLite>()
             }
         } catch (e: Exception) {
