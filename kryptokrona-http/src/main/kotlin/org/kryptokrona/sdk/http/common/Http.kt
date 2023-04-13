@@ -47,6 +47,9 @@ private val client = HttpClient {
         retryOnServerErrors(maxRetries = 5)
         exponentialDelay()
     }
+    install(HttpSend) {
+        maxSendCount = 50
+    }
 }
 
 
