@@ -53,6 +53,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transactions
      *
+     * @since 0.1.0
      * @return Transactions
      */
     suspend fun getTransactions(): Transactions? {
@@ -74,6 +75,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transaction details by hashes
      *
+     * @since 0.1.0
      * @return TransactionDetailsHashes
      */
     suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
@@ -95,6 +97,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transaction hashes by payment id
      *
+     * @since 0.1.0
      * @return TransactionHashesPaymentId
      */
     suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
@@ -116,6 +119,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transactions status
      *
+     * @since 0.1.0
      * @return TransactionsStatus
      */
     suspend fun getTransactionsStatus(): TransactionsStatus? {

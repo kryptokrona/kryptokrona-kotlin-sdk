@@ -59,6 +59,8 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
+     * @param blockDetailsByHeightRequest The block details by height request
+     * @since 0.1.0
      * @return BlockDetail
      */
     suspend fun getBlockDetailsByHeight(blockDetailsByHeightRequest: BlockDetailsByHeightRequest): BlockDetail? {
@@ -92,6 +94,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
+     * @since 0.1.0
      * @return BlocksDetails
      */
     suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
@@ -113,6 +116,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
+     * @since 0.1.0
      * @return BlocksDetailsHashes
      */
     suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
@@ -134,6 +138,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get blocks hashes by timestamps
      *
+     * @since 0.1.0
      * @return BlocksHashesTimestamp
      */
     suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {

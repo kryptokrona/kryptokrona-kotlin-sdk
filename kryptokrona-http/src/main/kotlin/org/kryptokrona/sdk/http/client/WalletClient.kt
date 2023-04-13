@@ -55,6 +55,8 @@ class WalletClient(private val node: Node) {
     /**
      * Get wallet sync data
      *
+     * @param walletSyncData The wallet sync data request
+     * @since 0.1.0
      * @return Transactions
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {

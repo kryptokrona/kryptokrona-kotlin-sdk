@@ -55,6 +55,8 @@ class IndexesClient(private val node: Node) {
     /**
      * Get global indexes for range
      *
+     * @param globalIndexesForRangeRequest The request object
+     * @since 0.1.0
      * @return GlobalIndexesForRange
      */
     suspend fun getGlobalIndexesForRange(globalIndexesForRangeRequest: GlobalIndexesForRangeRequest): GlobalIndexesForRange? {

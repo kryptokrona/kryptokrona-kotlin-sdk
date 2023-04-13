@@ -54,6 +54,7 @@ class NodeClient(private val node: Node) {
     /**
      * Check if node is running
      *
+     * @since 0.1.0
      * @return Boolean
      */
     suspend fun isNodeRunning(): Boolean {
@@ -79,6 +80,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node peers
      *
+     * @since 0.1.0
      * @return Peers
      */
     suspend fun getNodeInfo(): Info? {
@@ -100,6 +102,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node height
      *
+     * @since 0.1.0
      * @return Height
      */
     suspend fun getNodeHeight(): Height? {
@@ -121,6 +124,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node peers
      *
+     * @since 0.1.0
      * @return Peers
      */
     suspend fun getNodePeers(): Peers? {
@@ -142,6 +146,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node fee
      *
+     * @since 0.1.0
      * @return Fee
      */
     suspend fun getNodeFee(): Fee? {

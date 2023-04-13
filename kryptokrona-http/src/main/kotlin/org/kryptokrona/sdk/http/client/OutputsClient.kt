@@ -50,6 +50,7 @@ class OutputsClient(private val node: Node) {
     /**
      * Get random outputs
      *
+     * @since 0.1.0
      * @return RandomOutputs
      */
     suspend fun getRandomOuts(): RandomOutputs? {
