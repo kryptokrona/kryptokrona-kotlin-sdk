@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":kryptokrona-crypto"))
     implementation(project(":kryptokrona-http"))
     implementation(project(":kryptokrona-util"))
 

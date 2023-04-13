@@ -34,7 +34,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Item(
+data class Block(
     val blockHash: String,
     val blockHeight: Long,
     val blockTimestamp: Long,

@@ -28,14 +28,61 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.walletsyncdata
+package org.kryptokrona.sdk.crypto.util
 
-import kotlinx.serialization.Serializable
+/**
+ * Utility function for converting between hex and byte arrays.
+ *
+ * @since 0.2.0
+ * @param bytes the byte array to convert
+ * @return the hex string
+ */
+fun toHex(bytes: ByteArray): String {
+    val hexChars = "0123456789abcdef".toCharArray()
+    val result = StringBuilder(bytes.size * 2)
 
-@Serializable
-data class WalletSyncData(
-    val items: List<Block>,
-    val status: String
-)
+    for (byte in bytes) {
+        val v = byte.toInt() and 0xff
+        result.append(hexChars[v shr 4])
+        result.append(hexChars[v and 0x0f])
+    }
 
+    return result.toString()
+}
 
+/**
+ * Utility function for converting between hex and byte arrays.
+ *
+ * @since 0.2.0
+ * @param string the hex string to convert
+ * @return the byte array
+ */
+fun fromHex(string: String): ByteArray {
+    val hexChars = "0123456789abcdef".toCharArray()
+    val result = ByteArray(string.length / 2)
+
+    for (i in string.indices step 2) {
+        val firstIndex = hexChars.indexOf(string[i])
+        val secondIndex = hexChars.indexOf(string[i + 1])
+        val byteValue = (firstIndex shl 4) or secondIndex
+        result[i / 2] = byteValue.toByte()
+    }
+
+    return result
+}
+
+/**
+ * Utility function for converting between hex and byte arrays.
+ *
+ * @since 0.2.0
+ * @param hex the hex string to convert
+ * @return the byte array
+ */
+fun convertHexToBytes(hex: String): ByteArray {
+    val bytes = ByteArray(32) { 0 }
+    hex.chunked(2).forEachIndexed { i, byte ->
+        val byteValue = byte.toInt(16).toByte()
+        bytes[i] = byteValue
+    }
+    return bytes
+}

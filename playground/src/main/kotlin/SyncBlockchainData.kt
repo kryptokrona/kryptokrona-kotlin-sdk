@@ -20,10 +20,11 @@ fun main() = runBlocking {
         }
     }
 
-    delay(60 * 60 * 1000)
+    delay(60 * 1000)
     job.cancel()
 
     walletService.getNodeInfo()?.let { println(it) }
+    walletService.getStoredBlocks().forEach { println(it) }
 
     println("Hello, world!")
 }
