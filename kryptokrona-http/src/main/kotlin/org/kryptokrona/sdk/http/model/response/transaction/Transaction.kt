@@ -38,3 +38,54 @@ data class Transaction(
     @SerialName("transactionPrefixInfo.txHash") val transactionHash: String,
     @SerialName("transactionPrefixInfo.txPrefix") val transactionPrefix: TransactionPrefix
 )
+
+@Serializable
+data class TransactionDetailsHashes(
+    val status: String,
+    val transactions: List<String>
+)
+
+@Serializable
+data class TransactionHashesPaymentId(
+    val status: String,
+    val transactionHashes: List<String>
+)
+
+@Serializable
+data class TransactionPrefix(
+    val extra: String,
+    @SerialName("unlock_time") val unlockTime: Int,
+    val version: Int,
+    val vin: List<TransactionPrefixVin>,
+    val vout: List<TransactionPrefixVout>
+)
+
+@Serializable
+data class TransactionPrefixVin(
+    val type: String,
+    val value: TransactionPrefixVinValue
+)
+
+@Serializable
+data class TransactionPrefixVinValue(
+    val amount: Long,
+    @SerialName("k_image") val keyImage: String,
+    @SerialName("key_offsets") val keyOffsets: List<Long>
+)
+
+@Serializable
+data class TransactionPrefixVout(
+    val amount: Long,
+    val target: TransactionPrefixVoutTarget
+)
+
+@Serializable
+data class TransactionPrefixVoutTarget(
+    val data: TransactionPrefixVoutTargetData,
+    val type: String
+)
+
+@Serializable
+data class TransactionPrefixVoutTargetData(
+    val key: String
+)

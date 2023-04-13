@@ -28,9 +28,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.transaction
+package org.kryptokrona.sdk.http.model.response.walletsyncdata
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TransactionPrefixVoutTargetData(val key: String)
+data class WalletSyncData(
+    val items: List<Item>,
+    val status: String
+)
+
+

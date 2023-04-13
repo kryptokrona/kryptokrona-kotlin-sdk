@@ -28,27 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.block
+package org.kryptokrona.sdk.http.model.response.blocksdetail
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlockDetailBlockTransaction(
-    val blockHash: String,
-    val blockIndex: Long,
-    val extra: BlockDetailBlockTransactionExtra,
-    val fee: Long,
-    val hash: String,
-    val inBlockchain: Boolean,
-    val inputs: List<BlockDetailBlockTransactionInput>,
-    val mixin: Long,
-    val outputs: List<BlockDetailBlockTransactionOutput>,
-    val paymentId: String,
-    // val signatures: List<String>, // TODO need to make an object for signatures to deserialize properly (JSON input: .....00000000000000","signatures":[{"first":0,"second":"fca84566a.....)
-    val signaturesSize: Long,
-    val size: Long,
-    val timestamp: Long,
-    val totalInputsAmount: Long,
-    val totalOutputsAmount: Long,
-    val unlockTime: Long
+data class Blocks(
+    @SerialName("response.blocks") val blocks: List<String>, // TODO: should probably be a list of Block
+    @SerialName("response.current_height") val currentHeight: Long,
+    @SerialName("response.start_height") val startHeight: Long,
+    @SerialName("response.status") val status: String
 )

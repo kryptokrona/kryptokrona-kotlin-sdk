@@ -31,8 +31,6 @@
 package org.kryptokrona.sdk.http.model.request.wallet
 
 import kotlinx.serialization.Serializable
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
-import java.util.Arrays.asList
 
 @Serializable
 data class WalletSyncDataRequest(

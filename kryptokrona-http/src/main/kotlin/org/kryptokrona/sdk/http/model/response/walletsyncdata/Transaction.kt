@@ -28,9 +28,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.block
+package org.kryptokrona.sdk.http.model.response.walletsyncdata
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlocksDetailsHashes(val blocks: List<String>, val status: String) // the list should probably have its own data class
+data class Transaction(
+    val hash: String,
+    val inputs: List<TransactionInput>,
+    val outputs: List<TransactionOutput>,
+    val paymentID: String,
+    val txPublicKey: String,
+    val unlockTime: Long
+)

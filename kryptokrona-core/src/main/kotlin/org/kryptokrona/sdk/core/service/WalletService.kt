@@ -34,18 +34,13 @@ import kotlinx.coroutines.*
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
+import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
-import org.kryptokrona.sdk.http.model.response.block.BlockDetailBlock
 import org.kryptokrona.sdk.http.model.response.node.Info
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItem
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncDataItemCoinbaseTransaction
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.block.Block
-import org.kryptokrona.sdk.util.model.block.TopBlock
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 
@@ -123,7 +118,6 @@ class WalletService(node: Node) {
                     logger.debug("Syncing blocks...")
 
                     nodeInfo?.height?.let {
-                        //TODO need to perhaps update node info more often?
                         if (walletHeight < it) {
                             lastCheckPoint = listOf(checkpoints.last())
                             val data = WalletSyncDataRequest(blockHashCheckpoints = lastCheckPoint)

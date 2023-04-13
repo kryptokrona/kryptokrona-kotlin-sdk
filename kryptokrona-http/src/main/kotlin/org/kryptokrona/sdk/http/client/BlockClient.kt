@@ -30,31 +30,20 @@
 
 package org.kryptokrona.sdk.http.client
 
-import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.client.utils.EmptyContent.contentType
-import io.ktor.client.utils.EmptyContent.headers
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.http.model.request.block.BlocksRequest
-import org.kryptokrona.sdk.http.model.response.block.*
-import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocks
-import org.kryptokrona.sdk.http.model.response.queryblocks.QueryBlocksLite
+import org.kryptokrona.sdk.http.model.response.blockdetail.BlockDetail
+import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksDetails
+import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksDetailsHashes
+import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksHashesTimestamp
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-
-private val client = HttpClient {
-    install(ContentNegotiation) {
-        json(Json { ignoreUnknownKeys = true })
-    }
-}
 
 /**
  * Block client

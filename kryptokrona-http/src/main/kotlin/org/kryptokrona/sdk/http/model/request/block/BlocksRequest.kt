@@ -34,4 +34,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BlocksRequest(@SerialName("block_ids") val blockIds: List<String>)
+data class BlocksRequest(
+    @SerialName("block_ids") val blockIds: List<String>
+)

@@ -28,12 +28,27 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.wallet
+package org.kryptokrona.sdk.http.model.response.blockdetail
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class WalletSyncDataItemTransactionOutput(
-    val amount: Long,
-    val key: String
+data class Transaction(
+    val blockHash: String,
+    val blockIndex: Long,
+    val extra: Extra,
+    val fee: Long,
+    val hash: String,
+    val inBlockchain: Boolean,
+    val inputs: List<TransactionInput>,
+    val mixin: Long,
+    val outputs: List<TransactionOutput>,
+    val paymentId: String,
+    // val signatures: List<String>, // TODO need to make an object for signatures to deserialize properly (JSON input: .....00000000000000","signatures":[{"first":0,"second":"fca84566a.....)
+    val signaturesSize: Long,
+    val size: Long,
+    val timestamp: Long,
+    val totalInputsAmount: Long,
+    val totalOutputsAmount: Long,
+    val unlockTime: Long
 )

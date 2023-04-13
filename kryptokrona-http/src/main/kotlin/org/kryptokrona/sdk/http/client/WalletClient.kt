@@ -30,24 +30,16 @@
 
 package org.kryptokrona.sdk.http.client
 
-import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.kryptokrona.sdk.http.model.response.wallet.WalletSyncData
+import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
+import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-
-private val client = HttpClient {
-    install(ContentNegotiation) {
-        json()
-    }
-}
 
 /**
  * Wallet client
