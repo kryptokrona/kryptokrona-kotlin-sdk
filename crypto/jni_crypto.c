@@ -28,35 +28,21 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto
+#include <stdio.h>
+#include "jni_crypto.h"
+#include "crypto.h"
 
-import java.io.File
-import java.util.*
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz, jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation)
+{
+    jbyte* public_key_ptr = (*env)->GetByteArrayElements(env, tx_pub_key, NULL);
+    jbyte* secret_key_ptr = (*env)->GetByteArrayElements(env, priv_view_key, NULL);
+    jbyte* key_derivation_ptr = (*env)->GetByteArrayElements(env, key_derivation, NULL);
 
-open class CLibraryLoader {
+    int result = generate_key_derivation((const uint8_t*)public_key_ptr, (const uint8_t*)secret_key_ptr, (uint8_t*)key_derivation_ptr);
 
-    init {
-        System.load(getLibraryPath())
-    }
+    (*env)->ReleaseByteArrayElements(env, tx_pub_key, public_key_ptr, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, priv_view_key, secret_key_ptr, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, key_derivation, key_derivation_ptr, 0);
 
-    private fun getLibraryPath(): String {
-        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
-        val libraryName = when {
-            osName.contains("windows") -> "crypto.dll"
-            osName.contains("mac") -> "libcrypto.dylib"
-            else -> "libcrypto.so"
-        }
-
-        val userDir = System.getProperty("user.dir")
-        val libraryPath = File(userDir, "kryptokrona-crypto/build/libs/$libraryName")
-
-        if (!libraryPath.exists()) {
-            throw RuntimeException("Failed to find the C shared library: $libraryName")
-        }
-
-        println("Library path: ${libraryPath.absolutePath}")
-
-        return libraryPath.absolutePath
-    }
-
+    return result;
 }

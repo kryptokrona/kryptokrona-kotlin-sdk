@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -fPIC
+CFLAGS := -Wall -fPIC -Wextra -pedantic -std=c99 -O2 -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin
 LDFLAGS := -shared
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)

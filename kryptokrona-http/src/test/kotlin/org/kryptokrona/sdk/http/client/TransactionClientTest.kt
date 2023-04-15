@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.util.model.node.Node
 
+/**
+ * Tests for the TransactionClient class.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class TransactionClientTest {
 
     private val nodeHTTP = Node("techy.ddns.net", 11898, false)

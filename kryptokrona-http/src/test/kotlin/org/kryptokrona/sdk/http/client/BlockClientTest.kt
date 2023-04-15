@@ -9,6 +9,12 @@ import org.kryptokrona.sdk.util.model.node.Node
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+/**
+ * Tests for the BlockClient class.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class BlockClientTest {
 
     private val nodeHTTP = Node("techy.ddns.net", 11898, false)

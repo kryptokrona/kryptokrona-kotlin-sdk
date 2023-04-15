@@ -45,6 +45,10 @@ kotlin {
     jvmToolchain(17)
 }
 
+tasks.named<CreateStartScripts>("startScripts") {
+    mustRunAfter(":kryptokrona-crypto:copyCLibrary")
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {

@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.util.model.node.Node
 
+/**
+ * Tests for the NodeClient class.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class NodeClientTest {
 
     private val nodeHTTP = Node("techy.ddns.net", 11898, false)

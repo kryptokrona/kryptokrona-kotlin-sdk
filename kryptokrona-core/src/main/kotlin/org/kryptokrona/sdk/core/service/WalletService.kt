@@ -59,6 +59,8 @@ class WalletService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("WalletService")
 
+    private val crypto = Crypto()
+
     private val walletClient = WalletClient(node)
 
     private val blockClient = BlockClient(node)
@@ -136,9 +138,7 @@ class WalletService(node: Node) {
                                     walletHeight += sd.items.size.toLong()
 
                                     // add new blocks to stored blocks
-                                    sd.items.forEach { block ->
-                                        storedBlocks.add(block)
-                                    }
+                                    sd.items.forEach { block -> storedBlocks.add(block) }
                                     logger.info("Fetched ${sd.items.size} block(s)")
                                 }
                             }
@@ -205,15 +205,17 @@ class WalletService(node: Node) {
     }
 
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
-        val privateViewKey = "x"
-        val publicSpendKey = "y"
+        val publicSpendKey = "cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb"
+        val privateViewKey = "8f066e33d45a0205b772f47b5a5d66f5b5e08fc329c45fc5f2a15a998ad0d4b4"
 
-        val pubSpend = convertHexToBytes(privateViewKey)
-        val privView = convertHexToBytes(publicSpendKey)
+        val pubSpend = convertHexToBytes(publicSpendKey)
+        val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
         val inputs = mutableListOf<TransactionInput>()
-        val derivation = Crypto.generate_key_derivation(txPubKey, privView)
+
+        val derivation = ByteArray(32)
+        crypto.generateKeyDerivation(txPubKey, privView, derivation)
 
         transaction.outputs.forEach { output ->
             val key = output.key

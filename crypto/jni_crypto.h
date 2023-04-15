@@ -28,35 +28,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto
-
-import java.io.File
-import java.util.*
-
-open class CLibraryLoader {
-
-    init {
-        System.load(getLibraryPath())
-    }
-
-    private fun getLibraryPath(): String {
-        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
-        val libraryName = when {
-            osName.contains("windows") -> "crypto.dll"
-            osName.contains("mac") -> "libcrypto.dylib"
-            else -> "libcrypto.so"
-        }
-
-        val userDir = System.getProperty("user.dir")
-        val libraryPath = File(userDir, "kryptokrona-crypto/build/libs/$libraryName")
-
-        if (!libraryPath.exists()) {
-            throw RuntimeException("Failed to find the C shared library: $libraryName")
-        }
-
-        println("Library path: ${libraryPath.absolutePath}")
-
-        return libraryPath.absolutePath
-    }
-
+#include <jni.h>
+#ifndef _Included_JNI_Crypto
+#define _Included_JNI_Crypto
+#ifdef __cplusplus
+extern "C" {
+#endif
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz, jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
+#ifdef __cplusplus
 }
+#endif
+#endif

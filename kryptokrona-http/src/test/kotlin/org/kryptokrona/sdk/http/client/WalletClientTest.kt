@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.model.node.Node
 
+/**
+ * Tests for the WalletClient class.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class WalletClientTest {
 
     private val nodeHTTP = Node("techy.ddns.net", 11898, false)

@@ -3,14 +3,6 @@
 
 #include <stdint.h>
 
-#ifndef JNIEXPORT
-#ifdef __cplusplus
-#define JNIEXPORT extern "C"
-#else
-#define JNIEXPORT
-#endif
-#endif
-
 typedef struct
 {
   uint8_t data[32];
@@ -35,7 +27,7 @@ void generate_keys(uint8_t *public_key, uint8_t *secret_key);
 
 int check_key(const uint8_t *public_key);
 int secret_key_to_public_key(const uint8_t *secret_key, uint8_t *public_key);
-JNIEXPORT int generate_key_derivation(const uint8_t *public_key, const uint8_t *secret_key, uint8_t *key_derivation);
+int generate_key_derivation(const uint8_t *public_key, const uint8_t *secret_key, uint8_t *key_derivation);
 
 int derive_public_key(const uint8_t *derivation, size_t output_index,
                        const uint8_t *base, uint8_t *derived_key);
@@ -71,7 +63,3 @@ int check_ring_signature(const uint8_t *prefix_hash, const uint8_t *image,
 void hash_to_point(const uint8_t *hash, uint8_t *point);
 void hash_to_ec_ex(const uint8_t *hash, uint8_t *ec);
 
-// JNI EXPORT
-#ifdef __cplusplus
-}
-#endif

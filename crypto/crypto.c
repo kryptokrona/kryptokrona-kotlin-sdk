@@ -1,8 +1,3 @@
-// JNI EXPORT
-#ifdef JNIEXPORT
-#undef JNIEXPORT
-#endif
-#define JNIEXPORT __attribute__((visibility("default")))
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -80,7 +75,7 @@ int secret_key_to_public_key(const uint8_t *secret_key, uint8_t *public_key)
   return 1;
 }
 
-JNIEXPORT int generate_key_derivation(const uint8_t *public_key, const uint8_t *secret_key, uint8_t *key_derivation)
+int generate_key_derivation(const uint8_t *public_key, const uint8_t *secret_key, uint8_t *key_derivation)
 {
   ge_p3 point;
   ge_p2 point2;

@@ -32,8 +32,6 @@ package org.kryptokrona.sdk.crypto
 
 class Crypto : CLibraryLoader() {
 
-    companion object {
-        external fun generate_key_derivation(txPubKey: ByteArray, privView: ByteArray): Int
-    }
+    external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int
 
 }

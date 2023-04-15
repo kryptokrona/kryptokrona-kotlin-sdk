@@ -121,13 +121,18 @@ tasks.register<Exec>("cCompile") {
     commandLine("make")
 }
 
+tasks.register<Exec>("cClean") {
+    workingDir = file("$cryptoDir")
+    commandLine("make", "clean")
+}
+
 val copyCLibrary by tasks.registering(Copy::class) {
     from(sharedLibraryPath)
     into("$buildDir/libs")
 }
 
 tasks.named<CreateStartScripts>("startScripts") {
-    mustRunAfter(":kryptokrona-crypto:copyCLibrary")
+    mustRunAfter("copyCLibrary")
 }
 
 val copyCHeaders by tasks.registering(Copy::class) {
