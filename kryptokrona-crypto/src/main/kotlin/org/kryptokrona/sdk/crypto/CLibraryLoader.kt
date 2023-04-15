@@ -65,8 +65,10 @@ open class CLibraryLoader {
             else -> "libcrypto.so"
         }
 
+        // use a different path for tests
+        val libraryFolder = if (isRunningInsideUnitTest()) "../kryptokrona-crypto/build/libs" else "kryptokrona-crypto/build/libs"
         val userDir = System.getProperty("user.dir")
-        val libraryPath = File(userDir, "kryptokrona-crypto/build/libs/$libraryName")
+        val libraryPath = File(userDir, "$libraryFolder/$libraryName")
 
         if (!libraryPath.exists()) {
             throw RuntimeException("Failed to find the C shared library: $libraryName")

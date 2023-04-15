@@ -22,7 +22,7 @@ class CryptoTest {
         // Act
         val pubSpend = convertHexToBytes(publicSpendKey)
         val privView = convertHexToBytes(privateViewKey)
-        val txPubKey = convertHexToBytes("dsadadadasdas")
+        val txPubKey = convertHexToBytes("cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb")
 
         val test = ByteArray(32)
         crypto.generateKeyDerivation(txPubKey, privView, test)

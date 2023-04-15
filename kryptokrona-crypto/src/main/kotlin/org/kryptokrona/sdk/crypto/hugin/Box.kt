@@ -42,6 +42,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Box(
     val box: String,
-    @SerialName("t")
-    val timestamp: Long = 0
+    @SerialName("t") val timestamp: Long = 0
 )
