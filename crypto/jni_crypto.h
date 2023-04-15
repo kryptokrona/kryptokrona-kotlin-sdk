@@ -34,7 +34,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz, jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
+
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz,
+    jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
+
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(
+    JNIEnv *env, jclass clazz, jbyteArray derivation, jlong output_index, jbyteArray derived_key, jbyteArray base);
+
 #ifdef __cplusplus
 }
 #endif

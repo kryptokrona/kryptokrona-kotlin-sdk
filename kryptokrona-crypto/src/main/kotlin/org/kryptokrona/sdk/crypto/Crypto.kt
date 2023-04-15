@@ -40,4 +40,6 @@ class Crypto : CLibraryLoader() {
 
     external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int
 
+    external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
+
 }

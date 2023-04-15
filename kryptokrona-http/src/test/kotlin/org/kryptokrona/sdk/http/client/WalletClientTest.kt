@@ -1,5 +1,6 @@
 package org.kryptokrona.sdk.http.client
 
+import io.ktor.client.network.sockets.*
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

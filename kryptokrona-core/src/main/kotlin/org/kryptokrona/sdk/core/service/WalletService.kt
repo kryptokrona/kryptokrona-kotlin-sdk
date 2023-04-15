@@ -217,15 +217,16 @@ class WalletService(node: Node) {
         val derivation = ByteArray(32)
         crypto.generateKeyDerivation(txPubKey, privView, derivation)
 
-        transaction.outputs.forEach { output ->
+        transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
-            val byteKey = convertHexToBytes("")
-            val amount = output.amount
+            val derivedKey = convertHexToBytes(key)
+            val base = ByteArray(32)
 
-            val derivedSpendKey = ""
+            crypto.underivePublicKey(derivation, index.toLong(), derivedKey, base)
 
-            // if pub_spend != derived_spend_key
-                // continue
+            if (!pubSpend.contentEquals(derivedKey)) {
+                return@forEachIndexed
+            }
 
             // this transaction contains outputs that belong to us. create the key image and transaction input and save it.
             // let (key_image, private_ephemeral) = get_key_image_from_output(&derivation, index as u64, &pub_spend);
