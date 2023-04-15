@@ -17,11 +17,9 @@ class CryptoTest {
     @Test
     fun `can generate key derivation`() {
         // Arrange
-        val publicSpendKey = "5b1bff17a9c26feff8ba3fabc9e14d9c729bc182a4e5e6c0ea390510d0b69f4d"
         val privateViewKey = "548b044902b6da1edf7abbba8de293cc2c8b3db901864027d35d1587f003e50f"
 
         // Act
-        val pubSpend = convertHexToBytes(publicSpendKey)
         val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes("fdfd97d2ea9f1c25df773ff2c973d885653a3ee643157eb0ae2b6dd98f0b6984")
 

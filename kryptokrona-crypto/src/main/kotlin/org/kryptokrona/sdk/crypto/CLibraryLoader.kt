@@ -74,8 +74,6 @@ open class CLibraryLoader {
             throw RuntimeException("Failed to find the C shared library: $libraryName")
         }
 
-        println("Library path: ${libraryPath.absolutePath}")
-
         return libraryPath.absolutePath
     }
 
