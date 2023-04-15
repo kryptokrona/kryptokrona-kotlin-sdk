@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.crypto
 
+/**
+ * A class that loads the C library
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class Crypto : CLibraryLoader() {
 
     external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int

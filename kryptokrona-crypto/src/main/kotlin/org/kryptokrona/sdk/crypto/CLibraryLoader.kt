@@ -33,12 +33,30 @@ package org.kryptokrona.sdk.crypto
 import java.io.File
 import java.util.*
 
+/**
+ * A class that loads the C library
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 open class CLibraryLoader {
 
     init {
         System.load(getLibraryPath())
     }
 
+    /**
+     * Returns the path to the C shared library.
+     *
+     * If the current thread is running inside a unit test, the library is loaded from the current working directory.
+     * Otherwise, the library is loaded from the classpath.
+     * This is done to make it easier to run the unit tests.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @return the path to the C shared library
+     * @throws RuntimeException if the library is not found
+     */
     private fun getLibraryPath(): String {
         val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
         val libraryName = when {
@@ -57,6 +75,21 @@ open class CLibraryLoader {
         println("Library path: ${libraryPath.absolutePath}")
 
         return libraryPath.absolutePath
+    }
+
+    /**
+     * Checks if the current thread is running inside a unit test.
+     *
+     * This is used to determine if we should load the native library from the
+     * current working directory or from the classpath.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @return true if the current thread is running inside a unit test, false otherwise
+     */
+    private fun isRunningInsideUnitTest(): Boolean {
+        val stackTrace = Thread.currentThread().stackTrace
+        return stackTrace.any { it.className.startsWith("org.junit.") }
     }
 
 }

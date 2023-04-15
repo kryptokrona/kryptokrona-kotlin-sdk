@@ -15,15 +15,19 @@ class CryptoTest {
 
     @Test
     fun `can generate key derivation`() {
+        // Arrange
         val publicSpendKey = "cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb"
         val privateViewKey = "8f066e33d45a0205b772f47b5a5d66f5b5e08fc329c45fc5f2a15a998ad0d4b4"
 
+        // Act
         val pubSpend = convertHexToBytes(publicSpendKey)
         val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes("dsadadadasdas")
 
         val test = ByteArray(32)
-        val derivation = crypto.generateKeyDerivation(txPubKey, privView, test)
-        println(derivation)
+        crypto.generateKeyDerivation(txPubKey, privView, test)
+
+        // Assert
+        println(test)
     }
 }
