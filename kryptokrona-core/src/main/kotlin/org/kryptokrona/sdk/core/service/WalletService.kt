@@ -221,13 +221,13 @@ class WalletService(node: Node) {
     }
 
     /**
-     * Checks the transaction outputs for outputs that belong to the wallet.
+     * Checks the transaction outputs for outputs that belong to the wallet
+     * and adds them to the wallet.
      *
      * @param transaction The transaction to check.
      * @param blockHeight The block height of the transaction.
      * @author Marcus Cvjeticanin
      * @since 0.2.0
-     * @return The transaction outputs that belong to the wallet.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
         val publicSpendKey = "cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb"
