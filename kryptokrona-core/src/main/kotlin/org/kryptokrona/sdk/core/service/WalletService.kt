@@ -237,6 +237,11 @@ class WalletService(node: Node) {
             // construct our transaction input, there may be more inputs from this transactions
             /*val txInput = TransactionInput(
                 keyImage = "",
+                amount = output.amount,
+
+            )*/
+            /*val txInput = TransactionInput(
+                keyImage = "",
                 amount = amount,
 
             )*/

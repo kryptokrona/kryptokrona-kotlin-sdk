@@ -38,8 +38,29 @@ package org.kryptokrona.sdk.crypto
  */
 class Crypto : CLibraryLoader() {
 
+    /**
+     * Generates a key derivation from a public key and a secret key, and stores the result in the provided buffer.
+     *
+     * @param publicKey the public key used in the key derivation.
+     * @param secretKey the secret key used in the key derivation.
+     * @param keyDerivation the buffer to store the generated key derivation.
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @return the number of bytes written to the key derivation buffer.
+     */
     external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int
 
+    /**
+     * Derives a public key from a base key and a key derivation, and stores the result in the provided buffer.
+     *
+     * @param derivation the key derivation used in the public key derivation.
+     * @param outputIndex the index of the output in the derivation path.
+     * @param derivedKey the buffer to store the derived public key.
+     * @param base the base key used in the public key derivation.
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @return the number of bytes written to the derived public key buffer.
+     */
     external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
 
 }
