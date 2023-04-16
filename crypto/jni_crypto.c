@@ -39,6 +39,7 @@ JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivat
     jbyte* secret_key_ptr = (*env)->GetByteArrayElements(env, priv_view_key, NULL);
     jbyte* key_derivation_ptr = (*env)->GetByteArrayElements(env, key_derivation, NULL);
 
+    // call the C function
     int result = generate_key_derivation((const uint8_t*)public_key_ptr, (const uint8_t*)secret_key_ptr, (uint8_t*)key_derivation_ptr);
 
     (*env)->ReleaseByteArrayElements(env, tx_pub_key, public_key_ptr, JNI_ABORT);
@@ -72,3 +73,19 @@ JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(
 
     return (jint) result;
 }
+
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(JNIEnv *env, jclass clazz,
+    jbyteArray pub, jbyteArray sec, jbyteArray image)
+{
+    uint8_t *pub_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, pub, NULL);
+    uint8_t *sec_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, sec, NULL);
+    uint8_t *image_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, image, NULL);
+
+    // call the C function
+    generate_key_image(pub_bytes, sec_bytes, image_bytes);
+
+    (*env)->ReleaseByteArrayElements(env, pub, (jbyte *)pub_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, sec, (jbyte *)sec_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, image, (jbyte *)image_bytes, 0);
+}
+

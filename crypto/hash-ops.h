@@ -11,11 +11,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#endif 
-
-#if !defined(__RUST_RAW_CRYPTO__)
-
-#endif
+#endif /* !defined(__cplusplus) */
 
 #if !defined(__cplusplus)
 #include "util.h"

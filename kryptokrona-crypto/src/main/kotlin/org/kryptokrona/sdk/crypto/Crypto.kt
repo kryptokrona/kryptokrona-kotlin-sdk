@@ -63,4 +63,15 @@ class Crypto : CLibraryLoader() {
      */
     external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
 
+    /**
+     * Generates a key image from a public key and a secret key, and stores the result in the provided buffer.
+     *
+     * @param pub the public key used in the key image generation.
+     * @param sec the secret key used in the key image generation.
+     * @param image the buffer to store the generated key image.
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     */
+    external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray)
+
 }
