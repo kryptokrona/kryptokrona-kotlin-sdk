@@ -31,7 +31,7 @@
 package org.kryptokrona.sdk.crypto
 
 /**
- * A class that loads the C library
+ * Crypto class that loads the C library
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0

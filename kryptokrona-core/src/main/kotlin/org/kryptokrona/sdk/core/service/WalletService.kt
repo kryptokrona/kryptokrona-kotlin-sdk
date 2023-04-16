@@ -101,6 +101,9 @@ class WalletService(node: Node) {
 
     /**
      * Starts the sync process.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      */
     suspend fun startSync() = coroutineScope {
         logger.info("Starting sync process...")
@@ -167,6 +170,9 @@ class WalletService(node: Node) {
 
     /**
      * Stops the sync process.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      */
     suspend fun stopSync() = coroutineScope {
         syncJob.children.forEach { it.cancel() }
@@ -177,6 +183,8 @@ class WalletService(node: Node) {
     /**
      * Gets the wallet sync data.
      *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      * @return The wallet sync data.
      */
     private suspend fun getSyncData(walletSyncDataRequest: WalletSyncDataRequest): WalletSyncData? {
@@ -184,6 +192,14 @@ class WalletService(node: Node) {
         return walletClient.getWalletSyncData(walletSyncDataRequest)
     }
 
+    /**
+     * Processes the stored blocks and checks the transactions
+     * for outputs that belong to the wallet. Removes the processed
+     * blocks from the storedBlocks list when done.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     */
     private fun processBlocks() {
         logger.info("Processing blocks...")
 
@@ -204,6 +220,15 @@ class WalletService(node: Node) {
         storedBlocks.removeAll(blocksToRemove)
     }
 
+    /**
+     * Checks the transaction outputs for outputs that belong to the wallet.
+     *
+     * @param transaction The transaction to check.
+     * @param blockHeight The block height of the transaction.
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @return The transaction outputs that belong to the wallet.
+     */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
         val publicSpendKey = "cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb"
         val privateViewKey = "8f066e33d45a0205b772f47b5a5d66f5b5e08fc329c45fc5f2a15a998ad0d4b4"
