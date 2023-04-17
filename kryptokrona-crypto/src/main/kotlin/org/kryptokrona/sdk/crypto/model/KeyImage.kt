@@ -39,24 +39,6 @@ package org.kryptokrona.sdk.crypto.model
  * @since 0.2.0
  */
 data class KeyImage(
-    val keyImage: ByteArray,
-    val ephemeralPublicKey: ByteArray
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as KeyImage
-
-        if (!keyImage.contentEquals(other.keyImage)) return false
-        if (!ephemeralPublicKey.contentEquals(other.ephemeralPublicKey)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = keyImage.contentHashCode()
-        result = 31 * result + ephemeralPublicKey.contentHashCode()
-        return result
-    }
-}
+    val keyImage: String,
+    val ephemeralPublicKey: String
+)
