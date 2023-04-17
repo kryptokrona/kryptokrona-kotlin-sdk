@@ -30,6 +30,9 @@
 
 package org.kryptokrona.sdk.crypto
 
+import org.kryptokrona.sdk.crypto.model.KeyImage
+import org.kryptokrona.sdk.crypto.util.convertHexToBytes
+
 /**
  * Crypto class that loads the C library
  *
@@ -73,5 +76,19 @@ class Crypto : CLibraryLoader() {
      * @since 0.2.0
      */
     external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray)
+
+    fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: ByteArray): KeyImage? {
+        // get our private spend key from wallet.keys
+        val privateSpendKey = convertHexToBytes("")
+
+        // derive the ephemeral key pair
+
+
+        // generate the key image
+
+        // the check is done in bytes, return hex64 strings
+
+        return null
+    }
 
 }

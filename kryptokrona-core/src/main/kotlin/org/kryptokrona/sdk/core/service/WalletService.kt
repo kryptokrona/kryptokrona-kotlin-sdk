@@ -255,6 +255,7 @@ class WalletService(node: Node) {
 
             // this transaction contains outputs that belong to us. create the key image and transaction input and save it.
             // let (key_image, private_ephemeral) = get_key_image_from_output(&derivation, index as u64, &pub_spend);
+            val keyImage = crypto.getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
 
             // this is not spent yet. We just got it :)
             val spendHeight = 0
