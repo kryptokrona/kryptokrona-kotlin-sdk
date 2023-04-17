@@ -77,12 +77,24 @@ class WalletService(node: Node) {
      */
     private val nodeService = NodeService(node)
 
+    /**
+     * The sync job for the wallet sync process.
+     */
     private var syncJob: Job = Job()
 
+    /**
+     * The node info we get from node service.
+     */
     private var nodeInfo: Info? = null
 
+    /**
+     * If we don't set the start height, we will start from the genesis block.
+     */
     private var startHeight: Long = 0
 
+    /**
+     * The current height of the wallet. If we set a start height, we will start from that height.
+     */
     private var walletHeight: Long = 0
 
     /**

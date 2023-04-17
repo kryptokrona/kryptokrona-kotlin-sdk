@@ -75,9 +75,8 @@ class Crypto : CLibraryLoader() {
      * @param pub the public key used in the key image generation.
      * @param sec the secret key used in the key image generation.
      * @param image the buffer to store the generated key image.
-     * @return if successful or not in the form of an integer.
      */
-    external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray): Int
+    external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray)
 
     /**
      * Generates a key pair from a secret key, and stores the result in the provided buffers.
@@ -100,9 +99,8 @@ class Crypto : CLibraryLoader() {
      * @param derivation the key derivation used in the secret key derivation.
      * @param outputIndex the index of the output in the derivation path.
      * @param derivedKey the buffer to store the derived secret key.
-     * @return if successful or not in the form of an integer.
      */
-    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray): Int
+    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray)
 
     /**
      * Generates a signature from a hash and a secret key, and returns the result as a key image.

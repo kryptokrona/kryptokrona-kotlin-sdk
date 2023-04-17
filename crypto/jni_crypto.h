@@ -44,6 +44,12 @@ JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(JNIEnv *env, jclass clazz,
     jbyteArray pub, jbyteArray sec, jbyteArray image);
 
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JNIEnv *env, jclass clazz,
+    jbyteArray derivation, jlong output_index, jbyteArray base, jbyteArray derived_key);
+
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_deriveSecretKey(JNIEnv *env, jclass clazz,
+    jbyteArray derivation, jlong output_index, jbyteArray base, jbyteArray derived_key);
+
 #ifdef __cplusplus
 }
 #endif
