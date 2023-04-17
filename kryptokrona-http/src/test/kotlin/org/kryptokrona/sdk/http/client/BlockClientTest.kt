@@ -1,10 +1,8 @@
 package org.kryptokrona.sdk.http.client
 
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.http.model.request.block.BlocksRequest
 import org.kryptokrona.sdk.util.model.node.Node
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

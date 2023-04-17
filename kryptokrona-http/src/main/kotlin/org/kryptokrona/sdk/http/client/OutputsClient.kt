@@ -33,7 +33,6 @@ package org.kryptokrona.sdk.http.client
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.response.RandomOutputs
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory

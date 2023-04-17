@@ -37,16 +37,14 @@ import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Block
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
+import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.time.LocalDateTime
-import java.time.LocalDateTime.now
 
 /**
  * WalletService class.

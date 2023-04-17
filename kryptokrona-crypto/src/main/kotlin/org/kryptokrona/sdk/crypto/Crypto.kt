@@ -32,7 +32,6 @@ package org.kryptokrona.sdk.crypto
 
 import org.kryptokrona.sdk.crypto.model.KeyImage
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
-import org.kryptokrona.sdk.crypto.util.fromHex
 import org.kryptokrona.sdk.crypto.util.toHex
 
 /**
