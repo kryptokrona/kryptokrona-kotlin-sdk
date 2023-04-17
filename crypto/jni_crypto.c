@@ -32,46 +32,38 @@
 #include "jni_crypto.h"
 #include "crypto.h"
 
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz,
-    jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation)
+JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jclass clazz,
+    jbyteArray key, jbyteArray derivation, jbyteArray output)
 {
-    jbyte* public_key_ptr = (*env)->GetByteArrayElements(env, tx_pub_key, NULL);
-    jbyte* secret_key_ptr = (*env)->GetByteArrayElements(env, priv_view_key, NULL);
-    jbyte* key_derivation_ptr = (*env)->GetByteArrayElements(env, key_derivation, NULL);
+    uint8_t *key_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, key, NULL);
+    uint8_t *derivation_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, derivation, NULL);
+    uint8_t *output_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, output, NULL);
 
     // call the C function
-    int result = generate_key_derivation((const uint8_t*)public_key_ptr, (const uint8_t*)secret_key_ptr, (uint8_t*)key_derivation_ptr);
+    int result = generate_key_derivation(key_bytes, derivation_bytes, output_bytes);
 
-    (*env)->ReleaseByteArrayElements(env, tx_pub_key, public_key_ptr, JNI_ABORT);
-    (*env)->ReleaseByteArrayElements(env, priv_view_key, secret_key_ptr, JNI_ABORT);
-    (*env)->ReleaseByteArrayElements(env, key_derivation, key_derivation_ptr, 0);
+    (*env)->ReleaseByteArrayElements(env, key, (jbyte *)key_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, derivation, (jbyte *)derivation_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, output, (jbyte *)output_bytes, 0);
 
     return result;
 }
 
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray derived_key, jbyteArray base)
+    jbyteArray derivation, jint output_index, jbyteArray pub, jbyteArray derived_key)
 {
-    // convert the input byte arrays to C arrays
-    jbyte *derivation_c = (*env)->GetByteArrayElements(env, derivation, NULL);
-    jsize derivation_len = (*env)->GetArrayLength(env, derivation);
-
-    jbyte *derived_key_c = (*env)->GetByteArrayElements(env, derived_key, NULL);
-    jsize derived_key_len = (*env)->GetArrayLength(env, derived_key);
-
-    jbyte *base_c = (*env)->GetByteArrayElements(env, base, NULL);
-    jsize base_len = (*env)->GetArrayLength(env, base);
+    uint8_t *derivation_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, derivation, NULL);
+    uint8_t *pub_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, pub, NULL);
+    uint8_t *derived_key_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, derived_key, NULL);
 
     // call the C function
-    int result = underive_public_key((const uint8_t *) derivation_c, (size_t) output_index,
-                                     (const uint8_t *) derived_key_c, (uint8_t *) base_c);
+    int result = underive_public_key(derivation_bytes, output_index, pub_bytes, derived_key_bytes);
 
-    // Release the C arrays and return the result
-    (*env)->ReleaseByteArrayElements(env, derivation, derivation_c, 0);
-    (*env)->ReleaseByteArrayElements(env, derived_key, derived_key_c, 0);
-    (*env)->ReleaseByteArrayElements(env, base, base_c, 0);
+    (*env)->ReleaseByteArrayElements(env, derivation, (jbyte *)derivation_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, pub, (jbyte *)pub_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, derived_key, (jbyte *)derived_key_bytes, 0);
 
-    return (jint) result;
+    return result;
 }
 
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(JNIEnv *env, jclass clazz,
@@ -92,15 +84,15 @@ JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(J
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JNIEnv *env, jclass clazz,
     jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key)
 {
-  uint8_t *c_derivation = (uint8_t*)env->GetByteArrayElements(derivation, NULL);
-  uint8_t *c_base = (uint8_t*)env->GetByteArrayElements(base, NULL);
-  uint8_t *c_derived_key = (uint8_t*)env->GetByteArrayElements(derived_key, NULL);
+  uint8_t *c_derivation = (uint8_t*) (*env)->GetByteArrayElements(env, derivation, NULL);
+  uint8_t *c_base = (uint8_t*) (*env)->GetByteArrayElements(env, base, NULL);
+  uint8_t *c_derived_key = (uint8_t*) (*env)->GetByteArrayElements(env, derived_key, NULL);
 
   int result = derive_public_key(c_derivation, output_index, c_base, c_derived_key);
 
-  env->ReleaseByteArrayElements(derivation, (jbyte*)c_derivation, JNI_ABORT);
-  env->ReleaseByteArrayElements(base, (jbyte*)c_base, JNI_ABORT);
-  env->ReleaseByteArrayElements(derived_key, (jbyte*)c_derived_key, 0);
+  (*env)->ReleaseByteArrayElements(env, derivation, (jbyte*)c_derivation, JNI_ABORT);
+  (*env)->ReleaseByteArrayElements(env, base, (jbyte*)c_base, JNI_ABORT);
+  (*env)->ReleaseByteArrayElements(env, derived_key, (jbyte*)c_derived_key, 0);
 
   return result;
 }
@@ -108,14 +100,14 @@ JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JN
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_deriveSecretKey(JNIEnv *env, jclass clazz,
     jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key)
 {
-  uint8_t *c_derivation = (uint8_t*)env->GetByteArrayElements(derivation, NULL);
-  uint8_t *c_base = (uint8_t*)env->GetByteArrayElements(base, NULL);
-  uint8_t *c_derived_key = (uint8_t*)env->GetByteArrayElements(derived_key, NULL);
+  uint8_t *c_derivation = (uint8_t*) (*env)->GetByteArrayElements(env, derivation, NULL);
+  uint8_t *c_base = (uint8_t*) (*env)->GetByteArrayElements(env, base, NULL);
+  uint8_t *c_derived_key = (uint8_t*) (*env)->GetByteArrayElements(env, derived_key, NULL);
 
   derive_secret_key(c_derivation, output_index, c_base, c_derived_key);
 
-  env->ReleaseByteArrayElements(derivation, (jbyte*)c_derivation, JNI_ABORT);
-  env->ReleaseByteArrayElements(base, (jbyte*)c_base, JNI_ABORT);
-  env->ReleaseByteArrayElements(derived_key, (jbyte*)c_derived_key, 0);
+  (*env)->ReleaseByteArrayElements(env, derivation, (jbyte*)c_derivation, JNI_ABORT);
+  (*env)->ReleaseByteArrayElements(env, base, (jbyte*)c_base, JNI_ABORT);
+  (*env)->ReleaseByteArrayElements(env, derived_key, (jbyte*)c_derived_key, 0);
 }
 
