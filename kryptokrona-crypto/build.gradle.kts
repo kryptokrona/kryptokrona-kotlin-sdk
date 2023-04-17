@@ -53,7 +53,8 @@ koverReport {
 
             filters {
                 excludes {
-                    classes("org.kryptokrona.sdk.http.model.*")
+                    classes("org.kryptokrona.sdk.crypto.hugin.*")
+                    classes("org.kryptokrona.sdk.crypto.model.*")
                 }
             }
 
