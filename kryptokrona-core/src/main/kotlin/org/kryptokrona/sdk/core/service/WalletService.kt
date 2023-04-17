@@ -59,12 +59,24 @@ class WalletService(node: Node) {
 
     private val logger = LoggerFactory.getLogger("WalletService")
 
+    /**
+     * The crypto external library from C code.
+     */
     private val crypto = Crypto()
 
+    /**
+     * The wallet client, used for sending requests to a node.
+     */
     private val walletClient = WalletClient(node)
 
+    /**
+     * The block client, used for sending requests to a node.
+     */
     private val blockClient = BlockClient(node)
 
+    /**
+     * The node service, used for getting information of the node.
+     */
     private val nodeService = NodeService(node)
 
     private var syncJob: Job = Job()
@@ -75,21 +87,15 @@ class WalletService(node: Node) {
 
     private var walletHeight: Long = 0
 
+    /**
+     * Checkpoints for the wallet sync process.
+     */
     private var checkpoints: MutableList<String> = mutableListOf()
 
     /**
      * Stored blocks for later processing
      */
     private var storedBlocks = mutableListOf<Block>()
-
-    /**
-     * Whether we are already downloading a chunk of blocks
-     */
-    private var fetchingBlocks: Boolean = false
-
-    private var shouldSleep: Boolean = false
-
-    private var lastDownloadedBlocks: LocalDateTime = now()
 
     fun getNodeInfo() = nodeInfo
 
@@ -280,8 +286,6 @@ class WalletService(node: Node) {
             // TODO we add this input to its wallet
             // inputs.add(txInput)
         }
-
     }
-
 
 }
