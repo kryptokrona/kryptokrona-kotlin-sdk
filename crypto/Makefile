@@ -1,15 +1,24 @@
 CC := gcc
-CFLAGS := -Wall -fPIC -Wextra -pedantic -std=c11 -O2 -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin
-LDFLAGS := -shared
+CFLAGS := -Wall -fPIC -Wextra -pedantic -std=c11 -O2
+LDFLAGS :=
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 TARGET := build/libcrypto.so
 
 ifeq ($(OS),Windows_NT)
+    CFLAGS += -I"$(JAVA_HOME)\include" -I"$(JAVA_HOME)\include\win32"
+    LDFLAGS += -shared
     TARGET := build/crypto.dll
 else
     UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CFLAGS += -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
+        LDFLAGS += -shared
+        TARGET := build/libcrypto.so
+    endif
     ifeq ($(UNAME_S),Darwin)
+        CFLAGS += -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin
+        LDFLAGS += -dynamiclib
         TARGET := build/libcrypto.dylib
     endif
 endif
