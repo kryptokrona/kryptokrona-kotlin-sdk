@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
+import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.http.client.BlockClient
@@ -271,7 +272,7 @@ class WalletService(node: Node) {
             }
 
             // this transaction contains outputs that belong to us. create the key image and transaction input and save it
-            val keyImage = crypto.getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
+            val keyImage = getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
 
             // this is not spent yet, we just got it :)
             val spendHeight = 0

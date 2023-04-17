@@ -30,10 +30,6 @@
 
 package org.kryptokrona.sdk.crypto
 
-import org.kryptokrona.sdk.crypto.model.KeyImage
-import org.kryptokrona.sdk.crypto.util.convertHexToBytes
-import org.kryptokrona.sdk.crypto.util.toHex
-
 /**
  * Crypto class that loads the C library
  *
@@ -103,32 +99,4 @@ class Crypto : CLibraryLoader() {
      */
     external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray, derivedKey: ByteArray)
 
-    /**
-     * Generates a signature from a hash and a secret key, and returns the result as a key image.
-     *
-     * @author Marcus Cvjeticanin
-     * @since 0.2.0
-     * @param hash the hash used in the signature generation.
-     * @param sec the secret key used in the signature generation.
-     * @param sig the buffer to store the generated signature.
-     * @return a key image containing the image and private ephemeral key.
-     */
-    fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: ByteArray): KeyImage {
-        //TODO need to get this from WalletService and pass to this function
-        // get our private spend key from wallet.keys
-        val privateSpendKey = convertHexToBytes("")
-        val publicSpendKey = ByteArray(32)
-        val derivedKey = ByteArray(32)
-
-        // derive the key pair
-        derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
-        deriveSecretKey(derivation, index, privateSpendKey, derivedKey)
-
-        // generate the key image
-        val image = ByteArray(32)
-        generateKeyImage(publicSpendKey, privateSpendKey, image)
-
-        // the check is done in bytes, return hex64 strings
-        return KeyImage(toHex(image), toHex(derivedKey))
-    }
 }
