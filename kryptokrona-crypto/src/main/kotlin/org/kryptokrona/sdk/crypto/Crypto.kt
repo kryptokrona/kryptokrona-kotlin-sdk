@@ -118,16 +118,17 @@ class Crypto : CLibraryLoader() {
         // get our private spend key from wallet.keys
         val privateSpendKey = convertHexToBytes("")
         val publicSpendKey = ByteArray(32)
+        val derivedKey = ByteArray(32)
 
         // derive the key pair
         derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
-        deriveSecretKey(derivation, index, privateSpendKey)
+        deriveSecretKey(derivation, index, privateSpendKey, derivedKey)
 
         // generate the key image
         val image = ByteArray(32)
         generateKeyImage(publicSpendKey, privateSpendKey, image)
 
         // the check is done in bytes, return hex64 strings
-        return KeyImage(toHex(image), toHex(privateSpendKey))
+        return KeyImage(toHex(image), toHex(derivedKey))
     }
 }
