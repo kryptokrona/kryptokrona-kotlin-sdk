@@ -98,9 +98,10 @@ class Crypto : CLibraryLoader() {
      * @since 0.2.0
      * @param derivation the key derivation used in the secret key derivation.
      * @param outputIndex the index of the output in the derivation path.
+     * @param base the base key used in the secret key derivation.
      * @param derivedKey the buffer to store the derived secret key.
      */
-    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray)
+    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray, derivedKey: ByteArray)
 
     /**
      * Generates a signature from a hash and a secret key, and returns the result as a key image.
