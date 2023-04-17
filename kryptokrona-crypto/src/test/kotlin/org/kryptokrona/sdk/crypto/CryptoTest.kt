@@ -105,6 +105,4 @@ class CryptoTest {
         assertEquals(32, base.size)
         assertTrue { base.isNotEmpty() }
     }
-
-
 }
