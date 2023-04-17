@@ -31,14 +31,32 @@
 package org.kryptokrona.sdk.crypto.model
 
 /**
- * Data class that represents a key image
+ * Represents a transaction input for a wallet.
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param keyImage the key image
- * @param ephemeralPublicKey the ephemeral public key
+ * @param amount the amount of the input
+ * @param blockHeight the block height of the input
+ * @param keyImage the key image of the input
+ * @param txPubKey the transaction public key of the input
+ * @param key the key of the input
+ * @param privateEphemeral the private ephemeral of the input
+ * @param txHash the transaction hash of the input
+ * @param txIndex the transaction index of the input
+ * @param spendHeight the spend height of the input
+ * @param unlockHeight the unlock height of the input
+ * @param globalIndex the global index of the input
  */
-data class KeyImage(
-    val keyImage: String,
-    val ephemeralPublicKey: String
+data class TransactionInput(
+    val amount: Long,
+    val blockHeight: Long,
+    val keyImage: KeyImage,
+    val txPubKey: String,
+    val key: String,
+    val privateEphemeral: String,
+    val txHash: String,
+    val txIndex: Long,
+    val spendHeight: Long,
+    val unlockHeight: Long,
+    val globalIndex: Long,
 )

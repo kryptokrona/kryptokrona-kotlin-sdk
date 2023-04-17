@@ -46,11 +46,11 @@ class Crypto : CLibraryLoader() {
     /**
      * Generates a key derivation from a public key and a secret key, and stores the result in the provided buffer.
      *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      * @param publicKey the public key used in the key derivation.
      * @param secretKey the secret key used in the key derivation.
      * @param keyDerivation the buffer to store the generated key derivation.
-     * @author Marcus Cvjeticanin
-     * @since 0.2.0
      * @return the number of bytes written to the key derivation buffer.
      */
     external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int
@@ -58,12 +58,12 @@ class Crypto : CLibraryLoader() {
     /**
      * Derives a public key from a base key and a key derivation, and stores the result in the provided buffer.
      *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      * @param derivation the key derivation used in the public key derivation.
      * @param outputIndex the index of the output in the derivation path.
      * @param derivedKey the buffer to store the derived public key.
      * @param base the base key used in the public key derivation.
-     * @author Marcus Cvjeticanin
-     * @since 0.2.0
      * @return the number of bytes written to the derived public key buffer.
      */
     external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
@@ -71,18 +71,49 @@ class Crypto : CLibraryLoader() {
     /**
      * Generates a key image from a public key and a secret key, and stores the result in the provided buffer.
      *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
      * @param pub the public key used in the key image generation.
      * @param sec the secret key used in the key image generation.
      * @param image the buffer to store the generated key image.
+     */
+    external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray): Int
+
+    /**
+     * Generates a key pair from a secret key, and stores the result in the provided buffers.
+     *
      * @author Marcus Cvjeticanin
      * @since 0.2.0
+     * @param pub the buffer to store the generated public key.
+     * @param sec the secret key used in the key pair generation.
+     * @param recoverable if true, the public key is recoverable from the secret key.
+     * @return the number of bytes written to the public key buffer.
      */
-    external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray)
+    external fun derivePublicKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): Int
 
-    external fun derivePublicKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): ByteArray
+    /**
+     * Derives a secret key from a base key and a key derivation, and stores the result in the provided buffer.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param derivation the key derivation used in the secret key derivation.
+     * @param outputIndex the index of the output in the derivation path.
+     * @param derivedKey the buffer to store the derived secret key.
+     * @param base the base key used in the secret key derivation.
+     * @return the number of bytes written to the derived secret key buffer.
+     */
+    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): Int
 
-    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): ByteArray
-
+    /**
+     * Generates a signature from a hash and a secret key, and returns the result as a key image.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param hash the hash used in the signature generation.
+     * @param sec the secret key used in the signature generation.
+     * @param sig the buffer to store the generated signature.
+     * @return a key image containing the image and private ephemeral key.
+     */
     fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: ByteArray): KeyImage {
         //TODO need to get this from WalletService and pass to this function
         // get our private spend key from wallet.keys
