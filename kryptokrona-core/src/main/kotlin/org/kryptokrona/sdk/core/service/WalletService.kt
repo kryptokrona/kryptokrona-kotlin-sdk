@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
+import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
@@ -41,7 +42,6 @@ import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Block
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
-import org.kryptokrona.sdk.http.model.response.walletsyncdata.TransactionInput
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
@@ -249,6 +249,7 @@ class WalletService(node: Node) {
 
             crypto.underivePublicKey(derivation, index.toLong(), derivedKey, base)
 
+            // if the derived spend key does not match, the output key is not designated to us. continue checking other outputs.
             if (!pubSpend.contentEquals(derivedKey)) {
                 return@forEachIndexed
             }
@@ -256,23 +257,27 @@ class WalletService(node: Node) {
             // this transaction contains outputs that belong to us. create the key image and transaction input and save it
             val keyImage = crypto.getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
 
-            // this is not spent yet. We just got it :)
+            // this is not spent yet, we just got it :)
             val spendHeight = 0
 
             // construct our transaction input, there may be more inputs from this transactions
-            /*val txInput = TransactionInput(
-                keyImage = "",
+            val txInput = TransactionInput(
                 amount = output.amount,
+                blockHeight = blockHeight,
+                keyImage = keyImage,
+                txPubKey = transaction.txPublicKey,
+                key = key,
+                privateEphemeral = keyImage.privateSpendKey,
+                txHash = transaction.hash,
+                txIndex = index.toLong(),
+                spendHeight = 0,
+                unlockTime = transaction.unlockTime,
+                globalIndex = 0
+            )
 
-            )*/
-            /*val txInput = TransactionInput(
-                keyImage = "",
-                amount = amount,
+            logger.info("Transaction found with hash: " + txInput.txHash)
 
-            )*/
-
-             // yellow!("Transaction found \n {:#?}", &tx_input);
-
+            // TODO we add this input to its wallet
             // inputs.add(txInput)
         }
 

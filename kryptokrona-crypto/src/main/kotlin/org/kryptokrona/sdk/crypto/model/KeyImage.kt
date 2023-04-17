@@ -40,5 +40,5 @@ package org.kryptokrona.sdk.crypto.model
  */
 data class KeyImage(
     val keyImage: String,
-    val ephemeralPublicKey: String
+    val privateSpendKey: String
 )

@@ -44,7 +44,7 @@ package org.kryptokrona.sdk.crypto.model
  * @param txHash the transaction hash of the input
  * @param txIndex the transaction index of the input
  * @param spendHeight the spend height of the input
- * @param unlockHeight the unlock height of the input
+ * @param unlockTime the unlock time of the input
  * @param globalIndex the global index of the input
  */
 data class TransactionInput(
@@ -57,6 +57,6 @@ data class TransactionInput(
     val txHash: String,
     val txIndex: Long,
     val spendHeight: Long,
-    val unlockHeight: Long,
+    val unlockTime: Long,
     val globalIndex: Long,
 )
