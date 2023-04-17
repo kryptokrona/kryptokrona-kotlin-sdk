@@ -10,8 +10,8 @@ on:
       - master
 
 jobs:
-  assemble:
-    name: Assemble
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +26,31 @@ jobs:
       - name: Assemble
         run: ./gradlew assemble
 
+      - name: Compile C library
+        run: ./gradlew cCompile
+
+      - name: Copy C library
+        run: ./gradlew copyCLibrary
+
+      - name: Copy C headers
+        run: ./gradlew copyCHeaders
+
+      - name: Upload C library
+        uses: actions/upload-artifact@v2
+        with:
+          name: kryptokrona-crypto
+          path: kryptokrona-crypto/build/libs
+
+      - name: Upload C headers
+        uses: actions/upload-artifact@v2
+        with:
+          name: kryptokrona-crypto-headers
+          path: kryptokrona-crypto/build/headers
+
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
-    needs: [ assemble ]
+    needs: [ build ]
 
     steps:
       - uses: actions/checkout@v3
@@ -39,6 +60,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
+
+      - name: Download C library
+        uses: actions/download-artifact@v2
+        with:
+          name: kryptokrona-crypto
+          path: kryptokrona-crypto/build/libs
+
+      - name: Download C headers
+        uses: actions/download-artifact@v2
+        with:
+          name: kryptokrona-crypto-headers
+          path: kryptokrona-crypto/build/headers
 
       - name: Run Unit Test
         run: ./gradlew test

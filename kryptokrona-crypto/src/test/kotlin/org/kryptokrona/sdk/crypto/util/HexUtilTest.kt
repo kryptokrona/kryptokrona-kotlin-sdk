@@ -57,7 +57,7 @@ class HexUtilTest {
         assertEquals("23f489126a8c", hex)
     }
 
-        @Test
+    @Test
     fun `test empty string`() {
         val input = ""
         val expected = byteArrayOf()
