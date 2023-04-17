@@ -51,7 +51,7 @@ class Crypto : CLibraryLoader() {
      * @param publicKey the public key used in the key derivation.
      * @param secretKey the secret key used in the key derivation.
      * @param keyDerivation the buffer to store the generated key derivation.
-     * @return the number of bytes written to the key derivation buffer.
+     * @return if successful or not in the form of an integer.
      */
     external fun generateKeyDerivation(publicKey: ByteArray, secretKey: ByteArray, keyDerivation: ByteArray): Int
 
@@ -64,7 +64,7 @@ class Crypto : CLibraryLoader() {
      * @param outputIndex the index of the output in the derivation path.
      * @param derivedKey the buffer to store the derived public key.
      * @param base the base key used in the public key derivation.
-     * @return the number of bytes written to the derived public key buffer.
+     * @return if successful or not in the form of an integer.
      */
     external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
 
@@ -76,6 +76,7 @@ class Crypto : CLibraryLoader() {
      * @param pub the public key used in the key image generation.
      * @param sec the secret key used in the key image generation.
      * @param image the buffer to store the generated key image.
+     * @return if successful or not in the form of an integer.
      */
     external fun generateKeyImage(pub: ByteArray, sec: ByteArray, image: ByteArray): Int
 
@@ -84,12 +85,13 @@ class Crypto : CLibraryLoader() {
      *
      * @author Marcus Cvjeticanin
      * @since 0.2.0
-     * @param pub the buffer to store the generated public key.
-     * @param sec the secret key used in the key pair generation.
-     * @param recoverable if true, the public key is recoverable from the secret key.
-     * @return the number of bytes written to the public key buffer.
+     * @param derivation the buffer to store the generated public key.
+     * @param outputIndex the buffer to store the generated secret key.
+     * @param base the secret key used in the key pair generation.
+     * @param derivedKey the secret key used in the key pair generation.
+     * @return if successful or not in the form of an integer.
      */
-    external fun derivePublicKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): Int
+    external fun derivePublicKey(derivation: ByteArray, outputIndex: Long, base: ByteArray, derivedKey: ByteArray): Int
 
     /**
      * Derives a secret key from a base key and a key derivation, and stores the result in the provided buffer.
@@ -99,10 +101,9 @@ class Crypto : CLibraryLoader() {
      * @param derivation the key derivation used in the secret key derivation.
      * @param outputIndex the index of the output in the derivation path.
      * @param derivedKey the buffer to store the derived secret key.
-     * @param base the base key used in the secret key derivation.
-     * @return the number of bytes written to the derived secret key buffer.
+     * @return if successful or not in the form of an integer.
      */
-    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray): Int
+    external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray): Int
 
     /**
      * Generates a signature from a hash and a secret key, and returns the result as a key image.
@@ -118,16 +119,17 @@ class Crypto : CLibraryLoader() {
         //TODO need to get this from WalletService and pass to this function
         // get our private spend key from wallet.keys
         val privateSpendKey = convertHexToBytes("")
+        val publicSpendKey = ByteArray(32)
 
-        // derive the ephemeral key pair
-        val publicEphemeral = derivePublicKey(derivation, index, myPublicSpend)
-        val privateEphemeral = deriveSecretKey(derivation, index, privateSpendKey)
+        // derive the key pair
+        derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
+        deriveSecretKey(derivation, index, privateSpendKey)
 
         // generate the key image
         val image = ByteArray(32)
-        generateKeyImage(publicEphemeral, privateEphemeral, image)
+        generateKeyImage(publicSpendKey, privateSpendKey, image)
 
         // the check is done in bytes, return hex64 strings
-        return KeyImage(toHex(image), toHex(privateEphemeral))  // should use toHex on string values that we get
+        return KeyImage(toHex(image), toHex(privateSpendKey))
     }
 }
