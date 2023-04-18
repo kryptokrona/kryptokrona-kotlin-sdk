@@ -125,6 +125,5 @@ jobs:
           verbose: false
 
   static-analysis:
-    name: Static Analysis
     uses: ./.github/workflows/detekt.yml
     needs: [ build ]
