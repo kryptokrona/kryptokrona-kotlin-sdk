@@ -118,8 +118,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ env.KRYPTOKRONA_HTTP_KOVER_XML }}, ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}
-          flags: unittests, grid # optional
+          flags: unittests
           layout: horizontal
-          name: codecov-umbrella # optional
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: false
