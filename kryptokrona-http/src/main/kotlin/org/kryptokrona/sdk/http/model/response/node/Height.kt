@@ -34,4 +34,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Height(val height: Int, @SerialName("network_height") val networkHeight: Int, val status: String)
+data class Height(
+    val height: Long,
+    @SerialName("network_height") val networkHeight: Long,
+    val status: String
+)
+

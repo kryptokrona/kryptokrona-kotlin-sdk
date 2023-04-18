@@ -34,4 +34,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OIndexes(@SerialName("o_indexes") val oIndexes: List<Long>, val status: String)
+data class OIndexes(
+    @SerialName("o_indexes") val oIndexes: List<Long>,
+    val status: String
+)

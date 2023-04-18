@@ -80,10 +80,10 @@ data class Info(
     val testnet: Boolean,
 
     @SerialName("tx_count")
-    val txCount: Int,
+    val txCount: Long,
 
     @SerialName("tx_pool_size")
-    val txPoolSize: Int,
+    val txPoolSize: Long,
 
     @SerialName("upgrade_heights")
     val upgradeHeights: List<Int>,
@@ -91,5 +91,5 @@ data class Info(
     val version: String,
 
     @SerialName("white_peerlist_size")
-    val whitePeerlistSize: Int
+    val whitePeerlistSize: Long
 )

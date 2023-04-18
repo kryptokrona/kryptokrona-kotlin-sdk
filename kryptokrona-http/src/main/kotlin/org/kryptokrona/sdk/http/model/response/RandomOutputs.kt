@@ -33,4 +33,7 @@ package org.kryptokrona.sdk.http.model.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RandomOutputs(val outs: List<Int>, val status: String)
+data class RandomOutputs(
+    val outs: List<Int>,
+    val status: String
+)
