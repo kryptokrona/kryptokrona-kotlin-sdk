@@ -34,13 +34,11 @@
 
 #include "hash-ops.h"
 
-#ifdef _MSC_VER
-#include <malloc.h>
-#elif !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) \
-  && !defined(__NetBSD__)
- #include <alloca.h>
+#ifdef __GNUC__
+#include <alloca.h>
 #else
- #include <stdlib.h>
+#include <malloc.h>
+#define alloca _alloca
 #endif
 
 /*** 
