@@ -3,6 +3,9 @@ import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.*
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
 val sdkVersion: String by project
 
@@ -16,10 +19,6 @@ buildscript {
     dependencies {
         classpath("org.jetbrains.dokka:dokka-base:1.8.10")
     }
-}
-
-allprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
 }
 
 repositories {
@@ -37,29 +36,6 @@ tasks.named<Test>("test") {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
-}
-
-tasks.withType<Detekt>().configureEach {
-    jvmTarget = "17"
-}
-tasks.withType<DetektCreateBaselineTask>().configureEach {
-    jvmTarget = "17"
-}
-
-detekt {
-    buildUponDefaultConfig = true // preconfigure defaults
-    allRules = false // activate all available (even unstable) rules.
-    config.setFrom(files("$projectDir/detekt-config.yml")) // point to your custom config defining rules to run, overwriting default behavior
-}
-
-tasks.withType<Detekt>().configureEach {
-    reports {
-        html.required.set(true) // observe findings in your browser with structure and code snippets
-        xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
-        txt.required.set(true) // similar to the console output, contains issue signature to manually edit baseline files
-        sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with GitHub Code Scanning
-        md.required.set(true) // simple Markdown format
-    }
 }
 
 // Dokka configuration
@@ -86,4 +62,36 @@ tasks.register<Copy>("copyDokkaHtmlMultiModule") {
     from("${buildDir}/dokka/htmlMultiModule")
     into(layout.buildDirectory.dir("${projectDir}/docs/${sdkVersion}"))
     include("**/*.*")
+}
+
+val detektReportMergeSarif by tasks.registering(ReportMergeTask::class) {
+    output.set(layout.buildDirectory.file("reports/detekt/merge.sarif"))
+}
+
+allprojects {
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+
+    detekt {
+        buildUponDefaultConfig = true
+        config.setFrom(file("${rootDir}/detekt.yml"))
+    }
+
+    tasks.withType<Detekt>().configureEach {
+        jvmTarget = "17"
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            txt.required.set(true)
+            sarif.required.set(true)
+            md.required.set(true)
+        }
+        basePath = rootDir.absolutePath
+        finalizedBy(detektReportMergeSarif)
+    }
+    detektReportMergeSarif {
+        input.from(tasks.withType<Detekt>().map { it.sarifReportFile })
+    }
+    tasks.withType<DetektCreateBaselineTask>().configureEach {
+        jvmTarget = "17"
+    }
 }

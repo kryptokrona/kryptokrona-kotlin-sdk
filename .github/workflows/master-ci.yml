@@ -123,3 +123,8 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
           verbose: false
+
+  static-analysis:
+    name: Static Analysis
+    uses: ./.github/workflows/detekt.yml
+    needs: [ build ]
