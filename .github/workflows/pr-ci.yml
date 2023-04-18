@@ -32,6 +32,12 @@ jobs:
       - name: Assemble
         run: ./gradlew assemble
 
+      - name: "Set up MinGW for ${{ matrix.config.name }}"
+        if: matrix.config.os == 'windows-latest'
+        uses: egor-tensin/setup-mingw@v2
+        with:
+          platform: x64
+
       - name: Compile C library
         run: ./gradlew cCompile
 
