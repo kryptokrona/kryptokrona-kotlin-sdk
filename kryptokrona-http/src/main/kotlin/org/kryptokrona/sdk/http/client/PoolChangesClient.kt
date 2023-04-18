@@ -56,22 +56,18 @@ class PoolChangesClient(private val node: Node) {
      * @return PoolChangesLite
      */
     suspend fun getPoolChangesLite(): PoolChangesLite? {
-        // Send post request with known transactions
-        // how should we send this data?
+        var result: PoolChangesLite? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return client.post("https://${node.hostName}:${node.port}/get_pool_changes_lite")
-                        .body<PoolChangesLite>()
-                }
-
-                return client.post("http://${node.hostName}:${node.port}/get_pool_changes_lite")
-                    .body<PoolChangesLite>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/get_pool_changes_lite"
+                result = client.post(url).body<PoolChangesLite>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting pool changes lite. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 }

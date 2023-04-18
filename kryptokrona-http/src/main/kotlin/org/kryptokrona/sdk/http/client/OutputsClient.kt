@@ -56,21 +56,18 @@ class OutputsClient(private val node: Node) {
      * @return RandomOutputs
      */
     suspend fun getRandomOuts(): RandomOutputs? {
+        var result: RandomOutputs? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return client.get("https://${node.hostName}:${node.port}/getrandom_outs")
-                        .body<RandomOutputs>()
-                }
-
-                return client.get("http://${node.hostName}:${node.port}/getrandom_outs")
-                    .body<RandomOutputs>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/getrandom_outs"
+                result = client.get(url).body<RandomOutputs>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting random outputs. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
-
 }

@@ -102,21 +102,19 @@ class BlockClient(private val node: Node) {
      * @return BlocksDetails
      */
     suspend fun getBlocksDetailsByHeights(): BlocksDetails? {
+        var result: BlocksDetails? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_heights")
-                        .body<BlocksDetails>()
-                }
-
-                return get("http://${node.hostName}:${node.port}/get_blocks_details_by_heights")
-                    .body<BlocksDetails>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/get_blocks_details_by_heights"
+                result = get(url).body<BlocksDetails>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by height. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -127,21 +125,19 @@ class BlockClient(private val node: Node) {
      * @return BlocksDetailsHashes
      */
     suspend fun getBlocksDetailsByHashes(): BlocksDetailsHashes? {
+        var result: BlocksDetailsHashes? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_details_by_hashes")
-                        .body<BlocksDetailsHashes>()
-                }
-
-                return get("http://${node.hostName}:${node.port}/get_blocks_details_by_hashes")
-                    .body<BlocksDetailsHashes>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/get_blocks_details_by_hashes"
+                result = get(url).body<BlocksDetailsHashes>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -152,20 +148,18 @@ class BlockClient(private val node: Node) {
      * @return BlocksHashesTimestamp
      */
     suspend fun getBlocksHashesByTimestamps(): BlocksHashesTimestamp? {
+        var result: BlocksHashesTimestamp? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return get("https://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps")
-                        .body<BlocksHashesTimestamp>()
-                }
-
-                return get("http://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps")
-                    .body<BlocksHashesTimestamp>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps"
+                result = get(url).body<BlocksHashesTimestamp>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 }

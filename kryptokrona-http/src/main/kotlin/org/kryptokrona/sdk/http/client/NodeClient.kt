@@ -60,23 +60,20 @@ class NodeClient(private val node: Node) {
      * @return Boolean
      */
     suspend fun isNodeRunning(): Boolean {
-        try {
-            node.ssl.let { it ->
-                if (it) {
-                    client.get("https://${node.hostName}:${node.port}/info").let {
-                        return it.status.isSuccess()
-                    }
-                }
+        var isSuccess = false
 
-                client.get("http://${node.hostName}:${node.port}/info").let {
-                    return it.status.isSuccess()
-                }
+        try {
+            node.ssl.let {
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/info"
+                val response = client.get(url)
+                isSuccess = response.status.isSuccess()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
         }
 
-        return false
+        return isSuccess
     }
 
     /**
@@ -86,17 +83,19 @@ class NodeClient(private val node: Node) {
      * @return Peers
      */
     suspend fun getNodeInfo(): Info? {
+        var result: Info? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/info").body<Info>()
-
-                return client.get("http://${node.hostName}:${node.port}/info").body<Info>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/info"
+                result = client.get(url).body<Info>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -106,17 +105,19 @@ class NodeClient(private val node: Node) {
      * @return Height
      */
     suspend fun getNodeHeight(): Height? {
+        var result: Height? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/height").body<Height>()
-
-                return client.get("http://${node.hostName}:${node.port}/height").body<Height>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/height"
+                result = client.get(url).body<Height>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node height. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -126,17 +127,19 @@ class NodeClient(private val node: Node) {
      * @return Peers
      */
     suspend fun getNodePeers(): Peers? {
+        var result: Peers? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/peers").body<Peers>()
-
-                return client.get("http://${node.hostName}:${node.port}/peers").body<Peers>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/peers"
+                result = client.get(url).body<Peers>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node peers. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -146,16 +149,18 @@ class NodeClient(private val node: Node) {
      * @return Fee
      */
     suspend fun getNodeFee(): Fee? {
+        var result: Fee? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/fee").body<Fee>()
-
-                return client.get("http://${node.hostName}:${node.port}/fee").body<Fee>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/fee"
+                result = client.get(url).body<Fee>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node fee. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 }

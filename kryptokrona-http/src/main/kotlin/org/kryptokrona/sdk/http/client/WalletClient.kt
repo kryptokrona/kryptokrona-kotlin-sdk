@@ -62,20 +62,13 @@ class WalletClient(private val node: Node) {
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
         val jsonBody = Json.encodeToString(walletSyncData)
+        var result: WalletSyncData? = null
 
         try {
             node.ssl.let {
-                if (it) {
-                    return client.post("https://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        contentType(ContentType.Application.Json)
-                        headers {
-                            append("Content-Length", jsonBody.length.toString())
-                        }
-                        setBody(jsonBody)
-                    }.body<WalletSyncData>()
-                }
-
-                return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/getwalletsyncdata"
+                result = client.post(url) {
                     contentType(ContentType.Application.Json)
                     headers {
                         append("Content-Length", jsonBody.length.toString())
@@ -87,6 +80,6 @@ class WalletClient(private val node: Node) {
             logger.error("Error getting wallet sync data. Could not reach the server.", e)
         }
 
-        return null
+        return result
     }
 }
