@@ -36,5 +36,11 @@ import kotlinx.serialization.Serializable
 data class GlobalIndexesForRangeRequest(
     val startHeight: Long? = null,
     val endHeight: Long? = null,
-    val indexes: List<Long>? = null
+    val indexes: List<Index>? = null
+)
+
+@Serializable
+data class Index(
+    val key: String,
+    val value: List<Long>
 )

@@ -34,6 +34,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GlobalIndexesForRange(
-    val indexes: List<Long>,
+    val indexes: List<Index>,
     val status: String
+)
+
+@Serializable
+data class Index(
+    val key: String,
+    val value: List<Long>
 )

@@ -34,6 +34,7 @@ import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
@@ -46,6 +47,7 @@ import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksHashesTimestam
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Block client
@@ -112,6 +114,10 @@ class BlockClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by height. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting blocks details by height. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting blocks details by height. Could not convert the response.", e)
         }
 
         return result
@@ -135,6 +141,10 @@ class BlockClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting blocks details by hashes. Could not convert the response.", e)
         }
 
         return result
@@ -158,6 +168,10 @@ class BlockClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting blocks details by hashes. Could not convert the response.", e)
         }
 
         return result

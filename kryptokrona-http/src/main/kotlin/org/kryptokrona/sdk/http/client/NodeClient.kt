@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.http.client
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.node.Fee
 import org.kryptokrona.sdk.http.model.response.node.Height
@@ -41,6 +42,7 @@ import org.kryptokrona.sdk.http.model.response.node.Peers
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Node client
@@ -71,6 +73,8 @@ class NodeClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node information. Could not resolve the address.", e)
         }
 
         return isSuccess
@@ -93,6 +97,10 @@ class NodeClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node information. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node information. Could not parse the response.", e)
         }
 
         return result
@@ -115,6 +123,10 @@ class NodeClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node height. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node height. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node height. Could not parse the response.", e)
         }
 
         return result
@@ -137,6 +149,10 @@ class NodeClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node peers. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node peers. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node peers. Could not parse the response.", e)
         }
 
         return result
@@ -159,6 +175,10 @@ class NodeClient(private val node: Node) {
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node fee. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node fee. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node fee. Could not parse the response.", e)
         }
 
         return result
