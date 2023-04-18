@@ -57,5 +57,4 @@ class NodeService(private var node: Node) {
         logger.debug("Getting node info...")
         return nodeClient.getNodeInfo()
     }
-
 }

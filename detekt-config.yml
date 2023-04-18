@@ -1,0 +1,12 @@
+detekt:
+  config:
+    - default-detekt-config.yml
+
+  # Fail the build if any issues are found
+  failFast: true
+
+  # Increase the max allowed issues
+  maxIssues: 100
+
+  # Exclude certain files or paths from analysis
+  excludes: "*.c"
