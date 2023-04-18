@@ -12,15 +12,6 @@ Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, w
 
 Kryptokrona SDK for Kotlin is currently the most fully featured implementation of the Kryptokrona Network protocols and includes many useful components and tools for building decentralized private communication and payment systems.
 
-## Table of Contents
-
-- [Development resources](#development-resources)
-- [Getting Help](#getting-help)
-- [Reporting Issues](#reporting-issues)
-- [Contributors](#contributors)
-- [License](#license)
-
-
 ## Development Resources
 
 - Web: https://kryptokrona.org
@@ -29,7 +20,6 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 - GitHub: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
-
 
 ## Getting Help
 
