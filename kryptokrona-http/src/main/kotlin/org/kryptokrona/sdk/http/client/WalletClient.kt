@@ -40,6 +40,7 @@ import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Wallet client
@@ -82,8 +83,8 @@ class WalletClient(private val node: Node) {
                     setBody(jsonBody)
                 }.body<WalletSyncData>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting wallet sync data", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting wallet sync data. Could not reach the server.", e)
         }
 
         return null

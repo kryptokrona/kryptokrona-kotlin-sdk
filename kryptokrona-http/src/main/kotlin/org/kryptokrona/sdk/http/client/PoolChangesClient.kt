@@ -36,6 +36,7 @@ import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.PoolChangesLite
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Pool changes client
@@ -67,8 +68,8 @@ class PoolChangesClient(private val node: Node) {
                 return client.post("http://${node.hostName}:${node.port}/get_pool_changes_lite")
                     .body<PoolChangesLite>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting pool changes lite", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting pool changes lite. Could not reach the server.", e)
         }
 
         return null

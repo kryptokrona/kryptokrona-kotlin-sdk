@@ -40,6 +40,7 @@ import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.http.model.response.node.Peers
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Node client
@@ -71,8 +72,8 @@ class NodeClient(private val node: Node) {
                     return it.status.isSuccess()
                 }
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node information", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node information. Could not reach the server.", e)
         }
 
         return false
@@ -91,8 +92,8 @@ class NodeClient(private val node: Node) {
 
                 return client.get("http://${node.hostName}:${node.port}/info").body<Info>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node information", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node information. Could not reach the server.", e)
         }
 
         return null
@@ -111,8 +112,8 @@ class NodeClient(private val node: Node) {
 
                 return client.get("http://${node.hostName}:${node.port}/height").body<Height>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node height", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node height. Could not reach the server.", e)
         }
 
         return null
@@ -131,8 +132,8 @@ class NodeClient(private val node: Node) {
 
                 return client.get("http://${node.hostName}:${node.port}/peers").body<Peers>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node peers", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node peers. Could not reach the server.", e)
         }
 
         return null
@@ -151,8 +152,8 @@ class NodeClient(private val node: Node) {
 
                 return client.get("http://${node.hostName}:${node.port}/fee").body<Fee>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node fee", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node fee. Could not reach the server.", e)
         }
 
         return null

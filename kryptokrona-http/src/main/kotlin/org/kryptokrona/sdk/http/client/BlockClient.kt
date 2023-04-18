@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
+import io.ktor.client.network.sockets.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.encodeToString
@@ -44,6 +45,7 @@ import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksDetailsHashes
 import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksHashesTimestamp
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Block client
@@ -60,6 +62,7 @@ class BlockClient(private val node: Node) {
      * Get block details by hash
      *
      * @param blockDetailsByHeightRequest The block details by height request
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return BlockDetail
      */
@@ -84,8 +87,8 @@ class BlockClient(private val node: Node) {
 
         try {
             return client.post(builder).body<BlockDetail>()
-        } catch (e: Exception) {
-            logger.error("Error getting block details by height", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting block details by height. Could not reach the server.", e)
         }
 
         return null
@@ -94,6 +97,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return BlocksDetails
      */
@@ -108,8 +112,8 @@ class BlockClient(private val node: Node) {
                 return get("http://${node.hostName}:${node.port}/get_blocks_details_by_heights")
                     .body<BlocksDetails>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting blocks details by height", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting blocks details by height. Could not reach the server.", e)
         }
 
         return null
@@ -118,6 +122,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return BlocksDetailsHashes
      */
@@ -132,8 +137,8 @@ class BlockClient(private val node: Node) {
                 return get("http://${node.hostName}:${node.port}/get_blocks_details_by_hashes")
                     .body<BlocksDetailsHashes>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting blocks details by hashes", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         }
 
         return null
@@ -142,6 +147,7 @@ class BlockClient(private val node: Node) {
     /**
      * Get blocks hashes by timestamps
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return BlocksHashesTimestamp
      */
@@ -156,8 +162,8 @@ class BlockClient(private val node: Node) {
                 return get("http://${node.hostName}:${node.port}/get_blocks_hashes_by_timestamps")
                     .body<BlocksHashesTimestamp>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting blocks details by hashes", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         }
 
         return null

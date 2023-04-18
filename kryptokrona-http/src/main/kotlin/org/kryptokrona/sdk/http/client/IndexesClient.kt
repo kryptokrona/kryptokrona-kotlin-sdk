@@ -40,6 +40,7 @@ import org.kryptokrona.sdk.http.model.request.GlobalIndexesForRangeRequest
 import org.kryptokrona.sdk.http.model.response.GlobalIndexesForRange
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Indexes client
@@ -81,8 +82,8 @@ class IndexesClient(private val node: Node) {
 
         try {
             client.post(builder).body<GlobalIndexesForRange>()
-        } catch (e: Exception) {
-            logger.error("Error getting global indexes for range", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting global indexes for range. Could not reach the server.", e)
         }
 
         return null

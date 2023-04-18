@@ -36,6 +36,7 @@ import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.RandomOutputs
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
 
 /**
  * Outputs client
@@ -65,8 +66,8 @@ class OutputsClient(private val node: Node) {
                 return client.get("http://${node.hostName}:${node.port}/getrandom_outs")
                     .body<RandomOutputs>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting random outputs", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting random outputs. Could not reach the server.", e)
         }
 
         return null
