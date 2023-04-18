@@ -1,0 +1,15 @@
+config:
+  validation: true
+  warningsAsErrors: false
+  excludes: ''
+
+style:
+  WildcardImport:
+    active: false # Wildcard imports are allowed
+
+build:
+  maxIssues: 10 # break the build if more than ten weighted issues are found
+  weights:
+    complexity: 2 # every rule of the complexity rule set should count as if two issues were found...
+    LongParameterList: 1 # ...with the exception of the LongParameterList rule.
+    comments: 0 # comment rules are just a nice to know?!

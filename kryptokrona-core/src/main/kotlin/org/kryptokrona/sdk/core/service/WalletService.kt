@@ -254,7 +254,7 @@ class WalletService(node: Node) {
         val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
-        val inputs = mutableListOf<TransactionInput>()
+        // val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(32)
         crypto.generateKeyDerivation(txPubKey, privView, derivation)
@@ -266,12 +266,14 @@ class WalletService(node: Node) {
 
             crypto.underivePublicKey(derivation, index.toLong(), derivedKey, base)
 
-            // if the derived spend key does not match, the output key is not designated to us. continue checking other outputs.
+            // if the derived spend key does not match, the output key is not designated to us.
+            // continue checking other outputs.
             if (!pubSpend.contentEquals(derivedKey)) {
                 return@forEachIndexed
             }
 
-            // this transaction contains outputs that belong to us. create the key image and transaction input and save it
+            // this transaction contains outputs that belong to us.
+            // create the key image and transaction input and save it
             val keyImage = getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
 
             // this is not spent yet, we just got it :)
@@ -298,5 +300,4 @@ class WalletService(node: Node) {
             // inputs.add(txInput)
         }
     }
-
 }
