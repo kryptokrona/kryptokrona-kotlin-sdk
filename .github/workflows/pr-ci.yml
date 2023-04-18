@@ -81,6 +81,18 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Download C library
+        uses: actions/download-artifact@v2
+        with:
+          name: kryptokrona-crypto
+          path: kryptokrona-crypto/build/libs
+
+      - name: Download C headers
+        uses: actions/download-artifact@v2
+        with:
+          name: kryptokrona-crypto-headers
+          path: kryptokrona-crypto/build/headers
+
       - name: Generate Kover XML Reports
         run: ./gradlew test koverXmlReport
 
