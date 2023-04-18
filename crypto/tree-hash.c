@@ -34,11 +34,10 @@
 
 #include "hash-ops.h"
 
-#ifdef __GNUC__
-#include <alloca.h>
-#else
+#ifdef _MSC_VER
 #include <malloc.h>
-#define alloca _alloca
+#else
+#include <alloca.h>
 #endif
 
 /*** 
