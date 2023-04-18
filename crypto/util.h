@@ -4,11 +4,17 @@
 
 #pragma once
 
+#ifdef __linux__
+    #define _BSD_SOURCE
+    #define _POSIX_C_SOURCE 200809L
+#endif
+
 #include <assert.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <sys/param.h>
+#include <endian.h>
 
 #if defined(_MSC_VER)
 #include <stdlib.h>
