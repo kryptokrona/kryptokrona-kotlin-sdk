@@ -69,7 +69,7 @@ static void generate_system_random_bytes(size_t n, void *result) {
 
 static void generate_system_random_bytes(size_t n, void *result) {
   int fd;
-  if ((fd = open("/dev/urandom", O_RDONLY | O_NOCTTY | O_CLOEXEC)) < 0) {
+  if ((fd = open("/dev/urandom", O_RDONLY | O_NOCTTY | FD_CLOEXEC)) < 0) {
     err(EXIT_FAILURE, "open /dev/urandom");
   }
   for (;;) {
