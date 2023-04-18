@@ -35,7 +35,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Blocks(
-    @SerialName("response.blocks") val blocks: List<String>, // TODO: should probably be a list of Block
+    @SerialName("response.blocks") val blocks: List<String>,
     @SerialName("response.current_height") val currentHeight: Long,
     @SerialName("response.start_height") val startHeight: Long,
     @SerialName("response.status") val status: String

@@ -147,5 +147,4 @@ class TransactionClient(private val node: Node) {
 
         return null
     }
-
 }

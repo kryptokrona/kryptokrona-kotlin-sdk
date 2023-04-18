@@ -58,18 +58,17 @@ fun toHex(bytes: ByteArray): String {
  * @return the byte array
  */
 fun fromHex(string: String): ByteArray {
-    if (string.length % 2 != 0) {
-        throw IllegalArgumentException("Input must have an even number of characters")
-    }
+    require(string.length % 2 != 0) { "Input must have an even number of characters" }
+
     val hexChars = "0123456789abcdef".toCharArray()
     val result = ByteArray(string.length / 2)
 
     for (i in string.indices step 2) {
-        val firstIndex = hexChars.indexOf(string[i].toLowerCase())
-        val secondIndex = hexChars.indexOf(string[i + 1].toLowerCase())
-        if (firstIndex == -1 || secondIndex == -1) {
-            throw IllegalArgumentException("Input contains invalid characters")
-        }
+        val firstIndex = hexChars.indexOf(string[i].lowercaseChar())
+        val secondIndex = hexChars.indexOf(string[i + 1].lowercaseChar())
+
+        require(firstIndex != -1 && secondIndex != -1) { "Input contains invalid characters" }
+
         val byteValue = (firstIndex shl 4) or secondIndex
         result[i / 2] = byteValue.toByte()
     }
@@ -85,15 +84,16 @@ fun fromHex(string: String): ByteArray {
  * @return the byte array
  */
 fun convertHexToBytes(hex: String): ByteArray {
-    if (hex.length % 2 != 0) {
-        throw IllegalArgumentException("Input string must have an even number of characters.")
-    }
+    require(hex.length % 2 == 0) { "Input string must have an even number of characters." }
 
+    val radix = 16
     val bytes = ByteArray(hex.length / 2)
-    hex.chunked(2).forEachIndexed { i, byte ->
-        val byteValue = byte.toIntOrNull(16)
+    val size = 2
+    hex.chunked(size).forEachIndexed { i, byte ->
+        val byteValue = byte.toIntOrNull(radix)
             ?: throw IllegalArgumentException("Invalid character(s): $byte.")
         bytes[i] = byteValue.toByte()
     }
+
     return bytes
 }

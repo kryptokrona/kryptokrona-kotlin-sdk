@@ -88,5 +88,4 @@ class WalletClient(private val node: Node) {
 
         return null
     }
-
 }

@@ -59,7 +59,8 @@ class IndexesClient(private val node: Node) {
      * @since 0.1.0
      * @return GlobalIndexesForRange
      */
-    suspend fun getGlobalIndexesForRange(globalIndexesForRangeRequest: GlobalIndexesForRangeRequest): GlobalIndexesForRange? {
+    suspend fun getGlobalIndexesForRange(
+        globalIndexesForRangeRequest: GlobalIndexesForRangeRequest): GlobalIndexesForRange? {
         val jsonBody = Json.encodeToString(globalIndexesForRangeRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -86,5 +87,4 @@ class IndexesClient(private val node: Node) {
 
         return null
     }
-
 }

@@ -61,7 +61,11 @@ class Crypto : CLibraryLoader() {
      * @param base the base key used in the public key derivation.
      * @return if successful or not in the form of an integer.
      */
-    external fun underivePublicKey(derivation: ByteArray, outputIndex: Long, derivedKey: ByteArray, base: ByteArray): Int
+    external fun underivePublicKey(
+        derivation: ByteArray,
+        outputIndex: Long,
+        derivedKey: ByteArray,
+        base: ByteArray): Int
 
     /**
      * Generates a key image from a public key and a secret key, and stores the result in the provided buffer.
@@ -98,5 +102,4 @@ class Crypto : CLibraryLoader() {
      * @param derivedKey the buffer to store the derived secret key.
      */
     external fun deriveSecretKey(derivation: ByteArray, outputIndex: Long, base: ByteArray, derivedKey: ByteArray)
-
 }

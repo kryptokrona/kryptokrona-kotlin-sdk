@@ -44,7 +44,9 @@ data class Transaction(
     val mixin: Long,
     val outputs: List<TransactionOutput>,
     val paymentId: String,
-    // val signatures: List<String>, // TODO need to make an object for signatures to deserialize properly (JSON input: .....00000000000000","signatures":[{"first":0,"second":"fca84566a.....)
+    // TODO need to make an object for signatures to deserialize properly
+    // (JSON input: .....00000000000000","signatures":[{"first":0,"second":"fca84566a.....)
+    // val signatures: List<String>,
     val signaturesSize: Long,
     val size: Long,
     val timestamp: Long,
