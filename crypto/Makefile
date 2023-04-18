@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -fPIC -Wextra -pedantic -std=c11 -O2
+CFLAGS := -Wall -fPIC -Wextra -pedantic -std=gnu11 -O2
 LDFLAGS :=
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
