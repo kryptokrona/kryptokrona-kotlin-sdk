@@ -40,8 +40,6 @@ import java.util.*
  */
 object Config {
 
-    // TODO: should we be able to change these values before the app starts?
-
     /**
      * The amount of decimal places.
      */
@@ -172,12 +170,4 @@ object Config {
      * from the daemon before emitting 'deadnode'.
      */
     const val MAX_LAST_UPDATED_LOCAL_HEIGHT_INTERVAL = (60 * 3).toLong()
-
-    /**
-     * Allows setting a custom user agent string
-     */
-    val CUSTOM_USER_AGENT_STRING = String.format(
-        "%s-sdk-%s", TICKER.lowercase(Locale.getDefault()), System.getProperty("sdk-version")
-    )
-
 }

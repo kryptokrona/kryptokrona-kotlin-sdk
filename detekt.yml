@@ -6,6 +6,8 @@ config:
 style:
   WildcardImport:
     active: false # Wildcard imports are allowed
+  UnusedPrivateProperty:
+    active: false
 
 build:
   maxIssues: 10 # break the build if more than ten weighted issues are found

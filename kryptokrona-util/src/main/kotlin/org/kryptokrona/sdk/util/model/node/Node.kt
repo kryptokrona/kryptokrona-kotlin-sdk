@@ -44,6 +44,4 @@ data class Node(
     var hostName: String,
     var port: Int,
     var ssl: Boolean
-
-    //TODO: add more private properties here that we get from the WalletService
 )
