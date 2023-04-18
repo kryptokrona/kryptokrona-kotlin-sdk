@@ -136,6 +136,5 @@ jobs:
           cache: 'gradle'
 
       - name: Run Detekt
-        continue-on-error: true
         run: |
           ./gradlew detekt
