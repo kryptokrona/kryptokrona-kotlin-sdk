@@ -34,8 +34,9 @@
 
 #include "hash-ops.h"
 
-#ifdef _MSC_VER
+#if defined(_WIN32) && defined(__MINGW32__)
 #include <malloc.h>
+#define alloca _alloca
 #else
 #include <alloca.h>
 #endif
