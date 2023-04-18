@@ -58,7 +58,7 @@ fun toHex(bytes: ByteArray): String {
  * @return the byte array
  */
 fun fromHex(string: String): ByteArray {
-    require(string.length % 2 != 0) { "Input must have an even number of characters" }
+    require(string.length % 2 == 0) { "Input must have an even number of characters" }
 
     val hexChars = "0123456789abcdef".toCharArray()
     val result = ByteArray(string.length / 2)
