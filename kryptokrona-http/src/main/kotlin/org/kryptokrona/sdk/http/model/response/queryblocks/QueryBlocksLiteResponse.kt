@@ -30,38 +30,13 @@
 
 package org.kryptokrona.sdk.http.model.response.queryblocks
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.kryptokrona.sdk.http.model.response.transaction.TransactionPrefix
 
 @Serializable
-data class QueryBlocks(
-    @SerialName("current_height") val currentHeight: Long,
-    @SerialName("full_offset") val fullOffset: Long,
-    val items: List<QueryBlocksItems>,
-    @SerialName("start_height") val startHeight: Long,
-    val status: String
-)
-
-@Serializable
-data class QueryBlocksItems(
-    @SerialName("blockFullInfo.block") val block: List<Long>,
-    @SerialName("blockFullInfo.block_id") val blockId: String,
-    @SerialName("txs") val transactions: List<String>
-)
-
-@Serializable
-data class QueryBlocksLite(
+data class QueryBlocksLiteResponse(
     val currentHeight: Long,
     val fullOffset: Long,
-    val items: List<QueryBlocksLiteItems>,
+    val items: List<QueryBlocksLiteItemsResponse>,
     val startHeight: Long,
     val status: String
-)
-
-@Serializable
-data class QueryBlocksLiteItems(
-    @SerialName("blockShortInfo.block") val block: List<Long>,
-    @SerialName("blockShortInfo.blockId") val blockId: String,
-    @SerialName("blockShortInfo.txPrefixes") val transactionPrefixes: List<TransactionPrefix>
 )

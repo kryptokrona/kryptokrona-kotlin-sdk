@@ -28,14 +28,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.request
+package org.kryptokrona.sdk.http.model.response.queryblocks
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PoolChangesLiteRequest(
-    val tailBlockId: Long? = null,
-    val knownTxIds: List<String>? = null,
-    val addedTxs: List<String>? = null,
-    val deletedTxs: List<String>? = null
+data class QueryBlocksResponse(
+    @SerialName("current_height") val currentHeight: Long,
+    @SerialName("full_offset") val fullOffset: Long,
+    val items: List<QueryBlocksItemsResponse>,
+    @SerialName("start_height") val startHeight: Long,
+    val status: String
 )
+
