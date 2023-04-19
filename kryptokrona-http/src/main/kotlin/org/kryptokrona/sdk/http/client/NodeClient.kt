@@ -35,10 +35,10 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.model.response.node.Fee
-import org.kryptokrona.sdk.http.model.response.node.Height
-import org.kryptokrona.sdk.http.model.response.node.Info
-import org.kryptokrona.sdk.http.model.response.node.Peers
+import org.kryptokrona.sdk.http.model.response.node.FeeResponse
+import org.kryptokrona.sdk.http.model.response.node.HeightResponse
+import org.kryptokrona.sdk.http.model.response.node.InfoResponse
+import org.kryptokrona.sdk.http.model.response.node.PeersResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
@@ -86,14 +86,14 @@ class NodeClient(private val node: Node) {
      * @since 0.1.0
      * @return Peers
      */
-    suspend fun getNodeInfo(): Info? {
-        var result: Info? = null
+    suspend fun getNodeInfo(): InfoResponse? {
+        var result: InfoResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/info"
-                result = client.get(url).body<Info>()
+                result = client.get(url).body<InfoResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
@@ -112,14 +112,14 @@ class NodeClient(private val node: Node) {
      * @since 0.1.0
      * @return Height
      */
-    suspend fun getNodeHeight(): Height? {
-        var result: Height? = null
+    suspend fun getNodeHeight(): HeightResponse? {
+        var result: HeightResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/height"
-                result = client.get(url).body<Height>()
+                result = client.get(url).body<HeightResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node height. Could not reach the server.", e)
@@ -138,14 +138,14 @@ class NodeClient(private val node: Node) {
      * @since 0.1.0
      * @return Peers
      */
-    suspend fun getNodePeers(): Peers? {
-        var result: Peers? = null
+    suspend fun getNodePeers(): PeersResponse? {
+        var result: PeersResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/peers"
-                result = client.get(url).body<Peers>()
+                result = client.get(url).body<PeersResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node peers. Could not reach the server.", e)
@@ -164,14 +164,14 @@ class NodeClient(private val node: Node) {
      * @since 0.1.0
      * @return Fee
      */
-    suspend fun getNodeFee(): Fee? {
-        var result: Fee? = null
+    suspend fun getNodeFee(): FeeResponse? {
+        var result: FeeResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/fee"
-                result = client.get(url).body<Fee>()
+                result = client.get(url).body<FeeResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting node fee. Could not reach the server.", e)

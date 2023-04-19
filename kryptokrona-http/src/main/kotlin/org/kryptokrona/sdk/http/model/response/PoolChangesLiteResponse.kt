@@ -28,13 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.node
+package org.kryptokrona.sdk.http.model.response
 
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.http.model.response.transaction.Transaction
 
 @Serializable
-data class Fee(
-    val address: String,
-    val amount: Long,
+data class PoolChangesLiteResponse(
+    val addedTxs: List<Transaction>,
+    val deletedTxsIds: List<String>, // Int here instead?
+    val isTailBlockActual: Boolean,
     val status: String
 )

@@ -31,22 +31,20 @@
 package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
-import io.ktor.client.network.sockets.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.common.get
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
 import org.kryptokrona.sdk.http.model.request.block.BlocksDetailsByHashesRequest
 import org.kryptokrona.sdk.http.model.request.block.BlocksDetailsByHeightsRequest
 import org.kryptokrona.sdk.http.model.request.block.BlocksHashesByTimestampsRequest
-import org.kryptokrona.sdk.http.model.response.blockdetail.BlockDetail
-import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksDetails
-import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksDetailsHashes
-import org.kryptokrona.sdk.http.model.response.blocksdetail.BlocksHashesTimestamp
+import org.kryptokrona.sdk.http.model.response.blockdetail.BlockDetailResponse
+import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksDetailsResponse
+import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksDetailsByHashesResponse
+import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksHashesByTimestampsResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
@@ -71,7 +69,7 @@ class BlockClient(private val node: Node) {
      * @param blockDetailsByHeight The block details by height
      * @return BlockDetail
      */
-    suspend fun getBlockDetailsByHeight(blockDetailsByHeight: BlockDetailsByHeightRequest): BlockDetail? {
+    suspend fun getBlockDetailsByHeight(blockDetailsByHeight: BlockDetailsByHeightRequest): BlockDetailResponse? {
         val jsonBody = Json.encodeToString(blockDetailsByHeight)
 
         val builder = HttpRequestBuilder().apply {
@@ -91,7 +89,7 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlockDetail>()
+            return client.post(builder).body<BlockDetailResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting block details by height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -112,7 +110,7 @@ class BlockClient(private val node: Node) {
      * @return BlocksDetails
      */
     suspend fun getBlocksDetailsByHeights(blocksDetailsByHeights: BlocksDetailsByHeightsRequest):
-            BlocksDetails? {
+            BlocksDetailsResponse? {
         val jsonBody = Json.encodeToString(blocksDetailsByHeights)
 
         val builder = HttpRequestBuilder().apply {
@@ -132,7 +130,7 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlocksDetails>()
+            return client.post(builder).body<BlocksDetailsResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -152,7 +150,8 @@ class BlockClient(private val node: Node) {
      * @param blocksDetailsByHashes The blocks details by hashes
      * @return BlocksDetailsHashes
      */
-    suspend fun getBlocksDetailsByHashes(blocksDetailsByHashes: BlocksDetailsByHashesRequest): BlocksDetailsHashes? {
+    suspend fun getBlocksDetailsByHashes(blocksDetailsByHashes: BlocksDetailsByHashesRequest):
+            BlocksDetailsByHashesResponse? {
         val jsonBody = Json.encodeToString(blocksDetailsByHashes)
 
         val builder = HttpRequestBuilder().apply {
@@ -172,7 +171,7 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlocksDetailsHashes>()
+            return client.post(builder).body<BlocksDetailsByHashesResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -193,7 +192,7 @@ class BlockClient(private val node: Node) {
      * @return BlocksHashesTimestamp
      */
     suspend fun getBlocksHashesByTimestamps(blocksHashesByTimestamps: BlocksHashesByTimestampsRequest):
-            BlocksHashesTimestamp? {
+            BlocksHashesByTimestampsResponse? {
         val jsonBody = Json.encodeToString(blocksHashesByTimestamps)
 
         val builder = HttpRequestBuilder().apply {
@@ -213,7 +212,7 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlocksHashesTimestamp>()
+            return client.post(builder).body<BlocksHashesByTimestampsResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {

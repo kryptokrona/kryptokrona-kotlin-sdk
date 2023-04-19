@@ -28,15 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.blocksdetail
+package org.kryptokrona.sdk.http.model.request.globalindexesforrange
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Blocks(
-    @SerialName("response.blocks") val blocks: List<String>,
-    @SerialName("response.current_height") val currentHeight: Long,
-    @SerialName("response.start_height") val startHeight: Long,
-    @SerialName("response.status") val status: String
+data class GlobalIndexesForRangeRequest(
+    val startHeight: Long? = null,
+    val endHeight: Long? = null,
+    val indexes: List<IndexResponse>? = null
 )

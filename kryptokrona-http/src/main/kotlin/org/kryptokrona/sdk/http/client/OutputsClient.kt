@@ -34,7 +34,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.model.response.RandomOutputs
+import org.kryptokrona.sdk.http.model.response.RandomOutputsResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
@@ -57,14 +57,14 @@ class OutputsClient(private val node: Node) {
      * @since 0.1.0
      * @return RandomOutputs
      */
-    suspend fun getRandomOuts(): RandomOutputs? {
-        var result: RandomOutputs? = null
+    suspend fun getRandomOuts(): RandomOutputsResponse? {
+        var result: RandomOutputsResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/getrandom_outs"
-                result = client.get(url).body<RandomOutputs>()
+                result = client.get(url).body<RandomOutputsResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting random outputs. Could not reach the server.", e)

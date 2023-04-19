@@ -28,15 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.node
+package org.kryptokrona.sdk.http.model.request.globalindexesforrange
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Height(
-    val height: Long,
-    @SerialName("network_height") val networkHeight: Long,
-    val status: String
+data class IndexResponse(
+    val key: String,
+    val value: List<Long>
 )
-

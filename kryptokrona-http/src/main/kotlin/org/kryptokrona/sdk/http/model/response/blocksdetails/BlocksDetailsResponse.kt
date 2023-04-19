@@ -28,11 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.request.block
+package org.kryptokrona.sdk.http.model.response.blocksdetails
 
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.http.model.response.BlockResponse
 
 @Serializable
-data class BlocksDetailsByHashesRequest(
-    val hashes: List<String>
+data class BlocksDetailsResponse(
+    val blocks: List<BlockResponse>,
+    val status: String
 )

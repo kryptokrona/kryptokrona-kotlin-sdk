@@ -33,63 +33,10 @@ package org.kryptokrona.sdk.http.model.response.node
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Node info
- */
 @Serializable
-data class Info(
-
-    @SerialName("alt_blocks_count")
-    val altBlocksCount: Long,
-
-    val difficulty: Long,
-
-    @SerialName("grey_peerlist_size")
-    val greyPeerlistSize: Long,
-
-    val hashrate: Long,
+data class HeightResponse(
     val height: Long,
-
-    @SerialName("incoming_connections_count")
-    val incomingConnectionsCount: Long,
-
-    @SerialName("last_known_block_index")
-    val lastKnownBlockIndex: Long,
-
-    @SerialName("major_version")
-    val majorVersion: Int,
-
-    @SerialName("minor_version")
-    val minorVersion: Int,
-
-    @SerialName("network_height")
-    val networkHeight: Long,
-
-    @SerialName("outgoing_connections_count")
-    val outgoingConnectionsCount: Long,
-
-    @SerialName("start_time")
-    val startTime: Long,
-
-    val status: String,
-
-    @SerialName("supported_height")
-    val supportedHeight: Long,
-
-    val synced: Boolean,
-    val testnet: Boolean,
-
-    @SerialName("tx_count")
-    val txCount: Long,
-
-    @SerialName("tx_pool_size")
-    val txPoolSize: Long,
-
-    @SerialName("upgrade_heights")
-    val upgradeHeights: List<Int>,
-
-    val version: String,
-
-    @SerialName("white_peerlist_size")
-    val whitePeerlistSize: Long
+    @SerialName("network_height") val networkHeight: Long,
+    val status: String
 )
+

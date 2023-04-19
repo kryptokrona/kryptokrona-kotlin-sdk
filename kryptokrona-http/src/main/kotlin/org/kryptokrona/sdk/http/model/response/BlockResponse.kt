@@ -28,24 +28,28 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.blocksdetail
+package org.kryptokrona.sdk.http.model.response
 
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.http.model.response.blockdetail.Transaction
 
 @Serializable
-data class BlocksDetails(
-    val blocks: List<String>,
-    val status: String
-)
-
-@Serializable
-data class BlocksDetailsHashes(
-    val blocks: List<String>,
-    val status: String
-)
-
-@Serializable
-data class BlocksHashesTimestamp(
-    val blockHashes: List<String>, 
-    val status: String
+data class BlockResponse(
+    val alreadyGeneratedCoins: Long,
+    val alreadyGeneratedTransactions: Long,
+    val baseReward: Long,
+    val blockSize: Long,
+    val difficulty: Long,
+    val hash: String,
+    val index: Long,
+    val majorVersion: Int,
+    val minorVersion: Int,
+    val nonce: Long,
+    val prevBlockHash: String,
+    val reward: Long,
+    val sizeMedian: Long,
+    val timestamp: Long,
+    val totalFeeAmount: Long,
+    val transactions: List<Transaction>,
+    val transactionsCumulativeSize: Long
 )

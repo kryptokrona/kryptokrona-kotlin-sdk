@@ -37,8 +37,8 @@ import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.model.request.GlobalIndexesForRangeRequest
-import org.kryptokrona.sdk.http.model.response.GlobalIndexesForRange
+import org.kryptokrona.sdk.http.model.request.globalindexesforrange.GlobalIndexesForRangeRequest
+import org.kryptokrona.sdk.http.model.response.globalindexesforrange.GlobalIndexesForRangeResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
@@ -63,7 +63,8 @@ class IndexesClient(private val node: Node) {
      * @return GlobalIndexesForRange
      */
     suspend fun getGlobalIndexesForRange(
-        globalIndexesForRangeRequest: GlobalIndexesForRangeRequest): GlobalIndexesForRange? {
+        globalIndexesForRangeRequest: GlobalIndexesForRangeRequest
+    ): GlobalIndexesForRangeResponse? {
         val jsonBody = Json.encodeToString(globalIndexesForRangeRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -83,7 +84,7 @@ class IndexesClient(private val node: Node) {
         }
 
         try {
-            client.post(builder).body<GlobalIndexesForRange>()
+            client.post(builder).body<GlobalIndexesForRangeResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting global indexes for range. Could not reach the server.", e)
         } catch(e: UnresolvedAddressException) {

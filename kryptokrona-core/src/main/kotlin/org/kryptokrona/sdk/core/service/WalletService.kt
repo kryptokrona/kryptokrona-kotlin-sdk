@@ -39,7 +39,7 @@ import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
 import org.kryptokrona.sdk.http.model.request.block.BlockDetailsByHeightRequest
 import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
-import org.kryptokrona.sdk.http.model.response.node.Info
+import org.kryptokrona.sdk.http.model.response.node.InfoResponse
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Block
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
@@ -86,7 +86,7 @@ class WalletService(node: Node) {
     /**
      * The node info we get from node service.
      */
-    private var nodeInfo: Info? = null
+    private var nodeInfo: InfoResponse? = null
 
     /**
      * If we don't set the start height, we will start from the genesis block.

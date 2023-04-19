@@ -28,14 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.node
+package org.kryptokrona.sdk.http.model.response.globalindexesforrange
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Peers(
-    @SerialName("gray_peers") val grayPeers: List<String>,
-    val peers: List<String>,
-    val status: String
+data class IndexResponse(
+    val key: String,
+    val value: List<Long>
 )
+

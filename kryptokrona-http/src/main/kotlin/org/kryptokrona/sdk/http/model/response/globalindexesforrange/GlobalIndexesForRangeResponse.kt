@@ -28,13 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response
+package org.kryptokrona.sdk.http.model.response.globalindexesforrange
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OIndexes(
-    @SerialName("o_indexes") val oIndexes: List<Long>,
+data class GlobalIndexesForRangeResponse(
+    val indexes: List<IndexResponse>,
     val status: String
 )

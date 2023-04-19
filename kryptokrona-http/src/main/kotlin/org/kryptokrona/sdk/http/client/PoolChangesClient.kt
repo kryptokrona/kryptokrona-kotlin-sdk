@@ -34,7 +34,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
-import org.kryptokrona.sdk.http.model.response.PoolChangesLite
+import org.kryptokrona.sdk.http.model.response.PoolChangesLiteResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.net.http.HttpTimeoutException
@@ -57,14 +57,14 @@ class PoolChangesClient(private val node: Node) {
      * @since 0.1.0
      * @return PoolChangesLite
      */
-    suspend fun getPoolChangesLite(): PoolChangesLite? {
-        var result: PoolChangesLite? = null
+    suspend fun getPoolChangesLite(): PoolChangesLiteResponse? {
+        var result: PoolChangesLiteResponse? = null
 
         try {
             node.ssl.let {
                 val protocol = if (it) "https" else "http"
                 val url = "$protocol://${node.hostName}:${node.port}/get_pool_changes_lite"
-                result = client.post(url).body<PoolChangesLite>()
+                result = client.post(url).body<PoolChangesLiteResponse>()
             }
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting pool changes lite. Could not reach the server.", e)
