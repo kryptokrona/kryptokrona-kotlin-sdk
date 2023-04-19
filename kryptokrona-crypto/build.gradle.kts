@@ -154,6 +154,7 @@ tasks.register<Exec>("cCompile") {
 
 tasks.register<Exec>("cClean") {
     workingDir = file("$cryptoDir")
+    commandLine("rm", "-rf", "$cryptoDir/build")
     commandLine("make", "clean")
 }
 
