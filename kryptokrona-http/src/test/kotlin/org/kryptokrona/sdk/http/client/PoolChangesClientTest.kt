@@ -72,9 +72,9 @@ class PoolChangesClientTest {
     fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs`() = runTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
-            1,
-            listOf("knownTx1", "knownTx2"),
-            listOf("addedTx1", "addedTx2")
+            tailBlockId = 1,
+            knownTxIds = listOf("knownTx1", "knownTx2"),
+            addedTxs = listOf("addedTx1", "addedTx2")
         )
 
         // Act
@@ -91,10 +91,10 @@ class PoolChangesClientTest {
     fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs and deletedTxs`() = runTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
-            1,
-            listOf("knownTx1", "knownTx2"),
-            listOf("addedTx1", "addedTx2"),
-            listOf("deletedTx1", "deletedTx2")
+            tailBlockId = 1,
+            knownTxIds = listOf("knownTx1", "knownTx2"),
+            addedTxs = listOf("addedTx1", "addedTx2"),
+            deletedTxs = listOf("deletedTx1", "deletedTx2")
         )
 
         // Act

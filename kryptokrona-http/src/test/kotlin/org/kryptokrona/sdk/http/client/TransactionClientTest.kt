@@ -45,7 +45,7 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions with empty list` () = runTest {
         // Arrange
-        val transactions = TransactionsRequest(listOf())
+        val transactions = TransactionsRequest(txsHashes = listOf())
 
         // Act
         val dataHTTP = clientHTTP.getTransactions(transactions)
@@ -60,7 +60,7 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions with list of tx hashes` () = runTest {
         // Arrange
-        val transactions = TransactionsRequest(listOf("hash1", "hash2", "hash3"))
+        val transactions = TransactionsRequest(txsHashes = listOf("hash1", "hash2", "hash3"))
 
         // Act
         val dataHTTP = clientHTTP.getTransactions(transactions)
@@ -90,7 +90,7 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes with empty list` () = runTest {
         // Arrange
-        val hashes = TransactionDetailsByHashesRequest(listOf())
+        val hashes = TransactionDetailsByHashesRequest(transactionHashes = listOf())
 
         // Act
         val dataHTTP = clientHTTP.getTransactionDetailsByHashes(hashes)
@@ -105,7 +105,7 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes with transaction hashes` () = runTest {
         // Arrange
-        val hashes = TransactionDetailsByHashesRequest(listOf("hash1", "hash2", "hash3"))
+        val hashes = TransactionDetailsByHashesRequest(transactionHashes = listOf("hash1", "hash2", "hash3"))
 
         // Act
         val dataHTTP = clientHTTP.getTransactionDetailsByHashes(hashes)
@@ -120,7 +120,7 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
         // Arrange
-        val paymentId = TransactionHashesPaymentIdRequest("paymentId")
+        val paymentId = TransactionHashesPaymentIdRequest(paymentId = "paymentId")
 
         // Act
         val dataHTTP = clientHTTP.getTransactionHashesByPaymentId(paymentId)

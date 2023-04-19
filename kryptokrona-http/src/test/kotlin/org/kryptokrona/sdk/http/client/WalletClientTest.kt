@@ -63,7 +63,10 @@ class WalletClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with start height and start timestamp`() = runTest {
         // Arrange
-        val requestData = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50)
+        val requestData = WalletSyncDataRequest(
+            startHeight = 100000,
+            startTimestamp = 50
+        )
 
         // Act
         val dataHTTP = clientHTTP.getWalletSyncData(requestData)
@@ -78,7 +81,11 @@ class WalletClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with start height, start timestamp and block count`() = runTest {
         // Arrange
-        val requestData = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
+        val requestData = WalletSyncDataRequest(
+            startHeight = 10000,
+            startTimestamp = 100000,
+            blockCount = 50
+        )
 
         // Act
         val dataHTTP = clientHTTP.getWalletSyncData(requestData)

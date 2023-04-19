@@ -94,12 +94,12 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks details by hashes`() = runTest {
         // Arrange
-        val blockWithHashes1 = BlocksDetailsByHashesRequest(listOf("hash1", "hash2", "hash3"))
+        val blockWithHashes1 = BlocksDetailsByHashesRequest(hashes = listOf("hash1", "hash2", "hash3"))
         val blockWithHashes2 = BlocksDetailsByHashesRequest(
-            listOf("hash4", "hash5", "hash6", "hash7", "hash8", "hash9")
+            hashes = listOf("hash4", "hash5", "hash6", "hash7", "hash8", "hash9")
         )
         val blockWithHashes3 = BlocksDetailsByHashesRequest(
-            listOf("hash10", "hash11", "hash12", "hash13", "hash14", "hash15", "hash16", "hash17")
+            hashes = listOf("hash10", "hash11", "hash12", "hash13", "hash14", "hash15", "hash16", "hash17")
         )
 
         // Act
@@ -125,9 +125,11 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks hashes by timestamps`() = runTest {
         // Arrange
-        val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(listOf(1554236111))
-        val blockWithTimestamp2 = BlocksHashesByTimestampsRequest(listOf(1554236111, 1554236112))
-        val blockWithTimestamp3 = BlocksHashesByTimestampsRequest(listOf(1554236111, 1554236112, 1554236113))
+        val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(timestamps = listOf(1554236111))
+        val blockWithTimestamp2 = BlocksHashesByTimestampsRequest(timestamps = listOf(1554236111, 1554236112))
+        val blockWithTimestamp3 = BlocksHashesByTimestampsRequest(
+            timestamps = listOf(1554236111, 1554236112, 1554236113)
+        )
 
         // Act
         val dataHTTP1 = clientHTTP.getBlocksHashesByTimestamps(blockWithTimestamp1)
