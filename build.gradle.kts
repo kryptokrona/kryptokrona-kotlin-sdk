@@ -76,7 +76,7 @@ allprojects {
 
     detekt {
         buildUponDefaultConfig = true
-        config.setFrom(file("${rootDir}/detekt.yml"))
+        config.setFrom(file("${rootDir}/config/detekt.yml"))
     }
 
     tasks.withType<Detekt>().configureEach {

@@ -120,6 +120,7 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
           verbose: true
+          config: config/codecov.yml
 
   static-analysis:
     name: Static Analysis
