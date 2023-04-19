@@ -6,7 +6,7 @@ import org.kryptokrona.sdk.core.service.WalletService
 import org.kryptokrona.sdk.util.model.node.Node
 
 fun main() = runBlocking {
-    val node = Node("techy.ddns.net", 11898, false)
+    val node = Node("privacymine.net", 11898, false)
     val walletService = WalletService(node)
     walletService.setStartHeight(1364842L)
 

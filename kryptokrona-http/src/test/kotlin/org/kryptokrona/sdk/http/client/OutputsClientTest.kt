@@ -13,7 +13,7 @@ import org.kryptokrona.sdk.util.model.node.Node
  */
 class OutputsClientTest {
 
-    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("privacymine.net", 11898, false)
 
     private val nodeHTTPS = Node("privacymine.net", 21898, true)
 

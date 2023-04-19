@@ -277,7 +277,7 @@ class WalletService(node: Node) {
             val keyImage = getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
 
             // this is not spent yet, we just got it :)
-            val spendHeight = 0
+            // val spendHeight = 0
 
             // construct our transaction input, there may be more inputs from this transactions
             val txInput = TransactionInput(

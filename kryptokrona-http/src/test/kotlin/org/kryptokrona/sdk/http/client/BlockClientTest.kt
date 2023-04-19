@@ -15,7 +15,7 @@ import kotlin.test.assertTrue
  */
 class BlockClientTest {
 
-    private val nodeHTTP = Node("techy.ddns.net", 11898, false)
+    private val nodeHTTP = Node("privacymine.net", 11898, false)
 
     private val nodeHTTPS = Node("privacymine.net", 21898, true)
 
