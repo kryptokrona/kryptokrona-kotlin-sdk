@@ -32,8 +32,12 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
+import org.kryptokrona.sdk.http.model.request.PoolChangesLiteRequest
 import org.kryptokrona.sdk.http.model.response.PoolChangesLiteResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
@@ -57,15 +61,27 @@ class PoolChangesClient(private val node: Node) {
      * @since 0.1.0
      * @return PoolChangesLite
      */
-    suspend fun getPoolChangesLite(): PoolChangesLiteResponse? {
-        var result: PoolChangesLiteResponse? = null
+    suspend fun getPoolChangesLite(poolChangesLiteRequest: PoolChangesLiteRequest): PoolChangesLiteResponse? {
+        val jsonBody = Json.encodeToString(poolChangesLiteRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_pool_changes_lite")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_pool_changes_lite")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
         try {
-            node.ssl.let {
-                val protocol = if (it) "https" else "http"
-                val url = "$protocol://${node.hostName}:${node.port}/get_pool_changes_lite"
-                result = client.post(url).body<PoolChangesLiteResponse>()
-            }
+            return client.post(builder).body<PoolChangesLiteResponse>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting pool changes lite. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -74,6 +90,6 @@ class PoolChangesClient(private val node: Node) {
             logger.error("Error getting pool changes lite. Could not parse the response.", e)
         }
 
-        return result
+        return null
     }
 }
