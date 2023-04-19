@@ -180,6 +180,10 @@ tasks.named("build") {
     dependsOn(copyCHeaders)
 }
 
+tasks.named("clean") {
+    dependsOn("cClean")
+}
+
 tasks.withType(KotlinNativeCompile::class.java) {
     dependsOn("cCompile")
     dependsOn(copyCLibrary)
