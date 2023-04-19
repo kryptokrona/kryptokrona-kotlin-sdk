@@ -31,6 +31,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    mustRunAfter("copyCLibrary")
 }
 
 kotlin {
