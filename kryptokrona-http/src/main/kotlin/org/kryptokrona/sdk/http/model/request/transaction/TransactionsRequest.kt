@@ -35,5 +35,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TransactionsRequest(
-    @SerialName("txs_hashes") val txsHashes: List<String>
+    @SerialName("txs_hashes") val txsHashes: List<String>? = null,
 )
