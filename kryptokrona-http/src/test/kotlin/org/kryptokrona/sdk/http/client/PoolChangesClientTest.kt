@@ -24,28 +24,85 @@ class PoolChangesClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get pool changes lite` () = runTest {
+    fun `can get pool changes lite without body` () = runTest {
         // Arrange
-        val poolChangesLiteRequest1 = PoolChangesLiteRequest()
-        val poolChangesLiteRequest2 = PoolChangesLiteRequest(1)
+        val poolChangesLiteRequest = PoolChangesLiteRequest()
+
+        // Act
+        val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest)
+        val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
+
+        // Assert
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get pool changes lite with tailBlockId`() = runTest {
+        // Arrange
+        val poolChangesLiteRequest = PoolChangesLiteRequest(1)
+
+        // Act
+        val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest)
+        val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
+
+        // Assert
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get pool changes lite with tailBlockId and knownTxIds`() = runTest {
+        // Arrange
         val poolChangesLiteRequest3 = PoolChangesLiteRequest(1, listOf("transactionId1", "transactionId2"))
 
         // Act
-        val dataHTTP1 = clientHTTP.getPoolChangesLite(poolChangesLiteRequest1)
-        val dataHTTP2 = clientHTTP.getPoolChangesLite(poolChangesLiteRequest2)
-        val dataHTTP3 = clientHTTP.getPoolChangesLite(poolChangesLiteRequest3)
-
-        val dataHTTPS1 = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest1)
-        val dataHTTPS2 = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest2)
-        val dataHTTPS3 = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest3)
+        val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest3)
+        val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest3)
 
         // Assert
-        if (dataHTTP1 != null) assertEquals(dataHTTP1.status, "OK")
-        if (dataHTTP2 != null) assertEquals(dataHTTP2.status, "OK")
-        if (dataHTTP3 != null) assertEquals(dataHTTP3.status, "OK")
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+    }
 
-        if (dataHTTPS1 != null) assertEquals(dataHTTPS1.status, "OK")
-        if (dataHTTPS2 != null) assertEquals(dataHTTPS2.status, "OK")
-        if (dataHTTPS3 != null) assertEquals(dataHTTPS3.status, "OK")
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs`() = runTest {
+        // Arrange
+        val poolChangesLiteRequest = PoolChangesLiteRequest(
+            1,
+            listOf("knownTx1", "knownTx2"),
+            listOf("addedTx1", "addedTx2")
+        )
+
+        // Act
+        val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest)
+        val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
+
+        // Assert
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs and deletedTxs`() = runTest {
+        // Arrange
+        val poolChangesLiteRequest = PoolChangesLiteRequest(
+            1,
+            listOf("knownTx1", "knownTx2"),
+            listOf("addedTx1", "addedTx2"),
+            listOf("deletedTx1", "deletedTx2")
+        )
+
+        // Act
+        val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest)
+        val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
+
+        // Assert
+        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
+        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
 }
