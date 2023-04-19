@@ -37,4 +37,3 @@ data class TransactionInput(
     // val data: BlockDetailBlockTransactionInputData,
     val type: String
 )
-

@@ -33,4 +33,13 @@ package org.kryptokrona.sdk.http.model.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GlobalIndexesForRange(val indexes: List<Long>, val status: String)
+data class GlobalIndexesForRange(
+    val indexes: List<Index>,
+    val status: String
+)
+
+@Serializable
+data class Index(
+    val key: String,
+    val value: List<Long>
+)

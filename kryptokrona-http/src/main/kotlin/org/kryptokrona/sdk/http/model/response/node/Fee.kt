@@ -33,4 +33,8 @@ package org.kryptokrona.sdk.http.model.response.node
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Fee(val address: String, val amount: Long, val status: String)
+data class Fee(
+    val address: String,
+    val amount: Long,
+    val status: String
+)

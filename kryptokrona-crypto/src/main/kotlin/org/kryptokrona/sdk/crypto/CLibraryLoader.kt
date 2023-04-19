@@ -66,7 +66,9 @@ open class CLibraryLoader {
         }
 
         // use a different path for tests
-        val libraryFolder = if (isRunningInsideUnitTest()) "../kryptokrona-crypto/build/libs" else "kryptokrona-crypto/build/libs"
+        val libraryFolder = if (isRunningInsideUnitTest()) "../kryptokrona-crypto/build/libs"
+                            else "kryptokrona-crypto/build/libs"
+        
         val userDir = System.getProperty("user.dir")
         val libraryPath = File(userDir, "$libraryFolder/$libraryName")
 

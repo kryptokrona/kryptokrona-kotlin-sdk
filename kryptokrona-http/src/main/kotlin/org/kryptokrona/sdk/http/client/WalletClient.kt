@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.http.client
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
@@ -40,6 +41,8 @@ import org.kryptokrona.sdk.http.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Wallet client
@@ -61,20 +64,13 @@ class WalletClient(private val node: Node) {
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
         val jsonBody = Json.encodeToString(walletSyncData)
+        var result: WalletSyncData? = null
 
         try {
             node.ssl.let {
-                if (it) {
-                    return client.post("https://${node.hostName}:${node.port}/getwalletsyncdata") {
-                        contentType(ContentType.Application.Json)
-                        headers {
-                            append("Content-Length", jsonBody.length.toString())
-                        }
-                        setBody(jsonBody)
-                    }.body<WalletSyncData>()
-                }
-
-                return client.post("http://${node.hostName}:${node.port}/getwalletsyncdata") {
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/getwalletsyncdata"
+                result = client.post(url) {
                     contentType(ContentType.Application.Json)
                     headers {
                         append("Content-Length", jsonBody.length.toString())
@@ -82,11 +78,14 @@ class WalletClient(private val node: Node) {
                     setBody(jsonBody)
                 }.body<WalletSyncData>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting wallet sync data", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting wallet sync data. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting wallet sync data. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting wallet sync data. Could not convert the response.", e)
         }
 
-        return null
+        return result
     }
-
 }

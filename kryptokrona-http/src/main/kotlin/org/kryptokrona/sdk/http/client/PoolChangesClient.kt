@@ -32,10 +32,13 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.PoolChangesLite
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Pool changes client
@@ -55,23 +58,22 @@ class PoolChangesClient(private val node: Node) {
      * @return PoolChangesLite
      */
     suspend fun getPoolChangesLite(): PoolChangesLite? {
-        // Send post request with known transactions
-        // how should we send this data?
+        var result: PoolChangesLite? = null
+
         try {
             node.ssl.let {
-                if (it) {
-                    return client.post("https://${node.hostName}:${node.port}/get_pool_changes_lite")
-                        .body<PoolChangesLite>()
-                }
-
-                return client.post("http://${node.hostName}:${node.port}/get_pool_changes_lite")
-                    .body<PoolChangesLite>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/get_pool_changes_lite"
+                result = client.post(url).body<PoolChangesLite>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting pool changes lite", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting pool changes lite. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting pool changes lite. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting pool changes lite. Could not parse the response.", e)
         }
 
-        return null
+        return result
     }
-
 }

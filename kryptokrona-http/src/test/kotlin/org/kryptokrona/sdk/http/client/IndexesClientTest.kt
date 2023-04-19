@@ -36,5 +36,4 @@ class IndexesClientTest {
         if (data1 != null) assertEquals(data1.status, "OK")
         if (data2 != null) assertEquals(data2.status, "OK")
     }
-
 }

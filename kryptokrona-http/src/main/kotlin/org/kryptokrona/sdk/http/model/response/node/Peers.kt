@@ -34,4 +34,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Peers(@SerialName("gray_peers") val grayPeers: List<String>, val peers: List<String>, val status: String)
+data class Peers(
+    @SerialName("gray_peers") val grayPeers: List<String>,
+    val peers: List<String>,
+    val status: String
+)

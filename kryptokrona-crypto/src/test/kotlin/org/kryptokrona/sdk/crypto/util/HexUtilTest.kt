@@ -88,5 +88,4 @@ class HexUtilTest {
         val actual = fromHex(input)
         assertTrue(expected.contentEquals(actual))
     }
-
 }

@@ -54,8 +54,8 @@ data class TransactionHashesPaymentId(
 @Serializable
 data class TransactionPrefix(
     val extra: String,
-    @SerialName("unlock_time") val unlockTime: Int,
-    val version: Int,
+    @SerialName("unlock_time") val unlockTime: Long,
+    val version: Long,
     val vin: List<TransactionPrefixVin>,
     val vout: List<TransactionPrefixVout>
 )

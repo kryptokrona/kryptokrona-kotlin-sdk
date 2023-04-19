@@ -77,5 +77,4 @@ class TransactionClientTest {
         if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
         if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
     }
-
 }

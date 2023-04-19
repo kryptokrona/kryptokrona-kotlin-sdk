@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.http.client
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.*
 import org.kryptokrona.sdk.http.common.HttpClient.client
 import org.kryptokrona.sdk.http.model.response.node.Fee
 import org.kryptokrona.sdk.http.model.response.node.Height
@@ -40,6 +41,8 @@ import org.kryptokrona.sdk.http.model.response.node.Info
 import org.kryptokrona.sdk.http.model.response.node.Peers
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.net.http.HttpTimeoutException
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Node client
@@ -59,23 +62,22 @@ class NodeClient(private val node: Node) {
      * @return Boolean
      */
     suspend fun isNodeRunning(): Boolean {
-        try {
-            node.ssl.let { it ->
-                if (it) {
-                    client.get("https://${node.hostName}:${node.port}/info").let {
-                        return it.status.isSuccess()
-                    }
-                }
+        var isSuccess = false
 
-                client.get("http://${node.hostName}:${node.port}/info").let {
-                    return it.status.isSuccess()
-                }
+        try {
+            node.ssl.let {
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/info"
+                val response = client.get(url)
+                isSuccess = response.status.isSuccess()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node information", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node information. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node information. Could not resolve the address.", e)
         }
 
-        return false
+        return isSuccess
     }
 
     /**
@@ -85,17 +87,23 @@ class NodeClient(private val node: Node) {
      * @return Peers
      */
     suspend fun getNodeInfo(): Info? {
+        var result: Info? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/info").body<Info>()
-
-                return client.get("http://${node.hostName}:${node.port}/info").body<Info>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/info"
+                result = client.get(url).body<Info>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node information", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node information. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node information. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node information. Could not parse the response.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -105,17 +113,23 @@ class NodeClient(private val node: Node) {
      * @return Height
      */
     suspend fun getNodeHeight(): Height? {
+        var result: Height? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/height").body<Height>()
-
-                return client.get("http://${node.hostName}:${node.port}/height").body<Height>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/height"
+                result = client.get(url).body<Height>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node height", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node height. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node height. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node height. Could not parse the response.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -125,17 +139,23 @@ class NodeClient(private val node: Node) {
      * @return Peers
      */
     suspend fun getNodePeers(): Peers? {
+        var result: Peers? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/peers").body<Peers>()
-
-                return client.get("http://${node.hostName}:${node.port}/peers").body<Peers>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/peers"
+                result = client.get(url).body<Peers>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node peers", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node peers. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node peers. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node peers. Could not parse the response.", e)
         }
 
-        return null
+        return result
     }
 
     /**
@@ -145,17 +165,22 @@ class NodeClient(private val node: Node) {
      * @return Fee
      */
     suspend fun getNodeFee(): Fee? {
+        var result: Fee? = null
+
         try {
             node.ssl.let {
-                if (it) return client.get("https://${node.hostName}:${node.port}/fee").body<Fee>()
-
-                return client.get("http://${node.hostName}:${node.port}/fee").body<Fee>()
+                val protocol = if (it) "https" else "http"
+                val url = "$protocol://${node.hostName}:${node.port}/fee"
+                result = client.get(url).body<Fee>()
             }
-        } catch (e: Exception) {
-            logger.error("Error getting node fee", e)
+        } catch (e: HttpTimeoutException) {
+            logger.error("Error getting node fee. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node fee. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node fee. Could not parse the response.", e)
         }
 
-        return null
+        return result
     }
-
 }
