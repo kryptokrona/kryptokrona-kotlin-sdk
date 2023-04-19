@@ -32,8 +32,15 @@ package org.kryptokrona.sdk.http.client
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.http.common.HttpClient.client
+import org.kryptokrona.sdk.http.model.request.transaction.TransactionDetailsByHashesRequest
+import org.kryptokrona.sdk.http.model.request.transaction.TransactionHashesPaymentIdRequest
+import org.kryptokrona.sdk.http.model.request.transaction.TransactionsRequest
+import org.kryptokrona.sdk.http.model.request.transaction.TransactionsStatusRequest
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionDetailsHashes
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionHashesPaymentId
 import org.kryptokrona.sdk.http.model.response.transaction.Transactions
@@ -58,17 +65,30 @@ class TransactionClient(private val node: Node) {
      * Get transactions
      *
      * @since 0.1.0
+     * @param transactions The transactions request
      * @return Transactions
      */
-    suspend fun getTransactions(): Transactions? {
-        var result: Transactions? = null
+    suspend fun getTransactions(transactions: TransactionsRequest): Transactions? {
+        val jsonBody = Json.encodeToString(transactions)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/gettransactions")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/gettransactions")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
         try {
-            node.ssl.let {
-                val protocol = if (it) "https" else "http"
-                val url = "$protocol://${node.hostName}:${node.port}/gettransactions"
-                result = client.get(url).body<Transactions>()
-            }
+            return client.request(builder).body<Transactions>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting transactions. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -77,24 +97,38 @@ class TransactionClient(private val node: Node) {
             logger.error("Error getting transactions. Could not parse the response.", e)
         }
 
-        return result
+        return null
     }
 
     /**
      * Get transaction details by hashes
      *
      * @since 0.1.0
+     * @param transactionDetailsByHashes The transaction details by hashes request
      * @return TransactionDetailsHashes
      */
-    suspend fun getTransactionDetailsByHashes(): TransactionDetailsHashes? {
-        var result: TransactionDetailsHashes? = null
+    suspend fun getTransactionDetailsByHashes(transactionDetailsByHashes: TransactionDetailsByHashesRequest):
+            TransactionDetailsHashes? {
+        val jsonBody = Json.encodeToString(transactionDetailsByHashes)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_transaction_details_by_hashes")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_transaction_details_by_hashes")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
         try {
-            node.ssl.let {
-                val protocol = if (it) "https" else "http"
-                val url = "$protocol://${node.hostName}:${node.port}/get_transaction_details_by_hashes"
-                result = client.get(url).body<TransactionDetailsHashes>()
-            }
+            return client.request(builder).body<TransactionDetailsHashes>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting transaction details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -103,24 +137,38 @@ class TransactionClient(private val node: Node) {
             logger.error("Error getting transaction details by hashes. Could not parse the response.", e)
         }
 
-        return result
+        return null
     }
 
     /**
      * Get transaction hashes by payment id
      *
      * @since 0.1.0
+     * @param transactionHashesPaymentId The transaction hashes payment id request
      * @return TransactionHashesPaymentId
      */
-    suspend fun getTransactionHashesByPaymentId(): TransactionHashesPaymentId? {
-        var result: TransactionHashesPaymentId? = null
+    suspend fun getTransactionHashesByPaymentId(transactionHashesPaymentId: TransactionHashesPaymentIdRequest):
+            TransactionHashesPaymentId? {
+        val jsonBody = Json.encodeToString(transactionHashesPaymentId)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
         try {
-            node.ssl.let {
-                val protocol = if (it) "https" else "http"
-                val url = "$protocol://${node.hostName}:${node.port}/get_transaction_hashes_by_payment_id"
-                result = client.get(url).body<TransactionHashesPaymentId>()
-            }
+            return client.post(builder).body<TransactionHashesPaymentId>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting transaction hashes by payment id. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -129,24 +177,37 @@ class TransactionClient(private val node: Node) {
             logger.error("Error getting transaction hashes by payment id. Could not parse the response.", e)
         }
 
-        return result
+        return null
     }
 
     /**
      * Get transactions status
      *
      * @since 0.1.0
+     * @param transactionsStatus The transactions status request
      * @return TransactionsStatus
      */
-    suspend fun getTransactionsStatus(): TransactionsStatus? {
-        var result: TransactionsStatus? = null
+    suspend fun getTransactionsStatus(transactionsStatus: TransactionsStatusRequest): TransactionsStatus? {
+        val jsonBody = Json.encodeToString(transactionsStatus)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/get_transactions_status")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/get_transactions_status")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
         try {
-            node.ssl.let {
-                val protocol = if (it) "https" else "http"
-                val url = "$protocol://${node.hostName}:${node.port}/get_transactions_status"
-                result = client.get(url).body<TransactionsStatus>()
-            }
+            return client.post(builder).body<TransactionsStatus>()
         } catch (e: HttpTimeoutException) {
             logger.error("Error getting transaction status. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -155,6 +216,6 @@ class TransactionClient(private val node: Node) {
             logger.error("Error getting transaction status. Could not parse the response.", e)
         }
 
-        return result
+        return null
     }
 }
