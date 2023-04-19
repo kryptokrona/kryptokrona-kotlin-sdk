@@ -63,9 +63,9 @@ class BlockClient(private val node: Node) {
     /**
      * Get block details by hash
      *
-     * @param blockDetailsByHeightRequest The block details by height request
      * @author Marcus Cvjeticanin
      * @since 0.1.0
+     * @param blockDetailsByHeightRequest The block details by height request
      * @return BlockDetail
      */
     suspend fun getBlockDetailsByHeight(blockDetailsByHeightRequest: BlockDetailsByHeightRequest): BlockDetail? {

@@ -57,4 +57,22 @@ class BlockClientTest {
         assertEquals(dataHTTPS2?.status, "OK")
         assertEquals(dataHTTPS3?.status, "OK")
     }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get blocks details by heights`() {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get blocks details by hashes`() {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get blocks hashes by timestamps`() {
+        TODO()
+    }
 }
