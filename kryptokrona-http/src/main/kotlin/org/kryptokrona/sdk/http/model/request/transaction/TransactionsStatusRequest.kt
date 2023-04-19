@@ -34,8 +34,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TransactionsStatusRequest(
-    val transactionHashes: List<String>,
-    val transactionsInPool: Boolean,
-    val transactionsInBlock: Boolean,
-    val transactionsUnknown: Boolean
+    val transactionHashes: List<String>? = null,
+    val transactionsInPool: Boolean? = null,
+    val transactionsInBlock: Boolean? = null,
+    val transactionsUnknown: Boolean? = null
 )
