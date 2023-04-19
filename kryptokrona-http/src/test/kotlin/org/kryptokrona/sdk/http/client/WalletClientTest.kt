@@ -25,7 +25,7 @@ class WalletClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get wallet sync data without request parameters` () = runTest {
+    fun `can get wallet sync data without body` () = runTest {
         // Arrange
         val requestData = WalletSyncDataRequest()
 
