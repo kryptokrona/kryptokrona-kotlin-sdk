@@ -95,7 +95,7 @@ class BlockClient(private val node: Node) {
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting block details by height. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting block details by height. Could not convert the response.", e)
+            logger.error("Error getting block details by height. Could not parse the response.", e)
         }
 
         return null
@@ -136,7 +136,7 @@ class BlockClient(private val node: Node) {
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by height. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting blocks details by height. Could not convert the response.", e)
+            logger.error("Error getting blocks details by height. Could not parse the response.", e)
         }
 
         return null
@@ -177,7 +177,7 @@ class BlockClient(private val node: Node) {
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting blocks details by hashes. Could not convert the response.", e)
+            logger.error("Error getting blocks details by hashes. Could not parse the response.", e)
         }
 
         return null
@@ -218,7 +218,7 @@ class BlockClient(private val node: Node) {
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting blocks details by hashes. Could not convert the response.", e)
+            logger.error("Error getting blocks details by hashes. Could not parse the response.", e)
         }
 
         return null
