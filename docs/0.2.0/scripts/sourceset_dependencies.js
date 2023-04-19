@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":kryptokrona-crypto:dokkaHtmlPartial/main":[],":kryptokrona-util:dokkaHtmlPartial/main":[],":kryptokrona-http:dokkaHtmlPartial/main":[],":kryptokrona-core:dokkaHtmlPartial/main":[]}'
