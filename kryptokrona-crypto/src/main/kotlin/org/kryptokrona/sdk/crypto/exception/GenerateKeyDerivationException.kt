@@ -30,7 +30,7 @@
 
 package org.kryptokrona.sdk.crypto.exception
 
-import com.sun.org.slf4j.internal.LoggerFactory
+import org.slf4j.LoggerFactory
 
 /**
  * Exception thrown when generate key derivation fails.
