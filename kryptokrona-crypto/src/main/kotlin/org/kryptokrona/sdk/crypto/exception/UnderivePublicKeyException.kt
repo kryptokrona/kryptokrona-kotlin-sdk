@@ -47,7 +47,7 @@ class UnderivePublicKeyException(message: String) : Exception(message) {
     }
 
     fun logError() {
-        logger.error("Could not generate key derivation: $message")
+        logger.error("Could not underive public key: $message")
     }
 
 }
