@@ -6,7 +6,7 @@ OBJS := $(SRCS:.c=.o)
 TARGET := build/libcrypto.so
 
 ifeq ($(OS),Windows_NT)
-    CFLAGS += -I"$(JAVA_HOME)\include" -I"$(JAVA_HOME)\include\win32" -I/mingw64/include
+    CFLAGS += -I"$(JAVA_HOME)\include" -I"$(JAVA_HOME)\include\win32" -IC:\MinGW\include
     LDFLAGS += -shared
     TARGET := build/crypto.dll
 else
