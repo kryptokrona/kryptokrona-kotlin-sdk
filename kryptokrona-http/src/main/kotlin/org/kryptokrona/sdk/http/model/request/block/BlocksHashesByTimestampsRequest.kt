@@ -34,5 +34,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlocksHashesByTimestampsRequest(
-    val timestamps: List<Long>
+    val timestampBegin: Long,
+    val secondsCount: Long
 )

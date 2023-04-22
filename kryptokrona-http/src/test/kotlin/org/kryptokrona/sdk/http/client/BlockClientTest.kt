@@ -144,11 +144,13 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks hashes by timestamps`() = runTest {
         // Arrange
-        val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(timestamps = listOf(1554236111))
-        val blockWithTimestamp2 = BlocksHashesByTimestampsRequest(timestamps = listOf(1554236111, 1554236112))
+        val blockTime = 90L
+        val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(
+            timestampBegin = 1554236111, secondsCount = blockTime)
+        val blockWithTimestamp2 = BlocksHashesByTimestampsRequest(
+            timestampBegin = 1554236111, secondsCount = blockTime * 10)
         val blockWithTimestamp3 = BlocksHashesByTimestampsRequest(
-            timestamps = listOf(1554236111, 1554236112, 1554236113)
-        )
+            timestampBegin = 1554236111, secondsCount = blockTime * 100)
 
         // Act
         val dataHTTP1 = clientHTTP.getBlocksHashesByTimestamps(blockWithTimestamp1)
@@ -160,12 +162,12 @@ class BlockClientTest {
         val dataHTTPS3 = clientHTTPS.getBlocksHashesByTimestamps(blockWithTimestamp3)
 
         // Assert
-        assertTrue(dataHTTP1?.blockHashes?.size == 3)
-        assertTrue(dataHTTP2?.blockHashes?.size == 6)
-        assertTrue(dataHTTP3?.blockHashes?.size == 9)
+        assertEquals(dataHTTP1?.status, "OK")
+        assertEquals(dataHTTP2?.status, "OK")
+        assertEquals(dataHTTP3?.status, "OK")
 
-        assertTrue(dataHTTPS1?.blockHashes?.size == 3)
-        assertTrue(dataHTTPS2?.blockHashes?.size == 6)
-        assertTrue(dataHTTPS3?.blockHashes?.size == 9)
+        assertEquals(dataHTTPS1?.status, "OK")
+        assertEquals(dataHTTPS2?.status, "OK")
+        assertEquals(dataHTTPS3?.status, "OK")
     }
 }
