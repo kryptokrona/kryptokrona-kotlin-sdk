@@ -33,6 +33,15 @@ package org.kryptokrona.sdk.http.model.response.node
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Peers response from the node.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param grayPeers The gray peers of the node.
+ * @param peers The peers of the node.
+ * @param status The status of the node.
+ */
 @Serializable
 data class PeersResponse(
     @SerialName("gray_peers") val grayPeers: List<String>,

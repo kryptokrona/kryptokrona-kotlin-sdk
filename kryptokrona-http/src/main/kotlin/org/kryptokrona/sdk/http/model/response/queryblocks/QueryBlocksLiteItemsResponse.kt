@@ -34,6 +34,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.http.model.response.transaction.TransactionPrefix
 
+/**
+ * Response from querying blocks lite items.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param block Block.
+ * @param blockId The block id.
+ * @param transactionPrefixes The transactions prefixes.
+ */
 @Serializable
 data class QueryBlocksLiteItemsResponse(
     @SerialName("blockShortInfo.block") val block: List<Long>,

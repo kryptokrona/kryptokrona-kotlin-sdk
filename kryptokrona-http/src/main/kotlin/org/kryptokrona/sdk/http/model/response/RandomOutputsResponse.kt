@@ -32,6 +32,14 @@ package org.kryptokrona.sdk.http.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for random outputs.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param outs The outs.
+ * @param status The status.
+ */
 @Serializable
 data class RandomOutputsResponse(
     val outs: List<Int>,

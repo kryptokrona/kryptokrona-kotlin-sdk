@@ -33,6 +33,15 @@ package org.kryptokrona.sdk.http.model.response.node
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Height response from the node.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param height The height of the node.
+ * @param networkHeight The network height of the node.
+ * @param status The status of the node.
+ */
 @Serializable
 data class HeightResponse(
     val height: Long,

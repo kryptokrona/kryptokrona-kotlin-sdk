@@ -34,7 +34,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Node info
+ * Info response from the node.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
  */
 @Serializable
 data class InfoResponse(

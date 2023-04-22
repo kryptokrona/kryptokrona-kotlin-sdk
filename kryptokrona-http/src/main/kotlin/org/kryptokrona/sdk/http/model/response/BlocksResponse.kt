@@ -33,6 +33,16 @@ package org.kryptokrona.sdk.http.model.response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for multiple blocks.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param blocks The blocks.
+ * @param currentHeight The current height of the node.
+ * @param startHeight The start height of the node.
+ * @param status The status.
+ */
 @Serializable
 data class BlocksResponse(
     @SerialName("response.blocks") val blocks: List<String>,

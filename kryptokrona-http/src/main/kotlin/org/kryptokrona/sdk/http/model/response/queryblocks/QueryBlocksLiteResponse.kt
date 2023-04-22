@@ -32,6 +32,17 @@ package org.kryptokrona.sdk.http.model.response.queryblocks
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response from querying blocks lite.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param currentHeight The current height.
+ * @param fullOffset The full offset.
+ * @param items The items.
+ * @param startHeight The start height.
+ * @param status The status.
+ */
 @Serializable
 data class QueryBlocksLiteResponse(
     val currentHeight: Long,

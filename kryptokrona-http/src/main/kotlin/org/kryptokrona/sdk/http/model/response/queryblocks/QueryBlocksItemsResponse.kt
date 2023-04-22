@@ -33,6 +33,15 @@ package org.kryptokrona.sdk.http.model.response.queryblocks
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Response from querying blocks items.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param block Block.
+ * @param blockId The block id.
+ * @param transactions The transactions.
+ */
 @Serializable
 data class QueryBlocksItemsResponse(
     @SerialName("blockFullInfo.block") val block: List<Long>,

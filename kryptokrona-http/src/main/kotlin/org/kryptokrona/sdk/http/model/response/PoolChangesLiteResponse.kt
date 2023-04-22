@@ -33,6 +33,16 @@ package org.kryptokrona.sdk.http.model.response
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.http.model.response.transaction.Transaction
 
+/**
+ * Response from the pool changes lite.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param addedTxs List of added transactions.
+ * @param deletedTxsIds List of deleted transactions.
+ * @param isTailBlockActual Is the tail block actual.
+ * @param status Status of the response.
+ */
 @Serializable
 data class PoolChangesLiteResponse(
     val addedTxs: List<Transaction>,

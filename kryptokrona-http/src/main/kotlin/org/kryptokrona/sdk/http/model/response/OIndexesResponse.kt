@@ -33,6 +33,14 @@ package org.kryptokrona.sdk.http.model.response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for o indexes.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param oIndexes The o indexes.
+ * @param status The status.
+ */
 @Serializable
 data class OIndexesResponse(
     @SerialName("o_indexes") val oIndexes: List<Long>,
