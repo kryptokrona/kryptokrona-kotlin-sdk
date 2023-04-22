@@ -40,6 +40,7 @@ package org.kryptokrona.sdk.util.config
  * Configuration object for a cryptocurrency.
  */
 object CoinConfig {
+
     /**
      * The version of the parent block that activates the coin's features.
      */

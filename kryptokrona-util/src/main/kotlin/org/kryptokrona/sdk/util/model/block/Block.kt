@@ -33,6 +33,17 @@ package org.kryptokrona.sdk.util.model.block
 import org.kryptokrona.sdk.util.model.transaction.RawCoinbaseTransaction
 import org.kryptokrona.sdk.util.model.transaction.RawTransaction
 
+/**
+ * A block.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param coinbaseTransaction The coinbase transaction.
+ * @param transactions The transactions.
+ * @param blockHeight The block height.
+ * @param blockHash The block hash.
+ * @param blockTimestamp The block timestamp.
+ */
 data class Block(
     val coinbaseTransaction: RawCoinbaseTransaction,
     val transactions: List<RawTransaction>,
