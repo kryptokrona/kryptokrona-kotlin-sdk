@@ -28,12 +28,26 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.request
 
-import kotlinx.serialization.Serializable
+package org.kryptokrona.sdk.crypto.exception
 
-@Serializable
-data class PoolChangesLiteRequest(
-    val tailBlockId: String? = null,
-    val knownTxsIds: List<String>? = null,
-)
+import org.slf4j.LoggerFactory
+
+/**
+ * Exception thrown when underive public key fails.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param message the error message
+ */
+class UnderivePublicKeyException(message: String) : Exception(message) {
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(GenerateKeyDerivationException::class.java)
+    }
+
+    fun logError() {
+        logger.error("Could not underive public key: $message")
+    }
+
+}

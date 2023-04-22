@@ -18,7 +18,7 @@ import org.kryptokrona.sdk.util.model.node.Node
  */
 class TransactionClientTest {
 
-    private val nodeHTTP = Node("privacymine.net", 11898, false)
+    private val nodeHTTP = Node("blocksum.org", 11898, false)
 
     private val nodeHTTPS = Node("privacymine.net", 21898, true)
 
@@ -37,38 +37,46 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions with empty list` () = runTest {
         // Arrange
-        val transactions = TransactionsRequest(listOf())
+        val transactions = TransactionsRequest(txsHashes = listOf())
 
         // Act
         val dataHTTP = clientHTTP.getTransactions(transactions)
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transactions with list of tx hashes` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
-        val transactions = TransactionsRequest(listOf("hash1", "hash2", "hash3"))
+        val transactions = TransactionsRequest(
+            txsHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ))
 
         // Act
         val dataHTTP = clientHTTP.getTransactions(transactions)
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -82,53 +90,62 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes with empty list` () = runTest {
         // Arrange
-        val hashes = TransactionDetailsByHashesRequest(listOf())
+        val hashes = TransactionDetailsByHashesRequest(transactionHashes = listOf())
 
         // Act
         val dataHTTP = clientHTTP.getTransactionDetailsByHashes(hashes)
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details by hashes with transaction hashes` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
-        val hashes = TransactionDetailsByHashesRequest(listOf("hash1", "hash2", "hash3"))
+        val hashes = TransactionDetailsByHashesRequest(
+            transactionHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ))
 
         // Act
         val dataHTTP = clientHTTP.getTransactionDetailsByHashes(hashes)
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
         // Arrange
-        val paymentId = TransactionHashesPaymentIdRequest("paymentId")
+        val paymentId = TransactionHashesPaymentIdRequest(
+            paymentId = "e94f0ecf94fe63be4ad3ecfd2de2bb95a950f37b72991caac20771620c091e0f")
 
         // Act
         val dataHTTP = clientHTTP.getTransactionHashesByPaymentId(paymentId)
         val dataHTTPS = clientHTTPS.getTransactionHashesByPaymentId(paymentId)
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -142,32 +159,46 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status with transaction hashes` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
         val transactionStatus = TransactionsStatusRequest(
-            transactionHashes = listOf("hash1", "hash2", "hash3"))
+            transactionHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ))
 
         // Act
         val dataHTTP = clientHTTP.getTransactionsStatus(transactionStatus)
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status with transaction hashes and transactions in pool` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
         val transactionStatus = TransactionsStatusRequest(
-            transactionHashes = listOf("hash1", "hash2", "hash3"),
+            transactionHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ),
             transactionsInPool = false
         )
 
@@ -176,16 +207,23 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status with transaction hashes, transactions in pool and transactions in block` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
         val transactionStatus = TransactionsStatusRequest(
-            transactionHashes = listOf("hash1", "hash2", "hash3"),
+            transactionHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ),
             transactionsInPool = false,
             transactionsInBlock = false
         )
@@ -195,16 +233,23 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction status with transaction hashes, transactions in pool, transactions in block and transactions unknown` () = runTest {
+        // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
+
         // Arrange
         val transactionStatus = TransactionsStatusRequest(
-            transactionHashes = listOf("hash1", "hash2", "hash3"),
+            transactionHashes = listOf(
+                "9f20011eee4d97227e17805f8c8cce1bb833e8f44b1c0d8f42c0271f500a1be8",
+                "c67d90f2ba8d855f2217f884d86dbb47bb043954573867f9824cbe5ad968ee62",
+                "971ec6b759ae26b4e52550e2d0a88259f49d5279f32848b4821ddeb99c368f12",
+                "8ca57276ec06bf987d6774cafa913092b0bcd86aa8bd697339612e7f51b7909d"
+            ),
             transactionsInPool = false,
             transactionsInBlock = false,
             transactionsUnknown = false
@@ -215,7 +260,7 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }

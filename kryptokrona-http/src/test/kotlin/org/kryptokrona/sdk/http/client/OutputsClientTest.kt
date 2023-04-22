@@ -31,7 +31,7 @@ class OutputsClientTest {
         val dataHTTPS = clientHTTPS.getRandomOuts()
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }

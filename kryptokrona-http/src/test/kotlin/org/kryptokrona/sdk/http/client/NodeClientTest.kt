@@ -61,8 +61,8 @@ class NodeClientTest {
         val dataHTTPS = clientHTTPS.getNodeInfo()
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -75,8 +75,8 @@ class NodeClientTest {
         val dataHTTPS = clientHTTPS.getNodeHeight()
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -89,8 +89,8 @@ class NodeClientTest {
         val dataHTTPS = clientHTTPS.getNodePeers()
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -103,7 +103,7 @@ class NodeClientTest {
         val dataHTTPS = clientHTTPS.getNodeFee()
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }

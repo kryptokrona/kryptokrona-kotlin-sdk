@@ -83,7 +83,7 @@ class WalletClient(private val node: Node) {
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting wallet sync data. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting wallet sync data. Could not convert the response.", e)
+            logger.error("Error getting wallet sync data. Could not parse the response.", e)
         }
 
         return result

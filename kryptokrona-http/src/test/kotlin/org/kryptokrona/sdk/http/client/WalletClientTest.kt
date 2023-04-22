@@ -34,8 +34,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -49,8 +49,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
 
         dataHTTP?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
         dataHTTPS?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
@@ -63,29 +63,36 @@ class WalletClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with start height and start timestamp`() = runTest {
         // Arrange
-        val requestData = WalletSyncDataRequest(startHeight = 100000, startTimestamp = 50)
+        val requestData = WalletSyncDataRequest(
+            startHeight = 100000,
+            startTimestamp = 50
+        )
 
         // Act
         val dataHTTP = clientHTTP.getWalletSyncData(requestData)
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data with start height, start timestamp and block count`() = runTest {
         // Arrange
-        val requestData = WalletSyncDataRequest(startHeight = 10000, startTimestamp = 100000, blockCount = 50)
+        val requestData = WalletSyncDataRequest(
+            startHeight = 10000,
+            startTimestamp = 100000,
+            blockCount = 50
+        )
 
         // Act
         val dataHTTP = clientHTTP.getWalletSyncData(requestData)
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }

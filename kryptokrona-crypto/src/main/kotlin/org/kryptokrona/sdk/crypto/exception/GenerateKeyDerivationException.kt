@@ -28,12 +28,24 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.request
+package org.kryptokrona.sdk.crypto.exception
 
-import kotlinx.serialization.Serializable
+import org.slf4j.LoggerFactory
 
-@Serializable
-data class PoolChangesLiteRequest(
-    val tailBlockId: String? = null,
-    val knownTxsIds: List<String>? = null,
-)
+/**
+ * Exception thrown when generate key derivation fails.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param message the error message
+ */
+class GenerateKeyDerivationException(message: String) : Exception(message) {
+
+     companion object {
+        private val logger = LoggerFactory.getLogger(GenerateKeyDerivationException::class.java)
+    }
+
+    fun logError() {
+        logger.error("Could not generate key derivation: $message")
+    }
+}

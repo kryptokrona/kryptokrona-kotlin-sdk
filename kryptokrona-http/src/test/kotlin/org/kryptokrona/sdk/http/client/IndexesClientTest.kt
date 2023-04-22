@@ -33,7 +33,7 @@ class IndexesClientTest {
         val data2 = clientHTTPS.getGlobalIndexesForRange(globalIndexesForRangeRequest)
 
         // Assert
-        if (data1 != null) assertEquals(data1.status, "OK")
-        if (data2 != null) assertEquals(data2.status, "OK")
+        if (data1 != null) assertEquals("OK", data1.status)
+        if (data2 != null) assertEquals("OK", data2.status)
     }
 }

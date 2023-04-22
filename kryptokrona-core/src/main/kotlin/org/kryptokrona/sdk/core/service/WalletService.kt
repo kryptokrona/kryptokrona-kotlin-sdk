@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
+import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
 import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
@@ -247,9 +248,10 @@ class WalletService(node: Node) {
      * @param blockHeight The block height of the transaction.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
-        val publicSpendKey = "cde60afedba1e88a9c7e8b28cc038ee018d5a24a1a239cdcb8d32506a594f3cb"
-        val privateViewKey = "8f066e33d45a0205b772f47b5a5d66f5b5e08fc329c45fc5f2a15a998ad0d4b4"
+        val publicSpendKey = "fdfd97d2ea9f1c25df773ff2c973d885653a3ee643157eb0ae2b6dd98f0b6984"
+        val privateViewKey = "eb2bd1cf0c5e074f9dbf38ebbc99c316f54e21803048c687a3bb359f7a713b02"
 
+        // if we get negative values of the convertion in the byte array generated the keys are invalid
         val pubSpend = convertHexToBytes(publicSpendKey)
         val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
@@ -257,7 +259,10 @@ class WalletService(node: Node) {
         // val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(32)
-        crypto.generateKeyDerivation(txPubKey, privView, derivation)
+        val success = crypto.generateKeyDerivation(txPubKey, privView, derivation)
+
+        // since this is a fatal error we throw an exception, since the keys cannot be invalid
+        success.takeIf { it == 0 } ?: throw GenerateKeyDerivationException("Keys are invalid.")
 
         transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
