@@ -52,13 +52,13 @@ class BlockClientTest {
         assertTrue(dataHTTPS2?.block?.index == 1L)
         assertTrue(dataHTTPS3?.block?.index == 100L)
 
-        assertEquals(dataHTTP1?.status, "OK")
-        assertEquals(dataHTTP2?.status, "OK")
-        assertEquals(dataHTTP3?.status, "OK")
+        assertEquals("OK", dataHTTP1?.status)
+        assertEquals("OK", dataHTTP2?.status)
+        assertEquals("OK", dataHTTP3?.status)
 
-        assertEquals(dataHTTPS1?.status, "OK")
-        assertEquals(dataHTTPS2?.status, "OK")
-        assertEquals(dataHTTPS3?.status, "OK")
+        assertEquals("OK", dataHTTPS1?.status)
+        assertEquals("OK", dataHTTPS2?.status)
+        assertEquals("OK", dataHTTPS3?.status)
     }
 
     @Test
@@ -162,12 +162,12 @@ class BlockClientTest {
         val dataHTTPS3 = clientHTTPS.getBlocksHashesByTimestamps(blockWithTimestamp3)
 
         // Assert
-        assertEquals(dataHTTP1?.status, "OK")
-        assertEquals(dataHTTP2?.status, "OK")
-        assertEquals(dataHTTP3?.status, "OK")
+        assertEquals("OK", dataHTTP1?.status)
+        assertEquals("OK", dataHTTP2?.status)
+        assertEquals("OK", dataHTTP3?.status)
 
-        assertEquals(dataHTTPS1?.status, "OK")
-        assertEquals(dataHTTPS2?.status, "OK")
-        assertEquals(dataHTTPS3?.status, "OK")
+        assertEquals("OK", dataHTTPS1?.status)
+        assertEquals("OK", dataHTTPS2?.status)
+        assertEquals("OK", dataHTTPS3?.status)
     }
 }
