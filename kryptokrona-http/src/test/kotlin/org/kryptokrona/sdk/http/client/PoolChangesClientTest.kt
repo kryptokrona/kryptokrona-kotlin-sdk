@@ -41,7 +41,7 @@ class PoolChangesClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get pool changes lite with tailBlockId`() = runTest {
         // Arrange
-        val poolChangesLiteRequest = PoolChangesLiteRequest(1)
+        val poolChangesLiteRequest = PoolChangesLiteRequest(tailBlockId = 1)
 
         // Act
         val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest)
