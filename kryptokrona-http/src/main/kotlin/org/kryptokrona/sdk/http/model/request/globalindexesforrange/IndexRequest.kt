@@ -32,8 +32,16 @@ package org.kryptokrona.sdk.http.model.request.globalindexesforrange
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Index request object for global indexes for range request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param key The key
+ * @param value The value list
+ */
 @Serializable
-data class IndexResponse(
+data class IndexRequest(
     val key: String,
     val value: List<Long>
 )

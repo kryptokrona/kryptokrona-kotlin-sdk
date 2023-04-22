@@ -32,6 +32,14 @@ package org.kryptokrona.sdk.http.model.response.globalindexesforrange
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for getting the global indexes for a range of blocks.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param indexes The indexes
+ * @param status The status
+ */
 @Serializable
 data class GlobalIndexesForRangeResponse(
     val indexes: List<IndexResponse>,

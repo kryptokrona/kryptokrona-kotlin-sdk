@@ -32,9 +32,10 @@ package org.kryptokrona.sdk.http.model.request.globalindexesforrange
 
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 data class GlobalIndexesForRangeRequest(
     val startHeight: Long? = null,
     val endHeight: Long? = null,
-    val indexes: List<IndexResponse>? = null
+    val indexes: List<IndexRequest>? = null
 )
