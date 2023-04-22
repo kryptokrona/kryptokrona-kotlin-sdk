@@ -54,9 +54,11 @@ class PoolChangesClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get pool changes lite with tailBlockId and knownTxIds`() = runTest {
+    fun `can get pool changes lite with tailBlockId and knownTxsIds`() = runTest {
         // Arrange
-        val poolChangesLiteRequest3 = PoolChangesLiteRequest(1, listOf("transactionId1", "transactionId2"))
+        val poolChangesLiteRequest3 = PoolChangesLiteRequest(
+            tailBlockId = 1,
+            knownTxsIds = listOf("transactionId1", "transactionId2"))
 
         // Act
         val dataHTTP = clientHTTP.getPoolChangesLite(poolChangesLiteRequest3)
@@ -69,7 +71,7 @@ class PoolChangesClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs`() = runTest {
+    fun `can get pool changes lite with tailBlockId and knownTxsIds and addedTxs`() = runTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
             tailBlockId = 1,
@@ -88,7 +90,7 @@ class PoolChangesClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get pool changes lite with tailBlockId and knownTxIds and addedTxs and deletedTxs`() = runTest {
+    fun `can get pool changes lite with tailBlockId and knownTxsIds and addedTxs and deletedTxs`() = runTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
             tailBlockId = 1,
