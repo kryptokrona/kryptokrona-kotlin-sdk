@@ -259,12 +259,10 @@ class WalletService(node: Node) {
         // val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(32)
-        val successful = crypto.generateKeyDerivation(txPubKey, privView, derivation)
+        val success = crypto.generateKeyDerivation(txPubKey, privView, derivation)
 
         // since this is a fatal error we throw an exception, since the keys cannot be invalid
-        if (successful == 0) {
-            throw GenerateKeyDerivationException("Keys are invalid.")
-        }
+        success.takeIf { it == 0 } ?: throw GenerateKeyDerivationException("Keys are invalid.")
 
         transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
