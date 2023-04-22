@@ -48,13 +48,13 @@ jobs:
         run: ./gradlew copyCHeaders
 
       - name: Upload C library
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kryptokrona-crypto
           path: kryptokrona-crypto/build/libs
 
       - name: Upload C headers
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kryptokrona-crypto-headers
           path: kryptokrona-crypto/build/headers
