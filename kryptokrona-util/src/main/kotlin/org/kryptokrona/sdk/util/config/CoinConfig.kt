@@ -36,9 +36,6 @@ package org.kryptokrona.sdk.util.config
  * @author Marcus Cvjeticanin
  * @since 0.1.0
  */
-/**
- * Configuration object for a cryptocurrency.
- */
 object CoinConfig {
 
     /**
