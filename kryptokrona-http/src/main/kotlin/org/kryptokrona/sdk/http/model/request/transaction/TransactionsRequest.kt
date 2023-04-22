@@ -33,6 +33,13 @@ package org.kryptokrona.sdk.http.model.request.transaction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Request for getting the transactions.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param txsHashes The hashes of the transactions
+ */
 @Serializable
 data class TransactionsRequest(
     @SerialName("txs_hashes") val txsHashes: List<String>? = null,

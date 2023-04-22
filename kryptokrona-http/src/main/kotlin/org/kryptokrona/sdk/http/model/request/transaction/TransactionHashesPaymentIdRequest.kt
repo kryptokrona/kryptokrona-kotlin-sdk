@@ -32,6 +32,13 @@ package org.kryptokrona.sdk.http.model.request.transaction
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Request for getting the transaction hashes by payment id.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param paymentId The payment id
+ */
 @Serializable
 data class TransactionHashesPaymentIdRequest(
     val paymentId: String

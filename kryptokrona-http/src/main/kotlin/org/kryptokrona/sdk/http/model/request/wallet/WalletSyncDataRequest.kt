@@ -32,6 +32,17 @@ package org.kryptokrona.sdk.http.model.request.wallet
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Request for getting the latest wallet sync data.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param blockHashCheckpoints List of block hashes to check if we have the latest data
+ * @param startHeight Start height for the sync
+ * @param startTimestamp Start timestamp for the sync
+ * @param blockCount Number of blocks to sync
+ * @param skipCoinbaseTransactions Skip coinbase transactions
+ */
 @Serializable
 data class WalletSyncDataRequest(
     val blockHashCheckpoints: List<String> = listOf(),

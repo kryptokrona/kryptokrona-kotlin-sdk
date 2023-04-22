@@ -32,6 +32,16 @@ package org.kryptokrona.sdk.http.model.request.transaction
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Request for getting the transactions status.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param transactionHashes The hashes of the transactions
+ * @param transactionsInPool Whether to include transactions in the pool
+ * @param transactionsInBlock Whether to include transactions in the block
+ * @param transactionsUnknown Whether to include transactions that are unknown
+ */
 @Serializable
 data class TransactionsStatusRequest(
     val transactionHashes: List<String>? = null,

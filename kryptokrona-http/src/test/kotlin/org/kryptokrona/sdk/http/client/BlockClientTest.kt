@@ -146,11 +146,17 @@ class BlockClientTest {
         // Arrange
         val blockTime = 90L
         val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(
-            timestampBegin = 1554236111, secondsCount = blockTime)
+            timestampBegin = 1554236111,
+            secondsCount = blockTime
+        )
         val blockWithTimestamp2 = BlocksHashesByTimestampsRequest(
-            timestampBegin = 1554236111, secondsCount = blockTime * 10)
+            timestampBegin = 1554236111,
+            secondsCount = blockTime * 10
+        )
         val blockWithTimestamp3 = BlocksHashesByTimestampsRequest(
-            timestampBegin = 1554236111, secondsCount = blockTime * 100)
+            timestampBegin = 1554236111,
+            secondsCount = blockTime * 100
+        )
 
         // Act
         val dataHTTP1 = clientHTTP.getBlocksHashesByTimestamps(blockWithTimestamp1)

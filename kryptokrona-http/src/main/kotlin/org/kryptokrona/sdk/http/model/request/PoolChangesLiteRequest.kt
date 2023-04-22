@@ -32,6 +32,14 @@ package org.kryptokrona.sdk.http.model.request
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Request for getting the changes in the pool.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param tailBlockId The block id of the last block we know about
+ * @param knownTxsIds Already known transactions
+ */
 @Serializable
 data class PoolChangesLiteRequest(
     val tailBlockId: String? = null,
