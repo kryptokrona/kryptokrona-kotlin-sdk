@@ -37,7 +37,7 @@ import kotlinx.serialization.Serializable
  * Peers response from the node.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param grayPeers The gray peers of the node.
  * @param peers The peers of the node.
  * @param status The status of the node.

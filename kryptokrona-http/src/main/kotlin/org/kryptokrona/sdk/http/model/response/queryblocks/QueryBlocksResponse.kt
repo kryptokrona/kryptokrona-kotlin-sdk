@@ -37,7 +37,7 @@ import kotlinx.serialization.Serializable
  * Response for querying blocks.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param currentHeight The current height.
  * @param fullOffset The full offset.
  * @param items The items.

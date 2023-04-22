@@ -38,7 +38,7 @@ import org.kryptokrona.sdk.http.model.response.transaction.TransactionPrefix
  * Response from querying blocks lite items.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param block Block.
  * @param blockId The block id.
  * @param transactionPrefixes The transactions prefixes.

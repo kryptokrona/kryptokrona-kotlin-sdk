@@ -36,7 +36,7 @@ import kotlinx.serialization.Serializable
  * Response for blocks hashes by timestamp.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param blockHashes The block hashes.
  * @param status The status.
  */

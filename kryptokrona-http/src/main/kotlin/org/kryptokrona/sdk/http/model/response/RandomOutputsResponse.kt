@@ -36,7 +36,7 @@ import kotlinx.serialization.Serializable
  * Response for random outputs.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param outs The outs.
  * @param status The status.
  */

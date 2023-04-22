@@ -37,7 +37,7 @@ import kotlinx.serialization.Serializable
  * Response for o indexes.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param oIndexes The o indexes.
  * @param status The status.
  */

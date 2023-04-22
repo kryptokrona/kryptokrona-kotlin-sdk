@@ -37,7 +37,7 @@ import kotlinx.serialization.Serializable
  * Height response from the node.
  *
  * @author Marcus Cvjeticanin
- * @since 1.0.0
+ * @since 0.1.0
  * @param height The height of the node.
  * @param networkHeight The network height of the node.
  * @param status The status of the node.
