@@ -34,8 +34,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -49,8 +49,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
 
         dataHTTP?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
         dataHTTPS?.items?.get(0)?.let { assertEquals(it.blockHeight, 10000) }
@@ -73,8 +73,8 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -92,7 +92,7 @@ class WalletClientTest {
         val dataHTTPS = clientHTTPS.getWalletSyncData(requestData)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }
