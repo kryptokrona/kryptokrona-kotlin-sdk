@@ -33,8 +33,8 @@ class PoolChangesClientTest {
         val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -48,8 +48,8 @@ class PoolChangesClientTest {
         val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -63,8 +63,8 @@ class PoolChangesClientTest {
         val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest3)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -73,7 +73,7 @@ class PoolChangesClientTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
             tailBlockId = 1,
-            knownTxIds = listOf("knownTx1", "knownTx2"),
+            knownTxsIds = listOf("knownTx1", "knownTx2"),
             addedTxs = listOf("addedTx1", "addedTx2")
         )
 
@@ -82,8 +82,8 @@ class PoolChangesClientTest {
         val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -92,9 +92,9 @@ class PoolChangesClientTest {
         // Arrange
         val poolChangesLiteRequest = PoolChangesLiteRequest(
             tailBlockId = 1,
-            knownTxIds = listOf("knownTx1", "knownTx2"),
+            knownTxsIds = listOf("knownTx1", "knownTx2"),
             addedTxs = listOf("addedTx1", "addedTx2"),
-            deletedTxs = listOf("deletedTx1", "deletedTx2")
+            deletedTxsIds = listOf("deletedTx1", "deletedTx2")
         )
 
         // Act
@@ -102,7 +102,7 @@ class PoolChangesClientTest {
         val dataHTTPS = clientHTTPS.getPoolChangesLite(poolChangesLiteRequest)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }
