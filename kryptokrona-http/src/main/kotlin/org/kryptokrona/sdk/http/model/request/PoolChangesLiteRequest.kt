@@ -36,6 +36,4 @@ import kotlinx.serialization.Serializable
 data class PoolChangesLiteRequest(
     val tailBlockId: Long? = null,
     val knownTxsIds: List<String>? = null,
-    val addedTxs: List<String>? = null,
-    val deletedTxsIds: List<String>? = null
 )
