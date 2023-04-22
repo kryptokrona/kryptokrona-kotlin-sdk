@@ -47,6 +47,7 @@ koverReport {
         excludes {
             classes("org.kryptokrona.sdk.crypto.hugin.*")
             classes("org.kryptokrona.sdk.crypto.model.*")
+            classes("org.kryptokrona.sdk.crypto.exception.*")
         }
     }
 
@@ -60,6 +61,7 @@ koverReport {
                 excludes {
                     classes("org.kryptokrona.sdk.crypto.hugin.*")
                     classes("org.kryptokrona.sdk.crypto.model.*")
+                    classes("org.kryptokrona.sdk.crypto.exception.*")
                 }
             }
 
