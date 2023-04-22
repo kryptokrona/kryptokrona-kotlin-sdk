@@ -36,7 +36,7 @@ import org.kryptokrona.sdk.http.model.response.transaction.Transaction
 @Serializable
 data class PoolChangesLiteResponse(
     val addedTxs: List<Transaction>,
-    val deletedTxsIds: List<String>, // Int here instead?
+    val deletedTxsIds: List<String>,
     val isTailBlockActual: Boolean,
     val status: String
 )
