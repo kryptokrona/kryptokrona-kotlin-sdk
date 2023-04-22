@@ -94,13 +94,32 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get blocks details by hashes`() = runTest {
         // Arrange
-        val blockWithHashes1 = BlocksDetailsByHashesRequest(hashes = listOf("hash1", "hash2", "hash3"))
+        val blockWithHashes1 = BlocksDetailsByHashesRequest(
+            blockHashes = listOf(
+                "88a4d0edfb6b640bda0d97f45668869fc3fe76dd963946b0a265f135105e7a3d",
+                "57a839bba17c4b903cd61cde342bbbbcc38826cea9446c8d76582f3489c00e66",
+                "680a09b5f3ea1c37d1fff36400fc392db0ba0c17bcc0c5225376260d898bfc11"
+            ))
         val blockWithHashes2 = BlocksDetailsByHashesRequest(
-            hashes = listOf("hash4", "hash5", "hash6", "hash7", "hash8", "hash9")
-        )
+            blockHashes = listOf(
+                "622a5f45a1aa5873ec9ae381d68690abd17e097d92e9fea83c8a7177e8af86c4",
+                "1b9462b655eecfffc01c65559edcdaac927277c6301a963461902ef88b7bf3c2",
+                "50fe909fd687aadbe03e3e09f05adfda689930ccfc1cc736b37fb3cb3555d6fc",
+                "70ad6b86ee32fb609a54935c9af854068fbfe3c3e2567eb9d426fad022fc79d9",
+                "003e78f1bd43841279c24bca5c6e7bfa740c29d20b91f269c9bf11976e339095",
+                "001e9c66daf6f48c42bc55852cef2915255c4f2b401ea5f27478e4985d720630"
+            ))
         val blockWithHashes3 = BlocksDetailsByHashesRequest(
-            hashes = listOf("hash10", "hash11", "hash12", "hash13", "hash14", "hash15", "hash16", "hash17")
-        )
+            blockHashes = listOf(
+                "d42be60ce5297cc0da3e73221ad5d2c9ef80dc0822d56a74fd8711fe4b0252e3",
+                "708f3e0d06e0994cfbe1f7575d1ff5c346ff3e53afe04e114e293c462a465f07",
+                "a77a8a07f492d1e598b6ee45451bf9ddeeeeff97f96bc991e0b2f3f56d8f3249",
+                "c7fe22599375aa522f8c9de2b407d2d41597799a2c8a1e112498d0f1ac795033",
+                "8ce9af8c7e3a32bef4e03e5905eed74c72b56e01f9197e1fa61bd980ee1fc6fb",
+                "15e42efcea52a31d92997a2dd36e57b34dc833029572be4009168d68d030c40b",
+                "ba5394f629fb6aeb244b1961b5e024bea8a1b7905358ca9c1ca6646e8d183915",
+                "d566ca75c7ce695d1e96b76a113ac3d50acd40481db447c53c797b862e0c43a1"
+            ))
 
         // Act
         val dataHTTP1 = clientHTTP.getBlocksDetailsByHashes(blockWithHashes1)

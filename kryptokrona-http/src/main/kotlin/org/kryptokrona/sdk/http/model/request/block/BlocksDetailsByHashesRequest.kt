@@ -34,5 +34,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BlocksDetailsByHashesRequest(
-    val hashes: List<String>
+    val blockHashes: List<String>
 )

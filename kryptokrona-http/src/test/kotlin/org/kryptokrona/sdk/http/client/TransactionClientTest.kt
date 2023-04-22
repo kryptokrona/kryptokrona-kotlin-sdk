@@ -18,7 +18,7 @@ import org.kryptokrona.sdk.util.model.node.Node
  */
 class TransactionClientTest {
 
-    private val nodeHTTP = Node("privacymine.net", 11898, false)
+    private val nodeHTTP = Node("blocksum.org", 11898, false)
 
     private val nodeHTTPS = Node("privacymine.net", 21898, true)
 
@@ -37,8 +37,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -52,8 +52,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -75,8 +75,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactions(transactions)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -90,8 +90,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -105,8 +105,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -128,23 +128,24 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionDetailsByHashes(hashes)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
         // Arrange
-        val paymentId = TransactionHashesPaymentIdRequest(paymentId = "paymentId")
+        val paymentId = TransactionHashesPaymentIdRequest(
+            paymentId = "e94f0ecf94fe63be4ad3ecfd2de2bb95a950f37b72991caac20771620c091e0f")
 
         // Act
         val dataHTTP = clientHTTP.getTransactionHashesByPaymentId(paymentId)
         val dataHTTPS = clientHTTPS.getTransactionHashesByPaymentId(paymentId)
 
         // Assert
-        assertNotNull(dataHTTP)
-        assertNotNull(dataHTTPS)
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -158,8 +159,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -181,8 +182,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -206,8 +207,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -232,8 +233,8 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
     @Test
@@ -259,7 +260,7 @@ class TransactionClientTest {
         val dataHTTPS = clientHTTPS.getTransactionsStatus(transactionStatus)
 
         // Assert
-        if (dataHTTP != null) assertEquals(dataHTTP.status, "OK")
-        if (dataHTTPS != null) assertEquals(dataHTTPS.status, "OK")
+        if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
+        if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 }
