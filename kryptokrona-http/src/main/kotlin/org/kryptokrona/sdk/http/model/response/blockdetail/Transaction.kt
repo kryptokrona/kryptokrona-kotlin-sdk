@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.http.model.response.blockdetail
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for a transaction.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ */
 @Serializable
 data class Transaction(
     val blockHash: String,

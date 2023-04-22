@@ -32,6 +32,13 @@ package org.kryptokrona.sdk.http.model.response.blockdetail
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for a transaction input.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param type The type.
+ */
 @Serializable
 data class TransactionInput(
     // val data: BlockDetailBlockTransactionInputData,

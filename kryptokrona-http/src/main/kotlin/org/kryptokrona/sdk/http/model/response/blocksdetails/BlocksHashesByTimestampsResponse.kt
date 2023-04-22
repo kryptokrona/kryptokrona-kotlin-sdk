@@ -32,6 +32,14 @@ package org.kryptokrona.sdk.http.model.response.blocksdetails
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for blocks hashes by timestamp.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param blockHashes The block hashes.
+ * @param status The status.
+ */
 @Serializable
 data class BlocksHashesByTimestampsResponse(
     val blockHashes: List<String>,

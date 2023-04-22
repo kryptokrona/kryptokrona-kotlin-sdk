@@ -33,6 +33,14 @@ package org.kryptokrona.sdk.http.model.response.blocksdetails
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.http.model.response.BlockResponse
 
+/**
+ * Response for blocks details.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param blocks The blocks.
+ * @param status The status.
+ */
 @Serializable
 data class BlocksDetailsResponse(
     val blocks: List<BlockResponse>,

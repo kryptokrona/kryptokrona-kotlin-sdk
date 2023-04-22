@@ -7,7 +7,10 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
 /**
- * HTTP client singleton object
+ * HTTP client singleton object.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
  */
 object HttpClient {
     val client = HttpClient {

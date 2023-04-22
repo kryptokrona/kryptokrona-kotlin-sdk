@@ -32,6 +32,15 @@ package org.kryptokrona.sdk.http.model.response.blockdetail
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Response for extra data.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 1.0.0
+ * @param nonce The nonce.
+ * @param publicKey The public key.
+ * @param raw The raw data.
+ */
 @Serializable
 data class Extra(
     val nonce: List<Long>,
