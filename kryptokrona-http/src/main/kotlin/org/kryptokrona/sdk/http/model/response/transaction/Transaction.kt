@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.http.model.response.transaction
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.http.model.response.TransactionResponse
 
 @Serializable
 data class Transaction(
@@ -42,7 +43,7 @@ data class Transaction(
 @Serializable
 data class TransactionDetailsHashes(
     val status: String,
-    val transactions: List<String>
+    val transactions: List<TransactionResponse>
 )
 
 @Serializable

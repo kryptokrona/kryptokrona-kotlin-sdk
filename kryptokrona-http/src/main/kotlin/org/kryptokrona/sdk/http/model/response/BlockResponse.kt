@@ -31,7 +31,6 @@
 package org.kryptokrona.sdk.http.model.response
 
 import kotlinx.serialization.Serializable
-import org.kryptokrona.sdk.http.model.response.blockdetail.Transaction
 
 /**
  * Response for a single block.
@@ -56,6 +55,6 @@ data class BlockResponse(
     val sizeMedian: Long,
     val timestamp: Long,
     val totalFeeAmount: Long,
-    val transactions: List<Transaction>,
+    val transactions: List<TransactionResponse>,
     val transactionsCumulativeSize: Long
 )

@@ -28,9 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.http.model.response.blockdetail
+package org.kryptokrona.sdk.http.model.response
 
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.http.model.response.blockdetail.Extra
+import org.kryptokrona.sdk.http.model.response.blockdetail.TransactionInput
+import org.kryptokrona.sdk.http.model.response.blockdetail.TransactionOutput
 
 /**
  * Response for a transaction.
@@ -39,7 +42,7 @@ import kotlinx.serialization.Serializable
  * @since 0.1.0
  */
 @Serializable
-data class Transaction(
+data class TransactionResponse(
     val blockHash: String,
     val blockIndex: Long,
     val extra: Extra,
