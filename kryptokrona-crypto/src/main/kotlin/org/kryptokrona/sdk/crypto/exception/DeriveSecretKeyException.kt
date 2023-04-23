@@ -48,5 +48,4 @@ class DeriveSecretKeyException(message: String) : Exception(message) {
     fun logError() {
         logger.error("Could not derive secret key: $message")
     }
-
 }

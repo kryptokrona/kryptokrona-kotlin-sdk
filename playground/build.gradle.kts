@@ -3,6 +3,7 @@ val slf4j_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
+    id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     application
 }
 
@@ -36,4 +37,12 @@ tasks.test {
 
 kotlin {
     jvmToolchain(17)
+}
+
+koverReport {
+    filters {
+        excludes {
+            classes("*")
+        }
+    }
 }

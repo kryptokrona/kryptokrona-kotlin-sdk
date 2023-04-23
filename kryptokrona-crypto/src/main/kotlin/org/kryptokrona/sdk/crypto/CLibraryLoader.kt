@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.crypto
 
 import java.io.File
+import java.io.FileNotFoundException
 import java.util.*
 
 /**
@@ -73,7 +74,7 @@ open class CLibraryLoader {
         val libraryPath = File(userDir, "$libraryFolder/$libraryName")
 
         if (!libraryPath.exists()) {
-            throw RuntimeException("Failed to find the C shared library: $libraryName")
+            throw FileNotFoundException("Failed to find the C shared library: $libraryName")
         }
 
         return libraryPath.absolutePath

@@ -48,5 +48,4 @@ class DerivePublicKeyException(message: String) : Exception(message) {
     fun logError() {
         logger.error("Could not derive public key: $message")
     }
-
 }

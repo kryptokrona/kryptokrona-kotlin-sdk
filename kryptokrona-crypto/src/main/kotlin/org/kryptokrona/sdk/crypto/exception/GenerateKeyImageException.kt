@@ -48,5 +48,4 @@ class GenerateKeyImageException(message: String) : Exception(message) {
     fun logError() {
         logger.error("Could not generate key image: $message")
     }
-
 }
