@@ -12,7 +12,7 @@ val sdkVersion: String by project
 plugins {
     kotlin("jvm") version "1.8.10"
     id("org.jetbrains.dokka") version "1.8.10"
-    id("io.gitlab.arturbosch.detekt").version("1.23.0-RC1")
+    id("io.gitlab.arturbosch.detekt").version("1.23.0-RC2")
 }
 
 buildscript {
