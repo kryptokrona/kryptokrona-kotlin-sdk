@@ -46,6 +46,7 @@ import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
+import org.kryptokrona.sdk.util.model.wallet.WalletFile
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -109,6 +110,11 @@ class WalletService(node: Node) {
      * Stored blocks for later processing
      */
     private var storedBlocks = mutableListOf<Block>()
+
+    /**
+     * The wallet file, used for storing the wallet.
+     */
+    private val walletFile: WalletFile? = null
 
     fun getNodeInfo() = nodeInfo
 
@@ -318,8 +324,17 @@ class WalletService(node: Node) {
     fun saveWalletToFile(fileName: String, password: String) {
         logger.debug("Saving wallet to file...")
 
+        // check if it exists already, and then just skip this if the filename is the same
+
+        // create WalletFile object from data class
+
+        // serialize the walletFile object to a byte array
+
+        // encrypt the wallet with the password
+
         val homeDir = System.getProperty("user.home")
         val file = File(homeDir, fileName)
+        val content = ByteArray(32)
         file.writeBytes(content)
     }
 
@@ -337,5 +352,12 @@ class WalletService(node: Node) {
         val homeDir = System.getProperty("user.home")
         val file = File(homeDir, fileName)
         val content = file.readBytes()
+
+        // decrypt the wallet with the password
+
+        // deserialize the wallet into WalletFile object
+
+        // save the object to the field walletFile
+
     }
 }
