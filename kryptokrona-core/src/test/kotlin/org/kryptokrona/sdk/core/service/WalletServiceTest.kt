@@ -27,11 +27,11 @@ class WalletServiceTest {
         walletService.saveWalletToFile(fileName, password)
 
         // Assert
-        val expectedFile = File(System.getProperty("user.home"), fileName)
-        assertTrue { expectedFile.exists() }
+        val file = File(System.getProperty("user.home"), fileName)
+        assertTrue { file.exists() }
 
         // Clean up
-        expectedFile.delete()
+        file.delete()
     }
 
     @Test
@@ -39,12 +39,17 @@ class WalletServiceTest {
         // Arrange
         val fileName = "test.wallet"
         val password = "password"
+        val file = File(System.getProperty("user.home"), fileName)
 
         // Act
+        walletService.saveWalletToFile(fileName, password)
         walletService.loadWalletFromFile(fileName, password)
 
         // Assert
         assertTrue { walletService.getIsWalletLoaded() }
+
+        // Clean up
+        file.delete()
     }
 
 }
