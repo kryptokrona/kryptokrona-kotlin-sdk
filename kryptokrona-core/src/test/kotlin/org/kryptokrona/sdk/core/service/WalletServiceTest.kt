@@ -1,6 +1,9 @@
 package org.kryptokrona.sdk.core.service
 
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.kryptokrona.sdk.util.model.node.Node
+import java.io.File
 
 /**
  * Tests for the WalletService class.
@@ -10,14 +13,38 @@ import org.junit.jupiter.api.Test
  */
 class WalletServiceTest {
 
+    private val node = Node("privacymine.net", 11898, false)
+
+    private val walletService = WalletService(node)
+
     @Test
     fun `can save wallet to file`() {
-        TODO()
+        // Arrange
+        val fileName = "test.wallet"
+        val password = "password"
+
+        // Act
+        walletService.saveWalletToFile(fileName, password)
+
+        // Assert
+        val expectedFile = File(System.getProperty("user.home"), fileName)
+        assertTrue { expectedFile.exists() }
+
+        // Clean up
+        expectedFile.delete()
     }
 
     @Test
     fun `can load wallet from file`() {
-        TODO()
+        // Arrange
+        val fileName = "test.wallet"
+        val password = "password"
+
+        // Act
+        walletService.loadWalletFromFile(fileName, password)
+
+        // Assert
+        assertTrue { walletService.getIsWalletLoaded() }
     }
 
 }

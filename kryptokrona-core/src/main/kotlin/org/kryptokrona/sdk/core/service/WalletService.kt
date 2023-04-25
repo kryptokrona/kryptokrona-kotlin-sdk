@@ -116,9 +116,16 @@ class WalletService(node: Node) {
      */
     private val walletFile: WalletFile? = null
 
+    /**
+     * If the wallet is loaded.
+     */
+    private var isWalletLoaded: Boolean = false
+
     fun getNodeInfo() = nodeInfo
 
     fun getStoredBlocks() = storedBlocks
+
+    fun getIsWalletLoaded() = isWalletLoaded
 
     fun setStartHeight(height: Long) {
         startHeight = height
@@ -331,6 +338,7 @@ class WalletService(node: Node) {
         // serialize the walletFile object to a byte array
 
         // encrypt the wallet with the password
+        // perhaps this: https://stackoverflow.com/a/27962481/21225362
 
         val homeDir = System.getProperty("user.home")
         val file = File(homeDir, fileName)
@@ -359,5 +367,6 @@ class WalletService(node: Node) {
 
         // save the object to the field walletFile
 
+        isWalletLoaded = true
     }
 }
