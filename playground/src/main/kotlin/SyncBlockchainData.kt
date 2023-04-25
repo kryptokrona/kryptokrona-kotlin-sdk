@@ -20,9 +20,14 @@ fun main() = runBlocking {
         }
     }
 
+    // setting delay so we don't cancel immediately
+    // you probably will not use a delay in your code :)
     delay(60 * 1000)
+
+    // canceling the sync process
     job.cancel()
 
+    // printing the results
     walletService.getNodeInfo()?.let { println(it) }
     walletService.getStoredBlocks().forEach { println(it) }
 

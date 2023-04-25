@@ -174,6 +174,10 @@ tasks.named<CreateStartScripts>("startScripts") {
     mustRunAfter("copyCLibrary")
 }
 
+tasks.named<Test>("test") {
+    mustRunAfter("copyCLibrary")
+}
+
 val copyCHeaders by tasks.registering(Copy::class) {
     from("$cryptoDir") {
         include("**/*.h") // copy all files with .h extension
