@@ -3,6 +3,7 @@ name: Kryptokrona Kotlin SDK Master Pipeline
 env:
   KRYPTOKRONA_HTTP_KOVER_XML: ./kryptokrona-http/build/reports/kover/report.xml
   KRYPTOKRONA_CRYPTO_KOVER_XML: ./kryptokrona-crypto/build/reports/kover/report.xml
+  KRYPTOKRONA_CORE_KOVER_XML: ./kryptokrona-core/build/reports/kover/report.xml
 
 on:
   push:
@@ -117,7 +118,7 @@ jobs:
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ env.KRYPTOKRONA_HTTP_KOVER_XML }}, ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}
+          files: ${{ env.KRYPTOKRONA_HTTP_KOVER_XML }}, ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}, ${{ env.KRYPTOKRONA_CORE_KOVER_XML }}
           flags: unittests
           layout: horizontal
           name: codecov-umbrella

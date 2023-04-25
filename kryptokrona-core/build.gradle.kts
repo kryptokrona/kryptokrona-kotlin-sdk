@@ -45,6 +45,35 @@ kotlin {
     jvmToolchain(17)
 }
 
+koverReport {
+    filters {
+        excludes {
+            classes("org.kryptokrona.sdk.core.wallet.*")
+        }
+    }
+
+    verify {
+        onCheck = true
+        rule {
+            isEnabled = true
+            entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
+
+            filters {
+                excludes {
+                    classes("org.kryptokrona.sdk.core.wallet.*")
+                }
+            }
+
+            bound {
+                minValue = 60
+                maxValue = 90
+                metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
+                aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+            }
+        }
+    }
+}
+
 tasks.named<CreateStartScripts>("startScripts") {
     mustRunAfter(":kryptokrona-crypto:copyCLibrary")
 }
