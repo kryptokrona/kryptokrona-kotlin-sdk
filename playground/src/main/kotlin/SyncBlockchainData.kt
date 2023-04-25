@@ -23,6 +23,9 @@ fun main() = runBlocking {
         }
     }
 
+    // saving encrypted wallet to file
+    walletService.saveWalletToFile("mjovanc.wallet", "password")
+
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
     delay(60 * 10000)
