@@ -18,7 +18,7 @@ import org.kryptokrona.sdk.util.model.node.Node
  */
 class TransactionClientTest {
 
-    private val nodeHTTP = Node("blocksum.org", 11898, false)
+    private val nodeHTTP = Node("privacymine.net", 11898, false)
 
     private val nodeHTTPS = Node("privacymine.net", 21898, true)
 
