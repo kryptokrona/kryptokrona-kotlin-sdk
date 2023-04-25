@@ -248,8 +248,8 @@ class WalletService(node: Node) {
      * @param blockHeight The block height of the transaction.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
-        val publicSpendKey = "fdfd97d2ea9f1c25df773ff2c973d885653a3ee643157eb0ae2b6dd98f0b6984"
-        val privateViewKey = "eb2bd1cf0c5e074f9dbf38ebbc99c316f54e21803048c687a3bb359f7a713b02"
+        val publicSpendKey = "45f6f692d8dc545deff096b048e94ee25acd7bf67fb49f7d83107f9969b9bc67"
+        val privateViewKey = "4451358855fb52b2199db97b33b6d7d47ac2b4067ecdf5ed20bb32162543270a"
 
         // if we get negative values of the convertion in the byte array generated the keys are invalid
         val pubSpend = convertHexToBytes(publicSpendKey)
@@ -262,7 +262,7 @@ class WalletService(node: Node) {
         val success = crypto.generateKeyDerivation(txPubKey, privView, derivation)
 
         // since this is a fatal error we throw an exception, since the keys cannot be invalid
-        success.takeIf { it == 0 } ?: throw GenerateKeyDerivationException("Keys are invalid.")
+        success.takeIf { it != 0 } ?: throw GenerateKeyDerivationException("Keys are invalid.")
 
         transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
@@ -271,7 +271,7 @@ class WalletService(node: Node) {
 
             crypto.underivePublicKey(derivation, index.toLong(), derivedKey, base)
 
-            // if the derived spend key does not match, the output key is not designated to us.
+            // if the underived spend key does not match, the output key is not designated to us.
             // continue checking other outputs.
             if (!pubSpend.contentEquals(derivedKey)) {
                 return@forEachIndexed

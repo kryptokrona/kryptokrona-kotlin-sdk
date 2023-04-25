@@ -30,6 +30,4 @@ fun main() = runBlocking {
     // printing the results
     walletService.getNodeInfo()?.let { println(it) }
     walletService.getStoredBlocks().forEach { println(it) }
-
-    println("Hello, world!")
 }

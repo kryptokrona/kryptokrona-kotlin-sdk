@@ -42,9 +42,9 @@ fun toHex(bytes: ByteArray): String {
     val result = StringBuilder(bytes.size * 2)
 
     for (byte in bytes) {
-        val v = byte.toInt() and 0xff
-        result.append(hexChars[v shr 4])
-        result.append(hexChars[v and 0x0f])
+        val unsignedByte = byte.toInt() and 0xFF
+        result.append(hexChars[unsignedByte shr 4])
+        result.append(hexChars[unsignedByte and 0x0F])
     }
 
     return result.toString()
@@ -70,7 +70,7 @@ fun fromHex(string: String): ByteArray {
         require(firstIndex != -1 && secondIndex != -1) { "Input contains invalid characters" }
 
         val byteValue = (firstIndex shl 4) or secondIndex
-        result[i / 2] = byteValue.toByte()
+        result[i / 2] = (byteValue and 0xFF).toByte()
     }
 
     return result
@@ -92,8 +92,10 @@ fun convertHexToBytes(hex: String): ByteArray {
     hex.chunked(size).forEachIndexed { i, byte ->
         val byteValue = byte.toIntOrNull(radix)
             ?: throw IllegalArgumentException("Invalid character(s): $byte.")
-        bytes[i] = byteValue.toByte()
+        bytes[i] = (byteValue and 0xFF).toByte()
     }
 
     return bytes
 }
+
+
