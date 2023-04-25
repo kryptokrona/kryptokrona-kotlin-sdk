@@ -132,14 +132,7 @@ class TransactionClientTest {
         if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
     }
 
-    //TODO - this test works inconsistently with the following error response:
-    // {
-    //    "status": "Error: _Map_base::at",
-    //    "transactionHashes": []
-    // }
-    // This is an issue with those nodes that have v1.1.1 and not v1.1.2
-    // since we do not have a node with v1.1.2 and with SSL we comment this out for now
-    /*@Test
+    @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction hashes by payment id` () = runTest {
         // Arrange
@@ -153,7 +146,7 @@ class TransactionClientTest {
         // Assert
         if (dataHTTP != null) assertEquals("OK", dataHTTP.status)
         if (dataHTTPS != null) assertEquals("OK", dataHTTPS.status)
-    }*/
+    }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
