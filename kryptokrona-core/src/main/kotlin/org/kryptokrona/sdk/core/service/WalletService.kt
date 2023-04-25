@@ -47,6 +47,7 @@ import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
+import java.io.File
 
 /**
  * WalletService class.
@@ -304,5 +305,37 @@ class WalletService(node: Node) {
             // TODO we add this input to its wallet
             // inputs.add(txInput)
         }
+    }
+
+    /**
+     * Saves the wallet to a file.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param fileName The name of the file to save the wallet to.
+     * @param password The password to encrypt the wallet with.
+     */
+    fun saveWalletToFile(fileName: String, password: String) {
+        logger.debug("Saving wallet to file...")
+
+        val homeDir = System.getProperty("user.home")
+        val file = File(homeDir, fileName)
+        file.writeBytes(content)
+    }
+
+    /**
+     * Loads the wallet from a file.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param fileName The name of the file to load the wallet from.
+     * @param password The password to decrypt the wallet with.
+     */
+    fun loadWalletFromFile(fileName: String, password: String) {
+        logger.debug("Loading wallet from file...")
+
+        val homeDir = System.getProperty("user.home")
+        val file = File(homeDir, fileName)
+        val content = file.readBytes()
     }
 }
