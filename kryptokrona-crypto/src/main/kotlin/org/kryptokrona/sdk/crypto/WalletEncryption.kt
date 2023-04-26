@@ -118,7 +118,7 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
         // decrypt ciphertext with password and IV using AES encryption
         val decryptedBytes = decryptWallet(ciphertext, password, iv)
 
-        // deserialize decrypted bytes into WalletFile object
+        // TODO deserialize decrypted bytes into WalletFile object
 
         // add the data to the wallet file object
         val walletFile = WalletFile("")

@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.core.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
+import org.kryptokrona.sdk.crypto.WalletEncryption
 import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
 import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
@@ -114,7 +115,7 @@ class WalletService(node: Node) {
     /**
      * The wallet file, used for storing the wallet.
      */
-    private val walletFile: WalletFile? = null
+    private var walletFile: WalletFile? = null
 
     /**
      * If the wallet is loaded.
@@ -331,19 +332,14 @@ class WalletService(node: Node) {
     fun saveWalletToFile(fileName: String, password: String) {
         logger.debug("Saving wallet to file...")
 
-        // check if it exists already, and then just skip this if the filename is the same
+        // create wallet file
+        walletFile = WalletFile("")
 
-        // create WalletFile object from data class
+        // create wallet encryption object from data class
+        val walletEncryption = WalletEncryption(walletFile!!)
 
-        // serialize the walletFile object to a byte array
-
-        // encrypt the wallet with the password
-        // perhaps this: https://stackoverflow.com/a/27962481/21225362
-
-        val homeDir = System.getProperty("user.home")
-        val file = File(homeDir, fileName)
-        val content = ByteArray(32)
-        file.writeBytes(content)
+        // encrypt the wallet with the password and save it to file
+        walletEncryption.encryptToFile(fileName, password)
     }
 
     /**
@@ -357,16 +353,10 @@ class WalletService(node: Node) {
     fun loadWalletFromFile(fileName: String, password: String) {
         logger.debug("Loading wallet from file...")
 
-        val homeDir = System.getProperty("user.home")
-        val file = File(homeDir, fileName)
-        val content = file.readBytes()
+        val walletEncryption = WalletEncryption()
+        walletFile = walletEncryption.loadWallet(fileName, password)
 
-        // decrypt the wallet with the password
-
-        // deserialize the wallet into WalletFile object
-
-        // save the object to the field walletFile
-
+        // we now have loaded the wallet file
         isWalletLoaded = true
     }
 }
