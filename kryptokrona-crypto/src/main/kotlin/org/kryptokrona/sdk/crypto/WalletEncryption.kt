@@ -39,14 +39,20 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.ObjectOutputStream
+import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import kotlin.io.encoding.Base64.Default.encodeToByteArray
 
-private const val IV_SIZE = 12 // size of the initialization vector in bytes
+private const val IV_SIZE = 16 // size of the initialization vector in bytes
 private const val MIN_ENCRYPTED_FILE_SIZE = 16 // minimum size of the encrypted file in bytes
 private const val TAG_LENGTH_BITS = 128 // length of the gcm authentication tag in bits
+private const val KEY_LENGTH = 256 // use a 256-bit key for AES encryption
+private const val ITERATIONS = 10000 // use 10000 iterations for PBKDF2
+private const val SALT_LENGTH = 16 // generate a 16-byte salt
+private const val BITS_PER_BYTE = 8
 
 /**
  * This class is used to encrypt and decrypt wallet files.
@@ -67,38 +73,46 @@ class WalletEncryption(private val wallet: Wallet? = null) {
      * @param password The password to encrypt the wallet with
      */
     fun encryptToFile(fileName: String, password: String) {
-        // generate a 256-bit AES key from the password
-        val passwordBytes = password.toByteArray(Charsets.UTF_8)
-        val passwordSpec = SecretKeySpec(passwordBytes, "AES")
+        // generate a 256-bit AES key from the password and a random salt
+        val passwordBytes = password.toCharArray()
+        val salt = ByteArray(SALT_LENGTH) // generate a random salt
+        SecureRandom().nextBytes(salt)
+
+        val keySpec = SecretKeySpec(
+            generatePBKDF2DerivedKey(passwordBytes, salt, KEY_LENGTH / BITS_PER_BYTE, ITERATIONS),
+            "AES"
+        )
 
         // create cipher object for encryption
-        val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-        cipher.init(Cipher.ENCRYPT_MODE, passwordSpec)
+        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
 
-        // get IV (initialization vector) from cipher object
-        val iv = cipher.iv
+        // generate a secure IV for the encryption
+        val iv = ByteArray(cipher.blockSize)
+        SecureRandom().nextBytes(iv)
+        val ivParams = IvParameterSpec(iv)
+
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParams)
 
         // serialize the wallet object to a byte array
-        wallet.let {
-            it?.let { walletFile ->
-                val walletBytes = serialize(walletFile)
+        wallet?.let { walletFile ->
+            val walletBytes = serialize(walletFile)
 
-                // encrypt the wallet with the password using AES encryption
-                val encryptedWallet = cipher.doFinal(walletBytes)
+            // encrypt the wallet with the password using AES encryption
+            val encryptedWallet = cipher.doFinal(walletBytes)
 
-                // concatenate IV and encrypted wallet into a single byte array
-                val encryptedBytes = ByteArray(iv.size + encryptedWallet.size)
-                System.arraycopy(iv, 0, encryptedBytes, 0, iv.size)
-                System.arraycopy(encryptedWallet, 0, encryptedBytes, iv.size, encryptedWallet.size)
+            // concatenate salt, IV, and encrypted wallet into a single byte array
+            val encryptedBytes = ByteArray(salt.size + iv.size + encryptedWallet.size)
+            System.arraycopy(salt, 0, encryptedBytes, 0, salt.size)
+            System.arraycopy(iv, 0, encryptedBytes, salt.size, iv.size)
+            System.arraycopy(encryptedWallet, 0, encryptedBytes, salt.size + iv.size, encryptedWallet.size)
 
-                // write encrypted byte array to file
-                val homeDir = System.getProperty("user.home")
-                val file = File(homeDir, fileName)
-                FileOutputStream(file).use { outputStream ->
-                    outputStream.write(encryptedBytes)
-                }
+            // write encrypted byte array to file
+            val homeDir = System.getProperty("user.home")
+            val file = File(homeDir, fileName)
+            FileOutputStream(file).use { outputStream ->
+                outputStream.write(encryptedBytes)
             }
-        } ?: logger.error("Can not encrypt to file when wallet file object is null!")
+        } ?: logger.error("Cannot encrypt to file when wallet file object is null!")
     }
 
     /**
@@ -121,12 +135,13 @@ class WalletEncryption(private val wallet: Wallet? = null) {
             "Encrypted file is too small to contain an IV and ciphertext"
         }
 
-        // split encrypted bytes into IV and ciphertext
-        val iv = encryptedBytes.sliceArray(0 until IV_SIZE)
-        val ciphertext = encryptedBytes.sliceArray(IV_SIZE until encryptedBytes.size)
+        // split encrypted bytes into salt, IV, and ciphertext
+        val salt = encryptedBytes.sliceArray(0 until SALT_LENGTH)
+        val iv = encryptedBytes.sliceArray(SALT_LENGTH until SALT_LENGTH + IV_SIZE)
+        val ciphertext = encryptedBytes.sliceArray(SALT_LENGTH + IV_SIZE until encryptedBytes.size)
 
         // decrypt ciphertext with password and IV using AES encryption
-        val decryptedBytes = decryptWallet(ciphertext, password, iv)
+        val decryptedBytes = decryptWallet(ciphertext, password, salt, iv)
 
         // TODO deserialize decrypted bytes into WalletFile object
         // need to figure out the structure of the WalletFile first
@@ -166,16 +181,20 @@ class WalletEncryption(private val wallet: Wallet? = null) {
      * @param iv The initialization vector
      * @return the decrypted wallet file object
      */
-    private fun decryptWallet(encryptedBytes: ByteArray, password: String, iv: ByteArray): ByteArray {
+    private fun decryptWallet(encryptedBytes: ByteArray, password: String, salt: ByteArray, iv: ByteArray): ByteArray {
         logger.debug("Decrypting wallet...")
 
-        // generate a 256-bit AES key from the password
-        val keySpec = SecretKeySpec(password.toByteArray(), "AES")
+        // generate a 256-bit AES key from the password and salt
+        val passwordBytes = password.toCharArray()
+        val keySpec = SecretKeySpec(
+            generatePBKDF2DerivedKey(passwordBytes, salt, KEY_LENGTH / BITS_PER_BYTE, ITERATIONS),
+            "AES"
+        )
 
         // create cipher object for decryption
-        val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-        val gcmSpec = GCMParameterSpec(TAG_LENGTH_BITS, iv)
-        cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
+        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+        val ivParams = IvParameterSpec(iv)
+        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParams)
 
         // decrypt encrypted bytes using AES encryption
         return cipher.doFinal(encryptedBytes)
