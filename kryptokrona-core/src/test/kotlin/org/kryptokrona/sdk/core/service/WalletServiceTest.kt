@@ -51,5 +51,4 @@ class WalletServiceTest {
         // Clean up
         file.delete()
     }
-
 }

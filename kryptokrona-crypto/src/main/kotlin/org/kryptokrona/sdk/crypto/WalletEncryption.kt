@@ -61,14 +61,13 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
      * @param password The password to encrypt the wallet with
      */
     fun encryptToFile(fileName: String, password: String) {
-        // generate a 256-bit AES key
-        val keyGen = KeyGenerator.getInstance("AES")
-        keyGen.init(256)
-        val secretKey: SecretKey = keyGen.generateKey()
+        // generate a 256-bit AES key from the password
+        val passwordBytes = password.toByteArray(Charsets.UTF_8)
+        val passwordSpec = SecretKeySpec(passwordBytes, "AES")
 
         // create cipher object for encryption
         val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey)
+        cipher.init(Cipher.ENCRYPT_MODE, passwordSpec)
 
         // get IV (initialization vector) from cipher object
         val iv = cipher.iv
@@ -184,26 +183,4 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
         oos.flush()
         return bos.toByteArray()
     }
-
-    companion object {
-
-        /**
-         * Encrypt the wallet file object with the password using AES encryption.
-         *
-         * @author Marcus Cvjeticanin
-         * @since 0.2.0
-         * @param plaintext the wallet file object
-         * @param password the password
-         * @param algorithm the encryption algorithm
-         * @return ciphertext
-         */
-        fun encrypt(plaintext: ByteArray, password: String, algorithm: String): ByteArray {
-            val passwordBytes = password.toByteArray(Charsets.UTF_8)
-            val passwordSpec = SecretKeySpec(passwordBytes, algorithm.split("/")[0])
-            val cipher = Cipher.getInstance(algorithm)
-            cipher.init(Cipher.ENCRYPT_MODE, passwordSpec)
-            return cipher.doFinal(plaintext)
-        }
-    }
-
 }
