@@ -39,4 +39,4 @@ import kotlinx.serialization.Serializable
  * @since 0.2.0
  */
 @Serializable
-data class WalletFile(val test: String) //TODO not done yet
+data class WalletFile(val test: String) //TODO not done yet, need to figure out how the structure of a wallet file looks like

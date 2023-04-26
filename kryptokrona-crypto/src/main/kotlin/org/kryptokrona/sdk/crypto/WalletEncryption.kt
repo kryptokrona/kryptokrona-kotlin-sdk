@@ -119,6 +119,7 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
         val decryptedBytes = decryptWallet(ciphertext, password, iv)
 
         // TODO deserialize decrypted bytes into WalletFile object
+        // need to figure out the structure of the WalletFile first
 
         // add the data to the wallet file object
         val walletFile = WalletFile("")
