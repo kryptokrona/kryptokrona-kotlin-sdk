@@ -6,6 +6,8 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
+private const val MAX_SEND_COUNT = 50
+
 /**
  * HTTP client singleton object.
  *
@@ -22,7 +24,7 @@ object HttpClient {
             exponentialDelay()
         }
         install(HttpSend) {
-            maxSendCount = 50
+            maxSendCount = MAX_SEND_COUNT
         }
     }
 }

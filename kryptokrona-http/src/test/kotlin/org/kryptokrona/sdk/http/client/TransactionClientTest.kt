@@ -212,7 +212,7 @@ class TransactionClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get transaction status with transaction hashes, transactions in pool and transactions in block` () = runTest {
+    fun `can get transaction status with hashes, pool and block` () = runTest {
         // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
 
         // Arrange
@@ -238,7 +238,7 @@ class TransactionClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get transaction status with transaction hashes, transactions in pool, transactions in block and transactions unknown` () = runTest {
+    fun `can get transaction status with hashes, pool, block and unknown` () = runTest {
         // Using Block 2e9a0f1fb6e59a76984bce3a390b9484c3d11ea3c36ba750147efe822c8a9f5b
 
         // Arrange
