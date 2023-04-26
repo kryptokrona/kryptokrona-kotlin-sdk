@@ -21,7 +21,7 @@ class WalletServiceTest {
     fun `can save wallet to file`() {
         // Arrange
         val fileName = "test.wallet"
-        val password = "password"
+        val password = "strongPassword1432"
 
         // Act
         walletService.saveWalletToFile(fileName, password)
@@ -38,7 +38,7 @@ class WalletServiceTest {
     fun `can load wallet from file`() {
         // Arrange
         val fileName = "test.wallet"
-        val password = "password"
+        val password = "strongPassword1432"
         val file = File(System.getProperty("user.home"), fileName)
 
         // Act
