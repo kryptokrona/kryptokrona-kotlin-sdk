@@ -35,7 +35,7 @@ fun main() = runBlocking {
     val wallet = walletService.getWallet()
 
     // printing out the wallet to get a better understanding of what it looks like
-    wallet.let { println(it) }
+    println(wallet)
 
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
