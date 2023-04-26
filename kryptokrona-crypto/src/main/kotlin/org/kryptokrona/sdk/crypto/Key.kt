@@ -34,6 +34,7 @@ import org.kryptokrona.sdk.crypto.model.KeyImage
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.toHex
 
+private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in the function
 
 private val crypto = Crypto()
 
@@ -51,15 +52,15 @@ fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: Byt
     //TODO need to get this from WalletService and pass to this function
     // get our private spend key from wallet.keys
     val privateSpendKey = convertHexToBytes("")
-    val publicSpendKey = ByteArray(32)
-    val derivedKey = ByteArray(32)
+    val publicSpendKey = ByteArray(BYTE_ARRAY_LENGTH)
+    val derivedKey = ByteArray(BYTE_ARRAY_LENGTH)
 
     // derive the key pair
     crypto.derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
     crypto.deriveSecretKey(derivation, index, privateSpendKey, derivedKey)
 
     // generate the key image
-    val image = ByteArray(32)
+    val image = ByteArray(BYTE_ARRAY_LENGTH)
     crypto.generateKeyImage(publicSpendKey, privateSpendKey, image)
 
     // the check is done in bytes, return hex64 strings

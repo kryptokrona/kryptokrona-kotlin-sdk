@@ -44,6 +44,10 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import kotlin.io.encoding.Base64.Default.encodeToByteArray
 
+private const val IV_SIZE = 12 // size of the initialization vector in bytes
+private const val MIN_ENCRYPTED_FILE_SIZE = 16 // minimum size of the encrypted file in bytes
+private const val TAG_LENGTH_BITS = 128 // length of the gcm authentication tag in bits
+
 /**
  * This class is used to encrypt and decrypt wallet files.
  *
@@ -112,9 +116,14 @@ class WalletEncryption(private val wallet: Wallet? = null) {
         // load encrypted bytes from file
         val encryptedBytes = loadEncryptedBytesFromFile(fileName)
 
+        // verify that the file is not too small
+        require(encryptedBytes.size >= MIN_ENCRYPTED_FILE_SIZE) {
+            "Encrypted file is too small to contain an IV and ciphertext"
+        }
+
         // split encrypted bytes into IV and ciphertext
-        val iv = encryptedBytes.sliceArray(0 until 12)
-        val ciphertext = encryptedBytes.sliceArray(12 until encryptedBytes.size)
+        val iv = encryptedBytes.sliceArray(0 until IV_SIZE)
+        val ciphertext = encryptedBytes.sliceArray(IV_SIZE until encryptedBytes.size)
 
         // decrypt ciphertext with password and IV using AES encryption
         val decryptedBytes = decryptWallet(ciphertext, password, iv)
@@ -165,7 +174,7 @@ class WalletEncryption(private val wallet: Wallet? = null) {
 
         // create cipher object for decryption
         val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-        val gcmSpec = GCMParameterSpec(128, iv)
+        val gcmSpec = GCMParameterSpec(TAG_LENGTH_BITS, iv)
         cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
 
         // decrypt encrypted bytes using AES encryption
