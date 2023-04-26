@@ -125,6 +125,8 @@ class WalletService(node: Node) {
 
     fun getStoredBlocks() = storedBlocks
 
+    fun getWallet() = wallet
+
     fun getIsWalletLoaded() = isWalletLoaded
 
     fun setStartHeight(height: Long) {
