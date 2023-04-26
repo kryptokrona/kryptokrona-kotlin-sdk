@@ -31,5 +31,7 @@
 package org.kryptokrona.sdk.crypto.model
 
 data class UnconfirmedInput(
-    var test: String
+    val amount: Long,
+    val key: String,
+    val parentTransactionHash: String,
 )
