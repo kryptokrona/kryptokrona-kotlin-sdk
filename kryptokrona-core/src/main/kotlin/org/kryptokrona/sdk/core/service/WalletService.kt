@@ -36,6 +36,7 @@ import org.kryptokrona.sdk.crypto.WalletEncryption
 import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
 import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
+import org.kryptokrona.sdk.crypto.model.Wallet
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.http.client.BlockClient
 import org.kryptokrona.sdk.http.client.WalletClient
@@ -47,7 +48,6 @@ import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
-import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
 
 private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in the function

@@ -2,7 +2,6 @@ package org.kryptokrona.sdk.http.client
 
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.http.model.request.transaction.TransactionDetailsByHashesRequest
 import org.kryptokrona.sdk.http.model.request.transaction.TransactionHashesPaymentIdRequest

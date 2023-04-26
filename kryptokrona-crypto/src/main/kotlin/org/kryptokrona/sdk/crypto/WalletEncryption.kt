@@ -32,19 +32,14 @@ package org.kryptokrona.sdk.crypto
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.Json.Default.encodeToString
 import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.io.ObjectOutputStream
 import java.security.SecureRandom
 import javax.crypto.Cipher
-import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
-import kotlin.io.encoding.Base64.Default.encodeToByteArray
 
 private const val IV_SIZE = 16 // size of the initialization vector in bytes
 private const val MIN_ENCRYPTED_FILE_SIZE = 16 // minimum size of the encrypted file in bytes

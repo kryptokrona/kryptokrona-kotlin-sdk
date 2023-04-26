@@ -30,8 +30,6 @@
 
 package org.kryptokrona.sdk.util.config
 
-import java.util.*
-
 /**
  * Config is a singleton object that holds configuration values for the library.
  *

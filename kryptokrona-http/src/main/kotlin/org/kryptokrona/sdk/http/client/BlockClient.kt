@@ -42,8 +42,8 @@ import org.kryptokrona.sdk.http.model.request.block.BlocksDetailsByHashesRequest
 import org.kryptokrona.sdk.http.model.request.block.BlocksDetailsByHeightsRequest
 import org.kryptokrona.sdk.http.model.request.block.BlocksHashesByTimestampsRequest
 import org.kryptokrona.sdk.http.model.response.blockdetail.BlockDetailResponse
-import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksDetailsResponse
 import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksDetailsByHashesResponse
+import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksDetailsResponse
 import org.kryptokrona.sdk.http.model.response.blocksdetails.BlocksHashesByTimestampsResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
