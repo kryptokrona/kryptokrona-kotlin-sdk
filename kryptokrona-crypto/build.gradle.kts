@@ -24,6 +24,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":kryptokrona-util"))
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
 
