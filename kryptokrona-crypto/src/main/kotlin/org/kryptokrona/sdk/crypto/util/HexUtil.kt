@@ -30,7 +30,7 @@
 
 package org.kryptokrona.sdk.crypto.util
 
-private const val HEX_CHARS = "0123456789ABCDEF"
+private const val HEX_CHARS = "0123456789abcdef"
 private const val BYTE_MASK = 0xFF
 private const val NIBBLE_MASK = 0x0F
 private const val NIBBLE_SIZE_BITS = 4
