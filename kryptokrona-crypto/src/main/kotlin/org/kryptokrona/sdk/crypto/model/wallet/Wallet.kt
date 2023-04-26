@@ -28,72 +28,74 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.wallet
+package org.kryptokrona.sdk.crypto.model.wallet
 
-import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.crypto.model.TransactionInput
+import org.kryptokrona.sdk.crypto.model.UnconfirmedInput
 
 /**
- * Wallet file model.
+ * Wallet model.
+ *
+ * We are using this model for saving to file.
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-@Serializable
-data class WalletFile(
+data class Wallet(
 
     /**
-     * A vector of the stored transaction input data, to be used for
-     * sending transactions later
+     * A list of the stored transaction input data, to be used for
+     * sending transactions later.
      */
     val unspentInputs: List<TransactionInput> = emptyList(),
 
     /**
      * Inputs which have been used in a transaction, and are waiting to
-     * either be put into a block, or return to our wallet
+     * either be put into a block, or return to our wallet.
      */
     val lockedInputs: List<TransactionInput> = emptyList(),
 
     /**
-     * Inputs which have been spent in a transaction
+     * Inputs which have been spent in a transaction.
      */
     val spentInputs: List<TransactionInput> = emptyList(),
 
     /**
      * Inputs which have come in from a transaction we sent - either from
      * change or from sending to ourself - we use this to display unlocked
-     * balance correctly
+     * balance correctly.
      */
     val unconfirmedIncomingAmounts: List<UnconfirmedInput> = emptyList(),
 
     /**
-     * This subwallet's public spend key
+     * This subwallet's public spend key.
      */
     val publicSpendKey: String,
 
     /**
-     * The subwallet's private spend key (undefined if view wallet)
+     * The subwallet's private spend key (undefined if view wallet).
      */
     val privateSpendKey: String? = null,
 
     /**
      * The timestamp to begin syncing the wallet at
-     * (usually creation time or zero)
+     * (usually creation time or zero).
      */
     val syncStartTimestamp: Long = 0,
 
     /**
-     * The height to begin syncing the wallet at
+     * The height to begin syncing the wallet at.
      */
     val syncStartHeight: Long = 0,
 
     /**
-     * This subwallet's public address
+     * This subwallet's public address.
      */
     val address: String = "",
 
     /**
      * The wallet has one 'main' address which we will use by default
-     * when treating it as a single user wallet
+     * when treating it as a single user wallet.
      */
     val primaryAddress: Boolean = false
 )
