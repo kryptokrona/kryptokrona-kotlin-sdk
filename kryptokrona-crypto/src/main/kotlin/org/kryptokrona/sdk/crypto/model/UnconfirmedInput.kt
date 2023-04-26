@@ -28,15 +28,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.wallet
+package org.kryptokrona.sdk.crypto.model
 
-import kotlinx.serialization.Serializable
-
-/**
- * Wallet file model.
- *
- * @author Marcus Cvjeticanin
- * @since 0.2.0
- */
-@Serializable
-data class WalletFile(val test: String) //TODO not done yet, need to figure out how the structure of a wallet file looks like
+data class UnconfirmedInput(
+    var test: String
+)
