@@ -60,7 +60,7 @@ class IndexesClient(private val node: Node) {
      *
      * @param globalIndexesForRangeRequest The request object
      * @since 0.1.0
-     * @return GlobalIndexesForRange
+     * @return GlobalIndexesForRangeResponse
      */
     suspend fun getGlobalIndexesForRange(
         globalIndexesForRangeRequest: GlobalIndexesForRangeRequest

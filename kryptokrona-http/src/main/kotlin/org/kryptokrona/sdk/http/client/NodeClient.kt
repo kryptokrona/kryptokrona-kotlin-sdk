@@ -81,10 +81,10 @@ class NodeClient(private val node: Node) {
     }
 
     /**
-     * Get node peers
+     * Get node info
      *
      * @since 0.1.0
-     * @return Peers
+     * @return InfoResponse
      */
     suspend fun getNodeInfo(): InfoResponse? {
         var result: InfoResponse? = null
@@ -110,7 +110,7 @@ class NodeClient(private val node: Node) {
      * Get node height
      *
      * @since 0.1.0
-     * @return Height
+     * @return HeightResponse
      */
     suspend fun getNodeHeight(): HeightResponse? {
         var result: HeightResponse? = null
@@ -136,7 +136,7 @@ class NodeClient(private val node: Node) {
      * Get node peers
      *
      * @since 0.1.0
-     * @return Peers
+     * @return PeersResponse
      */
     suspend fun getNodePeers(): PeersResponse? {
         var result: PeersResponse? = null
@@ -162,7 +162,7 @@ class NodeClient(private val node: Node) {
      * Get node fee
      *
      * @since 0.1.0
-     * @return Fee
+     * @return FeeResponse
      */
     suspend fun getNodeFee(): FeeResponse? {
         var result: FeeResponse? = null

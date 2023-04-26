@@ -59,7 +59,7 @@ class PoolChangesClient(private val node: Node) {
      * Get pool changes lite
      *
      * @since 0.1.0
-     * @return PoolChangesLite
+     * @return PoolChangesLiteResponse
      */
     suspend fun getPoolChangesLite(poolChangesLiteRequest: PoolChangesLiteRequest): PoolChangesLiteResponse? {
         val jsonBody = Json.encodeToString(poolChangesLiteRequest)

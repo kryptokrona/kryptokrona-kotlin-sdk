@@ -60,7 +60,7 @@ class WalletClient(private val node: Node) {
      *
      * @param walletSyncData The wallet sync data request
      * @since 0.1.0
-     * @return Transactions
+     * @return WalletSyncData
      */
     suspend fun getWalletSyncData(walletSyncData: WalletSyncDataRequest): WalletSyncData? {
         val jsonBody = Json.encodeToString(walletSyncData)

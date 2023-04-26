@@ -67,7 +67,7 @@ class BlockClient(private val node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param blockDetailsByHeight The block details by height
-     * @return BlockDetail
+     * @return BlockDetailResponse
      */
     suspend fun getBlockDetailsByHeight(blockDetailsByHeight: BlockDetailsByHeightRequest): BlockDetailResponse? {
         val jsonBody = Json.encodeToString(blockDetailsByHeight)
@@ -107,7 +107,7 @@ class BlockClient(private val node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param blocksDetailsByHeights The blocks details by heights
-     * @return BlocksDetails
+     * @return BlocksDetailsResponse
      */
     suspend fun getBlocksDetailsByHeights(blocksDetailsByHeights: BlocksDetailsByHeightsRequest):
             BlocksDetailsResponse? {
@@ -148,7 +148,7 @@ class BlockClient(private val node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param blocksDetailsByHashes The blocks details by hashes
-     * @return BlocksDetailsHashes
+     * @return BlocksDetailsByHashesResponse
      */
     suspend fun getBlocksDetailsByHashes(blocksDetailsByHashes: BlocksDetailsByHashesRequest):
             BlocksDetailsByHashesResponse? {
@@ -189,7 +189,7 @@ class BlockClient(private val node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param blocksHashesByTimestamps The blocks hashes by timestamps
-     * @return BlocksHashesTimestamp
+     * @return BlocksHashesByTimestampsResponse
      */
     suspend fun getBlocksHashesByTimestamps(blocksHashesByTimestamps: BlocksHashesByTimestampsRequest):
             BlocksHashesByTimestampsResponse? {
