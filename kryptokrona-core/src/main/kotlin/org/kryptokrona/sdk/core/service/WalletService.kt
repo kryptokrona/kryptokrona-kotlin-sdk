@@ -334,8 +334,9 @@ class WalletService(node: Node) {
         logger.debug("Saving wallet to file...")
 
         // create wallet file
+        // TODO: not done, should add more properties here
         wallet = Wallet(
-
+            publicSpendKey = "",
         )
 
         // create wallet encryption object from data class

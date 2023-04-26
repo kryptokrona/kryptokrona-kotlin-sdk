@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.crypto
 
+import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayOutputStream
@@ -119,8 +120,9 @@ class WalletEncryption(private val wallet: Wallet? = null) {
         // need to figure out the structure of the WalletFile first
 
         // add the data to the wallet file object
+        // TODO: not done, should add more properties here
         val wallet = Wallet(
-
+            publicSpendKey = "",
         )
 
         return wallet
