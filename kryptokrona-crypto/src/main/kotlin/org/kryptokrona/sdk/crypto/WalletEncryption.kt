@@ -30,7 +30,9 @@
 
 package org.kryptokrona.sdk.crypto
 
-import org.kryptokrona.sdk.crypto.model.TransactionInput
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.encodeToString
 import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayOutputStream
@@ -40,6 +42,7 @@ import java.io.ObjectOutputStream
 import javax.crypto.Cipher
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
+import kotlin.io.encoding.Base64.Default.encodeToByteArray
 
 /**
  * This class is used to encrypt and decrypt wallet files.
@@ -121,11 +124,10 @@ class WalletEncryption(private val wallet: Wallet? = null) {
 
         // add the data to the wallet file object
         // TODO: not done, should add more properties here
-        val wallet = Wallet(
+
+        return Wallet(
             publicSpendKey = "",
         )
-
-        return wallet
     }
 
     /**
@@ -179,10 +181,7 @@ class WalletEncryption(private val wallet: Wallet? = null) {
      * @return the serialized wallet file object
      */
     private fun serialize(wallet: Wallet): ByteArray {
-        val bos = ByteArrayOutputStream()
-        val oos = ObjectOutputStream(bos)
-        oos.writeObject(wallet)
-        oos.flush()
-        return bos.toByteArray()
+        val json = Json { encodeDefaults = true }
+        return json.encodeToString(wallet).toByteArray()
     }
 }
