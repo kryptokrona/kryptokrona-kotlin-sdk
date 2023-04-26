@@ -50,6 +50,8 @@ import org.kryptokrona.sdk.util.model.node.Node
 import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
 
+private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in the function
+
 /**
  * WalletService class.
  *
@@ -276,7 +278,7 @@ class WalletService(node: Node) {
         // TODO add this as a property to class so we can send this data to WalletEncryption
         // val inputs = mutableListOf<TransactionInput>()
 
-        val derivation = ByteArray(32)
+        val derivation = ByteArray(BYTE_ARRAY_LENGTH)
         val success = crypto.generateKeyDerivation(txPubKey, privView, derivation)
 
         // since this is a fatal error we throw an exception, since the keys cannot be invalid
@@ -285,7 +287,7 @@ class WalletService(node: Node) {
         transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
             val derivedKey = convertHexToBytes(key)
-            val base = ByteArray(32)
+            val base = ByteArray(BYTE_ARRAY_LENGTH)
 
             crypto.underivePublicKey(derivation, index.toLong(), derivedKey, base)
 
