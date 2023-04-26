@@ -30,8 +30,7 @@
 
 package org.kryptokrona.sdk.crypto.model
 
-import org.kryptokrona.sdk.crypto.model.TransactionInput
-import org.kryptokrona.sdk.crypto.model.UnconfirmedInput
+import kotlinx.serialization.Serializable
 
 /**
  * Wallet model.
@@ -41,6 +40,7 @@ import org.kryptokrona.sdk.crypto.model.UnconfirmedInput
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
+@Serializable
 data class Wallet(
 
     /**

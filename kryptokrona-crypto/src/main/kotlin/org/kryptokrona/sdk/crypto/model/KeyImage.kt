@@ -30,6 +30,8 @@
 
 package org.kryptokrona.sdk.crypto.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * Data class that represents a key image
  *
@@ -38,6 +40,7 @@ package org.kryptokrona.sdk.crypto.model
  * @param keyImage the key image
  * @param ephemeralPublicKey the ephemeral public key
  */
+@Serializable
 data class KeyImage(
     val keyImage: String,
     val privateSpendKey: String

@@ -30,6 +30,8 @@
 
 package org.kryptokrona.sdk.crypto.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * Represents a transaction input for a wallet.
  *
@@ -47,6 +49,7 @@ package org.kryptokrona.sdk.crypto.model
  * @param unlockTime the unlock time of the input
  * @param globalIndex the global index of the input
  */
+@Serializable
 data class TransactionInput(
     val amount: Long,
     val blockHeight: Long,

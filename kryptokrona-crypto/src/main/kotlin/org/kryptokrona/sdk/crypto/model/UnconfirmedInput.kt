@@ -30,6 +30,15 @@
 
 package org.kryptokrona.sdk.crypto.model
 
+import kotlinx.serialization.Serializable
+
+/**
+ * Data class that represents an unconfirmed input
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
+@Serializable
 data class UnconfirmedInput(
     val amount: Long,
     val key: String,
