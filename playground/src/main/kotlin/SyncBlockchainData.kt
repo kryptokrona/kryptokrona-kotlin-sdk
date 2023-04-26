@@ -24,7 +24,14 @@ fun main() = runBlocking {
     }
 
     // saving encrypted wallet to file
-    walletService.saveWalletToFile("mjovanc.wallet", "password")
+    walletService.saveWalletToFile("mjovanc.wallet", "someLongPassword")
+    walletService.loadWalletFromFile("mjovanc.wallet", "someLongPassword")
+
+    // getting the wallet we just created
+    val wallet = walletService.getWallet()
+
+    // printing out the wallet to get a better understanding of what it looks like
+    wallet.let { println(it) }
 
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
