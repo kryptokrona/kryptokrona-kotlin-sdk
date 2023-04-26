@@ -47,9 +47,8 @@ import org.kryptokrona.sdk.http.model.response.walletsyncdata.Transaction
 import org.kryptokrona.sdk.http.model.response.walletsyncdata.WalletSyncData
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
-import org.kryptokrona.sdk.util.model.wallet.WalletFile
+import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
-import java.io.File
 
 /**
  * WalletService class.
@@ -115,7 +114,7 @@ class WalletService(node: Node) {
     /**
      * The wallet file, used for storing the wallet.
      */
-    private var walletFile: WalletFile? = null
+    private var wallet: Wallet? = null
 
     /**
      * If the wallet is loaded.
@@ -263,6 +262,7 @@ class WalletService(node: Node) {
      * @param blockHeight The block height of the transaction.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
+        // TODO we need to generate these when creating a new wallet and save them somewhere
         val publicSpendKey = "45f6f692d8dc545deff096b048e94ee25acd7bf67fb49f7d83107f9969b9bc67"
         val privateViewKey = "4451358855fb52b2199db97b33b6d7d47ac2b4067ecdf5ed20bb32162543270a"
 
@@ -271,6 +271,7 @@ class WalletService(node: Node) {
         val privView = convertHexToBytes(privateViewKey)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
+        // TODO add this as a property to class so we can send this data to WalletEncryption
         // val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(32)
@@ -333,10 +334,12 @@ class WalletService(node: Node) {
         logger.debug("Saving wallet to file...")
 
         // create wallet file
-        walletFile = WalletFile("")
+        wallet = Wallet(
+
+        )
 
         // create wallet encryption object from data class
-        val walletEncryption = WalletEncryption(walletFile!!)
+        val walletEncryption = WalletEncryption(wallet!!)
 
         // encrypt the wallet with the password and save it to file
         walletEncryption.encryptToFile(fileName, password)
@@ -354,7 +357,7 @@ class WalletService(node: Node) {
         logger.debug("Loading wallet from file...")
 
         val walletEncryption = WalletEncryption()
-        walletFile = walletEncryption.loadWallet(fileName, password)
+        wallet = walletEncryption.loadWallet(fileName, password)
 
         // we now have loaded the wallet file
         isWalletLoaded = true

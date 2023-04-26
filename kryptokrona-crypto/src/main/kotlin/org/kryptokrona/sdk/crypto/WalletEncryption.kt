@@ -30,15 +30,13 @@
 
 package org.kryptokrona.sdk.crypto
 
-import org.kryptokrona.sdk.util.model.wallet.WalletFile
+import org.kryptokrona.sdk.crypto.model.Wallet
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.ObjectOutputStream
 import javax.crypto.Cipher
-import javax.crypto.KeyGenerator
-import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
@@ -47,9 +45,9 @@ import javax.crypto.spec.SecretKeySpec
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param walletFile The wallet file object to encrypt
+ * @param wallet The wallet file object to encrypt
  */
-class WalletEncryption(private val walletFile: WalletFile? = null) {
+class WalletEncryption(private val wallet: Wallet? = null) {
 
     private val logger = LoggerFactory.getLogger("WalletEncryption")
 
@@ -73,7 +71,7 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
         val iv = cipher.iv
 
         // serialize the wallet object to a byte array
-        walletFile.let {
+        wallet.let {
             it?.let { walletFile ->
                 val walletBytes = serialize(walletFile)
 
@@ -104,7 +102,7 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
      * @param password The password to decrypt the wallet with
      * @return the deserialized wallet file object
      */
-    fun loadWallet(fileName: String, password: String): WalletFile {
+    fun loadWallet(fileName: String, password: String): Wallet {
         logger.debug("Loading wallet from file...")
 
         // load encrypted bytes from file
@@ -121,9 +119,11 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
         // need to figure out the structure of the WalletFile first
 
         // add the data to the wallet file object
-        val walletFile = WalletFile("")
+        val wallet = Wallet(
 
-        return walletFile
+        )
+
+        return wallet
     }
 
     /**
@@ -173,13 +173,13 @@ class WalletEncryption(private val walletFile: WalletFile? = null) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.2.0
-     * @param walletFile the wallet file object
+     * @param wallet the wallet file object
      * @return the serialized wallet file object
      */
-    private fun serialize(walletFile: WalletFile): ByteArray {
+    private fun serialize(wallet: Wallet): ByteArray {
         val bos = ByteArrayOutputStream()
         val oos = ObjectOutputStream(bos)
-        oos.writeObject(walletFile)
+        oos.writeObject(wallet)
         oos.flush()
         return bos.toByteArray()
     }
