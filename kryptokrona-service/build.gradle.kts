@@ -64,7 +64,7 @@ koverReport {
     }
 }
 
-publishing {
+/*publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             artifactId = "kryptokrona-service"
@@ -123,11 +123,11 @@ publishing {
             }
         }
     }
-}
+}*/
 
-signing {
+/*signing {
     sign(publishing.publications["mavenJava"])
-}
+}*/
 
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
