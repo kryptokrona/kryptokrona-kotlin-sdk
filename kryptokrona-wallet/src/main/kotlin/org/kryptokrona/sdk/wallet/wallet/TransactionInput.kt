@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.wallet.wallet
 
+/**
+ * Transaction input is an input that is confirmed in the blockchain.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 data class TransactionInput(
     val keyImage: String,
     val amount: Long,

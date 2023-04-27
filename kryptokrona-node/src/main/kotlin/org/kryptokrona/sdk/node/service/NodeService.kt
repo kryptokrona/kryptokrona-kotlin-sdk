@@ -51,6 +51,8 @@ class NodeService(private var node: Node) {
     /**
      * Get the node info.
      *
+     * @author Marcus Cvjeticanin
+     * @since 0.1.1
      * @return The node info.
      */
     suspend fun getNodeInfo(): InfoResponse? {
