@@ -3,6 +3,7 @@ rootProject.name = "kryptokrona-kotlin-sdk"
 // publishing libraries
 include("kryptokrona-wallet")
 include("kryptokrona-node")
+include("kryptokrona-service")
 include("kryptokrona-crypto")
 include("kryptokrona-util")
 
