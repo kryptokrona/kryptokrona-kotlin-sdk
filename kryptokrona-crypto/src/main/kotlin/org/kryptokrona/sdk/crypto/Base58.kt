@@ -35,7 +35,7 @@ import java.util.*
 
 private val ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray()
 private val ENCODED_ZERO = ALPHABET[0]
-private var INDEXES = IntArray(128)
+private val INDEXES = IntArray(128)
 private const val BASE_58 = 58
 private const val BASE_256 = 256
 private const val DIVISOR_58 = 58

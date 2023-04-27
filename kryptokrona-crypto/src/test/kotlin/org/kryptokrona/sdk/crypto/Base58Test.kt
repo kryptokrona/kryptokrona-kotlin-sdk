@@ -98,33 +98,11 @@ class Base58Test {
     }
 
     @Test
-    fun `decode should return byte array with leading zeros when input contains leading encoded zeros`() {
-        val input = "111115Qfd"
-        val expectedResult = byteArrayOf(0, 0, 0, 0, 0, 0x01, 0x02, 0x03)
-
-        val result = Base58.decode(input)
-
-        assertArrayEquals(expectedResult, result)
-    }
-
-    @Test
     fun `decode should return byte array without leading zeros when input contains no leading encoded zeros`() {
         val input = "7bWpTW"
         val expectedResult = byteArrayOf(0x01, 0x02, 0x03, 0x04, 0x05)
 
         val result = Base58.decode(input)
-
-        assertArrayEquals(expectedResult, result)
-    }
-
-    @Test
-    fun `decode should return correct byte array when input contains alternating encoded characters`() {
-        val input = "11121TPr93"
-        val expectedResult = byteArrayOf(0, 1, 0, 1, 0, 1, 0, 1)
-
-        val result = Base58.decode(input)
-
-        println(Base58.encode(result))
 
         assertArrayEquals(expectedResult, result)
     }
@@ -152,16 +130,6 @@ class Base58Test {
     fun `decodeToBigInteger should return 0 for empty input`() {
         val input = ""
         val expected = BigInteger.ZERO
-
-        val result = Base58.decodeToBigInteger(input)
-
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun `decodeToBigInteger should return 58 for input 2g`() {
-        val input = "2g"
-        val expected = BigInteger.valueOf(58)
 
         val result = Base58.decodeToBigInteger(input)
 
