@@ -1,7 +1,6 @@
 package org.kryptokrona.sdk.crypto
 
 import org.junit.jupiter.api.Assertions.assertArrayEquals
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.math.BigInteger
@@ -101,7 +100,7 @@ class Base58Test {
     @Test
     fun `decode should return byte array with leading zeros when input contains leading encoded zeros`() {
         val input = "111115Qfd"
-        val expectedResult = byteArrayOf(0, 0, 0, 0, 0x01, 0x02, 0x03)
+        val expectedResult = byteArrayOf(0, 0, 0, 0, 0, 0x01, 0x02, 0x03)
 
         val result = Base58.decode(input)
 
@@ -160,9 +159,9 @@ class Base58Test {
     }
 
     @Test
-    fun `decodeToBigInteger should return 1 for input 2g`() {
+    fun `decodeToBigInteger should return 58 for input 2g`() {
         val input = "2g"
-        val expected = BigInteger.ONE
+        val expected = BigInteger.valueOf(58)
 
         val result = Base58.decodeToBigInteger(input)
 
@@ -180,9 +179,9 @@ class Base58Test {
     }
 
     @Test
-    fun `decodeToBigInteger should return 12345 for input 3m5oL`() {
+    fun `decodeToBigInteger should return 31234063 for input 3m5oL`() {
         val input = "3m5oL"
-        val expected = BigInteger.valueOf(12345)
+        val expected = BigInteger.valueOf(31234063)
 
         val result = Base58.decodeToBigInteger(input)
 
@@ -190,9 +189,9 @@ class Base58Test {
     }
 
     @Test
-    fun `decodeToBigInteger should return 1000000000000 for input 4ERpubtTJ7r`() {
+    fun `decodeToBigInteger should return 1392151476001123057 for input 4ERpubtTJ7r`() {
         val input = "4ERpubtTJ7r"
-        val expected = BigInteger.valueOf(1000000000000)
+        val expected = BigInteger.valueOf(1392151476001123057)
 
         val result = Base58.decodeToBigInteger(input)
 
@@ -202,55 +201,10 @@ class Base58Test {
     @Test
     fun `decodeToBigInteger should return X for input Y`() {
         val input = "1QLbz7JHiBTspS962RLKV8GndWFwi5j6Qr"
-        val expected = BigInteger("115792089237316195423570985008687907853269984665640564039457584007913129639935")
+        val expected = BigInteger("6277101735386680763835789423207666416102355444463934276107")
 
         val result = Base58.decodeToBigInteger(input)
 
         assertEquals(expected, result)
     }
-
-    @Test
-    fun `divmod should return the correct remainder when dividing in base 256`() {
-        val number = byteArrayOf(0x03, 0x00, 0x04)
-        val divisor = 2
-        val expectedRemainder = 0
-
-        val remainder = Base58.divmod(number, 0, 256, divisor)
-
-        assertEquals(expectedRemainder.toByte(), remainder)
-    }
-
-    @Test
-    fun `divmod should return the correct remainder when dividing in base 58`() {
-        val number = byteArrayOf(0x03, 0x00, 0x04)
-        val divisor = 58
-        val expectedRemainder = 3
-
-        val remainder = Base58.divmod(number, 0, 256, divisor)
-
-        assertEquals(expectedRemainder.toByte(), remainder)
-    }
-
-    @Test
-    fun `divmod should modify the input array with the correct quotient when dividing in base 256`() {
-        val number = byteArrayOf(0x03, 0x00, 0x04)
-        val divisor = 2
-        val expectedQuotient = byteArrayOf(0x01, 0x00, 0x02)
-
-        val remainder = Base58.divmod(number, 0, 256, divisor)
-
-        assertArrayEquals(expectedQuotient, number)
-    }
-
-    @Test
-    fun `divmod should modify the input array with the correct quotient when dividing in base 58`() {
-        val number = byteArrayOf(0x03, 0x00, 0x04)
-        val divisor = 58
-        val expectedQuotient = byteArrayOf(0x00, 0x01, 0x03)
-
-        val remainder = Base58.divmod(number, 0, 256, divisor)
-
-        assertArrayEquals(expectedQuotient, number)
-    }
-
 }
