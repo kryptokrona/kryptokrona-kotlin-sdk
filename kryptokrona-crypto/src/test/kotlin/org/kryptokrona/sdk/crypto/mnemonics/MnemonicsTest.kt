@@ -1,7 +1,5 @@
 package org.kryptokrona.sdk.crypto.mnemonics
 
-import org.junit.jupiter.api.Test
-
 /**
  * Tests for Mnemonics class.
  *

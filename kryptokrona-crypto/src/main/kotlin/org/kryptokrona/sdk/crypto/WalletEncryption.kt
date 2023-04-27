@@ -43,7 +43,6 @@ import javax.crypto.spec.SecretKeySpec
 
 private const val IV_SIZE = 16 // size of the initialization vector in bytes
 private const val MIN_ENCRYPTED_FILE_SIZE = 16 // minimum size of the encrypted file in bytes
-private const val TAG_LENGTH_BITS = 128 // length of the gcm authentication tag in bits
 private const val KEY_LENGTH = 256 // use a 256-bit key for AES encryption
 private const val ITERATIONS = 10000 // use 10000 iterations for PBKDF2
 private const val SALT_LENGTH = 16 // generate a 16-byte salt

@@ -58,6 +58,7 @@ class PoolChangesClient(private val node: Node) {
     /**
      * Get pool changes lite
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return PoolChangesLiteResponse
      */

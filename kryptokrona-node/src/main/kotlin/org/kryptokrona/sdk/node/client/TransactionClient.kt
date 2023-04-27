@@ -64,6 +64,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transactions
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param transactions The transactions request
      * @return Transactions
@@ -103,6 +104,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transaction details by hashes
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param transactionDetailsByHashes The transaction details by hashes request
      * @return TransactionDetailsHashes
@@ -143,6 +145,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transaction hashes by payment id
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param transactionHashesPaymentId The transaction hashes payment id request
      * @return TransactionHashesPaymentId
@@ -183,6 +186,7 @@ class TransactionClient(private val node: Node) {
     /**
      * Get transactions status
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @param transactionsStatus The transactions status request
      * @return TransactionsStatus

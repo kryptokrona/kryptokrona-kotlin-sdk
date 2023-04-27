@@ -58,6 +58,7 @@ class NodeClient(private val node: Node) {
     /**
      * Check if node is running
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return Boolean
      */
@@ -83,6 +84,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node info
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return InfoResponse
      */
@@ -109,6 +111,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node height
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return HeightResponse
      */
@@ -135,6 +138,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node peers
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return PeersResponse
      */
@@ -161,6 +165,7 @@ class NodeClient(private val node: Node) {
     /**
      * Get node fee
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return FeeResponse
      */

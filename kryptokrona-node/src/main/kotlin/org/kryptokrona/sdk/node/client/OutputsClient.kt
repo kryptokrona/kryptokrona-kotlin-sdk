@@ -54,6 +54,7 @@ class OutputsClient(private val node: Node) {
     /**
      * Get random outputs
      *
+     * @author Marcus Cvjeticanin
      * @since 0.1.0
      * @return RandomOutputsResponse
      */
