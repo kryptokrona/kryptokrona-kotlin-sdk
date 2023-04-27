@@ -38,7 +38,7 @@
     </div>
     <div class="pull-right d-flex">
         <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kryptokrona-http:dokkaHtmlPartial/main">jvm</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kryptokrona-node:dokkaHtmlPartial/main">jvm</button>
         </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -49,19 +49,19 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="kryptokrona-http::org.kryptokrona.sdk.http.model.response/TransactionResponse///PointingToDeclaration//2120254197">
-  <div class="breadcrumbs"><a href="../../index.html">kryptokrona-http</a><span class="delimiter">/</span><a href="../index.html">org.kryptokrona.sdk.http.model.response</a><span class="delimiter">/</span><span class="current">TransactionResponse</span></div>
+<div class="main-content" data-page-type="classlike" id="content" pageids="kryptokrona-node::org.kryptokrona.sdk.node.model.response/TransactionResponse///PointingToDeclaration//2120254197">
+  <div class="breadcrumbs"><a href="../../index.html">kryptokrona-node</a><span class="delimiter">/</span><a href="../index.html">org.kryptokrona.sdk.node.model.response</a><span class="delimiter">/</span><span class="current">TransactionResponse</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Transaction</span><wbr><span><span>Response</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TransactionResponse</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>blockHash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>blockIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>extra<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fee<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inBlockchain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mixin<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>outputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>paymentId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>signaturesSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>timestamp<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalInputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalOutputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>unlockTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Response for a transaction.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Marcus Cvjeticanin</p></span><span class="kdoc-tag"><h4 class="">Since</h4><p class="paragraph">0.1.0</p></span></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TransactionResponse</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>blockHash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>blockIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>extra<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fee<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inBlockchain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>inputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mixin<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>outputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>paymentId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>signaturesSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>timestamp<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalInputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalOutputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>unlockTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Response for a transaction.</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Marcus Cvjeticanin</p></span><span class="kdoc-tag"><h4 class="">Since</h4><p class="paragraph">0.1.0</p></span></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="">Constructors</h2>
-        <div class="table"><a data-name="1602657565%2FConstructors%2F2120254197" anchor-label="TransactionResponse" id="1602657565%2FConstructors%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+        <div class="table"><a data-name="1602657565%2FConstructors%2F2120254197" anchor-label="TransactionResponse" id="1602657565%2FConstructors%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-transaction-response.html"><span>Transaction</span><wbr><span><span>Response</span></span></a></div>
@@ -70,7 +70,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">blockHash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">blockIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">extra<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a><span class="token punctuation">, </span></span><span class="parameter ">fee<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">hash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">inBlockchain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">inputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">mixin<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">outputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">paymentId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">signaturesSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">timestamp<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">totalInputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">totalOutputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unlockTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">blockHash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">blockIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">extra<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a><span class="token punctuation">, </span></span><span class="parameter ">fee<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">hash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">inBlockchain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">inputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">mixin<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">outputs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">paymentId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">signaturesSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">timestamp<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">totalInputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">totalOutputsAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unlockTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -79,8 +79,8 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="637402911%2FProperties%2F2120254197" anchor-label="blockHash" id="637402911%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+        <div class="table"><a data-name="637402911%2FProperties%2F2120254197" anchor-label="blockHash" id="637402911%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="block-hash.html"><span>block</span><wbr><span><span>Hash</span></span></a></div>
@@ -89,13 +89,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="block-hash.html">blockHash</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="block-hash.html">blockHash</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1373917307%2FProperties%2F2120254197" anchor-label="blockIndex" id="1373917307%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="1373917307%2FProperties%2F2120254197" anchor-label="blockIndex" id="1373917307%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="block-index.html"><span>block</span><wbr><span><span>Index</span></span></a></div>
@@ -104,13 +104,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="block-index.html">blockIndex</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="block-index.html">blockIndex</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-637852054%2FProperties%2F2120254197" anchor-label="extra" id="-637852054%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-637852054%2FProperties%2F2120254197" anchor-label="extra" id="-637852054%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="extra.html"><span><span>extra</span></span></a></div>
@@ -119,13 +119,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="extra.html">extra</a><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="extra.html">extra</a><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-extra/index.html">Extra</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2120051444%2FProperties%2F2120254197" anchor-label="fee" id="2120051444%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="2120051444%2FProperties%2F2120254197" anchor-label="fee" id="2120051444%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fee.html"><span><span>fee</span></span></a></div>
@@ -134,13 +134,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="fee.html">fee</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="fee.html">fee</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1209998866%2FProperties%2F2120254197" anchor-label="hash" id="1209998866%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="1209998866%2FProperties%2F2120254197" anchor-label="hash" id="1209998866%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="hash.html"><span><span>hash</span></span></a></div>
@@ -149,13 +149,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="hash.html">hash</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="hash.html">hash</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1188199129%2FProperties%2F2120254197" anchor-label="inBlockchain" id="-1188199129%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-1188199129%2FProperties%2F2120254197" anchor-label="inBlockchain" id="-1188199129%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="in-blockchain.html"><span>in</span><wbr><span><span>Blockchain</span></span></a></div>
@@ -164,13 +164,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="in-blockchain.html">inBlockchain</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="in-blockchain.html">inBlockchain</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2111896791%2FProperties%2F2120254197" anchor-label="inputs" id="2111896791%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="2111896791%2FProperties%2F2120254197" anchor-label="inputs" id="2111896791%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="inputs.html"><span><span>inputs</span></span></a></div>
@@ -179,13 +179,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="inputs.html">inputs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="inputs.html">inputs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-input/index.html">TransactionInput</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1260773145%2FProperties%2F2120254197" anchor-label="mixin" id="1260773145%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="1260773145%2FProperties%2F2120254197" anchor-label="mixin" id="1260773145%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="mixin.html"><span><span>mixin</span></span></a></div>
@@ -194,13 +194,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="mixin.html">mixin</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="mixin.html">mixin</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1117909528%2FProperties%2F2120254197" anchor-label="outputs" id="-1117909528%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-1117909528%2FProperties%2F2120254197" anchor-label="outputs" id="-1117909528%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="outputs.html"><span><span>outputs</span></span></a></div>
@@ -209,13 +209,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="outputs.html">outputs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="outputs.html">outputs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../org.kryptokrona.sdk.http.model.response.blockdetail/-transaction-output/index.html">TransactionOutput</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-955163815%2FProperties%2F2120254197" anchor-label="paymentId" id="-955163815%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-955163815%2FProperties%2F2120254197" anchor-label="paymentId" id="-955163815%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="payment-id.html"><span>payment</span><wbr><span><span>Id</span></span></a></div>
@@ -224,13 +224,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="payment-id.html">paymentId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="payment-id.html">paymentId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-624900668%2FProperties%2F2120254197" anchor-label="signaturesSize" id="-624900668%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-624900668%2FProperties%2F2120254197" anchor-label="signaturesSize" id="-624900668%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="signatures-size.html"><span>signatures</span><wbr><span><span>Size</span></span></a></div>
@@ -239,13 +239,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="signatures-size.html">signaturesSize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="signatures-size.html">signaturesSize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="549561983%2FProperties%2F2120254197" anchor-label="size" id="549561983%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="549561983%2FProperties%2F2120254197" anchor-label="size" id="549561983%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="size.html"><span><span>size</span></span></a></div>
@@ -254,13 +254,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="size.html">size</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="size.html">size</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-399999580%2FProperties%2F2120254197" anchor-label="timestamp" id="-399999580%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-399999580%2FProperties%2F2120254197" anchor-label="timestamp" id="-399999580%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="timestamp.html"><span><span>timestamp</span></span></a></div>
@@ -269,13 +269,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="timestamp.html">timestamp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="timestamp.html">timestamp</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2130468971%2FProperties%2F2120254197" anchor-label="totalInputsAmount" id="-2130468971%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-2130468971%2FProperties%2F2120254197" anchor-label="totalInputsAmount" id="-2130468971%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="total-inputs-amount.html"><span>total</span><wbr><span>Inputs</span><wbr><span><span>Amount</span></span></a></div>
@@ -284,13 +284,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="total-inputs-amount.html">totalInputsAmount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="total-inputs-amount.html">totalInputsAmount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1612312774%2FProperties%2F2120254197" anchor-label="totalOutputsAmount" id="-1612312774%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-1612312774%2FProperties%2F2120254197" anchor-label="totalOutputsAmount" id="-1612312774%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="total-outputs-amount.html"><span>total</span><wbr><span>Outputs</span><wbr><span><span>Amount</span></span></a></div>
@@ -299,13 +299,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="total-outputs-amount.html">totalOutputsAmount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="total-outputs-amount.html">totalOutputsAmount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-268586481%2FProperties%2F2120254197" anchor-label="unlockTime" id="-268586481%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":kryptokrona-http:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-http:dokkaHtmlPartial/main">
+<a data-name="-268586481%2FProperties%2F2120254197" anchor-label="unlockTime" id="-268586481%2FProperties%2F2120254197" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-node:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-node:dokkaHtmlPartial/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="unlock-time.html"><span>unlock</span><wbr><span><span>Time</span></span></a></div>
@@ -314,7 +314,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-http:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="unlock-time.html">unlockTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-node:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="unlock-time.html">unlockTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div></div>
                 </div>
               </div>
             </div>

@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":kryptokrona-http:dokkaHtmlPartial/main":[],":kryptokrona-core:dokkaHtmlPartial/main":[]}'
+sourceset_dependencies = '{":kryptokrona-node:dokkaHtmlPartial/main":[],":kryptokrona-wallet:dokkaHtmlPartial/main":[]}'

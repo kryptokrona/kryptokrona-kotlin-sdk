@@ -1,9 +1,9 @@
 name: Kryptokrona Kotlin SDK Pull Request Pipeline
 
 env:
-  KRYPTOKRONA_HTTP_KOVER_XML: ./kryptokrona-http/build/reports/kover/report.xml
+  KRYPTOKRONA_NODE_KOVER_XML: ./kryptokrona-node/build/reports/kover/report.xml
   KRYPTOKRONA_CRYPTO_KOVER_XML: ./kryptokrona-crypto/build/reports/kover/report.xml
-  KRYPTOKRONA_CORE_KOVER_XML: ./kryptokrona-core/build/reports/kover/report.xml
+  KRYPTOKRONA_WALLET_KOVER_XML: ./kryptokrona-wallet/build/reports/kover/report.xml
 
 on: [ pull_request ]
 

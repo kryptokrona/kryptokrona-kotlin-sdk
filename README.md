@@ -3,7 +3,7 @@
 [![alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
 [![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-kotlin-sdk/master-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions/workflows/master-ci.yml) 
 [![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)
+[![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-wallet)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-wallet)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk)
 [![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)

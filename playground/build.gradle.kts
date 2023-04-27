@@ -15,9 +15,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":kryptokrona-core"))
+    implementation(project(":kryptokrona-wallet"))
     implementation(project(":kryptokrona-crypto"))
-    implementation(project(":kryptokrona-http"))
+    implementation(project(":kryptokrona-node"))
     implementation(project(":kryptokrona-util"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")

@@ -2,7 +2,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.kryptokrona.sdk.core.service.WalletService
+import org.kryptokrona.sdk.wallet.service.WalletService
 import org.kryptokrona.sdk.util.model.node.Node
 
 fun main() = runBlocking {
