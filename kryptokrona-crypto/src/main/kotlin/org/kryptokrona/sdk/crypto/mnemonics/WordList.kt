@@ -28,7 +28,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto.util
+package org.kryptokrona.sdk.crypto.mnemonics
 
 /**
  * The list of words used to generate a mnemonic phrase.
@@ -36,7 +36,7 @@ package org.kryptokrona.sdk.crypto.util
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-object MnemonicWordList {
+object WordList {
 
     val words: List<String> = listOf(
         "abbey",
