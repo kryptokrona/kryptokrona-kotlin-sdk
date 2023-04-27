@@ -2,6 +2,12 @@ package org.kryptokrona.sdk.crypto.mnemonics
 
 import org.junit.jupiter.api.Test
 
+/**
+ * Tests for Mnemonics class.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ */
 class MnemonicsTest {
 
     @Test
