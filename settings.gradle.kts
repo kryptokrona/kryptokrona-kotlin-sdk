@@ -4,6 +4,7 @@ rootProject.name = "kryptokrona-kotlin-sdk"
 include("kryptokrona-wallet")
 include("kryptokrona-node")
 include("kryptokrona-service")
+include("kryptokrona-walletapi")
 include("kryptokrona-crypto")
 include("kryptokrona-util")
 
