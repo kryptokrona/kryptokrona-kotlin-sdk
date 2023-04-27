@@ -30,14 +30,50 @@
 
 package org.kryptokrona.sdk.crypto.mnemonics
 
+/**
+ * Use a mnemonic seed phrase to generate a private key.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param words The mnemonic seed phrase.
+ * @return The private key.
+ */
 fun mnemonicToPrivateKey(words: List<String>) {
     TODO()
 }
 
+/**
+ * Use a mnemonic seed phrase to generate a public key.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param words The mnemonic seed phrase.
+ * @return The public key.
+ */
 fun mnemonicToPublicKey(words: List<String>) {
     TODO()
 }
 
-fun privateKeyToMnemonic(privateKey: String) {
+/**
+ * Use a private key to generate a mnemonic seed phrase.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param privateKey The private key.
+ * @return The mnemonic seed phrase.
+ */
+fun privateKeyToMnemonic(privateKey: String): List<String> {
     TODO()
+}
+
+/**
+ * Check if a mnemonic word is valid.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param word The mnemonic word.
+ * @return True if the word is valid, false otherwise.
+ */
+fun isValidMnemonicWord(word: String): Boolean {
+    return WordList.words.contains(word)
 }
