@@ -1,4 +1,5 @@
+import kotlinx.coroutines.runBlocking
 
-fun main() {
+fun main() = runBlocking {
     println("Hello, world!")
 }
