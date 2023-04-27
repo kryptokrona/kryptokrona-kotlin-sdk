@@ -65,6 +65,7 @@ koverReport {
                     classes("org.kryptokrona.sdk.crypto.hugin.*")
                     classes("org.kryptokrona.sdk.crypto.model.*")
                     classes("org.kryptokrona.sdk.crypto.exception.*")
+                    classes("org.kryptokrona.sdk.crypto.mnemonics.WordList")
                 }
             }
 
