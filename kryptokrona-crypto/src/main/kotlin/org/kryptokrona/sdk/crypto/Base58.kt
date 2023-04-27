@@ -35,7 +35,7 @@ import java.util.*
 
 private val ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray()
 private val ENCODED_ZERO = ALPHABET[0]
-private val INDEXES = IntArray(128)
+private var INDEXES = IntArray(128)
 private const val BASE_58 = 58
 private const val BASE_256 = 256
 private const val DIVISOR_58 = 58
@@ -160,7 +160,7 @@ object Base58 {
      * @param divisor the number to divide by (up to 256)
      * @return the remainder of the division operation
      */
-    private fun divmod(number: ByteArray, firstDigit: Int, base: Int, divisor: Int): Byte {
+    fun divmod(number: ByteArray, firstDigit: Int, base: Int, divisor: Int): Byte {
         // this is just long division which accounts for the base of the input digits
         var remainder = 0
         for (i in firstDigit until number.size) {
