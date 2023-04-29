@@ -32,7 +32,7 @@ package org.kryptokrona.sdk.wallet.service
 
 import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
-import org.kryptokrona.sdk.crypto.WalletEncryption
+import org.kryptokrona.sdk.crypto.WalletFileEncryption
 import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
 import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
@@ -345,10 +345,10 @@ class WalletService(node: Node) {
         )
 
         // create wallet encryption object from data class
-        val walletEncryption = WalletEncryption(wallet!!)
+        val walletFileEncryption = WalletFileEncryption(wallet!!)
 
         // encrypt the wallet with the password and save it to file
-        walletEncryption.encryptToFile(fileName, password)
+        walletFileEncryption.encryptToFile(fileName, password)
     }
 
     /**
@@ -362,8 +362,8 @@ class WalletService(node: Node) {
     fun loadWalletFromFile(fileName: String, password: String) {
         logger.debug("Loading wallet from file...")
 
-        val walletEncryption = WalletEncryption()
-        wallet = walletEncryption.loadWallet(fileName, password)
+        val walletFileEncryption = WalletFileEncryption()
+        wallet = walletFileEncryption.loadWallet(fileName, password)
 
         // we now have loaded the wallet file
         isWalletLoaded = true
