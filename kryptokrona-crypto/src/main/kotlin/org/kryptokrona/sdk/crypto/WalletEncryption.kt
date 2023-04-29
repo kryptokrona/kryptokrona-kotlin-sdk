@@ -37,4 +37,6 @@ package org.kryptokrona.sdk.crypto
  * @since 0.2.0
  */
 class WalletEncryption {
+
+    // implement encryption and decryption methods here for generating ED25519 keys
 }
