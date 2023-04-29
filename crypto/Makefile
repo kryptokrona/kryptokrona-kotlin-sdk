@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -Wall -fPIC -Wextra -pedantic -std=gnu11 -O2 -march=native
 LDFLAGS :=
-SRCS := $(wildcard *.c) $(wildcard ed25519/*.c)
+SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 TARGET := build/libcrypto.so
 
