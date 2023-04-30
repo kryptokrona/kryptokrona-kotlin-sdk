@@ -32,6 +32,9 @@ $(TARGET): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+ed25519:
+	$(MAKE) -C ed25519
+
 .PHONY: clean
 clean:
 	rm -rf build
