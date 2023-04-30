@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -41,7 +42,6 @@ import org.kryptokrona.sdk.node.model.response.node.InfoResponse
 import org.kryptokrona.sdk.node.model.response.node.PeersResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.net.http.HttpTimeoutException
 import java.nio.channels.UnresolvedAddressException
 
 /**
@@ -72,7 +72,7 @@ class NodeClient(private val node: Node) {
                 val response = client.get(url)
                 isSuccess = response.status.isSuccess()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node information. Could not resolve the address.", e)
@@ -97,7 +97,7 @@ class NodeClient(private val node: Node) {
                 val url = "$protocol://${node.hostName}:${node.port}/info"
                 result = client.get(url).body<InfoResponse>()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node information. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node information. Could not resolve the address.", e)
@@ -124,7 +124,7 @@ class NodeClient(private val node: Node) {
                 val url = "$protocol://${node.hostName}:${node.port}/height"
                 result = client.get(url).body<HeightResponse>()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node height. Could not resolve the address.", e)
@@ -151,7 +151,7 @@ class NodeClient(private val node: Node) {
                 val url = "$protocol://${node.hostName}:${node.port}/peers"
                 result = client.get(url).body<PeersResponse>()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node peers. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node peers. Could not resolve the address.", e)
@@ -178,7 +178,7 @@ class NodeClient(private val node: Node) {
                 val url = "$protocol://${node.hostName}:${node.port}/fee"
                 result = client.get(url).body<FeeResponse>()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node fee. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node fee. Could not resolve the address.", e)

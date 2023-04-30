@@ -31,13 +31,13 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.kryptokrona.sdk.node.model.response.RandomOutputsResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.net.http.HttpTimeoutException
 import java.nio.channels.UnresolvedAddressException
 
 /**
@@ -67,7 +67,7 @@ class OutputsClient(private val node: Node) {
                 val url = "$protocol://${node.hostName}:${node.port}/getrandom_outs"
                 result = client.get(url).body<RandomOutputsResponse>()
             }
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting random outputs. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting random outputs. Could not resolve the address.", e)

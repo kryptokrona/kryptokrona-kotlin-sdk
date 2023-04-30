@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -47,7 +48,6 @@ import org.kryptokrona.sdk.node.model.response.transaction.Transactions
 import org.kryptokrona.sdk.node.model.response.transaction.TransactionsStatus
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.net.http.HttpTimeoutException
 import java.nio.channels.UnresolvedAddressException
 
 /**
@@ -90,7 +90,7 @@ class TransactionClient(private val node: Node) {
 
         try {
             return client.request(builder).body<Transactions>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting transactions. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting transactions. Could not resolve the address.", e)
@@ -131,7 +131,7 @@ class TransactionClient(private val node: Node) {
 
         try {
             return client.request(builder).body<TransactionDetailsHashes>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting transaction details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting transaction details by hashes. Could not resolve the address.", e)
@@ -172,7 +172,7 @@ class TransactionClient(private val node: Node) {
 
         try {
             return client.post(builder).body<TransactionHashesPaymentId>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting transaction hashes by payment id. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting transaction hashes by payment id. Could not resolve the address.", e)
@@ -212,7 +212,7 @@ class TransactionClient(private val node: Node) {
 
         try {
             return client.post(builder).body<TransactionsStatus>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting transaction status. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting transaction status. Could not resolve the address.", e)

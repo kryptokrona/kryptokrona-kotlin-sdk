@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -47,7 +48,6 @@ import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsRespon
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksHashesByTimestampsResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.net.http.HttpTimeoutException
 import java.nio.channels.UnresolvedAddressException
 
 /**
@@ -90,7 +90,7 @@ class BlockClient(private val node: Node) {
 
         try {
             return client.post(builder).body<BlockDetailResponse>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block details by height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting block details by height. Could not resolve the address.", e)
@@ -131,7 +131,7 @@ class BlockClient(private val node: Node) {
 
         try {
             return client.post(builder).body<BlocksDetailsResponse>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting blocks details by height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by height. Could not resolve the address.", e)
@@ -172,7 +172,7 @@ class BlockClient(private val node: Node) {
 
         try {
             return client.post(builder).body<BlocksDetailsByHashesResponse>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
@@ -213,7 +213,7 @@ class BlockClient(private val node: Node) {
 
         try {
             return client.post(builder).body<BlocksHashesByTimestampsResponse>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting blocks details by hashes. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)

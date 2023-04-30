@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -41,7 +42,6 @@ import org.kryptokrona.sdk.node.model.request.globalindexesforrange.GlobalIndexe
 import org.kryptokrona.sdk.node.model.response.globalindexesforrange.GlobalIndexesForRangeResponse
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
-import java.net.http.HttpTimeoutException
 import java.nio.channels.UnresolvedAddressException
 
 /**
@@ -85,7 +85,7 @@ class IndexesClient(private val node: Node) {
 
         try {
             client.post(builder).body<GlobalIndexesForRangeResponse>()
-        } catch (e: HttpTimeoutException) {
+        } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting global indexes for range. Could not reach the server.", e)
         } catch(e: UnresolvedAddressException) {
             logger.error("Error getting global indexes for range. Could not resolve the address.", e)
