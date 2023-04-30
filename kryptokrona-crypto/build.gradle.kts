@@ -178,6 +178,9 @@ tasks.register<Exec>("cClean") {
     workingDir = file("$cryptoDir")
     commandLine("rm", "-rf", "$cryptoDir/build")
     commandLine("make", "clean")
+
+    workingDir = file("$cryptoDir/ed25519")
+    commandLine("make", "clean")
 }
 
 val copyCLibrary by tasks.registering(Copy::class) {
