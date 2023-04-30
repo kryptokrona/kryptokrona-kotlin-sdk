@@ -23,7 +23,7 @@ else
     endif
 endif
 
-all: $(TARGET)
+all: ed25519 $(TARGET)
 
 $(TARGET): $(OBJS)
 	@mkdir -p build

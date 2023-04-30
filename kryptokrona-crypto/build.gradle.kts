@@ -152,15 +152,26 @@ tasks.javadoc {
 
 // compile the crypto C library
 val cryptoDir = "${rootDir}/crypto"
-val sharedLibraryPath = when {
+val cryptoSharedLibraryPath = when {
     org.gradle.internal.os.OperatingSystem.current().isWindows -> "$cryptoDir/build/crypto.dll"
     org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$cryptoDir/build/libcrypto.dylib"
     else -> "$cryptoDir/build/libcrypto.so"
 }
 
+val ed25519SharedLibraryPath = when {
+    org.gradle.internal.os.OperatingSystem.current().isWindows -> "$cryptoDir/build/ed25519.dll"
+    org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$cryptoDir/build/libed25519.dylib"
+    else -> "$cryptoDir/build/libed25519.so"
+}
+
 tasks.register<Exec>("cCompile") {
     workingDir = file("$cryptoDir")
     commandLine("make")
+}
+
+tasks.register<Exec>("cReCompile") {
+    workingDir = file("$cryptoDir")
+    commandLine("make", "-B")
 }
 
 tasks.register<Exec>("cClean") {
@@ -170,7 +181,10 @@ tasks.register<Exec>("cClean") {
 }
 
 val copyCLibrary by tasks.registering(Copy::class) {
-    from(sharedLibraryPath)
+    from(cryptoSharedLibraryPath)
+    into("$buildDir/libs")
+
+    from(ed25519SharedLibraryPath)
     into("$buildDir/libs")
 }
 
@@ -187,6 +201,11 @@ val copyCHeaders by tasks.registering(Copy::class) {
         include("**/*.h") // copy all files with .h extension
     }
     into("$buildDir/headers")
+
+    from("$cryptoDir/ed25519") {
+        include("ed25519/*.h") // copy all files with .h extension
+    }
+    into("$buildDir/headers/ed25519")
 }
 
 tasks.named("build") {
