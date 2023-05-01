@@ -50,4 +50,6 @@ class Ed25519 : Ed25519LibraryLoader() {
      * @param seed the seed to create.
      */
     external fun createKeyPair(publicKey: CharArray, secretKey: CharArray, seed: CharArray)
+
+    // external fun sign(signature: )
 }
