@@ -61,9 +61,9 @@ open class CryptoLibraryLoader {
     private fun getLibraryPath(): String {
         val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
         val libraryName = when {
-            osName.contains("windows") -> "ed25519.dll"
-            osName.contains("mac") -> "libed25519.dylib"
-            else -> "libed25519.so"
+            osName.contains("windows") -> "crypto.dll"
+            osName.contains("mac") -> "libcrypto.dylib"
+            else -> "libcrypto.so"
         }
 
         // use a different path for tests
