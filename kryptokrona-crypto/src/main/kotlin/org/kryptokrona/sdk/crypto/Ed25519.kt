@@ -40,4 +40,14 @@ import org.kryptokrona.sdk.crypto.loader.Ed25519LibraryLoader
  */
 class Ed25519 : Ed25519LibraryLoader() {
 
+    /**
+     * Creates a key pair from a public key, a secret key and a seed.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param publicKey the public key to create.
+     * @param secretKey the secret key to create.
+     * @param seed the seed to create.
+     */
+    external fun createKeyPair(publicKey: CharArray, secretKey: CharArray, seed: CharArray)
 }

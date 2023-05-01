@@ -29,8 +29,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <jni.h>
-#ifndef _Included_JNI_Crypto
-#define _Included_JNI_Crypto
+#ifndef _Included_JNI_Ed25519
+#define _Included_JNI_Ed25519
 #ifdef __cplusplus
 extern "C" {
 #endif

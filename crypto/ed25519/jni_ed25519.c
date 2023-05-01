@@ -30,4 +30,4 @@
 
 #include <stdio.h>
 #include "jni_ed25519.h"
-// #include "crypto.h"
+#include "ed25519.h"
