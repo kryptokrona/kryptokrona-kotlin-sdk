@@ -41,7 +41,7 @@ jobs:
           platform: x64
 
       - name: Compile C library
-        run: ./gradlew cCompile
+        run: ./gradlew cReCompile
 
       - name: Copy C library
         run: ./gradlew copyCLibrary
