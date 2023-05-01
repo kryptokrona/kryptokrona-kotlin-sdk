@@ -35,6 +35,8 @@
 extern "C" {
 #endif
 
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Ed25519_createKeyPair(JNIEnv *env, jobject obj,
+    jbyteArray publicKey, jbyteArray privateKey, jbyteArray seed);
 
 #ifdef __cplusplus
 }
