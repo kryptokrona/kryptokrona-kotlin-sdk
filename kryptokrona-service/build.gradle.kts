@@ -4,7 +4,7 @@ val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file sh
 plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
-    id("org.jetbrains.dokka")
+    // id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     `java-library`
     `maven-publish`
@@ -14,10 +14,10 @@ plugins {
 
 version = "0.2.0"
 
-java {
+/*java {
     withJavadocJar()
     withSourcesJar()
-}
+}*/
 
 repositories {
     mavenCentral()
@@ -129,8 +129,9 @@ koverReport {
     sign(publishing.publications["mavenJava"])
 }*/
 
+/*
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
-}
+}*/
