@@ -40,7 +40,7 @@ import java.util.*
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-open class CLibraryLoader {
+open class CryptoLibraryLoader {
 
     init {
         System.load(getLibraryPath())
