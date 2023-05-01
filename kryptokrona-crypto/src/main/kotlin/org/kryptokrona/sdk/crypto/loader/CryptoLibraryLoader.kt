@@ -28,14 +28,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.crypto
+package org.kryptokrona.sdk.crypto.loader
 
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
 
 /**
- * A class that loads the C library
+ * A class that loads the crypto library
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
@@ -47,7 +47,7 @@ open class CryptoLibraryLoader {
     }
 
     /**
-     * Returns the path to the C shared library.
+     * Returns the path to the crypto shared library.
      *
      * If the current thread is running inside a unit test, the library is loaded from the current working directory.
      * Otherwise, the library is loaded from the classpath.
@@ -55,15 +55,15 @@ open class CryptoLibraryLoader {
      *
      * @author Marcus Cvjeticanin
      * @since 0.2.0
-     * @return the path to the C shared library
+     * @return the path to the crypto shared library
      * @throws RuntimeException if the library is not found
      */
     private fun getLibraryPath(): String {
         val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
         val libraryName = when {
-            osName.contains("windows") -> "crypto.dll"
-            osName.contains("mac") -> "libcrypto.dylib"
-            else -> "libcrypto.so"
+            osName.contains("windows") -> "ed25519.dll"
+            osName.contains("mac") -> "libed25519.dylib"
+            else -> "libed25519.so"
         }
 
         // use a different path for tests
@@ -74,7 +74,7 @@ open class CryptoLibraryLoader {
         val libraryPath = File(userDir, "$libraryFolder/$libraryName")
 
         if (!libraryPath.exists()) {
-            throw FileNotFoundException("Failed to find the C shared library: $libraryName")
+            throw FileNotFoundException("Failed to find the ed25519 shared library: $libraryName")
         }
 
         return libraryPath.absolutePath
