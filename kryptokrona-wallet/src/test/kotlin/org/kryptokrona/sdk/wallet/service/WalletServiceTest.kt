@@ -1,14 +1,8 @@
 package org.kryptokrona.sdk.wallet.service
 
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.advanceTimeBy
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlinx.coroutines.test.runTest
 import org.kryptokrona.sdk.util.model.node.Node
 import java.io.File
 
