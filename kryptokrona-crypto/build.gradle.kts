@@ -212,7 +212,7 @@ val copyCHeaders by tasks.registering(Copy::class) {
 }
 
 tasks.named("build") {
-    dependsOn("cCompile")
+    dependsOn("cReCompile")
     dependsOn(copyCLibrary)
     dependsOn(copyCHeaders)
 }
