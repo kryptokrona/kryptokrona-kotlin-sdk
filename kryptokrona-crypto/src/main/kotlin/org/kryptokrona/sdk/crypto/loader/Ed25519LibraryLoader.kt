@@ -94,5 +94,4 @@ open class Ed25519LibraryLoader {
         val stackTrace = Thread.currentThread().stackTrace
         return stackTrace.any { it.className.startsWith("org.junit.") }
     }
-
 }

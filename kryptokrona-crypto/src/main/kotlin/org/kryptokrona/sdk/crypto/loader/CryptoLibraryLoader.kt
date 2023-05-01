@@ -94,5 +94,4 @@ open class CryptoLibraryLoader {
         val stackTrace = Thread.currentThread().stackTrace
         return stackTrace.any { it.className.startsWith("org.junit.") }
     }
-
 }
