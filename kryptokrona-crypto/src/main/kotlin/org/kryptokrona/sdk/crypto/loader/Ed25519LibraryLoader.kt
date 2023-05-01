@@ -40,7 +40,7 @@ import java.util.*
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-class Ed25519LibraryLoader {
+open class Ed25519LibraryLoader {
 
     init {
         System.load(getLibraryPath())
