@@ -17,7 +17,7 @@ fun main() = runBlocking {
     walletService.setStartHeight(1364842L)
 
     // launching the sync process
-    val job = launch {
+    launch {
         while(isActive) {
             walletService.startSync()
         }
@@ -39,10 +39,11 @@ fun main() = runBlocking {
 
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
-    delay(60 * 10000)
+    delay(30000)
 
     // canceling the sync process
-    job.cancel()
+    //job.cancel()
+    walletService.stopSync()
 
     // printing the results
     walletService.getNodeInfo()?.let { println(it) }
