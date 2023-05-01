@@ -7,7 +7,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("org.jetbrains.dokka")
+    // id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
 }
 
