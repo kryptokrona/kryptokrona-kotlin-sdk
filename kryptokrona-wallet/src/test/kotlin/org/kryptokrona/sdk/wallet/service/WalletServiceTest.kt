@@ -1,7 +1,12 @@
 package org.kryptokrona.sdk.wallet.service
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 import org.kryptokrona.sdk.util.model.node.Node
 import java.io.File
 
@@ -16,6 +21,28 @@ class WalletServiceTest {
     private val node = Node("privacymine.net", 11898, false)
 
     private val walletService = WalletService(node)
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can start syncing`() = runTest() {
+        // Arrange
+        val walletService = WalletService(node)
+        walletService.setStartHeight(1364842L)
+
+        // Act
+        launch {
+            while(isActive) {
+                walletService.startSync()
+            }
+        }
+        
+        delay(30000) // 30 seconds
+        walletService.stopSync()
+
+        walletService.getNodeInfo()?.let { println(it) }
+
+        // Assert
+    }
 
     @Test
     fun `can save wallet to file`() {
