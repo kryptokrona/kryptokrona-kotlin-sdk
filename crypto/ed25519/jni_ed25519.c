@@ -31,3 +31,26 @@
 #include <stdio.h>
 #include "jni_ed25519.h"
 #include "ed25519.h"
+
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Ed25519_createKeyPair(JNIEnv *env, jobject obj,
+    jbyteArray publicKey, jbyteArray privateKey, jbyteArray seed) {
+    unsigned char pk[32];
+    unsigned char sk[64];
+
+    // Convert the Java byte arrays to C arrays
+    jbyte *pk_bytes = (*env)->GetByteArrayElements(env, publicKey, NULL);
+    jbyte *sk_bytes = (*env)->GetByteArrayElements(env, privateKey, NULL);
+    jbyte *seed_bytes = (*env)->GetByteArrayElements(env, seed, NULL);
+
+    // Call the ed25519_create_keypair function
+    ed25519_create_keypair(pk, sk, (const unsigned char *) seed_bytes);
+
+    // Copy the results back to the Java byte arrays
+    (*env)->SetByteArrayRegion(env, publicKey, 0, 32, (jbyte *) pk);
+    (*env)->SetByteArrayRegion(env, privateKey, 0, 64, (jbyte *) sk);
+
+    // Release the C arrays
+    (*env)->ReleaseByteArrayElements(env, publicKey, pk_bytes, 0);
+    (*env)->ReleaseByteArrayElements(env, privateKey, sk_bytes, 0);
+    (*env)->ReleaseByteArrayElements(env, seed, seed_bytes, JNI_ABORT);
+}
