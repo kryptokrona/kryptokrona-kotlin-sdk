@@ -17,6 +17,14 @@ class Ed25519Test {
 
     @Test
     fun `can create key pair`() {
-        TODO()
+        // Arrange
+        val publicKey = CharArray(32)
+        val privateKey = CharArray(64)
+        val seed = CharArray(32)
+
+        // Act
+        ed25519.createKeyPair(publicKey, privateKey, seed)
+
+        // Assert
     }
 }
