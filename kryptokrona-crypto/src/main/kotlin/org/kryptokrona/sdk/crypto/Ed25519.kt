@@ -49,5 +49,5 @@ class Ed25519 : Ed25519LibraryLoader() {
      * @param secretKey the secret key to create.
      * @param seed the seed to use to create.
      */
-    external fun createKeyPair(publicKey: CharArray, secretKey: CharArray, seed: CharArray)
+    external fun createKeyPair(publicKey: ByteArray, secretKey: ByteArray, seed: ByteArray)
 }

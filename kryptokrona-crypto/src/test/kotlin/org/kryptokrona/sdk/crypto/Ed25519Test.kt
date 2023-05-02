@@ -1,6 +1,8 @@
 package org.kryptokrona.sdk.crypto
 
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 /**
  * Tests for the Ed25519 class with the external C library
@@ -18,13 +20,17 @@ class Ed25519Test {
     @Test
     fun `can create key pair`() {
         // Arrange
-        val publicKey = CharArray(32)
-        val privateKey = CharArray(64)
-        val seed = CharArray(32)
+        val publicKey = ByteArray(32)
+        val privateKey = ByteArray(64)
+        val seed = ByteArray(32)
 
         // Act
         ed25519.createKeyPair(publicKey, privateKey, seed)
 
         // Assert
+        assertEquals(32, publicKey.size)
+        assertEquals(64, privateKey.size)
+        assertTrue { publicKey.isNotEmpty() }
+        assertTrue { privateKey.isNotEmpty() }
     }
 }
