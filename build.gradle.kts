@@ -1,18 +1,17 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import io.gitlab.arturbosch.detekt.*
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
-import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
 val sdkVersion: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.21"
     id("org.jetbrains.dokka") version "1.8.10"
-    id("io.gitlab.arturbosch.detekt").version("1.23.0-RC1")
+    id("io.gitlab.arturbosch.detekt").version("1.23.0-RC3")
 }
 
 buildscript {
@@ -41,8 +40,9 @@ tasks.withType<KotlinCompile> {
 // Dokka configuration
 // TODO: does not work ATM, if you can fix it, please do :)
 subprojects {
-    // exclude the "playground" module from the dokka task
-    if (name != "playground") {
+    // exclude the "playground" module from the dokka task and the "kryptokrona-service" module
+    // and the "kryptokrona-walletapi" module temporarily since we are not ready yet to publish
+    if (name != "playground" && name != "kryptokrona-service" && name != "kryptokrona-walletapi" ) {
         apply(plugin = "org.jetbrains.dokka")
 
         tasks.withType<DokkaTask>().configureEach {

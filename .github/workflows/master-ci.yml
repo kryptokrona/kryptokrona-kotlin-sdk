@@ -1,8 +1,10 @@
 name: Kryptokrona Kotlin SDK Master Pipeline
 
 env:
-  KRYPTOKRONA_HTTP_KOVER_XML: ./kryptokrona-http/build/reports/kover/report.xml
+  KRYPTOKRONA_NODE_KOVER_XML: ./kryptokrona-node/build/reports/kover/report.xml
   KRYPTOKRONA_CRYPTO_KOVER_XML: ./kryptokrona-crypto/build/reports/kover/report.xml
+  KRYPTOKRONA_WALLET_KOVER_XML: ./kryptokrona-wallet/build/reports/kover/report.xml
+  KRYPTOKRONA_SERVICE_KOVER_XML: ./kryptokrona-service/build/reports/kover/report.xml
 
 on:
   push:
@@ -42,7 +44,7 @@ jobs:
           platform: x64
 
       - name: Compile C library
-        run: ./gradlew cCompile
+        run: ./gradlew cReCompile
 
       - name: Copy C library
         run: ./gradlew copyCLibrary
@@ -51,13 +53,13 @@ jobs:
         run: ./gradlew copyCHeaders
 
       - name: Upload C library
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kryptokrona-crypto
           path: kryptokrona-crypto/build/libs
 
       - name: Upload C headers
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: kryptokrona-crypto-headers
           path: kryptokrona-crypto/build/headers
@@ -77,13 +79,13 @@ jobs:
           cache: 'gradle'
 
       - name: Download C library
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: kryptokrona-crypto
           path: kryptokrona-crypto/build/libs
 
       - name: Download C headers
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: kryptokrona-crypto-headers
           path: kryptokrona-crypto/build/headers
@@ -100,13 +102,13 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Download C library
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: kryptokrona-crypto
           path: kryptokrona-crypto/build/libs
 
       - name: Download C headers
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: kryptokrona-crypto-headers
           path: kryptokrona-crypto/build/headers
@@ -117,7 +119,7 @@ jobs:
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ env.KRYPTOKRONA_HTTP_KOVER_XML }}, ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}
+          files: ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}, ${{ env.KRYPTOKRONA_NODE_KOVER_XML }}, ${{ env.KRYPTOKRONA_WALLET_KOVER_XML }}, ${{ env.KRYPTOKRONA_SERVICE_KOVER_XML }}
           flags: unittests
           layout: horizontal
           name: codecov-umbrella

@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.crypto.util
 
+private const val HEX_CHARS = "0123456789abcdef"
+private const val BYTE_MASK = 0xFF
+private const val NIBBLE_MASK = 0x0F
+private const val NIBBLE_SIZE_BITS = 4
+private const val RADIX = 16
+
 /**
  * Utility function for converting between hex and byte arrays.
  *
@@ -38,13 +44,13 @@ package org.kryptokrona.sdk.crypto.util
  * @return the hex string
  */
 fun toHex(bytes: ByteArray): String {
-    val hexChars = "0123456789abcdef".toCharArray()
+    val hexChars = HEX_CHARS.toCharArray()
     val result = StringBuilder(bytes.size * 2)
 
     for (byte in bytes) {
-        val v = byte.toInt() and 0xff
-        result.append(hexChars[v shr 4])
-        result.append(hexChars[v and 0x0f])
+        val unsignedByte = byte.toInt() and BYTE_MASK
+        result.append(hexChars[unsignedByte shr NIBBLE_SIZE_BITS])
+        result.append(hexChars[unsignedByte and NIBBLE_MASK])
     }
 
     return result.toString()
@@ -69,8 +75,8 @@ fun fromHex(string: String): ByteArray {
 
         require(firstIndex != -1 && secondIndex != -1) { "Input contains invalid characters" }
 
-        val byteValue = (firstIndex shl 4) or secondIndex
-        result[i / 2] = byteValue.toByte()
+        val byteValue = (firstIndex shl NIBBLE_SIZE_BITS) or secondIndex
+        result[i / 2] = (byteValue and BYTE_MASK).toByte()
     }
 
     return result
@@ -86,14 +92,15 @@ fun fromHex(string: String): ByteArray {
 fun convertHexToBytes(hex: String): ByteArray {
     require(hex.length % 2 == 0) { "Input string must have an even number of characters." }
 
-    val radix = 16
     val bytes = ByteArray(hex.length / 2)
     val size = 2
     hex.chunked(size).forEachIndexed { i, byte ->
-        val byteValue = byte.toIntOrNull(radix)
+        val byteValue = byte.toIntOrNull(RADIX)
             ?: throw IllegalArgumentException("Invalid character(s): $byte.")
-        bytes[i] = byteValue.toByte()
+        bytes[i] = (byteValue and BYTE_MASK).toByte()
     }
 
     return bytes
 }
+
+

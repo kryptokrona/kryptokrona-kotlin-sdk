@@ -1,12 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 val coroutines_version: String by project
+val slf4j_version: String by project
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     `java-library`
@@ -23,8 +24,13 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":kryptokrona-util"))
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+
+    implementation("org.slf4j:slf4j-api:$slf4j_version")
+    implementation("org.slf4j:slf4j-simple:$slf4j_version")
 
     testImplementation(kotlin("test"))
 }
@@ -43,6 +49,8 @@ koverReport {
         excludes {
             classes("org.kryptokrona.sdk.crypto.hugin.*")
             classes("org.kryptokrona.sdk.crypto.model.*")
+            classes("org.kryptokrona.sdk.crypto.exception.*")
+            classes("org.kryptokrona.sdk.crypto.mnemonics.WordList")
         }
     }
 
@@ -56,6 +64,8 @@ koverReport {
                 excludes {
                     classes("org.kryptokrona.sdk.crypto.hugin.*")
                     classes("org.kryptokrona.sdk.crypto.model.*")
+                    classes("org.kryptokrona.sdk.crypto.exception.*")
+                    classes("org.kryptokrona.sdk.crypto.mnemonics.WordList")
                 }
             }
 
@@ -142,10 +152,16 @@ tasks.javadoc {
 
 // compile the crypto C library
 val cryptoDir = "${rootDir}/crypto"
-val sharedLibraryPath = when {
+val cryptoSharedLibraryPath = when {
     org.gradle.internal.os.OperatingSystem.current().isWindows -> "$cryptoDir/build/crypto.dll"
     org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$cryptoDir/build/libcrypto.dylib"
     else -> "$cryptoDir/build/libcrypto.so"
+}
+
+val ed25519SharedLibraryPath = when {
+    org.gradle.internal.os.OperatingSystem.current().isWindows -> "$cryptoDir/build/ed25519.dll"
+    org.gradle.internal.os.OperatingSystem.current().isMacOsX -> "$cryptoDir/build/libed25519.dylib"
+    else -> "$cryptoDir/build/libed25519.so"
 }
 
 tasks.register<Exec>("cCompile") {
@@ -153,18 +169,33 @@ tasks.register<Exec>("cCompile") {
     commandLine("make")
 }
 
+tasks.register<Exec>("cReCompile") {
+    workingDir = file("$cryptoDir")
+    commandLine("make", "-B")
+}
+
 tasks.register<Exec>("cClean") {
     workingDir = file("$cryptoDir")
     commandLine("rm", "-rf", "$cryptoDir/build")
     commandLine("make", "clean")
+
+    workingDir = file("$cryptoDir/ed25519")
+    commandLine("make", "clean")
 }
 
 val copyCLibrary by tasks.registering(Copy::class) {
-    from(sharedLibraryPath)
+    from(cryptoSharedLibraryPath)
+    into("$buildDir/libs")
+
+    from(ed25519SharedLibraryPath)
     into("$buildDir/libs")
 }
 
 tasks.named<CreateStartScripts>("startScripts") {
+    mustRunAfter("copyCLibrary")
+}
+
+tasks.named<Test>("test") {
     mustRunAfter("copyCLibrary")
 }
 
@@ -173,10 +204,15 @@ val copyCHeaders by tasks.registering(Copy::class) {
         include("**/*.h") // copy all files with .h extension
     }
     into("$buildDir/headers")
+
+    from("$cryptoDir/ed25519") {
+        include("ed25519/*.h") // copy all files with .h extension
+    }
+    into("$buildDir/headers/ed25519")
 }
 
 tasks.named("build") {
-    dependsOn("cCompile")
+    dependsOn("cReCompile")
     dependsOn(copyCLibrary)
     dependsOn(copyCHeaders)
 }

@@ -1,8 +1,10 @@
+val ktor_version: String by project
 val ossrhUsername: String? = System.getProperty("ossrhUsername")
 val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     `java-library`
@@ -19,6 +21,8 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+
     testImplementation(kotlin("test"))
 }
 

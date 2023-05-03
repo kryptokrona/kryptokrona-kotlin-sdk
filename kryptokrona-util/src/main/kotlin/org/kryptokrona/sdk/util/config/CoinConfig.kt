@@ -37,22 +37,94 @@ package org.kryptokrona.sdk.util.config
  * @since 0.1.0
  */
 object CoinConfig {
+
+    /**
+     * The version of the parent block that activates the coin's features.
+     */
     private const val ACTIVATE_PARENT_BLOCK_VERSION: Long = 2
+
+    /**
+     * The number of decimal places in the coin's unit.
+     */
     private const val COIN_UNIT_PLACES: Long = 5
+
+    /**
+     * The prefix used for coin addresses.
+     */
     private const val ADDRESS_PREFIX: Long = 2239254
+
+    /**
+     * The number of iterations of the Keccak hashing algorithm.
+     */
     private const val KECCAK_ITERATIONS: Long = 1
+
+    /**
+     * The default network fee for transactions.
+     */
     private const val DEFAULT_NETWORK_FEE = 10.0
+
+    /**
+     * The minimum number of inputs required for a fusion transaction.
+     */
     private const val FUSION_MIN_INPUT_COUNT: Long = 12
+
+    /**
+     * The minimum ratio of inputs to outputs required for a fusion transaction.
+     */
     private const val FUSION_MIN_IN_OUT_COUNT_RATIO: Long = 4
+
+    /**
+     * The version of the mining block that activates the coin's features.
+     */
     private const val MM_MINING_BLOCK_VERSION: Long = 2
+
+    /**
+     * The maximum amount that can be sent in a single transaction output.
+     */
     private const val MAXIMUM_OUTPUT_AMOUNT = 100000000000L
+
+    /**
+     * The maximum number of outputs allowed per transaction.
+     */
     private const val MAXIMUM_OUTPUTS_PER_TRANSACTION: Long = 90
+
+    /**
+     * The maximum size in bytes of extra data that can be included in a transaction.
+     */
     private const val MAXIMUM_EXTRA_SIZE: Long = 1024
+
+    /**
+     * Whether or not to activate the fee-per-byte transaction feature.
+     */
     private const val ACTIVATE_FEE_PER_BYTE_TRANSACTION = true
+
+    /**
+     * The fee per byte of transaction data.
+     */
     private const val FEE_PER_BYTE = 1.953125
+
+    /**
+     * The chunk size in bytes for fee-per-byte transactions.
+     */
     private const val FEE_PER_BYTE_CHUNK_SIZE = 256.0
+
+    /**
+     * The maximum size in bytes of a single transaction in the ledger.
+     */
     private const val MAXIMUM_LEDGER_TRANSACTION_SIZE: Long = 38400
+
+    /**
+     * The maximum payload size in bytes for a single APDU (Application Protocol Data Unit) sent to the ledger.
+     */
     private const val MAXIMUM_LEDGER_APDU_PAYLOAD_SIZE: Long = 480
+
+    /**
+     * The minimum version of the ledger required for compatibility.
+     */
     private const val MINIMUM_LEDGER_VERSION = "1.2.0"
+
+    /**
+     * Whether or not to enable debugging on the ledger.
+     */
     private const val LEDGER_DEBUG = false
 }

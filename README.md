@@ -3,7 +3,7 @@
 [![alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
 [![build](https://img.shields.io/github/actions/workflow/status/kryptokrona/kryptokrona-kotlin-sdk/master-ci.yml?branch=master)](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions/workflows/master-ci.yml) 
 [![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-core)
+[![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk)
 [![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)
@@ -58,6 +58,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/mjovanc.png?size=72" alt="mjovanc" width="72">](https://github.com/mjovanc)
 [<img src="https://github.com/renovatebot.png?size=72" alt="mjovanc" width="72">](https://github.com/renovatebot)
 [<img src="https://github.com/n9lsjr.png?size=72" alt="n9lsjr" width="72">](https://github.com/n9lsjr)
+[<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy17" width="72">](https://github.com/TechyGuy17)
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
 
 ## License

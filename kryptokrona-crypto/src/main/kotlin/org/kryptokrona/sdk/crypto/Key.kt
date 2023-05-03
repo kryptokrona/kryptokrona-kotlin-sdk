@@ -33,7 +33,11 @@ package org.kryptokrona.sdk.crypto
 import org.kryptokrona.sdk.crypto.model.KeyImage
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.toHex
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
 
+private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in the function
+private const val BITS_PER_BYTE = 8
 
 private val crypto = Crypto()
 
@@ -51,17 +55,34 @@ fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: Byt
     //TODO need to get this from WalletService and pass to this function
     // get our private spend key from wallet.keys
     val privateSpendKey = convertHexToBytes("")
-    val publicSpendKey = ByteArray(32)
-    val derivedKey = ByteArray(32)
+    val publicSpendKey = ByteArray(BYTE_ARRAY_LENGTH)
+    val derivedKey = ByteArray(BYTE_ARRAY_LENGTH)
 
     // derive the key pair
     crypto.derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
     crypto.deriveSecretKey(derivation, index, privateSpendKey, derivedKey)
 
     // generate the key image
-    val image = ByteArray(32)
+    val image = ByteArray(BYTE_ARRAY_LENGTH)
     crypto.generateKeyImage(publicSpendKey, privateSpendKey, image)
 
     // the check is done in bytes, return hex64 strings
     return KeyImage(toHex(image), toHex(derivedKey))
+}
+
+/**
+ * Generates a PBKDF2 derived key from a password, salt, key length and number of iterations.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param password the password used in the key generation.
+ * @param salt the salt used in the key generation.
+ * @param keyLength the length of the key.
+ * @param iterations the number of iterations.
+ * @return a PBKDF2 derived key as ByteArray.
+ */
+fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: Int, iterations: Int): ByteArray {
+    val keySpec = PBEKeySpec(password, salt, iterations, keyLength * BITS_PER_BYTE)
+    val keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+    return keyFactory.generateSecret(keySpec).encoded
 }

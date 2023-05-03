@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.util.model.output
 
+/**
+ * Key output.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 data class KeyOutput(
     val key: String,
     val amount: Long,

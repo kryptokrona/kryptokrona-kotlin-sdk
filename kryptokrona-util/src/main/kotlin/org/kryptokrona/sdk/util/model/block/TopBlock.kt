@@ -31,4 +31,13 @@
 
 package org.kryptokrona.sdk.util.model.block
 
-data class TopBlock(val hash: String, val height: Long)
+/**
+ * Top block.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
+data class TopBlock(
+    val hash: String,
+    val height: Long
+)

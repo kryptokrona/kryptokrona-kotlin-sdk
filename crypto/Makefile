@@ -23,7 +23,7 @@ else
     endif
 endif
 
-all: $(TARGET)
+all: ed25519 $(TARGET)
 
 $(TARGET): $(OBJS)
 	@mkdir -p build
@@ -31,6 +31,9 @@ $(TARGET): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+ed25519:
+	$(MAKE) -C ed25519
 
 .PHONY: clean
 clean:

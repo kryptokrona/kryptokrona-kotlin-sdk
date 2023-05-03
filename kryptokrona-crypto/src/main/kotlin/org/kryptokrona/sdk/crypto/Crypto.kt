@@ -30,13 +30,15 @@
 
 package org.kryptokrona.sdk.crypto
 
+import org.kryptokrona.sdk.crypto.loader.CryptoLibraryLoader
+
 /**
  * Crypto class that loads the C library
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
  */
-class Crypto : CLibraryLoader() {
+class Crypto : CryptoLibraryLoader() {
 
     /**
      * Generates a key derivation from a public key and a secret key, and stores the result in the provided buffer.

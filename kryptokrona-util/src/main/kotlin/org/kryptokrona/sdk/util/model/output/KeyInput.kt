@@ -30,6 +30,12 @@
 
 package org.kryptokrona.sdk.util.model.output
 
+/**
+ * Key input.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ */
 data class KeyInput(
     val amount: Long,
     val keyImage: String,

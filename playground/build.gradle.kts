@@ -2,7 +2,8 @@ val coroutines_version: String by project
 val slf4j_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.21"
+    id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     application
 }
 
@@ -14,9 +15,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":kryptokrona-core"))
+    implementation(project(":kryptokrona-wallet"))
     implementation(project(":kryptokrona-crypto"))
-    implementation(project(":kryptokrona-http"))
+    implementation(project(":kryptokrona-node"))
     implementation(project(":kryptokrona-util"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
@@ -36,4 +37,12 @@ tasks.test {
 
 kotlin {
     jvmToolchain(17)
+}
+
+koverReport {
+    filters {
+        excludes {
+            classes("*")
+        }
+    }
 }

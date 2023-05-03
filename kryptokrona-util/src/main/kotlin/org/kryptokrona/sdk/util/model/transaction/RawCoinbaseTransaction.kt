@@ -32,6 +32,16 @@ package org.kryptokrona.sdk.util.model.transaction
 
 import org.kryptokrona.sdk.util.model.output.KeyOutput
 
+/**
+ * Raw coinbase transaction.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.1.0
+ * @param keyOutputs List of key outputs.
+ * @param hash Transaction hash.
+ * @param transactionPublishKey Transaction publish key.
+ * @param unlockTime Transaction unlock time.
+ */
 interface RawCoinbaseTransaction {
     var keyOutputs: List<KeyOutput>
     val hash: String
