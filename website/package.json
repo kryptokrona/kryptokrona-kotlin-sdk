@@ -13,7 +13,7 @@
     "@sveltejs/kit": "^1.5.0",
     "@svelteness/kit-docs": "^1.1.3",
     "clsx": "^1.0.0",
-    "shiki": "^0.12.0",
+    "shiki": "^0.14.0",
     "svelte": "^3.54.0",
     "unplugin-icons": "^0.14.0",
     "vite": "^4.3.0"
