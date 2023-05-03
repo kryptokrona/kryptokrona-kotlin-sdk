@@ -1,6 +1,9 @@
 package org.kryptokrona.sdk.crypto
 
 import org.junit.jupiter.api.Test
+import org.kryptokrona.sdk.crypto.util.convertBytesToHex
+import java.security.NoSuchAlgorithmException
+import java.security.SecureRandom
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -23,6 +26,10 @@ class Ed25519Test {
         val publicKey = ByteArray(32)
         val privateKey = ByteArray(64)
         val seed = ByteArray(32)
+
+        // This test is not done yet
+        val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
+        sr.nextBytes(seed)
 
         // Act
         ed25519.createKeyPair(publicKey, privateKey, seed)
