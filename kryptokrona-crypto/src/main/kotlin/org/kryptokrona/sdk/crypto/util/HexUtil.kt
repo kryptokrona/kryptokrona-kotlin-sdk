@@ -103,4 +103,16 @@ fun convertHexToBytes(hex: String): ByteArray {
     return bytes
 }
 
+/**
+ * Utility function for converting bytes to hex.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param bytes the byte array to convert
+ * @return the hex string
+ */
+fun convertBytesToHex(bytes: ByteArray): String {
+    return bytes.joinToString("") { "%02x".format(it) }
+}
+
 
