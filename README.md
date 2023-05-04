@@ -61,6 +61,16 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy17" width="72">](https://github.com/TechyGuy17)
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
 
+## Powered by
+
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/kotlin.png" alt="Kotlin" height="65">](https://github.com/JetBrains/kotlin)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/ktor.png" alt="Ktor" height="65">](https://github.com/ktorio/ktor)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/detekt.png" alt="Detekt" height="65">](https://github.com/detekt)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/kotlin-coroutines.png" alt="Kotlin Coroutines" height="65">](https://github.com/Kotlin/kotlinx.coroutines)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/githubactions.png" alt="GitHub Actions" height="65">](https://github.com/actions)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/svelte.png" alt="Svelte" height="65">](https://github.com/sveltejs/svelte)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/vercel.png" alt="Vercel" height="65">](https://github.com/vercel)
+
 ## License
 
 The 3-Clause BSD License.
