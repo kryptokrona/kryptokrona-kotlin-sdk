@@ -55,7 +55,7 @@ const config = defineConfig({
           },
         },
         github: "https://github.com/kryptokrona/kryptokrona-kotlin-sdk",
-        logo: "/sveltepress.svg",
+        logo: "/logo_box.png",
       }),
       siteConfig: {
         title: "Kryptokrona SDK",
