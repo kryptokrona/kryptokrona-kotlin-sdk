@@ -68,7 +68,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/detekt.png" alt="Detekt" height="65">](https://github.com/detekt)
 [<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/kotlin-coroutines.png" alt="Kotlin Coroutines" height="65">](https://github.com/Kotlin/kotlinx.coroutines)
 [<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/githubactions.png" alt="GitHub Actions" height="65">](https://github.com/actions)
-[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/svelte.png" alt="Svelte" height="65">](https://github.com/sveltejs/svelte)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/sveltepress.png" alt="Sveltepress" height="65">](https://github.com/SveltePress/sveltepress)
 [<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/vercel.png" alt="Vercel" height="65">](https://github.com/vercel)
 
 ## License
