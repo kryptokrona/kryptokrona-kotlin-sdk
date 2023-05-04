@@ -1,23 +1,17 @@
-<div style="max-width: 992px; margin: 0 auto;">
-
-# Welcome to KitDocs
-
-This your home page. Feel free to change it to a Svelte file by renaming it to `+page.svelte`.
-
-## Redirecting
-
-You might want the home page to be the first page of your documentation. If this is the case,
-rename this file to `+page.js` and replace the content of this file with the following:
-
-```js copy
-import { redirect } from '@sveltejs/kit';
-
-export const prerender = true;
-
-/** @type {import('./$types').PageLoad} */
-export function load() {
-  throw redirect(307, '/docs');
-}
-```
-
-</div>
+---
+title: Welcome to Sveltepress
+heroImage: /sveltepress@3x.png
+tagline: A simple, easy to use content centered site build tool with the full power of Sveltekit.
+actions:
+  - label: View on github
+    type: primary
+    to: https://github.com/Blackman99/sveltepress
+    external: true
+features:
+  - title: Markdown centered
+    description: To help you can start writing with minimal configuration
+  - title: Build with Sveltekit
+    description: Preserve the full power of Sveltekit. So that you can do more than SSG
+  - title: Svelte in Markdown
+    description: Feel free to use svelte in markdown. Explore infinite possibilities.
+---

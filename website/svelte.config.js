@@ -1,22 +1,17 @@
-import adapter from "@sveltejs/adapter-auto";
+import adapter from '@sveltejs/adapter-static'
+import { vitePreprocess } from '@sveltejs/kit/vite'
 
-/** @type {import('@sveltejs/kit').Config} */
+/**
+ * @type {import('@sveltejs/kit').Config}
+ */
 const config = {
-  extensions: [".svelte", ".md"],
-
+  extensions: ['.svelte', '.md'],
+  preprocess: [vitePreprocess()],
   kit: {
-    adapter: adapter(),
-
-    prerender: {
-      entries: ["*"],
-      handleMissingId: "warn",
-    },
+    adapter: adapter({
+      pages: 'dist',
+    }),
   },
+}
 
-  package: {
-    dir: "client",
-    emitTypes: true,
-  },
-};
-
-export default config;
+export default config
