@@ -8,3 +8,10 @@ actions:
     to: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
     external: true
 ---
+
+
+<script>
+  import Frontpage from "../components/sections/Frontpage.svelte"
+</script>
+
+<Frontpage />
