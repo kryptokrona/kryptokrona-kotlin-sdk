@@ -34,24 +34,27 @@
 
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Ed25519_createKeyPair(JNIEnv *env, jobject obj,
     jbyteArray publicKey, jbyteArray privateKey, jbyteArray seed) {
-    printf("createKeyPair() called\n");
-    unsigned char pk[32];
-    unsigned char sk[64];
 
-    // Convert the Java byte arrays to C arrays
-    jbyte *pk_bytes = (*env)->GetByteArrayElements(env, publicKey, NULL);
-    jbyte *sk_bytes = (*env)->GetByteArrayElements(env, privateKey, NULL);
-    jbyte *seed_bytes = (*env)->GetByteArrayElements(env, seed, NULL);
+    // Get pointers to the Java/Kotlin byte arrays
+    jbyte *pk = (*env)->GetByteArrayElements(env, publicKey, NULL);
+    jbyte *sk = (*env)->GetByteArrayElements(env, privateKey, NULL);
+    jbyte *sd = (*env)->GetByteArrayElements(env, seed, NULL);
 
     // Call the ed25519_create_keypair function
-    ed25519_create_keypair(pk, sk, (const unsigned char *) seed_bytes);
+    ed25519_create_keypair((unsigned char *) pk, (unsigned char *) sk, (const unsigned char *) sd);
 
-    // Copy the results back to the Java byte arrays
-    (*env)->SetByteArrayRegion(env, publicKey, 0, 32, (jbyte *) pk);
-    (*env)->SetByteArrayRegion(env, privateKey, 0, 64, (jbyte *) sk);
+    // Update the lengths of the key arrays
+    int pk_len = 32;
+    int sk_len = 64;
 
-    // Release the C arrays
-    (*env)->ReleaseByteArrayElements(env, publicKey, pk_bytes, 0);
-    (*env)->ReleaseByteArrayElements(env, privateKey, sk_bytes, 0);
-    (*env)->ReleaseByteArrayElements(env, seed, seed_bytes, JNI_ABORT);
+    // Copy the generated keys back to the Java/Kotlin byte arrays
+    (*env)->SetByteArrayRegion(env, publicKey, 0, pk_len, pk);
+    (*env)->SetByteArrayRegion(env, privateKey, 0, sk_len, sk);
+
+    // Release the Java/Kotlin byte arrays
+    (*env)->ReleaseByteArrayElements(env, publicKey, pk, 0);
+    (*env)->ReleaseByteArrayElements(env, privateKey, sk, 0);
+    (*env)->ReleaseByteArrayElements(env, seed, sd, JNI_ABORT);
 }
+
+
