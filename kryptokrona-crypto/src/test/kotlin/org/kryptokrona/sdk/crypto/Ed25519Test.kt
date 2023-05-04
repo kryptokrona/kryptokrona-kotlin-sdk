@@ -27,11 +27,9 @@ class Ed25519Test {
         val privateKey = ByteArray(64)
         val seed = ByteArray(32)
 
-        // This test is not done yet
+        // Act
         val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
         sr.nextBytes(seed)
-
-        // Act
         ed25519.createKeyPair(publicKey, privateKey, seed)
 
         // Assert
@@ -39,5 +37,7 @@ class Ed25519Test {
         assertEquals(64, privateKey.size)
         assertTrue { publicKey.isNotEmpty() }
         assertTrue { privateKey.isNotEmpty() }
+        assertTrue { publicKey.any { it.toInt() != 0 } }
+        assertTrue { privateKey.any { it.toInt() != 0 } }
     }
 }
