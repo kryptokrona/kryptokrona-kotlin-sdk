@@ -6,7 +6,7 @@
 [![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk)
-[![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)
+[![docs](https://therealsujitk-vercel-badge.vercel.app/?app=kryptokrona-kotlin-sdk)](https://sdk.kryptokrona.org)
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
