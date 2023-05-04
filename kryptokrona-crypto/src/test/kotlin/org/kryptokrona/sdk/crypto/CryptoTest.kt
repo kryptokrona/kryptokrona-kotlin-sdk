@@ -54,6 +54,7 @@ class CryptoTest {
         // Assert
         assertEquals(32, base.size)
         assertTrue { base.isNotEmpty() }
+        assertTrue { base.any { it.toInt() != 0 } }
     }
 
     @Test
@@ -72,6 +73,7 @@ class CryptoTest {
         // Assert
         assertEquals(32, image.size)
         assertTrue { image.isNotEmpty() }
+        assertTrue { image.any { it.toInt() != 0 } }
     }
 
     @Test
@@ -88,6 +90,7 @@ class CryptoTest {
         // Assert
         assertEquals(32, base.size)
         assertTrue { base.isNotEmpty() }
+        assertTrue { base.any { it.toInt() != 0 } }
     }
 
     @Test
@@ -104,5 +107,6 @@ class CryptoTest {
         // Assert
         assertEquals(32, base.size)
         assertTrue { base.isNotEmpty() }
+        assertTrue { base.any { it.toInt() != 0 } }
     }
 }
