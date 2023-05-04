@@ -55,10 +55,10 @@ const config = defineConfig({
           },
         },
         github: "https://github.com/kryptokrona/kryptokrona-kotlin-sdk",
-        logo: "/logo_box.png",
+        logo: "/kotlin_logo.png",
       }),
       siteConfig: {
-        title: "Kryptokrona SDK",
+        title: "Kryptokrona Kotlin SDK",
         description: "Description",
       },
     }),

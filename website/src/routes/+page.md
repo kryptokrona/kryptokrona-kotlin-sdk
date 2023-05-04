@@ -1,6 +1,6 @@
 ---
 title: Welcome to kryptokrona SDK
-heroImage: /logo_github.png
+heroImage: /kotlin_logo.png
 tagline: Some text here about kryptokrona SDK.
 actions:
   - label: View on github
