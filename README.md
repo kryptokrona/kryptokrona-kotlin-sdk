@@ -6,7 +6,7 @@
 [![release](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)](https://img.shields.io/maven-central/v/org.kryptokrona.sdk/kryptokrona-util)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/kryptokrona/kryptokrona-kotlin-sdk)
-[![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)
+[![docs](https://therealsujitk-vercel-badge.vercel.app/?app=kryptokrona-kotlin-sdk)](https://sdk.kryptokrona.org)
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
@@ -60,6 +60,16 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/n9lsjr.png?size=72" alt="n9lsjr" width="72">](https://github.com/n9lsjr)
 [<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy17" width="72">](https://github.com/TechyGuy17)
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
+
+## Powered by
+
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/kotlin.png" alt="Kotlin" height="65">](https://github.com/JetBrains/kotlin)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/ktor.png" alt="Ktor" height="65">](https://github.com/ktorio/ktor)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/detekt.png" alt="Detekt" height="65">](https://github.com/detekt)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/kotlin-coroutines.png" alt="Kotlin Coroutines" height="65">](https://github.com/Kotlin/kotlinx.coroutines)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/githubactions.png" alt="GitHub Actions" height="65">](https://github.com/actions)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/sveltepress.png" alt="Sveltepress" height="65">](https://github.com/SveltePress/sveltepress)
+[<img src="https://github.com/kryptokrona/kryptokrona-kotlin-sdk/blob/master/resources/poweredby/vercel.png" alt="Vercel" height="65">](https://github.com/vercel)
 
 ## License
 
