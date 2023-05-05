@@ -16,5 +16,8 @@
     "vite": "^4.1.1"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@sveltejs/adapter-auto": "^2.0.1"
+  }
 }
