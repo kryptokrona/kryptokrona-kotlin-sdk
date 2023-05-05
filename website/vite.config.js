@@ -17,30 +17,14 @@ const config = defineConfig({
             {
               title: "Introduction",
               to: "/guide/",
-              items: [
-                {
-                  title: "Something 1",
-                  to: "/guide/",
-                },
-                {
-                  title: "Something 2",
-                  to: "/guide/something2/",
-                },
-              ],
             },
             {
-              title: "Features",
-              to: "/guide/features/",
-              items: [
-                {
-                  title: "Feature 1",
-                  to: "/guide/features/",
-                },
-                {
-                  title: "Feature 2",
-                  to: "/guide/features/feature2",
-                },
-              ],
+              title: "Getting started",
+              to: "/guide/getting_started/",
+            },
+            {
+              title: "Contribute",
+              to: "/guide/contribute/",
             },
           ],
         },

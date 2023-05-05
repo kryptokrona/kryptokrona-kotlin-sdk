@@ -6,22 +6,16 @@
   <div class="inner">
     <div class="grid-3">
       <InfoBox
-        goTo="/guide/"
-        title="Introduction"
+        goTo="/guide/getting_started"
+        title="Getting started"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         ><img src="/icons/drop.svg" alt="droplet" /></InfoBox
       >
       <InfoBox
-        goTo="/guide/features"
-        title="Features"
+        goTo="/guide/contribute/"
+        title="Contribute"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         ><img src="/icons/sun.svg" alt="droplet" /></InfoBox
-      >
-      <InfoBox
-        goTo="/guide/"
-        title="Heading 3"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ><img src="/icons/moon.svg" alt="droplet" /></InfoBox
       >
     </div>
   </div>
