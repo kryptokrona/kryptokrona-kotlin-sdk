@@ -1,23 +1,17 @@
-<div style="max-width: 992px; margin: 0 auto;">
+---
+title: Welcome to kryptokrona SDK
+heroImage: /kotlin_logo.png
+tagline: Some text here about kryptokrona SDK.
+actions:
+  - label: View on github
+    type: primary
+    to: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
+    external: true
+---
 
-# Welcome to KitDocs
 
-This your home page. Feel free to change it to a Svelte file by renaming it to `+page.svelte`.
+<script>
+  import Frontpage from "../components/sections/Frontpage.svelte"
+</script>
 
-## Redirecting
-
-You might want the home page to be the first page of your documentation. If this is the case,
-rename this file to `+page.js` and replace the content of this file with the following:
-
-```js copy
-import { redirect } from '@sveltejs/kit';
-
-export const prerender = true;
-
-/** @type {import('./$types').PageLoad} */
-export function load() {
-  throw redirect(307, '/docs');
-}
-```
-
-</div>
+<Frontpage />

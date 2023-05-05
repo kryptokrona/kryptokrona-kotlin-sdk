@@ -1,6 +1,6 @@
 # Kryptokrona Kotlin SDK Website
 
-This is the website for the Kryptokrona Kotlin SDK. It is built using SvelteKit and kit-docs.
+This is the website for the Kryptokrona Kotlin SDK. It is built using SvelteKit and Sveltepress.
 
 To visit the production website: https://sdk.kryptokrona.org
 
@@ -10,7 +10,6 @@ Once you've cloned the project and installed dependencies with `npm install` (or
 
 ```bash
 npm run dev
-
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```

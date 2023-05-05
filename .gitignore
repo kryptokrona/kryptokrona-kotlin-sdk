@@ -179,3 +179,5 @@ gradle-app.setting
 
 *.hprof
 .DS_Store
+
+website/node_modules

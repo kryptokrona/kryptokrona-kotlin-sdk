@@ -1,16 +1,11 @@
 ---
-title: Installation
-description: How to install the libraries.
+title: Getting started
 ---
 
-# {$frontmatter.title}
+To install Kryptokrona Kotlin SDK into your Maven/Gradle project we need to include the dependency:
 
-{$frontmatter.description}
+```xml
 
-To install Kryptokrona Kotlin SDK into your Maven/Gradle project we need to include the dependencies:
-
-**Maven**
-```
 <dependency>
     <groupId>org.kryptokrona.sdk</groupId>
     <artifactId>kryptokrona-wallet</artifactId>
@@ -38,25 +33,29 @@ To install Kryptokrona Kotlin SDK into your Maven/Gradle project we need to incl
     <version>enter-version-here</version>
     <scope>implementation</scope>
 </dependency>
+
 ```
 
 **Gradle**
-```
+
+```txt
 dependencies {
     implementation 'org.kryptokrona.sdk:kryptokrona-wallet:<version>'
     implementation 'org.kryptokrona.sdk:kryptokrona-node:<version>'
     implementation 'org.kryptokrona.sdk:kryptokrona-crypto:<version>'
     implementation 'org.kryptokrona.sdk:kryptokrona-util:<version>'
 }
+
 ```
 
 **Gradle Kotlin DSL**
-```
+
+```txt
 dependencies {
     implementation("org.kryptokrona.sdk:kryptokrona-wallet:<version>")
     implementation("org.kryptokrona.sdk:kryptokrona-node:<version>")
     implementation("org.kryptokrona.sdk:kryptokrona-crypto:<version>")
     implementation("org.kryptokrona.sdk:kryptokrona-util:<version>")
 }
-```
 
+```
