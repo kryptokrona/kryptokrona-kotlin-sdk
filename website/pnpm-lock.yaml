@@ -16,8 +16,8 @@ devDependencies:
     specifier: ^1.1.6
     version: 1.1.6(@algolia/client-search@4.17.0)(@sveltejs/kit@1.14.0)(rollup@2.79.1)(svelte@3.55.1)(vite@4.1.1)(workbox-build@6.5.4)(workbox-window@6.5.4)
   '@sveltepress/vite':
-    specifier: ^0.17.2
-    version: 0.17.2(@sveltejs/kit@1.14.0)(rollup@2.79.1)(svelte@3.55.1)(vite@4.1.1)
+    specifier: ^0.18.0
+    version: 0.18.0(@sveltejs/kit@1.14.0)(rollup@2.79.1)(svelte@3.55.1)(vite@4.1.1)
   '@types/node':
     specifier: ^18.11.17
     version: 18.11.17
@@ -1828,8 +1828,8 @@ packages:
       - workbox-window
     dev: true
 
-  /@sveltepress/vite@0.17.2(@sveltejs/kit@1.14.0)(rollup@2.79.1)(svelte@3.55.1)(vite@4.1.1):
-    resolution: {integrity: sha512-TZ7i+hsbSY+zctJUhTvgtrqSYl/UasFabTUokB9kWJhEH/1xgBUVRHdNkvlju3Y4UE4iwoOi81JP35V2c2j+IA==}
+  /@sveltepress/vite@0.18.0(@sveltejs/kit@1.14.0)(rollup@2.79.1)(svelte@3.55.1)(vite@4.1.1):
+    resolution: {integrity: sha512-AApIo7GHRpkWAZwtvO3vGTTsLa/O1vfpgAUwIHIU/GhDnBp3GgcLHUZTZ5OVHf5+P+gqYrexIYaednZX/h8nBA==}
     peerDependencies:
       '@sveltejs/kit': ^1.7.0
       svelte: ^3.55.1
