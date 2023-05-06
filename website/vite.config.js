@@ -26,6 +26,10 @@ const config = defineConfig({
               title: "Contribute",
               to: "/guide/contribute/",
             },
+            {
+              title: "Our libraries",
+              to: "/guide/libraries/",
+            },
           ],
         },
         themeColor: {
@@ -43,7 +47,8 @@ const config = defineConfig({
       }),
       siteConfig: {
         title: "Kryptokrona Kotlin SDK",
-        description: "Description",
+        description:
+          "The most fully featured implementation of the Kryptokrona Network protocols",
       },
     }),
   ],

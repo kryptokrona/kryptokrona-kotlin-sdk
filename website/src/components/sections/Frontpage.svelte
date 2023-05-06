@@ -1,21 +1,30 @@
 <script>
   import InfoBox from "../InfoBox.svelte";
+  import Meteor from "../icons/Meteor.svelte";
+  import Sun from "../icons/Sun.svelte";
+  import Wind from "../icons/Wind.svelte";
 </script>
 
 <div style="display: flex; justify-content: center; margin-top: 5rem">
   <div class="inner">
     <div class="grid-3">
       <InfoBox
+        goTo="/guide/libraries/"
+        title="Our libraries"
+        text="Our libraries that are being built in this SDK is for various purposes. Here we are going to get into what they do and what you can expect from each."
+        ><Sun /></InfoBox
+      >
+      <InfoBox
         goTo="/guide/getting_started"
         title="Getting started"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ><img src="/icons/drop.svg" alt="droplet" /></InfoBox
+        text="Install Kryptokrona Kotlin SDK into your Maven/Gradle project."
+        ><Wind /></InfoBox
       >
       <InfoBox
         goTo="/guide/contribute/"
         title="Contribute"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ><img src="/icons/sun.svg" alt="droplet" /></InfoBox
+        text="If you would like to contribute to this project here are a couple of ways."
+        ><Meteor /></InfoBox
       >
     </div>
   </div>
