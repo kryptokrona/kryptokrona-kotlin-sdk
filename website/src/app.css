@@ -1,14 +1,16 @@
    .dark {
-    --box-bg: #0a0a0a;
-    --subtitle-color: rgb(148,163,184);  
+      --text-color: rgb(239,239,239);
+      --box-bg: #0a0a0a;
+      --subtitle-color: rgb(148,163,184);  
     }
 
     .svp-code-block-wrapper {
       background-color: var(--box-bg) !important;
-   }
+    }
    
     :root:not(.dark) {
-    --box-bg: #d4d4d8;
-    --subtitle-color: #44403c;
+      --text-color: rgb(33,53,71);
+      --box-bg: #d4d4d8;
+      --subtitle-color: #44403c;
     }
   
