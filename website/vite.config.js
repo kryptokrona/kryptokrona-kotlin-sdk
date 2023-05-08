@@ -86,7 +86,6 @@ const config = defineConfig({
                                 }
                             ],
                         },
-
                         {
                             title: "Other",
                             items: [
