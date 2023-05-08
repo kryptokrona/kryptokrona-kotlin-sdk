@@ -46,7 +46,7 @@ dependencies {
 
 **Gradle Kotlin DSL**
 
-```kotlin
+```text
 dependencies {
     implementation("org.kryptokrona.sdk:kryptokrona-wallet:<version>")
     implementation("org.kryptokrona.sdk:kryptokrona-node:<version>")
