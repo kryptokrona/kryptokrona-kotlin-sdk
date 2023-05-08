@@ -9,14 +9,14 @@ const config = defineConfig({
                 navbar: [
                     {
                         title: "Docs",
-                        to: "/docs/",
+                        to: "/docs/getting-started/",
                     },
                 ],
                 sidebar: {
                     "/docs/": [
                         {
                             title: "Introduction",
-                            to: "/docs/",
+                            to: "/docs/getting-started/",
                             items: [
                                 {
                                     title: "Getting Started",
