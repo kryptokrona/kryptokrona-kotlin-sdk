@@ -2,8 +2,6 @@
 title: Pull Request
 ---
 
-Read through the developer documentation here at: [https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki).
-
 We highly recommend using IntelliJ to work on this project. Please make sure to install the plugins:
 
 * [Detekt](https://plugins.jetbrains.com/plugin/10761-detekt)
@@ -19,4 +17,4 @@ The easiest way is to make a fork and then make a pull request into our develop 
 * Have you run kover (code coverage) to check if it's at least above 60%?
 * Have you run all unit tests and it passed?
 * If you created new functionality, have you made unit test(s) to cover it?
-* Have you read through [Branching and Merging](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki/Branching-and-Merging)?
+* Have you read through [Branching and Merging](/docs/contributing/branching-and-merging)?
