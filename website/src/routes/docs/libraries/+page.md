@@ -1,5 +1,5 @@
 ---
-title: Our libraries
+title: Our Libraries
 ---
 
 Our libraries that are being built in this SDK is for various purposes. Here we are going to get into what they do and what you can expect from each. We are trying to make these libraries as loosly coupled as possible so one can choose to use one, two or multiple ones and is not required to include all into the project.

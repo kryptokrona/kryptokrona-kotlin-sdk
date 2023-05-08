@@ -43,6 +43,7 @@ const config = defineConfig({
           },
         },
         github: "https://github.com/kryptokrona/kryptokrona-kotlin-sdk",
+        discord: 'https://discord.gg/VTgsTGS9b7',
         logo: "/kotlin_logo.png",
       }),
       siteConfig: {
