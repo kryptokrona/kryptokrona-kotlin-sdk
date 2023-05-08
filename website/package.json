@@ -1,7 +1,7 @@
 {
-  "name": "website",
+  "name": "kryptokrona-kotlin-sdk",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build"
@@ -16,7 +16,7 @@
     "vite": "^4.1.1"
   },
   "type": "module",
-  "license": "MIT",
+  "license": "The 3-Clause BSD License",
   "dependencies": {
     "@sveltejs/adapter-auto": "^2.0.1"
   }

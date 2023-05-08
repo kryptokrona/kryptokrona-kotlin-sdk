@@ -10,13 +10,13 @@
     <div class="grid-3">
       <InfoBox
         goTo="/guide/libraries/"
-        title="Our libraries"
+        title="Our Libraries"
         text="Our libraries that are being built in this SDK is for various purposes. Here we are going to get into what they do and what you can expect from each."
         ><Sun /></InfoBox
       >
       <InfoBox
         goTo="/guide/getting_started"
-        title="Getting started"
+        title="Getting Started"
         text="Install Kryptokrona Kotlin SDK into your Maven/Gradle project."
         ><Wind /></InfoBox
       >

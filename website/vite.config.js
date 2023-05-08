@@ -19,7 +19,7 @@ const config = defineConfig({
               to: "/guide/",
             },
             {
-              title: "Getting started",
+              title: "Getting Started",
               to: "/guide/getting_started/",
             },
             {
@@ -27,7 +27,7 @@ const config = defineConfig({
               to: "/guide/contribute/",
             },
             {
-              title: "Our libraries",
+              title: "Our Libraries",
               to: "/guide/libraries/",
             },
           ],
