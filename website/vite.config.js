@@ -25,7 +25,11 @@ const config = defineConfig({
             {
                 title: "How To Use",
                 to: "/docs/how-to-use/",
-            }
+            },
+            {
+                title: "Usage Ideas",
+                to: "/docs/usage-ideas/",
+            },
             {
               title: "Contribute",
               to: "/docs/contribute/",
