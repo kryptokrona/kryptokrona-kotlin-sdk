@@ -1,0 +1,21 @@
+---
+title: Release Checklist
+---
+
+- Let Marcus (@mjovanc) know release is about to go up
+- Ensure new `SNAPSHOT` version is set on libraries in `build.gradle.kts` files
+- Ensure master [build](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/actions) is finished and passed all jobs
+- Ensure [API docs](https://sdk.kryptokrona.org) are correct
+- Generate Dokka using `dokkaHtmlMultiModule` and copy files using `copyDokkaHtmlMultiModule` Gradle task
+- Marcus publishes `SNAPSHOT` release on Sonatype
+- Ensure that the `SNAPSHOT` release is working by importing it in an external project and test using it
+- Close issues that are fixed.
+- Let Marcus setup a release [draft](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/releases) by [correct](https://github.com/kryptokrona/kryptokrona-kotlin-sdk/wiki/Changelog-Format) changelog format
+- Deleted merged branches
+- Ensure new proper version is set on libraries in `build.gradle.kts` files by removing `SNAPSHOT`
+- Marcus publishes release on GitHub
+- Marcus publishes proper release on Sonatype and elevates it
+- Announce the new release in:
+  - [Discord](https://discord.gg/VTgsTGS9b7) on #news
+  - [Twitter](https://twitter.com/kryptokrona)
+  - [LinkedIn](https://www.linkedin.com/company/68235321) that a new version has been released

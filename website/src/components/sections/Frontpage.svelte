@@ -15,7 +15,7 @@
         ><Sun /></InfoBox
       >
       <InfoBox
-        goTo="/docs/getting_started"
+        goTo="/docs/getting-started"
         title="Getting Started"
         text="Get started by installing Kryptokrona Kotlin SDK into your Maven/Gradle project."
         ><Wind /></InfoBox
