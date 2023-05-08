@@ -2,7 +2,7 @@
 title: Getting started
 ---
 
-To install Kryptokrona Kotlin SDK into your Maven/Gradle project we need to include the dependency:
+To install Kryptokrona Kotlin SDK into your Maven/Gradle project we need to include the following dependencies:
 
 ```xml
 
