@@ -26,6 +26,10 @@ const config = defineConfig({
                                     title: "Libraries",
                                     to: "/docs/libraries/",
                                 },
+                                {
+                                    title: "Glossary",
+                                    to: "/docs/glossary/",
+                                }
                             ],
                         },
                         {
