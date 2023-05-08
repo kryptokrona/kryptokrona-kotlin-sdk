@@ -11,13 +11,13 @@
       <InfoBox
         goTo="/docs/libraries/"
         title="Our Libraries"
-        text="Our libraries that are being built in this SDK is for various purposes. Here we are going to get into what they do and what you can expect from each."
+        text="Learn more about what libraries that we are building and how they can be useful for you."
         ><Sun /></InfoBox
       >
       <InfoBox
         goTo="/docs/getting_started"
         title="Getting Started"
-        text="Install Kryptokrona Kotlin SDK into your Maven/Gradle project."
+        text="Get started by installing Kryptokrona Kotlin SDK into your Maven/Gradle project."
         ><Wind /></InfoBox
       >
       <InfoBox
