@@ -29,6 +29,20 @@ const config = defineConfig({
                             ],
                         },
                         {
+                            title: "Usage",
+                            to: "/docs/usage/",
+                            items: [
+                                {
+                                    title: "How To Use",
+                                    to: "/docs/usage/how-to-use/",
+                                },
+                                {
+                                    title: "Usage Ideas",
+                                    to: "/docs/usage/usage-ideas/",
+                                },
+                            ],
+                        },
+                        {
                             title: "Contributing",
                             to: "/docs/contributing/",
                             items: [
@@ -55,14 +69,6 @@ const config = defineConfig({
                             ],
                         },
                         {
-                            title: "How To Use",
-                            to: "/docs/how-to-use/",
-                        },
-                        {
-                            title: "Usage Ideas",
-                            to: "/docs/usage-ideas/",
-                        },
-                        {
                             title: "Contribute",
                             to: "/docs/contribute/",
                             items: [
@@ -80,6 +86,20 @@ const config = defineConfig({
                                 }
                             ],
                         },
+
+                        {
+                            title: "Other",
+                            items: [
+                                {
+                                    title: "About",
+                                    to: "/docs/other/about/",
+                                },
+                                {
+                                    title: "Additional Reading",
+                                    to: "/docs/other/additional-reading/",
+                                }
+                            ],
+                        }
 
                     ],
                 },
