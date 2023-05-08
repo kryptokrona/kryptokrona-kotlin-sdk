@@ -9,7 +9,7 @@ actions:
     external: true
   - label: Read the docs
     type: flat
-    to: /docs/
+    to: /docs/getting-started/
 ---
 
 
