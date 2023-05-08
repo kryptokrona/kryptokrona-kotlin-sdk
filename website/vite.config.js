@@ -47,6 +47,10 @@ const config = defineConfig({
                                 {
                                     title: "Release Checklist",
                                     to: "/docs/contributing/release-checklist/",
+                                },
+                                {
+                                    title: "Log Levels",
+                                    to: "/docs/contributing/log-levels/",
                                 }
                             ],
                         },
