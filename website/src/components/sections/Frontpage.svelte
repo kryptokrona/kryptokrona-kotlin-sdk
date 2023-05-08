@@ -9,19 +9,19 @@
   <div class="inner">
     <div class="grid-3">
       <InfoBox
-        goTo="/guide/libraries/"
+        goTo="/docs/libraries/"
         title="Our Libraries"
         text="Our libraries that are being built in this SDK is for various purposes. Here we are going to get into what they do and what you can expect from each."
         ><Sun /></InfoBox
       >
       <InfoBox
-        goTo="/guide/getting_started"
+        goTo="/docs/getting_started"
         title="Getting Started"
         text="Install Kryptokrona Kotlin SDK into your Maven/Gradle project."
         ><Wind /></InfoBox
       >
       <InfoBox
-        goTo="/guide/contribute/"
+        goTo="/docs/contribute/"
         title="Contribute"
         text="If you would like to contribute to this project here are a couple of ways."
         ><Meteor /></InfoBox

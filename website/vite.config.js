@@ -8,27 +8,27 @@ const config = defineConfig({
       theme: defaultTheme({
         navbar: [
           {
-            title: "Guide",
-            to: "/guide/",
+            title: "Docs",
+            to: "/docs/",
           },
         ],
         sidebar: {
-          "/guide/": [
+          "/docs/": [
             {
               title: "Introduction",
-              to: "/guide/",
+              to: "/docs/",
             },
             {
               title: "Getting Started",
-              to: "/guide/getting_started/",
+              to: "/docs/getting_started/",
             },
             {
               title: "Contribute",
-              to: "/guide/contribute/",
+              to: "/docs/contribute/",
             },
             {
               title: "Our Libraries",
-              to: "/guide/libraries/",
+              to: "/docs/libraries/",
             },
           ],
         },

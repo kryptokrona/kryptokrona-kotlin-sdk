@@ -1,15 +1,15 @@
 ---
-title: Welcome to kryptokrona SDK
+title: Welcome
 heroImage: /kotlin_logo.png
 tagline: Kryptokrona Kotlin SDK includes many useful components and tools for building decentralized private communication and payment systems.
 actions:
-  - label: View on github
+  - label: View on GitHub
     type: primary
     to: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
     external: true
   - label: Read the docs
     type: flat
-    to: /guide/
+    to: /docs/
 ---
 
 
