@@ -20,8 +20,12 @@ const config = defineConfig({
             },
             {
               title: "Getting Started",
-              to: "/docs/getting_started/",
+              to: "/docs/getting-started/",
             },
+            {
+                title: "How To Use",
+                to: "/docs/how-to-use/",
+            }
             {
               title: "Contribute",
               to: "/docs/contribute/",
