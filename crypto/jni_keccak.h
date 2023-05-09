@@ -35,7 +35,8 @@
 extern "C" {
 #endif
 
-// code
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Keccak_computeHashValue(JNIEnv *env, jclass clazz,
+    jbyteArray in, jint inlen, jbyteArray md, jint mdlen);
 
 #ifdef __cplusplus
 }

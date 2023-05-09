@@ -31,3 +31,16 @@
 #include <stdio.h>
 #include "jni_keccak.h"
 #include "keccak.h"
+
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Keccak_computeHashValue(JNIEnv *env, jclass clazz,
+    jbyteArray in, jint inlen, jbyteArray md, jint mdlen)
+{
+    uint8_t *in_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, in, NULL);
+    uint8_t *md_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, md, NULL);
+
+    // call the C function
+    keccak(in_bytes, (size_t)inlen, md_bytes, (int)mdlen);
+
+    (*env)->ReleaseByteArrayElements(env, in, (jbyte *)in_bytes, JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env, md, (jbyte *)md_bytes, 0);
+}
