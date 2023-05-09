@@ -18,6 +18,7 @@
   "type": "module",
   "license": "The 3-Clause BSD License",
   "dependencies": {
-    "@sveltejs/adapter-auto": "^2.0.1"
+    "@sveltejs/adapter-auto": "^2.0.1",
+    "@vercel/analytics": "^1.0.1"
   }
 }
