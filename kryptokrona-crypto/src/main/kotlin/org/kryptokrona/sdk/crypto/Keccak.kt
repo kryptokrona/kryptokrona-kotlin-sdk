@@ -48,5 +48,5 @@ class Keccak : CryptoLibraryLoader() {
      * @param md the output buffer.
      * @param mdLength the length of the output buffer.
      */
-    external fun computeHashValue(input: ByteArray, inputLength: Int, md: Int, mdLength: Int)
+    external fun computeHashValue(input: ByteArray, inputLength: Int, md: ByteArray, mdLength: Int)
 }
