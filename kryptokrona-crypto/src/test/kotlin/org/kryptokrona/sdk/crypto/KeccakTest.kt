@@ -29,7 +29,7 @@ class KeccakTest {
         val output = toHex(md)
 
         // Assert
-        val expectedOutput = "f59b7ef0b9fcd7e87a3b21ffd3d3ea3f3a1c8e524e123785785fb642"
+        val expectedOutput = "29bf7021020ea89dbd91ef52022b5a654b55ed418c9e7aba71ef3b43a51669f2"
         assertEquals(expectedOutput, output)
     }
 }
