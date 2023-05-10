@@ -1,6 +1,6 @@
 ---
 title: Welcome
-heroImage: /kotlin_logo.png
+heroImage: /img/sdklogo.png
 tagline: Kryptokrona Kotlin SDK includes many useful libraries and tools for building decentralized private communication and payment systems.
 actions:
   - label: View on GitHub
