@@ -15,6 +15,8 @@ actions:
 
 <script>
   import Frontpage from "../components/sections/Frontpage.svelte"
+   import Footer from "../components/Footer.svelte"
 </script>
 
 <Frontpage />
+<Footer />
