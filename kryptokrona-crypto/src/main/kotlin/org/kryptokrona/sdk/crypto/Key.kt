@@ -31,8 +31,10 @@
 package org.kryptokrona.sdk.crypto
 
 import org.kryptokrona.sdk.crypto.model.KeyImage
+import org.kryptokrona.sdk.crypto.model.WalletKeyPairs
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.toHex
+import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 
@@ -40,15 +42,17 @@ private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in th
 private const val BITS_PER_BYTE = 8
 
 private val crypto = Crypto()
+private val ed25519 = Ed25519()
+private val keccak = Keccak()
 
 /**
  * Generates a signature from a hash and a secret key, and returns the result as a key image.
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param hash the hash used in the signature generation.
- * @param sec the secret key used in the signature generation.
- * @param sig the buffer to store the generated signature.
+ * @param derivation
+ * @param index
+ * @param myPublicSpend
  * @return a key image containing the image and private ephemeral key.
  */
 fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: ByteArray): KeyImage {
@@ -86,3 +90,24 @@ fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: In
     val keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
     return keyFactory.generateSecret(keySpec).encoded
 }
+
+fun generateKeyPairs(): WalletKeyPairs {
+    val publicKey = ByteArray(32)
+    val privateKey = ByteArray(64)
+    val seed = ByteArray(32)
+
+    val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
+    sr.nextBytes(seed)
+    ed25519.createKeyPair(publicKey, privateKey, seed)
+
+    val output = ByteArray(32)
+    keccak.computeHashValue(privateKey, 64, output, 32)
+
+    return WalletKeyPairs(
+        publicKey = toHex(publicKey),
+        privateKey = toHex(privateKey),
+        publicSpendKey = toHex(publicKey),
+        privateSpendKey = toHex(privateKey)
+    )
+}
+

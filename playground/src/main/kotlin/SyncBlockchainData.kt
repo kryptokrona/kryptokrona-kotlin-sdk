@@ -26,9 +26,9 @@ fun main() = runBlocking {
     // saving encrypted wallet to file
     walletService.saveWalletToFile("mjovanc.wallet", "someLongPassword")
 
-    // loading the wallet from file so we can use it to get information
+    // loading the wallet from file, so we can use it to get information
     // this is only needed if we want to obtain information from the wallet
-    // not neccessary if we just want to populate it with data, which is done by the sync process
+    // not necessary if we just want to populate it with data, which is done by the sync process
     walletService.loadWalletFromFile("mjovanc.wallet", "someLongPassword")
 
     // getting the wallet we just created

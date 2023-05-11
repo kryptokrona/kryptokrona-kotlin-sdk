@@ -34,6 +34,7 @@ import kotlinx.coroutines.*
 import org.kryptokrona.sdk.crypto.Crypto
 import org.kryptokrona.sdk.crypto.WalletFileEncryption
 import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
+import org.kryptokrona.sdk.crypto.generateKeyPairs
 import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.model.Wallet
@@ -337,6 +338,11 @@ class WalletService(node: Node) {
      */
     fun saveWalletToFile(fileName: String, password: String) {
         logger.debug("Saving wallet to file...")
+
+        // generate keypairs
+        val walletKeyPairs = generateKeyPairs()
+
+        // generate address
 
         // create wallet file
         // TODO: not done, should add more properties here
