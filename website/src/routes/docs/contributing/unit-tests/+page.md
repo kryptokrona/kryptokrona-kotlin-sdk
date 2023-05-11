@@ -2,9 +2,12 @@
 title: Unit Tests
 ---
 
-> Unit tests are the foundation of reliable software; they give you the freedom to evolve and improve without fear. - Unknown
+:::tip[Quote]
+Unit tests are the foundation of reliable software; they give you the freedom to evolve 
+and improve without fear. - Unknown
+:::
 
-:::note[Title]
+:::note[Note]
 This page and guidelines are a work in progress. And some things might not be true to the
 current implementation, but we are striving for it!
 :::
