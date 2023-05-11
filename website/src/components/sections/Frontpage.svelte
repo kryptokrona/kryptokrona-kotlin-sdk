@@ -1,6 +1,9 @@
 <script>
   import InfoBox from "../InfoBox.svelte";
+  import Cloud from "../icons/Cloud.svelte";
+  import Heart from "../icons/Heart.svelte";
   import Meteor from "../icons/Meteor.svelte";
+  import Moon from "../icons/Moon.svelte";
   import Sun from "../icons/Sun.svelte";
   import Wind from "../icons/Wind.svelte";
 </script>
@@ -25,6 +28,26 @@
         title="Contribute"
         text="If you would like to contribute to this project here are a couple of ways."
         ><Meteor /></InfoBox
+      >
+
+      <InfoBox
+        goTo="/docs/other/about"
+        title="About"
+        text="Learn more about Kryptokrona Kotlin SDK."><Moon /></InfoBox
+      >
+
+      <InfoBox
+        goTo="/docs/contribute/donate"
+        title="Donate"
+        text="If you want to support our project you can donate XKR."
+        ><Heart /></InfoBox
+      >
+
+      <InfoBox
+        goTo="/docs/other/additional-reading"
+        title="Additional reading"
+        text="Information regarding usage, relevant news or articles from the internet."
+        ><Cloud /></InfoBox
       >
     </div>
   </div>
