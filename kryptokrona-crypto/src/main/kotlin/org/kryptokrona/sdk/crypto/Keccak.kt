@@ -33,7 +33,7 @@ package org.kryptokrona.sdk.crypto
 import org.kryptokrona.sdk.crypto.loader.CryptoLibraryLoader
 
 /**
- * Crypto class that loads the C library
+ * Keccak class that loads the C library
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
