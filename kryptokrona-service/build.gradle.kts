@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
     // id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
+    id("org.jetbrains.kotlinx.kover") version "0.7.0"
     `java-library`
     `maven-publish`
     signing
