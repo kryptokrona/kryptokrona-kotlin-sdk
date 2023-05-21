@@ -118,7 +118,7 @@ class WalletFileEncryption(private val wallet: Wallet? = null) {
      * @param password The password to decrypt the wallet with
      * @return the deserialized wallet file object
      */
-    fun loadWallet(fileName: String, password: String): Wallet {
+    fun loadWallet(fileName: String, password: String) {
         logger.debug("Loading wallet from file...")
 
         // load encrypted bytes from file
@@ -143,9 +143,9 @@ class WalletFileEncryption(private val wallet: Wallet? = null) {
         // add the data to the wallet file object
         // TODO: not done, should add more properties here
 
-        return Wallet(
+        /*return Wallet(
             publicSpendKey = "",
-        )
+        )*/
     }
 
     /**

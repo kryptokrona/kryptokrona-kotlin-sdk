@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
-    jbyteArray data, jlong length, jbyteArray hash);
+    jbyteArray data, jint length, jbyteArray hash);
 
 #ifdef __cplusplus
 }

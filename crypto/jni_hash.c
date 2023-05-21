@@ -33,7 +33,7 @@
 #include "hash-ops.h"
 
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
-    jbyteArray data, jlong length, jbyteArray hash) {
+    jbyteArray data, jint length, jbyteArray hash) {
   // get the byte arrays as native C pointers
   jbyte* c_data = (*env)->GetByteArrayElements(env, data, NULL);
   jbyte* c_hash = (*env)->GetByteArrayElements(env, hash, NULL);

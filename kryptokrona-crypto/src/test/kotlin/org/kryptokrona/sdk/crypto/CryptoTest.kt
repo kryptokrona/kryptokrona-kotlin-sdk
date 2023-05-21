@@ -123,7 +123,7 @@ class CryptoTest {
         val actualHash = ByteArray(expectedHash.size)
 
         // Act
-        hash.cnFastHash(data, data.size.toLong(), actualHash)
+        hash.cnFastHash(data, data.size, actualHash)
 
         // Assert
         assertArrayEquals(expectedHash, actualHash)

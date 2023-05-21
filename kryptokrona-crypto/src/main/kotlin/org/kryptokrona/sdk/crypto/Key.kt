@@ -144,6 +144,7 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     bytes.addAll(publicViewKey.toByteArray().toList())
 
     // add checksum
+    // cn fast hash istället för sha256
     val md = MessageDigest.getInstance("SHA-256")
     val checksum = md.digest(bytes.toByteArray()).take(4)
     bytes.addAll(checksum.toList())

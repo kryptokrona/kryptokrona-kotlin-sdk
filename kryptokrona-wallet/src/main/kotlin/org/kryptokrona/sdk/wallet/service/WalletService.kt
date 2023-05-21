@@ -391,7 +391,7 @@ class WalletService(node: Node) {
         logger.debug("Loading wallet from file...")
 
         val walletFileEncryption = WalletFileEncryption()
-        wallet = walletFileEncryption.loadWallet(fileName, password)
+        // wallet = walletFileEncryption.loadWallet(fileName, password)
 
         // we now have loaded the wallet file
         isWalletLoaded = true

@@ -47,5 +47,5 @@ class Hash : CryptoLibraryLoader() {
      * @param length
      * @param hash
      */
-    external fun cnFastHash(data: ByteArray, length: Long, hash: ByteArray)
+    external fun cnFastHash(data: ByteArray, length: Int, hash: ByteArray)
 }
