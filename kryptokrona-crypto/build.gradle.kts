@@ -179,6 +179,12 @@ tasks.register<Exec>("cClean") {
     commandLine("rm", "-rf", "$cryptoDir/build")
     commandLine("make", "clean")
 
+    // remove .o files in the cryptoDir and its subdirectories
+    doLast {
+        workingDir = file("$cryptoDir")
+        commandLine("find", ".", "-name", "*.o", "-type", "f", "-delete")
+    }
+
     workingDir = file("$cryptoDir/ed25519")
     commandLine("make", "clean")
 }
