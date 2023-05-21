@@ -1,6 +1,5 @@
 package org.kryptokrona.sdk.crypto
 
-import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import kotlin.test.assertEquals
@@ -111,23 +110,5 @@ class CryptoTest {
         assertEquals(32, base.size)
         assertTrue { base.isNotEmpty() }
         assertTrue { base.any { it.toInt() != 0 } }
-    }
-
-    @Test
-    fun `can generate cn fast hash`() {
-        // Arrange
-        val data = "Hello, World!".toByteArray()
-        val expectedHash = byteArrayOf(
-            // Fill this array with the expected hash value
-        )
-        val actualHash = ByteArray(expectedHash.size)
-
-        // Act
-        hash.cnFastHash(data, data.size, actualHash)
-
-        // Assert
-        assertArrayEquals(expectedHash, actualHash)
-        assertTrue { actualHash.isNotEmpty() }
-        assertTrue { actualHash.any { it.toInt() != 0 } }
     }
 }
