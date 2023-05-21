@@ -75,7 +75,17 @@ data class Wallet(
     /**
      * The subwallet's private spend key (undefined if view wallet).
      */
-    val privateSpendKey: String? = null,
+    val privateSpendKey: String,
+
+    /**
+     * This subwallet's public view key.
+     */
+    val publicViewKey: String,
+
+    /**
+     * The subwallet's private view key.
+     */
+    val privateViewKey: String,
 
     /**
      * The timestamp to begin syncing the wallet at
