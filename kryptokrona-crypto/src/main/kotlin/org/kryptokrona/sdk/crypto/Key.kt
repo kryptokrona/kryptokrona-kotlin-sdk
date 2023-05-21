@@ -92,22 +92,27 @@ fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: In
 }
 
 fun generateKeyPairs(): WalletKeyPairs {
-    val publicKey = ByteArray(32)
-    val privateKey = ByteArray(64)
+    val publicSpendKey = ByteArray(32)
+    val privateSpendKey = ByteArray(64)
     val seed = ByteArray(32)
 
     val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
     sr.nextBytes(seed)
-    ed25519.createKeyPair(publicKey, privateKey, seed)
+    ed25519.createKeyPair(publicSpendKey, privateSpendKey, seed)
 
     val output = ByteArray(32)
-    keccak.computeHashValue(privateKey, 64, output, 32)
+    keccak.computeHashValue(privateSpendKey, 64, output, 32)
 
     return WalletKeyPairs(
-        publicKey = toHex(publicKey),
-        privateKey = toHex(privateKey),
-        publicSpendKey = toHex(publicKey),
-        privateSpendKey = toHex(privateKey)
+        publicSpendKey = toHex(publicSpendKey),
+        privateSpendKey = toHex(privateSpendKey),
+        publicViewKey = toHex(publicSpendKey),
+        privateViewKey = toHex(publicSpendKey)
     )
+}
+
+fun generateAddress(): String {
+    // return crypto.encodeAddress(keyPairs.publicSpendKey, keyPairs.publicViewKey)
+    TODO()
 }
 

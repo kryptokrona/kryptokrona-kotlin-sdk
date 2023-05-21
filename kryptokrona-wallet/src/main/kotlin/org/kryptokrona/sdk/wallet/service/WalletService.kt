@@ -273,6 +273,7 @@ class WalletService(node: Node) {
 
         if (isSyncCanceled) return true
 
+        // remove all the processed blocks since we do not need them anymore
         storedBlocks.removeAll(blocksToRemove)
 
         return false
@@ -363,6 +364,7 @@ class WalletService(node: Node) {
         val walletKeyPairs = generateKeyPairs()
 
         // generate address
+        // val address = generateAddress(walletKeyPairs., pubViewKey)
 
         // create wallet file
         // TODO: not done, should add more properties here
