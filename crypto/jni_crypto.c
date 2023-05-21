@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include "jni_crypto.h"
 #include "crypto.h"
-#include "hash.h"
+#include "hash-ops.h"
 
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jclass clazz,
     jbyteArray key, jbyteArray derivation, jbyteArray output)
