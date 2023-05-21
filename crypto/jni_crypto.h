@@ -50,6 +50,9 @@ JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JN
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_deriveSecretKey(JNIEnv *env, jclass clazz,
     jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key);
 
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
+    jbyteArray data, jlong length, jbyteArray hash);
+
 #ifdef __cplusplus
 }
 #endif
