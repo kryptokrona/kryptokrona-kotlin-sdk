@@ -8,7 +8,10 @@
   import Wind from "../icons/Wind.svelte";
 </script>
 
-<div style="display: flex; justify-content: center; margin-top: 5rem;">
+<div
+  style="display: flex; justify-content: center; margin-top: 5rem; padding-left: 1rem;
+padding-right: 1rem;"
+>
   <div class="inner">
     <div class="grid-3">
       <InfoBox

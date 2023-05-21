@@ -1,5 +1,6 @@
 .dark {
   --text-color: rgb(239,239,239);
+  --text-inverted: #0a0a0a;
   --box-bg: #0a0a0a;
   --subtitle-color: rgb(148,163,184);  
   --divider-color: rgba(68,64,60);
@@ -11,6 +12,7 @@
 
 :root:not(.dark) {
   --text-color: rgb(33,53,71);
+  --text-inverted: rgb(239,239,239);
   --box-bg: #d4d4d8;
   --subtitle-color: #44403c;
   --divider-color: rgba(231,229,228);
