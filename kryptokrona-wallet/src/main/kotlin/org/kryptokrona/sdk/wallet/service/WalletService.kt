@@ -125,6 +125,11 @@ class WalletService(node: Node) {
      */
     private var isWalletLoaded: Boolean = false
 
+    /**
+     * If the sync process is canceled.
+     */
+    private var isSyncCanceled = false
+
     fun getNodeInfo() = nodeInfo
 
     fun getStoredBlocks() = storedBlocks
@@ -184,7 +189,10 @@ class WalletService(node: Node) {
                                 }
                             }
 
-                            processBlocks()
+                            if (processBlocks()) {
+                                logger.info("Sync process canceled...")
+                                return@launch
+                            }
 
                             logger.info("Wallet height: $walletHeight")
                         }
@@ -212,8 +220,10 @@ class WalletService(node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.2.0
      */
-    suspend fun stopSync() = coroutineScope {
-        syncJob.children.forEach { it.cancel() }
+    fun stopSync() {
+        isSyncCanceled = true
+        syncJob.cancelChildren()
+        syncJob.cancel()
 
         logger.info("Stopping sync process...")
     }
@@ -238,24 +248,34 @@ class WalletService(node: Node) {
      * @author Marcus Cvjeticanin
      * @since 0.2.0
      */
-    private fun processBlocks() {
+    private fun processBlocks(): Boolean {
         logger.info("Processing blocks...")
 
         val blocksToRemove = mutableListOf<Block>()
 
-        storedBlocks.forEach { block ->
-            block.transactions.forEach { transaction ->
+        for (block in storedBlocks) {
+            if (isSyncCanceled) break
+
+            for (transaction in block.transactions) {
+                if (isSyncCanceled) {
+                    isSyncCanceled = true
+                    break
+                }
+
                 checkTransactionOutputs(transaction, block.blockHeight)
             }
 
-            // update wallet scan height
-            walletHeight = block.blockHeight
-
-            // remove the checked block from storedBlocks
-            blocksToRemove.add(block)
+            if (!isSyncCanceled) {
+                walletHeight = block.blockHeight
+                blocksToRemove.add(block)
+            }
         }
 
+        if (isSyncCanceled) return true
+
         storedBlocks.removeAll(blocksToRemove)
+
+        return false
     }
 
     /**

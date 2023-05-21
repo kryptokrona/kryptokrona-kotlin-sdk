@@ -18,9 +18,7 @@ fun main() = runBlocking {
 
     // launching the sync process
     launch {
-        while(isActive) {
-            walletService.startSync()
-        }
+        walletService.startSync()
     }
 
     // saving encrypted wallet to file
@@ -39,7 +37,7 @@ fun main() = runBlocking {
 
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
-    delay(30000)
+    delay(20000)
 
     // canceling the sync process
     //job.cancel()
