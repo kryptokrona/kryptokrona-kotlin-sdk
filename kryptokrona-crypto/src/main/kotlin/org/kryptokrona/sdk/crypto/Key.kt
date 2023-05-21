@@ -98,16 +98,24 @@ fun generateKeyPairs(): WalletKeyPairs {
 
     val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
     sr.nextBytes(seed)
+
+    // create the spend key pair
     ed25519.createKeyPair(publicSpendKey, privateSpendKey, seed)
 
+    // compute a hash of the private spend key
     val output = ByteArray(32)
     keccak.computeHashValue(privateSpendKey, 64, output, 32)
+
+    // generate the view key pair
+    val publicViewKey = ByteArray(32)
+    val privateViewKey = ByteArray(64)
+    ed25519.createKeyPair(publicViewKey, privateViewKey, output)
 
     return WalletKeyPairs(
         publicSpendKey = toHex(publicSpendKey),
         privateSpendKey = toHex(privateSpendKey),
-        publicViewKey = toHex(publicSpendKey),
-        privateViewKey = toHex(publicSpendKey)
+        publicViewKey = toHex(publicViewKey),
+        privateViewKey = toHex(privateViewKey)
     )
 }
 
