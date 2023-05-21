@@ -109,7 +109,7 @@ A stealth address is another type of address used in Kryptokrona (XKR) and other
 
 ### Ring Signatures
 
-Ring signatures are a type of digital signature used in privacy-focused cryptocurrencies like Kryptokrona (XKR). They allow a user to sign a message using a group of public keys, making it difficult for others to determine which key was actually used to sign the message.
+Ring signatures are a type of digital signature used in privacy-focused cryptocurrencies like Kryptokrona (XKR). They allow a user to sign a message using a group of public keys, making it difficult for others to determine which key was actually used to sign the transaction.
 
 ### Mnemonic Seed
 

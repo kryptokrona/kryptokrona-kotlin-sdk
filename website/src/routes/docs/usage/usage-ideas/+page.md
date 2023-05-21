@@ -12,7 +12,7 @@ This is the most obvious way of using Kryptokrona Kotlin SDK. Kotlin multiplatfo
 
 Since Kotlin multiplatform allows for development on all platforms, this can also be done in Kotlin to build a desktop wallet. Kotlin allows for building into binary form.
 
-## New Pool Backend
+## Pool Backend
 
 Since we are building a wrapper around Kryptokrona Service, this should be possible to build a backend with frameworks such as Spring or Ktor. Then apply a frontend framework of your choice to get this data from the pool backend.
 
