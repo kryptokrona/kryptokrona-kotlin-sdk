@@ -29,26 +29,14 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <jni.h>
-#ifndef _Included_JNI_Crypto
-#define _Included_JNI_Crypto
+#ifndef _Included_JNI_Hash
+#define _Included_JNI_Hash
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz,
-    jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
-
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray derived_key, jbyteArray base);
-
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(JNIEnv *env, jclass clazz,
-    jbyteArray pub, jbyteArray sec, jbyteArray image);
-
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key);
-
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_deriveSecretKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key);
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
+    jbyteArray data, jlong length, jbyteArray hash);
 
 #ifdef __cplusplus
 }

@@ -28,29 +28,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <jni.h>
-#ifndef _Included_JNI_Crypto
-#define _Included_JNI_Crypto
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <stdio.h>
+#include "jni_hash.h"
+#include "hash-ops.h"
 
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz,
-    jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
+    jbyteArray data, jlong length, jbyteArray hash) {
+  // get the byte arrays as native C pointers
+  jbyte* c_data = (*env)->GetByteArrayElements(env, data, NULL);
+  jbyte* c_hash = (*env)->GetByteArrayElements(env, hash, NULL);
 
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_underivePublicKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray derived_key, jbyteArray base);
+  // call cn_fast_hash with the provided data and length
+  cn_fast_hash((const void*)c_data, (size_t)length, (char*)c_hash);
 
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyImage(JNIEnv *env, jclass clazz,
-    jbyteArray pub, jbyteArray sec, jbyteArray image);
-
-JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_derivePublicKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key);
-
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_deriveSecretKey(JNIEnv *env, jclass clazz,
-    jbyteArray derivation, jint output_index, jbyteArray base, jbyteArray derived_key);
-
-#ifdef __cplusplus
+  // release the acquired native C pointers
+  (*env)->ReleaseByteArrayElements(env, data, c_data, JNI_COMMIT);
+  (*env)->ReleaseByteArrayElements(env, hash, c_hash, JNI_COMMIT);
 }
-#endif
-#endif
