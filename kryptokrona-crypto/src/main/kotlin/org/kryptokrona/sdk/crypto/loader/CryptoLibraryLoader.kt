@@ -74,7 +74,7 @@ open class CryptoLibraryLoader {
         val libraryPath = File(userDir, "$libraryFolder/$libraryName")
 
         if (!libraryPath.exists()) {
-            throw FileNotFoundException("Failed to find the ed25519 shared library: $libraryName")
+            throw FileNotFoundException("Failed to find the crypto shared library: $libraryName")
         }
 
         return libraryPath.absolutePath
