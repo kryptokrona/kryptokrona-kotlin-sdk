@@ -34,6 +34,7 @@ import org.kryptokrona.sdk.crypto.model.KeyImage
 import org.kryptokrona.sdk.crypto.model.WalletKeyPairs
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.toHex
+import java.security.MessageDigest
 import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
@@ -143,8 +144,9 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     bytes.addAll(publicViewKey.toByteArray().toList())
 
     // add checksum
-    // val checksum = keccak256(bytes.toByteArray()).take(4)
-    // bytes.addAll(checksum.toList())
+    val md = MessageDigest.getInstance("SHA-256")
+    val checksum = md.digest(bytes.toByteArray()).take(4)
+    bytes.addAll(checksum.toList())
 
     // convert to base58 in 8 byte chunks
     val base58 = StringBuilder()
