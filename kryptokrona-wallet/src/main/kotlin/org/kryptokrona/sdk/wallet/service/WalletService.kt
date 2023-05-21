@@ -363,10 +363,13 @@ class WalletService(node: Node) {
         // generate address
         val address = generateAddress(walletKeyPairs.publicSpendKey, walletKeyPairs.publicViewKey)
 
-        // create wallet file
-        // TODO: not done, should add more properties here
+        // create a wallet data class
         wallet = Wallet(
-            publicSpendKey = "",
+            publicSpendKey = walletKeyPairs.publicSpendKey,
+            privateSpendKey = walletKeyPairs.privateSpendKey,
+            publicViewKey = walletKeyPairs.publicViewKey,
+            privateViewKey = walletKeyPairs.privateViewKey,
+            address = address
         )
 
         // create wallet encryption object from data class
