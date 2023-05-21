@@ -31,11 +31,8 @@
 package org.kryptokrona.sdk.wallet.service
 
 import kotlinx.coroutines.*
-import org.kryptokrona.sdk.crypto.Crypto
-import org.kryptokrona.sdk.crypto.WalletFileEncryption
+import org.kryptokrona.sdk.crypto.*
 import org.kryptokrona.sdk.crypto.exception.GenerateKeyDerivationException
-import org.kryptokrona.sdk.crypto.generateKeyPairs
-import org.kryptokrona.sdk.crypto.getKeyImageFromOutput
 import org.kryptokrona.sdk.crypto.model.TransactionInput
 import org.kryptokrona.sdk.crypto.model.Wallet
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
@@ -364,7 +361,7 @@ class WalletService(node: Node) {
         val walletKeyPairs = generateKeyPairs()
 
         // generate address
-        // val address = generateAddress(walletKeyPairs., pubViewKey)
+        val address = generateAddress(walletKeyPairs.publicSpendKey, walletKeyPairs.publicViewKey)
 
         // create wallet file
         // TODO: not done, should add more properties here

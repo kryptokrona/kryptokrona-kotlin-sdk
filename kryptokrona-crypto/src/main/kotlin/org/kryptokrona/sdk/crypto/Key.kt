@@ -119,8 +119,56 @@ fun generateKeyPairs(): WalletKeyPairs {
     )
 }
 
-fun generateAddress(): String {
-    // return crypto.encodeAddress(keyPairs.publicSpendKey, keyPairs.publicViewKey)
-    TODO()
+/**
+ * Gives the XKR prefix.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @return the XKR prefix.
+ */
+fun getPrefix(): String {
+    return "96d68801"
+}
+
+fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
+    val bytes = mutableListOf<Byte>()
+
+    // add prefix
+    val hexPrefix = getPrefix()
+    val prefixBytes = convertHexToBytes(hexPrefix)
+    bytes.addAll(prefixBytes.toList())
+
+    // add public keys
+    bytes.addAll(publicSpendKey.toByteArray().toList())
+    bytes.addAll(publicViewKey.toByteArray().toList())
+
+    // add checksum
+    // val checksum = keccak256(bytes.toByteArray()).take(4)
+    // bytes.addAll(checksum.toList())
+
+    // convert to base58 in 8 byte chunks
+    val base58 = StringBuilder()
+    val byteArray = bytes.toByteArray()
+    var currentIndex = 0
+
+    while (currentIndex < byteArray.size) {
+        val chunkSize = if (currentIndex + 8 <= byteArray.size) 8 else byteArray.size - currentIndex
+        val chunk = byteArray.copyOfRange(currentIndex, currentIndex + chunkSize)
+        val encodedChunk = Base58.encode(chunk)
+        val expectedLength = when (chunkSize) {
+            8 -> 11
+            6 -> 9
+            5 -> 7
+            else -> error("Invalid chunk length: $chunkSize")
+        }
+        val missing = expectedLength - encodedChunk.length
+        if (missing > 0) {
+            base58.append("1".repeat(missing))
+        }
+        base58.append(encodedChunk)
+        currentIndex += chunkSize
+    }
+
+    return base58.toString()
 }
 
