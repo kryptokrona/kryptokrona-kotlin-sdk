@@ -170,6 +170,7 @@ tasks.register<Exec>("cCompile") {
 }
 
 tasks.register<Exec>("cReCompile") {
+    dependsOn("cClean")
     workingDir = file("$cryptoDir")
     commandLine("make", "-B")
 }
@@ -181,8 +182,12 @@ tasks.register<Exec>("cClean") {
 
     // remove .o files in the cryptoDir and its subdirectories
     doLast {
-        workingDir = file("$cryptoDir")
-        commandLine("find", ".", "-name", "*.o", "-type", "f", "-delete")
+        val cryptoDir = file("$projectDir/$cryptoDir")
+        cryptoDir.walkTopDown().forEach { file ->
+            if (file.extension == "o") {
+                file.delete()
+            }
+        }
     }
 
     workingDir = file("$cryptoDir/ed25519")
