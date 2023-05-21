@@ -4,8 +4,7 @@
   import Footer from "../components/Footer.svelte";
 
   export const frontmatter = {
-    title: "Some title",
-    description: "Some description",
+    title: "Documentation - Kryptokrona Kotlin SDK",
     home: false,
   };
 </script>
