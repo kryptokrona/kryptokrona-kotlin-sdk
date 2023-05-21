@@ -181,12 +181,11 @@ tasks.register<Exec>("cClean") {
     commandLine("make", "clean")
 
     // remove .o files in the cryptoDir and its subdirectories
-    doLast {
-        val cryptoDir = file("$projectDir/$cryptoDir")
-        cryptoDir.walkTopDown().forEach { file ->
-            if (file.extension == "o") {
-                file.delete()
-            }
+    println("Removing .o files in $cryptoDir")
+    val cryptoDir = file("$cryptoDir")
+    cryptoDir.walkTopDown().forEach { file ->
+        if (file.extension == "o") {
+            file.delete()
         }
     }
 
