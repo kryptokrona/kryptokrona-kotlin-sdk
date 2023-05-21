@@ -8,7 +8,11 @@
   import Wind from "../icons/Wind.svelte";
 </script>
 
-<div style="display: flex; justify-content: center; margin-top: 5rem;">
+<div
+  class="phone-padding"
+  style="display: flex; justify-content: center; margin-top: 5rem; padding-left: 1rem;
+padding-right: 1rem;"
+>
   <div class="inner">
     <div class="grid-3">
       <InfoBox
@@ -54,6 +58,12 @@
 </div>
 
 <style>
+  @media (max-width: 870px) and (min-width: 576px) {
+    .phone-padding {
+      padding-bottom: 20vw;
+    }
+  }
+
   .inner {
     max-width: 1152px;
   }
@@ -72,6 +82,9 @@
   @media (max-width: 576px) {
     .grid-3 {
       grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .phone-padding {
+      padding-bottom: 40vw;
     }
   }
 
