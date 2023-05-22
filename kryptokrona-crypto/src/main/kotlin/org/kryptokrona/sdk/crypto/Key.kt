@@ -41,6 +41,12 @@ import javax.crypto.spec.PBEKeySpec
 
 private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in the function
 private const val BITS_PER_BYTE = 8
+private const val XKR_PREFIX = "96d68801"
+private const val CHECKSUM_SIZE = 4
+private const val KEY_SIZE = 32
+private const val CHUNK_8_LENGTH = 11
+private const val CHUNK_6_LENGTH = 9
+private const val CHUNK_5_LENGTH = 7
 
 private val crypto = Crypto()
 private val keccak = Keccak()
@@ -100,10 +106,10 @@ fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: In
  * @return the generated XKR key pairs.
  */
 fun generateKeyPairs(): WalletKeyPairs {
-    val publicSpendKey = ByteArray(32)
-    val privateSpendKey = ByteArray(32)
+    val publicSpendKey = ByteArray(KEY_SIZE)
+    val privateSpendKey = ByteArray(KEY_SIZE)
 
-    val seed = ByteArray(32)
+    val seed = ByteArray(KEY_SIZE)
     val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
     sr.nextBytes(seed)
 
@@ -111,12 +117,12 @@ fun generateKeyPairs(): WalletKeyPairs {
     crypto.generateKeys(publicSpendKey, privateSpendKey)
 
     // compute a hash of the private spend key
-    val output = ByteArray(32)
-    keccak.computeHashValue(privateSpendKey, 32, output, 32)
+    val output = ByteArray(KEY_SIZE)
+    keccak.computeHashValue(privateSpendKey, KEY_SIZE, output, KEY_SIZE)
 
     // generate the view key pair
-    val publicViewKey = ByteArray(32)
-    val privateViewKey = ByteArray(32)
+    val publicViewKey = ByteArray(KEY_SIZE)
+    val privateViewKey = ByteArray(KEY_SIZE)
     crypto.generateDeterministicViewKeys(publicViewKey, privateViewKey, output)
 
     return WalletKeyPairs(
@@ -125,17 +131,6 @@ fun generateKeyPairs(): WalletKeyPairs {
         publicViewKey = toHex(publicViewKey),
         privateViewKey = toHex(privateViewKey)
     )
-}
-
-/**
- * Gives the XKR prefix.
- *
- * @author Marcus Cvjeticanin
- * @since 0.2.0
- * @return the XKR prefix.
- */
-private fun getPrefix(): String {
-    return "96d68801"
 }
 
 /**
@@ -151,8 +146,7 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     val bytes = mutableListOf<Byte>()
 
     // add prefix
-    val hexPrefix = getPrefix()
-    val prefixBytes = convertHexToBytes(hexPrefix)
+    val prefixBytes = convertHexToBytes(XKR_PREFIX)
     bytes.addAll(prefixBytes.toList())
 
     // add public keys
@@ -162,7 +156,7 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     // add checksum
     val output = ByteArray(bytes.size)
     hash.cnFastHash(bytes.toByteArray(), bytes.size, output)
-    val checksum = output.take(4)
+    val checksum = output.take(CHECKSUM_SIZE)
     bytes.addAll(checksum.toList())
 
     // convert to base58 in 8 byte chunks
@@ -171,13 +165,17 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     var currentIndex = 0
 
     while (currentIndex < byteArray.size) {
-        val chunkSize = if (currentIndex + 8 <= byteArray.size) 8 else byteArray.size - currentIndex
+        val chunkSize: Int = if (currentIndex + CHUNK_8_LENGTH <= byteArray.size) {
+            CHUNK_8_LENGTH
+        } else {
+            byteArray.size - currentIndex
+        }
         val chunk = byteArray.copyOfRange(currentIndex, currentIndex + chunkSize)
         val encodedChunk = Base58.encode(chunk)
         val expectedLength = when (chunkSize) {
-            8 -> 11
-            6 -> 9
-            5 -> 7
+            8 -> CHUNK_8_LENGTH
+            6 -> CHUNK_6_LENGTH
+            5 -> CHUNK_5_LENGTH
             else -> error("Invalid chunk length: $chunkSize")
         }
         val missing = expectedLength - encodedChunk.length

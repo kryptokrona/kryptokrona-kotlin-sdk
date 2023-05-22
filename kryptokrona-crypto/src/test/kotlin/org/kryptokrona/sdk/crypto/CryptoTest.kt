@@ -32,9 +32,6 @@ class CryptoTest {
         // Act
         crypto.generateDeterministicViewKeys(publicKey, secretKey, seed)
 
-        println(toHex(publicKey))
-        println(toHex(secretKey))
-
         // Assert
         assertEquals(32, publicKey.size)
         assertEquals(32, secretKey.size)
