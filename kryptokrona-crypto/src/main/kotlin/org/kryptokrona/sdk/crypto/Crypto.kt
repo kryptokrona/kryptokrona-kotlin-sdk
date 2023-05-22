@@ -50,6 +50,15 @@ class Crypto : CryptoLibraryLoader() {
      */
     external fun generateKeys(publicKey: ByteArray, secretKey: ByteArray)
 
+    /**
+     * Generates a deterministic key pair from a seed.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param publicKey the public key to generate.
+     * @param secretKey the secret key to generate.
+     * @param seed the seed to use to generate.
+     */
     external fun generateDeterministicViewKeys(publicKey: ByteArray, secretKey: ByteArray, seed: ByteArray)
 
     /**
