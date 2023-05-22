@@ -1,5 +1,4 @@
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kryptokrona.sdk.util.model.node.Node
@@ -29,15 +28,15 @@ fun main() = runBlocking {
         walletService.startSync()
     }
 
+    // setting delay so we don't cancel immediately
+    // you probably will not use a delay in your code :)
+    delay(20000)
+
     // getting the wallet we just created
     val wallet = walletService.getWallet()
 
     // printing out the wallet to get a better understanding of what it looks like
     println(wallet)
-
-    // setting delay so we don't cancel immediately
-    // you probably will not use a delay in your code :)
-    delay(20000)
 
     // canceling the sync process
     //job.cancel()
