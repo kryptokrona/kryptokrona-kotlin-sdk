@@ -49,6 +49,15 @@ void hash_to_scalar(const uint8_t *scalar, size_t length, uint8_t *hash)
   sc_reduce32(hash);
 }
 
+void generate_deterministic_keys(uint8_t *pub, uint8_t *sec, uint8_t *seed)
+{
+    ge_p3 point;
+    *sec = *seed;
+    sc_reduce32(sec); // reduce in case second round of keys (sendkeys)
+    ge_scalarmult_base(&point, sec);
+    ge_p3_tobytes(pub, &point);
+}
+
 void generate_keys(uint8_t *public_key, uint8_t *secret_key)
 {
   ge_p3 point;

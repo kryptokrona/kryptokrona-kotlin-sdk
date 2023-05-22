@@ -23,6 +23,7 @@ typedef struct
 
 void random_scalar(uint8_t *res);
 void hash_to_scalar(const uint8_t *scalar, size_t length, uint8_t *hash);
+void generate_deterministic_keys(uint8_t *pub, uint8_t *sec, uint8_t *seed);
 void generate_keys(uint8_t *public_key, uint8_t *secret_key);
 
 int check_key(const uint8_t *public_key);

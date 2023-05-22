@@ -46,6 +46,21 @@ JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeys(JNIEn
     (*env)->ReleaseByteArrayElements(env, secretKey, (jbyte *)secret_key_bytes, 0);
 }
 
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateDeterministicViewKeys(JNIEnv *env, jclass clazz,
+    jbyteArray publicKey, jbyteArray secretKey, jbyteArray seed)
+{
+    jbyte *public_key_bytes = (*env)->GetByteArrayElements(env, publicKey, NULL);
+    jbyte *secret_key_bytes = (*env)->GetByteArrayElements(env, secretKey, NULL);
+    jbyte *seed_bytes = (*env)->GetByteArrayElements(env, seed, NULL);
+
+    // call the C function
+    generate_deterministic_keys((uint8_t *)public_key_bytes, (uint8_t *)secret_key_bytes, (uint8_t *)seed_bytes);
+
+    (*env)->ReleaseByteArrayElements(env, publicKey, public_key_bytes, 0);
+    (*env)->ReleaseByteArrayElements(env, secretKey, secret_key_bytes, 0);
+    (*env)->ReleaseByteArrayElements(env, seed, seed_bytes, 0);
+}
+
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jclass clazz,
     jbyteArray key, jbyteArray derivation, jbyteArray output)
 {

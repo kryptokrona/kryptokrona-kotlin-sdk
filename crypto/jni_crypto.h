@@ -38,6 +38,9 @@ extern "C" {
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeys(JNIEnv *env, jclass clazz,
     jbyteArray publicKey, jbyteArray secretKey);
 
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateDeterministicViewKeys(JNIEnv *env, jclass clazz,
+    jbyteArray publicKey, jbyteArray secretKey, jbyteArray seed);
+
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jobject thiz,
     jbyteArray tx_pub_key, jbyteArray priv_view_key, jbyteArray key_derivation);
 
