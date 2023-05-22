@@ -153,8 +153,8 @@ publishing {
 }
 
 signing {
-    val signingKey = System.getenv("SONATYPE_SIGNING_KEY")
-    val signingPassword = System.getenv("SONATYPE_SIGNING_PASSWORD")
+    val signingKey = System.getenv("ORG_GRADLE_PROJECT_signingKey")
+    val signingPassword = System.getenv("ORG_GRADLE_PROJECT_signingPassword")
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
