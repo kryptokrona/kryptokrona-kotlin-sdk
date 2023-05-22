@@ -124,6 +124,10 @@ const config = defineConfig({
                   title: "Additional Reading",
                   to: "/docs/other/additional-reading/",
                 },
+                {
+                  title: "Audit",
+                  to: "/docs/other/audit/",
+                }
               ],
             },
           ],
