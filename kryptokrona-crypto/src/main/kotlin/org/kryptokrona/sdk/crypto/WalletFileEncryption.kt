@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.crypto
 
+import kotlinx.serialization.builtins.LongAsStringSerializer.deserialize
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.crypto.model.Wallet
@@ -137,15 +138,9 @@ class WalletFileEncryption(private val wallet: Wallet? = null) {
         // decrypt ciphertext with password and IV using AES encryption
         val decryptedBytes = decryptWallet(ciphertext, password, salt, iv)
 
-        // TODO deserialize decrypted bytes into WalletFile object
-        // need to figure out the structure of the WalletFile first
+        val decryptedString = decryptedBytes.decodeToString()
 
-        // add the data to the wallet file object
-        // TODO: not done, should add more properties here
-
-        return Wallet(
-            publicSpendKey = "",
-        )
+        return Json.decodeFromString(decryptedString)
     }
 
     /**
