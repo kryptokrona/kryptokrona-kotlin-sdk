@@ -286,9 +286,9 @@ class WalletService(node: Node) {
      * @param blockHeight The block height of the transaction.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
-        // TODO we need to generate these when creating a new wallet and save them somewhere
         assert(wallet != null)
 
+        // the public spend key and private view key from the wallet
         val publicSpendKey = wallet?.publicSpendKey
         val privateViewKey = wallet?.privateViewKey
 
@@ -297,7 +297,7 @@ class WalletService(node: Node) {
         val privView = convertHexToBytes(privateViewKey!!)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
-        // TODO add this as a property to class so we can send this data to WalletEncryption
+        // the inputs we will collect from the transaction outputs
         val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(BYTE_ARRAY_LENGTH)
@@ -306,6 +306,7 @@ class WalletService(node: Node) {
         // since this is a fatal error we throw an exception, since the keys cannot be invalid
         success.takeIf { it != 0 } ?: throw GenerateKeyDerivationException("Keys are invalid.")
 
+        // check all the outputs of the transaction
         transaction.outputs.forEachIndexed { index, output ->
             val key = output.key
             val derivedKey = convertHexToBytes(key)
@@ -322,9 +323,6 @@ class WalletService(node: Node) {
             // this transaction contains outputs that belong to us.
             // create the key image and transaction input and save it
             val keyImage = getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
-
-            // this is not spent yet, we just got it :)
-            // val spendHeight = 0
 
             // construct our transaction input, there may be more inputs from this transactions
             val txInput = TransactionInput(
