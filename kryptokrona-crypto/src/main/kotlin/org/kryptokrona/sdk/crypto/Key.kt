@@ -93,6 +93,13 @@ fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: In
     return keyFactory.generateSecret(keySpec).encoded
 }
 
+/**
+ * Generates XKR key pairs.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @return the generated XKR key pairs.
+ */
 fun generateKeyPairs(): WalletKeyPairs {
     val publicSpendKey = ByteArray(32)
     val privateSpendKey = ByteArray(64)
@@ -132,6 +139,15 @@ fun getPrefix(): String {
     return "96d68801"
 }
 
+/**
+ * Generates an XKR address from a public spend key and a public view key.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param publicSpendKey the public spend key.
+ * @param publicViewKey the public view key.
+ * @return the generated XKR address.
+ */
 fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     val bytes = mutableListOf<Byte>()
 
