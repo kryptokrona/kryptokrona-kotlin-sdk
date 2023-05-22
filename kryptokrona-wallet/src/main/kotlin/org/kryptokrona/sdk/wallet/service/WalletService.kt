@@ -287,16 +287,18 @@ class WalletService(node: Node) {
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
         // TODO we need to generate these when creating a new wallet and save them somewhere
-        val publicSpendKey = "45f6f692d8dc545deff096b048e94ee25acd7bf67fb49f7d83107f9969b9bc67"
-        val privateViewKey = "4451358855fb52b2199db97b33b6d7d47ac2b4067ecdf5ed20bb32162543270a"
+        assert(wallet != null)
+
+        val publicSpendKey = wallet?.publicSpendKey
+        val privateViewKey = wallet?.privateViewKey
 
         // if we get negative values of the convertion in the byte array generated the keys are invalid
-        val pubSpend = convertHexToBytes(publicSpendKey)
-        val privView = convertHexToBytes(privateViewKey)
+        val pubSpend = convertHexToBytes(publicSpendKey!!)
+        val privView = convertHexToBytes(privateViewKey!!)
         val txPubKey = convertHexToBytes(transaction.txPublicKey)
 
         // TODO add this as a property to class so we can send this data to WalletEncryption
-        // val inputs = mutableListOf<TransactionInput>()
+        val inputs = mutableListOf<TransactionInput>()
 
         val derivation = ByteArray(BYTE_ARRAY_LENGTH)
         val success = crypto.generateKeyDerivation(txPubKey, privView, derivation)
@@ -341,9 +343,12 @@ class WalletService(node: Node) {
 
             logger.info("Transaction found with hash: " + txInput.txHash)
 
-            // TODO we add this input to its wallet
-            // inputs.add(txInput)
+            // save the input
+            inputs.add(txInput)
         }
+
+        // adding all the inputs as unspent to the wallet
+        wallet?.unspentInputs?.plus(inputs)
     }
 
     /**

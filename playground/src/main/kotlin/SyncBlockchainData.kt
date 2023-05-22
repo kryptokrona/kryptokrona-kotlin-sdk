@@ -16,11 +16,6 @@ fun main() = runBlocking {
     // setting initial start height to be sync from
     walletService.setStartHeight(1364842L)
 
-    // launching the sync process
-    launch {
-        walletService.startSync()
-    }
-
     // saving encrypted wallet to file
     walletService.saveWalletToFile("mjovanc.wallet", "someLongPassword")
 
@@ -28,6 +23,11 @@ fun main() = runBlocking {
     // this is only needed if we want to obtain information from the wallet
     // not necessary if we just want to populate it with data, which is done by the sync process
     walletService.loadWalletFromFile("mjovanc.wallet", "someLongPassword")
+
+    // launching the sync process
+    launch {
+        walletService.startSync()
+    }
 
     // getting the wallet we just created
     val wallet = walletService.getWallet()
