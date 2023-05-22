@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <stdio.h>
 #include "crypto-ops.h"
 #include "crypto.h"
 #include "random.h"
@@ -52,7 +53,7 @@ void hash_to_scalar(const uint8_t *scalar, size_t length, uint8_t *hash)
 void generate_deterministic_keys(uint8_t *pub, uint8_t *sec, uint8_t *seed)
 {
     ge_p3 point;
-    *sec = *seed;
+    memcpy(sec, seed, 32);
     sc_reduce32(sec); // reduce in case second round of keys (sendkeys)
     ge_scalarmult_base(&point, sec);
     ge_p3_tobytes(pub, &point);
