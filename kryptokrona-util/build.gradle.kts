@@ -96,7 +96,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/kryptokrona/kryptokrona-kotlin-sdk")
 
             credentials {
-                username = "username" // placeholder value
+                username = "kryptokrona"
                 password = System.getenv("GH_SECRET")
             }
         }
