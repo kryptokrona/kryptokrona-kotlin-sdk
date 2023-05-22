@@ -29,22 +29,19 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdio.h>
+#include <stdint.h>
 #include "jni_crypto.h"
 #include "crypto-ops.h"
 
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_CryptoOps_scReduce32(JNIEnv *env, jclass clazz,
-    jbyteArray bytes, jbyteArray seed) {
-
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_CryptoOps_scReduce32(JNIEnv *env, jclass clazz, jbyteArray bytes)
+{
     // get the byte arrays and their lengths
     jsize bytes_len = (*env)->GetArrayLength(env, bytes);
-    jsize seed_len = (*env)->GetArrayLength(env, seed);
     uint8_t *bytes_ptr = (uint8_t *)(*env)->GetByteArrayElements(env, bytes, NULL);
-    uint8_t *seed_ptr = (uint8_t *)(*env)->GetByteArrayElements(env, seed, NULL);
 
     // perform the reduction operation
     sc_reduce32(bytes_ptr);
 
-    // release the byte arrays
-    (*env)->ReleaseByteArrayElements(env, bytes, (jbyte *)bytes_ptr, 0);
-    (*env)->ReleaseByteArrayElements(env, seed, (jbyte *)seed_ptr, JNI_ABORT);
+    // release the byte arrays with JNI_COMMIT flag
+    (*env)->ReleaseByteArrayElements(env, bytes, (jbyte *)bytes_ptr, JNI_COMMIT);
 }

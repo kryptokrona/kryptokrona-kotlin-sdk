@@ -35,8 +35,7 @@
 extern "C" {
 #endif
 
-JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_CryptoOps_scReduce32(JNIEnv *env, jclass clazz,
-    jbyteArray bytes, jbyteArray seed);
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_CryptoOps_scReduce32(JNIEnv *env, jclass clazz, jbyteArray bytes);
 
 #ifdef __cplusplus
 }
