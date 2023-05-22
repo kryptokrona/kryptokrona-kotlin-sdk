@@ -114,8 +114,6 @@ fun generateKeyPairs(): WalletKeyPairs {
     val output = ByteArray(32)
     keccak.computeHashValue(privateSpendKey, 32, output, 32)
 
-    println("output: ${toHex(output)}")
-
     // generate the view key pair
     val publicViewKey = ByteArray(32)
     val privateViewKey = ByteArray(32)

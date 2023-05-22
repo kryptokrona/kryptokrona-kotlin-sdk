@@ -2,6 +2,7 @@ package org.kryptokrona.sdk.crypto
 
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
+import org.kryptokrona.sdk.crypto.util.toHex
 import java.security.SecureRandom
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -23,7 +24,7 @@ class CryptoTest {
     fun `can generate deterministic keys`() {
         // Arrange
         val publicKey = ByteArray(32)
-        val secretKey = ByteArray(64)
+        val secretKey = ByteArray(32)
         val seed = ByteArray(32)
         val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
         sr.nextBytes(seed)
@@ -31,9 +32,12 @@ class CryptoTest {
         // Act
         crypto.generateDeterministicViewKeys(publicKey, secretKey, seed)
 
+        println(toHex(publicKey))
+        println(toHex(secretKey))
+
         // Assert
         assertEquals(32, publicKey.size)
-        assertEquals(64, secretKey.size)
+        assertEquals(32, secretKey.size)
         assertTrue { publicKey.isNotEmpty() }
     }
 
