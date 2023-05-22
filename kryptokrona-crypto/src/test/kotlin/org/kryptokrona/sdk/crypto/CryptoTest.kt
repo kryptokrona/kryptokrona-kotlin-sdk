@@ -18,8 +18,6 @@ class CryptoTest {
 
     private val crypto = Crypto()
 
-    private val hash = Hash()
-
     @Test
     fun `can generate key derivation`() {
         // Arrange
