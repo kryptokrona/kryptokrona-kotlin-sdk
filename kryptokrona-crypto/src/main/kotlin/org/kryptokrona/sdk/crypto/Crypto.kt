@@ -50,6 +50,8 @@ class Crypto : CryptoLibraryLoader() {
      */
     external fun generateKeys(publicKey: ByteArray, secretKey: ByteArray)
 
+    external fun generateDeterministicViewKeys(publicKey: ByteArray, secretKey: ByteArray, seed: ByteArray)
+
     /**
      * Generates a key derivation from a public key and a secret key, and stores the result in the provided buffer.
      *

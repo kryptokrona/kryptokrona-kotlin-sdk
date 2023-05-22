@@ -43,10 +43,8 @@ private const val BYTE_ARRAY_LENGTH = 32 // length of the byte arrays used in th
 private const val BITS_PER_BYTE = 8
 
 private val crypto = Crypto()
-private val ed25519 = Ed25519()
 private val keccak = Keccak()
 private val hash = Hash()
-private val cryptoOps = CryptoOps()
 
 /**
  * Generates a signature from a hash and a secret key, and returns the result as a key image.
@@ -104,32 +102,24 @@ fun generatePBKDF2DerivedKey(password: CharArray, salt: ByteArray, keyLength: In
 fun generateKeyPairs(): WalletKeyPairs {
     val publicSpendKey = ByteArray(32)
     val privateSpendKey = ByteArray(32)
-    val seed = ByteArray(32)
 
+    val seed = ByteArray(32)
     val sr: SecureRandom = SecureRandom.getInstance("NativePRNGNonBlocking")
     sr.nextBytes(seed)
 
     // create the spend key pair
-    // ed25519.createKeyPair(publicSpendKey, privateSpendKey, seed)
     crypto.generateKeys(publicSpendKey, privateSpendKey)
-
-    // reduce byte array from 64 to 32 bytes
-    /*val newPrivateSpendKey = privateSpendKey.copyOf()
-    cryptoOps.scReduce32(newPrivateSpendKey)*/
 
     // compute a hash of the private spend key
     val output = ByteArray(32)
     keccak.computeHashValue(privateSpendKey, 32, output, 32)
 
+    println("output: ${toHex(output)}")
+
     // generate the view key pair
     val publicViewKey = ByteArray(32)
     val privateViewKey = ByteArray(32)
-    // ed25519.createKeyPair(publicViewKey, privateViewKey, output)
-    crypto.generateKeys(publicViewKey, privateViewKey)
-
-    // reduce byte array from 64 to 32 bytes
-    /*val newPrivateViewKey = privateViewKey.copyOf()
-    cryptoOps.scReduce32(newPrivateViewKey)*/
+    crypto.generateDeterministicViewKeys(publicViewKey, privateViewKey, output)
 
     return WalletKeyPairs(
         publicSpendKey = toHex(publicSpendKey),
@@ -146,7 +136,7 @@ fun generateKeyPairs(): WalletKeyPairs {
  * @since 0.2.0
  * @return the XKR prefix.
  */
-fun getPrefix(): String {
+private fun getPrefix(): String {
     return "96d68801"
 }
 
