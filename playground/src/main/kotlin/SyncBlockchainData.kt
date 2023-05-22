@@ -39,7 +39,6 @@ fun main() = runBlocking {
     println(wallet)
 
     // canceling the sync process
-    //job.cancel()
     walletService.stopSync()
 
     // printing the results

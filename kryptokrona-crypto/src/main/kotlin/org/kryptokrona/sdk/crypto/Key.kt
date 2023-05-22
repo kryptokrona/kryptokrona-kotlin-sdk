@@ -164,11 +164,7 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     var currentIndex = 0
 
     while (currentIndex < byteArray.size) {
-        val chunkSize: Int = if (currentIndex + CHUNK_8_LENGTH <= byteArray.size) {
-            CHUNK_8_LENGTH
-        } else {
-            byteArray.size - currentIndex
-        }
+        val chunkSize = if (currentIndex + 8 <= byteArray.size) 8 else byteArray.size - currentIndex
         val chunk = byteArray.copyOfRange(currentIndex, currentIndex + chunkSize)
         val encodedChunk = Base58.encode(chunk)
         val expectedLength = when (chunkSize) {

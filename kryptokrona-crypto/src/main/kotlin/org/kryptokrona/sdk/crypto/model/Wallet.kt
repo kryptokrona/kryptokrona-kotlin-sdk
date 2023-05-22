@@ -47,7 +47,7 @@ data class Wallet(
      * A list of the stored transaction input data, to be used for
      * sending transactions later.
      */
-    val unspentInputs: List<TransactionInput> = emptyList(),
+    var unspentInputs: List<TransactionInput> = emptyList(),
 
     /**
      * Inputs which have been used in a transaction, and are waiting to

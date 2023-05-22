@@ -346,7 +346,7 @@ class WalletService(node: Node) {
         }
 
         // adding all the inputs as unspent to the wallet
-        wallet?.unspentInputs?.plus(inputs)
+        wallet?.unspentInputs = wallet?.unspentInputs?.plus(inputs) ?: inputs
     }
 
     /**
