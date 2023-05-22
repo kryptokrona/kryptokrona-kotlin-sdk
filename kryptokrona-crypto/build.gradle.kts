@@ -166,7 +166,7 @@ val ed25519SharedLibraryPath = when {
 
 tasks.register<Exec>("cCompile") {
     workingDir = file("$cryptoDir")
-    commandLine("make")
+    commandLine("make", "-B")
 }
 
 tasks.register<Exec>("cReCompile") {

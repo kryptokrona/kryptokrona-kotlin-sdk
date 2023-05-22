@@ -45,6 +45,7 @@ private const val BITS_PER_BYTE = 8
 private val crypto = Crypto()
 private val ed25519 = Ed25519()
 private val keccak = Keccak()
+private val hash = Hash()
 
 /**
  * Generates a signature from a hash and a secret key, and returns the result as a key image.
@@ -144,9 +145,9 @@ fun generateAddress(publicSpendKey: String, publicViewKey: String): String {
     bytes.addAll(publicViewKey.toByteArray().toList())
 
     // add checksum
-    // cn fast hash istället för sha256
-    val md = MessageDigest.getInstance("SHA-256")
-    val checksum = md.digest(bytes.toByteArray()).take(4)
+    val output = ByteArray(bytes.size)
+    hash.cnFastHash(bytes.toByteArray(), bytes.size, output)
+    val checksum = output.take(4)
     bytes.addAll(checksum.toList())
 
     // convert to base58 in 8 byte chunks
