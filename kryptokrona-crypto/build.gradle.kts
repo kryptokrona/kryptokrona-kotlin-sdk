@@ -2,8 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 val coroutines_version: String by project
 val slf4j_version: String by project
-val ossrhUsername: String? = System.getProperty("ossrhUsername")
-val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
 
 plugins {
     kotlin("jvm") version "1.8.21"
@@ -133,8 +131,18 @@ publishing {
                 create<BasicAuthentication>("basic")
             }
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = System.getenv("SONATYPE_USER")
+                password = System.getenv("SONATYPE_PASSWORD")
+            }
+        }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kryptokrona/kryptokrona-kotlin-sdk")
+
+            credentials {
+                username = "username" // placeholder value
+                password = System.getenv("GH_SECRET")
             }
         }
     }
