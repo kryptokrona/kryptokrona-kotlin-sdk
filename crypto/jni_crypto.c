@@ -33,6 +33,19 @@
 #include "crypto.h"
 #include "hash-ops.h"
 
+JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeys(JNIEnv *env, jclass clazz,
+    jbyteArray publicKey, jbyteArray secretKey)
+{
+    uint8_t *public_key_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, publicKey, NULL);
+    uint8_t *secret_key_bytes = (uint8_t *)(*env)->GetByteArrayElements(env, secretKey, NULL);
+
+    // call the C function
+    generate_keys(public_key_bytes, secret_key_bytes);
+
+    (*env)->ReleaseByteArrayElements(env, publicKey, (jbyte *)public_key_bytes, 0);
+    (*env)->ReleaseByteArrayElements(env, secretKey, (jbyte *)secret_key_bytes, 0);
+}
+
 JNIEXPORT jint JNICALL Java_org_kryptokrona_sdk_crypto_Crypto_generateKeyDerivation(JNIEnv* env, jclass clazz,
     jbyteArray key, jbyteArray derivation, jbyteArray output)
 {

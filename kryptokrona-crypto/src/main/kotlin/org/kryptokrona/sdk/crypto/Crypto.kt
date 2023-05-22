@@ -40,6 +40,8 @@ import org.kryptokrona.sdk.crypto.loader.CryptoLibraryLoader
  */
 class Crypto : CryptoLibraryLoader() {
 
+    external fun generateKeys(publicKey: ByteArray, secretKey: ByteArray)
+
     /**
      * Generates a key derivation from a public key and a secret key, and stores the result in the provided buffer.
      *

@@ -35,13 +35,14 @@
 
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_CryptoOps_scReduce32(JNIEnv *env, jclass clazz, jbyteArray bytes)
 {
-    // get the byte arrays and their lengths
+    // get the byte array and its length
     jsize bytes_len = (*env)->GetArrayLength(env, bytes);
-    uint8_t *bytes_ptr = (uint8_t *)(*env)->GetByteArrayElements(env, bytes, NULL);
+    jbyte *bytes_ptr = (*env)->GetByteArrayElements(env, bytes, NULL);
 
     // perform the reduction operation
-    sc_reduce32(bytes_ptr);
+    sc_reduce32((unsigned char*)bytes_ptr);
 
-    // release the byte arrays with JNI_COMMIT flag
-    (*env)->ReleaseByteArrayElements(env, bytes, (jbyte *)bytes_ptr, JNI_COMMIT);
+    // release the byte array with JNI_COMMIT flag to commit changes
+    (*env)->ReleaseByteArrayElements(env, bytes, bytes_ptr, JNI_COMMIT);
 }
+
