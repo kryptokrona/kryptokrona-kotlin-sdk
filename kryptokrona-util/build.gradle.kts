@@ -104,6 +104,9 @@ publishing {
 }
 
 signing {
+    val signingKey = System.getenv("SONATYPE_SIGNING_KEY")
+    val signingPassword = System.getenv("SONATYPE_SIGNING_PASSWORD")
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
 
