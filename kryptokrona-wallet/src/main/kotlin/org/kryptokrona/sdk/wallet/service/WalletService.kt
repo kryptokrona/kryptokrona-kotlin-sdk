@@ -372,7 +372,9 @@ class WalletService(node: Node) {
             privateSpendKey = walletKeyPairs.privateSpendKey,
             publicViewKey = walletKeyPairs.publicViewKey,
             privateViewKey = walletKeyPairs.privateViewKey,
-            address = address
+            address = address,
+            syncStartHeight = startHeight,
+            primaryAddress = true
         )
 
         // create wallet encryption object from data class
@@ -395,8 +397,6 @@ class WalletService(node: Node) {
 
         val walletFileEncryption = WalletFileEncryption()
         wallet = walletFileEncryption.loadWallet(fileName, password)
-
-        // we now have loaded the wallet file
         isWalletLoaded = true
     }
 }
