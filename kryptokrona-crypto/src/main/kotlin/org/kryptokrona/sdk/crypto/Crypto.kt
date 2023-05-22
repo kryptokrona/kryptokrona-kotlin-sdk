@@ -40,6 +40,14 @@ import org.kryptokrona.sdk.crypto.loader.CryptoLibraryLoader
  */
 class Crypto : CryptoLibraryLoader() {
 
+    /**
+     * Generates a key pair.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.2.0
+     * @param publicKey the public key to generate.
+     * @param secretKey the secret key to generate.
+     */
     external fun generateKeys(publicKey: ByteArray, secretKey: ByteArray)
 
     /**
