@@ -1,8 +1,6 @@
 package org.kryptokrona.sdk.crypto
 
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.crypto.util.convertBytesToHex
-import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

@@ -30,7 +30,6 @@
 
 package org.kryptokrona.sdk.crypto
 
-import kotlinx.serialization.builtins.LongAsStringSerializer.deserialize
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.crypto.model.Wallet

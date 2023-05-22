@@ -1,11 +1,11 @@
 <script>
-  import InfoBox from "../InfoBox.svelte";
-  import Cloud from "../icons/Cloud.svelte";
-  import Heart from "../icons/Heart.svelte";
-  import Meteor from "../icons/Meteor.svelte";
-  import Moon from "../icons/Moon.svelte";
-  import Sun from "../icons/Sun.svelte";
-  import Wind from "../icons/Wind.svelte";
+    import InfoBox from "../InfoBox.svelte";
+    import Cloud from "../icons/Cloud.svelte";
+    import Heart from "../icons/Heart.svelte";
+    import Meteor from "../icons/Meteor.svelte";
+    import Moon from "../icons/Moon.svelte";
+    import Sun from "../icons/Sun.svelte";
+    import Wind from "../icons/Wind.svelte";
 </script>
 
 <div

@@ -1,9 +1,9 @@
 <script context="module">
-  import External from "../components/icons/External.svelte";
-  import Boxes from "../components/sections/Boxes.svelte";
-  import Footer from "../components/Footer.svelte";
+    import External from "../components/icons/External.svelte";
+    import Boxes from "../components/sections/Boxes.svelte";
+    import Footer from "../components/Footer.svelte";
 
-  export const frontmatter = {
+    export const frontmatter = {
     title: "Documentation - Kryptokrona Kotlin SDK",
     home: false,
   };

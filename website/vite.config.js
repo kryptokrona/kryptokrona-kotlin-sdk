@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import { sveltepress } from "@sveltepress/vite";
-import { defaultTheme } from "@sveltepress/theme-default";
+import {defineConfig} from "vite";
+import {sveltepress} from "@sveltepress/vite";
+import {defaultTheme} from "@sveltepress/theme-default";
 
 const config = defineConfig({
   plugins: [
