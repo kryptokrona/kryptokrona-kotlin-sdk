@@ -35,7 +35,7 @@ fun main() = runBlocking {
     delay(20000)
 
     // make transaction
-    transferService.makeTransaction()
+    // transferService.makeTransaction()
 
     // getting the wallet we just created
     val wallet = walletService.getWallet()
