@@ -28,7 +28,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.output
+package org.kryptokrona.sdk.util.model.input
 
 /**
  * Key input.
@@ -39,5 +39,5 @@ package org.kryptokrona.sdk.util.model.output
 data class KeyInput(
     val amount: Long,
     val keyImage: String,
-    val outputIndexes: List<Int>,
+    val outputIndexes: List<Long>,
 )
