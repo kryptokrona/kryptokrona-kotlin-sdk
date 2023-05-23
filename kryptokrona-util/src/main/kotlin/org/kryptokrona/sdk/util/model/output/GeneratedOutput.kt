@@ -28,28 +28,23 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.input
+package org.kryptokrona.sdk.util.model.output
 
 /**
- * Input Keys.
+ * Represents a Generated Output (destination)
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
-data class InputKeys(
+data class GeneratedOutput(
 
     /**
-     * The derived public key
+     * The amount of the output
      */
-    val publicKey: String,
+    val amount: Double,
 
     /**
-     * The key derivation
+     * The destination of the output
      */
-    val derivedKey: String,
-
-    /**
-     * The output index
-     */
-    val outputIndex: Long
+    val destination: String
 )
