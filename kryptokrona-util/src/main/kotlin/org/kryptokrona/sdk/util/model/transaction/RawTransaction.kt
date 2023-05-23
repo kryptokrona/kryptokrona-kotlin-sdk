@@ -30,7 +30,7 @@
 
 package org.kryptokrona.sdk.util.model.transaction
 
-import org.kryptokrona.sdk.util.model.output.KeyInput
+import org.kryptokrona.sdk.util.model.input.KeyInput
 import org.kryptokrona.sdk.util.model.output.KeyOutput
 
 /**
