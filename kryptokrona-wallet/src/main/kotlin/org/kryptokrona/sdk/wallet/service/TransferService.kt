@@ -30,9 +30,13 @@
 
 package org.kryptokrona.sdk.wallet.service
 
+import org.kryptokrona.sdk.crypto.util.isHex64
 import org.kryptokrona.sdk.node.client.OutputsClient
+import org.kryptokrona.sdk.util.model.input.GeneratedInput
+import org.kryptokrona.sdk.util.model.input.InputKeys
 import org.kryptokrona.sdk.util.model.node.Node
 import org.kryptokrona.sdk.util.model.output.GeneratedOutput
+import org.kryptokrona.sdk.util.model.output.Output
 import org.kryptokrona.sdk.util.model.output.RandomOutput
 import org.kryptokrona.sdk.util.model.transaction.TxInputAndOwner
 import org.slf4j.LoggerFactory
@@ -65,10 +69,45 @@ class TransferService(node: Node) {
         // get random outs
         val randomOuts = getRingParticipants(emptyList(), 0L)
 
-        val numPregenerated = 0
-        val numGeneratedOnDemand = 0
+        var numPregenerated = 0
+        var numGeneratedOnDemand = 0
 
-        // get ourOutputs
+        val ourOutputs = ourInputs.map { input ->
+            val generatedInput = input.input
+
+            if (generatedInput.privateEphemeral.isEmpty() || !isHex64(generatedInput.privateEphemeral)) {
+                val (_, tmpSecretKey) = generateKeyImage(
+                    generatedInput.transactionPublicKey,
+                    getPrivateViewKey(),
+                    input.publicSpendKey,
+                    input.privateSpendKey,
+                    generatedInput.transactionIndex
+                )
+
+                generatedInput.privateEphemeral = tmpSecretKey
+
+                numGeneratedOnDemand++
+            } else {
+                numPregenerated++
+            }
+
+            Output(
+                amount = generatedInput.amount,
+                globalIndex = generatedInput.globalOutputIndex,
+                index = generatedInput.transactionIndex,
+                input = GeneratedInput(
+                    privateEphemeral = generatedInput.privateEphemeral,
+                    publicEphemeral = "", // Required by compiler, not used in func
+                    transactionKeys = InputKeys(
+                        derivedKey = "",
+                        outputIndex = 0,
+                        publicKey = ""
+                    )
+                ),
+                key = generatedInput.key,
+                keyImage = generatedInput.keyImage
+            )
+        }
 
         logger.info("Generated key images for $numGeneratedOnDemand inputs, " +
                 "used pre-generated key images for $numPregenerated inputs.")

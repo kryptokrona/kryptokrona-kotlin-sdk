@@ -80,6 +80,32 @@ fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: Byt
     return KeyImage(toHex(image), toHex(derivedKey))
 }
 
+fun generateKeyImage(
+    transactionPublicKey: String,
+    privateViewKey: String,
+    publicSpendKey: String,
+    privateSpendKey: String,
+    transactionIndex: Long
+) {
+    // generateKeyDerivation()
+
+    // generateKeyImagePrimitive()
+    TODO()
+}
+
+fun generateKeyImagePrimitive(publicSpendKey: String, privateSpendKey: String, outputIndex: Long, derivation: String) {
+    // derivePublicKey()
+
+    // deriveSecretKey()
+
+    // generateKeyImage()
+
+    // CryptoUtils - generateKeyImagePrimitive()
+
+
+    TODO()
+}
+
 /**
  * Generates a PBKDF2 derived key from a password, salt, key length and number of iterations.
  *

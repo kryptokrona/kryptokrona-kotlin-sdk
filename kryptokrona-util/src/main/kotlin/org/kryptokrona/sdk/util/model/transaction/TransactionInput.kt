@@ -38,14 +38,14 @@ package org.kryptokrona.sdk.util.model.transaction
  */
 data class TransactionInput(
     val keyImage: String,
-    val amount: Long,
+    val amount: Double,
     val blockHeight: Long,
     val transactionPublicKey: String,
     val transactionIndex: Long,
-    var globalOutputIndex: Long?,
+    var globalOutputIndex: Long,
     val key: String,
     var spendHeight: Long,
     val unlockTime: Long,
     var parentTransactionHash: String,
-    var privateEphemeral: String?
+    var privateEphemeral: String
 )
