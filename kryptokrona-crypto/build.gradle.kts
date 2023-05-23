@@ -21,6 +21,11 @@ repositories {
     mavenCentral()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 dependencies {
     implementation(project(":kryptokrona-util"))
 

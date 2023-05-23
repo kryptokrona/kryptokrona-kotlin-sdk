@@ -18,6 +18,11 @@ repositories {
     mavenCentral()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
