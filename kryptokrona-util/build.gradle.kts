@@ -48,7 +48,7 @@ publishing {
             }
             pom {
                 name.set("Kryptokrona Util")
-                description.set("The util library for communicating with Kryptokrona nodes")
+                description.set("The Kryptokrona util library.")
                 url.set("https://kryptokrona.org")
                 licenses {
                     license {
@@ -96,7 +96,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/kryptokrona/kryptokrona-kotlin-sdk")
 
             credentials {
-                username = "mjovanc"
+                username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GH_SECRET")
             }
         }
