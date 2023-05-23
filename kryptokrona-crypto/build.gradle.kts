@@ -131,8 +131,8 @@ publishing {
                 create<BasicAuthentication>("basic")
             }
             credentials {
-                username = System.getenv("SONATYPE_USER")
-                password = System.getenv("SONATYPE_PASSWORD")
+                username = System.getenv("ORG_GRADLE_PROJECT_ossrhUsername")
+                password = System.getenv("ORG_GRADLE_PROJECT_ossrhPassword")
             }
         }
 
