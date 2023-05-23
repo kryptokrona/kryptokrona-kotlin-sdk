@@ -42,6 +42,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class RandomOutputsResponse(
-    val outs: List<Int>,
+    val outs: List<Long>,
     val status: String
 )
