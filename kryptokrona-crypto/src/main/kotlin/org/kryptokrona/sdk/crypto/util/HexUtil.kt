@@ -115,4 +115,16 @@ fun convertBytesToHex(bytes: ByteArray): String {
     return bytes.joinToString("") { "%02x".format(it) }
 }
 
+/**
+ * Checks if a given string is a valid hexadecimal string with a length of 64 characters.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ * @param input The string to check.
+ * @return `true` if the string is a valid hexadecimal string with a length of 64 characters, `false` otherwise.
+ */
+fun isHex64(input: String): Boolean {
+    val hexRegex = Regex("^[0-9a-fA-F]{64}$")
+    return hexRegex.matches(input)
+}
 
