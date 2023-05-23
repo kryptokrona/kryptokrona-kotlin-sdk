@@ -32,6 +32,7 @@ package org.kryptokrona.sdk.wallet.service
 
 import org.kryptokrona.sdk.node.client.OutputsClient
 import org.kryptokrona.sdk.util.model.node.Node
+import org.kryptokrona.sdk.util.model.output.GeneratedOutput
 import org.kryptokrona.sdk.util.model.output.RandomOutput
 import org.kryptokrona.sdk.util.model.transaction.TxInputAndOwner
 import org.slf4j.LoggerFactory
@@ -48,7 +49,15 @@ class TransferService(node: Node) {
 
     private val outputsClient: OutputsClient = OutputsClient(node)
 
-    suspend fun makeTransaction() {
+    // add subWallets: SubWallets, later as a parameter
+    suspend fun makeTransaction(
+        mixin: Long,
+        fee: Double,
+        paymentId: String,
+        ourInputs: List<TxInputAndOwner>,
+        destinations: List<GeneratedOutput>,
+        extraData: String? = null
+    ) {
         logger.info("Collecting ring participants...") // change to debug later
 
         // get random outs
