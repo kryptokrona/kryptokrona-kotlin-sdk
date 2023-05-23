@@ -60,6 +60,8 @@ class TransferService(node: Node) {
     ) {
         logger.info("Collecting ring participants...") // change to debug later
 
+        ourInputs.sortedBy { input -> input.input.amount }
+
         // get random outs
         val randomOuts = getRingParticipants(emptyList(), 0L)
 
