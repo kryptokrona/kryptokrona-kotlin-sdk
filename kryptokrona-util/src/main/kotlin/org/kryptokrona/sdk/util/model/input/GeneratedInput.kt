@@ -37,14 +37,17 @@ package org.kryptokrona.sdk.util.model.input
  * @since 0.3.0
  */
 data class GeneratedInput(
+
     /**
      * The derived transaction keys
      */
     val transactionKeys: InputKeys,
+
     /**
      * The public ephemeral of the input
      */
     val publicEphemeral: String,
+
     /**
      * The private ephemeral of the input
      */

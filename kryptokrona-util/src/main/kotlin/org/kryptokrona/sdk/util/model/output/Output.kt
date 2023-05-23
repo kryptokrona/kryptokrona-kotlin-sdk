@@ -39,34 +39,42 @@ import org.kryptokrona.sdk.util.model.input.GeneratedInput
  * @since 0.3.0
  */
 data class Output(
+
     /**
      * The output key
      */
     val key: String,
+
     /**
      * The output index (position) in the transaction
      */
     val index: Long,
+
     /**
      * The output global index
      */
     val globalIndex: Long,
+
     /**
      * The output amount
      */
     val amount: Double,
+
     /**
      * The output type
      */
     val type: Long? = null,
+
     /**
      * The output key image
      */
     val keyImage: String? = null,
+
     /**
      * The GeneratedInput of the output (if it belongs to us)
      */
     val input: GeneratedInput? = null,
+
     /**
      * Defines whether this is a partial key image
      */
