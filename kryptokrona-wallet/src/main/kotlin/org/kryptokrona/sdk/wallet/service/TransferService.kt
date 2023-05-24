@@ -30,6 +30,8 @@
 
 package org.kryptokrona.sdk.wallet.service
 
+import org.kryptokrona.sdk.crypto.generateKeyImage
+import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.isHex64
 import org.kryptokrona.sdk.node.client.OutputsClient
 import org.kryptokrona.sdk.util.model.input.GeneratedInput
@@ -66,32 +68,34 @@ class TransferService(node: Node) {
 
         ourInputs.sortedBy { input -> input.input.amount }
 
-        // get random outs
-        val randomOuts = getRingParticipants(emptyList(), 0L)
+        // get random outs from node
+        val randomOuts = getRingParticipants(ourInputs, mixin)
 
         var numPregenerated = 0
         var numGeneratedOnDemand = 0
+
+        // go through our inputs
 
         val ourOutputs = ourInputs.map { input ->
             val generatedInput = input.input
 
             if (generatedInput.privateEphemeral.isEmpty() || !isHex64(generatedInput.privateEphemeral)) {
-                val (_, tmpSecretKey) = generateKeyImage(
-                    generatedInput.transactionPublicKey,
-                    getPrivateViewKey(),
-                    input.publicSpendKey,
-                    input.privateSpendKey,
+                val keyImage = generateKeyImage(
+                    convertHexToBytes(generatedInput.transactionPublicKey),
+                    convertHexToBytes("privateViewKeyHere"),
+                    convertHexToBytes(input.publicSpendKey),
+                    convertHexToBytes(input.privateSpendKey),
                     generatedInput.transactionIndex
                 )
 
-                generatedInput.privateEphemeral = tmpSecretKey
+                generatedInput.privateEphemeral = keyImage.privateSpendKey
 
                 numGeneratedOnDemand++
             } else {
                 numPregenerated++
             }
 
-            Output(
+            /*Output(
                 amount = generatedInput.amount,
                 globalIndex = generatedInput.globalOutputIndex,
                 index = generatedInput.transactionIndex,
@@ -107,6 +111,7 @@ class TransferService(node: Node) {
                 key = generatedInput.key,
                 keyImage = generatedInput.keyImage
             )
+        }*/
         }
 
         logger.info("Generated key images for $numGeneratedOnDemand inputs, " +
@@ -115,7 +120,7 @@ class TransferService(node: Node) {
 
     }
 
-    suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long)/*: List<RandomOutput>*/ {
+    private suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long)/*: List<RandomOutput>*/ {
         if (mixin == 0L) {
             logger.info("No mixin, skipping ring participant collection.")
             // return emptyList()
@@ -125,7 +130,7 @@ class TransferService(node: Node) {
          *one of the mixin outs, we can skip it and still form the transaction
          */
         val requestedOuts: Long = mixin + 1
-        val amounts: List<Long> = inputs.map { input -> input.input.amount }
+        val amounts: List<Double> = inputs.map { input -> input.input.amount }
 
         val outs = getRandomOutputsByAmount(amounts, requestedOuts)
 
@@ -133,7 +138,7 @@ class TransferService(node: Node) {
 
     }
 
-    private suspend fun getRandomOutputsByAmount(amounts: List<Long>, requestedOuts: Long) {
+    private suspend fun getRandomOutputsByAmount(amounts: List<Double>, requestedOuts: Long) {
         val data = mutableListOf<Long>()
 
         val response = outputsClient.getRandomOuts() // change to post request and send amounts and requestOuts later
