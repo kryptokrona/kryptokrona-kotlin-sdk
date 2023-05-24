@@ -56,54 +56,50 @@ private val hash = Hash()
  *
  * @author Marcus Cvjeticanin
  * @since 0.2.0
- * @param derivation
+ * @param transactionPublicKey
  * @param index
- * @param myPublicSpend
+ * @param publicSpendKey
  * @return a key image containing the image and private ephemeral key.
  */
-fun getKeyImageFromOutput(derivation: ByteArray, index: Long, myPublicSpend: ByteArray): KeyImage {
-    //TODO need to get this from WalletService and pass to this function
-    // get our private spend key from wallet.keys
-    val privateSpendKey = convertHexToBytes("")
-    val publicSpendKey = ByteArray(BYTE_ARRAY_LENGTH)
-    val derivedKey = ByteArray(BYTE_ARRAY_LENGTH)
+fun generateKeyImage(
+    transactionPublicKey: ByteArray,
+    privateViewKey: ByteArray,
+    publicSpendKey: ByteArray,
+    privateSpendKey: ByteArray,
+    outputIndex: Long,
+): KeyImage {
+    val derivation = ByteArray(BYTE_ARRAY_LENGTH)
+    crypto.generateKeyDerivation(transactionPublicKey, privateViewKey, derivation)
 
+    return generateKeyImagePrimitive(publicSpendKey, privateSpendKey, outputIndex, derivation)
+}
+
+/**
+ * Primitive method for generating a key image from the supplied values.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ * @param publicSpendKey
+ * @param privateSpendKey
+ * @param outputIndex
+ * @param derivation
+ * @return a key image containing the image and private ephemeral key (private spend key).
+ */
+fun generateKeyImagePrimitive(
+    publicSpendKey: ByteArray,
+    privateSpendKey: ByteArray,
+    outputIndex: Long,
+    derivation: ByteArray
+): KeyImage {
     // derive the key pair
-    crypto.derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
-    crypto.deriveSecretKey(derivation, index, privateSpendKey, derivedKey)
+    crypto.derivePublicKey(derivation, outputIndex, publicSpendKey, publicSpendKey)
+    crypto.deriveSecretKey(derivation, outputIndex, privateSpendKey, privateSpendKey)
 
     // generate the key image
     val image = ByteArray(BYTE_ARRAY_LENGTH)
     crypto.generateKeyImage(publicSpendKey, privateSpendKey, image)
 
-    // the check is done in bytes, return hex64 strings
-    return KeyImage(toHex(image), toHex(derivedKey))
-}
-
-fun generateKeyImage(
-    transactionPublicKey: String,
-    privateViewKey: String,
-    publicSpendKey: String,
-    privateSpendKey: String,
-    transactionIndex: Long
-) {
-    // generateKeyDerivation()
-
-    // generateKeyImagePrimitive()
-    TODO()
-}
-
-fun generateKeyImagePrimitive(publicSpendKey: String, privateSpendKey: String, outputIndex: Long, derivation: String) {
-    // derivePublicKey()
-
-    // deriveSecretKey()
-
-    // generateKeyImage()
-
-    // CryptoUtils - generateKeyImagePrimitive()
-
-
-    TODO()
+    return KeyImage(toHex(image), toHex(privateSpendKey))
 }
 
 /**
