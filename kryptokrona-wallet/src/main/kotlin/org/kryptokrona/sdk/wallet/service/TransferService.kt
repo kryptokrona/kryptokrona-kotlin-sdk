@@ -34,12 +34,15 @@ import org.kryptokrona.sdk.crypto.generateKeyImage
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.isHex64
 import org.kryptokrona.sdk.node.client.OutputsClient
+import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.input.GeneratedInput
 import org.kryptokrona.sdk.util.model.input.InputKeys
 import org.kryptokrona.sdk.util.model.node.Node
 import org.kryptokrona.sdk.util.model.output.GeneratedOutput
 import org.kryptokrona.sdk.util.model.output.Output
 import org.kryptokrona.sdk.util.model.output.RandomOutput
+import org.kryptokrona.sdk.util.model.transaction.PreparedTransaction
+import org.kryptokrona.sdk.util.model.transaction.Transaction
 import org.kryptokrona.sdk.util.model.transaction.TxInputAndOwner
 import org.slf4j.LoggerFactory
 
@@ -95,7 +98,7 @@ class TransferService(node: Node) {
                 numPregenerated++
             }
 
-            /*Output(
+            Output(
                 amount = generatedInput.amount,
                 globalIndex = generatedInput.globalOutputIndex,
                 index = generatedInput.transactionIndex,
@@ -111,13 +114,43 @@ class TransferService(node: Node) {
                 key = generatedInput.key,
                 keyImage = generatedInput.keyImage
             )
-        }*/
         }
 
         logger.info("Generated key images for $numGeneratedOnDemand inputs, " +
                 "used pre-generated key images for $numPregenerated inputs.")
 
 
+        logger.info("Asynchronously creating transaction.")
+
+        // val tx = createTransaction(destinations, ourOutputs, randomOuts, mixin, fee, paymentId, extraData)
+
+        logger.info("Transaction creation succeeded.")
+
+        // return tx
+        TODO()
+    }
+
+    private suspend fun createTransaction(
+        destinations: List<GeneratedOutput>,
+        ourOutputs: List<Output>,
+        randomOuts: List<RandomOutput>,
+        mixin: Long,
+        fee: Double,
+        paymentId: String,
+        extraData: String?
+    ): Transaction {
+        // add to Config later
+        val feePerByte = true
+
+        val prepared = createTransactionStructure()
+
+        // val txPrefixHash = prepared.transaction.prefixHash()
+
+        TODO()
+    }
+
+    private suspend fun createTransactionStructure(): PreparedTransaction {
+        TODO()
     }
 
     private suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long)/*: List<RandomOutput>*/ {
@@ -133,8 +166,6 @@ class TransferService(node: Node) {
         val amounts: List<Double> = inputs.map { input -> input.input.amount }
 
         val outs = getRandomOutputsByAmount(amounts, requestedOuts)
-
-
 
     }
 
