@@ -13,7 +13,7 @@ fun main() = runBlocking {
     val walletService = WalletService(node)
 
     // setting initial start height to be sync from
-    walletService.setStartHeight(1364842L)
+    walletService.setStartHeight(1408510L)
 
     // saving encrypted wallet to file
     walletService.saveWalletToFile("mjovanc.wallet", "someLongPassword")
@@ -30,7 +30,7 @@ fun main() = runBlocking {
 
     // setting delay so we don't cancel immediately
     // you probably will not use a delay in your code :)
-    delay(20000)
+    delay(100000)
 
     // getting the wallet we just created
     val wallet = walletService.getWallet()
