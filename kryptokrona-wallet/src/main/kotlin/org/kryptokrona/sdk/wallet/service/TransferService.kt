@@ -122,7 +122,7 @@ class TransferService(node: Node) {
 
         logger.info("Asynchronously creating transaction.")
 
-        // val tx = createTransaction(destinations, ourOutputs, randomOuts, mixin, fee, paymentId, extraData)
+        val tx = createTransaction(destinations, ourOutputs, randomOuts, mixin, fee, paymentId, extraData)
 
         logger.info("Transaction creation succeeded.")
 
@@ -131,13 +131,14 @@ class TransferService(node: Node) {
     }
 
     private suspend fun createTransaction(
-        destinations: List<GeneratedOutput>,
-        ourOutputs: List<Output>,
+        outputs: List<GeneratedOutput>,
+        inputs: List<Output>,
         randomOuts: List<RandomOutput>,
         mixin: Long,
-        fee: Double,
-        paymentId: String,
-        extraData: String?
+        fee: Double? = null,
+        paymentId: String? = null,
+        unlockTime: Long? = null,
+        extraData: String? = null
     ): Transaction {
         // add to Config later
         val feePerByte = true
@@ -153,23 +154,32 @@ class TransferService(node: Node) {
         TODO()
     }
 
-    private suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long)/*: List<RandomOutput>*/ {
+    private suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long) : List<RandomOutput> {
         if (mixin == 0L) {
             logger.info("No mixin, skipping ring participant collection.")
-            // return emptyList()
+            return emptyList()
         }
 
         /* Request one more than needed, this way if we get our own output as
-         *one of the mixin outs, we can skip it and still form the transaction
+         * one of the mixin outs, we can skip it and still form the transaction
          */
         val requestedOuts: Long = mixin + 1
         val amounts: List<Double> = inputs.map { input -> input.input.amount }
 
         val outs = getRandomOutputsByAmount(amounts, requestedOuts)
 
+        if (outs.isEmpty()) {
+            logger.error("Failed to get random outputs from node.")
+        }
+
+        amounts.forEach {
+            val foundOutputs = outs.find { (outAmount, _) -> amount == outAmount }
+        }
+
+        TODO()
     }
 
-    private suspend fun getRandomOutputsByAmount(amounts: List<Double>, requestedOuts: Long) {
+    private suspend fun getRandomOutputsByAmount(amounts: List<Double>, requestedOuts: Long): List<RandomOutput> {
         val data = mutableListOf<Long>()
 
         val response = outputsClient.getRandomOuts() // change to post request and send amounts and requestOuts later
@@ -180,6 +190,7 @@ class TransferService(node: Node) {
 
         data.forEach { println(it) }
 
+        TODO()
     }
 
 }
