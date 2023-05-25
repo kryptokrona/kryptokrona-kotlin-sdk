@@ -1,6 +1,6 @@
-import {defineConfig} from "vite";
-import {sveltepress} from "@sveltepress/vite";
-import {defaultTheme} from "@sveltepress/theme-default";
+import { defineConfig } from "vite";
+import { sveltepress } from "@sveltepress/vite";
+import { defaultTheme } from "@sveltepress/theme-default";
 
 const config = defineConfig({
   plugins: [
@@ -127,7 +127,7 @@ const config = defineConfig({
                 {
                   title: "Audit",
                   to: "/docs/other/audit/",
-                }
+                },
               ],
             },
           ],
@@ -147,7 +147,7 @@ const config = defineConfig({
         logo: "/img/sdklogo.png",
       }),
       siteConfig: {
-        title: "Kryptokrona Kotlin SDK",
+        title: "Documentation - Kryptokrona Kotlin SDK",
         description:
           "The most fully featured implementation of the Kryptokrona Network protocols",
       },
