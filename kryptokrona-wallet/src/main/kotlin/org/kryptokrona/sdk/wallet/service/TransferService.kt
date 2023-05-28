@@ -129,7 +129,7 @@ class TransferService(node: Node) {
 
         logger.info("Asynchronously creating transaction.")
 
-        val tx =
+        /*val tx =
                 createTransaction(
                         destinations,
                         ourOutputs,
@@ -138,7 +138,7 @@ class TransferService(node: Node) {
                         fee,
                         paymentId,
                         extraData
-                )
+                )*/
 
         logger.info("Transaction creation succeeded.")
 
@@ -191,9 +191,9 @@ class TransferService(node: Node) {
             logger.error("Failed to get random outputs from node.")
         }
 
-        amounts.forEach {
+        /*amounts.forEach {
             val foundOutputs = outs.find { (outAmount, _) -> amount == outAmount }
-        }
+        }*/
 
         TODO()
     }
