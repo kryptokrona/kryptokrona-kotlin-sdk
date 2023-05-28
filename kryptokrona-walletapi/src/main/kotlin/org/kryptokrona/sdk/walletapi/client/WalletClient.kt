@@ -28,16 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.node
+package org.kryptokrona.sdk.walletapi.client
+
+import org.kryptokrona.sdk.walletapi.model.WalletApi
 
 /**
- * Node is a data class that holds information about a node. The properties are mutable so that they
- * can be changed during runtime.
+ * Wallet client
  *
  * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
+ * @since 0.3.0
+ * @param walletApi The wallet API to connect to.
  */
-data class Node(var hostName: String, var port: Int, var ssl: Boolean)
+class WalletClient(private val walletApi: WalletApi) {}
