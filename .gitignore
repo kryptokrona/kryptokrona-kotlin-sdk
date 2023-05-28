@@ -181,3 +181,5 @@ gradle-app.setting
 .DS_Store
 
 website/node_modules
+
+bin/

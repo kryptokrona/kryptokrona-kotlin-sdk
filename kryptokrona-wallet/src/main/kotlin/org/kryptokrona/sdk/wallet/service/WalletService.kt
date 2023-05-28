@@ -183,6 +183,13 @@ class WalletService(node: Node) {
                                     // add new blocks to stored blocks
                                     sd.items.forEach { block -> storedBlocks.add(block) }
                                     logger.info("Fetched ${sd.items.size} block(s)")
+                                    storedBlocks.forEach {
+                                        logger.info("Block hash: ${it.blockHeight}")
+                                        logger.info("Block height: ${it.blockHeight}")
+                                        logger.info("Block timestamp: ${it.blockTimestamp}")
+                                        val transactions = it.transactions
+                                        val coinbaseTransaction = it.coinbaseTransaction
+                                    }
                                 }
                             }
 
@@ -286,6 +293,9 @@ class WalletService(node: Node) {
      * @param blockHeight The block height of the transaction.
      */
     private fun checkTransactionOutputs(transaction: Transaction, blockHeight: Long) {
+        logger.info("Checking transaction outputs...")
+        logger.info("Block height: $blockHeight")
+        logger.info("Transaction hash: ${transaction.hash}")
         assert(wallet != null)
 
         // the public spend key and private view key from the wallet
@@ -322,7 +332,7 @@ class WalletService(node: Node) {
 
             // this transaction contains outputs that belong to us.
             // create the key image and transaction input and save it
-            val keyImage = getKeyImageFromOutput(derivation, index.toLong(), pubSpend)
+            val keyImage = generateKeyImage(derivation, index.toLong(), pubSpend)
 
             // construct our transaction input, there may be more inputs from this transactions
             val txInput = TransactionInput(
