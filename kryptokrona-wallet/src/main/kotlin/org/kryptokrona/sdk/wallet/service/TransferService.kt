@@ -34,7 +34,6 @@ import org.kryptokrona.sdk.crypto.generateKeyImage
 import org.kryptokrona.sdk.crypto.util.convertHexToBytes
 import org.kryptokrona.sdk.crypto.util.isHex64
 import org.kryptokrona.sdk.node.client.OutputsClient
-import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.input.GeneratedInput
 import org.kryptokrona.sdk.util.model.input.InputKeys
 import org.kryptokrona.sdk.util.model.node.Node
@@ -60,12 +59,12 @@ class TransferService(node: Node) {
 
     // add subWallets: SubWallets, later as a parameter
     suspend fun makeTransaction(
-        mixin: Long,
-        fee: Double,
-        paymentId: String,
-        ourInputs: List<TxInputAndOwner>,
-        destinations: List<GeneratedOutput>,
-        extraData: String? = null
+            mixin: Long,
+            fee: Double,
+            paymentId: String,
+            ourInputs: List<TxInputAndOwner>,
+            destinations: List<GeneratedOutput>,
+            extraData: String? = null
     ) {
         logger.info("Collecting ring participants...") // change to debug later
 
@@ -79,50 +78,67 @@ class TransferService(node: Node) {
 
         // go through our inputs
 
-        val ourOutputs = ourInputs.map { input ->
-            val generatedInput = input.input
+        val ourOutputs =
+                ourInputs.map { input ->
+                    val generatedInput = input.input
 
-            if (generatedInput.privateEphemeral.isEmpty() || !isHex64(generatedInput.privateEphemeral)) {
-                val keyImage = generateKeyImage(
-                    convertHexToBytes(generatedInput.transactionPublicKey),
-                    convertHexToBytes("privateViewKeyHere"),
-                    convertHexToBytes(input.publicSpendKey),
-                    convertHexToBytes(input.privateSpendKey),
-                    generatedInput.transactionIndex
-                )
+                    if (generatedInput.privateEphemeral.isEmpty() ||
+                                    !isHex64(generatedInput.privateEphemeral)
+                    ) {
+                        val keyImage =
+                                generateKeyImage(
+                                        convertHexToBytes(generatedInput.transactionPublicKey),
+                                        convertHexToBytes("privateViewKeyHere"),
+                                        convertHexToBytes(input.publicSpendKey),
+                                        convertHexToBytes(input.privateSpendKey),
+                                        generatedInput.transactionIndex
+                                )
 
-                generatedInput.privateEphemeral = keyImage.privateSpendKey
+                        generatedInput.privateEphemeral = keyImage.privateSpendKey
 
-                numGeneratedOnDemand++
-            } else {
-                numPregenerated++
-            }
+                        numGeneratedOnDemand++
+                    } else {
+                        numPregenerated++
+                    }
 
-            Output(
-                amount = generatedInput.amount,
-                globalIndex = generatedInput.globalOutputIndex,
-                index = generatedInput.transactionIndex,
-                input = GeneratedInput(
-                    privateEphemeral = generatedInput.privateEphemeral,
-                    publicEphemeral = "", // Required by compiler, not used in func
-                    transactionKeys = InputKeys(
-                        derivedKey = "",
-                        outputIndex = 0,
-                        publicKey = ""
+                    Output(
+                            amount = generatedInput.amount,
+                            globalIndex = generatedInput.globalOutputIndex,
+                            index = generatedInput.transactionIndex,
+                            input =
+                                    GeneratedInput(
+                                            privateEphemeral = generatedInput.privateEphemeral,
+                                            publicEphemeral =
+                                                    "", // Required by compiler, not used in func
+                                            transactionKeys =
+                                                    InputKeys(
+                                                            derivedKey = "",
+                                                            outputIndex = 0,
+                                                            publicKey = ""
+                                                    )
+                                    ),
+                            key = generatedInput.key,
+                            keyImage = generatedInput.keyImage
                     )
-                ),
-                key = generatedInput.key,
-                keyImage = generatedInput.keyImage
-            )
-        }
+                }
 
-        logger.info("Generated key images for $numGeneratedOnDemand inputs, " +
-                "used pre-generated key images for $numPregenerated inputs.")
-
+        logger.info(
+                "Generated key images for $numGeneratedOnDemand inputs, " +
+                        "used pre-generated key images for $numPregenerated inputs."
+        )
 
         logger.info("Asynchronously creating transaction.")
 
-        val tx = createTransaction(destinations, ourOutputs, randomOuts, mixin, fee, paymentId, extraData)
+        val tx =
+                createTransaction(
+                        destinations,
+                        ourOutputs,
+                        randomOuts,
+                        mixin,
+                        fee,
+                        paymentId,
+                        extraData
+                )
 
         logger.info("Transaction creation succeeded.")
 
@@ -131,14 +147,14 @@ class TransferService(node: Node) {
     }
 
     private suspend fun createTransaction(
-        outputs: List<GeneratedOutput>,
-        inputs: List<Output>,
-        randomOuts: List<RandomOutput>,
-        mixin: Long,
-        fee: Double? = null,
-        paymentId: String? = null,
-        unlockTime: Long? = null,
-        extraData: String? = null
+            outputs: List<GeneratedOutput>,
+            inputs: List<Output>,
+            randomOuts: List<RandomOutput>,
+            mixin: Long,
+            fee: Double? = null,
+            paymentId: String? = null,
+            unlockTime: Long? = null,
+            extraData: String? = null
     ): Transaction {
         // add to Config later
         val feePerByte = true
@@ -154,7 +170,10 @@ class TransferService(node: Node) {
         TODO()
     }
 
-    private suspend fun getRingParticipants(inputs: List<TxInputAndOwner>, mixin: Long) : List<RandomOutput> {
+    private suspend fun getRingParticipants(
+            inputs: List<TxInputAndOwner>,
+            mixin: Long
+    ): List<RandomOutput> {
         if (mixin == 0L) {
             logger.info("No mixin, skipping ring participant collection.")
             return emptyList()
@@ -179,18 +198,21 @@ class TransferService(node: Node) {
         TODO()
     }
 
-    private suspend fun getRandomOutputsByAmount(amounts: List<Double>, requestedOuts: Long): List<RandomOutput> {
+    private suspend fun getRandomOutputsByAmount(
+            amounts: List<Double>,
+            requestedOuts: Long
+    ): List<RandomOutput> {
         val data = mutableListOf<Long>()
 
-        val response = outputsClient.getRandomOuts() // change to post request and send amounts and requestOuts later
+        val response =
+                outputsClient
+                        .getRandomOuts() // change to post request and send amounts and requestOuts
+        // later
 
-        response?.outs?.forEach { output ->
-            data.add(output)
-        }
+        response?.outs?.forEach { output -> data.add(output) }
 
         data.forEach { println(it) }
 
         TODO()
     }
-
 }
