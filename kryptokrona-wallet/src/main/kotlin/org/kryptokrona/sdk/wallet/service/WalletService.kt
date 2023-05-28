@@ -299,6 +299,7 @@ class WalletService(node: Node) {
         assert(wallet != null)
 
         // the public spend key and private view key from the wallet
+        val privateSpendKey = wallet?.privateSpendKey
         val publicSpendKey = wallet?.publicSpendKey
         val privateViewKey = wallet?.privateViewKey
 
@@ -332,7 +333,8 @@ class WalletService(node: Node) {
 
             // this transaction contains outputs that belong to us.
             // create the key image and transaction input and save it
-            val keyImage = generateKeyImage(derivation, index.toLong(), pubSpend)
+            val keyImage = generateKeyImageFromOutput(
+                derivation, index.toLong(), convertHexToBytes(privateSpendKey!!), pubSpend)
 
             // construct our transaction input, there may be more inputs from this transactions
             val txInput = TransactionInput(

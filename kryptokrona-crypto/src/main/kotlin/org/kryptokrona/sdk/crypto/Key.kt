@@ -75,6 +75,38 @@ fun generateKeyImage(
 }
 
 /**
+ * Generates a signature from a hash and a secret key, and returns the result as a key image.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.2.0
+ * @param derivation
+ * @param index
+ * @param myPrivateSpendKey
+ * @param myPublicSpend
+ * @return a key image containing the image and private ephemeral key.
+ */
+fun generateKeyImageFromOutput(
+    derivation: ByteArray,
+    index: Long,
+    myPrivateSpendKey: ByteArray,
+    myPublicSpend: ByteArray
+): KeyImage {
+    val publicSpendKey = ByteArray(BYTE_ARRAY_LENGTH)
+    val derivedKey = ByteArray(BYTE_ARRAY_LENGTH)
+
+    // derive the key pair
+    crypto.derivePublicKey(derivation, index, myPublicSpend, publicSpendKey)
+    crypto.deriveSecretKey(derivation, index, myPrivateSpendKey, derivedKey)
+
+    // generate the key image
+    val image = ByteArray(BYTE_ARRAY_LENGTH)
+    crypto.generateKeyImage(publicSpendKey, myPrivateSpendKey, image)
+
+    // the check is done in bytes, return hex64 strings
+    return KeyImage(toHex(image), toHex(derivedKey))
+}
+
+/**
  * Primitive method for generating a key image from the supplied values.
  *
  * @author Marcus Cvjeticanin
