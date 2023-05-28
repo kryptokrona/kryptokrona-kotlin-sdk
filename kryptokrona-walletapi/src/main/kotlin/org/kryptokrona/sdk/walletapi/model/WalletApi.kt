@@ -36,8 +36,8 @@ package org.kryptokrona.sdk.util.model.node
  *
  * @author Marcus Cvjeticanin
  * @since 0.1.0
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
+ * @param hostName The host name of the wallet api.
+ * @param port The port of the wallet api.
+ * @param ssl Whether the wallet api is using SSL.
  */
 data class WalletApi(var hostName: String, var port: Int, var ssl: Boolean)
