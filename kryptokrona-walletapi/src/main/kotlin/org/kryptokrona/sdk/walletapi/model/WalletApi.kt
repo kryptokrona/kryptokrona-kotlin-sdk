@@ -31,8 +31,8 @@
 package org.kryptokrona.sdk.util.model.node
 
 /**
- * Node is a data class that holds information about a node. The properties are mutable so that they
- * can be changed during runtime.
+ * WalletApi is a data class that holds information about a Wallet API. The properties are mutable
+ * so that they can be changed during runtime.
  *
  * @author Marcus Cvjeticanin
  * @since 0.1.0
@@ -40,4 +40,4 @@ package org.kryptokrona.sdk.util.model.node
  * @param port The port of the node.
  * @param ssl Whether the node is using SSL.
  */
-data class Node(var hostName: String, var port: Int, var ssl: Boolean)
+data class WalletApi(var hostName: String, var port: Int, var ssl: Boolean)
