@@ -61,9 +61,9 @@ class AddressClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return PrimaryAddressResponse
      */
-    suspend fun primaryAddress(): StatusResponse? {
+    suspend fun primaryAddress(): PrimaryAddressResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -76,7 +76,7 @@ class AddressClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<PrimaryAddressResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting primary address from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -93,9 +93,9 @@ class AddressClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return AddressesResponse
      */
-    suspend fun addresses(): StatusResponse? {
+    suspend fun addresses(): AddressesResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -108,7 +108,7 @@ class AddressClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<AddressesResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting all addresses from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
