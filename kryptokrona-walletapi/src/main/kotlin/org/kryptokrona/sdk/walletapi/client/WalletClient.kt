@@ -30,7 +30,20 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.http.headers
+import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.walletapi.common.HttpClient.client
+import org.slf4j.LoggerFactory
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.request.OpenWalletRequest
+import org.kryptokrona.sdk.walletapi.model.response.OpenWalletResponse
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Wallet client
@@ -39,4 +52,47 @@ import org.kryptokrona.sdk.walletapi.model.WalletApi
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class WalletClient(private val walletApi: WalletApi) {}
+class WalletClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("WalletClient")
+
+    /**
+     * Open a wallet.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param openWalletRequest The open wallet request.
+     * @return OpenWalletResponse
+     */
+    suspend fun openWallet(openWalletRequest: OpenWalletRequest): OpenWalletResponse? {
+        val jsonBody = Json.encodeToString(openWalletRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/wallet/open")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/wallet/open")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<OpenWalletResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error open wallet from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error open wallet from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error open wallet from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+}
