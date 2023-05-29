@@ -35,9 +35,13 @@ import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
-import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
+import org.kryptokrona.sdk.walletapi.model.request.ImportAddressRequest
+import org.kryptokrona.sdk.walletapi.model.request.ImportViewOnlyAddressRequest
+import org.kryptokrona.sdk.walletapi.model.response.*
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
@@ -57,9 +61,9 @@ class AddressClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return PrimaryAddressResponse
      */
-    suspend fun primaryAddress(): StatusResponse? {
+    suspend fun primaryAddress(): PrimaryAddressResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -72,7 +76,7 @@ class AddressClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<PrimaryAddressResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting primary address from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -89,9 +93,9 @@ class AddressClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return AddressesResponse
      */
-    suspend fun addresses(): StatusResponse? {
+    suspend fun addresses(): AddressesResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -104,13 +108,192 @@ class AddressClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<AddressesResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting all addresses from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting all addresses from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting all addresses from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Create a random address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return RandomAddressResponse
+     */
+    suspend fun createRandomAddress(): RandomAddressResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/create")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/create")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<RandomAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating a random address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating a random address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating a random address with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Import an address with secret spend key.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return ImportAddressResponse
+     */
+    suspend fun importAddress(importAddressRequest: ImportAddressRequest): ImportAddressResponse? {
+        val jsonBody = Json.encodeToString(importAddressRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/import")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/import")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<ImportAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error importing address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error importing address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error importing address with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Import a view only address with a public spend key.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return ImportViewOnlyAddressResponse
+     */
+    suspend fun importViewOnlyAddress(
+        importViewOnlyAddressRequest: ImportViewOnlyAddressRequest): ImportViewOnlyAddressResponse? {
+        val jsonBody = Json.encodeToString(importViewOnlyAddressRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/import/view")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/import/view")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<ImportViewOnlyAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error importing view only address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error importing view only address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error importing view only address with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Delete a given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun deleteAddress(address: String): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Delete
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/$address")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/$address")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.delete(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error deleting address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error deleting address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error deleting address with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Creates an integrated address from a given address and payment id.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return CreateIntegratedAddressFromAddressAndPaymentIdResponse
+     */
+    suspend fun createIntegratedAddressFromAddressAndPaymentID(address: String, paymentId: String
+    ): CreateIntegratedAddressFromAddressAndPaymentIdResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/$address/$paymentId")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/$address/$paymentId")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<CreateIntegratedAddressFromAddressAndPaymentIdResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not parse the response.", e)
         }
 
         return null

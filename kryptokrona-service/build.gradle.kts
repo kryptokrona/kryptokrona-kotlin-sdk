@@ -1,10 +1,12 @@
-val ossrhUsername: String? = System.getProperty("ossrhUsername")
-val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
+val ktor_version: String by project
+val coroutines_version: String by project
+val slf4j_version: String by project
+val kotlin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     `java-library`
     `maven-publish`
@@ -14,10 +16,10 @@ plugins {
 
 version = "0.3.0"
 
-/*java {
+java {
     withJavadocJar()
     withSourcesJar()
-}*/
+}
 
 repositories {
     mavenCentral()
@@ -64,7 +66,36 @@ koverReport {
     }
 }
 
-/*publishing {
+koverReport {
+    filters {
+        excludes {
+            classes("org.kryptokrona.sdk.walletapi.model.*")
+        }
+    }
+
+    verify {
+        onCheck = true
+        rule {
+            isEnabled = true
+            entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
+
+            filters {
+                excludes {
+                    classes("org.kryptokrona.sdk.walletapi.model.*")
+                }
+            }
+
+            bound {
+                minValue = 60
+                maxValue = 90
+                metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
+                aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+            }
+        }
+    }
+}
+
+publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             artifactId = "kryptokrona-service"
@@ -80,7 +111,7 @@ koverReport {
             }
             pom {
                 name.set("Kryptokrona Service")
-                description.set("The service library for communicating with Kryptokrona nodes")
+                description.set("The service library for communicating with a Kryptokrona Service.")
                 url.set("https://kryptokrona.org")
                 licenses {
                     license {
@@ -118,20 +149,32 @@ koverReport {
                 create<BasicAuthentication>("basic")
             }
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = System.getenv("ORG_GRADLE_PROJECT_ossrhUsername")
+                password = System.getenv("ORG_GRADLE_PROJECT_ossrhPassword")
+            }
+        }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kryptokrona/kryptokrona-kotlin-sdk")
+
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
-}*/
+}
 
-/*signing {
+signing {
+    val signingKey = System.getenv("ORG_GRADLE_PROJECT_signingKey")
+    val signingPassword = System.getenv("ORG_GRADLE_PROJECT_signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
-}*/
+}
 
-/*
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
-}*/
+}

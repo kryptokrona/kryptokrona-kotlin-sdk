@@ -28,19 +28,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.walletapi.model.request
-
-import kotlinx.serialization.Serializable
+package org.kryptokrona.sdk.walletapi.model.response
 
 /**
- * Import wallet with key request.
+ * Wallet status response.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
-@Serializable
-data class ImportWalletWithKeyRequest(
-    var privateViewKey: String,
-    var privateSpendKey: String,
-    var scanHeight: Long,
+data class WalletStatusResponse(
+    var walletBlockCount: Long,
+    var localDaemonBlockCount: Long,
+    var networkBlockCount: Long,
+    var peerCount: Long,
+    var hashrate: Long,
+    var isViewWallet: Boolean,
+    var subWalletCount: Long,
 )

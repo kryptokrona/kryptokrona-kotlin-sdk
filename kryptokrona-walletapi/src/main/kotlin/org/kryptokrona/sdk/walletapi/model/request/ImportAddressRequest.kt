@@ -33,14 +33,13 @@ package org.kryptokrona.sdk.walletapi.model.request
 import kotlinx.serialization.Serializable
 
 /**
- * Import wallet with key request.
+ * Import address request.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class ImportWalletWithKeyRequest(
-    var privateViewKey: String,
-    var privateSpendKey: String,
+data class ImportAddressRequest(
     var scanHeight: Long,
+    var privateSpendKey: String,
 )

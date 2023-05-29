@@ -37,6 +37,8 @@ import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.BalanceResponse
+import org.kryptokrona.sdk.walletapi.model.response.BalancesResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -57,9 +59,9 @@ class BalanceClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return BalanceResponse
      */
-    suspend fun walletBalance(): StatusResponse? {
+    suspend fun walletBalance(): BalanceResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -72,7 +74,7 @@ class BalanceClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<BalanceResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting wallet balance from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -89,9 +91,9 @@ class BalanceClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return BalancesResponse
      */
-    suspend fun walletBalances(): StatusResponse? {
+    suspend fun walletBalances(): BalancesResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -104,7 +106,7 @@ class BalanceClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<BalancesResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting wallet balances from each address from Wallet API. " +
                     "Could not reach the server.", e)
@@ -124,24 +126,22 @@ class BalanceClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return BalanceResponse
      */
-    suspend fun walletBalanceForSpecificAddress(): StatusResponse? {
-        //TODO: need to take in a request parameter here
-
+    suspend fun walletBalanceForSpecificAddress(address: String): BalanceResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance/$address")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances/$address")
                 }
             }
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<BalanceResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting wallet balance from specific address from Wallet API. " +
                     "Could not reach the server.", e)

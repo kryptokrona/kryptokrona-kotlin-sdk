@@ -41,7 +41,10 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.request.*
+import org.kryptokrona.sdk.walletapi.model.response.SendTransactionResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
+import org.kryptokrona.sdk.walletapi.model.response.TransactionDetailWithHashResponse
+import org.kryptokrona.sdk.walletapi.model.response.TransactionsUnconfirmedWithAddressResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
@@ -61,9 +64,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransaction(sendTransactionRequest: SendTransactionRequest): StatusResponse? {
+    suspend fun sendTransaction(sendTransactionRequest: SendTransactionRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -83,7 +86,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending basic transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -100,9 +103,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransactionAdvanced(sendTransactionAdvancedRequest: SendTransactionAdvancedRequest): StatusResponse? {
+    suspend fun sendTransactionAdvanced(sendTransactionAdvancedRequest: SendTransactionAdvancedRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionAdvancedRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -122,7 +125,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending advanced transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -139,9 +142,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransactionFusion(sendTransactionFusionRequest: SendTransactionFusionRequest): StatusResponse? {
+    suspend fun sendTransactionFusion(sendTransactionFusionRequest: SendTransactionFusionRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionFusionRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -161,7 +164,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending fusion transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -178,10 +181,10 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
     suspend fun sendTransactionFusionAdvanced(
-        sendTransactionFusionAdvancedRequest: SendTransactionFusionAdvancedRequest): StatusResponse? {
+        sendTransactionFusionAdvancedRequest: SendTransactionFusionAdvancedRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionFusionAdvancedRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -201,7 +204,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending advanced fusion transaction through Wallet API. " +
                     "Could not reach the server.", e)
@@ -277,6 +280,116 @@ class TransactionClient(private val walletApi: WalletApi) {
                     "Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting all unconfirmed transactions from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get all unconfirmed transactions with a given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return TransactionsUnconfirmedWithAddressResponse
+     */
+    suspend fun transactionsUnconfirmedWithAddress(address: String): TransactionsUnconfirmedWithAddressResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/unconfirmed/$address")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/unconfirmed/$address")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<TransactionsUnconfirmedWithAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all unconfirmed transactions with a given address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all unconfirmed transactions with a given address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all unconfirmed transactions with a given address from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get all transactions starting at the given block and ending at the given block
+     * belonging to the given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return TransactionsUnconfirmedWithAddressResponse
+     */
+    suspend fun transactionsAddressStartingEndingBlock(
+        address: String,
+        startBlock: Long,
+        endBlock: Long
+    ): TransactionsUnconfirmedWithAddressResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/address/$address/$startBlock/$endBlock")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/address/$address/$startBlock/$endBlock")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<TransactionsUnconfirmedWithAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get transaction detail with a given hash.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return TransactionDetailWithHashResponse
+     */
+    suspend fun transactionDetailWithHash(hash: String): TransactionDetailWithHashResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/hash/$hash")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/hash/$hash")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<TransactionDetailWithHashResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
                     "Could not parse the response.", e)
         }
 

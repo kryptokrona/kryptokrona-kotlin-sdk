@@ -37,6 +37,7 @@ import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.NodeDetailsResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -57,9 +58,9 @@ class NodeClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return NodeDetailsResponse
      */
-    suspend fun nodeDetails(): StatusResponse? {
+    suspend fun nodeDetails(): NodeDetailsResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -72,7 +73,7 @@ class NodeClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<NodeDetailsResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting node details from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
