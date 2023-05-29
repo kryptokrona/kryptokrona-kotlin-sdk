@@ -215,4 +215,71 @@ class TransactionClient(private val walletApi: WalletApi) {
 
         return null
     }
+
+    /**
+     * Get all transactions.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun transactions(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all transactions from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all transactions from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all transactions from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get all unconfirmed transactions.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun transactionsUnconfirmed(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/unconfirmed")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/unconfirmed")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all unconfirmed transactions from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all unconfirmed transactions from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all unconfirmed transactions from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
