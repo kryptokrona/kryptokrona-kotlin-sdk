@@ -42,31 +42,31 @@ import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
 /**
- * Address client
+ * Node client
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class AddressClient(private val walletApi: WalletApi) {
+class NodeClient(private val walletApi: WalletApi) {
 
-    private val logger = LoggerFactory.getLogger("AddressClient")
+    private val logger = LoggerFactory.getLogger("NodeClient")
 
     /**
-     * Get the primary address.
+     * Node details.
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun primaryAddress(): StatusResponse? {
+    suspend fun nodeDetails(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/node")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/node")
                 }
             }
         }
@@ -74,43 +74,43 @@ class AddressClient(private val walletApi: WalletApi) {
         try {
             return HttpClient.client.get(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting primary address from Wallet API. Could not reach the server.", e)
+            logger.error("Error getting node details from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting primary address from Wallet API. Could not resolve the address.", e)
+            logger.error("Error getting node details from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting primary address from Wallet API. Could not parse the response.", e)
+            logger.error("Error getting node details from Wallet API. Could not parse the response.", e)
         }
 
         return null
     }
 
     /**
-     * Get a list of all addresses.
+     * Swap node details.
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun addresses(): StatusResponse? {
+    suspend fun swapNodeDetails(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
-            method = HttpMethod.Get
+            method = HttpMethod.Put
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/node")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/node")
                 }
             }
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.put(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting all addresses from Wallet API. Could not reach the server.", e)
+            logger.error("Error swapping node details with Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting all addresses from Wallet API. Could not resolve the address.", e)
+            logger.error("Error swapping node details with Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting all addresses from Wallet API. Could not parse the response.", e)
+            logger.error("Error swapping node details with Wallet API. Could not parse the response.", e)
         }
 
         return null

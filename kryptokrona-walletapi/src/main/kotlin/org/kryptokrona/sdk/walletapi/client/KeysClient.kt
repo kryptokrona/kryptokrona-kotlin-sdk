@@ -42,31 +42,31 @@ import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
 /**
- * Address client
+ * Keys client
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class AddressClient(private val walletApi: WalletApi) {
+class KeysClient(private val walletApi: WalletApi) {
 
-    private val logger = LoggerFactory.getLogger("AddressClient")
+    private val logger = LoggerFactory.getLogger("KeysClient")
 
     /**
-     * Get the primary address.
+     * Get shared private view key.
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun primaryAddress(): StatusResponse? {
+    suspend fun sharedPrivateViewKey(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/keys")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/keys")
                 }
             }
         }
@@ -74,43 +74,11 @@ class AddressClient(private val walletApi: WalletApi) {
         try {
             return HttpClient.client.get(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting primary address from Wallet API. Could not reach the server.", e)
+            logger.error("Error getting shared private view key from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting primary address from Wallet API. Could not resolve the address.", e)
+            logger.error("Error getting shared private view key from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting primary address from Wallet API. Could not parse the response.", e)
-        }
-
-        return null
-    }
-
-    /**
-     * Get a list of all addresses.
-     *
-     * @author Marcus Cvjeticanin
-     * @since 0.3.0
-     * @return StatusResponse
-     */
-    suspend fun addresses(): StatusResponse? {
-        val builder = HttpRequestBuilder().apply {
-            method = HttpMethod.Get
-            walletApi.ssl.let {
-                if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses")
-                } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses")
-                }
-            }
-        }
-
-        try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
-        } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting all addresses from Wallet API. Could not reach the server.", e)
-        } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting all addresses from Wallet API. Could not resolve the address.", e)
-        } catch (e: JsonConvertException) {
-            logger.error("Error getting all addresses from Wallet API. Could not parse the response.", e)
+            logger.error("Error getting shared private view key from Wallet API. Could not parse the response.", e)
         }
 
         return null

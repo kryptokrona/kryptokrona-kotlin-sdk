@@ -28,25 +28,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.walletapi.model
+package org.kryptokrona.sdk.walletapi.model.response
 
 import kotlinx.serialization.Serializable
 
-/**
- * WalletApi is a data class that holds information about a Wallet API. The properties are mutable
- * so that they can be changed during runtime.
- *
- * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param hostName The host name of the wallet api.
- * @param port The port of the wallet api.
- * @param ssl Whether the wallet api is using SSL.
- */
 @Serializable
-data class WalletApi(
-    var hostName: String,
-    var port: Int,
-    var fileName: String,
-    var password: String,
-    var ssl: Boolean
+data class StatusResponse(
+    var status: Int,
 )
