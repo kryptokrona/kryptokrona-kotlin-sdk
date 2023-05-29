@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.walletapi.model.request
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Send transaction fusion request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class SendTransactionFusionRequest(
     var test: String,
