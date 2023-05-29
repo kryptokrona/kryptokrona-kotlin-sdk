@@ -16,10 +16,10 @@ plugins {
 
 version = "0.3.0"
 
-/*java {
+java {
     withJavadocJar()
     withSourcesJar()
-}*/
+}
 
 repositories {
     mavenCentral()
@@ -53,7 +53,7 @@ kotlin {
 koverReport {
     filters {
         excludes {
-            classes("org.kryptokrona.sdk.http.model.*")
+            classes("org.kryptokrona.sdk.service.model.*")
         }
     }
 
@@ -65,7 +65,7 @@ koverReport {
 
             filters {
                 excludes {
-                    classes("org.kryptokrona.sdk.http.model.*")
+                    classes("org.kryptokrona.sdk.service.model.*")
                 }
             }
 
