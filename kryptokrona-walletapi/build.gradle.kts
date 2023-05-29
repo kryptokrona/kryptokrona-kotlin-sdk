@@ -10,7 +10,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
 }
 
@@ -50,13 +50,39 @@ kotlin {
     jvmToolchain(17)
 }
 
-// import Kover config here later
+koverReport {
+    filters {
+        excludes {
+            classes("org.kryptokrona.sdk.http.model.*")
+        }
+    }
+
+    verify {
+        onCheck = true
+        rule {
+            isEnabled = true
+            entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
+
+            filters {
+                excludes {
+                    classes("org.kryptokrona.sdk.http.model.*")
+                }
+            }
+
+            bound {
+                minValue = 60
+                maxValue = 90
+                metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
+                aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+            }
+        }
+    }
+}
 
 // import publishing config here later
 
-/*
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
-}*/
+}
