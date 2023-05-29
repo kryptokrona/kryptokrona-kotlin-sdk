@@ -38,6 +38,7 @@ import io.ktor.serialization.*
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.response.MnemonicSeedResponse
+import org.kryptokrona.sdk.walletapi.model.response.SharedPrivateViewKeyResponse
 import org.kryptokrona.sdk.walletapi.model.response.SpendKeysResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
@@ -59,9 +60,9 @@ class KeysClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SharedPrivateViewKeyResponse
      */
-    suspend fun sharedPrivateViewKey(): StatusResponse? {
+    suspend fun sharedPrivateViewKey(): SharedPrivateViewKeyResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -74,7 +75,7 @@ class KeysClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<SharedPrivateViewKeyResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting shared private view key from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
