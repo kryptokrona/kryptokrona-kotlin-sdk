@@ -41,9 +41,8 @@ tasks.withType<KotlinCompile> {
 // Dokka configuration
 // TODO: does not work ATM, if you can fix it, please do :)
 subprojects {
-    // exclude the "playground" module from the dokka task and the "kryptokrona-service" module
-    // and the "kryptokrona-walletapi" module temporarily since we are not ready yet to publish
-    if (name != "playground" && name != "kryptokrona-service" && name != "kryptokrona-walletapi" ) {
+    // exclude the "playground" module from the dokka task
+    if (name != "playground") {
         apply(plugin = "org.jetbrains.dokka")
 
         tasks.withType<DokkaTask>().configureEach {
