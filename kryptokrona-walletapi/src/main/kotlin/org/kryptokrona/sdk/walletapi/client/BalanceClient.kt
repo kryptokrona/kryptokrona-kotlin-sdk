@@ -30,8 +30,16 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Balance client
@@ -43,4 +51,108 @@ import org.slf4j.LoggerFactory
 class BalanceClient(private val walletApi: WalletApi) {
 
     private val logger = LoggerFactory.getLogger("BalanceClient")
+
+    /**
+     * Balance of wallet.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun walletBalance(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balance")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting wallet balance from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting wallet balance from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting wallet balance from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Balances of each address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun walletBalances(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balances")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Balance of specific wallet address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun walletBalanceForSpecificAddress(): StatusResponse? {
+        //TODO: need to take in a request parameter here
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
