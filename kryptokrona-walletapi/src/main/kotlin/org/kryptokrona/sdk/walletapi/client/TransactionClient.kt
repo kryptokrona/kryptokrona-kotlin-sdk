@@ -318,4 +318,44 @@ class TransactionClient(private val walletApi: WalletApi) {
 
         return null
     }
+
+    /**
+     * Get all transactions starting at the given block and ending at the given block
+     * belonging to the given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return TransactionsUnconfirmedWithAddressResponse
+     */
+    suspend fun transactionsAddressStartingEndingBlock(
+        address: String,
+        startBlock: Long,
+        endBlock: Long
+    ): TransactionsUnconfirmedWithAddressResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/address/$address/$startBlock/$endBlock")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/address/$address/$startBlock/$endBlock")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<TransactionsUnconfirmedWithAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all transactions with a given address and starting/ending " +
+                    "block from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
