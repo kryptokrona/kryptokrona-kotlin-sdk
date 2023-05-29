@@ -42,31 +42,31 @@ import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
 /**
- * Address client
+ * Balance client
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class AddressClient(private val walletApi: WalletApi) {
+class BalanceClient(private val walletApi: WalletApi) {
 
-    private val logger = LoggerFactory.getLogger("AddressClient")
+    private val logger = LoggerFactory.getLogger("BalanceClient")
 
     /**
-     * Get the primary address.
+     * Balance of wallet.
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun primaryAddress(): StatusResponse? {
+    suspend fun walletBalance(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/primary")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balance")
                 }
             }
         }
@@ -74,31 +74,31 @@ class AddressClient(private val walletApi: WalletApi) {
         try {
             return HttpClient.client.get(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting primary address from Wallet API. Could not reach the server.", e)
+            logger.error("Error getting wallet balance from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting primary address from Wallet API. Could not resolve the address.", e)
+            logger.error("Error getting wallet balance from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting primary address from Wallet API. Could not parse the response.", e)
+            logger.error("Error getting wallet balance from Wallet API. Could not parse the response.", e)
         }
 
         return null
     }
 
     /**
-     * Get a list of all addresses.
+     * Balances of each address.
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun addresses(): StatusResponse? {
+    suspend fun walletBalances(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses")
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balances")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses")
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances")
                 }
             }
         }
@@ -106,11 +106,51 @@ class AddressClient(private val walletApi: WalletApi) {
         try {
             return HttpClient.client.get(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting all addresses from Wallet API. Could not reach the server.", e)
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting all addresses from Wallet API. Could not resolve the address.", e)
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting all addresses from Wallet API. Could not parse the response.", e)
+            logger.error("Error getting wallet balances from each address from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Balance of specific wallet address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun walletBalanceForSpecificAddress(): StatusResponse? {
+        //TODO: need to take in a request parameter here
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/balance")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/balances")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting wallet balance from specific address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting wallet balances from specific address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting wallet balances from specific address from Wallet API. " +
+                    "Could not parse the response.", e)
         }
 
         return null

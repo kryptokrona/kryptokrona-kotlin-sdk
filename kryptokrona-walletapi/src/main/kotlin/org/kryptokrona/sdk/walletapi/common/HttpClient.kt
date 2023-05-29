@@ -28,25 +28,39 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.walletapi.model
+package org.kryptokrona.sdk.walletapi.common
 
-import kotlinx.serialization.Serializable
+import io.ktor.client.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
+
+private const val MAX_SEND_COUNT = 50
+// with some endpoints we can get a lot of data, so we need to increase the timeout
+private const val MAX_TIMEOUT = 30_000L
 
 /**
- * WalletApi is a data class that holds information about a Wallet API. The properties are mutable
- * so that they can be changed during runtime.
+ * HTTP client singleton object.
  *
  * @author Marcus Cvjeticanin
  * @since 0.1.0
- * @param hostName The host name of the wallet api.
- * @param port The port of the wallet api.
- * @param ssl Whether the wallet api is using SSL.
  */
-@Serializable
-data class WalletApi(
-    var hostName: String,
-    var port: Int,
-    var fileName: String,
-    var password: String,
-    var ssl: Boolean
-)
+object HttpClient {
+    val client = HttpClient {
+        install(ContentNegotiation) {
+            json(Json { ignoreUnknownKeys = true })
+        }
+        install(HttpRequestRetry) {
+            retryOnServerErrors(maxRetries = 5)
+            exponentialDelay()
+        }
+        install(HttpSend) {
+            maxSendCount = MAX_SEND_COUNT
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = MAX_TIMEOUT
+        }
+    }
+}
+
