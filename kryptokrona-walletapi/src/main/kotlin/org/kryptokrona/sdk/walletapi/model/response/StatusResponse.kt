@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.walletapi.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Status response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class StatusResponse(
     var status: Int,

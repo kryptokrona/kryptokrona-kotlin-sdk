@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.walletapi.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Import address response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class ImportAddressResponse(
     var address: String,

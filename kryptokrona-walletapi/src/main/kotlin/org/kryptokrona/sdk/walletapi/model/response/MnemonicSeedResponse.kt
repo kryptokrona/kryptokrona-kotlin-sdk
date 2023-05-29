@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.walletapi.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Mnemonic seed response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class MnemonicSeedResponse(
     var mnemonicSeed: String
