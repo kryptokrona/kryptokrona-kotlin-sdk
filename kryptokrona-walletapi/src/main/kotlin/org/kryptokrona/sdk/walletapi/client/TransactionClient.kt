@@ -40,9 +40,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
-import org.kryptokrona.sdk.walletapi.model.request.ImportViewWalletRequest
-import org.kryptokrona.sdk.walletapi.model.request.SendTransactionAdvancedRequest
-import org.kryptokrona.sdk.walletapi.model.request.SendTransactionRequest
+import org.kryptokrona.sdk.walletapi.model.request.*
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -131,6 +129,88 @@ class TransactionClient(private val walletApi: WalletApi) {
             logger.error("Error sending advanced transaction through Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error sending advanced transaction through Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Send fusion transaction.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun sendTransactionFusion(sendTransactionFusionRequest: SendTransactionFusionRequest): StatusResponse? {
+        val jsonBody = Json.encodeToString(sendTransactionFusionRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/send/fusion/basic")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/send/fusion/basic")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error sending fusion transaction through Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error sending fusion transaction through Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error sending fusion transaction through Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Send advanced fusion transaction.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun sendTransactionFusionAdvanced(
+        sendTransactionFusionAdvancedRequest: SendTransactionFusionAdvancedRequest): StatusResponse? {
+        val jsonBody = Json.encodeToString(sendTransactionFusionAdvancedRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/send/fusion/advanced")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/send/fusion/advanced")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error sending advanced fusion transaction through Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error sending advanced fusion transaction through Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error sending advanced fusion transaction through Wallet API. " +
+                    "Could not parse the response.", e)
         }
 
         return null
