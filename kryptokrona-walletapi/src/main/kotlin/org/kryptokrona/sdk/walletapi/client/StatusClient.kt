@@ -62,7 +62,7 @@ class StatusClient(private val walletApi: WalletApi) {
      * @since 0.3.0
      * @return StatusResponse
      */
-    suspend fun openWallet(): StatusResponse? {
+    suspend fun walletStatus(): StatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
