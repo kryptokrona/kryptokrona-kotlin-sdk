@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.walletapi.client
 
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.slf4j.LoggerFactory
 
 /**
  * Transaction client
@@ -39,4 +40,7 @@ import org.kryptokrona.sdk.walletapi.model.WalletApi
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class TransactionClient(private val walletApi: WalletApi) {}
+class TransactionClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("TransactionClient")
+}

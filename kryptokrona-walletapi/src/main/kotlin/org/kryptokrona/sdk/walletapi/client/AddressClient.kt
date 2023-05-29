@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.walletapi.client
 
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.slf4j.LoggerFactory
 
 /**
  * Address client
@@ -39,4 +40,8 @@ import org.kryptokrona.sdk.walletapi.model.WalletApi
  * @since 0.3.0
  * @param walletApi The wallet API to connect to.
  */
-class AddressClient(private val walletApi: WalletApi) {}
+class AddressClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("AddressClient")
+
+}
