@@ -262,4 +262,40 @@ class AddressClient(private val walletApi: WalletApi) {
 
         return null
     }
+
+    /**
+     * Creates an integrated address from a given address and payment id.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return CreateIntegratedAddressFromAddressAndPaymentIdResponse
+     */
+    suspend fun createIntegratedAddressFromAddressAndPaymentID(address: String, paymentId: String
+    ): CreateIntegratedAddressFromAddressAndPaymentIdResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/$address/$paymentId")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/$address/$paymentId")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<CreateIntegratedAddressFromAddressAndPaymentIdResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating integrated address from the given address and payment ID from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
