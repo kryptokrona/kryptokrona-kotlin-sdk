@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@sveltejs/adapter-auto':
@@ -19,8 +23,8 @@ devDependencies:
     specifier: 1.6.1
     version: 1.6.1(@algolia/client-search@4.17.0)(@sveltejs/kit@1.16.2)(rollup@2.79.1)(svelte@3.59.1)(vite@4.3.5)(workbox-build@6.5.4)(workbox-window@6.5.4)
   '@sveltepress/vite':
-    specifier: ^0.19.0
-    version: 0.19.0(@sveltejs/kit@1.16.2)(rollup@2.79.1)(svelte@3.59.1)(vite@4.3.5)
+    specifier: ^0.20.0
+    version: 0.20.0(@sveltejs/kit@1.16.2)(rollup@2.79.1)(svelte@3.59.1)(vite@4.3.5)
   '@types/node':
     specifier: ^18.11.17
     version: 18.16.6
@@ -1831,8 +1835,8 @@ packages:
       - workbox-window
     dev: true
 
-  /@sveltepress/vite@0.19.0(@sveltejs/kit@1.16.2)(rollup@2.79.1)(svelte@3.59.1)(vite@4.3.5):
-    resolution: {integrity: sha512-uUhE+ZAoh8ay/egCqjYPK1dNV5+idNGGL5UF041l882vHW7v7gQ9Alr5hAOaSyae5wN+lMOhTdh0tC/ZSO2D7Q==}
+  /@sveltepress/vite@0.20.0(@sveltejs/kit@1.16.2)(rollup@2.79.1)(svelte@3.59.1)(vite@4.3.5):
+    resolution: {integrity: sha512-Jsak7lMAD9Ex7ehtlwvFL09NQ39LHYkaAsJqWVzsi31e3TpCXwKIF3uQvDhqhKhVdSMxwOEJda10njDneY9PsQ==}
     peerDependencies:
       '@sveltejs/kit': ^1.7.0
       svelte: ^3.55.1
