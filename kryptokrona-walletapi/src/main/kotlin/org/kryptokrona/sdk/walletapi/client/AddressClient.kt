@@ -35,8 +35,14 @@ import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.request.ImportAddressRequest
+import org.kryptokrona.sdk.walletapi.model.response.ImportAddressResponse
+import org.kryptokrona.sdk.walletapi.model.response.RandomAddressResponse
+import org.kryptokrona.sdk.walletapi.model.response.SpendKeysResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -111,6 +117,77 @@ class AddressClient(private val walletApi: WalletApi) {
             logger.error("Error getting all addresses from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting all addresses from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Create a random address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun createRandomAddress(): RandomAddressResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/create")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/create")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<RandomAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating a random address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating a random address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating a random address with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Import an address with secret spend key.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return ImportAddressResponse
+     */
+    suspend fun importAddress(importAddressRequest: ImportAddressRequest): ImportAddressResponse? {
+        val jsonBody = Json.encodeToString(importAddressRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/addresses/import")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/addresses/import")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<ImportAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error importing address with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error importing address with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error importing address with Wallet API. Could not parse the response.", e)
         }
 
         return null

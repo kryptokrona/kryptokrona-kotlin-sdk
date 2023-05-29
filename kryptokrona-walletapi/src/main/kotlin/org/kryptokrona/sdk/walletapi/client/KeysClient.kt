@@ -37,6 +37,8 @@ import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.MnemonicSeedResponse
+import org.kryptokrona.sdk.walletapi.model.response.SpendKeysResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -79,6 +81,76 @@ class KeysClient(private val walletApi: WalletApi) {
             logger.error("Error getting shared private view key from Wallet API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting shared private view key from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get the spend keys for a given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return SpendKeysResponse
+     */
+    suspend fun getSpendKeys(address: String): SpendKeysResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/keys/$address")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/keys/$address")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<SpendKeysResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting the spend keys for a given address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting the spend keys for a given address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting the spend keys for a given address from Wallet API. " +
+                    "Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get the mnemonic seed for a given address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun getMnemonicSeed(address: String): MnemonicSeedResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/keys/mnemonic/$address")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/keys/mnemonic/$address")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<MnemonicSeedResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting mnemonic seed for a given address from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting mnemonic seed for a given address from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting mnemonic seed for a given address from Wallet API. " +
+                    "Could not parse the response.", e)
         }
 
         return null
