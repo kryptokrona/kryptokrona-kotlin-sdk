@@ -28,11 +28,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.walletapi.model.response
+package org.kryptokrona.sdk.walletapi.model.request
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OpenWalletResponse(
-    var status: Int,
+data class ImportWalletWithSeedRequest(
+    var mnemonicSeed: String,
+    var scanHeight: Long,
 )
