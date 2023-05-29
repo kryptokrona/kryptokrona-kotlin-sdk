@@ -143,13 +143,13 @@ class BalanceClient(private val walletApi: WalletApi) {
         try {
             return HttpClient.client.get(builder).body<StatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting wallet balances from each address from Wallet API. " +
+            logger.error("Error getting wallet balance from specific address from Wallet API. " +
                     "Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting wallet balances from each address from Wallet API. " +
+            logger.error("Error getting wallet balances from specific address from Wallet API. " +
                     "Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting wallet balances from each address from Wallet API. " +
+            logger.error("Error getting wallet balances from specific address from Wallet API. " +
                     "Could not parse the response.", e)
         }
 

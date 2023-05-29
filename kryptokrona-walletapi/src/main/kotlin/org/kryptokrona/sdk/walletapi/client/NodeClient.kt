@@ -30,8 +30,16 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Node client
@@ -43,4 +51,68 @@ import org.slf4j.LoggerFactory
 class NodeClient(private val walletApi: WalletApi) {
 
     private val logger = LoggerFactory.getLogger("NodeClient")
+
+    /**
+     * Node details.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun nodeDetails(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/node")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/node")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting node details from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting node details from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting node details from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Swap node details.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun swapNodeDetails(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Put
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/node")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/node")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.put(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error swapping node details with Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error swapping node details with Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error swapping node details with Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
