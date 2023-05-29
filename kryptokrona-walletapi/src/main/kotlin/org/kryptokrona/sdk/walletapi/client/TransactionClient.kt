@@ -42,6 +42,7 @@ import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.request.*
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
+import org.kryptokrona.sdk.walletapi.model.response.TransactionDetailWithHashResponse
 import org.kryptokrona.sdk.walletapi.model.response.TransactionsUnconfirmedWithAddressResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -354,6 +355,41 @@ class TransactionClient(private val walletApi: WalletApi) {
         } catch (e: JsonConvertException) {
             logger.error("Error getting all transactions with a given address and starting/ending " +
                     "block from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get transaction detail with a given hash.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return TransactionDetailWithHashResponse
+     */
+    suspend fun transactionDetailWithHash(hash: String): TransactionDetailWithHashResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/transactions/hash/$hash")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/transactions/hash/$hash")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<TransactionDetailWithHashResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
+                    "Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
+                    "Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting transaction detail by given transaction hash from Wallet API. " +
+                    "Could not parse the response.", e)
         }
 
         return null
