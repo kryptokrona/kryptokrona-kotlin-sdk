@@ -95,7 +95,7 @@ koverReport {
     }
 }
 
-/*publishing {
+publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             artifactId = "kryptokrona-service"
@@ -111,7 +111,7 @@ koverReport {
             }
             pom {
                 name.set("Kryptokrona Service")
-                description.set("The service library for communicating with Kryptokrona nodes")
+                description.set("The service library for communicating with a Kryptokrona Service.")
                 url.set("https://kryptokrona.org")
                 licenses {
                     license {
@@ -149,16 +149,29 @@ koverReport {
                 create<BasicAuthentication>("basic")
             }
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = System.getenv("ORG_GRADLE_PROJECT_ossrhUsername")
+                password = System.getenv("ORG_GRADLE_PROJECT_ossrhPassword")
+            }
+        }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kryptokrona/kryptokrona-kotlin-sdk")
+
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
-}*/
+}
 
-/*signing {
+signing {
+    val signingKey = System.getenv("ORG_GRADLE_PROJECT_signingKey")
+    val signingPassword = System.getenv("ORG_GRADLE_PROJECT_signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
-}*/
+}
 
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
