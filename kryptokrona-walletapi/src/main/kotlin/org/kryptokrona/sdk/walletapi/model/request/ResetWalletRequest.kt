@@ -33,6 +33,6 @@ package org.kryptokrona.sdk.walletapi.model.request
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OpenWalletRequest(
-    var test: String,
+data class ResetWalletRequest(
+    var scanHeight: Long,
 )
