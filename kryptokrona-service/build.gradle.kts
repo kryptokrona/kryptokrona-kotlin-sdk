@@ -1,10 +1,12 @@
-val ossrhUsername: String? = System.getProperty("ossrhUsername")
-val ossrhPassword: String? = System.getProperty("ossrhPassword") // this file should be in the HOME directory gradle.properties
+val ktor_version: String by project
+val coroutines_version: String by project
+val slf4j_version: String by project
+val kotlin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
-    // id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.0-Alpha"
     `java-library`
     `maven-publish`
@@ -14,10 +16,10 @@ plugins {
 
 version = "0.3.0"
 
-/*java {
+java {
     withJavadocJar()
     withSourcesJar()
-}*/
+}
 
 repositories {
     mavenCentral()
@@ -51,6 +53,35 @@ koverReport {
             filters {
                 excludes {
                     classes("org.kryptokrona.sdk.service.model.*")
+                }
+            }
+
+            bound {
+                minValue = 60
+                maxValue = 90
+                metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
+                aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+            }
+        }
+    }
+}
+
+koverReport {
+    filters {
+        excludes {
+            classes("org.kryptokrona.sdk.walletapi.model.*")
+        }
+    }
+
+    verify {
+        onCheck = true
+        rule {
+            isEnabled = true
+            entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
+
+            filters {
+                excludes {
+                    classes("org.kryptokrona.sdk.walletapi.model.*")
                 }
             }
 
@@ -129,9 +160,8 @@ koverReport {
     sign(publishing.publications["mavenJava"])
 }*/
 
-/*
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
-}*/
+}
