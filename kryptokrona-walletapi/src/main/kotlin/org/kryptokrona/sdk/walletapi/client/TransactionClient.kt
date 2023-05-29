@@ -41,6 +41,7 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.request.*
+import org.kryptokrona.sdk.walletapi.model.response.SendTransactionResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.kryptokrona.sdk.walletapi.model.response.TransactionDetailWithHashResponse
 import org.kryptokrona.sdk.walletapi.model.response.TransactionsUnconfirmedWithAddressResponse
@@ -63,9 +64,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransaction(sendTransactionRequest: SendTransactionRequest): StatusResponse? {
+    suspend fun sendTransaction(sendTransactionRequest: SendTransactionRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -85,7 +86,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending basic transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -102,9 +103,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransactionAdvanced(sendTransactionAdvancedRequest: SendTransactionAdvancedRequest): StatusResponse? {
+    suspend fun sendTransactionAdvanced(sendTransactionAdvancedRequest: SendTransactionAdvancedRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionAdvancedRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -124,7 +125,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending advanced transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -141,9 +142,9 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
-    suspend fun sendTransactionFusion(sendTransactionFusionRequest: SendTransactionFusionRequest): StatusResponse? {
+    suspend fun sendTransactionFusion(sendTransactionFusionRequest: SendTransactionFusionRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionFusionRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -163,7 +164,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending fusion transaction through Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -180,10 +181,10 @@ class TransactionClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return SendTransactionResponse
      */
     suspend fun sendTransactionFusionAdvanced(
-        sendTransactionFusionAdvancedRequest: SendTransactionFusionAdvancedRequest): StatusResponse? {
+        sendTransactionFusionAdvancedRequest: SendTransactionFusionAdvancedRequest): SendTransactionResponse? {
         val jsonBody = Json.encodeToString(sendTransactionFusionAdvancedRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -203,7 +204,7 @@ class TransactionClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.post(builder).body<StatusResponse>()
+            return HttpClient.client.post(builder).body<SendTransactionResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error sending advanced fusion transaction through Wallet API. " +
                     "Could not reach the server.", e)

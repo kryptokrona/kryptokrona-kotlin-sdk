@@ -41,6 +41,7 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
+import org.kryptokrona.sdk.walletapi.model.response.WalletStatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
@@ -60,9 +61,9 @@ class StatusClient(private val walletApi: WalletApi) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.3.0
-     * @return StatusResponse
+     * @return WalletStatusResponse
      */
-    suspend fun walletStatus(): StatusResponse? {
+    suspend fun walletStatus(): WalletStatusResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             walletApi.ssl.let {
@@ -75,7 +76,7 @@ class StatusClient(private val walletApi: WalletApi) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<StatusResponse>()
+            return HttpClient.client.get(builder).body<WalletStatusResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting wallet status from Wallet API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
