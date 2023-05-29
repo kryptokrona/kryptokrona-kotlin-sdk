@@ -30,8 +30,16 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Keys client
@@ -43,4 +51,36 @@ import org.slf4j.LoggerFactory
 class KeysClient(private val walletApi: WalletApi) {
 
     private val logger = LoggerFactory.getLogger("KeysClient")
+
+    /**
+     * Get shared private view key.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @return StatusResponse
+     */
+    suspend fun sharedPrivateViewKey(): StatusResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            walletApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/keys")
+                } else {
+                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/keys")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<StatusResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting shared private view key from Wallet API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting shared private view key from Wallet API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting shared private view key from Wallet API. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
