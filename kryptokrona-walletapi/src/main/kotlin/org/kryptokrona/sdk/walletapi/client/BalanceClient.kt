@@ -30,5 +30,17 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
-class BalanceClient {
+import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.slf4j.LoggerFactory
+
+/**
+ * Balance client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ * @param walletApi The wallet API to connect to.
+ */
+class BalanceClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("BalanceClient")
 }

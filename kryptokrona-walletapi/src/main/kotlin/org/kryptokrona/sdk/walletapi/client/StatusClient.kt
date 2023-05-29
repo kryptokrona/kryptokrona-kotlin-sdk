@@ -30,5 +30,17 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
-class StatusClient {
+import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.slf4j.LoggerFactory
+
+/**
+ * Status client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ * @param walletApi The wallet API to connect to.
+ */
+class StatusClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("StatusClient")
 }

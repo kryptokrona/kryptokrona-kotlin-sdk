@@ -30,5 +30,17 @@
 
 package org.kryptokrona.sdk.walletapi.client
 
-class NodeClient {
+import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.slf4j.LoggerFactory
+
+/**
+ * Node client
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ * @param walletApi The wallet API to connect to.
+ */
+class NodeClient(private val walletApi: WalletApi) {
+
+    private val logger = LoggerFactory.getLogger("NodeClient")
 }
