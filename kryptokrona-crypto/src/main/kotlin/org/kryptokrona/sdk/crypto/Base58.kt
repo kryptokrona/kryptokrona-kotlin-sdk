@@ -79,7 +79,7 @@ object Base58 {
             ++zeros
         }
         // convert base-256 digits to base-58 digits (plus conversion to ASCII characters)
-        input = Arrays.copyOf(input, input.size) // since we modify it in-place
+        input = input.copyOf(input.size) // since we modify it in-place
         val encoded = CharArray(input.size * 2) // upper bound
         var outputStart = encoded.size
         var inputStart = zeros
