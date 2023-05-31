@@ -30,6 +30,8 @@
 
 package org.kryptokrona.sdk.service.client
 
+import org.kryptokrona.sdk.service.model.Service
+
 /**
  * Address Service Client
  *
@@ -37,7 +39,7 @@ package org.kryptokrona.sdk.service.client
  * @since 0.3.0
  * @param service The service to connect to.
  */
-class AddressServiceClient {
+class AddressServiceClient(private val service: Service) {
 
     // createAddress
 
