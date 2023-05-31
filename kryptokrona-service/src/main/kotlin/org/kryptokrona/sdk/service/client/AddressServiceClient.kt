@@ -30,7 +30,27 @@
 
 package org.kryptokrona.sdk.service.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
+import org.kryptokrona.sdk.service.model.request.address.CreateAddressRequest
+import org.kryptokrona.sdk.service.model.request.address.CreateIntegratedAddressRequest
+import org.kryptokrona.sdk.service.model.request.address.DeleteAddressRequest
+import org.kryptokrona.sdk.service.model.request.address.GetAddressesRequest
+import org.kryptokrona.sdk.service.model.request.balance.BalanceRequest
+import org.kryptokrona.sdk.service.model.response.address.CreateAddressResponse
+import org.kryptokrona.sdk.service.model.response.address.CreateIntegratedAddressResponse
+import org.kryptokrona.sdk.service.model.response.address.DeleteAddressResponse
+import org.kryptokrona.sdk.service.model.response.address.GetAddressesResponse
+import org.kryptokrona.sdk.service.model.response.balance.BalanceResponse
+import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Address Service Client
@@ -41,13 +61,168 @@ import org.kryptokrona.sdk.service.model.Service
  */
 class AddressServiceClient(private val service: Service) {
 
-    // createAddress
+    private val logger = LoggerFactory.getLogger("AddressServiceClient")
+
+    /**
+     * Create a new address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param createAddressRequest The request to create a new address.
+     * @return The response from the server.
+     */
+    suspend fun createAddress(createAddressRequest: CreateAddressRequest): CreateAddressResponse? {
+        val jsonBody = Json.encodeToString(createAddressRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<CreateAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating address. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating address. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating address. Could not parse the response.", e)
+        }
+
+        return null
+    }
 
     // createAddressList
 
-    // deleteAddress
+    /**
+     * Delete an address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param deleteAddressRequest The request to delete an address.
+     * @return The response from the server.
+     */
+    suspend fun deleteAddress(deleteAddressRequest: DeleteAddressRequest): DeleteAddressResponse? {
+        val jsonBody = Json.encodeToString(deleteAddressRequest)
 
-    // getAddresses
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
 
-    // createIntegratedAddress
+        try {
+            return HttpClient.client.post(builder).body<DeleteAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error deleting address. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error deleting address. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error deleting address. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get a list of addresses for the wallet.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getAddressesRequest The request object.
+     * @return The response object.
+     */
+    suspend fun getAddresses(getAddressesRequest: GetAddressesRequest): GetAddressesResponse? {
+        val jsonBody = Json.encodeToString(getAddressesRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<GetAddressesResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting addresses. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting addresses. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting addresses. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Create an integrated address.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param createIntegratedAddressRequest The request.
+     * @return The response.
+     */
+    suspend fun createIntegratedAddress(createIntegratedAddressRequest: CreateIntegratedAddressRequest):
+            CreateIntegratedAddressResponse? {
+        val jsonBody = Json.encodeToString(createIntegratedAddressRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<CreateIntegratedAddressResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error creating integrated address. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error creating integrated address. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error creating integrated address. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
