@@ -56,6 +56,14 @@ class StatusServiceClient(private val service: Service) {
 
     private val logger = LoggerFactory.getLogger("StatusServiceClient")
 
+    /**
+     * Get the status of the service.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param statusRequest The status request.
+     * @return The status response.
+     */
     suspend fun getStatus(statusRequest: StatusRequest): StatusResponse? {
         val jsonBody = Json.encodeToString(statusRequest)
 
