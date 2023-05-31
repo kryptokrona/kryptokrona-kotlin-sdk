@@ -30,7 +30,22 @@
 
 package org.kryptokrona.sdk.service.client
 
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
+import org.kryptokrona.sdk.service.model.request.SaveRequest
+import org.kryptokrona.sdk.service.model.request.StatusRequest
+import org.kryptokrona.sdk.service.model.response.SaveResponse
+import org.kryptokrona.sdk.service.model.response.StatusResponse
+import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Wallet Service Client
@@ -41,7 +56,48 @@ import org.kryptokrona.sdk.service.model.Service
  */
 class WalletServiceClient(private val service: Service) {
 
-    // save
+    private val logger = LoggerFactory.getLogger("WalletServiceClient")
+
+    /**
+     * Save the wallet.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param saveRequest The save request.
+     * @return The save response.
+     */
+    suspend fun save(saveRequest: SaveRequest): SaveResponse? {
+        val jsonBody = Json.encodeToString(saveRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<SaveResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error saving wallet. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error saving wallet. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error saving wallet. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
 
     // export
 
