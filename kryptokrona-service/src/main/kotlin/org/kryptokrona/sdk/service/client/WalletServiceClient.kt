@@ -100,8 +100,7 @@ class WalletServiceClient(private val service: Service) {
         return null
     }
 
-
-    // export
+    // TODO: export, could not find export in docs https://docs.kryptokrona.org/developer/kryptokrona/api/legacy-wallet-rpc-api
 
     /**
      * Reset the wallet.

@@ -91,5 +91,6 @@ class FeeServiceClient(private val service: Service) {
         return null
     }
 
-    // getNodeFeeInfo
+    // TODO: export, could not find getNodeFeeInfo in docs
+    // https://docs.kryptokrona.org/developer/kryptokrona/api/legacy-wallet-rpc-api
 }
