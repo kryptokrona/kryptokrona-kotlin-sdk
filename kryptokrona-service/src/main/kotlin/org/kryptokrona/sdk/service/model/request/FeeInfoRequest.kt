@@ -28,38 +28,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.service.client
+package org.kryptokrona.sdk.service.model.request
 
-import org.kryptokrona.sdk.service.model.Service
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 
 /**
- * Transaction Service Client
+ * Fee Info Request.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
- * @param service The service to connect to.
  */
-class TransactionServiceClient(private val service: Service) {
-
-    // getTransactionHashes
-
-    // getTransactions
-
-    // getUnconfirmedTransactionHashes
-
-    // getTransaction
-
-    // sendTransaction
-
-    // createDelayedTransaction
-
-    // getDelayedTransactionHashes
-
-    // deleteDelayedTransaction
-
-    // sendDelayedTransaction
-
-    // sendFusionTransaction
-
-    // estimateFusion
-}
+@Serializable
+data class FeeInfoRequest(
+    val jsonrpc: String = "2.0",
+    val id: Int,
+    val password: String,
+    val method: String,
+    @Contextual val params: @Contextual Any = emptyMap<String, Any>()
+)

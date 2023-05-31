@@ -30,6 +30,8 @@
 
 package org.kryptokrona.sdk.service.client
 
+import org.kryptokrona.sdk.service.model.Service
+
 /**
  * Wallet Service Client
  *
@@ -37,7 +39,7 @@ package org.kryptokrona.sdk.service.client
  * @since 0.3.0
  * @param service The service to connect to.
  */
-class WalletServiceClient {
+class WalletServiceClient(private val service: Service) {
 
     // save
 
