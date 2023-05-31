@@ -30,6 +30,22 @@
 
 package org.kryptokrona.sdk.service.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.kryptokrona.sdk.service.common.HttpClient
+import org.kryptokrona.sdk.service.model.Service
+import org.kryptokrona.sdk.service.model.request.balance.BalanceRequest
+import org.kryptokrona.sdk.service.model.request.block.BlockHashesRequest
+import org.kryptokrona.sdk.service.model.response.BlockHashesResponse
+import org.kryptokrona.sdk.service.model.response.balance.BalanceResponse
+import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
+
 /**
  * Block Service Client
  *
@@ -37,7 +53,47 @@ package org.kryptokrona.sdk.service.client
  * @since 0.3.0
  * @param service The service to connect to.
  */
-class BlockServiceClient {
+class BlockServiceClient(private val service: Service) {
 
-    // getBlockHashes
+    private val logger = LoggerFactory.getLogger("BlockServiceClient")
+
+    /**
+     * Get block hashes by range.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param blockHashesRequest The block hashes request.
+     * @return The block hashes response.
+     */
+    suspend fun getBlockHashes(blockHashesRequest: BlockHashesRequest): BlockHashesResponse? {
+        val jsonBody = Json.encodeToString(blockHashesRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<BlockHashesResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block hashes. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block hashes. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block hashes. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
