@@ -40,8 +40,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
+import org.kryptokrona.sdk.service.model.request.ResetRequest
 import org.kryptokrona.sdk.service.model.request.SaveRequest
 import org.kryptokrona.sdk.service.model.request.StatusRequest
+import org.kryptokrona.sdk.service.model.response.ResetResponse
 import org.kryptokrona.sdk.service.model.response.SaveResponse
 import org.kryptokrona.sdk.service.model.response.StatusResponse
 import org.slf4j.LoggerFactory
@@ -101,5 +103,43 @@ class WalletServiceClient(private val service: Service) {
 
     // export
 
-    // reset
+    /**
+     * Reset the wallet.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param resetRequest The reset request.
+     * @return The reset response.
+     */
+    suspend fun reset(resetRequest: ResetRequest): ResetResponse? {
+        val jsonBody = Json.encodeToString(resetRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            service.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${service.hostName}:${service.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${service.hostName}:${service.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return HttpClient.client.post(builder).body<ResetResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error resetting. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error resetting. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error resetting. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
