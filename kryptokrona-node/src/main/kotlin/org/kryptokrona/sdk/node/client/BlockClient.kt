@@ -38,10 +38,9 @@ import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.node.common.HttpClient.client
-import org.kryptokrona.sdk.node.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksDetailsByHashesRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksDetailsByHeightsRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksHashesByTimestampsRequest
+import org.kryptokrona.sdk.node.model.request.block.*
+import org.kryptokrona.sdk.node.model.response.block.GetBlockCountResponse
+import org.kryptokrona.sdk.node.model.response.block.GetBlockHashResponse
 import org.kryptokrona.sdk.node.model.response.blockdetail.BlockDetailResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsByHashesResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsResponse
@@ -219,6 +218,70 @@ class BlockClient(private val node: Node) {
             logger.error("Error getting blocks details by hashes. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting blocks details by hashes. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    suspend fun getBlockCount(getBlockCountRequest: GetBlockCountRequest): GetBlockCountResponse? {
+        val jsonBody = Json.encodeToString(getBlockCountRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetBlockCountResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block count. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block count. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block count. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    suspend fun getBlockHash(getBlockHashRequest: GetBlockHashRequest): GetBlockHashResponse? {
+        val jsonBody = Json.encodeToString(getBlockHashRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetBlockHashResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block hash. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block hash. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block hash. Could not parse the response.", e)
         }
 
         return null
