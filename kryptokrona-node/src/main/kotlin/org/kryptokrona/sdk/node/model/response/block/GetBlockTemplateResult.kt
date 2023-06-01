@@ -42,8 +42,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GetBlockTemplateResult(
     @SerialName("blocktemplate_blob") val blocktemplateBlob: String,
-    val difficulty: Int,
-    val height: Int,
-    @SerialName("reserved_offset") val reservedOffset: Int,
+    val difficulty: Long,
+    val height: Long,
+    @SerialName("reserved_offset") val reservedOffset: Long,
     val status: String
 )

@@ -41,15 +41,15 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class BlockHeader(
-    @SerialName("block_size") val blockSize: Int,
-    val depth: Int,
+    @SerialName("block_size") val blockSize: Long,
+    val depth: Long,
     val difficulty: Long,
     val hash: String,
-    val height: Int,
+    val height: Long,
     @SerialName("major_version") val majorVersion: Int,
     @SerialName("minor_version") val minorVersion: Int,
     val nonce: Long,
-    @SerialName("num_txes") val numTxes: Int,
+    @SerialName("num_txes") val numTxes: Long,
     @SerialName("orphan_status") val orphanStatus: Boolean,
     @SerialName("prev_hash") val prevHash: String,
     val reward: Long,

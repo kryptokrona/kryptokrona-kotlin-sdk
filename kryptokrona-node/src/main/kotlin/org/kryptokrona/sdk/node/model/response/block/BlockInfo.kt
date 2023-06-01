@@ -41,10 +41,10 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class BlockInfo(
-    @SerialName("cumul_size") val cumulSize: Int,
-    val difficulty: Int,
+    @SerialName("cumul_size") val cumulSize: Long,
+    val difficulty: Long,
     val hash: String,
-    val height: Int,
-    val timestamp: Int,
-    @SerialName("tx_count") val txCount: Int
+    val height: Long,
+    val timestamp: Long,
+    @SerialName("tx_count") val txCount: Long
 )

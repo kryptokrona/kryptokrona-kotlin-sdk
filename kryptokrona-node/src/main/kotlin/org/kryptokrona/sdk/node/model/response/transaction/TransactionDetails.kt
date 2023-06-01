@@ -44,7 +44,7 @@ data class TransactionDetails(
     @SerialName("amount_out") val amountOut: Long,
     val fee: Long,
     val hash: String,
-    val mixin: Int,
+    val mixin: Long,
     @SerialName("paymentId") val paymentID: String,
-    val size: Int
+    val size: Long
 )

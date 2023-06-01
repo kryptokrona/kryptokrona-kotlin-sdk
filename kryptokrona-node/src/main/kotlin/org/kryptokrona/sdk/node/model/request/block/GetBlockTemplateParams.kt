@@ -41,6 +41,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetBlockTemplateParams(
-    @SerialName("reserve_size") val reserveSize: Int,
+    @SerialName("reserve_size") val reserveSize: Long,
     @SerialName("wallet_address") val walletAddress: String
 )

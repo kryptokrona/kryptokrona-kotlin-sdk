@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.node.model.request.block
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 /**
@@ -42,5 +43,5 @@ import kotlinx.serialization.Serializable
 data class GetLastBlockHeaderRequest(
     val jsonrpc: String = "2.0",
     val method: String,
-    val params: Unit = Unit
+    @Contextual val params: Map<String, @Contextual Any>
 )
