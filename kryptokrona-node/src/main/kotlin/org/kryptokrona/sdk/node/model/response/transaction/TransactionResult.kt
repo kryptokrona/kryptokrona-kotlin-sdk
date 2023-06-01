@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.response.transaction
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.node.model.response.block.BlockInfo
 
+/**
+ * Transaction result.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionResult(
     val block: BlockInfo,

@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.response.transaction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Transactions.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class Transactions(
     @SerialName("missed_tx") val missedTransactions: List<String>, // should probably be another data class here

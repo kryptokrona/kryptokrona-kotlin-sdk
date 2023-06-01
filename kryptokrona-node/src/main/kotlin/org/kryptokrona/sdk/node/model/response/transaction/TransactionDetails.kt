@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.response.transaction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Transaction details.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionDetails(
     @SerialName("amount_out") val amountOut: Long,
