@@ -28,35 +28,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.node.service
+package org.kryptokrona.sdk.service.model.response.transaction
 
-import org.kryptokrona.sdk.node.client.NodeClient
-import org.kryptokrona.sdk.node.model.response.node.InfoResponse
-import org.kryptokrona.sdk.util.model.node.Node
-import org.slf4j.LoggerFactory
+import kotlinx.serialization.Serializable
 
 /**
- * BlockService class.
+ * Get transactions response result.
  *
  * @author Marcus Cvjeticanin
- * @since 0.1.1
- * @param node The node that the wallet service is connected to.
+ * @since 0.3.0
  */
-class NodeService(private var node: Node) {
-
-    private val logger = LoggerFactory.getLogger("NodeService")
-
-    private val nodeClient = NodeClient(node)
-
-    /**
-     * Get the node info.
-     *
-     * @author Marcus Cvjeticanin
-     * @since 0.1.1
-     * @return The node info.
-     */
-    suspend fun getNodeInfo(): InfoResponse? {
-        logger.debug("Getting node info...")
-        return nodeClient.getNodeInfo()
-    }
-}
+@Serializable
+data class GetTransactionsResponseResult(
+    val items: List<TransactionItem>
+)
