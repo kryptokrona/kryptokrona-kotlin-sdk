@@ -414,4 +414,36 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    suspend fun getBlockHeaderByHeight(getBlockHeaderByHeightRequest: GetBlockHeaderByHeightRequest): GetBlockHeaderByHeightResponse? {
+        val jsonBody = Json.encodeToString(getBlockHeaderByHeightRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetBlockHeaderByHeightResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block header by height. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block header by height. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block header by height. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
 }
