@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.response.block
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Get last block header response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class GetLastBlockHeaderResponse(
     val jsonrpc: String,

@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.request.block
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Submit block request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class SubmitBlockRequest(
     val jsonrpc: String = "2.0",

@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.request.block
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Blocks details by heights request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class BlocksDetailsByHeightsRequest(
     val blockHeights: List<Long>

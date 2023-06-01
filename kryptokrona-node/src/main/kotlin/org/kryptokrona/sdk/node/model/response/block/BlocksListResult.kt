@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.response.block
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Blocks list result.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class BlocksListResult(
     val blocks: List<BlockInfo>,

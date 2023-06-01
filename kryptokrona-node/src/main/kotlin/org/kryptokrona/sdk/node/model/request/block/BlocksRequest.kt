@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.request.block
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Blocks request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class BlocksRequest(
     @SerialName("block_ids") val blockIds: List<String>

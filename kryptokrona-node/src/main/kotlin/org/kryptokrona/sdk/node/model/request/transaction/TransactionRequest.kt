@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.request.transaction
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Transaction request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionRequest(
     val jsonrpc: String = "2.0",

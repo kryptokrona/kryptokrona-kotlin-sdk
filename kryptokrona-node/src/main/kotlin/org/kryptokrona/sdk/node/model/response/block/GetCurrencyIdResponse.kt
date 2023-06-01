@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.response.block
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Get currency id response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class GetCurrencyIdResponse(
     val jsonrpc: String,
