@@ -41,6 +41,8 @@ import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.kryptokrona.sdk.node.model.request.block.*
 import org.kryptokrona.sdk.node.model.response.block.GetBlockCountResponse
 import org.kryptokrona.sdk.node.model.response.block.GetBlockHashResponse
+import org.kryptokrona.sdk.node.model.response.block.GetBlockTemplateResponse
+import org.kryptokrona.sdk.node.model.response.block.SubmitBlockResponse
 import org.kryptokrona.sdk.node.model.response.blockdetail.BlockDetailResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsByHashesResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsResponse
@@ -282,6 +284,70 @@ class BlockClient(private val node: Node) {
             logger.error("Error getting block hash. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting block hash. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    suspend fun getBlockTemplate(getBlockTemplateRequest: GetBlockTemplateRequest): GetBlockTemplateResponse? {
+        val jsonBody = Json.encodeToString(getBlockTemplateRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetBlockTemplateResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block template. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block template. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block template. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    suspend fun submitBlock(submitBlockRequest: SubmitBlockRequest): SubmitBlockResponse? {
+        val jsonBody = Json.encodeToString(submitBlockRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<SubmitBlockResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error submitting block. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error submitting block. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error submitting block. Could not parse the response.", e)
         }
 
         return null
