@@ -39,10 +39,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.kryptokrona.sdk.node.model.request.block.*
-import org.kryptokrona.sdk.node.model.response.block.GetBlockCountResponse
-import org.kryptokrona.sdk.node.model.response.block.GetBlockHashResponse
-import org.kryptokrona.sdk.node.model.response.block.GetBlockTemplateResponse
-import org.kryptokrona.sdk.node.model.response.block.SubmitBlockResponse
+import org.kryptokrona.sdk.node.model.response.block.*
 import org.kryptokrona.sdk.node.model.response.blockdetail.BlockDetailResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsByHashesResponse
 import org.kryptokrona.sdk.node.model.response.blocksdetails.BlocksDetailsResponse
@@ -352,4 +349,37 @@ class BlockClient(private val node: Node) {
 
         return null
     }
+
+    suspend fun getLastBlockHeader(getLastBlockHeaderRequest: GetLastBlockHeaderRequest): GetLastBlockHeaderResponse? {
+        val jsonBody = Json.encodeToString(getLastBlockHeaderRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetLastBlockHeaderResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting last block header. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting last block header. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting last block header. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
 }
