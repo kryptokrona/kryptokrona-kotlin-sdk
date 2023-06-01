@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.node.model.request.block
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,6 +41,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetBlockTemplateParams(
-    val reserve_size: Int,
-    val wallet_address: String
+    @SerialName("reserve_size") val reserveSize: Int,
+    @SerialName("wallet_address") val walletAddress: String
 )
