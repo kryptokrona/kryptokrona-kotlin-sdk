@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.node.model.response.transaction
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Transaction pool response.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionsPoolResponse(
     val jsonrpc: String,

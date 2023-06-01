@@ -34,24 +34,48 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.node.model.response.TransactionResponse
 
+/**
+ * Transaction.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class Transaction(
     @SerialName("transactionPrefixInfo.txHash") val transactionHash: String,
     @SerialName("transactionPrefixInfo.txPrefix") val transactionPrefix: TransactionPrefix
 )
 
+/**
+ * Transaction details hashes.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionDetailsHashes(
     val status: String,
     val transactions: List<TransactionResponse>
 )
 
+/**
+ * Transaction hashes payment id.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionHashesPaymentId(
     val status: String,
     val transactionHashes: List<String>
 )
 
+/**
+ * Transaction prefix.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefix(
     val extra: String,
@@ -61,12 +85,24 @@ data class TransactionPrefix(
     val vout: List<TransactionPrefixVout>
 )
 
+/**
+ * Transaction prefix vin.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefixVin(
     val type: String,
     val value: TransactionPrefixVinValue
 )
 
+/**
+ * Transaction prefix vin value.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefixVinValue(
     val amount: Long,
@@ -74,18 +110,36 @@ data class TransactionPrefixVinValue(
     @SerialName("key_offsets") val keyOffsets: List<Long>
 )
 
+/**
+ * Transaction prefix vout.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefixVout(
     val amount: Long,
     val target: TransactionPrefixVoutTarget
 )
 
+/**
+ * Transaction prefix vout target.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefixVoutTarget(
     val data: TransactionPrefixVoutTargetData,
     val type: String
 )
 
+/**
+ * Transaction prefix vout target data.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionPrefixVoutTargetData(
     val key: String
