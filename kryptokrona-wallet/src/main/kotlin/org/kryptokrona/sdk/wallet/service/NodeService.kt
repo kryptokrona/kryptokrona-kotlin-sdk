@@ -28,7 +28,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.node.service
+package org.kryptokrona.sdk.wallet.service
 
 import org.kryptokrona.sdk.node.client.NodeClient
 import org.kryptokrona.sdk.node.model.response.node.InfoResponse

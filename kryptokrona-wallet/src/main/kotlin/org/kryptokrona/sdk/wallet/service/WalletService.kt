@@ -44,7 +44,6 @@ import org.kryptokrona.sdk.node.model.response.node.InfoResponse
 import org.kryptokrona.sdk.node.model.response.walletsyncdata.Block
 import org.kryptokrona.sdk.node.model.response.walletsyncdata.Transaction
 import org.kryptokrona.sdk.node.model.response.walletsyncdata.WalletSyncData
-import org.kryptokrona.sdk.node.service.NodeService
 import org.kryptokrona.sdk.util.config.Config
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
