@@ -382,4 +382,36 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    suspend fun getBlockHeaderByHash(getBlockHeaderByHashRequest: GetBlockHeaderByHashRequest): GetBlockHeaderByHashResponse? {
+        val jsonBody = Json.encodeToString(getBlockHeaderByHashRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<GetBlockHeaderByHashResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting block header by hash. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting block header by hash. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting block header by hash. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
 }
