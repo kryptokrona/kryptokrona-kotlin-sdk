@@ -222,6 +222,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block count.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getBlockCountRequest The get block count request
+     * @return GetBlockCountResponse
+     */
     suspend fun getBlockCount(getBlockCountRequest: GetBlockCountRequest): GetBlockCountResponse? {
         val jsonBody = Json.encodeToString(getBlockCountRequest)
 
@@ -254,6 +262,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block hash.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getBlockHashRequest The get block hash request
+     * @return GetBlockHashResponse
+     */
     suspend fun getBlockHash(getBlockHashRequest: GetBlockHashRequest): GetBlockHashResponse? {
         val jsonBody = Json.encodeToString(getBlockHashRequest)
 
@@ -286,6 +302,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block template.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getBlockTemplateRequest The get block template request
+     * @return GetBlockTemplateResponse
+     */
     suspend fun getBlockTemplate(getBlockTemplateRequest: GetBlockTemplateRequest): GetBlockTemplateResponse? {
         val jsonBody = Json.encodeToString(getBlockTemplateRequest)
 
@@ -318,6 +342,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Submit block.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param submitBlockRequest The submit block request
+     * @return SubmitBlockResponse
+     */
     suspend fun submitBlock(submitBlockRequest: SubmitBlockRequest): SubmitBlockResponse? {
         val jsonBody = Json.encodeToString(submitBlockRequest)
 
@@ -350,6 +382,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get the block header of the last block.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getLastBlockHeaderRequest
+     * @return GetLastBlockHeaderResponse
+     */
     suspend fun getLastBlockHeader(getLastBlockHeaderRequest: GetLastBlockHeaderRequest): GetLastBlockHeaderResponse? {
         val jsonBody = Json.encodeToString(getLastBlockHeaderRequest)
 
@@ -382,6 +422,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block header by hash.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getBlockHeaderByHashRequest
+     * @return GetBlockHeaderByHashResponse
+     */
     suspend fun getBlockHeaderByHash(getBlockHeaderByHashRequest: GetBlockHeaderByHashRequest): GetBlockHeaderByHashResponse? {
         val jsonBody = Json.encodeToString(getBlockHeaderByHashRequest)
 
@@ -414,6 +462,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get block header by height.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getBlockHeaderByHeightRequest
+     * @return GetBlockHeaderByHeightResponse
+     */
     suspend fun getBlockHeaderByHeight(getBlockHeaderByHeightRequest: GetBlockHeaderByHeightRequest): GetBlockHeaderByHeightResponse? {
         val jsonBody = Json.encodeToString(getBlockHeaderByHeightRequest)
 
@@ -446,6 +502,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get the currency ID.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param getCurrencyIdRequest The request.
+     * @return GetCurrencyIdResponse
+     */
     suspend fun getCurrencyId(getCurrencyIdRequest: GetCurrencyIdRequest): GetCurrencyIdResponse? {
         val jsonBody = Json.encodeToString(getCurrencyIdRequest)
 
@@ -478,6 +542,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get a list of blocks.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param blocksListRequest The request object.
+     * @return BlocksListResponse
+     */
     suspend fun getBlocksList(blocksListRequest: BlocksListRequest): BlocksListResponse? {
         val jsonBody = Json.encodeToString(blocksListRequest)
 
@@ -510,6 +582,14 @@ class BlockClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get a block.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param blockRequest The block request.
+     * @return BlockResponse
+     */
     suspend fun getBlock(blockRequest: BlockRequest): BlockResponse? {
         val jsonBody = Json.encodeToString(blockRequest)
 

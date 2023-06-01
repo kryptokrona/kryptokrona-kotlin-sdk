@@ -217,7 +217,15 @@ class TransactionClient(private val node: Node) {
         return null
     }
 
-    suspend fun getTransactionJson(transactionRequest: TransactionRequest): TransactionRpcResponse? {
+    /**
+     * Get a transaction.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param transactionRequest The transaction request
+     * @return TransactionRpcResponse
+     */
+    suspend fun getTransaction(transactionRequest: TransactionRequest): TransactionRpcResponse? {
         val jsonBody = Json.encodeToString(transactionRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -249,6 +257,14 @@ class TransactionClient(private val node: Node) {
         return null
     }
 
+    /**
+     * Get transactions from the pool.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param transactionsPoolRequest The transactions pool request
+     * @return TransactionsPoolResponse
+     */
     suspend fun getTransactionsPool(transactionsPoolRequest: TransactionsPoolRequest): TransactionsPoolResponse? {
         val jsonBody = Json.encodeToString(transactionsPoolRequest)
 
