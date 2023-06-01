@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.node.model.response.block
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,5 +41,5 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetCurrencyIdResult(
-    val currency_id_blob: String
+    @SerialName("currency_id_blob") val currencyIdBlob: String
 )

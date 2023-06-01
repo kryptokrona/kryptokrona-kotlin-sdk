@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.node.model.response.block
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,9 +41,9 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetBlockTemplateResult(
-    val blocktemplate_blob: String,
+    @SerialName("blocktemplate_blob") val blocktemplateBlob: String,
     val difficulty: Int,
     val height: Int,
-    val reserved_offset: Int,
+    @SerialName("reserved_offset") val reservedOffset: Int,
     val status: String
 )

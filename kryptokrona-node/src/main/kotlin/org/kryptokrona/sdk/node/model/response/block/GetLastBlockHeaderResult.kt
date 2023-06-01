@@ -30,6 +30,7 @@
 
 package org.kryptokrona.sdk.node.model.response.block
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,6 +41,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetLastBlockHeaderResult(
-    val block_header: BlockHeader,
+    @SerialName("block_header") val blockHeader: BlockHeader,
     val status: String
 )
