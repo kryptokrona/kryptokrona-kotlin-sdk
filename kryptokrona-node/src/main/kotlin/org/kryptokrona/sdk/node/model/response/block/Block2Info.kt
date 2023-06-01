@@ -34,6 +34,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.kryptokrona.sdk.node.model.response.transaction.TransactionInfo
 
+/**
+ * Block info.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class Block2Info(
     @SerialName("alreadyGeneratedCoins") val alreadyGeneratedCoins: String,

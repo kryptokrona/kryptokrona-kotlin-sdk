@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.request.block
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
+/**
+ * Get block count request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class GetBlockCountRequest(
     val jsonrpc: String = "2.0",

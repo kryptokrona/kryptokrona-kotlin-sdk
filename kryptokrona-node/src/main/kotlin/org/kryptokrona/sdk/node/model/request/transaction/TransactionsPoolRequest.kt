@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.node.model.request.transaction
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
+/**
+ * Transactions pool request.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
 @Serializable
 data class TransactionsPoolRequest(
     val jsonrpc: String = "2.0",
