@@ -38,14 +38,8 @@ import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.node.common.HttpClient.client
-import org.kryptokrona.sdk.node.model.request.transaction.TransactionDetailsByHashesRequest
-import org.kryptokrona.sdk.node.model.request.transaction.TransactionHashesPaymentIdRequest
-import org.kryptokrona.sdk.node.model.request.transaction.TransactionsRequest
-import org.kryptokrona.sdk.node.model.request.transaction.TransactionsStatusRequest
-import org.kryptokrona.sdk.node.model.response.transaction.TransactionDetailsHashes
-import org.kryptokrona.sdk.node.model.response.transaction.TransactionHashesPaymentId
-import org.kryptokrona.sdk.node.model.response.transaction.Transactions
-import org.kryptokrona.sdk.node.model.response.transaction.TransactionsStatus
+import org.kryptokrona.sdk.node.model.request.transaction.*
+import org.kryptokrona.sdk.node.model.response.transaction.*
 import org.kryptokrona.sdk.util.model.node.Node
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -218,6 +212,86 @@ class TransactionClient(private val node: Node) {
             logger.error("Error getting transaction status. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
             logger.error("Error getting transaction status. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get a transaction.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param transactionRequest The transaction request
+     * @return TransactionRpcResponse
+     */
+    suspend fun getTransaction(transactionRequest: TransactionRequest): TransactionRpcResponse? {
+        val jsonBody = Json.encodeToString(transactionRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<TransactionRpcResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting transaction JSON. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting transaction JSON. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting transaction JSON. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get transactions from the pool.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.3.0
+     * @param transactionsPoolRequest The transactions pool request
+     * @return TransactionsPoolResponse
+     */
+    suspend fun getTransactionsPool(transactionsPoolRequest: TransactionsPoolRequest): TransactionsPoolResponse? {
+        val jsonBody = Json.encodeToString(transactionsPoolRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            node.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${node.hostName}:${node.port}/json_rpc")
+                } else {
+                    url.takeFrom("http://${node.hostName}:${node.port}/json_rpc")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<TransactionsPoolResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting transactions from the pool. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting transactions from the pool. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting transactions from the pool. Could not parse the response.", e)
         }
 
         return null

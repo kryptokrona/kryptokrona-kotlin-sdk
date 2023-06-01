@@ -28,18 +28,39 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.node.model.request.block
+package org.kryptokrona.sdk.node.model.response.block
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.node.model.response.transaction.TransactionInfo
 
 /**
- * Blocks request.
+ * Block info.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class BlocksRequest(
-    @SerialName("block_ids") val blockIds: List<String>
+data class Block2Info(
+    @SerialName("alreadyGeneratedCoins") val alreadyGeneratedCoins: String,
+    @SerialName("alreadyGeneratedTransactions") val alreadyGeneratedTransactions: Long,
+    @SerialName("baseReward") val baseReward: Long,
+    @SerialName("blockSize") val blockSize: Long,
+    val depth: Long,
+    val difficulty: Long,
+    @SerialName("effectiveSizeMedian") val effectiveSizeMedian: Long,
+    val hash: String,
+    val height: Long,
+    @SerialName("major_version") val majorVersion: Long,
+    @SerialName("minor_version") val minorVersion: Long,
+    val nonce: Long,
+    @SerialName("orphan_status") val orphanStatus: Boolean,
+    val penalty: Double,
+    @SerialName("prev_hash") val prevHash: String,
+    val reward: Long,
+    @SerialName("sizeMedian") val sizeMedian: Long,
+    val timestamp: Long,
+    @SerialName("totalFeeAmount") val totalFeeAmount: Long,
+    val transactions: List<TransactionInfo>,
+    @SerialName("transactionsCumulativeSize") val transactionsCumulativeSize: Long
 )

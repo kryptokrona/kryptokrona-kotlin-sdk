@@ -28,18 +28,64 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.node.model.request.block
+package org.kryptokrona.sdk.node.model.response.transaction
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Blocks request.
+ * Vin.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class BlocksRequest(
-    @SerialName("block_ids") val blockIds: List<String>
+data class Vin(
+    val type: String,
+    val value: VinValue
+)
+
+/**
+ * Vin value.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
+@Serializable
+data class VinValue(
+    val height: Int
+)
+
+/**
+ * Vout.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
+@Serializable
+data class Vout(
+    val amount: Long,
+    val target: Target
+)
+
+/**
+ * Target.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
+@Serializable
+data class Target(
+    val data: TargetData,
+    val type: String
+)
+
+/**
+ * Target data.
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.3.0
+ */
+@Serializable
+data class TargetData(
+    val key: String
 )

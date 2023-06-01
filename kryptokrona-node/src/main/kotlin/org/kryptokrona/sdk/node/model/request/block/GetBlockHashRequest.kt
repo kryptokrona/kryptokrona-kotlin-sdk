@@ -30,16 +30,17 @@
 
 package org.kryptokrona.sdk.node.model.request.block
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Blocks request.
+ * Get block hash request.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class BlocksRequest(
-    @SerialName("block_ids") val blockIds: List<String>
+data class GetBlockHashRequest(
+    val jsonrpc: String = "2.0",
+    val method: String,
+    val params: List<Long>
 )

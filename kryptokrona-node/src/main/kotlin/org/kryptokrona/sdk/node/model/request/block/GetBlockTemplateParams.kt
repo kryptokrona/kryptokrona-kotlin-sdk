@@ -34,12 +34,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Blocks request.
+ * Get block template params.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class BlocksRequest(
-    @SerialName("block_ids") val blockIds: List<String>
+data class GetBlockTemplateParams(
+    @SerialName("reserve_size") val reserveSize: Long,
+    @SerialName("wallet_address") val walletAddress: String
 )

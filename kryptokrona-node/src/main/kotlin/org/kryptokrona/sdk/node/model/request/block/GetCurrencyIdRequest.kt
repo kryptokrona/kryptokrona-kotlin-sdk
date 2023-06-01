@@ -30,16 +30,19 @@
 
 package org.kryptokrona.sdk.node.model.request.block
 
-import kotlinx.serialization.SerialName
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 /**
- * Blocks request.
+ * Get currency id request.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class BlocksRequest(
-    @SerialName("block_ids") val blockIds: List<String>
+data class GetCurrencyIdRequest(
+    val jsonrpc: String = "2.0",
+    val method: String,
+    @Contextual val params: Map<String, @Contextual Any>
 )
+
