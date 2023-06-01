@@ -40,6 +40,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetBlockCountResponseResult(
-    val count: Int,
+    val count: Long,
     val status: String
 )

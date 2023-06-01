@@ -42,7 +42,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TransactionInfo2(
     val extra: String,
-    @SerialName("unlock_time") val unlockTime: Int,
+    @SerialName("unlock_time") val unlockTime: Long,
     val version: Int,
     val vin: List<Vin>,
     val vout: List<Vout>
