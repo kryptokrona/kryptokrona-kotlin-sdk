@@ -4,8 +4,8 @@ val slf4j_version: String by project
 val kotlin_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.21"
-    kotlin("plugin.serialization") version "1.8.21"
+    kotlin("jvm") version "1.8.22"
+    kotlin("plugin.serialization") version "1.8.22"
     application
     `java-library`
     `maven-publish`

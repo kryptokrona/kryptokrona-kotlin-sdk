@@ -4,8 +4,8 @@ val coroutines_version: String by project
 val slf4j_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.21"
-    kotlin("plugin.serialization") version "1.8.21"
+    kotlin("jvm") version "1.8.22"
+    kotlin("plugin.serialization") version "1.8.22"
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.1"
     `java-library`
