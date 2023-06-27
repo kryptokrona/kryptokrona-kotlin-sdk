@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     signing
     id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlinx.kover") version "0.7.1"
+    id("org.jetbrains.kotlinx.kover") version "0.7.2"
 }
 
 version = "0.3.0"
