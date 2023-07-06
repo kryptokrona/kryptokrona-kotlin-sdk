@@ -1,8 +1,8 @@
 val ktor_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.serialization") version "1.8.22"
+    kotlin("jvm") version "1.9.0"
+    kotlin("plugin.serialization") version "1.9.0"
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover") version "0.7.2"
     `java-library`
