@@ -16,10 +16,8 @@ Kryptokrona SDK for Kotlin is currently the most fully featured implementation o
 
 - Web: https://kryptokrona.org
 - Docs: https://sdk.kryptokrona.org
-- Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-kotlin-sdk
 - Discord: https://discord.gg/VTgsTGS9b7
-- Twitter: https://twitter.com/mjovanc
 
 ## Getting Help
 
