@@ -3,7 +3,7 @@ val slf4j_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.22"
-    id("org.jetbrains.kotlinx.kover") version "0.7.2"
+    id("org.jetbrains.kotlinx.kover") version "0.7.3"
     application
 }
 
