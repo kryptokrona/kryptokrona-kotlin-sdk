@@ -63,7 +63,9 @@ class TransactionServiceClient(private val service: Service) {
      * @param getTransactionHashesRequest The request.
      * @return The response.
      */
-    suspend fun getTransactionHashes(getTransactionHashesRequest: GetTransactionHashesRequest): GetTransactionHashesResponse? {
+    suspend fun getTransactionHashes(
+        getTransactionHashesRequest: GetTransactionHashesRequest
+    ): GetTransactionHashesResponse? {
         val jsonBody = Json.encodeToString(getTransactionHashesRequest)
 
         val builder = HttpRequestBuilder().apply {
@@ -266,7 +268,9 @@ class TransactionServiceClient(private val service: Service) {
      * @param createDelayedTransactionRequest The request object.
      * @return The response object.
      */
-    suspend fun createDelayedTransaction(createDelayedTransactionRequest: CreateDelayedTransactionRequest): CreateDelayedTransactionResponse? {
+    suspend fun createDelayedTransaction(
+        createDelayedTransactionRequest: CreateDelayedTransactionRequest
+    ): CreateDelayedTransactionResponse? {
         val jsonBody = Json.encodeToString(createDelayedTransactionRequest)
 
         val builder = HttpRequestBuilder().apply {

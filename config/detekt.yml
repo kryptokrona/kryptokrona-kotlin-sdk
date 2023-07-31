@@ -6,6 +6,15 @@ config:
 style:
   WildcardImport:
     active: false # Wildcard imports are allowed
+  UnusedImports:
+    active: false
+  UnusedParameter:
+    active: false
+  UnusedPrivateClass:
+    active: false
+  UnusedPrivateMember:
+    active: false
+    allowedNames: ''
   UnusedPrivateProperty:
     active: false
 
@@ -15,3 +24,8 @@ build:
     complexity: 2 # every rule of the complexity rule set should count as if two issues were found...
     LongParameterList: 1 # ...with the exception of the LongParameterList rule.
     comments: 0 # comment rules are just a nice to know?!
+
+complexity:
+  active: true
+  TooManyFunctions:
+    active: false
