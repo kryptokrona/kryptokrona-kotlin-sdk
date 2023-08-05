@@ -40,7 +40,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SubmitBlockRequest(
-    val jsonrpc: String = "2.0",
+    val jsonrpc: String,
     val method: String,
     val params: List<String>
 )

@@ -41,7 +41,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class GetLastBlockHeaderRequest(
-    val jsonrpc: String = "2.0",
+    val jsonrpc: String,
     val method: String,
     @Contextual val params: Map<String, @Contextual Any>
 )
