@@ -2,10 +2,7 @@ package org.kryptokrona.sdk.node.client
 
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
-import org.kryptokrona.sdk.node.model.request.block.BlockDetailsByHeightRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksDetailsByHashesRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksDetailsByHeightsRequest
-import org.kryptokrona.sdk.node.model.request.block.BlocksHashesByTimestampsRequest
+import org.kryptokrona.sdk.node.model.request.block.*
 import org.kryptokrona.sdk.util.model.node.Node
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -183,60 +180,114 @@ class BlockClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block count`() = runTest {
-        TODO()
+        // Arrange
+        val blockCountRequest = GetBlockCountRequest(jsonrpc = "2.0", method = "getblockcount", mapOf())
+
+        // Act
+        val dataHTTP = clientHTTP.getBlockCount(blockCountRequest)
+        val dataHTTPS = clientHTTPS.getBlockCount(blockCountRequest)
+
+        // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block hash`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block template`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can submit block`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get last block header`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block header by hash`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block header by height`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get the currency id`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get list of blocks`() = runTest {
-        TODO()
+        // Arrange
+
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get block`() = runTest {
-        TODO()
+    fun `can get a block`() = runTest {
+        // Arrange
+        val blockRequest = BlockRequest(
+            jsonrpc = "2.0",
+            method = "f_block_json",
+            params = mapOf("hash" to "47752710b68db1eb6ebf27fb7c6985d12cc9dfaee274469955259ed1329e3049")
+        )
+
+        // Act
+        val dataHTTP = clientHTTP.getBlock(blockRequest)
+        val dataHTTPS = clientHTTPS.getBlock(blockRequest)
+
+        // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 }

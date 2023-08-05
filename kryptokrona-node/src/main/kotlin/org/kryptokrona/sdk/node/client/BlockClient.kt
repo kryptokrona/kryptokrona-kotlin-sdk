@@ -33,6 +33,7 @@ package org.kryptokrona.sdk.node.client
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
@@ -250,7 +251,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetBlockCountResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetBlockCountResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block count. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -290,7 +293,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetBlockHashResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetBlockHashResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block hash. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -330,7 +335,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetBlockTemplateResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetBlockTemplateResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block template. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -370,7 +377,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<SubmitBlockResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<SubmitBlockResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error submitting block. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -410,7 +419,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetLastBlockHeaderResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetLastBlockHeaderResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting last block header. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -450,7 +461,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetBlockHeaderByHashResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetBlockHeaderByHashResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block header by hash. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -490,7 +503,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetBlockHeaderByHeightResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetBlockHeaderByHeightResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block header by height. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -530,7 +545,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<GetCurrencyIdResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<GetCurrencyIdResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting currency ID. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -570,7 +587,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlocksListResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<BlocksListResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting blocks list. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -610,7 +629,9 @@ class BlockClient(private val node: Node) {
         }
 
         try {
-            return client.post(builder).body<BlockResponse>()
+            val response: HttpResponse = client.post(builder)
+            val responseString = response.bodyAsText().removeSuffix("%")
+            return Json.decodeFromString<BlockResponse>(responseString)
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting block JSON. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
