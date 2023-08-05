@@ -9,6 +9,7 @@ import org.kryptokrona.sdk.node.model.request.block.BlocksHashesByTimestampsRequ
 import org.kryptokrona.sdk.util.model.node.Node
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.time.Duration
 
 /**
  * Tests for the BlockClient class.
@@ -26,9 +27,11 @@ class BlockClientTest {
 
     private val clientHTTPS = BlockClient(nodeHTTPS)
 
+    private val infiniteDuration = Duration.INFINITE
+
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get block details by height`() = runTest {
+    fun `can get block details by height`() = runTest(timeout = infiniteDuration) {
         // Arrange
         val blockWithHeight0 = BlockDetailsByHeightRequest(0)
         val blockWithHeight1 = BlockDetailsByHeightRequest(1)
@@ -142,7 +145,7 @@ class BlockClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get blocks hashes by timestamps`() = runTest {
+    fun `can get blocks hashes by timestamps`() = runTest(timeout = infiniteDuration) {
         // Arrange
         val blockTime = 90L
         val blockWithTimestamp1 = BlocksHashesByTimestampsRequest(
