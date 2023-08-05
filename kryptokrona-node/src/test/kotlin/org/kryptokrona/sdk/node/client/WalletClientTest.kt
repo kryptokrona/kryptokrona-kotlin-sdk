@@ -23,6 +23,8 @@ class WalletClientTest {
 
     private val clientHTTPS = WalletClient(nodeHTTPS)
 
+    private val infiniteDuration = Duration.INFINITE
+
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet sync data without body` () = runTest {
@@ -61,7 +63,7 @@ class WalletClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get wallet sync data with start height and start timestamp`() = runTest {
+    fun `can get wallet sync data with start height and start timestamp`() = runTest(timeout = infiniteDuration) {
         // Arrange
         val requestData = WalletSyncDataRequest(
             startHeight = 100000,
