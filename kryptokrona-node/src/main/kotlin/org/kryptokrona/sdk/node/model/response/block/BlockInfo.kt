@@ -24,7 +24,7 @@
 // THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
 // PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+// LongERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
@@ -41,10 +41,26 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class BlockInfo(
-    @SerialName("cumul_size") val cumulSize: Long,
-    val difficulty: Long,
-    val hash: String,
-    val height: Long,
-    val timestamp: Long,
-    @SerialName("tx_count") val txCount: Long
+    @SerialName("alreadyGeneratedCoins") val alreadyGeneratedCoins: String,
+    @SerialName("alreadyGeneratedTransactions") val alreadyGeneratedTransactions: Long,
+    @SerialName("baseReward") val baseReward: Long,
+    @SerialName("blockSize") val blockSize: Long,
+    @SerialName("depth") val depth: Long,
+    @SerialName("difficulty") val difficulty: Long,
+    @SerialName("effectiveSizeMedian") val effectiveSizeMedian: Long,
+    @SerialName("hash") val hash: String,
+    @SerialName("height") val height: Long,
+    @SerialName("major_version") val majorVersion: Long,
+    @SerialName("minor_version") val minorVersion: Long,
+    @SerialName("nonce") val nonce: Long,
+    @SerialName("orphan_status") val orphanStatus: Boolean,
+    @SerialName("penalty") val penalty: Double,
+    @SerialName("prev_hash") val prevHash: String,
+    @SerialName("reward") val reward: Long,
+    @SerialName("sizeMedian") val sizeMedian: Long,
+    @SerialName("timestamp") val timestamp: Long,
+    @SerialName("totalFeeAmount") val totalFeeAmount: Long,
+    @SerialName("transactions") val transactions: List<BlockTransaction>,
+    @SerialName("transactionsCumulativeSize") val transactionsCumulativeSize: Long
 )
+

@@ -28,20 +28,21 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.node.model.request.block
+package org.kryptokrona.sdk.node.model.response.block
 
-import kotlinx.serialization.Contextual
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Get block count request.
+ * Block transaction.
  *
  * @author Marcus Cvjeticanin
  * @since 0.3.0
  */
 @Serializable
-data class GetBlockCountRequest(
-    val jsonrpc: String,
-    val method: String,
-    @Contextual val params: Map<String, @Contextual Any>
+data class BlockTransaction(
+    @SerialName("amount_out") val amountOut: Long,
+    @SerialName("fee") val fee: Long,
+    @SerialName("hash") val hash: String,
+    @SerialName("size") val size: Long
 )
