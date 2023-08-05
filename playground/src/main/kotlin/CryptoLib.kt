@@ -1,5 +1,5 @@
 import kotlinx.coroutines.runBlocking
 
-fun main() = runBlocking {
+fun cryptoLibUsage() = runBlocking {
     println("Hello, world!")
 }

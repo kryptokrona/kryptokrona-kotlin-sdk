@@ -5,7 +5,7 @@ import org.kryptokrona.sdk.util.model.node.Node
 import org.kryptokrona.sdk.wallet.service.TransferService
 import org.kryptokrona.sdk.wallet.service.WalletService
 
-fun main() = runBlocking {
+fun makeTransaction() = runBlocking {
 
     // setting up which node to connect to
     val node = Node("privacymine.net", 11898, false)
