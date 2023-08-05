@@ -31,6 +31,7 @@
 package org.kryptokrona.sdk.node.client
 
 import io.ktor.client.call.*
+import io.ktor.client.network.sockets.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -76,6 +77,8 @@ class NodeClient(private val node: Node) {
             logger.error("Error getting node information. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node information. Could not resolve the address.", e)
+        } catch (e: ConnectTimeoutException) {
+            logger.error("Error getting node information. Connection timeout.", e)
         }
 
         return isSuccess
