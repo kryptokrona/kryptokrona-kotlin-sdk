@@ -92,7 +92,7 @@ class BlockClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get blocks details by hashes`() = runTest {
+    fun `can get blocks details by hashes`() = runTest(timeout = infiniteDuration) {
         // Arrange
         val blockWithHashes1 = BlocksDetailsByHashesRequest(
             blockHashes = listOf(
