@@ -206,60 +206,117 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block template`() = runTest {
         // Arrange
+        val getBlockTemplateRequest = GetBlockTemplateRequest(
+            jsonrpc = "2.0",
+            method = "getblocktemplate",
+            params = GetBlockTemplateParams(
+                reserveSize = 200,
+                walletAddress = "SEKReV7rDhaj9UV8NYgesQLyAVoddy4foZQzqg2Ci4YrdUNB3qFUzjCQeEe85es2yuC8wE9kGzhcKU23A7Qa5qm9h4CFbKh3umH"
+            )
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getBlockTemplate(getBlockTemplateRequest)
+        val dataHTTPS = clientHTTPS.getBlockTemplate(getBlockTemplateRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can submit block`() = runTest {
         // Arrange
+        val submitBlockRequest = SubmitBlockRequest(
+            jsonrpc = "2.0",
+            method = "submitblock",
+            params = listOf("55380357445ecba3b3d56e83260bf1d49abbec616491aa667f5b228ffd0ac6dd") // submit mined block
+        )
 
-        // Act
+        /*// Act
+        val dataHTTP = clientHTTP.submitBlock(submitBlockRequest)
+        val dataHTTPS = clientHTTPS.submitBlock(submitBlockRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)*/
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get last block header`() = runTest {
         // Arrange
+        val lastBlockHeaderRequest = GetLastBlockHeaderRequest(
+            jsonrpc = "2.0",
+            method = "getlastblockheader",
+            params = mapOf()
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getLastBlockHeader(lastBlockHeaderRequest)
+        val dataHTTPS = clientHTTPS.getLastBlockHeader(lastBlockHeaderRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block header by hash`() = runTest {
         // Arrange
+        val blockHeaderByHashRequest = GetBlockHeaderByHashRequest(
+            jsonrpc = "2.0",
+            method = "getblockheaderbyhash",
+            params = mapOf("hash" to "55380357445ecba3b3d56e83260bf1d49abbec616491aa667f5b228ffd0ac6dd")
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getBlockHeaderByHash(blockHeaderByHashRequest)
+        val dataHTTPS = clientHTTPS.getBlockHeaderByHash(blockHeaderByHashRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block header by height`() = runTest {
         // Arrange
+        val blockHeaderByHeightsRequest = GetBlockHeaderByHeightRequest(
+            jsonrpc = "2.0",
+            method = "getblockheaderbyheight",
+            params = mapOf("height" to 123456)
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getBlockHeaderByHeight(blockHeaderByHeightsRequest)
+        val dataHTTPS = clientHTTPS.getBlockHeaderByHeight(blockHeaderByHeightsRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get the currency id`() = runTest {
         // Arrange
+        val currencyIdRequest = GetCurrencyIdRequest(
+            jsonrpc = "2.0",
+            method = "getcurrencyid",
+            params = mapOf()
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getCurrencyId(currencyIdRequest)
+        val dataHTTPS = clientHTTPS.getCurrencyId(currencyIdRequest)
 
         // Assert
+        assertEquals("2.0", dataHTTP?.jsonrpc)
+        assertEquals("2.0", dataHTTPS?.jsonrpc)
     }
 
     @Test
