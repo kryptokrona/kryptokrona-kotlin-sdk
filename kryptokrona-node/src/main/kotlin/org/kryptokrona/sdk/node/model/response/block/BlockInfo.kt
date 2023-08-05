@@ -64,3 +64,13 @@ data class BlockInfo(
     @SerialName("transactionsCumulativeSize") val transactionsCumulativeSize: Long
 )
 
+@Serializable
+data class BlockInfo2(
+    @SerialName("cumul_size") val cumulSize: Long,
+    @SerialName("difficulty") val difficulty: Long,
+    @SerialName("hash") val hash: String,
+    @SerialName("height") val height: Long,
+    @SerialName("timestamp") val timestamp: Long,
+    @SerialName("tx_count") val txCount: Long
+)
+

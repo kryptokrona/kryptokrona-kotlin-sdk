@@ -40,6 +40,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class BlocksListResult(
-    val blocks: List<BlockInfo>,
+    val blocks: List<BlockInfo2>,
     val status: String
 )
