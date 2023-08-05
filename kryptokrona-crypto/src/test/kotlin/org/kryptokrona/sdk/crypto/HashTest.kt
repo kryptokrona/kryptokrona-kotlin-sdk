@@ -22,7 +22,7 @@ class HashTest {
         // Arrange
         val data = "Hello, World!".toByteArray()
         val expectedHash = byteArrayOf(
-            // Fill this array with the expected hash value
+            -84, -81, 50, -119, -41, -74, 1, -53, -47, 20, -5, 54, -60
         )
         val actualHash = ByteArray(expectedHash.size)
 
