@@ -93,6 +93,10 @@ const config = defineConfig({
                   title: "Unit Tests",
                   to: "/docs/contributing/unit-tests/",
                 },
+                {
+                  title: "Known Issues",
+                  to: "/docs/contributing/known-issues",
+                }
               ],
             },
             {
@@ -147,7 +151,7 @@ const config = defineConfig({
         logo: "/img/sdklogo.png",
       }),
       siteConfig: {
-        title: "Documentation - Kryptokrona Kotlin SDK",
+        title: "Kryptokrona Kotlin SDK",
         description:
           "The most fully featured implementation of the Kryptokrona Network protocols",
       },
