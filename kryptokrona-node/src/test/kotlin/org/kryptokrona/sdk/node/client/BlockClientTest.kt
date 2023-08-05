@@ -266,10 +266,19 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get list of blocks`() = runTest {
         // Arrange
+        val listOfBlocksRequest = BlocksListRequest(
+            jsonrpc = "2.0",
+            method = "f_blocks_list_json",
+            params = mapOf("height" to 500000)
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getBlocksList(listOfBlocksRequest)
+        val dataHTTPS = clientHTTPS.getBlocksList(listOfBlocksRequest)
 
         // Assert
+        assertEquals("OK", dataHTTP?.result?.status)
+        assertEquals("OK", dataHTTPS?.result?.status)
     }
 
     @Test
