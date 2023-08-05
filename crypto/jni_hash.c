@@ -35,13 +35,13 @@
 JNIEXPORT void JNICALL Java_org_kryptokrona_sdk_crypto_Hash_cnFastHash(JNIEnv* env, jclass clazz,
     jbyteArray data, jint length, jbyteArray hash) {
   // get the byte arrays as native C pointers
-  jbyte* c_data = (*env)->GetByteArrayElements(env, data, NULL);
-  jbyte* c_hash = (*env)->GetByteArrayElements(env, hash, NULL);
+  jbyte* c_data = (*env)->GetPrimitiveArrayCritical(env, data, NULL);
+  jbyte* c_hash = (*env)->GetPrimitiveArrayCritical(env, hash, NULL);
 
   // call cn_fast_hash with the provided data and length
   cn_fast_hash((const void*)c_data, (size_t)length, (char*)c_hash);
 
   // release the acquired native C pointers
-  (*env)->ReleaseByteArrayElements(env, data, c_data, JNI_COMMIT);
-  (*env)->ReleaseByteArrayElements(env, hash, c_hash, JNI_COMMIT);
+  (*env)->ReleasePrimitiveArrayCritical(env, data, c_data, JNI_ABORT);
+  (*env)->ReleasePrimitiveArrayCritical(env, hash, c_hash, 0);
 }
