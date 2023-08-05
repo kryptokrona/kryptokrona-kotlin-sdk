@@ -38,7 +38,7 @@ import kotlinx.serialization.json.Json
 
 private const val MAX_SEND_COUNT = 50
 // with some endpoints we can get a lot of data, so we need to increase the timeout
-private const val MAX_TIMEOUT = 30_000L
+private const val MAX_TIMEOUT = 60_000L
 
 /**
  * HTTP client singleton object.

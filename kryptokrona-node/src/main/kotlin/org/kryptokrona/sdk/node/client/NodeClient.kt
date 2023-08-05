@@ -77,8 +77,6 @@ class NodeClient(private val node: Node) {
             logger.error("Error getting node information. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
             logger.error("Error getting node information. Could not resolve the address.", e)
-        } catch (e: ConnectTimeoutException) {
-            logger.error("Error getting node information. Connection timeout.", e)
         }
 
         return isSuccess
