@@ -1,11 +1,11 @@
 package org.kryptokrona.sdk.node.client
 
-import io.ktor.client.network.sockets.*
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.node.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.model.node.Node
+import kotlin.time.Duration
 
 /**
  * Tests for the WalletClient class.
