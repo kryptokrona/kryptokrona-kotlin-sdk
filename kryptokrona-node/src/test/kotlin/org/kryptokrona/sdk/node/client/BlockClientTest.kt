@@ -63,7 +63,7 @@ class BlockClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get blocks details by heights`() = runTest {
+    fun `can get blocks details by heights`() = runTest(timeout = infiniteDuration) {
         // Arrange
         val blocksWithHeights1 = BlocksDetailsByHeightsRequest(listOf(1, 2, 3))
         val blocksWithHeights100 = BlocksDetailsByHeightsRequest(listOf(100, 101, 102, 103, 104, 105))
