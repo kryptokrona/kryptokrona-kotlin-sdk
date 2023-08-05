@@ -179,4 +179,64 @@ class BlockClientTest {
         assertEquals("OK", dataHTTPS2?.status)
         assertEquals("OK", dataHTTPS3?.status)
     }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block count`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block hash`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block template`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can submit block`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get last block header`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block header by hash`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block header by height`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get the currency id`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get list of blocks`() = runTest {
+        TODO()
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get block`() = runTest {
+        TODO()
+    }
 }
