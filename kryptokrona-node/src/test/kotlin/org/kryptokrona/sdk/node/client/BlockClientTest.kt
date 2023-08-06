@@ -196,10 +196,19 @@ class BlockClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get block hash`() = runTest {
         // Arrange
+        val blockHashRequest = GetBlockHashRequest(
+            jsonrpc = "2.0",
+            method = "on_getblockhash",
+            params = listOf(123456)
+        )
 
         // Act
+        val dataHTTP = clientHTTP.getBlockHash(blockHashRequest)
+        val dataHTTPS = clientHTTPS.getBlockHash(blockHashRequest)
 
         // Assert
+        assertEquals("2.0", dataHTTP?.jsonrpc)
+        assertEquals("2.0", dataHTTPS?.jsonrpc)
     }
 
     @Test
