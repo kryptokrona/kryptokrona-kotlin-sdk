@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>WalletClient</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../index.html">
+<span>Kryptokrona Kotlin SDK</span>            </a>    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kryptokrona-walletapi:dokkaHtmlPartial/main">jvm</button>
+        </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="kryptokrona-walletapi::org.kryptokrona.sdk.walletapi.client/WalletClient///PointingToDeclaration//616680612">
+  <div class="breadcrumbs"><a href="../../index.html">kryptokrona-walletapi</a><span class="delimiter">/</span><a href="../index.html">org.kryptokrona.sdk.walletapi.client</a><span class="delimiter">/</span><span class="current">WalletClient</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Wallet</span><wbr><span><span>Client</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">WalletClient</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">walletApi<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model/-wallet-api/index.html">WalletApi</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Wallet client</p><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph">Marcus Cvjeticanin</p></span><span class="kdoc-tag"><h4 class="">Since</h4><p class="paragraph">0.3.0</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>wallet</span><wbr><span><span>Api</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The wallet API to connect to.</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-1781004734%2FConstructors%2F616680612" anchor-label="WalletClient" id="-1781004734%2FConstructors%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-wallet-client.html"><span>Wallet</span><wbr><span><span>Client</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1781004734%2FConstructors%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">walletApi<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model/-wallet-api/index.html">WalletApi</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-957723862%2FFunctions%2F616680612" anchor-label="createWallet" id="-957723862%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-wallet.html"><span>create</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-957723862%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="create-wallet.html"><span class="token function">createWallet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Create wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1211592549%2FFunctions%2F616680612" anchor-label="deleteWallet" id="-1211592549%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="delete-wallet.html"><span>delete</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1211592549%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="delete-wallet.html"><span class="token function">deleteWallet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Delete wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="424429621%2FFunctions%2F616680612" anchor-label="importViewWallet" id="424429621%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="import-view-wallet.html"><span>import</span><wbr><span>View</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="424429621%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="import-view-wallet.html"><span class="token function">importViewWallet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">importViewWalletRequest<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.request/-import-view-wallet-request/index.html">ImportViewWalletRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Import view wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1314432721%2FFunctions%2F616680612" anchor-label="importWalletWithKey" id="1314432721%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="import-wallet-with-key.html"><span>import</span><wbr><span>Wallet</span><wbr><span>With</span><wbr><span><span>Key</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1314432721%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="import-wallet-with-key.html"><span class="token function">importWalletWithKey</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">importWalletWithKeyRequest<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.request/-import-wallet-with-key-request/index.html">ImportWalletWithKeyRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Import wallet with key.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="156596633%2FFunctions%2F616680612" anchor-label="importWalletWithSeed" id="156596633%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="import-wallet-with-seed.html"><span>import</span><wbr><span>Wallet</span><wbr><span>With</span><wbr><span><span>Seed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="156596633%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="import-wallet-with-seed.html"><span class="token function">importWalletWithSeed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">importWalletWithSeedRequest<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.request/-import-wallet-with-seed-request/index.html">ImportWalletWithSeedRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Import wallet with seed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="737914012%2FFunctions%2F616680612" anchor-label="openWallet" id="737914012%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="open-wallet.html"><span>open</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="737914012%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="open-wallet.html"><span class="token function">openWallet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Open a wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2014328177%2FFunctions%2F616680612" anchor-label="resetWallet" id="2014328177%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="reset-wallet.html"><span>reset</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2014328177%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="reset-wallet.html"><span class="token function">resetWallet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">resetWalletRequest<span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.request/-reset-wallet-request/index.html">ResetWalletRequest</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Reset wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1004311799%2FFunctions%2F616680612" anchor-label="saveWallet" id="-1004311799%2FFunctions%2F616680612" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":kryptokrona-walletapi:dokkaHtmlPartial/main" data-filterable-set=":kryptokrona-walletapi:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="save-wallet.html"><span>save</span><wbr><span><span>Wallet</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1004311799%2FFunctions%2F616680612"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kryptokrona-walletapi:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="save-wallet.html"><span class="token function">saveWallet</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../org.kryptokrona.sdk.walletapi.model.response/-status-response/index.html">StatusResponse</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Save wallet.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
+

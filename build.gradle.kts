@@ -39,12 +39,12 @@ tasks.withType<KotlinCompile> {
 }
 
 // Dokka configuration
-// TODO: does not work ATM, if you can fix it, please do :)
 subprojects {
     // exclude the "playground" module from the dokka task
     if (name != "playground") {
         apply(plugin = "org.jetbrains.dokka")
 
+        // TODO: does not work ATM, if you can fix it, please do :)
         tasks.withType<DokkaTask>().configureEach {
             pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
                 footerMessage = "(c) 2022-2023 Kryptokrona Developers"
