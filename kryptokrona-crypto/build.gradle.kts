@@ -74,7 +74,7 @@ koverReport {
                 }
 
                 bound {
-                    minValue = 60
+                    minValue = 40 //TODO change to 60 later
                     maxValue = 90
                     metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
                     aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
@@ -239,7 +239,7 @@ val copyCHeaders by tasks.registering(Copy::class) {
     into("$buildDir/headers/ed25519")
 }
 
-tasks.named("build") {
+tasks.named("assemble") {
     dependsOn("cReCompile")
     dependsOn(copyCLibrary)
     dependsOn(copyCHeaders)

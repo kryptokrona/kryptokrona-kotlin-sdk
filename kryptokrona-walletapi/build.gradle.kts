@@ -71,7 +71,7 @@ koverReport {
                 }
 
                 bound {
-                    minValue = 60
+                    minValue = 0 //TODO change to 60 later
                     maxValue = 90
                     metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
                     aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE

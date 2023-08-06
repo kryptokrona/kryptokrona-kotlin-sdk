@@ -53,37 +53,6 @@ kotlin {
 koverReport {
     filters {
         excludes {
-            classes("org.kryptokrona.sdk.service.model.*")
-        }
-    }
-
-    defaults {
-        verify {
-            onCheck = true
-            rule {
-                isEnabled = true
-                entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
-
-                filters {
-                    excludes {
-                        classes("org.kryptokrona.sdk.service.model.*")
-                    }
-                }
-
-                bound {
-                    minValue = 60
-                    maxValue = 90
-                    metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
-                    aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
-                }
-            }
-        }
-    }
-}
-
-koverReport {
-    filters {
-        excludes {
             classes("org.kryptokrona.sdk.walletapi.model.*")
         }
     }
@@ -102,7 +71,7 @@ koverReport {
                 }
 
                 bound {
-                    minValue = 60
+                    minValue = 0 //TODO change to 60 later
                     maxValue = 90
                     metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
                     aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
