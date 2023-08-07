@@ -7,8 +7,7 @@ services:
     command: >
       /bin/sh -c " ./src/kryptokrona-service"
     ports:
-      - "10000:10000"
-      - "20000:20000"
+      - "8070:8070"
     networks:
       xkrnet:
         ipv4_address: 172.10.1.1
@@ -19,8 +18,7 @@ services:
     command: >
       /bin/sh -c " ./src/wallet-api"
     ports:
-      - "10001:10001"
-      - "20001:20001"
+      - "5000:5000"
     networks:
       xkrnet:
         ipv4_address: 172.10.1.2
