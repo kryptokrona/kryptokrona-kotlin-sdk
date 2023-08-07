@@ -183,17 +183,21 @@ val ed25519SharedLibraryPath = when {
 }
 
 tasks.register<Exec>("cCompile") {
+    group = "external"
     workingDir = file("$cryptoDir")
     commandLine("make", "-B")
 }
 
 tasks.register<Exec>("cReCompile") {
+    group = "external"
     dependsOn("cClean")
     workingDir = file("$cryptoDir")
     commandLine("make", "-B")
 }
 
 tasks.register<Exec>("cClean") {
+    group = "external"
+
     workingDir = file("$cryptoDir")
     commandLine("rm", "-rf", "$cryptoDir/build")
     commandLine("make", "clean")
@@ -212,6 +216,8 @@ tasks.register<Exec>("cClean") {
 }
 
 val copyCLibrary by tasks.registering(Copy::class) {
+    group = "external"
+
     from(cryptoSharedLibraryPath)
     into("$buildDir/libs")
 
@@ -228,6 +234,8 @@ tasks.named<Test>("test") {
 }
 
 val copyCHeaders by tasks.registering(Copy::class) {
+    group = "external"
+
     from("$cryptoDir") {
         include("**/*.h") // copy all files with .h extension
     }
@@ -256,6 +264,8 @@ tasks.withType(KotlinNativeCompile::class.java) {
 }
 
 val runCLibraryLoader by tasks.registering(JavaExec::class) {
+    group = "external"
+
     dependsOn("build")
     classpath = sourceSets.getByName("main").runtimeClasspath
     mainClass.set("org.kryptokrona.sdk.crypto.CLibraryLoader")
