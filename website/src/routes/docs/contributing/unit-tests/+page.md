@@ -29,3 +29,5 @@ Here are some guidelines for writing unit tests:
 - Technical debt from too many tests is most apparent when refactoring APIs or making substantial changes to the code - you end up making every change several times, once in the implementation and a bunch of times in the tests. Keep your future self in the back of your mind when writing tests, don't make it unnecessarily hard to refactor. The more times you go through the cycle of writing tests and having to refactor them the more concise your test writing will get over time.
 - Feeling uneasy that you are breaking stuff during refactoring is an indication that there isn't enough test coverage.
 - Strive for 100% test coverage if it's easy and at least 90% if it's hard.
+
+Note that before running any unit tests, remember to start the Kryptokrona services with the gradle task `startKryptokronaServices`.
