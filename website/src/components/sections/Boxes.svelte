@@ -9,7 +9,6 @@
 </script>
 
 <div
-  class="phone-padding"
   style="display: flex; justify-content: center; margin-top: 5rem; padding-left: 1rem;
 padding-right: 1rem;"
 >
@@ -58,12 +57,6 @@ padding-right: 1rem;"
 </div>
 
 <style>
-  @media (max-width: 870px) and (min-width: 576px) {
-    .phone-padding {
-      padding-bottom: 20vw;
-    }
-  }
-
   .inner {
     max-width: 1152px;
   }
@@ -82,9 +75,6 @@ padding-right: 1rem;"
   @media (max-width: 576px) {
     .grid-3 {
       grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-    .phone-padding {
-      padding-bottom: 40vw;
     }
   }
 
