@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  service:
+    image: ghcr.io/kryptokrona/kryptokrona
+    container_name: kryptokrona-service
+    command: >
+      /bin/sh -c " ./src/kryptokrona-service  --data-dir src/blockloc  --add-exclusive-node 172.10.1.2:10001  --add-exclusive-node 172.10.1.3:10002  --p2p-bind-port 10000  --rpc-bind-port 20000  --rpc-bind-ip 172.10.1.1 --log-level 3 "
+    ports:
+      - "10000:10000"
+      - "20000:20000"
+    networks:
+      xkrnet:
+        ipv4_address: 172.10.1.1
+
+  walletapi:
+    image: ghcr.io/kryptokrona/kryptokrona
+    container_name: kryptokrona-walletapi
+    command: >
+      /bin/sh -c " ./src/wallet-api  --data-dir src/blockloc  --add-exclusive-node 172.10.1.1:10000  --add-exclusive-node 172.10.1.3:10002  --p2p-bind-port 10001  --rpc-bind-port 20001  --rpc-bind-ip 172.10.1.2 --log-level 3 "
+    ports:
+      - "10001:10001"
+      - "20001:20001"
+    networks:
+      xkrnet:
+        ipv4_address: 172.10.1.2
+
+networks:
+  xkrnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.10.1.0/16"

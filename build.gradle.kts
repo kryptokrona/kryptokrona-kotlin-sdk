@@ -98,3 +98,10 @@ allprojects {
         jvmTarget = "17"
     }
 }
+
+tasks.register<Exec>("startKryptokronaServices") {
+    commandLine("docker-compose", "up", "-d")
+
+    group = "kryptokrona" // Specify a custom task group, if desired
+    description = "Start Kryptokrona services"
+}
