@@ -47,5 +47,6 @@
 </div>
 
 <Boxes />
-
+<div style="padding-bottom: 8rem;">
+</div>
 <Footer />
