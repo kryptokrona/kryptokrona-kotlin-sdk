@@ -102,6 +102,6 @@ allprojects {
 tasks.register<Exec>("startKryptokronaServices") {
     commandLine("docker-compose", "up", "-d")
 
-    group = "kryptokrona" // Specify a custom task group, if desired
+    group = "kryptokrona"
     description = "Start Kryptokrona services"
 }
