@@ -2,11 +2,26 @@
     import External from "../components/icons/External.svelte";
     import Boxes from "../components/sections/Boxes.svelte";
     import Footer from "../components/Footer.svelte";
-
+    import { page } from "$app/stores";
     export const frontmatter = {
     home: false,
   };
 </script>
+
+<svelte:head>
+  <title>Kryptokrona Kotlin SDK</title>
+  <meta name="description" content="The most fully featured implementation of the Kryptokrona Network protocols." /> 
+  <meta property="og:site_name" content="Kryptokrona Kotlin SDK"/>
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Kryptokrona Kotlin SDK" />
+		<meta property="og:image" content={$page.url + "/img/sdklogo.png"}>
+		<meta
+		  property="og:description"
+		  content="The most fully featured implementation of the Kryptokrona Network protocols."
+		/>
+    <meta property="og:locale" content="en"/>
+    <meta property="og:url" content="https://sdk.kryptokrona.org/"/>
+</svelte:head>
 
 <div class="home-page">
   <div class="title-homepage">
