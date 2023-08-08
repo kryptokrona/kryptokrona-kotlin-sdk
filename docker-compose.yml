@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   kryptokrona-service:
-    image: ghcr.io/kryptokrona/kryptokrona:c070f49
+    image: ghcr.io/kryptokrona/kryptokrona-testnet
     container_name: kryptokrona-service
     command: >
       /bin/sh -c " ./src/kryptokrona-service"
@@ -13,7 +13,7 @@ services:
         ipv4_address: 172.10.1.1
 
   kryptokrona-walletapi:
-    image: ghcr.io/kryptokrona/kryptokrona:c070f49
+    image: ghcr.io/kryptokrona/kryptokrona-testnet
     container_name: kryptokrona-walletapi
     command: >
       /bin/sh -c " ./src/wallet-api"
