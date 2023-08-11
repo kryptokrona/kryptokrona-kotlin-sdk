@@ -12,7 +12,19 @@ class KeysClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get primary address`() = runTest {
+    fun `can get shared private view key`() = runTest {
+
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get spend keys`() = runTest {
+
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get mnemonic seed`() = runTest {
 
     }
 }
