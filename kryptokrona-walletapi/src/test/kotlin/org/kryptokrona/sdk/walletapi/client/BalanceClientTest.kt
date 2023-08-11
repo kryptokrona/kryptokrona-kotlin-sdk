@@ -12,7 +12,19 @@ class BalanceClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get primary address`() = runTest {
+    fun `can get wallet balance`() = runTest {
+
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get wallet balances`() = runTest {
+
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can get wallet blanace for specific address`() = runTest {
 
     }
 }
