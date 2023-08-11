@@ -12,7 +12,7 @@ class StatusClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get primary address`() = runTest {
+    fun `can get wallet status`() = runTest {
 
     }
 }
