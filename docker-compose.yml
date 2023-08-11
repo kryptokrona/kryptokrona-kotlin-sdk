@@ -1,32 +1,27 @@
 version: '3.8'
 
+# not done yet
 services:
-  kryptokrona-service:
-    image: ghcr.io/kryptokrona/kryptokrona-testnet
-    container_name: kryptokrona-service
-    command: >
-      /bin/sh -c " ./src/kryptokrona-service"
-    ports:
-      - "8070:8070"
-    networks:
-      xkrnet:
-        ipv4_address: 172.10.1.1
+#  kryptokrona-service:
+#    image: ghcr.io/kryptokrona/kryptokrona-testnet
+#    container_name: kryptokrona-service
+#    command: >
+#      /bin/sh -c " ./src/kryptokrona-service"
+#    ports:
+#      - "8070:8070"
+#    networks:
+#      - xkrnet
 
   kryptokrona-walletapi:
     image: ghcr.io/kryptokrona/kryptokrona-testnet
     container_name: kryptokrona-walletapi
     command: >
-      /bin/sh -c " ./src/wallet-api"
+      /bin/sh -c "python3 walletapi_docker_wrapper.py"
     ports:
-      - "5000:5000"
+      - "8070:8070"
     networks:
-      xkrnet:
-        ipv4_address: 172.10.1.2
+      - xkrnet
 
 networks:
   xkrnet:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.10.1.0/16"
