@@ -12,7 +12,13 @@ class NodeClientTest {
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    fun `can get primary address`() = runTest {
+    fun `can get node details`() = runTest {
+
+    }
+
+    @Test
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    fun `can swap node details`() = runTest {
 
     }
 }
