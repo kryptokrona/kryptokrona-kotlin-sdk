@@ -8,7 +8,7 @@ class StatusClientTest {
 
     private val walletapi = WalletApi("localhost", 8070, "false", "", false)
 
-    private val client = AddressClient(walletapi)
+    private val client = StatusClient(walletapi)
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
