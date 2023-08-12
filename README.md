@@ -58,6 +58,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/n9lsjr.png?size=72" alt="n9lsjr" width="72">](https://github.com/n9lsjr)
 [<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy17" width="72">](https://github.com/TechyGuy17)
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
+[<img src="https://github.com/axz02.png?size=72" alt="axz02" width="72">](https://github.com/axz02)
 
 ## Powered by
 
