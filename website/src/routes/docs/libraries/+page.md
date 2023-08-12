@@ -14,7 +14,7 @@ This is the library to use if you want to communicate to a Kryptokrona node and 
 
 ## kryptokrona-service
 
-This is currently not done, yet. However the intent is to be able to communicate to a Kryptokrona Service. Today this is mostly used for mining pools.
+This is the library to use if you want to communicate to a Kryptokrona Service. Today this is mostly used for mining pools.
 
 ## kryptokrona-util
 
@@ -26,7 +26,7 @@ This is the library for creating a wallet as well as the usage around it.
 
 ## kryptokrona-walletapi
 
-This is currently not done, yet. However the intent is to be able to communicate to a Kryptokrona Wallet API, if so the user whishes to do so.
+This is the library to use if you want to communicate to a Kryptokrona Wallet API, if so the user whishes to do so.
 
 ## playground
 
