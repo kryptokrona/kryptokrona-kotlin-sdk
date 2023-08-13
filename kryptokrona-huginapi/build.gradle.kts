@@ -14,7 +14,7 @@ plugins {
     application
 }
 
-version = "0.3.0"
+version = "0.4.0"
 
 java {
     withJavadocJar()
@@ -55,7 +55,7 @@ kotlin {
 koverReport {
     filters {
         excludes {
-            classes("org.kryptokrona.sdk.node.model.*")
+            classes("org.kryptokrona.sdk.huginapi.model.*")
         }
     }
 
@@ -68,7 +68,7 @@ koverReport {
 
                 filters {
                     excludes {
-                        classes("org.kryptokrona.sdk.node.model.*")
+                        classes("org.kryptokrona.sdk.huginapi.model.*")
                     }
                 }
 
@@ -86,7 +86,7 @@ koverReport {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifactId = "kryptokrona-node"
+            artifactId = "kryptokrona-huginapi"
             groupId = "org.kryptokrona.sdk"
             from(components["java"])
             versionMapping {
@@ -98,8 +98,8 @@ publishing {
                 }
             }
             pom {
-                name.set("Kryptokrona Node")
-                description.set("The Node library for communicating with Kryptokrona nodes.")
+                name.set("Kryptokrona Hugin API")
+                description.set("The Hugin API library for communicating with Kryptokrona a Hugin API.")
                 url.set("https://kryptokrona.org")
                 licenses {
                     license {

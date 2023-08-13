@@ -7,6 +7,7 @@ include("kryptokrona-service")
 include("kryptokrona-walletapi")
 include("kryptokrona-crypto")
 include("kryptokrona-util")
+include("kryptokrona-huginapi")
 
 // non-publishing libraries
 include("playground")
