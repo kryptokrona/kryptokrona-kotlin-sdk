@@ -3,6 +3,7 @@ package org.kryptokrona.sdk.walletapi.client
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import kotlin.test.assertNotNull
 
 class NodeClientTest {
 
@@ -16,8 +17,10 @@ class NodeClientTest {
         // Arrange
 
         // Act
+        val nodeDetails = client.nodeDetails()
 
         // Assert
+        assertNotNull(nodeDetails)
     }
 
     @Test
@@ -26,7 +29,9 @@ class NodeClientTest {
         // Arrange
 
         // Act
+        val swapNodeDetails = client.swapNodeDetails()
 
         // Assert
+        assertNotNull(swapNodeDetails)
     }
 }

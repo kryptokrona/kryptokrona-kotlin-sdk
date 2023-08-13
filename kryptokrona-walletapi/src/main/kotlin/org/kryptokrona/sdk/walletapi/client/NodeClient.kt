@@ -93,6 +93,7 @@ class NodeClient(private val walletApi: WalletApi) {
      * @return StatusResponse
      */
     suspend fun swapNodeDetails(): StatusResponse? {
+        //TODO this might not be finished?
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Put
             walletApi.ssl.let {
