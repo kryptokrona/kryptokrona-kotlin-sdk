@@ -32,6 +32,12 @@ package org.kryptokrona.sdk.huginapi.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Info response
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.4.0
+ */
 @Serializable
 data class InfoResponse(
     val donationAddress: String,

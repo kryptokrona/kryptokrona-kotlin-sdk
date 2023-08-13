@@ -32,7 +32,13 @@ package org.kryptokrona.sdk.huginapi.model.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Send Message response
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.4.0
+ */
 @Serializable
 data class SendMessageResponse(
-    val iDontRememberWhatThisShouldBe: String //TODO fix this later
+    val payload: String
 )

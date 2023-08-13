@@ -33,6 +33,12 @@ package org.kryptokrona.sdk.huginapi.model.response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Post Encrypted Group response
+ *
+ * @author Marcus Cvjeticanin
+ * @since 0.4.0
+ */
 @Serializable
 data class PostEncryptedGroupResponse(
     val id: Long,
