@@ -52,6 +52,13 @@ class InfoClient(private val huginApi: HuginAPI) {
 
     private val logger = LoggerFactory.getLogger("InfoClient")
 
+    /**
+     * Get info from Hugin API.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.4.0
+     * @return InfoResponse
+     */
     suspend fun getInfo(): InfoResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
