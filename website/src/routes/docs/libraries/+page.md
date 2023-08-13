@@ -28,6 +28,10 @@ This is the library for creating a wallet as well as the usage around it.
 
 This is the library to use if you want to communicate to a Kryptokrona Wallet API, if so the user whishes to do so.
 
+## kryptokrona-huginapi
+
+This is the library to use if you want to communicate to a Hugin API to retrive Hugin related data.
+
 ## playground
 
 This is not a published library, this is only for demonstrating the usage of the SDK. As the name suggest, just play around with it and see what it possible!
