@@ -1,7 +1,40 @@
 version: '3.8'
 
-# not done yet
 services:
+  hugin-api:
+    image: ghcr.io/kryptokrona/hugin-api:aa4b3d4
+    container_name: hugin_api
+    command: ./start.sh
+    environment:
+      DATABASE_URL: postgres://postgres:test1234@postgres:5432/hugin_api_dev
+      SYS_HUGIN_NODE_SERVER: privacymine.net:11898
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - xkrnet
+
+  postgres:
+    image: postgres
+    container_name: hugin_api_db
+    restart: always
+    environment:
+      POSTGRES_DB: hugin_api_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - xkrnet
+
+volumes:
+  postgres:
+
 #  kryptokrona-service:
 #    image: ghcr.io/kryptokrona/kryptokrona-testnet
 #    container_name: kryptokrona-service
@@ -12,15 +45,15 @@ services:
 #    networks:
 #      - xkrnet
 
-  kryptokrona-walletapi:
-    image: ghcr.io/kryptokrona/kryptokrona-testnet
-    container_name: kryptokrona-walletapi
-    command: >
-      /bin/sh -c "python3 walletapi_docker_wrapper.py"
-    ports:
-      - "8070:8070"
-    networks:
-      - xkrnet
+#  kryptokrona-walletapi:
+#    image: ghcr.io/kryptokrona/kryptokrona-testnet
+#    container_name: kryptokrona-walletapi
+#    command: >
+#      /bin/sh -c "python3 walletapi_docker_wrapper.py"
+#    ports:
+#      - "8070:8070"
+#    networks:
+#      - xkrnet
 
 networks:
   xkrnet:
