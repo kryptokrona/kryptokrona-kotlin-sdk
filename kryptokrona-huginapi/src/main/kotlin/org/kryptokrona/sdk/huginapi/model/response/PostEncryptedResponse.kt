@@ -34,9 +34,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PostEncryptedAllResponse(
+data class PostEncryptedResponse(
     @SerialName("total_items") val totalItems: Long,
-    @SerialName("encrypted_posts") val encryptedPosts: List<PostEncryptedResponse>,
+    @SerialName("encrypted_group_posts") val encryptedGroupPosts: List<PostEncryptedGroupResponse>,
     @SerialName("total_pages") val totalPages: Long,
     @SerialName("current_page") val currentPage: Long
 )

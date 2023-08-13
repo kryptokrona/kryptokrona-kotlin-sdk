@@ -36,10 +36,8 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
-import org.kryptokrona.sdk.huginapi.model.response.InfoResponse
 import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedAllResponse
-import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedTxHashResponse
-import org.kryptokrona.sdk.node.common.HttpClient
+import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedResponse
 import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -94,7 +92,7 @@ class PostEncryptedClient(private val huginApi: HuginAPI) {
      * @since 0.4.0
      * @return PostEncryptedTxHashResponse
      */
-    suspend fun getByTxHash(txHash: String): PostEncryptedTxHashResponse? {
+    suspend fun getByTxHash(txHash: String): PostEncryptedResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             huginApi.ssl.let {
@@ -107,7 +105,7 @@ class PostEncryptedClient(private val huginApi: HuginAPI) {
         }
 
         try {
-            return client.get(builder).body<PostEncryptedTxHashResponse>()
+            return client.get(builder).body<PostEncryptedResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting encrypted post by tx hash from Hugin API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {

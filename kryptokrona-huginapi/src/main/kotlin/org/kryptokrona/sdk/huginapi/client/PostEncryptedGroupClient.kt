@@ -37,7 +37,7 @@ import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
 import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedGroupAllResponse
-import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedGroupTxHashResponse
+import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedGroupResponse
 import org.kryptokrona.sdk.node.common.HttpClient
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -92,7 +92,7 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
      * @since 0.4.0
      * @return PostEncryptedGroupTxHashResponse
      */
-    suspend fun getByTxHash(txHash: String): PostEncryptedGroupTxHashResponse? {
+    suspend fun getByTxHash(txHash: String): PostEncryptedGroupResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             huginApi.ssl.let {
@@ -105,7 +105,7 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<PostEncryptedGroupTxHashResponse>()
+            return HttpClient.client.get(builder).body<PostEncryptedGroupResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting encrypted group post by tx hash from Hugin API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
