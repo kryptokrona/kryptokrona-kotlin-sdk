@@ -30,8 +30,15 @@
 
 package org.kryptokrona.sdk.huginapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.*
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.kryptokrona.sdk.node.common.HttpClient
 import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Post Encrypted Group client
@@ -43,4 +50,68 @@ import org.slf4j.LoggerFactory
 class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
 
     private val logger = LoggerFactory.getLogger("PostEncryptedGroupClient")
+
+    /**
+     * Get all encrypted group posts from Hugin API.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.4.0
+     * @return PostEncryptedResponse
+     */
+    suspend fun getAll(): PostEncryptedResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            huginApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts-encrypted")
+                } else {
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts-encrypted")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<PostEncryptedResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting all encrypted group posts from Hugin API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting all encrypted group posts from Hugin API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting all encrypted group posts from Hugin API. Could not parse the response.", e)
+        }
+
+        return null
+    }
+
+    /**
+     * Get encrypted group post by tx hash from Hugin API.
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.4.0
+     * @return PostEncryptedResponse
+     */
+    suspend fun getByTxHash(txHash: String): PostEncryptedResponse? {
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            huginApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts-encrypted/$txHash")
+                } else {
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts-encrypted/$txHash")
+                }
+            }
+        }
+
+        try {
+            return HttpClient.client.get(builder).body<PostEncryptedResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error getting encrypted group post by tx hash from Hugin API. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error getting encrypted group post by tx hash from Hugin API. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error getting encrypted group post by tx hash from Hugin API. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }

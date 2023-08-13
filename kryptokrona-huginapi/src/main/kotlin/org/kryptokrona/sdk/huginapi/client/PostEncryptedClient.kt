@@ -92,7 +92,7 @@ class PostEncryptedClient(private val huginApi: HuginAPI) {
      * @since 0.4.0
      * @return PostEncryptedResponse
      */
-    suspend fun getEncryptedPostByTxHash(txHash: String): PostEncryptedResponse? {
+    suspend fun getByTxHash(txHash: String): PostEncryptedResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             huginApi.ssl.let {
