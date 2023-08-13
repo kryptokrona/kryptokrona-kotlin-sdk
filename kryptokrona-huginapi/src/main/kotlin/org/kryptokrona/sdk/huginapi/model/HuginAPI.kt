@@ -28,21 +28,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.node
+package org.kryptokrona.sdk.huginapi.model
 
 /**
- * Node is a data class that holds information about a node. The properties are mutable so that they
+ * HuginAPI is a data class that holds information about a Hugin API. The properties are mutable so that they
  * can be changed during runtime.
  *
  * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
+ * @since 0.4.0
+ * @param hostName The host name of the Hugin API.
+ * @param port The port of the Hugin API.
+ * @param ssl Whether the Hugin API is using SSL.
  */
-data class Node(
+data class HuginAPI(
     var hostName: String,
     var port: Int,
     var ssl: Boolean
 )
-

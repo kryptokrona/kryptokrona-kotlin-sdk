@@ -28,21 +28,19 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.util.model.node
+package org.kryptokrona.sdk.huginapi.client
+
+import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.slf4j.LoggerFactory
 
 /**
- * Node is a data class that holds information about a node. The properties are mutable so that they
- * can be changed during runtime.
+ * Post Encrypted Group client
  *
  * @author Marcus Cvjeticanin
- * @since 0.1.0
- * @param hostName The host name of the node.
- * @param port The port of the node.
- * @param ssl Whether the node is using SSL.
+ * @since 0.4.0
+ * @param huginapi The Hugin API that we will connect to.
  */
-data class Node(
-    var hostName: String,
-    var port: Int,
-    var ssl: Boolean
-)
+class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
 
+    private val logger = LoggerFactory.getLogger("PostEncryptedGroupClient")
+}
