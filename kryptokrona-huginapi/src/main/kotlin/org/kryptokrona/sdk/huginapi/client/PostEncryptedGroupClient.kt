@@ -36,6 +36,8 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedGroupAllResponse
+import org.kryptokrona.sdk.huginapi.model.response.PostEncryptedGroupTxHashResponse
 import org.kryptokrona.sdk.node.common.HttpClient
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
@@ -56,9 +58,9 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.4.0
-     * @return PostEncryptedResponse
+     * @return PostEncryptedGroupAllResponse
      */
-    suspend fun getAll(): PostEncryptedResponse? {
+    suspend fun getAll(): PostEncryptedGroupAllResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             huginApi.ssl.let {
@@ -71,7 +73,7 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<PostEncryptedResponse>()
+            return HttpClient.client.get(builder).body<PostEncryptedGroupAllResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting all encrypted group posts from Hugin API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
@@ -88,9 +90,9 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
      *
      * @author Marcus Cvjeticanin
      * @since 0.4.0
-     * @return PostEncryptedResponse
+     * @return PostEncryptedGroupTxHashResponse
      */
-    suspend fun getByTxHash(txHash: String): PostEncryptedResponse? {
+    suspend fun getByTxHash(txHash: String): PostEncryptedGroupTxHashResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
             huginApi.ssl.let {
@@ -103,7 +105,7 @@ class PostEncryptedGroupClient(private val huginApi: HuginAPI) {
         }
 
         try {
-            return HttpClient.client.get(builder).body<PostEncryptedResponse>()
+            return HttpClient.client.get(builder).body<PostEncryptedGroupTxHashResponse>()
         } catch (e: HttpRequestTimeoutException) {
             logger.error("Error getting encrypted group post by tx hash from Hugin API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
