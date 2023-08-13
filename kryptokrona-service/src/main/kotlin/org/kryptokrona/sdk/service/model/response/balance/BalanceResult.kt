@@ -30,7 +30,6 @@
 
 package org.kryptokrona.sdk.service.model.response.balance
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**

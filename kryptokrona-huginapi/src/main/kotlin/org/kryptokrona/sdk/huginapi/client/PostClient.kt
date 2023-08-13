@@ -34,14 +34,12 @@ import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.headers
 import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
 import org.kryptokrona.sdk.huginapi.model.request.SendMessageRequest
 import org.kryptokrona.sdk.huginapi.model.response.SendMessageResponse
-import org.kryptokrona.sdk.node.common.HttpClient
 import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException

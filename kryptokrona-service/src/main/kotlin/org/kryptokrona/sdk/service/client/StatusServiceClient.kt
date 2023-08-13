@@ -30,7 +30,6 @@
 
 package org.kryptokrona.sdk.service.client
 
-import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*

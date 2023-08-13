@@ -40,7 +40,6 @@ import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.response.MnemonicSeedResponse
 import org.kryptokrona.sdk.walletapi.model.response.SharedPrivateViewKeyResponse
 import org.kryptokrona.sdk.walletapi.model.response.SpendKeysResponse
-import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 

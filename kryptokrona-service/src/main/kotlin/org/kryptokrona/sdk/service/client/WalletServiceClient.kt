@@ -30,7 +30,6 @@
 
 package org.kryptokrona.sdk.service.client
 
-import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
@@ -42,10 +41,8 @@ import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
 import org.kryptokrona.sdk.service.model.request.ResetRequest
 import org.kryptokrona.sdk.service.model.request.SaveRequest
-import org.kryptokrona.sdk.service.model.request.StatusRequest
 import org.kryptokrona.sdk.service.model.response.ResetResponse
 import org.kryptokrona.sdk.service.model.response.SaveResponse
-import org.kryptokrona.sdk.service.model.response.StatusResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
