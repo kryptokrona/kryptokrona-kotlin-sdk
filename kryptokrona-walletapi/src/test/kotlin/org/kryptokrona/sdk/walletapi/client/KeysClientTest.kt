@@ -13,18 +13,30 @@ class KeysClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get shared private view key`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get spend keys`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get mnemonic seed`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 }

@@ -13,54 +13,90 @@ class TransactionClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can send a transaction`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can send an advanced transaction`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can send a fusion transaction`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can send an advanced fusion transaction`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get all transactions`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get all unconfirmed transactions`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get all unconfirmed transactions with a given address`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get all transactions starting and ending at a given block belonging to given address`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get transaction details with a given hash`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 }

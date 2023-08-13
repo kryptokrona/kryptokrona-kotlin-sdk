@@ -13,12 +13,20 @@ class NodeClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get node details`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can swap node details`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 }

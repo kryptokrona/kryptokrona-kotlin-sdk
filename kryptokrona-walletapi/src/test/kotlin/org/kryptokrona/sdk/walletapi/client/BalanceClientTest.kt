@@ -13,18 +13,30 @@ class BalanceClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet balance`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet balances`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet blanace for specific address`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 }

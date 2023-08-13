@@ -13,48 +13,80 @@ class WalletClientTest {
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can open a wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can import wallet with key`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can import wallet with seed`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can import view wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can create wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can delete wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can save wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 
     @Test
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can reset wallet`() = runTest {
+        // Arrange
 
+        // Act
+
+        // Assert
     }
 }
