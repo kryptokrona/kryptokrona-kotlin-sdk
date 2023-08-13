@@ -30,8 +30,21 @@
 
 package org.kryptokrona.sdk.huginapi.client
 
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.http.headers
+import io.ktor.serialization.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.kryptokrona.sdk.huginapi.model.request.SendMessageRequest
+import org.kryptokrona.sdk.huginapi.model.response.SendMessageResponse
+import org.kryptokrona.sdk.node.common.HttpClient
+import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.slf4j.LoggerFactory
+import java.nio.channels.UnresolvedAddressException
 
 /**
  * Post client
@@ -43,4 +56,44 @@ import org.slf4j.LoggerFactory
 class PostClient(private val huginApi: HuginAPI) {
 
     private val logger = LoggerFactory.getLogger("PostClient")
+
+    /**
+     * Send a message
+     *
+     * @author Marcus Cvjeticanin
+     * @since 0.4.0
+     * @param sendMessageRequest The payload to send to the Hugin API
+     * @return SendMessageResponse
+     */
+    suspend fun sendMessage(sendMessageRequest: SendMessageRequest): SendMessageResponse? {
+        val jsonBody = Json.encodeToString(sendMessageRequest)
+
+        val builder = HttpRequestBuilder().apply {
+            method = HttpMethod.Post
+            huginApi.ssl.let {
+                if (it) {
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts")
+                } else {
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts")
+                }
+            }
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Length", jsonBody.length.toString())
+            }
+            setBody(jsonBody)
+        }
+
+        try {
+            return client.post(builder).body<SendMessageResponse>()
+        } catch (e: HttpRequestTimeoutException) {
+            logger.error("Error sending message. Could not reach the server.", e)
+        } catch (e: UnresolvedAddressException) {
+            logger.error("Error sending message. Could not resolve the address.", e)
+        } catch (e: JsonConvertException) {
+            logger.error("Error sending message. Could not parse the response.", e)
+        }
+
+        return null
+    }
 }
