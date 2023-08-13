@@ -41,16 +41,12 @@ class BalanceClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can get wallet blanace for specific address`() = runTest {
         // Arrange
+        val correctAddress = ""
+        val incorrectAddress = "SEKReV7rDhaj9UV8NYgesQLyAVoddy4foZQzqg2Ci4YrdUNB3qFUzjCQeEe85es2yuC8wE9kGzhcKU23A7Qa5qm9h4CFbKh3umH"
 
         // Act
-        //TODO need to generate an address for the testing and put here
-        val balanceForCorrectAddress = client.walletBalanceForSpecificAddress(
-            ""
-        )
-
-        val balanceForIncorrectAddress = client.walletBalanceForSpecificAddress(
-            "SEKReV7rDhaj9UV8NYgesQLyAVoddy4foZQzqg2Ci4YrdUNB3qFUzjCQeEe85es2yuC8wE9kGzhcKU23A7Qa5qm9h4CFbKh3umH"
-        )
+        val balanceForCorrectAddress = client.walletBalanceForSpecificAddress(correctAddress)
+        val balanceForIncorrectAddress = client.walletBalanceForSpecificAddress(incorrectAddress)
 
         // Assert
         assertNotNull(balanceForCorrectAddress)
