@@ -14,7 +14,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
 }
 
-version = "0.3.0"
+version = "0.4.0"
 
 java {
     withJavadocJar()
