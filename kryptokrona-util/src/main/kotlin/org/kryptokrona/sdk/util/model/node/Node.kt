@@ -40,4 +40,9 @@ package org.kryptokrona.sdk.util.model.node
  * @param port The port of the node.
  * @param ssl Whether the node is using SSL.
  */
-data class Node(var hostName: String, var port: Int, var ssl: Boolean)
+data class Node(
+    var hostName: String,
+    var port: Int,
+    var ssl: Boolean
+)
+

@@ -1,7 +1,7 @@
 package org.kryptokrona.sdk.node.client
 
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.node.model.request.wallet.WalletSyncDataRequest
 import org.kryptokrona.sdk.util.model.node.Node

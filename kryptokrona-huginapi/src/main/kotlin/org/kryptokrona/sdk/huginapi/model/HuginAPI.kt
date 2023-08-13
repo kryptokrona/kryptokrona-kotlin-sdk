@@ -28,18 +28,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.service.model.response.balance
-
-import kotlinx.serialization.Serializable
+package org.kryptokrona.sdk.huginapi.model
 
 /**
- * Status Result.
+ * HuginAPI is a data class that holds information about a Hugin API. The properties are mutable so that they
+ * can be changed during runtime.
  *
  * @author Marcus Cvjeticanin
- * @since 0.3.0
+ * @since 0.4.0
+ * @param hostName The host name of the Hugin API.
+ * @param port The port of the Hugin API.
+ * @param ssl Whether the Hugin API is using SSL.
  */
-@Serializable
-data class BalanceResult(
-    val availableBalance: Long,
-    val lockedAmount: Long
+data class HuginAPI(
+    var hostName: String,
+    var port: Int,
+    var ssl: Boolean
 )

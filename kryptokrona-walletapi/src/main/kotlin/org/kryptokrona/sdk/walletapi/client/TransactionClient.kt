@@ -34,13 +34,15 @@ import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.headers
 import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient
 import org.kryptokrona.sdk.walletapi.model.WalletApi
-import org.kryptokrona.sdk.walletapi.model.request.*
+import org.kryptokrona.sdk.walletapi.model.request.SendTransactionAdvancedRequest
+import org.kryptokrona.sdk.walletapi.model.request.SendTransactionFusionAdvancedRequest
+import org.kryptokrona.sdk.walletapi.model.request.SendTransactionFusionRequest
+import org.kryptokrona.sdk.walletapi.model.request.SendTransactionRequest
 import org.kryptokrona.sdk.walletapi.model.response.SendTransactionResponse
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
 import org.kryptokrona.sdk.walletapi.model.response.TransactionDetailWithHashResponse

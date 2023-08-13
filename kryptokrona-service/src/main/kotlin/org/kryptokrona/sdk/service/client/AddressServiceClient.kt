@@ -43,12 +43,10 @@ import org.kryptokrona.sdk.service.model.request.address.CreateAddressRequest
 import org.kryptokrona.sdk.service.model.request.address.CreateIntegratedAddressRequest
 import org.kryptokrona.sdk.service.model.request.address.DeleteAddressRequest
 import org.kryptokrona.sdk.service.model.request.address.GetAddressesRequest
-import org.kryptokrona.sdk.service.model.request.balance.BalanceRequest
 import org.kryptokrona.sdk.service.model.response.address.CreateAddressResponse
 import org.kryptokrona.sdk.service.model.response.address.CreateIntegratedAddressResponse
 import org.kryptokrona.sdk.service.model.response.address.DeleteAddressResponse
 import org.kryptokrona.sdk.service.model.response.address.GetAddressesResponse
-import org.kryptokrona.sdk.service.model.response.balance.BalanceResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 

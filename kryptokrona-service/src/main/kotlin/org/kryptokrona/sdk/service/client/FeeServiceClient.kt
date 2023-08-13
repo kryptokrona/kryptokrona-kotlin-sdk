@@ -40,10 +40,6 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
 import org.kryptokrona.sdk.service.model.request.FeeInfoRequest
-import org.kryptokrona.sdk.service.model.request.balance.BalanceRequest
-import org.kryptokrona.sdk.service.model.request.block.BlockHashesRequest
-import org.kryptokrona.sdk.service.model.response.BlockHashesResponse
-import org.kryptokrona.sdk.service.model.response.balance.BalanceResponse
 import org.kryptokrona.sdk.service.model.response.fee.FeeInfoResponse
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException

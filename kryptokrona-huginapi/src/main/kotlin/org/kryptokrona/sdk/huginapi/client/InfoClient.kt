@@ -28,59 +28,60 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.walletapi.client
+package org.kryptokrona.sdk.huginapi.client
 
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.*
-import org.kryptokrona.sdk.walletapi.common.HttpClient
-import org.kryptokrona.sdk.walletapi.model.WalletApi
-import org.kryptokrona.sdk.walletapi.model.response.WalletStatusResponse
+import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.kryptokrona.sdk.huginapi.model.response.InfoResponse
+import org.kryptokrona.sdk.node.common.HttpClient.client
 import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
 /**
- * Status client
+ * Info client
  *
  * @author Marcus Cvjeticanin
- * @since 0.3.0
- * @param walletApi The wallet API to connect to.
+ * @since 0.4.0
+ * @param huginapi The Hugin API that we will connect to.
  */
-class StatusClient(private val walletApi: WalletApi) {
+class InfoClient(private val huginApi: HuginAPI) {
 
-    private val logger = LoggerFactory.getLogger("StatusClient")
+    private val logger = LoggerFactory.getLogger("InfoClient")
 
     /**
-     * Status a wallet.
+     * Get info from Hugin API.
      *
      * @author Marcus Cvjeticanin
-     * @since 0.3.0
-     * @return WalletStatusResponse
+     * @since 0.4.0
+     * @return InfoResponse
      */
-    suspend fun walletStatus(): WalletStatusResponse? {
+    suspend fun getInfo(): InfoResponse? {
         val builder = HttpRequestBuilder().apply {
             method = HttpMethod.Get
-            walletApi.ssl.let {
+            huginApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${walletApi.hostName}:${walletApi.port}/status")
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/info")
                 } else {
-                    url.takeFrom("http://${walletApi.hostName}:${walletApi.port}/status")
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/info")
                 }
             }
         }
 
         try {
-            return HttpClient.client.get(builder).body<WalletStatusResponse>()
+            return client.get(builder).body<InfoResponse>()
         } catch (e: HttpRequestTimeoutException) {
-            logger.error("Error getting wallet status from Wallet API. Could not reach the server.", e)
+            logger.error("Error getting info from Hugin API. Could not reach the server.", e)
         } catch (e: UnresolvedAddressException) {
-            logger.error("Error getting wallet status from Wallet API. Could not resolve the address.", e)
+            logger.error("Error getting info from Hugin API. Could not resolve the address.", e)
         } catch (e: JsonConvertException) {
-            logger.error("Error getting wallet status from Wallet API. Could not parse the response.", e)
+            logger.error("Error getting info from Hugin API. Could not parse the response.", e)
         }
 
         return null
     }
+
 }

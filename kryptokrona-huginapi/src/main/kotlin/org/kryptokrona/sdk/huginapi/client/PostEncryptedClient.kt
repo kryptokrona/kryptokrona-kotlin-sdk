@@ -28,18 +28,19 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.sdk.service.model.response.balance
+package org.kryptokrona.sdk.huginapi.client
 
-import kotlinx.serialization.Serializable
+import org.kryptokrona.sdk.huginapi.model.HuginAPI
+import org.slf4j.LoggerFactory
 
 /**
- * Status Result.
+ * Post Encrypted client
  *
  * @author Marcus Cvjeticanin
- * @since 0.3.0
+ * @since 0.4.0
+ * @param huginapi The Hugin API that we will connect to.
  */
-@Serializable
-data class BalanceResult(
-    val availableBalance: Long,
-    val lockedAmount: Long
-)
+class PostEncryptedClient(private val huginApi: HuginAPI) {
+
+    private val logger = LoggerFactory.getLogger("PostEncryptedClient")
+}

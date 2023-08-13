@@ -1,11 +1,8 @@
 package org.kryptokrona.sdk.walletapi.client
 
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.walletapi.model.WalletApi
-import kotlin.test.DefaultAsserter.assertTrue
-import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class StatusClientTest {

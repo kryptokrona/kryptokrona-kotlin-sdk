@@ -38,13 +38,13 @@ import io.ktor.serialization.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.walletapi.common.HttpClient.client
-import org.kryptokrona.sdk.walletapi.model.request.ImportWalletWithKeyRequest
-import org.slf4j.LoggerFactory
 import org.kryptokrona.sdk.walletapi.model.WalletApi
 import org.kryptokrona.sdk.walletapi.model.request.ImportViewWalletRequest
+import org.kryptokrona.sdk.walletapi.model.request.ImportWalletWithKeyRequest
 import org.kryptokrona.sdk.walletapi.model.request.ImportWalletWithSeedRequest
 import org.kryptokrona.sdk.walletapi.model.request.ResetWalletRequest
 import org.kryptokrona.sdk.walletapi.model.response.StatusResponse
+import org.slf4j.LoggerFactory
 import java.nio.channels.UnresolvedAddressException
 
 /**

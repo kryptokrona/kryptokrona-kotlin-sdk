@@ -3,7 +3,6 @@ package org.kryptokrona.sdk.walletapi.client
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.walletapi.model.WalletApi
-import kotlin.test.DefaultAsserter.assertNotNull
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 

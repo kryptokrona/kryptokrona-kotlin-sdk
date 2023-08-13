@@ -30,7 +30,6 @@
 
 package org.kryptokrona.sdk.service.client
 
-import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
@@ -40,11 +39,9 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.sdk.service.common.HttpClient
 import org.kryptokrona.sdk.service.model.Service
-import org.kryptokrona.sdk.service.model.request.StatusRequest
 import org.kryptokrona.sdk.service.model.request.key.GetSpendKeysRequest
 import org.kryptokrona.sdk.service.model.request.key.GetViewKeyRequest
 import org.kryptokrona.sdk.service.model.request.mnemonic.GetMnemonicSeedRequest
-import org.kryptokrona.sdk.service.model.response.StatusResponse
 import org.kryptokrona.sdk.service.model.response.key.GetSpendKeysResponse
 import org.kryptokrona.sdk.service.model.response.key.GetViewKeyResponse
 import org.kryptokrona.sdk.service.model.response.mnemonic.GetMnemonicSeedResponse
