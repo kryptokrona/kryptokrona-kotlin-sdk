@@ -70,9 +70,9 @@ class PostClient(private val huginApi: HuginAPI) {
             method = HttpMethod.Post
             huginApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts")
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/api/v1/posts")
                 } else {
-                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts")
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/api/v1/posts")
                 }
             }
             contentType(ContentType.Application.Json)

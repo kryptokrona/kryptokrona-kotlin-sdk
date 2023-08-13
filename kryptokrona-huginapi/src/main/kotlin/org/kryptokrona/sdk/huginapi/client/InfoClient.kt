@@ -64,9 +64,9 @@ class InfoClient(private val huginApi: HuginAPI) {
             method = HttpMethod.Get
             huginApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/info")
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/api/v1/info")
                 } else {
-                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/info")
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/api/v1/info")
                 }
             }
         }

@@ -65,9 +65,9 @@ class PostEncryptedClient(private val huginApi: HuginAPI) {
             method = HttpMethod.Get
             huginApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts-encrypted")
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/api/v1/posts-encrypted")
                 } else {
-                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts-encrypted")
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/api/v1/posts-encrypted")
                 }
             }
         }
@@ -97,9 +97,9 @@ class PostEncryptedClient(private val huginApi: HuginAPI) {
             method = HttpMethod.Get
             huginApi.ssl.let {
                 if (it) {
-                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/posts-encrypted/$txHash")
+                    url.takeFrom("https://${huginApi.hostName}:${huginApi.port}/api/v1/posts-encrypted/$txHash")
                 } else {
-                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/posts-encrypted/$txHash")
+                    url.takeFrom("http://${huginApi.hostName}:${huginApi.port}/api/v1/posts-encrypted/$txHash")
                 }
             }
         }
