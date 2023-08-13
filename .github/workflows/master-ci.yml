@@ -5,6 +5,8 @@ env:
   KRYPTOKRONA_CRYPTO_KOVER_XML: ./kryptokrona-crypto/build/reports/kover/report.xml
   KRYPTOKRONA_WALLET_KOVER_XML: ./kryptokrona-wallet/build/reports/kover/report.xml
   KRYPTOKRONA_SERVICE_KOVER_XML: ./kryptokrona-service/build/reports/kover/report.xml
+  KRYPTOKRONA_WALLETAPI_KOVER_XML: ./kryptokrona-walletapi/build/reports/kover/report.xml
+  KRYPTOKRONA_HUGINAPI_KOVER_XML: ./kryptokrona-huginapi/build/reports/kover/report.xml
 
 on:
   push:
@@ -72,6 +74,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Start Docker Compose services
+        run: docker-compose up -d
+
       - name: Set up OpenJDK 17
         uses: actions/setup-java@v3
         with:
@@ -94,6 +105,9 @@ jobs:
       - name: Run Unit Test
         run: ./gradlew test
 
+      - name: Stop Docker Compose services
+        run: docker-compose down
+
   code-coverage:
     name: Code Coverage
     runs-on: ubuntu-latest
@@ -101,6 +115,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: Download C library
         uses: actions/download-artifact@v3
@@ -117,10 +136,13 @@ jobs:
       - name: Generate Kover XML Reports
         run: ./gradlew test koverXmlReport
 
+      - name: Stop Docker Compose services
+        run: docker-compose down
+
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}, ${{ env.KRYPTOKRONA_NODE_KOVER_XML }}, ${{ env.KRYPTOKRONA_WALLET_KOVER_XML }}, ${{ env.KRYPTOKRONA_SERVICE_KOVER_XML }}
+          files: ${{ env.KRYPTOKRONA_CRYPTO_KOVER_XML }}, ${{ env.KRYPTOKRONA_NODE_KOVER_XML }}, ${{ env.KRYPTOKRONA_WALLET_KOVER_XML }}, ${{ env.KRYPTOKRONA_SERVICE_KOVER_XML }}, ${{ env.KRYPTOKRONA_WALLETAPI_KOVER_XML }}, ${{ env.KRYPTOKRONA_HUGINAPI_KOVER_XML }}
           flags: unittests
           layout: horizontal
           name: codecov-umbrella
