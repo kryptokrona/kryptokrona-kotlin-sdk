@@ -3,6 +3,9 @@ package org.kryptokrona.sdk.walletapi.client
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.kryptokrona.sdk.walletapi.model.WalletApi
+import org.kryptokrona.sdk.walletapi.model.request.SendTransactionRequest
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class TransactionClientTest {
 
@@ -14,10 +17,18 @@ class TransactionClientTest {
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     fun `can send a transaction`() = runTest {
         // Arrange
+        val sendTransactionRequest = SendTransactionRequest(
+            destination = "",
+            amount = 0L,
+            paymentID = ""
+        )
 
         // Act
+        val sendTransaction = client.sendTransaction(sendTransactionRequest)
 
         // Assert
+        assertNotNull(sendTransaction)
+        assertTrue { sendTransaction.transactionHash.isNotEmpty() }
     }
 
     @Test
